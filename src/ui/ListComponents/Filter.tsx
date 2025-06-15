@@ -1,4 +1,4 @@
-import { Children, useEffect } from "react";
+import { useEffect } from "react";
 import type { ChildrenProps, DataTypes } from "../../utils/types";
 import useListContext from "./context";
 import Order from "./Order";
@@ -36,7 +36,7 @@ export default function Filter({
 
   if (!canModifyUrl) return null;
 
-  return <form className="flex flex-col gap-y-10 text-xl">{children}</form>;
+  return <form className="flex flex-col gap-y-5 text-xl">{children}</form>;
 }
 
 Filter.Order = Order;

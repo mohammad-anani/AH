@@ -7,6 +7,7 @@ export default function FilterEntities({ fields }: { fields: Key[] }) {
     <>
       <List.Filter fields={fields}>
         <List.Filter.Form />
+        <hr className="border-primary h-[1px]" />
         <div className="grid grid-cols-[50px_1fr_20px] gap-x-2 text-sm!">
           <List.Filter.Sort />
           <List.Filter.Order />

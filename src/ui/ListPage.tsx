@@ -64,7 +64,7 @@ export default function ListPage<T>({
           </Clickable>
         </List.ClearFilter>
         {/* isFilterOpen ? */}
-        {isFilterOpen ? (
+        {true ? (
           <>
             <Dialog
               defaultOpen={true}
@@ -74,8 +74,12 @@ export default function ListPage<T>({
             >
               <DialogPortal>
                 <DialogContent className="w-auto pt-4">
-                  <DialogHeader className="text-left text-2xl">
-                    <DialogTitle>{"Filter " + title}</DialogTitle>
+                  <DialogHeader>
+                    <DialogTitle>
+                      <H2 className="text-left text-2xl!">
+                        {"Filter " + title}
+                      </H2>
+                    </DialogTitle>
                   </DialogHeader>
                   <FilterEntities fields={filterFields} />
                 </DialogContent>

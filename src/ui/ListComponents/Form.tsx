@@ -7,7 +7,7 @@ export function Form() {
   console.log(filter);
 
   return (
-    <div className="grid w-[250px] grid-cols-[1fr_1fr] gap-y-2 text-xs! *:w-full!">
+    <div className="grid max-h-[300px]! w-[250px] grid-cols-[1fr_1fr] gap-y-2 overflow-y-scroll rounded-none! pr-2 text-xs! *:w-full!">
       {fields.map((field) => {
         const value = filter[field[0]];
         const label =
@@ -98,6 +98,16 @@ export function Form() {
                   <option value="true">{field[2]}</option>
                   <option value="false">{field[3]}</option>
                 </select>
+              </>
+            );
+          default:
+            return (
+              <>
+                {" "}
+                <label key={field[0]} htmlFor={field[0]}>
+                  {label}
+                </label>
+                <>To be implemented</>
               </>
             );
         }
