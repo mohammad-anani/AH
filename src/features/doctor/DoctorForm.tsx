@@ -1,7 +1,5 @@
 import type { Doctor } from "../../utils/types";
-import BackNavigator from "../../ui/BackNavigator";
 import { emptyDoctor } from "../../utils/emptyObjects";
-import AddUpdateEmployee from "../employee/EmployeeForm";
 import EmployeeForm from "../employee/EmployeeForm";
 
 export default function DoctorForm({
