@@ -1,16 +1,14 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import type { Admin } from "../../utils/types";
-import AddUpdateAdmin from "./AddUpdateAdmin";
+import AddUpdateForm from "@/ui/AddUpdateForm";
+import AdminForm from "./AdminForm";
 
 export default function UpdateAdmin() {
   const { admin } = useOutletContext<{ admin: Admin }>();
 
   return (
-    <>
-      <Link to={`/admin/human-resources/admins/${admin.ID}`}>
-        <button>Cancel</button>
-      </Link>
-      <AddUpdateAdmin admin={admin} />
-    </>
+    <AddUpdateForm title="Add Admin" backLink="/admin/human-resources/admins">
+      <AdminForm admin={admin} />
+    </AddUpdateForm>
   );
 }

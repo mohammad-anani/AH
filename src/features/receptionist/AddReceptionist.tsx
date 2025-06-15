@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
-import AddUpdateReceptionist from "./AddUpdateReceptionist";
+import AddUpdateForm from "@/ui/AddUpdateForm";
+import ReceptionistForm from "./ReceptionistForm";
 
 export default function AddReceptionist() {
   return (
-    <>
-      <Link to="/admin/human-resources/receptionists">
-        <button>Close</button>
-      </Link>
-      <h1>Add Receptionist</h1>
-      <AddUpdateReceptionist />
-    </>
+    <AddUpdateForm
+      title="Add Receptionist"
+      backLink="/admin/human-resources/receptionists"
+    >
+      <ReceptionistForm />
+    </AddUpdateForm>
   );
 }

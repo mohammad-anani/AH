@@ -1,16 +1,17 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import type { Patient } from "../../utils/types";
-import AddUpdatePatient from "./AddUpdatePatient";
+import AddUpdateForm from "@/ui/AddUpdateForm";
+import PatientForm from "./PatientForm";
 
 export default function UpdatePatient() {
   const { patient } = useOutletContext<{ patient: Patient }>();
-
+  const { ID } = patient;
   return (
-    <>
-      <Link to={`/admin/human-resources/patients/${patient.ID}`}>
-        <button>Cancel</button>
-      </Link>
-      <AddUpdatePatient patient={patient} />
-    </>
+    <AddUpdateForm
+      title="Add Patient"
+      backLink={"/admin/human-resources/patients/" + ID}
+    >
+      <PatientForm patient={patient} />
+    </AddUpdateForm>
   );
 }

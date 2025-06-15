@@ -11,7 +11,7 @@ export default function PatientCard() {
   return (
     <Card
       title="Patient"
-      backLink="/admin/patients"
+      backLink="/admin/human-resources/patients"
       Data={<PatientData patient={patient} />}
     >
       <Clickable

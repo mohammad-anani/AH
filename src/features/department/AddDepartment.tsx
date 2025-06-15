@@ -1,14 +1,10 @@
-import { Link } from "react-router-dom";
-
-import AddUpdateDepartment from "./AddUpdateDepartment";
+import DepartmentForm from "./DepartmentForm";
+import AddUpdateForm from "@/ui/AddUpdateForm";
 
 export default function AddDepartment() {
   return (
-    <>
-      <Link to="/admin/departments">
-        <button>Close</button>
-      </Link>
-      <AddUpdateDepartment />
-    </>
+    <AddUpdateForm title="Add Department" backLink={"/admin/departments/"}>
+      <DepartmentForm />
+    </AddUpdateForm>
   );
 }

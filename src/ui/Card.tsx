@@ -8,21 +8,28 @@ export default function Card({
   title,
 
   canEdit = true,
-  backLink,
+  backLink = "",
   headerWidth = 150,
   children,
 }: {
   Data: ReactNode;
   title: string;
   canEdit?: boolean;
-  backLink: string;
+  backLink?: string;
   headerWidth?: number;
 } & OptionalChildrenProps) {
   return (
     <>
-      <Clickable as="Link" variant="secondary" to={backLink}>
-        Back
-      </Clickable>
+      {backLink !== "" ? (
+        <Clickable
+          className="text-sm!"
+          as="Link"
+          variant="secondary"
+          to={backLink}
+        >
+          Back
+        </Clickable>
+      ) : null}
       <div className="flex items-center justify-between">
         <H2>{title}</H2>
         {canEdit ? (

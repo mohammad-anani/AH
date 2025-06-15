@@ -1,14 +1,10 @@
-import { Link } from "react-router-dom";
-import AddUpdateAdmin from "./AddUpdateAdmin";
+import AddUpdateForm from "@/ui/AddUpdateForm";
+import AdminForm from "./AdminForm";
 
 export default function AddAdmin() {
   return (
-    <>
-      <Link to="/admin/human-resources/admins">
-        <button>Close</button>
-      </Link>
-      <h1>Add Admin</h1>
-      <AddUpdateAdmin />
-    </>
+    <AddUpdateForm title="Add Admin" backLink="/admin/human-resources/admins">
+      <AdminForm />
+    </AddUpdateForm>
   );
 }

@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
-import AddUpdateDoctor from "./AddUpdateDoctor";
+import DoctorForm from "./DoctorForm";
+import AddUpdateForm from "@/ui/AddUpdateForm";
 
 export default function AddDoctor() {
   return (
-    <>
-      <Link to="/admin/human-resources/doctors">
-        <button>Close</button>
-      </Link>
-      <h1>Add Doctor</h1>
-      <AddUpdateDoctor />
-    </>
+    <AddUpdateForm
+      title="Add Doctor"
+      backLink={"/admin/human-resources/doctors"}
+    >
+      <DoctorForm />
+    </AddUpdateForm>
   );
 }

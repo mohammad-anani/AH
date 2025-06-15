@@ -86,7 +86,6 @@ const router = createBrowserRouter([
                     path: "",
                     element: (
                       <ListPage<Department>
-                        backUrl="/admin"
                         title="Departments"
                         canAdd
                         emptyText="No Departments"
