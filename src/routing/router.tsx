@@ -33,25 +33,11 @@ import { findAdminLoader } from "../interfaces/admin/loaders/admins";
 import { findReceptionistLoader } from "../interfaces/admin/loaders/receptionists";
 import Error from "@/ui/Error";
 import listLoader from "@/utils/listLoader";
-import ListPage from "@/ui/ListPage";
-import type {
-  Admin,
-  Department,
-  Doctor,
-  Patient,
-  Receptionist,
-} from "@/utils/types";
-import DepartmentsHeader from "@/features/department/DepartmentsHeader";
-import DepartmentRow from "@/features/department/DepartmentRow";
-import { employeeFields, persondFields } from "@/utils/objectKeys";
-import PatientRow from "@/features/patient/PatientRow";
-import DoctorRow from "@/features/doctor/DoctorRow";
-import AdminRow from "@/features/admin/AdminRow";
-import ReceptionistRow from "@/features/receptionist/ReceptionistRow";
-import PatientsHeader from "@/features/patient/PatientsHeader";
-import DoctorsHeader from "@/features/doctor/DoctorsHeader";
-import ReceptionitsHeader from "@/features/receptionist/ReceptionistsHeader";
-import AdminsHeader from "@/features/admin/AdminsHeader";
+import Departments from "../interfaces/admin/pages/Departments";
+import Patients from "../features/human-resources/Patients";
+import Doctors from "../features/human-resources/Doctors";
+import Admins from "../features/human-resources/Admins";
+import Receptionists from "../features/human-resources/Receptionists";
 import PatientViewEdit from "@/features/patient/PatientViewEdit";
 import DepartmentViewEdit from "@/features/department/DepartmentViewEdit";
 import DoctorViewEdit from "@/features/doctor/DoctorViewEdit";
@@ -84,24 +70,7 @@ const router = createBrowserRouter([
                 children: [
                   {
                     path: "",
-                    element: (
-                      <ListPage<Department>
-                        title="Departments"
-                        canAdd
-                        emptyText="No Departments"
-                        Header={<DepartmentsHeader />}
-                        render={(department) => (
-                          <DepartmentRow
-                            key={department.ID}
-                            department={department}
-                          />
-                        )}
-                        filterFields={[
-                          ["Name", "string"],
-                          ["Description", "string"],
-                        ]}
-                      />
-                    ),
+                    Component: Departments,
                     loader: listLoader("Departments"),
                   },
                   {
@@ -118,7 +87,6 @@ const router = createBrowserRouter([
               },
               {
                 path: "human-resources",
-
                 children: [
                   { path: "", Component: NavPage },
                   {
@@ -126,19 +94,7 @@ const router = createBrowserRouter([
                     children: [
                       {
                         path: "",
-                        element: (
-                          <ListPage<Patient>
-                            backUrl="/admin/human-resources"
-                            title="Patients"
-                            canAdd={false}
-                            emptyText="No Patients"
-                            Header={<PatientsHeader />}
-                            render={(patient) => (
-                              <PatientRow key={patient.ID} patient={patient} />
-                            )}
-                            filterFields={[...persondFields]}
-                          />
-                        ),
+                        Component: Patients,
                         loader: listLoader("Patients"),
                       },
                       {
@@ -158,24 +114,7 @@ const router = createBrowserRouter([
                     children: [
                       {
                         path: "",
-                        element: (
-                          <ListPage<Doctor>
-                            backUrl="/admin/human-resources"
-                            title="Doctors"
-                            canAdd={false}
-                            emptyText="No Doctors"
-                            Header={<DoctorsHeader />}
-                            render={(doctor) => (
-                              <DoctorRow key={doctor.ID} doctor={doctor} />
-                            )}
-                            filterFields={[
-                              ...persondFields,
-                              ...employeeFields,
-                              ["Specialization", "string"],
-                              ["CreatedAt", "datetime"],
-                            ]}
-                          />
-                        ),
+                        Component: Doctors,
                         loader: listLoader("Doctors"),
                       },
                       {
@@ -195,23 +134,7 @@ const router = createBrowserRouter([
                     children: [
                       {
                         path: "",
-                        element: (
-                          <ListPage<Admin>
-                            backUrl="/admin/human-resources"
-                            title="Admins"
-                            canAdd
-                            emptyText="No Admins"
-                            Header={<AdminsHeader />}
-                            render={(admin) => (
-                              <AdminRow key={admin.ID} admin={admin} />
-                            )}
-                            filterFields={[
-                              ...persondFields,
-                              ...employeeFields,
-                              ["CreatedAt", "datetime"],
-                            ]}
-                          />
-                        ),
+                        Component: Admins,
                         loader: listLoader("Admins"),
                       },
                       {
@@ -231,27 +154,7 @@ const router = createBrowserRouter([
                     children: [
                       {
                         path: "",
-                        element: (
-                          <ListPage<Receptionist>
-                            backUrl="/admin/human-resources"
-                            title="Receptionists"
-                            canAdd
-                            emptyText="No Receptionists"
-                            Header={<ReceptionitsHeader />}
-                            render={(receptionist) => (
-                              <ReceptionistRow
-                                key={receptionist.ID}
-                                receptionist={receptionist}
-                              />
-                            )}
-                            filterFields={[
-                              ...persondFields,
-                              ...employeeFields,
-                              ["AdminID", "number"],
-                              ["CreatedAt", "datetime"],
-                            ]}
-                          />
-                        ),
+                        Component: Receptionists,
                         loader: listLoader("Receptionists"),
                       },
                       {
@@ -268,21 +171,36 @@ const router = createBrowserRouter([
                   },
                 ],
               },
-              { path: "tests", Component: Tests },
-              { path: "operations", Component: Operations },
-              { path: "appointments", Component: Appointments },
-              { path: "finance", Component: Finance },
+              {
+                path: "tests",
+                Component: Tests,
+              },
+              {
+                path: "operations",
+                Component: Operations,
+              },
+              {
+                path: "appointments",
+                Component: Appointments,
+              },
+              {
+                path: "finance",
+                Component: Finance,
+              },
             ],
           },
         ],
       },
+      {
+        path: "/doctor",
+        Component: DoctorHomepage,
+      },
+      {
+        path: "/receptionist",
+        Component: ReceptionistHomepage,
+      },
     ],
   },
-  {
-    path: "/doctor",
-    Component: DoctorHomepage,
-  },
-  { path: "/receptionist", Component: ReceptionistHomepage },
 ]);
 
 export default router;

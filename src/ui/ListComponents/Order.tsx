@@ -10,10 +10,10 @@ export default function Order() {
   return (
     <Toggle isOn={order === "desc"}>
       <Toggle.Enabler>
-        <ArrowDownAZ className="h-[25px] w-[25px]" />
+        <ArrowDownAZ className="h-[25px] w-[25px] cursor-pointer" />
       </Toggle.Enabler>
       <Toggle.Disabler>
-        <ArrowUpAZ className="h-[25px] w-[25px]" />
+        <ArrowUpAZ className="h-[25px] w-[25px] cursor-pointer" />
       </Toggle.Disabler>
 
       <Toggle.OffUI>

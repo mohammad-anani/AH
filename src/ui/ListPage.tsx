@@ -64,7 +64,7 @@ export default function ListPage<T>({
           </Clickable>
         </List.ClearFilter>
         {/* isFilterOpen ? */}
-        {true ? (
+        {isFilterOpen ? (
           <>
             <Dialog
               defaultOpen={true}
