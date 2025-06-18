@@ -9,6 +9,8 @@ export function convertToType(type: string, value: string) {
       return value;
     case "boolean":
       return value === "true" ? true : value === "false" ? false : null;
+    case "array":
+      return value.split(",");
     default:
       return null;
   }

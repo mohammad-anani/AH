@@ -20,13 +20,23 @@ export default function Filter({
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
+    const temporals = "date#datetime#time";
     setFields(fields);
     setFilter(
       fields.reduce((obj, field) => {
-        obj[field[0]] = convertToType(
-          field[1],
-          searchParams.get(field[0]) || "",
-        );
+        if (temporals.includes(field[1])) {
+          obj[field[0] + "From"] = searchParams.get(
+            field[0] + "From" || "",
+          ) as DataTypes;
+          obj[field[0] + "To"] = searchParams.get(
+            field[0] + "To" || "",
+          ) as DataTypes;
+        } else {
+          obj[field[0]] = convertToType(
+            field[1],
+            searchParams.get(field[0]) || "",
+          ) as DataTypes;
+        }
         return obj;
       }, {} as reduceObjectType),
     );

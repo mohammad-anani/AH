@@ -14,7 +14,8 @@ const primaryStyles =
   "border-primary text-background!  bg-primary hover:bg-primary-light!  hover:text-primary!";
 const secondaryStyles =
   "border-primary text-primary! bg-transparent!  hover:bg-background-darker!";
-const destructiveStyles = "";
+const destructiveStyles =
+  " text-background! border-black bg-red-600 hover:bg-red-700";
 
 export default function Clickable({
   as,

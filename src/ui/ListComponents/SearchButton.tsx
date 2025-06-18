@@ -7,10 +7,13 @@ import { cloneElement } from "react";
 export default function SearchButton({ children }: ClickableChildrenProps) {
   const { fields, order, filter, sort } = useListContext();
 
+  const temporals = "date#datetime#time";
+  console.log(filter["WorkingDays"]);
   const [sp] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
-
+  if (filter["WorkingDays"])
+    console.log(filter["WorkingDays"].map(({ value }) => value).join(","));
   const searchParams = new URLSearchParams(sp);
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -21,15 +24,29 @@ export default function SearchButton({ children }: ClickableChildrenProps) {
     );
 
     fields.forEach(([field, type]) => {
-      console.log(field, type);
-      if (
-        !filter[field] ||
-        filter[field] === "" ||
-        (type === "boolean" && filter[field] === "all")
-      ) {
-        searchParams.delete(field);
+      if (temporals.includes(type)) {
+        if (!filter[field + "From"]) searchParams.delete(field + "From");
+        else searchParams.set(field + "From", filter[field + "From"]);
+      } else if (type === "array") {
+        if (filter[field].size === 0) searchParams.delete(field);
+        else
+          searchParams.set(
+            field,
+            filter[field].map(({ value }) => value).join(","),
+          );
+
+        if (!filter[field + "To"]) searchParams.delete(field + "To");
+        else searchParams.set(field + "To", filter[field + "To"]);
       } else {
-        searchParams.set(field, filter[field]);
+        if (
+          !filter[field] ||
+          filter[field] === "" ||
+          (type === "boolean" && filter[field] === "all")
+        ) {
+          searchParams.delete(field);
+        } else {
+          searchParams.set(field, filter[field]);
+        }
       }
     });
 
