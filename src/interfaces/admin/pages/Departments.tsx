@@ -15,7 +15,7 @@ export default function Departments() {
       )}
       filterFields={[
         ["Name", "string"],
-        ["Phone", "string"],
+        ["Phone", "phone"],
         ["AdminID", "string"],
         ["CreatedAt", "datetime"],
       ]}

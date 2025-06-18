@@ -27,5 +27,5 @@ export default function Items<T>({
         </li>
       </ul>
     );
-  else return <p>{emptyText}</p>;
+  else return <p className="text-center text-xl!">{emptyText}</p>;
 }

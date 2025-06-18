@@ -5,7 +5,6 @@ import Items from "./ListComponents/Items";
 import Pagination from "./ListComponents/Pagination";
 import Filter from "./ListComponents/Filter";
 import { ListContext } from "./ListComponents/context";
-import Length from "./ListComponents/Length";
 import ClearFilter from "./ListComponents/ClearFilter";
 
 export default function List<T>({
@@ -42,6 +41,5 @@ export default function List<T>({
 
 List.Items = Items;
 List.Pagination = Pagination;
-List.Length = Length;
 List.ClearFilter = ClearFilter;
 List.Filter = Filter;

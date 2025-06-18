@@ -40,7 +40,7 @@ export const emptyEmployee: Employee = {
   ID: 0,
   DepartmentID: 0,
   Salary: 0,
-  HireDate: new Date(),
+  HireDate: "",
   LeaveDate: null,
   isActive: false,
   WorkingDays: [],
@@ -53,7 +53,7 @@ export const emptyReceptionist: Receptionist = {
   ID: -1,
   Employee: emptyEmployee,
   CreatedByAdminID: -1,
-  CreatedAt: new Date(),
+  CreatedAt: "",
 };
 
 export const emptyDoctor: Doctor = {
@@ -61,14 +61,14 @@ export const emptyDoctor: Doctor = {
   Employee: emptyEmployee,
   Specialization: "",
   CreatedByReceptionistID: -1,
-  CreatedAt: new Date(),
+  CreatedAt: "",
 };
 
 export const emptyAdmin: Admin = {
   ID: -1,
   Employee: emptyEmployee,
   CreatedByAdminID: -1,
-  CreatedAt: new Date(),
+  CreatedAt: "",
 };
 
 // "Insurances": [

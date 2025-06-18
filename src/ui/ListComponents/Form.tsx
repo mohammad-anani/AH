@@ -149,7 +149,9 @@ export function Form() {
                   isMulti
                   name={key}
                   defaultValue={
-                    value ? value.map((v) => ({ value: v, label: v })) : []
+                    value
+                      ? value.map((v: string) => ({ value: v, label: v }))
+                      : []
                   }
                   onChange={(options) => {
                     setFilter((prev) => ({

@@ -15,3 +15,5 @@ export function convertToType(type: string, value: string) {
       return null;
   }
 }
+
+export const temporals = "date#datetime#time";
