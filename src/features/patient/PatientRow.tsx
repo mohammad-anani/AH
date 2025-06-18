@@ -1,7 +1,6 @@
 import type { Patient } from "../../utils/types";
-import Clickable from "@/ui/Clickable";
+import DetailsButton from "@/ui/DetailsButton";
 import formatPhoneNumber from "@/utils/formatPhoneNumber";
-import { Info } from "lucide-react";
 
 export default function PatientRow({ patient }: { patient: Patient }) {
   const {
@@ -14,15 +13,7 @@ export default function PatientRow({ patient }: { patient: Patient }) {
       <span>{Age}</span>
       <span>{formatPhoneNumber(Phone, "xx xxx xxx")}</span>
 
-      <Clickable
-        className="flex! items-center gap-x-1"
-        as="Link"
-        variant="secondary"
-        to={`${ID}`}
-      >
-        <Info className="*:text-primary! h-[20px] w-[20px]" />
-        Details
-      </Clickable>
+      <DetailsButton ID={ID} />
     </li>
   );
 }

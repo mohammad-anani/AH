@@ -18,6 +18,7 @@ export default function Doctors() {
         ...employeeFields,
         ["Specialization", "string"],
         ["CreatedAt", "datetime"],
+        ["ReceptionistID", "number"],
       ]}
     />
   );

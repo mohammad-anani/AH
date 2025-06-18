@@ -3,6 +3,7 @@ import { emptyEmployee } from "../../utils/emptyObjects";
 import type { Employee } from "../../utils/types";
 import PersonData from "../person/PersonData";
 import Clickable from "@/ui/Clickable";
+import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
 
 export default function EmployeeData({
   employee = emptyEmployee,
@@ -21,6 +22,13 @@ export default function EmployeeData({
     isActive,
   } = employee;
 
+  const formattedWorkingDays =
+    WorkingDays.length === 7
+      ? "Everyday"
+      : WorkingDays.length === 0
+        ? "None"
+        : WorkingDays.join(", ");
+
   return (
     <>
       <PersonData person={Person} />
@@ -37,13 +45,11 @@ export default function EmployeeData({
       <span>Salary:</span>
       <span>{formatMoney(Salary)}</span>
       <span>Hire Date:</span>
-      <span>{new Date(HireDate).toLocaleDateString()}</span>
+      <span>{formatDateIsoToLocal(HireDate)}</span>
       <span>Leave Date:</span>
-      <span>
-        {LeaveDate ? new Date(LeaveDate).toLocaleDateString() : "N/A"}
-      </span>
+      <span>{LeaveDate ? formatDateIsoToLocal(LeaveDate) : "N/A"}</span>
       <span>Working Days:</span>
-      <span>{WorkingDays.join(", ")}</span>
+      <span>{formattedWorkingDays}</span>
       <span>Shift Start:</span>
       <span>{ShiftStart}</span>
       <span>Shift End:</span>

@@ -23,7 +23,7 @@ export default function PatientCard() {
       </Clickable>
       <Clickable
         as="Link"
-        to={`/admin/tests?PatientID=${ID}`}
+        to={`/admin/testAppointments?PatientID=${ID}`}
         variant="secondary"
       >
         Show Tests Appointments
@@ -31,21 +31,6 @@ export default function PatientCard() {
       <Clickable
         as="Link"
         to={`/admin/operations?PatientID=${ID}`}
-        variant="secondary"
-      >
-        Show Appointments
-      </Clickable>
-      <Clickable
-        as="Link"
-        to={`/admin/finance?PatientID=${ID}`}
-        variant="secondary"
-      >
-        Show Operations
-      </Clickable>
-
-      <Clickable
-        as="Link"
-        to={`/admin/finance?PatientID=${ID}`}
         variant="secondary"
       >
         Show Operations

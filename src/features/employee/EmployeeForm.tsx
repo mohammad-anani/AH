@@ -1,6 +1,7 @@
 import type { Employee } from "../../utils/types";
 import { emptyEmployee } from "../../utils/emptyObjects";
 import AddUpdatePerson from "../person/PersonForm";
+import Select from "react-select";
 
 export default function EmployeeForm({
   employee = emptyEmployee,
@@ -20,6 +21,16 @@ export default function EmployeeForm({
   } = employee;
 
   const add = employee.ID === -1;
+
+  const selectOptions = [
+    { value: "Monday", label: "Monday" },
+    { value: "Tuesday", label: "Tuesday" },
+    { value: "Wednesday", label: "Wednesday" },
+    { value: "Thursday", label: "Thursday" },
+    { value: "Friday", label: "Friday" },
+    { value: "Saturday", label: "Saturday" },
+    { value: "Sunday", label: "Sunday" },
+  ];
 
   return (
     <>
@@ -51,11 +62,12 @@ export default function EmployeeForm({
       </select>
 
       <label htmlFor="workingDays">Working Days:</label>
-      <input
-        type="text"
-        name="workingDays"
-        defaultValue={!add ? WorkingDays.join(", ") : ""}
-        placeholder="e.g. Monday, Tuesday"
+      <Select
+        isMulti
+        name={"workingDays"}
+        defaultValue={WorkingDays.map((day) => ({ value: day, label: day }))}
+        onChange={() => {}}
+        options={selectOptions}
       />
 
       <label htmlFor="shiftStart">Shift Start:</label>

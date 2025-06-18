@@ -1,6 +1,7 @@
 import type { Doctor } from "../../utils/types";
 import Clickable from "@/ui/Clickable";
 import EmployeeData from "../employee/EmployeeData";
+import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
 
 interface DoctorDataProps {
   doctor: Doctor;
@@ -27,7 +28,7 @@ export default function DoctorData({ doctor }: DoctorDataProps) {
           </Clickable>
         </span>
         <span>Created at:</span>
-        <span>{new Date(CreatedAt).toLocaleString()}</span>
+        <span>{formatDateIsoToLocal(CreatedAt)}</span>
       </>
     </>
   );

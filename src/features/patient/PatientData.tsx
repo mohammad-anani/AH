@@ -1,6 +1,7 @@
 import type { Patient } from "../../utils/types";
 import Clickable from "@/ui/Clickable";
 import PersonData from "../person/PersonData";
+import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
 
 interface PatientDataProps {
   patient: Patient;
@@ -23,7 +24,7 @@ export default function PatientData({ patient }: PatientDataProps) {
         </Clickable>
       </span>
       <span>Created at:</span>
-      <span>{new Date(CreatedAt).toLocaleString()}</span>
+      <span>{formatDateIsoToLocal(CreatedAt)}</span>
     </>
   );
 }

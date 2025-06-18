@@ -1,6 +1,7 @@
 import Clickable from "@/ui/Clickable";
 import type { Department } from "../../utils/types";
 import formatPhoneNumber from "@/utils/formatPhoneNumber";
+import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
 
 export default function DepartmentData({
   department,
@@ -26,7 +27,7 @@ export default function DepartmentData({
         </Clickable>
       </span>
       <span>Created at:</span>
-      <span>{new Date(CreatedAt).toLocaleDateString()}</span>
+      <span>{formatDateIsoToLocal(CreatedAt)}</span>
     </>
   );
 }

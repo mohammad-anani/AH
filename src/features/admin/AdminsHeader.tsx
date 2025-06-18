@@ -1,6 +1,6 @@
 export default function AdminsHeader() {
   return (
-    <li className="">
+    <li>
       <span>Full Name</span>
     </li>
   );

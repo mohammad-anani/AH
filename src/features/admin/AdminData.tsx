@@ -1,3 +1,4 @@
+import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
 import type { Admin } from "../../utils/types";
 import EmployeeData from "../employee/EmployeeData";
 import Clickable from "@/ui/Clickable";
@@ -26,7 +27,7 @@ export default function AdminData({ admin }: AdminDataProps) {
         )}
       </span>
       <span>Created at:</span>
-      <span>{new Date(CreatedAt).toLocaleString()}</span>
+      <span>{formatDateIsoToLocal(CreatedAt)}</span>
     </>
   );
 }

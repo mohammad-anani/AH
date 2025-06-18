@@ -1,3 +1,4 @@
+import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
 import type { Receptionist } from "../../utils/types";
 import EmployeeData from "../employee/EmployeeData";
 import Clickable from "@/ui/Clickable";
@@ -25,7 +26,7 @@ export default function ReceptionistData({
         </Clickable>
       </span>
       <span>Created at:</span>
-      <span>{new Date(CreatedAt).toLocaleString()}</span>
+      <span>{formatDateIsoToLocal(CreatedAt)}</span>
     </>
   );
 }
