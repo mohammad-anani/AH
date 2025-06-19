@@ -1,8 +1,7 @@
 import axios from "./axios";
 
 export async function getList(url: string) {
-  const data = await axios.get(url);
-
-  const obj = [data.data, data.data.length];
+  const response = await axios.get(url);
+  const obj = [response.data, response.data.length];
   return obj;
 }

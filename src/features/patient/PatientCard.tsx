@@ -35,6 +35,13 @@ export default function PatientCard() {
       >
         Show Operations
       </Clickable>
+      <Clickable
+        as="Link"
+        to={`/admin/insurances?PatientID=${ID}`}
+        variant="secondary"
+      >
+        Show Insurances
+      </Clickable>
     </Card>
   );
 }

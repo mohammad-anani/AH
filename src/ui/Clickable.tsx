@@ -1,6 +1,7 @@
 import type { ChildrenProps } from "@/utils/types";
 import type { ButtonHTMLAttributes } from "react";
 import { Link, type LinkProps } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 type ButtonProps = ChildrenProps & {
   as: "button" | "Link";
@@ -8,49 +9,45 @@ type ButtonProps = ChildrenProps & {
 } & ButtonHTMLAttributes<HTMLButtonElement> &
   Partial<LinkProps>;
 
-const buttonStyles =
-  "place-content-center border-[1px] px-[20px] py-[7px] text-center text-xl active:opacity-60 active:transition-none! ";
-const primaryStyles =
-  "border-primary text-background!  bg-primary hover:bg-primary-light!  hover:text-primary!";
-const secondaryStyles =
-  "border-primary text-primary! bg-transparent!  hover:bg-background-darker!";
-const destructiveStyles =
-  " text-background! border-black bg-red-600 hover:bg-red-700";
+const baseStyles =
+  "place-content-center border-[1px] px-[20px] py-[7px] text-center text-xl active:opacity-60 active:transition-none!";
+
+const variantStyles = {
+  primary:
+    "border-primary text-background! bg-primary hover:bg-primary-light! hover:text-primary!",
+  secondary:
+    "border-primary text-primary! bg-transparent! hover:bg-background-darker!",
+  destructive: "text-background! border-black bg-red-600 hover:bg-red-700",
+  link: "text-primary! hover:text-primary-light! text-xl underline!",
+};
 
 export default function Clickable({
   as,
   variant,
   children,
+  className,
   ...rest
 }: ButtonProps) {
-  const className =
-    buttonStyles +
-    " " +
-    (variant === "primary"
-      ? primaryStyles
-      : variant === "secondary"
-        ? secondaryStyles
-        : destructiveStyles) +
-    " " +
-    rest.className;
+  const getButtonClassName = () => {
+    if (variant === "link") {
+      return cn(variantStyles.link, className);
+    }
+
+    return cn(baseStyles, variantStyles[variant], className);
+  };
+
+  const buttonClassName = getButtonClassName();
 
   switch (as) {
     case "button":
       return (
-        <button {...rest} className={className + " "}>
+        <button {...rest} className={buttonClassName}>
           {children}
         </button>
       );
     case "Link":
       return (
-        <Link
-          {...(rest as LinkProps)}
-          className={
-            variant !== "link"
-              ? className
-              : "text-primary! hover:text-primary-light! text-xl underline!"
-          }
-        >
+        <Link {...(rest as LinkProps)} className={buttonClassName}>
           {children}
         </Link>
       );

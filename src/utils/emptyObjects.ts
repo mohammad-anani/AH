@@ -70,36 +70,3 @@ export const emptyAdmin: Admin = {
   CreatedByAdminID: -1,
   CreatedAt: "",
 };
-
-// "Insurances": [
-//   {
-//     "ID": 1,
-//     "ProviderName": "HealthCare Plus",
-//     "Class": "A1",
-//     "ExpirationDate": "2025-12-31"
-//   },
-//   {
-//     "ID": 2,
-//     "ProviderName": "MedSecure",
-//     "Class": "B2",
-//     "ExpirationDate": "2024-11-30"
-//   },
-//   {
-//     "ID": 3,
-//     "ProviderName": "WellnessCorp",
-//     "Class": "A1",
-//     "ExpirationDate": "2025-06-15"
-//   },
-//   {
-//     "ID": 4,
-//     "ProviderName": "SafeHealth",
-//     "Class": "C3",
-//     "ExpirationDate": "2023-09-30"
-//   },
-//   {
-//     "ID": 5,
-//     "ProviderName": "PrimeCare",
-//     "Class": "B1",
-//     "ExpirationDate": "2026-01-01"
-//   }
-// ],
