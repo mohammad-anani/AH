@@ -15,23 +15,14 @@ export default function List<T>({
   const [fields, setFields] = useState<[string, DataTypes, string?, string?][]>(
     [],
   );
-  const [filter, setFilter] = useState({});
-  const [order, setOrder] = useState("asc");
-  const [sort, setSort] = useState("");
 
   return (
     <ListContext.Provider
       value={{
         items,
         fields,
-        filter,
-        order,
-        sort,
         canModifyUrl,
         setFields,
-        setFilter,
-        setOrder,
-        setSort,
       }}
     >
       <>{children}</>

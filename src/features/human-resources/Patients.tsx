@@ -13,7 +13,11 @@ export default function Patients() {
       emptyText="No Patients"
       Header={<PatientsHeader />}
       render={(patient) => <PatientRow key={patient.ID} patient={patient} />}
-      filterFields={[...persondFields]}
+      filterFields={[
+        ...persondFields,
+        ["CreatedAt", "datetime"],
+        ["ReceptionistID", "number"],
+      ]}
     />
   );
 }

@@ -1,41 +1,30 @@
-import useListContext from "../context";
+import { useFormContext } from "react-hook-form";
+import type { RegisterOptions, FieldValues } from "react-hook-form";
 
 interface BooleanInputProps {
   fieldKey: string;
   label: string;
-  value: string | boolean;
   trueLabel?: string;
   falseLabel?: string;
+  value?: string | boolean;
+  register?: ReturnType<typeof useFormContext>["register"];
+  registerOptions?: RegisterOptions;
 }
 
 export default function BooleanInput({
   fieldKey,
   label,
-  value,
-  trueLabel = "True",
-  falseLabel = "False",
+  trueLabel,
+  falseLabel,
 }: BooleanInputProps) {
-  const { setFilter } = useListContext();
-
+  const { register } = useFormContext<FieldValues>();
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <select
-        name={fieldKey}
-        defaultValue={
-          value === undefined || value === null
-            ? "all"
-            : value === "true"
-              ? "true"
-              : "false"
-        }
-        onChange={(e) =>
-          setFilter((prev) => ({ ...prev, [fieldKey]: e.target.value }))
-        }
-      >
+      <select id={fieldKey} {...register(fieldKey)}>
         <option value="all">All</option>
-        <option value="true">{trueLabel}</option>
-        <option value="false">{falseLabel}</option>
+        <option value={trueLabel}>{trueLabel ?? "true"}</option>
+        <option value={trueLabel}>{falseLabel ?? "false"}</option>
       </select>
     </>
   );

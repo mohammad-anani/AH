@@ -1,30 +1,22 @@
-import useListContext from "../context";
-import PhoneInputComponent from "../../PhoneInput";
+import { useFormContext } from "react-hook-form";
+import type { RegisterOptions, FieldValues } from "react-hook-form";
+import PhoneInp from "../../PhoneInput";
 
 interface PhoneInputProps {
   fieldKey: string;
   label: string;
-  value: string;
+  value?: string;
+  register?: ReturnType<typeof useFormContext>["register"];
+  registerOptions?: RegisterOptions;
 }
 
-export default function PhoneInput({
-  fieldKey,
-  label,
-  value,
-}: PhoneInputProps) {
-  const { setFilter } = useListContext();
+export default function PhoneInput({ fieldKey, label }: PhoneInputProps) {
+  const { register } = useFormContext<FieldValues>();
 
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <PhoneInputComponent
-        name={fieldKey}
-        format="xx xxx xxx"
-        initialValue={value || ""}
-        onChange={(phone) =>
-          setFilter((prev) => ({ ...prev, [fieldKey]: phone }))
-        }
-      />
+      <PhoneInp name={fieldKey} id={fieldKey} register={register} />
     </>
   );
 }

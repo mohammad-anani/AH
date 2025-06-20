@@ -1,3 +1,4 @@
+import type { DataTypes } from "@/utils/types";
 import useListContext from "./context";
 import {
   NumberInput,
@@ -8,66 +9,35 @@ import {
   ArrayInput,
   UnsupportedInput,
 } from "./form-inputs";
-import {
-  generateLabel,
-  isTemporalType,
-  getTemporalValue,
-} from "./form-inputs/utils";
+import { generateLabel, isTemporalType } from "./utils";
 
 export function Form() {
-  const { fields, filter } = useListContext();
+  const { fields } = useListContext();
 
-  const renderField = (field: [string, string, string?, string?]) => {
+  const renderField = (field: [string, DataTypes, string?, string?]) => {
     const [key, type, trueLabel, falseLabel] = field;
-    const label = generateLabel(key);
+    const label = generateLabel(key) + ":";
 
-    // Handle temporal types (date, datetime, time)
-    if (isTemporalType(type)) {
-      const value = getTemporalValue(key, filter);
+    if (isTemporalType(type ?? "")) {
       return (
         <TemporalInput
           key={key}
           fieldKey={key}
           label={label}
-          value={value}
           type={type as "date" | "datetime" | "time"}
         />
       );
     }
 
-    // Handle regular types
-    const value = filter[key];
-
     switch (type) {
       case "number":
-        return (
-          <NumberInput
-            key={key}
-            fieldKey={key}
-            label={label}
-            value={value as string | number}
-          />
-        );
+        return <NumberInput key={key} fieldKey={key} label={label} />;
 
       case "string":
-        return (
-          <StringInput
-            key={key}
-            fieldKey={key}
-            label={label}
-            value={value as string}
-          />
-        );
+        return <StringInput key={key} fieldKey={key} label={label} />;
 
       case "phone":
-        return (
-          <PhoneInput
-            key={key}
-            fieldKey={key}
-            label={label}
-            value={value as string}
-          />
-        );
+        return <PhoneInput key={key} fieldKey={key} label={label} />;
 
       case "boolean":
         return (
@@ -75,21 +45,13 @@ export function Form() {
             key={key}
             fieldKey={key}
             label={label}
-            value={value as string | boolean}
             trueLabel={trueLabel}
             falseLabel={falseLabel}
           />
         );
 
       case "array":
-        return (
-          <ArrayInput
-            key={key}
-            fieldKey={key}
-            label={label}
-            value={value as string[]}
-          />
-        );
+        return <ArrayInput key={key} fieldKey={key} label={label} />;
 
       default:
         return <UnsupportedInput key={key} fieldKey={key} label={label} />;
@@ -98,7 +60,7 @@ export function Form() {
 
   return (
     <div
-      className={`grid max-h-[300px]! w-[300px] grid-cols-[1fr_1fr] gap-y-3 overflow-x-hidden ${
+      className={`grid max-h-[300px]! w-[330px] grid-cols-[1fr_1fr] gap-y-3 overflow-x-hidden ${
         fields.length > 10 ? "overflow-y-scroll" : ""
       } rounded-none! p-2 text-xs! *:w-full!`}
     >

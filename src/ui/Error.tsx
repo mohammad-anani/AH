@@ -6,8 +6,6 @@ import { UNSAFE_ErrorResponseImpl, useRouteError } from "react-router-dom";
 
 export default function Error() {
   const error = useRouteError() as UNSAFE_ErrorResponseImpl;
-  console.log(error);
-
   return (
     <main className="mt-20 grid content-center gap-y-4">
       <Logo className="h-auto! w-auto! text-9xl!" />

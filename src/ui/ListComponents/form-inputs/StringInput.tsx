@@ -1,29 +1,21 @@
-import useListContext from "../context";
+import { useFormContext } from "react-hook-form";
+import type { RegisterOptions, FieldValues } from "react-hook-form";
 
 interface StringInputProps {
   fieldKey: string;
   label: string;
-  value: string;
+  value?: string;
+  register?: ReturnType<typeof useFormContext>["register"];
+  registerOptions?: RegisterOptions;
 }
 
-export default function StringInput({
-  fieldKey,
-  label,
-  value,
-}: StringInputProps) {
-  const { setFilter } = useListContext();
+export default function StringInput({ fieldKey, label }: StringInputProps) {
+  const { register } = useFormContext<FieldValues>();
 
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <input
-        type="text"
-        name={fieldKey}
-        defaultValue={value || ""}
-        onChange={(e) =>
-          setFilter((prev) => ({ ...prev, [fieldKey]: e.target.value }))
-        }
-      />
+      <input id={fieldKey} type="text" {...register(fieldKey)} />
     </>
   );
 }

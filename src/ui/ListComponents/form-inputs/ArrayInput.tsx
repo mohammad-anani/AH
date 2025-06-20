@@ -1,28 +1,16 @@
-import useListContext from "../context";
+import { useFormContext, Controller } from "react-hook-form";
 import Select from "react-select";
 
 interface ArrayInputProps {
   fieldKey: string;
   label: string;
-  value: string[];
 }
-
-const selectOptions = [
-  { value: "Monday", label: "Monday" },
-  { value: "Tuesday", label: "Tuesday" },
-  { value: "Wednesday", label: "Wednesday" },
-  { value: "Thursday", label: "Thursday" },
-  { value: "Friday", label: "Friday" },
-  { value: "Saturday", label: "Saturday" },
-  { value: "Sunday", label: "Sunday" },
-];
 
 const selectStyles = {
   control: (base: Record<string, unknown>) => ({
     ...base,
     fontSize: 10,
     minHeight: 24,
-    minheight: 24,
   }),
   valueContainer: (base: Record<string, unknown>) => ({
     ...base,
@@ -64,30 +52,48 @@ const selectStyles = {
   }),
 };
 
-export default function ArrayInput({
-  fieldKey,
-  label,
-  value,
-}: ArrayInputProps) {
-  const { setFilter } = useListContext();
+const selectOptions = [
+  { value: "Monday", label: "Monday" },
+  { value: "Tuesday", label: "Tuesday" },
+  { value: "Wednesday", label: "Wednesday" },
+  { value: "Thursday", label: "Thursday" },
+  { value: "Friday", label: "Friday" },
+  { value: "Saturday", label: "Saturday" },
+  { value: "Sunday", label: "Sunday" },
+];
+
+export default function ArrayInput({ fieldKey, label }: ArrayInputProps) {
+  const { control } = useFormContext();
 
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <Select
-        isMulti
+      <Controller
+        control={control}
         name={fieldKey}
-        defaultValue={
-          value ? value.map((v: string) => ({ value: v, label: v })) : []
-        }
-        onChange={(options) => {
-          setFilter((prev) => ({
-            ...prev,
-            [fieldKey]: options,
-          }));
+        render={({ field }) => {
+          const selectedOptions = field.value
+            ? field.value.map((v: string) => ({ value: v, label: v }))
+            : [];
+
+          return (
+            <Select
+              inputId={fieldKey}
+              isMulti
+              options={selectOptions}
+              value={selectedOptions}
+              styles={selectStyles}
+              onChange={(options) => {
+                const newValues = options
+                  ? options.map((opt) => opt.value)
+                  : [];
+
+                field.onChange(newValues);
+              }}
+              onBlur={field.onBlur}
+            />
+          );
         }}
-        options={selectOptions}
-        styles={selectStyles}
       />
     </>
   );

@@ -1,49 +1,37 @@
-import useListContext from "../context";
+import { useFormContext } from "react-hook-form";
+import type { FieldValues } from "react-hook-form";
 
 interface TemporalInputProps {
   fieldKey: string;
   label: string;
-  value: { from: string; to: string };
   type: "date" | "datetime" | "time";
 }
 
 export default function TemporalInput({
   fieldKey,
   label,
-  value,
   type,
 }: TemporalInputProps) {
-  const { setFilter } = useListContext();
+  const { register } = useFormContext<FieldValues>();
+  const inputType = type === "datetime" ? "datetime-local" : type;
 
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <div className="grid grid-cols-[50px_1fr] gap-y-1">
+      <span id={fieldKey} className="grid w-full! grid-cols-[50px_1fr] gap-y-1">
         <label htmlFor={fieldKey + "From"}>From:</label>
         <input
-          type={type}
-          name={fieldKey + "From"}
-          defaultValue={value.from || ""}
-          onChange={(e) =>
-            setFilter((prev) => ({
-              ...prev,
-              [fieldKey + "From"]: e.target.value,
-            }))
-          }
+          id={fieldKey + "From"}
+          type={inputType}
+          {...register(fieldKey + "From")}
         />
-        <label htmlFor={fieldKey + "To"}>To:</label>
+        <label htmlFor={fieldKey + "To"}> To:</label>
         <input
-          type={type}
-          name={fieldKey + "To"}
-          defaultValue={value.to || ""}
-          onChange={(e) =>
-            setFilter((prev) => ({
-              ...prev,
-              [fieldKey + "To"]: e.target.value,
-            }))
-          }
+          id={fieldKey + "To"}
+          type={inputType}
+          {...register(fieldKey + "To")}
         />
-      </div>
+      </span>
     </>
   );
 }

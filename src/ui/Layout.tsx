@@ -2,8 +2,6 @@ import { Outlet, useNavigation } from "react-router-dom";
 import Header from "./Header";
 import type { ChildrenProps } from "@/utils/types";
 import { MoonLoader } from "react-spinners";
-import { ErrorBoundary } from "react-error-boundary";
-import Error from "./Error";
 
 export default function Layout({ children }: ChildrenProps) {
   const { state } = useNavigation();

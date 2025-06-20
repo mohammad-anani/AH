@@ -18,6 +18,7 @@ export default function Receptionists() {
       filterFields={[
         ...persondFields,
         ...employeeFields,
+        ["CreatedAt", "datetime"],
         ["AdminID", "number"],
       ]}
     />

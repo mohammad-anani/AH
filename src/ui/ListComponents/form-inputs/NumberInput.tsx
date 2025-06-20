@@ -1,29 +1,21 @@
-import useListContext from "../context";
+import { useFormContext } from "react-hook-form";
+import type { RegisterOptions, FieldValues } from "react-hook-form";
 
 interface NumberInputProps {
   fieldKey: string;
   label: string;
-  value: string | number;
+  value?: string | number;
+  register?: ReturnType<typeof useFormContext>["register"];
+  registerOptions?: RegisterOptions;
 }
 
-export default function NumberInput({
-  fieldKey,
-  label,
-  value,
-}: NumberInputProps) {
-  const { setFilter } = useListContext();
+export default function NumberInput({ fieldKey, label }: NumberInputProps) {
+  const { register } = useFormContext<FieldValues>();
 
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <input
-        type="number"
-        name={fieldKey}
-        defaultValue={Number(value) || ""}
-        onChange={(e) =>
-          setFilter((prev) => ({ ...prev, [fieldKey]: e.target.value }))
-        }
-      />
+      <input id={fieldKey} type="number" {...register(fieldKey)} />
     </>
   );
 }

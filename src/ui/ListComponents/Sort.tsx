@@ -1,26 +1,33 @@
+import { useFormContext, Controller } from "react-hook-form";
 import useListContext from "./context";
+import { generateLabel } from "./utils";
 
 export default function Sort() {
-  const { fields, sort, setSort } = useListContext();
+  const { control } = useFormContext();
+  const { fields } = useListContext();
+
   return (
     <>
       <label htmlFor="sort">Sort by:</label>
-      <select
-        className="w-80"
+      <Controller
+        control={control}
         name="sort"
-        id="sort"
-        defaultValue={sort}
-        onChange={(e) => {
-          setSort(e.target.value);
-        }}
-      >
-        <option value="None">None</option>
-        {fields.map((field) => (
-          <option key={field[0]} value={field[0]}>
-            {field[0]}
-          </option>
-        ))}
-      </select>
+        render={({ field }) => (
+          <select
+            className="w-80"
+            id="sort"
+            value={field.value}
+            onChange={field.onChange}
+          >
+            <option value="None">None</option>
+            {fields.map((fieldItem) => (
+              <option key={fieldItem[0]} value={fieldItem[0]}>
+                {generateLabel(fieldItem[0])}
+              </option>
+            ))}
+          </select>
+        )}
+      />
     </>
   );
 }

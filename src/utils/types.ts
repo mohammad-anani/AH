@@ -50,7 +50,8 @@ export type DataTypes =
   | "date"
   | "datetime"
   | "array"
-  | "time";
+  | "time"
+  | null;
 
 export type Employee = {
   ID: number;
