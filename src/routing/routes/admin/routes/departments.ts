@@ -3,7 +3,7 @@ import DepartmentViewEdit from "@/features/department/DepartmentViewEdit";
 import DepartmentCard from "@/features/department/DepartmentCard";
 import UpdateDepartment from "@/features/department/UpdateDepartment";
 import AddDepartment from "@/features/department/AddDepartment";
-import { findDepartmentLoader } from "@/interfaces/admin/loaders/departments";
+import findByIDLoader from "@/utils/findByIDLoader";
 import listLoader from "@/utils/listLoader";
 
 export const departmentsRoutes = [
@@ -14,7 +14,7 @@ export const departmentsRoutes = [
       {
         path: ":id",
         Component: DepartmentViewEdit,
-        loader: findDepartmentLoader,
+        loader: findByIDLoader("Departments"),
         children: [
           { index: true, Component: DepartmentCard },
           { path: "edit", Component: UpdateDepartment },

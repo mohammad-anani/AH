@@ -3,8 +3,8 @@ import AdminViewEdit from "@/features/admin/AdminViewEdit";
 import AdminCard from "@/features/admin/AdminCard";
 import UpdateAdmin from "@/features/admin/UpdateAdmin";
 import AddAdmin from "@/features/admin/AddAdmin";
-import { findAdminLoader } from "@/interfaces/admin/loaders/admins";
 import listLoader from "@/utils/listLoader";
+import findByIDLoader from "@/utils/findByIDLoader";
 
 export const adminsRoutes = [
   {
@@ -14,7 +14,7 @@ export const adminsRoutes = [
       {
         path: ":id",
         Component: AdminViewEdit,
-        loader: findAdminLoader,
+        loader: findByIDLoader("Admins"),
         children: [
           { index: true, Component: AdminCard },
           { path: "edit", Component: UpdateAdmin },

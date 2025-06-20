@@ -3,7 +3,7 @@ import DoctorViewEdit from "@/features/doctor/DoctorViewEdit";
 import DoctorCard from "@/features/doctor/DoctorCard";
 import UpdateDoctor from "@/features/doctor/UpdateDoctor";
 import AddDoctor from "@/features/doctor/AddDoctor";
-import { findDoctorLoader } from "@/interfaces/admin/loaders/doctors";
+import findByIDLoader from "@/utils/findByIDLoader";
 import listLoader from "@/utils/listLoader";
 
 export const doctorsRoutes = [
@@ -14,7 +14,7 @@ export const doctorsRoutes = [
       {
         path: ":id",
         Component: DoctorViewEdit,
-        loader: findDoctorLoader,
+        loader: findByIDLoader("Doctors"),
         children: [
           { index: true, Component: DoctorCard },
           { path: "edit", Component: UpdateDoctor },

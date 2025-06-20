@@ -3,7 +3,7 @@ import PatientViewEdit from "@/features/patient/PatientViewEdit";
 import PatientCard from "@/features/patient/PatientCard";
 import UpdatePatient from "@/features/patient/UpdatePatient";
 import AddPatient from "@/features/patient/AddPatient";
-import { findPatientLoader } from "@/interfaces/admin/loaders/patients";
+import findByIDLoader from "@/utils/findByIDLoader";
 import listLoader from "@/utils/listLoader";
 
 export const patientsRoutes = [
@@ -14,7 +14,7 @@ export const patientsRoutes = [
       {
         path: ":id",
         Component: PatientViewEdit,
-        loader: findPatientLoader,
+        loader: findByIDLoader("Patients"),
         children: [
           { index: true, Component: PatientCard },
           { path: "edit", Component: UpdatePatient },

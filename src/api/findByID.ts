@@ -1,0 +1,6 @@
+import axios from "./axios";
+
+export async function findByID(urlEndpoint: string, id: number) {
+  const data = await axios.get(`/${urlEndpoint}?ID=${id}`);
+  return data.data[0] || {};
+}

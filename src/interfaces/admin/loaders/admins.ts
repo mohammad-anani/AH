@@ -1,7 +1,12 @@
 import type { LoaderFunctionArgs } from "react-router-dom";
-import { findAdmins } from "../../../api/admins";
+import { findByID } from "@/api/findByID";
+import throwError from "@/utils/throwError";
 
 export async function findAdminLoader({ params }: LoaderFunctionArgs) {
-  const admin = await findAdmins(Number(params["id"]));
+  if (!params["id"] || isNaN(Number(params["id"]))) {
+    throwError(400, "Bad request", "Invalid admin ID");
+  }
+
+  const admin = await findByID("Admins", Number(params["id"]));
   return admin;
 }

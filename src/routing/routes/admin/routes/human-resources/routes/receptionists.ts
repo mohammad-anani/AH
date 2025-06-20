@@ -3,7 +3,7 @@ import ReceptionistViewEdit from "@/features/receptionist/ReceptionistViewEdit";
 import ReceptionistCard from "@/features/receptionist/ReceptionistCard";
 import UpdateReceptionist from "@/features/receptionist/UpdateReceptionist";
 import AddReceptionist from "@/features/receptionist/AddReceptionist";
-import { findReceptionistLoader } from "@/interfaces/admin/loaders/receptionists";
+import findByIDLoader from "@/utils/findByIDLoader";
 import listLoader from "@/utils/listLoader";
 
 export const receptionistsRoutes = [
@@ -18,7 +18,7 @@ export const receptionistsRoutes = [
       {
         path: ":id",
         Component: ReceptionistViewEdit,
-        loader: findReceptionistLoader,
+        loader: findByIDLoader("Receptionists"),
         children: [
           { index: true, Component: ReceptionistCard },
           { path: "edit", Component: UpdateReceptionist },
