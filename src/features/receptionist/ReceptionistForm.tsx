@@ -1,11 +1,10 @@
-import type { Receptionist } from "../../utils/types";
-import { emptyReceptionist } from "../../utils/emptyObjects";
 import EmployeeForm from "../employee/EmployeeForm";
 
 export default function ReceptionistForm({
-  receptionist = emptyReceptionist,
+  fieldPrefix = "",
 }: {
-  receptionist?: Receptionist;
+  fieldPrefix?: string;
 }) {
-  return <EmployeeForm employee={receptionist.Employee} />;
+  const prefix = fieldPrefix + "";
+  return <EmployeeForm fieldPrefix={prefix} />;
 }

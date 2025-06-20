@@ -1,25 +1,14 @@
-import type { Doctor } from "../../utils/types";
-import { emptyDoctor } from "../../utils/emptyObjects";
 import EmployeeForm from "../employee/EmployeeForm";
+import RegisteredInput from "@/ui/RegisteredInput";
 
-export default function DoctorForm({
-  doctor = emptyDoctor,
-}: {
-  doctor?: Doctor;
-}) {
-  const { ID } = doctor;
-
-  const add = ID === -1;
+export default function DoctorForm() {
   return (
     <>
-      <EmployeeForm employee={doctor.Employee} />
+      <EmployeeForm />
       <label htmlFor="specialization">Specialization:</label>
-      <input
-        type="text"
-        name="specialization"
-        defaultValue={!add ? doctor.Specialization : ""}
-        placeholder="Specialization"
-      />
+      <RegisteredInput name="Specialization">
+        <input type="text" placeholder="Specialization" />
+      </RegisteredInput>
     </>
   );
 }

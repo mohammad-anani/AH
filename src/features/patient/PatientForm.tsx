@@ -1,11 +1,10 @@
-import type { Patient } from "../../utils/types";
-import { emptyPatient } from "../../utils/emptyObjects";
 import PersonForm from "../person/PersonForm";
 
 export default function PatientForm({
-  patient = emptyPatient,
+  fieldPrefix = "",
 }: {
-  patient?: Patient;
+  fieldPrefix?: string;
 }) {
-  return <PersonForm person={patient.Person} />;
+  const prefix = fieldPrefix + "";
+  return <PersonForm fieldPrefix={prefix} />;
 }

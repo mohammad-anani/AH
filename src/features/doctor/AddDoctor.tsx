@@ -1,11 +1,16 @@
+import { DoctorSchema } from "@/utils/schemas";
 import DoctorForm from "./DoctorForm";
 import AddUpdateForm from "@/ui/AddUpdateForm";
+import { emptyDoctor } from "@/utils/emptyObjects";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function AddDoctor() {
   return (
     <AddUpdateForm
+      resolver={zodResolver(DoctorSchema)}
+      defaultValues={emptyDoctor}
       title="Add Doctor"
-      backLink={"/admin/human-resources/doctors"}
+      backLink={"/admin/human-resources/doctors/"}
     >
       <DoctorForm />
     </AddUpdateForm>

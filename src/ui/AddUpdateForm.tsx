@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import H2 from "@/ui/H2";
 import Clickable from "@/ui/Clickable";
-import type { Key, OptionalChildrenProps } from "@/utils/types";
+import type { OptionalChildrenProps } from "@/utils/types";
 import { FormProvider, useForm, type Resolver } from "react-hook-form";
 
 export default function AddUpdateForm({
@@ -21,7 +21,7 @@ export default function AddUpdateForm({
   const methods = useForm({ resolver, defaultValues });
   const {
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = methods;
 
   console.log(defaultValues);

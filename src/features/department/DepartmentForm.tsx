@@ -1,32 +1,29 @@
-import type { Department } from "../../utils/types";
 import PhoneInput from "../../ui/PhoneInput";
-import { emptyDepartment } from "../../utils/emptyObjects";
+import { Controller, useFormContext } from "react-hook-form";
+import RegisteredInput from "@/ui/RegisteredInput";
 
-export default function DepartmentForm({
-  department = emptyDepartment,
-}: {
-  department?: Department;
-}) {
-  const { Name, Phone } = department;
-
-  const add = department.ID === -1;
-
+export default function DepartmentForm() {
+  const { control } = useFormContext();
   return (
     <>
-      <label htmlFor="name">Name:</label>
-      <input
-        type="text"
-        name="name"
-        defaultValue={!add ? Name : ""}
-        placeholder="Department Name"
-      />
+      <label htmlFor="Name">Name:</label>
+      <RegisteredInput name="Name">
+        <input id="Name" type="text" placeholder="Department Name" />
+      </RegisteredInput>
 
       <label htmlFor="phone">Phone:</label>
-      <PhoneInput
-        name="phone"
-        initialValue={!add ? Phone : ""}
-        format="xx xxx xxx"
-        placeholder="Department Phone"
+      <Controller
+        name="Phone"
+        control={control}
+        render={({ field }) => (
+          <PhoneInput
+            name={field.name}
+            format="xx xxx xxx"
+            placeholder="Phone Number"
+            initialValue={field.value}
+            onChange={field.onChange}
+          />
+        )}
       />
     </>
   );

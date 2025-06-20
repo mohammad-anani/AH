@@ -68,7 +68,11 @@
 body,
 html,
 #root {
-  @apply bg-background h-[100dvh] overflow-x-hidden;
+  @apply bg-background h-[100dvh] overflow-visible;
+}
+
+html {
+  @apply overflow-y-scroll;
 }
 
 /* #root {
@@ -80,7 +84,7 @@ a {
   @apply inline-block cursor-pointer;
 }
 
-.on path:first-child {
+/* .on path:first-child {
   rotate: -180deg;
   transform-origin: 7px 12px;
 }
@@ -89,7 +93,7 @@ a {
   rotate: -180deg;
   transform-origin: 0px 8px;
   transform-box: fill-box;
-}
+} */
 
 input,
 select {

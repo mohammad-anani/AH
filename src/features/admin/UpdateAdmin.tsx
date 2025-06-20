@@ -12,7 +12,7 @@ export default function UpdateAdmin() {
     <AddUpdateForm
       defaultValues={admin}
       resolver={zodResolver(AdminSchema)}
-      title="Update Admin"
+      title="Edit Admin"
       backLink={"/admin/human-resources/admins/" + admin.ID}
     >
       <AdminForm />
