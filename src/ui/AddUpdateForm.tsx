@@ -1,17 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import H2 from "@/ui/H2";
 import Clickable from "@/ui/Clickable";
-import type { OptionalChildrenProps } from "@/utils/types";
+import type { Key, OptionalChildrenProps } from "@/utils/types";
+import { FormProvider, useForm, type Resolver } from "react-hook-form";
 
 export default function AddUpdateForm({
   title,
   backLink,
   headerWidth = 150,
+  resolver,
+  defaultValues,
   children,
 }: {
   title: string;
   backLink: string;
+  resolver: Resolver<any>;
+  defaultValues: any;
   headerWidth?: number;
 } & OptionalChildrenProps) {
+  const methods = useForm({ resolver, defaultValues });
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  console.log(defaultValues);
   return (
     <>
       <Clickable
@@ -24,15 +37,24 @@ export default function AddUpdateForm({
       </Clickable>
 
       <H2 className="mb-6">{title}</H2>
-
-      <form
-        className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-3 *:text-xl! *:odd:font-bold`}
-      >
-        {children}
-        <Clickable className="col-span-2 mt-10" as="button" variant="primary">
-          Save
-        </Clickable>
-      </form>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={handleSubmit((data) => {
+            console.log(data);
+          })}
+          className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-3 *:text-xl! *:odd:font-bold`}
+        >
+          {children}
+          <Clickable
+            className="col-span-2 mt-10"
+            as="button"
+            type="submit"
+            variant="primary"
+          >
+            Save
+          </Clickable>
+        </form>
+      </FormProvider>
     </>
   );
 }

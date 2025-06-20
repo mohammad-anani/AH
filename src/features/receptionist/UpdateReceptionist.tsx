@@ -9,7 +9,7 @@ export default function UpdateReceptionist() {
   return (
     <AddUpdateForm
       title="Add Admin"
-      backLink={"/admin/human-resources/receptionists" + receptionist.ID}
+      backLink={"/admin/human-resources/receptionists/" + receptionist.ID}
     >
       <ReceptionistForm receptionist={receptionist} />
     </AddUpdateForm>

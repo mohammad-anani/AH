@@ -12,6 +12,8 @@
   --color-background: #edf1f5;
   --color-background-dark: #c4e1ff;
   --color-background-darker: #86c0ff;
+  --color-destructive: var(--color-red-600);
+  --color-destructive-light: var(--color-red-700);
   --color-foreground: #003242;
   --color-muted: var(--color-gray-300);
   --radius: 0.625rem;
@@ -54,6 +56,8 @@
   --color-background-dark: var(--color-background-dark);
   --color-background-darker: var(--color-background-darker);
   --color-foreground: var(--color-foreground);
+  --color-destructive: var(--color-destructive);
+  --color-destructive-light: var(--color-destructive-light);
   --color-muted: var(--color-muted);
 }
 

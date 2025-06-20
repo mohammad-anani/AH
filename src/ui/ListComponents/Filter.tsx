@@ -10,90 +10,85 @@ import Sort from "./Sort";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect } from "react";
 
-type reduceObjectType = { [key: string]: DataTypes };
+type FieldTuple = [string, DataTypes, string?, string?];
+type reduceObjectType = { [key: string]: DataTypes | string };
+
+function buildDefaultValues(
+  fields: FieldTuple[],
+  params: URLSearchParams,
+): reduceObjectType {
+  const defaults: reduceObjectType = {};
+
+  for (const [field, type] of fields) {
+    if (temporals.includes(type ?? "null")) {
+      defaults[field + "From"] = (params.get(field + "From") ??
+        null) as DataTypes;
+      defaults[field + "To"] = (params.get(field + "To") ?? null) as DataTypes;
+    } else {
+      const value = params.get(field) ?? "";
+      defaults[field] = convertStringToType(type ?? "", value) as DataTypes;
+    }
+  }
+
+  defaults.sort = params.get("sort") ?? "None";
+  defaults.order = params.get("order") ?? "asc";
+
+  return defaults;
+}
+
+function buildPathWithParams(
+  fields: FieldTuple[],
+  data: Record<string, any>,
+  basePath: string,
+): string {
+  const params = new URLSearchParams();
+
+  for (const [field, type] of fields) {
+    if (temporals.includes(type ?? "null")) {
+      if (data[field + "From"])
+        params.set(field + "From", data[field + "From"]);
+      if (data[field + "To"]) params.set(field + "To", data[field + "To"]);
+    } else if (type === "array") {
+      if (data[field]?.length) params.set(field, data[field].join(","));
+    } else if (data[field] && !(type === "boolean" && data[field] === "all")) {
+      params.set(field, data[field]);
+    }
+  }
+
+  if (data.sort !== "None") params.set("sort", data.sort);
+  if (data.order === "desc") params.set("order", "desc");
+
+  const page = new URLSearchParams(location.search).get("page");
+  if (page && Number(page) > 1) params.set("page", page);
+
+  return `${basePath}${params.toString() ? `?${params.toString()}` : ""}`;
+}
 
 export default function Filter({
   children,
   fields,
-}: ChildrenProps & { fields: [string, DataTypes, string?, string?][] }) {
+}: ChildrenProps & { fields: FieldTuple[] }) {
   const { canModifyUrl, setFields } = useListContext();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFields(fields);
-  }, [setFields, fields]);
+  }, [fields, setFields]);
 
-  const navigate = useNavigate();
-
-  const [searchParams] = useSearchParams();
-
-  const defaultValues = {
-    ...fields.reduce((obj, [field, type]) => {
-      if (temporals.includes(type ?? "null")) {
-        obj[field + "From"] = (searchParams.get(field + "From") ??
-          null) as DataTypes;
-        obj[field + "To"] = (searchParams.get(field + "To") ??
-          null) as DataTypes;
-      } else {
-        const value = searchParams.get(field) || "";
-        obj[field] = convertStringToType(type ?? "", value) as DataTypes;
-      }
-      return obj;
-    }, {} as reduceObjectType),
-    sort: searchParams.get("sort") ?? "None",
-    order: searchParams.get("order") ?? "asc",
-  };
-  const methods = useForm({
-    defaultValues: defaultValues,
-  });
-
-  const { handleSubmit, reset } = methods;
-
-  useEffect(() => {
-    reset(defaultValues);
-  }, [JSON.stringify(fields), searchParams.toString()]);
+  const defaultValues = buildDefaultValues(fields, searchParams);
+  const methods = useForm({ defaultValues });
+  const { handleSubmit } = methods;
 
   function onSubmit(data: Record<string, any>) {
-    let path = location.pathname.substring(
-      0,
-      location.pathname.indexOf("/filter"),
-    );
+    const filterIndex = location.pathname.indexOf("/filter");
+    const basePath =
+      filterIndex >= 0
+        ? location.pathname.slice(0, filterIndex)
+        : location.pathname;
 
-    fields.forEach(([field, type]) => {
-      if (temporals.includes(type ?? "none")) {
-        if (!data[field + "From"]) searchParams.delete(field + "From");
-        else searchParams.set(field + "From", data[field + "From"]);
-
-        if (!data[field + "To"]) searchParams.delete(field + "To");
-        else searchParams.set(field + "To", data[field + "To"]);
-      } else if (type === "array") {
-        if (!data[field] || data[field].size === 0) searchParams.delete(field);
-        else searchParams.set(field, data[field]?.join(","));
-      } else if (
-        !data[field] ||
-        data[field] === "" ||
-        (type === "boolean" && data[field] === "all")
-      ) {
-        searchParams.delete(field);
-      } else {
-        searchParams.set(field, data[field]);
-      }
-    });
-
-    searchParams.delete("sort");
-    if (data["sort"] !== "None") searchParams.set("sort", data["sort"]);
-
-    searchParams.delete("order");
-    if (data["order"] === "desc") searchParams.set("order", "desc");
-
-    const page = searchParams.get("page");
-
-    searchParams.delete("page");
-
-    if (page && Number(page) > 1) searchParams.set("page", page);
-
-    if (searchParams && searchParams.size > 0) path += "?";
-    path += searchParams.toString();
-    navigate(path);
+    const newPath = buildPathWithParams(fields, data, basePath);
+    navigate(newPath);
   }
 
   if (!canModifyUrl) return null;

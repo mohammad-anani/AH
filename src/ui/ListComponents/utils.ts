@@ -25,9 +25,9 @@ export const temporals = ["date", "datetime", "time"];
 
 export function generateLabel(key: string) {
   return key
-    .replace(/([A-Z])/g, " $1")
-    .replace(/^./, (str) => str.toUpperCase())
-    .replace(/_/g, " ");
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/_/g, " ")
+    .replace(/^./, (str) => str.toUpperCase());
 }
 
 export function getTemporalValue(key: string, filter: Record<string, unknown>) {

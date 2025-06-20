@@ -1,27 +1,14 @@
-import type { Employee } from "../../utils/types";
-import { emptyEmployee } from "../../utils/emptyObjects";
-import AddUpdatePerson from "../person/PersonForm";
+import PersonForm from "../person/PersonForm";
 import Select from "react-select";
+import RegisteredInput from "../../ui/RegisteredInput";
+import { Controller, useFormContext } from "react-hook-form";
 
 export default function EmployeeForm({
-  employee = emptyEmployee,
+  fieldPrefix = "",
 }: {
-  employee?: Employee;
+  fieldPrefix?: string;
 }) {
-  const {
-    Person,
-
-    Salary,
-    HireDate,
-    LeaveDate,
-    isActive,
-    WorkingDays,
-    ShiftStart,
-    ShiftEnd,
-  } = employee;
-
-  const add = employee.ID === -1;
-
+  const prefix = fieldPrefix + "Employee.";
   const selectOptions = [
     { value: "Monday", label: "Monday" },
     { value: "Tuesday", label: "Tuesday" },
@@ -32,53 +19,63 @@ export default function EmployeeForm({
     { value: "Sunday", label: "Sunday" },
   ];
 
+  const { control } = useFormContext();
+
   return (
     <>
-      <AddUpdatePerson person={Person} />
+      <PersonForm fieldPrefix={prefix} />
 
       <label htmlFor="salary">Salary:</label>
-      <input
-        type="number"
-        name="salary"
-        defaultValue={!add ? Salary : ""}
-        placeholder="Salary"
-      />
+      <RegisteredInput name={`${prefix}Salary`}>
+        <input type="number" placeholder="Salary" />
+      </RegisteredInput>
 
       <label htmlFor="hireDate">Hire Date:</label>
-      <input type="date" name="hireDate" defaultValue={!add ? HireDate : ""} />
+      <RegisteredInput name={`${prefix}HireDate`}>
+        <input type="date" />
+      </RegisteredInput>
 
       <label htmlFor="leaveDate">Leave Date:</label>
-      <input
-        type="date"
-        name="leaveDate"
-        defaultValue={!add && LeaveDate ? LeaveDate : ""}
-      />
+      <RegisteredInput name={`${prefix}LeaveDate`}>
+        <input type="date" />
+      </RegisteredInput>
 
       <label htmlFor="isActive">Status:</label>
-      <select name="isActive" defaultValue={!add ? String(isActive) : ""}>
-        <option value="">Select Status</option>
-        <option value="true">Active</option>
-        <option value="false">Inactive</option>
-      </select>
+      <RegisteredInput name={`${prefix}isActive`}>
+        <select>
+          <option value="">Select Status</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </RegisteredInput>
 
       <label htmlFor="workingDays">Working Days:</label>
-      <Select
-        isMulti
-        name={"workingDays"}
-        defaultValue={WorkingDays.map((day) => ({ value: day, label: day }))}
-        onChange={() => {}}
-        options={selectOptions}
+      <Controller
+        name={`${prefix}WorkingDays`}
+        control={control}
+        render={({ field }) => (
+          <Select
+            isMulti
+            options={selectOptions}
+            value={selectOptions.filter((option) =>
+              field.value?.includes(option.value),
+            )}
+            onChange={(selected) =>
+              field.onChange(selected.map((opt) => opt.value))
+            }
+          />
+        )}
       />
 
       <label htmlFor="shiftStart">Shift Start:</label>
-      <input
-        type="time"
-        name="shiftStart"
-        defaultValue={!add ? ShiftStart : ""}
-      />
+      <RegisteredInput name={`${prefix}ShiftStart`}>
+        <input type="time" />
+      </RegisteredInput>
 
       <label htmlFor="shiftEnd">Shift End:</label>
-      <input type="time" name="shiftEnd" defaultValue={!add ? ShiftEnd : ""} />
+      <RegisteredInput name={`${prefix}ShiftEnd`}>
+        <input type="time" />
+      </RegisteredInput>
     </>
   );
 }

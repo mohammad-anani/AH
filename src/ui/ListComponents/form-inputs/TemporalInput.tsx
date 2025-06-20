@@ -12,8 +12,14 @@ export default function TemporalInput({
   label,
   type,
 }: TemporalInputProps) {
-  const { register } = useFormContext<FieldValues>();
+  const {
+    register,
+    formState: { errors },
+    watch,
+  } = useFormContext<FieldValues>();
   const inputType = type === "datetime" ? "datetime-local" : type;
+
+  const dateTo = watch(fieldKey + "To");
 
   return (
     <>
@@ -23,7 +29,9 @@ export default function TemporalInput({
         <input
           id={fieldKey + "From"}
           type={inputType}
-          {...register(fieldKey + "From")}
+          {...register(fieldKey + "From", {
+            validate: (value) => !dateTo || new Date(value) <= new Date(dateTo),
+          })}
         />
         <label htmlFor={fieldKey + "To"}> To:</label>
         <input
@@ -31,6 +39,11 @@ export default function TemporalInput({
           type={inputType}
           {...register(fieldKey + "To")}
         />
+        {errors[fieldKey + "From"] && (
+          <span className="text-destructive! col-span-2">
+            'From Date' should be before or equal to 'To Date'
+          </span>
+        )}
       </span>
     </>
   );
