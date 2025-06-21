@@ -1,0 +1,27 @@
+// useFilterDefaultValues.ts
+import { useSearchParams } from "react-router-dom";
+import { convertStringToType, isTemporalType } from "./utils";
+import type { DataTypes, Key } from "@/utils/models/types";
+
+type ReduceObjectType = { [key: string]: DataTypes | string };
+
+export function useFilterDefaultValues(fields: Key[]) {
+  const [params] = useSearchParams();
+  const defaults: ReduceObjectType = {};
+
+  for (const [field, type] of fields) {
+    if (isTemporalType(type ?? "null")) {
+      defaults[field + "From"] = (params.get(field + "From") ??
+        null) as DataTypes;
+      defaults[field + "To"] = (params.get(field + "To") ?? null) as DataTypes;
+    } else {
+      const value = params.get(field) ?? "";
+      defaults[field] = convertStringToType(type ?? "", value) as DataTypes;
+    }
+  }
+
+  defaults.sort = params.get("sort") ?? "None";
+  defaults.order = params.get("order") ?? "asc";
+
+  return defaults;
+}

@@ -1,20 +1,17 @@
+import type { ChildrenProps, Key } from "@/utils/models/types";
 import { useState } from "react";
-import type { ChildrenProps, DataTypes } from "../utils/models/types";
-
-import Items from "./ListComponents/Items";
-import Pagination from "./ListComponents/Pagination";
-import Filter from "./ListComponents/Filter";
-import { ListContext } from "./ListComponents/context";
-import ClearFilter from "./ListComponents/ClearFilter";
+import { ListContext } from "./listComponents/context";
+import Items from "./listComponents/Items";
+import Pagination from "./listComponents/Pagination";
+import ClearFilter from "./listComponents/ClearFilter";
+import Filter from "./listComponents/Filter";
 
 export default function List<T>({
   children,
   items,
   canModifyUrl = true,
 }: ChildrenProps & { items: T[]; canModifyUrl?: boolean }) {
-  const [fields, setFields] = useState<[string, DataTypes, string?, string?][]>(
-    [],
-  );
+  const [fields, setFields] = useState<Key[]>({});
 
   return (
     <ListContext.Provider

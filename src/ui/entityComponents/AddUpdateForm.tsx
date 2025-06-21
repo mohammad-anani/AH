@@ -24,7 +24,6 @@ export default function AddUpdateForm({
     // formState: { errors },
   } = methods;
 
-  console.log(defaultValues);
   return (
     <>
       <Clickable

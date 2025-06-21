@@ -21,8 +21,6 @@ export function isTemporalType(type: string) {
   return ["date", "datetime", "time"].includes(type);
 }
 
-export const temporals = ["date", "datetime", "time"];
-
 export function generateLabel(key: string) {
   return key
     .replace(/([a-z0-9])([A-Z])/g, "$1 $2")

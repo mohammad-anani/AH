@@ -1,4 +1,4 @@
-import type { DataTypes } from "@/utils/models/types";
+import type { Key } from "@/utils/models/types";
 import useListContext from "./context";
 import {
   NumberInput,
@@ -8,54 +8,46 @@ import {
   TemporalInput,
   ArrayInput,
   UnsupportedInput,
-} from "./form-inputs";
+} from "./form-inputs/index";
 import { generateLabel, isTemporalType } from "./utils";
+
+const inputMap = {
+  number: NumberInput,
+  string: StringInput,
+  phone: PhoneInput,
+  array: ArrayInput,
+} as const;
 
 export function Form() {
   const { fields } = useListContext();
 
-  const renderField = (field: [string, DataTypes, string?, string?]) => {
+  const renderField = (field: Key) => {
     const [key, type, trueLabel, falseLabel] = field;
     const label = generateLabel(key) + ":";
+    const commonProps = { key, fieldKey: key, label };
 
     if (isTemporalType(type ?? "")) {
       return (
         <TemporalInput
-          key={key}
-          fieldKey={key}
-          label={label}
+          {...commonProps}
           type={type as "date" | "datetime" | "time"}
         />
       );
     }
 
-    switch (type) {
-      case "number":
-        return <NumberInput key={key} fieldKey={key} label={label} />;
-
-      case "string":
-        return <StringInput key={key} fieldKey={key} label={label} />;
-
-      case "phone":
-        return <PhoneInput key={key} fieldKey={key} label={label} />;
-
-      case "boolean":
-        return (
-          <BooleanInput
-            key={key}
-            fieldKey={key}
-            label={label}
-            trueLabel={trueLabel}
-            falseLabel={falseLabel}
-          />
-        );
-
-      case "array":
-        return <ArrayInput key={key} fieldKey={key} label={label} />;
-
-      default:
-        return <UnsupportedInput key={key} fieldKey={key} label={label} />;
+    if (type === "boolean") {
+      return (
+        <BooleanInput
+          {...commonProps}
+          trueLabel={trueLabel}
+          falseLabel={falseLabel}
+        />
+      );
     }
+
+    const InputComponent =
+      inputMap[type as keyof typeof inputMap] || UnsupportedInput;
+    return <InputComponent {...commonProps} />;
   };
 
   return (
