@@ -1,7 +1,7 @@
 import Clickable from "@/ui/Clickable";
-import type { Department } from "../../utils/types";
-import formatPhoneNumber from "@/utils/formatPhoneNumber";
-import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
+import type { Department } from "../../utils/models/types";
+import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 export default function DepartmentData({
   department,

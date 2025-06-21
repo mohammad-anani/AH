@@ -1,6 +1,6 @@
 import H2 from "@/ui/H2";
 import Clickable from "@/ui/Clickable";
-import type { OptionalChildrenProps } from "@/utils/types";
+import type { OptionalChildrenProps } from "@/utils/models/types";
 import type { ReactNode } from "react";
 import {
   Dialog,

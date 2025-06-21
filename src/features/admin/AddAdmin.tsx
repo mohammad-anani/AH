@@ -1,8 +1,8 @@
 import AddUpdateForm from "@/ui/AddUpdateForm";
 import AdminForm from "./AdminForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AdminSchema } from "@/utils/schemas";
-import { emptyAdmin } from "@/utils/emptyObjects";
+import { AdminSchema } from "@/utils/models/schemas";
+import { emptyAdmin } from "@/utils/models/emptyObjects";
 
 export default function AddAdmin() {
   return (

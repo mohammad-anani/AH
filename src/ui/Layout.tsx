@@ -1,6 +1,6 @@
 import { Outlet, useNavigation } from "react-router-dom";
 import Header from "./Header";
-import type { ChildrenProps } from "@/utils/types";
+import type { ChildrenProps } from "@/utils/models/types";
 import { MoonLoader } from "react-spinners";
 
 export default function Layout({ children }: ChildrenProps) {

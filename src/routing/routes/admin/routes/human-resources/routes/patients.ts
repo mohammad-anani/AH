@@ -3,8 +3,8 @@ import PatientViewEdit from "@/features/patient/PatientViewEdit";
 import PatientCard from "@/features/patient/PatientCard";
 import UpdatePatient from "@/features/patient/UpdatePatient";
 import AddPatient from "@/features/patient/AddPatient";
-import findByIDLoader from "@/utils/findByIDLoader";
-import listLoader from "@/utils/listLoader";
+import findByIDLoader from "@/utils/loaders/findByIDLoader";
+import listLoader from "@/utils/loaders/listLoader";
 
 export const patientsRoutes = [
   {

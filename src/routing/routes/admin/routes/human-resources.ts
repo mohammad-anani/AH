@@ -1,4 +1,4 @@
-import NavPage from "@/features/human-resources/NavPage";
+import HumanResources from "@/interfaces/admin/pages/HumanResources";
 import { patientsRoutes } from "./human-resources/routes/patients";
 import { doctorsRoutes } from "./human-resources/routes/doctors";
 import { adminsRoutes } from "./human-resources/routes/admins";
@@ -8,7 +8,7 @@ export const humanResourcesRoutes = [
   {
     path: "human-resources",
     children: [
-      { path: "", Component: NavPage },
+      { path: "", Component: HumanResources },
       ...patientsRoutes,
       ...doctorsRoutes,
       ...adminsRoutes,

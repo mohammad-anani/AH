@@ -1,4 +1,4 @@
-import type { DataTypes } from "@/utils/types";
+import type { DataTypes } from "@/utils/models/types";
 import useListContext from "./context";
 import {
   NumberInput,

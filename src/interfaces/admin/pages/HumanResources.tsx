@@ -1,7 +1,7 @@
 import Clickable from "@/ui/Clickable";
 import H2 from "@/ui/H2";
 
-export default function NavPage() {
+export default function HumanResources() {
   return (
     <>
       <H2 className="mb-2">Human Resources</H2>

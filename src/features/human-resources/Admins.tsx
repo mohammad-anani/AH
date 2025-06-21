@@ -1,8 +1,8 @@
 import ListPage from "@/ui/ListPage";
-import type { Admin } from "@/utils/types";
+import type { Admin } from "@/utils/models/types";
 import AdminsHeader from "@/features/admin/AdminsHeader";
 import AdminRow from "@/features/admin/AdminRow";
-import { employeeFields, persondFields } from "@/utils/objectKeys";
+import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
 export default function Admins() {
   return (

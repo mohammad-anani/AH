@@ -1,8 +1,8 @@
 import ListPage from "@/ui/ListPage";
-import type { Receptionist } from "@/utils/types";
+import type { Receptionist } from "@/utils/models/types";
 import ReceptionitsHeader from "@/features/receptionist/ReceptionistsHeader";
 import ReceptionistRow from "@/features/receptionist/ReceptionistRow";
-import { employeeFields, persondFields } from "@/utils/objectKeys";
+import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
 export default function Receptionists() {
   return (

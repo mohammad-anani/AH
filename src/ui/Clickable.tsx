@@ -1,4 +1,4 @@
-import type { ChildrenProps } from "@/utils/types";
+import type { ChildrenProps } from "@/utils/models/types";
 import type { ButtonHTMLAttributes } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import { cn } from "@/lib/utils";

@@ -3,8 +3,8 @@ import DepartmentViewEdit from "@/features/department/DepartmentViewEdit";
 import DepartmentCard from "@/features/department/DepartmentCard";
 import UpdateDepartment from "@/features/department/UpdateDepartment";
 import AddDepartment from "@/features/department/AddDepartment";
-import findByIDLoader from "@/utils/findByIDLoader";
-import listLoader from "@/utils/listLoader";
+import findByIDLoader from "@/utils/loaders/findByIDLoader";
+import listLoader from "@/utils/loaders/listLoader";
 
 export const departmentsRoutes = [
   {

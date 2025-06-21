@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext } from "react";
-import type { DataTypes, Key, Setter } from "../../utils/types";
+import type { DataTypes, Key, Setter } from "../../utils/models/types";
 
 type ContextType<T> = {
   items: T[];

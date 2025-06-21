@@ -1,4 +1,4 @@
-import type { ChildrenProps } from "@/utils/types";
+import type { ChildrenProps } from "@/utils/models/types";
 import { NavLink as NLink, type NavLinkProps } from "react-router-dom";
 
 export default function NavLink({

@@ -3,8 +3,8 @@ import DoctorViewEdit from "@/features/doctor/DoctorViewEdit";
 import DoctorCard from "@/features/doctor/DoctorCard";
 import UpdateDoctor from "@/features/doctor/UpdateDoctor";
 import AddDoctor from "@/features/doctor/AddDoctor";
-import findByIDLoader from "@/utils/findByIDLoader";
-import listLoader from "@/utils/listLoader";
+import findByIDLoader from "@/utils/loaders/findByIDLoader";
+import listLoader from "@/utils/loaders/listLoader";
 
 export const doctorsRoutes = [
   {

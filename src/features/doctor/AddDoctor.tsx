@@ -1,7 +1,7 @@
-import { DoctorSchema } from "@/utils/schemas";
+import { DoctorSchema } from "@/utils/models/schemas";
 import DoctorForm from "./DoctorForm";
 import AddUpdateForm from "@/ui/AddUpdateForm";
-import { emptyDoctor } from "@/utils/emptyObjects";
+import { emptyDoctor } from "@/utils/models/emptyObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function AddDoctor() {

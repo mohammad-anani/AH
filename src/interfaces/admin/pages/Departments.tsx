@@ -1,5 +1,5 @@
 import ListPage from "@/ui/ListPage";
-import type { Department } from "@/utils/types";
+import type { Department } from "@/utils/models/types";
 import DepartmentsHeader from "@/features/department/DepartmentsHeader";
 import DepartmentRow from "@/features/department/DepartmentRow";
 

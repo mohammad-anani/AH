@@ -1,4 +1,4 @@
-import type { Receptionist } from "../../utils/types";
+import type { Receptionist } from "../../utils/models/types";
 import DetailsButton from "@/ui/DetailsButton";
 
 export default function ReceptionistRow({

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import H2 from "@/ui/H2";
 import Clickable from "@/ui/Clickable";
-import type { OptionalChildrenProps } from "@/utils/types";
+import type { OptionalChildrenProps } from "@/utils/models/types";
 import { FormProvider, useForm, type Resolver } from "react-hook-form";
 
 export default function AddUpdateForm({

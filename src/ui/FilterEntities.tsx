@@ -1,4 +1,4 @@
-import type { Key } from "@/utils/types";
+import type { Key } from "@/utils/models/types";
 import List from "./List";
 import Clickable from "./Clickable";
 

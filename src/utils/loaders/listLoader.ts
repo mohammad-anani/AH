@@ -1,9 +1,9 @@
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
-import formatLoaderUrl from "./formatLoaderUrl";
+import formatLoaderUrl from "../formatters/formatLoaderUrl";
 import { getList } from "@/api/getList";
 import { z } from "zod";
-import throwError from "./throwError";
-import { schemas } from "./schemas";
+import throwError from "../helpers/throwError";
+import { schemas } from "../models/schemas";
 
 export default function listLoader(entity: string): LoaderFunction {
   return async function ({ request }: LoaderFunctionArgs) {

@@ -1,8 +1,8 @@
 import ListPage from "@/ui/ListPage";
-import type { Doctor } from "@/utils/types";
+import type { Doctor } from "@/utils/models/types";
 import DoctorsHeader from "@/features/doctor/DoctorsHeader";
 import DoctorRow from "@/features/doctor/DoctorRow";
-import { employeeFields, persondFields } from "@/utils/objectKeys";
+import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
 export default function Doctors() {
   return (

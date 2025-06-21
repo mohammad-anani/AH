@@ -3,8 +3,8 @@ import ReceptionistViewEdit from "@/features/receptionist/ReceptionistViewEdit";
 import ReceptionistCard from "@/features/receptionist/ReceptionistCard";
 import UpdateReceptionist from "@/features/receptionist/UpdateReceptionist";
 import AddReceptionist from "@/features/receptionist/AddReceptionist";
-import findByIDLoader from "@/utils/findByIDLoader";
-import listLoader from "@/utils/listLoader";
+import findByIDLoader from "@/utils/loaders/findByIDLoader";
+import listLoader from "@/utils/loaders/listLoader";
 
 export const receptionistsRoutes = [
   {

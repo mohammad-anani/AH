@@ -1,4 +1,4 @@
-import type { Doctor } from "../../utils/types";
+import type { Doctor } from "../../utils/models/types";
 import DetailsButton from "@/ui/DetailsButton";
 
 export default function DoctorRow({ doctor }: { doctor: Doctor }) {

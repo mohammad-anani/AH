@@ -1,4 +1,4 @@
-import type { Admin } from "../../utils/types";
+import type { Admin } from "../../utils/models/types";
 import DetailsButton from "@/ui/DetailsButton";
 
 export default function AdminRow({ admin }: { admin: Admin }) {

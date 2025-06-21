@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ChildrenProps, DataTypes } from "../utils/types";
+import type { ChildrenProps, DataTypes } from "../utils/models/types";
 
 import Items from "./ListComponents/Items";
 import Pagination from "./ListComponents/Pagination";

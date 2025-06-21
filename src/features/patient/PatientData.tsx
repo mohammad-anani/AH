@@ -1,7 +1,7 @@
-import type { Patient } from "../../utils/types";
+import type { Patient } from "../../utils/models/types";
 import Clickable from "@/ui/Clickable";
 import PersonData from "../person/PersonData";
-import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 interface PatientDataProps {
   patient: Patient;

@@ -1,9 +1,9 @@
 import { useOutletContext } from "react-router-dom";
-import type { Patient } from "../../utils/types";
+import type { Patient } from "../../utils/models/types";
 import AddUpdateForm from "@/ui/AddUpdateForm";
 import PatientForm from "./PatientForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PatientSchema } from "@/utils/schemas";
+import { PatientSchema } from "@/utils/models/schemas";
 
 export default function UpdatePatient() {
   const { patient } = useOutletContext<{ patient: Patient }>();

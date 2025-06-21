@@ -1,12 +1,12 @@
 import { useLoaderData } from "react-router-dom";
 import List from "./List";
 import Clickable from "./Clickable";
-import useFilter from "@/utils/useFilter";
+import useFilter from "@/utils/customHooks/useFilter";
 import type { ReactNode } from "react";
 import { Dialog, DialogContent, DialogHeader } from "../components/ui/dialog";
 import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "./FilterEntities";
-import type { Key } from "@/utils/types";
+import type { Key } from "@/utils/models/types";
 import H2 from "./H2";
 
 export default function ListPage<T>({

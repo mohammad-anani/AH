@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import type { Receptionist } from "../../utils/types";
+import type { Receptionist } from "../../utils/models/types";
 import Clickable from "@/ui/Clickable";
 import ReceptionistData from "./ReceptionistData";
 import Card from "@/ui/Card";

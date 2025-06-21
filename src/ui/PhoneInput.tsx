@@ -1,4 +1,4 @@
-import formatPhoneNumber from "@/utils/formatPhoneNumber";
+import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import { useState } from "react";
 import type { useFormContext } from "react-hook-form";
 

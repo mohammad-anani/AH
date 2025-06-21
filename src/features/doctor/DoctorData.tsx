@@ -1,7 +1,7 @@
-import type { Doctor } from "../../utils/types";
+import type { Doctor } from "../../utils/models/types";
 import Clickable from "@/ui/Clickable";
 import EmployeeData from "../employee/EmployeeData";
-import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 interface DoctorDataProps {
   doctor: Doctor;

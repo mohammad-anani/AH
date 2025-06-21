@@ -1,4 +1,4 @@
-import throwError from "@/utils/throwError";
+import throwError from "@/utils/helpers/throwError";
 import a, { isAxiosError } from "axios";
 
 const axios = a.create({
@@ -20,9 +20,7 @@ axios.interceptors.response.use(
         error.message ||
         "An unknown error occurred";
 
-      // Handle network errors (no response)
       if (!error.response) {
-        // e.g., timeout, DNS failure, server offline
         throwError(
           503,
           "Service Unavailable",
@@ -30,7 +28,6 @@ axios.interceptors.response.use(
         );
       }
 
-      // Handle Internal Server Error explicitly
       if (status === 500) {
         throwError(
           status,
@@ -39,11 +36,9 @@ axios.interceptors.response.use(
         );
       }
 
-      // For other HTTP errors, just throw the error with actual status
       throwError(status, statusText, message);
     }
 
-    // Non-Axios errors (could be coding or other errors)
     throw error;
   },
 );

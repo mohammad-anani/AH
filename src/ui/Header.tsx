@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import type { ChildrenProps } from "@/utils/types";
+import type { ChildrenProps } from "@/utils/models/types";
 import Nav from "./Nav";
 
 export default function Header({ children }: ChildrenProps) {

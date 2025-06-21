@@ -1,5 +1,5 @@
-import formatPhoneNumber from "@/utils/formatPhoneNumber";
-import type { Person } from "../../utils/types";
+import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
+import type { Person } from "../../utils/models/types";
 
 export default function PersonData({ person }: { person: Person }) {
   const {

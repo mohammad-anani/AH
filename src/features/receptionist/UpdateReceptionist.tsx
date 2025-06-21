@@ -1,9 +1,9 @@
 import { useOutletContext } from "react-router-dom";
-import type { Receptionist } from "../../utils/types";
+import type { Receptionist } from "../../utils/models/types";
 import AddUpdateForm from "@/ui/AddUpdateForm";
 import ReceptionistForm from "./ReceptionistForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReceptionistSchema } from "@/utils/schemas";
+import { ReceptionistSchema } from "@/utils/models/schemas";
 
 export default function UpdateReceptionist() {
   const { receptionist } = useOutletContext<{ receptionist: Receptionist }>();

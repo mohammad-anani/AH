@@ -1,4 +1,4 @@
-import type { OptionalChildrenProps } from "@/utils/types";
+import type { OptionalChildrenProps } from "@/utils/models/types";
 import useListContext from "./context";
 
 export default function Items<T>({

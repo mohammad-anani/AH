@@ -1,8 +1,8 @@
 import AddUpdateForm from "@/ui/AddUpdateForm";
 import ReceptionistForm from "./ReceptionistForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReceptionistSchema } from "@/utils/schemas";
-import { emptyReceptionist } from "@/utils/emptyObjects";
+import { ReceptionistSchema } from "@/utils/models/schemas";
+import { emptyReceptionist } from "@/utils/models/emptyObjects";
 
 export default function AddReceptionist() {
   return (

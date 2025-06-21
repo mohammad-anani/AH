@@ -1,8 +1,8 @@
 import ListPage from "@/ui/ListPage";
-import type { Patient } from "@/utils/types";
+import type { Patient } from "@/utils/models/types";
 import PatientsHeader from "@/features/patient/PatientsHeader";
 import PatientRow from "@/features/patient/PatientRow";
-import { persondFields } from "@/utils/objectKeys";
+import { persondFields } from "@/utils/models/objectKeys";
 
 export default function Patients() {
   return (

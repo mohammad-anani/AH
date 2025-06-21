@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import type { Department } from "../../utils/types";
+import type { Department } from "../../utils/models/types";
 import Clickable from "@/ui/Clickable";
 import DepartmentData from "./DepartmentData";
 import Card from "@/ui/Card";

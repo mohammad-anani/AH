@@ -1,9 +1,9 @@
 import { useOutletContext } from "react-router-dom";
-import type { Admin } from "../../utils/types";
+import type { Admin } from "../../utils/models/types";
 import AddUpdateForm from "@/ui/AddUpdateForm";
 import AdminForm from "./AdminForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AdminSchema } from "@/utils/schemas";
+import { AdminSchema } from "@/utils/models/schemas";
 
 export default function UpdateAdmin() {
   const { admin } = useOutletContext<{ admin: Admin }>();

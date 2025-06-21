@@ -3,8 +3,8 @@ import AdminViewEdit from "@/features/admin/AdminViewEdit";
 import AdminCard from "@/features/admin/AdminCard";
 import UpdateAdmin from "@/features/admin/UpdateAdmin";
 import AddAdmin from "@/features/admin/AddAdmin";
-import listLoader from "@/utils/listLoader";
-import findByIDLoader from "@/utils/findByIDLoader";
+import listLoader from "@/utils/loaders/listLoader";
+import findByIDLoader from "@/utils/loaders/findByIDLoader";
 
 export const adminsRoutes = [
   {

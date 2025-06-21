@@ -1,5 +1,5 @@
-import formatPhoneNumber from "@/utils/formatPhoneNumber";
-import type { Department } from "../../utils/types";
+import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
+import type { Department } from "../../utils/models/types";
 import DetailsButton from "@/ui/DetailsButton";
 
 export default function DepartmentRow({

@@ -1,5 +1,5 @@
-import formatDateIsoToLocal from "@/utils/formatDateIsoToLocal";
-import type { Receptionist } from "../../utils/types";
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
+import type { Receptionist } from "../../utils/models/types";
 import EmployeeData from "../employee/EmployeeData";
 import Clickable from "@/ui/Clickable";
 

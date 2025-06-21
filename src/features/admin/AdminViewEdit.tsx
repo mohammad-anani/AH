@@ -1,4 +1,4 @@
-import type { Admin } from "@/utils/types";
+import type { Admin } from "@/utils/models/types";
 import { Outlet, useLoaderData } from "react-router-dom";
 
 export default function AdminViewEdit() {
