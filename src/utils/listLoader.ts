@@ -24,6 +24,7 @@ export default function listLoader(entity: string): LoaderFunction {
     const result = apiSchema.safeParse(data);
 
     if (!result.success) {
+      console.log(result.error);
       throwError(
         500,
         "Internal Server Error",

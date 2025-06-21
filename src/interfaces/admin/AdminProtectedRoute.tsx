@@ -1,4 +1,3 @@
-import throwError from "@/utils/throwError";
 import { Outlet } from "react-router-dom";
 
 export default function AdminProtectedRoute() {

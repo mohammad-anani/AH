@@ -26,7 +26,7 @@ export const PatientSchema = z.object({
   ID: z.number(),
   Person: PersonSchema,
   CreatedByReceptionistID: z.number(),
-  CreatedAt: z.string(),
+  CreatedAt: z.string().datetime({ local: true, precision: 0 }),
 });
 
 export const EmployeeSchema = z.object({
