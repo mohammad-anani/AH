@@ -1,5 +1,5 @@
 import { Info } from "lucide-react";
-import Clickable from "./Clickable";
+import Clickable from "../customComponents/Clickable";
 
 export default function DetailsButton({ ID }: { ID: number }) {
   return (
