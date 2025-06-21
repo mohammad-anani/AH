@@ -1,6 +1,6 @@
-import PhoneInput from "../../ui/PhoneInput";
+import PhoneInput from "../../ui/customComponents/PhoneInput";
 import { Controller, useFormContext } from "react-hook-form";
-import RegisteredInput from "@/ui/RegisteredInput";
+import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 
 export default function DepartmentForm() {
   const { control } = useFormContext();

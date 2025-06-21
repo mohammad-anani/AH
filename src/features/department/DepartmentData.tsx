@@ -1,4 +1,4 @@
-import Clickable from "@/ui/Clickable";
+import Clickable from "@/ui/customComponents/Clickable";
 import type { Department } from "../../utils/models/types";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";

@@ -1,8 +1,8 @@
 import { useOutletContext } from "react-router-dom";
 import type { Doctor } from "../../utils/models/types";
-import Clickable from "@/ui/Clickable";
+import Clickable from "@/ui/customComponents/Clickable";
 import DoctorData from "./DoctorData";
-import Card from "@/ui/Card";
+import Card from "@/ui/entityComponents/Card";
 
 export default function DoctorCard() {
   const { doctor } = useOutletContext<{ doctor: Doctor }>();

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { ChildrenProps, DataTypes } from "../../utils/models/types";
+import type { ChildrenProps, DataTypes } from "../../../utils/models/types";
 import useListContext from "./context";
 import Order from "./Order";
 import { Form } from "./Form";

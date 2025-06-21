@@ -1,8 +1,8 @@
 import { useOutletContext } from "react-router-dom";
 import type { Admin } from "../../utils/models/types";
-import Clickable from "@/ui/Clickable";
+import Clickable from "@/ui/customComponents/Clickable";
 import AdminData from "./AdminData";
-import Card from "@/ui/Card";
+import Card from "@/ui/entityComponents/Card";
 
 export default function AdminCard() {
   const { admin } = useOutletContext<{ admin: Admin }>();

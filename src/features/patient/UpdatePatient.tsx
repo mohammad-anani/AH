@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import type { Patient } from "../../utils/models/types";
-import AddUpdateForm from "@/ui/AddUpdateForm";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import PatientForm from "./PatientForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PatientSchema } from "@/utils/models/schemas";

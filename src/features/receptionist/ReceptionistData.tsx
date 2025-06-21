@@ -1,7 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { Receptionist } from "../../utils/models/types";
 import EmployeeData from "../employee/EmployeeData";
-import Clickable from "@/ui/Clickable";
+import Clickable from "@/ui/customComponents/Clickable";
 
 interface ReceptionistDataProps {
   receptionist: Receptionist;

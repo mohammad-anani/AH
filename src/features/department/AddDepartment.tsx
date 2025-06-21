@@ -1,6 +1,6 @@
 import { DepartmentSchema } from "@/utils/models/schemas";
 import DepartmentForm from "./DepartmentForm";
-import AddUpdateForm from "@/ui/AddUpdateForm";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { emptyDepartment } from "@/utils/models/emptyObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 

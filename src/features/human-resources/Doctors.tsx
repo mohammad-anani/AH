@@ -1,4 +1,4 @@
-import ListPage from "@/ui/ListPage";
+import ListPage from "@/ui/entityComponents/ListPage";
 import type { Doctor } from "@/utils/models/types";
 import DoctorsHeader from "@/features/doctor/DoctorsHeader";
 import DoctorRow from "@/features/doctor/DoctorRow";

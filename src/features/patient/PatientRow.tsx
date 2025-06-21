@@ -1,5 +1,5 @@
 import type { Patient } from "../../utils/models/types";
-import DetailsButton from "@/ui/DetailsButton";
+import DetailsButton from "@/ui/customComponents/DetailsButton";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 
 export default function PatientRow({ patient }: { patient: Patient }) {

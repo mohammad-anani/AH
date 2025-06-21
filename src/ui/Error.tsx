@@ -1,7 +1,7 @@
 import { CircleX } from "lucide-react";
-import Logo from "./Logo";
-import Clickable from "./Clickable";
-import BackNavigator from "./BackNavigator";
+import Logo from "./customComponents/Logo";
+import Clickable from "./customComponents/Clickable";
+import BackNavigator from "./customComponents/BackNavigator";
 import { UNSAFE_ErrorResponseImpl, useRouteError } from "react-router-dom";
 
 export default function Error() {

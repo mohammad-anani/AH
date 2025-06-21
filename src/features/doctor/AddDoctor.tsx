@@ -1,6 +1,6 @@
 import { DoctorSchema } from "@/utils/models/schemas";
 import DoctorForm from "./DoctorForm";
-import AddUpdateForm from "@/ui/AddUpdateForm";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { emptyDoctor } from "@/utils/models/emptyObjects";
 import { zodResolver } from "@hookform/resolvers/zod";
 

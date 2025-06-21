@@ -1,4 +1,4 @@
-import NavLink from "@/ui/NavLink";
+import NavLink from "@/ui/customComponents/NavLink";
 import {
   House,
   Hospital,

@@ -1,5 +1,5 @@
 import EmployeeForm from "../employee/EmployeeForm";
-import RegisteredInput from "@/ui/RegisteredInput";
+import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 
 export default function DoctorForm() {
   return (

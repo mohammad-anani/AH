@@ -1,6 +1,6 @@
 import PersonForm from "../person/PersonForm";
 import Select from "react-select";
-import RegisteredInput from "../../ui/RegisteredInput";
+import RegisteredInput from "../../ui/customComponents/RegisteredInput";
 import { Controller, useFormContext } from "react-hook-form";
 
 export default function EmployeeForm({

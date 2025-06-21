@@ -1,8 +1,8 @@
 import { useOutletContext } from "react-router-dom";
 import type { Receptionist } from "../../utils/models/types";
-import Clickable from "@/ui/Clickable";
+import Clickable from "@/ui/customComponents/Clickable";
 import ReceptionistData from "./ReceptionistData";
-import Card from "@/ui/Card";
+import Card from "@/ui/entityComponents/Card";
 
 export default function ReceptionistCard() {
   const { receptionist } = useOutletContext<{ receptionist: Receptionist }>();

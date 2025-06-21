@@ -1,5 +1,5 @@
-import Clickable from "@/ui/Clickable";
-import H2 from "@/ui/H2";
+import Clickable from "@/ui/customComponents/Clickable";
+import H2 from "@/ui/customComponents/H2";
 
 export default function HumanResources() {
   return (

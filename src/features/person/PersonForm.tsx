@@ -1,5 +1,5 @@
-import PhoneInput from "../../ui/PhoneInput";
-import RegisteredInput from "../../ui/RegisteredInput";
+import PhoneInput from "../../ui/customComponents/PhoneInput";
+import RegisteredInput from "../../ui/customComponents/RegisteredInput";
 import { Controller, useFormContext } from "react-hook-form";
 
 export default function PersonForm({

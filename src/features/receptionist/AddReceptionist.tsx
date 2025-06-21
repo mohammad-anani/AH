@@ -1,4 +1,4 @@
-import AddUpdateForm from "@/ui/AddUpdateForm";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ReceptionistForm from "./ReceptionistForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReceptionistSchema } from "@/utils/models/schemas";

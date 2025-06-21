@@ -1,4 +1,4 @@
-import ListPage from "@/ui/ListPage";
+import ListPage from "@/ui/entityComponents/ListPage";
 import type { Receptionist } from "@/utils/models/types";
 import ReceptionitsHeader from "@/features/receptionist/ReceptionistsHeader";
 import ReceptionistRow from "@/features/receptionist/ReceptionistRow";

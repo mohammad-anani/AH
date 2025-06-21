@@ -1,5 +1,5 @@
 import { cloneElement } from "react";
-import type { ClickableChildrenProps } from "../utils/models/types";
+import type { ClickableChildrenProps } from "../../utils/models/types";
 import { useNavigate } from "react-router-dom";
 
 export default function BackNavigator({

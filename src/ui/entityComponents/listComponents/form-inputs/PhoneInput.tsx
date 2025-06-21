@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import type { RegisterOptions, FieldValues } from "react-hook-form";
-import PhoneInp from "../../PhoneInput";
+import PhoneInp from "../../../customComponents/PhoneInput";
 
 interface PhoneInputProps {
   fieldKey: string;

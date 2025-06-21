@@ -1,5 +1,5 @@
 import type { Doctor } from "../../utils/models/types";
-import DetailsButton from "@/ui/DetailsButton";
+import DetailsButton from "@/ui/customComponents/DetailsButton";
 
 export default function DoctorRow({ doctor }: { doctor: Doctor }) {
   const {

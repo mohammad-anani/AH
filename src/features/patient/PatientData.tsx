@@ -1,5 +1,5 @@
 import type { Patient } from "../../utils/models/types";
-import Clickable from "@/ui/Clickable";
+import Clickable from "@/ui/customComponents/Clickable";
 import PersonData from "../person/PersonData";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 

@@ -1,5 +1,5 @@
-import Clickable from "@/ui/Clickable";
-import Logo from "@/ui/Logo";
+import Clickable from "@/ui/customComponents/Clickable";
+import Logo from "@/ui/customComponents/Logo";
 import { Form } from "react-router-dom";
 
 export default function Login() {

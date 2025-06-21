@@ -1,4 +1,4 @@
-import ListPage from "@/ui/ListPage";
+import ListPage from "@/ui/entityComponents/ListPage";
 import type { Admin } from "@/utils/models/types";
 import AdminsHeader from "@/features/admin/AdminsHeader";
 import AdminRow from "@/features/admin/AdminRow";

@@ -1,5 +1,5 @@
 import PatientForm from "./PatientForm";
-import AddUpdateForm from "@/ui/AddUpdateForm";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PatientSchema } from "@/utils/models/schemas";
 import { emptyPatient } from "@/utils/models/emptyObjects";

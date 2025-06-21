@@ -1,4 +1,4 @@
-import AddUpdateForm from "@/ui/AddUpdateForm";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import AdminForm from "./AdminForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AdminSchema } from "@/utils/models/schemas";
