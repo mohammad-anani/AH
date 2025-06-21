@@ -1,6 +1,6 @@
+import Controller from "@/ui/customComponents/Controller";
 import PhoneInput from "../../ui/customComponents/PhoneInput";
 import RegisteredInput from "../../ui/customComponents/RegisteredInput";
-import { Controller, useFormContext } from "react-hook-form";
 
 export default function PersonForm({
   fieldPrefix = "",
@@ -8,8 +8,7 @@ export default function PersonForm({
   fieldPrefix?: string;
 }) {
   const prefix = fieldPrefix + "Person.";
-  const { control } = useFormContext();
-  console.log(prefix);
+
   return (
     <>
       <label htmlFor="firstName">First Name:</label>
@@ -54,11 +53,11 @@ export default function PersonForm({
       <label htmlFor="phone">Phone Number:</label>
       <Controller
         name={`${prefix}Phone`}
-        control={control}
-        render={({ field }) => (
+        renderField={({ field, isSubmitting }) => (
           <PhoneInput
             name={field.name}
             format="xx xxx xxx"
+            disabled={isSubmitting}
             placeholder="Phone Number"
             initialValue={field.value}
             onChange={field.onChange}

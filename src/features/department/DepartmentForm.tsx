@@ -1,9 +1,8 @@
+import Controller from "@/ui/customComponents/Controller";
 import PhoneInput from "../../ui/customComponents/PhoneInput";
-import { Controller, useFormContext } from "react-hook-form";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 
 export default function DepartmentForm() {
-  const { control } = useFormContext();
   return (
     <>
       <label htmlFor="Name">Name:</label>
@@ -13,12 +12,12 @@ export default function DepartmentForm() {
 
       <label htmlFor="phone">Phone:</label>
       <Controller
-        name="Phone"
-        control={control}
-        render={({ field }) => (
+        name={`Phone`}
+        renderField={({ field, isSubmitting }) => (
           <PhoneInput
             name={field.name}
             format="xx xxx xxx"
+            disabled={isSubmitting}
             placeholder="Phone Number"
             initialValue={field.value}
             onChange={field.onChange}

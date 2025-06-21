@@ -4,11 +4,12 @@ import type { Employee } from "../../utils/models/types";
 import PersonData from "../person/PersonData";
 import Clickable from "@/ui/customComponents/Clickable";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
+import type { EmptyEmployee } from "@/utils/models/emptyObjectsTypes";
 
 export default function EmployeeData({
   employee = emptyEmployee,
 }: {
-  employee?: Employee;
+  employee?: Employee | EmptyEmployee;
 }) {
   const {
     Person,
@@ -43,7 +44,7 @@ export default function EmployeeData({
         </Clickable>
       </span>
       <span>Salary:</span>
-      <span>{formatMoney(Salary)}</span>
+      <span>{formatMoney(Salary ?? 0)}</span>
       <span>Hire Date:</span>
       <span>{formatDateIsoToLocal(HireDate)}</span>
       <span>Leave Date:</span>

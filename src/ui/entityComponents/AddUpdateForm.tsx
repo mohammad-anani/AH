@@ -21,7 +21,7 @@ export default function AddUpdateForm({
   const methods = useForm({ resolver, defaultValues });
   const {
     handleSubmit,
-    // formState: { errors },
+    formState: { isSubmitting },
   } = methods;
 
   return (
@@ -38,9 +38,8 @@ export default function AddUpdateForm({
       <H2 className="mb-6">{title}</H2>
       <FormProvider {...methods}>
         <form
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
+          method="post"
+          onSubmit={handleSubmit(() => {})}
           className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-3 *:text-xl! *:odd:font-bold`}
         >
           {children}
@@ -49,8 +48,13 @@ export default function AddUpdateForm({
             as="button"
             type="submit"
             variant="primary"
+            disabled={isSubmitting}
           >
-            Save
+            {isSubmitting
+              ? "Submitting..."
+              : !defaultValues["ID"]
+                ? "Add"
+                : "Save"}
           </Clickable>
         </form>
       </FormProvider>

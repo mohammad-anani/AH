@@ -1,7 +1,13 @@
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import type { Person } from "../../utils/models/types";
+import { emptyPerson } from "@/utils/models/emptyObjects";
+import type { EmptyPerson } from "@/utils/models/emptyObjectsTypes";
 
-export default function PersonData({ person }: { person: Person }) {
+export default function PersonData({
+  person = emptyPerson,
+}: {
+  person: Person | EmptyPerson;
+}) {
   const {
     FirstName,
     MiddleName,

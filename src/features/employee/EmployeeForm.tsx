@@ -1,7 +1,7 @@
 import PersonForm from "../person/PersonForm";
 import Select from "react-select";
 import RegisteredInput from "../../ui/customComponents/RegisteredInput";
-import { Controller, useFormContext } from "react-hook-form";
+import Controller from "@/ui/customComponents/Controller";
 
 export default function EmployeeForm({
   fieldPrefix = "",
@@ -18,8 +18,6 @@ export default function EmployeeForm({
     { value: "Saturday", label: "Saturday" },
     { value: "Sunday", label: "Sunday" },
   ];
-
-  const { control } = useFormContext();
 
   return (
     <>
@@ -52,19 +50,21 @@ export default function EmployeeForm({
       <label htmlFor="workingDays">Working Days:</label>
       <Controller
         name={`${prefix}WorkingDays`}
-        control={control}
-        render={({ field }) => (
-          <Select
-            isMulti
-            options={selectOptions}
-            value={selectOptions.filter((option) =>
-              field.value?.includes(option.value),
-            )}
-            onChange={(selected) =>
-              field.onChange(selected.map((opt) => opt.value))
-            }
-          />
-        )}
+        renderField={({ field, isSubmitting }) => {
+          return (
+            <Select
+              isMulti
+              isDisabled={isSubmitting}
+              options={selectOptions}
+              value={selectOptions.filter((option) =>
+                field.value?.includes(option.value),
+              )}
+              onChange={(selected) =>
+                field.onChange(selected.map((opt) => opt.value))
+              }
+            />
+          );
+        }}
       />
 
       <label htmlFor="shiftStart">Shift Start:</label>

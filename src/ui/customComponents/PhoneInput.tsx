@@ -1,6 +1,5 @@
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import { useState } from "react";
-import type { useFormContext } from "react-hook-form";
 
 type PhoneInputProps = {
   id?: string;
@@ -8,7 +7,7 @@ type PhoneInputProps = {
   initialValue?: string;
   format?: string;
   placeholder?: string;
-  register?: ReturnType<typeof useFormContext>["register"];
+  disabled?: boolean;
   onChange?: (phone: string) => void;
 };
 
@@ -19,7 +18,7 @@ function PhoneInput({
   format = "xx xxx xxx",
   onChange,
   placeholder,
-  register,
+  disabled = false,
 }: PhoneInputProps) {
   const [phone, setPhone] = useState(
     formatPhoneNumber(initialValue ?? "", format) || "",
@@ -36,8 +35,9 @@ function PhoneInput({
   return (
     <input
       id={id}
+      disabled={disabled}
+      name={name}
       type="text"
-      {...(register ? register(name) : { name })}
       placeholder={placeholder}
       maxLength={format.length}
       value={phone}

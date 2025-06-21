@@ -1,72 +1,80 @@
 import type {
-  Admin,
-  Department,
-  Doctor,
-  Employee,
-  Patient,
-  Person,
-  Receptionist,
-} from "./types";
+  EmptyPerson,
+  EmptyDepartment,
+  EmptyPatient,
+  EmptyEmployee,
+  EmptyReceptionist,
+  EmptyDoctor,
+  EmptyAdmin,
+} from "@/utils/models/emptyObjectsTypes";
 
-export const emptyDepartment: Department = {
-  ID: -1,
-  Name: "",
-  Phone: "",
-  CreatedByAdminID: -1,
-  CreatedAt: "",
+const emptyNumber = null;
+const emptyBoolean = null;
+const emptyString = "";
+const emptyDate = "0000-00-00";
+const emptyDateTime = "0000";
+const emptyArray: string[] = [];
+const emptyNullable = null;
+
+export const emptyPerson: EmptyPerson = {
+  ID: emptyNumber,
+  FirstName: emptyString,
+  MiddleName: emptyString,
+  LastName: emptyString,
+  Gender: emptyString,
+  Age: emptyNumber,
+  CountryName: emptyString,
+  Phone: emptyString,
+  Email: emptyString,
+  Username: emptyString,
 };
 
-export const emptyPerson: Person = {
-  ID: -1,
-  FirstName: "",
-  MiddleName: "",
-  LastName: "",
-  Gender: "",
-  Age: 0,
-  CountryName: "",
-  Phone: "",
-  Email: "",
-  Username: "",
+export const emptyDepartment: EmptyDepartment = {
+  ID: emptyNumber,
+  Name: emptyString,
+  Phone: emptyString,
+  CreatedByAdminID: emptyNumber,
+  CreatedAt: emptyString,
 };
 
-export const emptyPatient: Patient = {
-  ID: -1,
-  CreatedByReceptionistID: -1,
-  CreatedAt: "0000",
+export const emptyPatient: EmptyPatient = {
+  ID: emptyNumber,
+  CreatedByReceptionistID: emptyNumber,
+  CreatedAt: emptyDateTime,
   Person: emptyPerson,
 };
 
-export const emptyEmployee: Employee = {
-  ID: 0,
-  DepartmentID: 0,
-  Salary: 0,
-  HireDate: "",
-  LeaveDate: null,
-  isActive: false,
-  WorkingDays: [],
-  ShiftStart: "",
-  ShiftEnd: "",
+export const emptyEmployee: EmptyEmployee = {
+  ID: emptyNumber,
+  DepartmentID: emptyNumber,
+  Salary: emptyNumber,
+  HireDate: emptyDate,
+  LeaveDate: emptyNullable,
+  isActive: emptyBoolean,
+  WorkingDays: emptyArray,
+  ShiftStart: emptyString,
+  ShiftEnd: emptyString,
   Person: emptyPerson,
 };
 
-export const emptyReceptionist: Receptionist = {
-  ID: -1,
+export const emptyReceptionist: EmptyReceptionist = {
+  ID: emptyNumber,
   Employee: emptyEmployee,
-  CreatedByAdminID: -1,
-  CreatedAt: "",
+  CreatedByAdminID: emptyNumber,
+  CreatedAt: emptyString,
 };
 
-export const emptyDoctor: Doctor = {
-  ID: -1,
+export const emptyDoctor: EmptyDoctor = {
+  ID: emptyNumber,
   Employee: emptyEmployee,
-  Specialization: "",
-  CreatedByReceptionistID: -1,
-  CreatedAt: "",
+  Specialization: emptyString,
+  CreatedByReceptionistID: emptyNumber,
+  CreatedAt: emptyString,
 };
 
-export const emptyAdmin: Admin = {
-  ID: -1,
+export const emptyAdmin: EmptyAdmin = {
+  ID: emptyNumber,
   Employee: emptyEmployee,
-  CreatedByAdminID: -1,
-  CreatedAt: "",
+  CreatedByAdminID: emptyNumber,
+  CreatedAt: emptyString,
 };
