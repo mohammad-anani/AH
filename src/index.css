@@ -72,7 +72,7 @@ html,
 }
 
 html {
-  @apply overflow-y-scroll;
+  @apply overflow-y-auto;
 }
 
 /* #root {

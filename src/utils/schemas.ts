@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
 
 export const DepartmentSchema = z.object({
@@ -59,6 +60,14 @@ export const DoctorSchema = z.object({
 export const AdminSchema = z.object({
   ID: z.number(),
   Employee: EmployeeSchema,
-  CreatedByAdminID: z.number().optional(),
+  CreatedByAdminID: z.number().nullable(),
   CreatedAt: z.string(),
 });
+
+export const schemas: Record<string, z.ZodObject<any>> = {
+  Admins: AdminSchema,
+  Departments: DepartmentSchema,
+  Doctors: DoctorSchema,
+  Patients: PatientSchema,
+  Receptionists: ReceptionistSchema,
+};

@@ -44,6 +44,7 @@
         "WorkingDays": ["Monday", "Friday", "Saturday"],
         "ShiftStart": "09:00:00",
         "ShiftEnd": "17:00:00",
+        "DepartmentID": 1,
         "Person": {
           "ID": 1,
           "FirstName": "Alice",
@@ -57,7 +58,8 @@
           "Username": "alice.smith"
         }
       },
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "id": "ea60"
     },
     {
       "ID": 2,
@@ -72,6 +74,7 @@
         "WorkingDays": ["Monday", "Friday", "Saturday"],
         "ShiftStart": "08:00:00",
         "ShiftEnd": "16:00:00",
+        "DepartmentID": 1,
         "Person": {
           "ID": 2,
           "FirstName": "Bob",
@@ -85,7 +88,8 @@
           "Username": "bob.taylor"
         }
       },
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "id": "0133"
     },
     {
       "ID": 3,
@@ -100,6 +104,7 @@
         "WorkingDays": ["Monday", "Friday", "Saturday"],
         "ShiftStart": "10:00:00",
         "ShiftEnd": "18:00:00",
+        "DepartmentID": 1,
         "Person": {
           "ID": 3,
           "FirstName": "Carol",
@@ -113,7 +118,8 @@
           "Username": "carol.brown"
         }
       },
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "id": "1b58"
     }
   ],
 

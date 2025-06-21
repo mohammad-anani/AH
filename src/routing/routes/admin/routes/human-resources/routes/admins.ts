@@ -10,7 +10,11 @@ export const adminsRoutes = [
   {
     path: "admins",
     children: [
-      { path: "", Component: Admins, loader: listLoader("Admins") },
+      {
+        path: "",
+        Component: Admins,
+        loader: listLoader("Admins"),
+      },
       {
         path: ":id",
         Component: AdminViewEdit,
