@@ -2,6 +2,7 @@ import { cloneElement } from "react";
 import { get, useFormContext } from "react-hook-form";
 
 import React from "react";
+import { useNavigation } from "react-router-dom";
 
 export default function RegisteredInput({
   name,
@@ -12,8 +13,12 @@ export default function RegisteredInput({
 }) {
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting: isSub },
   } = useFormContext();
+
+  const { state } = useNavigation();
+
+  const isSubmitting = state === "submitting" || isSub;
 
   const errorMessage = get(errors, name)?.message;
 

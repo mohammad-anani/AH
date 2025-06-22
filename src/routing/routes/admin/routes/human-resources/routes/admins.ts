@@ -5,10 +5,12 @@ import UpdateAdmin from "@/features/admin/UpdateAdmin";
 import AddAdmin from "@/features/admin/AddAdmin";
 import listLoader from "@/utils/loaders/listLoader";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
+import addUpdateAction from "@/utils/actions/addUpdateAction";
 
 export const adminsRoutes = [
   {
     path: "admins",
+
     children: [
       {
         path: "",
@@ -21,10 +23,10 @@ export const adminsRoutes = [
         loader: findByIDLoader("Admins"),
         children: [
           { index: true, Component: AdminCard },
-          { path: "edit", Component: UpdateAdmin },
+          { path: "edit", Component: UpdateAdmin, action: addUpdateAction },
         ],
       },
-      { path: "add", Component: AddAdmin },
+      { path: "add", Component: AddAdmin, action: addUpdateAction },
     ],
   },
 ];

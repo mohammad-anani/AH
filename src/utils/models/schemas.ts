@@ -15,7 +15,17 @@ export const PersonSchema = z.object({
   MiddleName: z.string(),
   LastName: z.string(),
   Gender: z.string(),
-  Age: z.number(),
+  Age: z.preprocess((val) => {
+    if (typeof val === "number") {
+      return val;
+    }
+
+    if (typeof val === "string" && val.trim() !== "") {
+      const n = Number(val);
+      return isNaN(n) ? undefined : n;
+    }
+    return undefined;
+  }, z.number()),
   CountryName: z.string(),
   Phone: z.string(),
   Email: z.string().email(),
@@ -32,11 +42,39 @@ export const PatientSchema = z.object({
 export const EmployeeSchema = z.object({
   ID: z.number(),
   Person: PersonSchema,
-  DepartmentID: z.number(),
-  Salary: z.number(),
+  DepartmentID: z.preprocess((val) => {
+    if (typeof val === "number") {
+      return val;
+    }
+
+    if (typeof val === "string" && val.trim() !== "") {
+      const n = Number(val);
+      return isNaN(n) ? undefined : n;
+    }
+    return undefined;
+  }, z.number()),
+  Salary: z.preprocess((val) => {
+    if (typeof val === "number") {
+      return val;
+    }
+
+    if (typeof val === "string" && val.trim() !== "") {
+      const n = Number(val);
+      return isNaN(n) ? undefined : n;
+    }
+    return undefined;
+  }, z.number()),
   HireDate: z.string(),
   LeaveDate: z.string().nullable(),
-  isActive: z.boolean(),
+  isActive: z.preprocess(
+    (val) =>
+      (typeof val === "boolean" && val) || val === "true"
+        ? true
+        : val === "false"
+          ? false
+          : null,
+    z.boolean(),
+  ),
   WorkingDays: z.array(z.string()),
   ShiftStart: z.string(),
   ShiftEnd: z.string(),

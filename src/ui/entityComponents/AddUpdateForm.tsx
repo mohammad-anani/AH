@@ -3,6 +3,7 @@ import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 import type { OptionalChildrenProps } from "@/utils/models/types";
 import { FormProvider, useForm, type Resolver } from "react-hook-form";
+import { Form, useNavigation, useSubmit } from "react-router-dom";
 
 export default function AddUpdateForm({
   title,
@@ -21,8 +22,13 @@ export default function AddUpdateForm({
   const methods = useForm({ resolver, defaultValues });
   const {
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting: isSub, errors },
   } = methods;
+
+  const submit = useSubmit();
+  const { state } = useNavigation();
+
+  const isSubmitting = state === "submitting" || isSub;
 
   return (
     <>
@@ -37,9 +43,13 @@ export default function AddUpdateForm({
 
       <H2 className="mb-6">{title}</H2>
       <FormProvider {...methods}>
-        <form
-          method="post"
-          onSubmit={handleSubmit(() => {})}
+        <Form
+          replace
+          method="POST"
+          onSubmit={handleSubmit((data) => {
+            console.log(data);
+            submit(data, { method: "POST", encType: "application/json" });
+          })}
           className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-3 *:text-xl! *:odd:font-bold`}
         >
           {children}
@@ -56,7 +66,7 @@ export default function AddUpdateForm({
                 ? "Add"
                 : "Save"}
           </Clickable>
-        </form>
+        </Form>
       </FormProvider>
     </>
   );

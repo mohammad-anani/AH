@@ -33,17 +33,21 @@ export default function EmployeeForm({
         <input type="date" />
       </RegisteredInput>
 
-      <label htmlFor="leaveDate">Leave Date:</label>
-      <RegisteredInput name={`${prefix}LeaveDate`}>
-        <input type="date" />
-      </RegisteredInput>
-
       <label htmlFor="isActive">Status:</label>
       <RegisteredInput name={`${prefix}isActive`}>
         <select>
           <option value="">Select Status</option>
           <option value="true">Active</option>
           <option value="false">Inactive</option>
+        </select>
+      </RegisteredInput>
+
+      <label htmlFor="DepartmentID">DepartmentID:</label>
+      <RegisteredInput name={`${prefix}DepartmentID`}>
+        <select>
+          <option value="">Select Status</option>
+          <option value="1">Active</option>
+          <option value="2">Inactive</option>
         </select>
       </RegisteredInput>
 
