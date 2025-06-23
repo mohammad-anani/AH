@@ -49,6 +49,7 @@ export const AddPatientSchema = PatientSchema.omit({
 export const AddDepartmentSchema = DepartmentSchema.omit({
   ID: true,
   CreatedAt: true,
+  CreatedByAdminID: true,
 });
 
 export const addingSchemas: Record<string, z.ZodObject<any>> = {

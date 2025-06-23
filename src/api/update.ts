@@ -3,7 +3,7 @@
 import axios from "./axios";
 
 export default async function update(data: any, entity: string) {
-  const url = `/${entity}/${data["ID"]}/addUpdate`;
+  const url = `/${entity}/${data["ID"]}`;
 
   const response = await axios.patch(url, data, {
     headers: {

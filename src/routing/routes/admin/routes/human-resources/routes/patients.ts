@@ -5,6 +5,7 @@ import UpdatePatient from "@/features/patient/UpdatePatient";
 import AddPatient from "@/features/patient/AddPatient";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
+import addUpdateAction from "@/utils/actions/addUpdateAction";
 
 export const patientsRoutes = [
   {
@@ -17,10 +18,18 @@ export const patientsRoutes = [
         loader: findByIDLoader("Patients"),
         children: [
           { index: true, Component: PatientCard },
-          { path: "edit", Component: UpdatePatient },
+          {
+            path: "edit",
+            Component: UpdatePatient,
+            action: addUpdateAction("Patients"),
+          },
         ],
       },
-      { path: "add", Component: AddPatient },
+      {
+        path: "add",
+        Component: AddPatient,
+        action: addUpdateAction("Patients"),
+      },
     ],
   },
 ];

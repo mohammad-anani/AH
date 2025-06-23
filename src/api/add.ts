@@ -4,7 +4,7 @@ import axios from "./axios";
 
 export default async function add(data: any, entity: string) {
   // /add
-  console.log("!");
+
   const url = `/${entity}`;
 
   const response = await axios.post(url, data, {

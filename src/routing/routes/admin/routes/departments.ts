@@ -6,6 +6,7 @@ import AddDepartment from "@/features/department/AddDepartment";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import throwError from "@/utils/helpers/throwError";
+import addUpdateAction from "@/utils/actions/addUpdateAction";
 
 export const departmentsRoutes = [
   {
@@ -30,10 +31,18 @@ export const departmentsRoutes = [
         loader: findByIDLoader("Departments"),
         children: [
           { index: true, Component: DepartmentCard },
-          { path: "edit", Component: UpdateDepartment },
+          {
+            path: "edit",
+            Component: UpdateDepartment,
+            action: addUpdateAction("Departments"),
+          },
         ],
       },
-      { path: "add", Component: AddDepartment },
+      {
+        path: "add",
+        Component: AddDepartment,
+        action: addUpdateAction("Departments"),
+      },
     ],
   },
 ];

@@ -5,6 +5,7 @@ import UpdateDoctor from "@/features/doctor/UpdateDoctor";
 import AddDoctor from "@/features/doctor/AddDoctor";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
+import addUpdateAction from "@/utils/actions/addUpdateAction";
 
 export const doctorsRoutes = [
   {
@@ -17,10 +18,14 @@ export const doctorsRoutes = [
         loader: findByIDLoader("Doctors"),
         children: [
           { index: true, Component: DoctorCard },
-          { path: "edit", Component: UpdateDoctor },
+          {
+            path: "edit",
+            Component: UpdateDoctor,
+            action: addUpdateAction("Doctors"),
+          },
         ],
       },
-      { path: "add", Component: AddDoctor },
+      { path: "add", Component: AddDoctor, action: addUpdateAction("Doctors") },
     ],
   },
 ];

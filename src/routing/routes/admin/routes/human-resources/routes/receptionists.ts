@@ -5,6 +5,7 @@ import UpdateReceptionist from "@/features/receptionist/UpdateReceptionist";
 import AddReceptionist from "@/features/receptionist/AddReceptionist";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
+import addUpdateAction from "@/utils/actions/addUpdateAction";
 
 export const receptionistsRoutes = [
   {
@@ -21,10 +22,18 @@ export const receptionistsRoutes = [
         loader: findByIDLoader("Receptionists"),
         children: [
           { index: true, Component: ReceptionistCard },
-          { path: "edit", Component: UpdateReceptionist },
+          {
+            path: "edit",
+            Component: UpdateReceptionist,
+            action: addUpdateAction("Receptionists"),
+          },
         ],
       },
-      { path: "add", Component: AddReceptionist },
+      {
+        path: "add",
+        Component: AddReceptionist,
+        action: addUpdateAction("Receptionists"),
+      },
     ],
   },
 ];

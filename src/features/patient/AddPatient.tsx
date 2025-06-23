@@ -1,7 +1,7 @@
 import PatientForm from "./PatientForm";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PatientSchema } from "@/utils/models/schemas";
+import { AddPatientSchema } from "@/utils/models/addingSchemas";
 import { emptyPatient } from "@/utils/models/emptyObjects";
 
 export default function AddPatient() {
@@ -9,7 +9,7 @@ export default function AddPatient() {
     <AddUpdateForm
       title="Add Patient"
       backLink="/admin/human-resources/patients"
-      resolver={zodResolver(PatientSchema)}
+      resolver={zodResolver(AddPatientSchema)}
       defaultValues={emptyPatient}
     >
       <PatientForm fieldPrefix="" />

@@ -6,8 +6,6 @@ import { type ActionFunctionArgs } from "react-router-dom";
 
 export default function addUpdateAction(entity: string) {
   return async function ({ request }: ActionFunctionArgs) {
-    console.log("HI");
-
     const data = await request.json();
     let response: AxiosResponse<any, any>;
     if (data["ID"]) response = await update(data, entity);

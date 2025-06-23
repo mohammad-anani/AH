@@ -1,7 +1,7 @@
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ReceptionistForm from "./ReceptionistForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReceptionistSchema } from "@/utils/models/schemas";
+import { AddReceptionistSchema } from "@/utils/models/addingSchemas";
 import { emptyReceptionist } from "@/utils/models/emptyObjects";
 
 export default function AddReceptionist() {
@@ -9,7 +9,7 @@ export default function AddReceptionist() {
     <AddUpdateForm
       title="Add Receptionist"
       backLink="/admin/human-resources/receptionists"
-      resolver={zodResolver(ReceptionistSchema)}
+      resolver={zodResolver(AddReceptionistSchema)}
       defaultValues={emptyReceptionist}
     >
       <ReceptionistForm fieldPrefix="" />
