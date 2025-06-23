@@ -6,6 +6,7 @@ import AddDoctor from "@/features/doctor/AddDoctor";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
+import deleteAction from "@/utils/actions/deleteAction";
 
 export const doctorsRoutes = [
   {
@@ -22,6 +23,10 @@ export const doctorsRoutes = [
             path: "edit",
             Component: UpdateDoctor,
             action: addUpdateAction("Doctors"),
+          },
+          {
+            path: "delete",
+            action: deleteAction("Doctors"),
           },
         ],
       },

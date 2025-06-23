@@ -6,6 +6,7 @@ import AddAdmin from "@/features/admin/AddAdmin";
 import listLoader from "@/utils/loaders/listLoader";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
+import deleteAction from "@/utils/actions/deleteAction";
 
 export const adminsRoutes = [
   {
@@ -27,6 +28,10 @@ export const adminsRoutes = [
             path: "edit",
             Component: UpdateAdmin,
             action: addUpdateAction("Admins"),
+          },
+          {
+            path: "delete",
+            action: deleteAction("Admins"),
           },
         ],
       },

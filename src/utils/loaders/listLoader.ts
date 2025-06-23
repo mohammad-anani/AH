@@ -1,6 +1,6 @@
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import formatLoaderUrl from "../formatters/formatLoaderUrl";
-import { getList } from "@/api/getList";
+import getList from "@/api/getList";
 import { z } from "zod";
 import throwError from "../helpers/throwError";
 import { schemas } from "../models/schemas";

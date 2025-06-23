@@ -7,6 +7,7 @@ import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import throwError from "@/utils/helpers/throwError";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
+import deleteAction from "@/utils/actions/deleteAction";
 
 export const departmentsRoutes = [
   {
@@ -30,7 +31,14 @@ export const departmentsRoutes = [
         Component: DepartmentViewEdit,
         loader: findByIDLoader("Departments"),
         children: [
-          { index: true, Component: DepartmentCard },
+          {
+            index: true,
+            Component: DepartmentCard,
+          },
+          {
+            path: "delete",
+            action: deleteAction("Departments"),
+          },
           {
             path: "edit",
             Component: UpdateDepartment,

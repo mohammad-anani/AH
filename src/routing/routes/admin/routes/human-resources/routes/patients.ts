@@ -6,6 +6,7 @@ import AddPatient from "@/features/patient/AddPatient";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
+import deleteAction from "@/utils/actions/deleteAction";
 
 export const patientsRoutes = [
   {
@@ -22,6 +23,10 @@ export const patientsRoutes = [
             path: "edit",
             Component: UpdatePatient,
             action: addUpdateAction("Patients"),
+          },
+          {
+            path: "delete",
+            action: deleteAction("Patients"),
           },
         ],
       },

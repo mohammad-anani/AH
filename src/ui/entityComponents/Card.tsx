@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogClose,
 } from "@/components/ui/dialog";
+import { useSubmit } from "react-router-dom";
 
 export default function Card({
   Data,
@@ -20,7 +21,6 @@ export default function Card({
   backLink = "",
   headerWidth = 150,
   deleteMessage,
-  onDeleteFn = () => {},
   children,
 }: {
   Data: ReactNode;
@@ -32,6 +32,8 @@ export default function Card({
   deleteMessage?: string;
   onDeleteFn?: () => void;
 } & OptionalChildrenProps) {
+  const submit = useSubmit();
+
   return (
     <Dialog>
       {backLink !== "" ? (
@@ -69,29 +71,40 @@ export default function Card({
       <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm!">
         {children}
       </div>
-      <DialogPortal>
-        <DialogContent className="">
-          <DialogHeader>
-            <DialogTitle>
-              <H2 className="text-left text-red-600!">Delete {title}</H2>
-            </DialogTitle>
-          </DialogHeader>
-          <span>
-            {deleteMessage ||
-              `Are you sure you want to delete this ${title.toLowerCase()}?`}
-          </span>
-          <div className="flex justify-end gap-x-2">
-            <DialogClose>
-              <Clickable as="button" variant="secondary">
-                Cancel
+      {canDelete && (
+        <DialogPortal>
+          <DialogContent className="">
+            <DialogHeader>
+              <DialogTitle>
+                <H2 className="text-left text-red-600!">Delete {title}</H2>
+              </DialogTitle>
+            </DialogHeader>
+            <span>
+              {deleteMessage ||
+                `Are you sure you want to delete this ${title.toLowerCase()}?`}
+            </span>
+            <div className="flex justify-end gap-x-2">
+              <DialogClose>
+                <Clickable as="button" variant="secondary">
+                  Cancel
+                </Clickable>
+              </DialogClose>
+              <Clickable
+                onClick={() => {
+                  submit(null, {
+                    method: "delete",
+                    action: "./delete",
+                  });
+                }}
+                as="button"
+                variant="destructive"
+              >
+                Delete
               </Clickable>
-            </DialogClose>
-            <Clickable onClick={onDeleteFn} as="button" variant="destructive">
-              Delete
-            </Clickable>
-          </div>
-        </DialogContent>
-      </DialogPortal>
+            </div>
+          </DialogContent>
+        </DialogPortal>
+      )}
     </Dialog>
   );
 }
