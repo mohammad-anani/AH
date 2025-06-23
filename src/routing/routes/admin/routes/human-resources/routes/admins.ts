@@ -23,10 +23,14 @@ export const adminsRoutes = [
         loader: findByIDLoader("Admins"),
         children: [
           { index: true, Component: AdminCard },
-          { path: "edit", Component: UpdateAdmin, action: addUpdateAction },
+          {
+            path: "edit",
+            Component: UpdateAdmin,
+            action: addUpdateAction("Admins"),
+          },
         ],
       },
-      { path: "add", Component: AddAdmin, action: addUpdateAction },
+      { path: "add", Component: AddAdmin, action: addUpdateAction("Admins") },
     ],
   },
 ];

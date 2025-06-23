@@ -25,10 +25,10 @@ export const PersonSchema = z.object({
       return isNaN(n) ? undefined : n;
     }
     return undefined;
-  }, z.number()),
+  }, z.number().optional()),
   CountryName: z.string(),
   Phone: z.string(),
-  Email: z.string().email(),
+  Email: z.string().optional(),
   Username: z.string(),
 });
 
@@ -52,7 +52,7 @@ export const EmployeeSchema = z.object({
       return isNaN(n) ? undefined : n;
     }
     return undefined;
-  }, z.number()),
+  }, z.number().optional()),
   Salary: z.preprocess((val) => {
     if (typeof val === "number") {
       return val;
@@ -63,7 +63,7 @@ export const EmployeeSchema = z.object({
       return isNaN(n) ? undefined : n;
     }
     return undefined;
-  }, z.number()),
+  }, z.number().optional()),
   HireDate: z.string(),
   LeaveDate: z.string().nullable(),
   isActive: z.preprocess(
@@ -73,7 +73,7 @@ export const EmployeeSchema = z.object({
         : val === "false"
           ? false
           : null,
-    z.boolean(),
+    z.boolean().optional(),
   ),
   WorkingDays: z.array(z.string()),
   ShiftStart: z.string(),

@@ -22,7 +22,7 @@ export default function AddUpdateForm({
   const methods = useForm({ resolver, defaultValues });
   const {
     handleSubmit,
-    formState: { isSubmitting: isSub, errors },
+    formState: { isSubmitting: isSub },
   } = methods;
 
   const submit = useSubmit();
@@ -47,7 +47,6 @@ export default function AddUpdateForm({
           replace
           method="POST"
           onSubmit={handleSubmit((data) => {
-            console.log(data);
             submit(data, { method: "POST", encType: "application/json" });
           })}
           className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-3 *:text-xl! *:odd:font-bold`}

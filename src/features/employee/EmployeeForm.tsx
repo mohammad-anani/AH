@@ -2,6 +2,9 @@ import PersonForm from "../person/PersonForm";
 import Select from "react-select";
 import RegisteredInput from "../../ui/customComponents/RegisteredInput";
 import Controller from "@/ui/customComponents/Controller";
+import { useEffect } from "react";
+import { useFetcher } from "react-router-dom";
+import type { Department } from "@/utils/models/types";
 
 export default function EmployeeForm({
   fieldPrefix = "",
@@ -18,6 +21,14 @@ export default function EmployeeForm({
     { value: "Saturday", label: "Saturday" },
     { value: "Sunday", label: "Sunday" },
   ];
+
+  const fetcher = useFetcher();
+
+  useEffect(() => {
+    fetcher.load("/admin/departments/list");
+  }, []);
+
+  const departments: Department[] = fetcher.data?.[0] ?? [];
 
   return (
     <>
@@ -42,12 +53,15 @@ export default function EmployeeForm({
         </select>
       </RegisteredInput>
 
-      <label htmlFor="DepartmentID">DepartmentID:</label>
+      <label htmlFor="DepartmentID">Department:</label>
       <RegisteredInput name={`${prefix}DepartmentID`}>
         <select>
-          <option value="">Select Status</option>
-          <option value="1">Active</option>
-          <option value="2">Inactive</option>
+          <option value="">Select Department</option>
+          {departments?.map((department) => (
+            <option key={department.ID} value={department.ID}>
+              {department.Name}
+            </option>
+          ))}
         </select>
       </RegisteredInput>
 

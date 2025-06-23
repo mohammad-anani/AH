@@ -18,7 +18,7 @@ export default function Error() {
         <p className="text-center">{error.data}</p>
       </div>
       <div className="flex justify-center space-x-2">
-        <Clickable as="Link" variant="primary">
+        <Clickable as="Link" variant="primary" to="/">
           Go to login
         </Clickable>
         <BackNavigator pagesBack={1}>

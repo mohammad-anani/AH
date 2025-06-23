@@ -5,31 +5,34 @@
       "Name": "Cardiology",
       "Phone": "55510100",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "id": "5cb2"
     },
     {
       "ID": 2,
       "Name": "Neurology",
       "Phone": "55530100",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "id": "9aaa"
     },
     {
       "ID": 3,
       "Name": "Orthopedics",
       "Phone": "55530130",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "id": "cccd"
     },
     {
       "ID": 4,
       "Name": "Pediatrics",
       "Phone": "55530144",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "id": "90fc"
     }
   ],
-
   "Admins": [
     {
       "ID": 1,
@@ -41,7 +44,11 @@
         "HireDate": "2020-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Monday", "Friday", "Saturday"],
+        "WorkingDays": [
+          "Monday",
+          "Friday",
+          "Saturday"
+        ],
         "ShiftStart": "09:00:00",
         "ShiftEnd": "17:00:00",
         "DepartmentID": 1,
@@ -71,7 +78,11 @@
         "HireDate": "2019-05-20",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Monday", "Friday", "Saturday"],
+        "WorkingDays": [
+          "Monday",
+          "Friday",
+          "Saturday"
+        ],
         "ShiftStart": "08:00:00",
         "ShiftEnd": "16:00:00",
         "DepartmentID": 1,
@@ -101,7 +112,11 @@
         "HireDate": "2021-07-10",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Monday", "Friday", "Saturday"],
+        "WorkingDays": [
+          "Monday",
+          "Friday",
+          "Saturday"
+        ],
         "ShiftStart": "10:00:00",
         "ShiftEnd": "18:00:00",
         "DepartmentID": 1,
@@ -120,9 +135,113 @@
       },
       "CreatedAt": "2023-01-15T09:30:00",
       "id": "1b58"
+    },
+    {
+      "id": "322b",
+      "Employee": {
+        "Person": {
+          "FirstName": "",
+          "MiddleName": "",
+          "LastName": "",
+          "Gender": "",
+          "CountryName": "",
+          "Phone": "",
+          "Email": "",
+          "Username": ""
+        },
+        "HireDate": "0000-00-00",
+        "LeaveDate": null,
+        "isActive": true,
+        "WorkingDays": [],
+        "ShiftStart": "",
+        "ShiftEnd": ""
+      }
+    },
+    {
+      "id": "164d",
+      "Employee": {
+        "Person": {
+          "FirstName": "",
+          "MiddleName": "",
+          "LastName": "",
+          "Gender": "",
+          "CountryName": "",
+          "Phone": "",
+          "Email": "",
+          "Username": ""
+        },
+        "HireDate": "0000-00-00",
+        "LeaveDate": null,
+        "isActive": true,
+        "WorkingDays": [],
+        "ShiftStart": "",
+        "ShiftEnd": ""
+      }
+    },
+    {
+      "id": "73de",
+      "Employee": {
+        "Person": {
+          "FirstName": "",
+          "MiddleName": "",
+          "LastName": "",
+          "Gender": "",
+          "CountryName": "",
+          "Phone": "",
+          "Email": "",
+          "Username": ""
+        },
+        "HireDate": "0000-00-00",
+        "LeaveDate": null,
+        "isActive": true,
+        "WorkingDays": [],
+        "ShiftStart": "",
+        "ShiftEnd": ""
+      }
+    },
+    {
+      "id": "3437",
+      "Employee": {
+        "Person": {
+          "FirstName": "",
+          "MiddleName": "",
+          "LastName": "",
+          "Gender": "",
+          "CountryName": "",
+          "Phone": "",
+          "Email": "",
+          "Username": ""
+        },
+        "HireDate": "0000-00-00",
+        "LeaveDate": null,
+        "isActive": true,
+        "WorkingDays": [],
+        "ShiftStart": "",
+        "ShiftEnd": ""
+      }
+    },
+    {
+      "id": "b309",
+      "Employee": {
+        "Person": {
+          "FirstName": "",
+          "MiddleName": "",
+          "LastName": "",
+          "Gender": "",
+          "CountryName": "",
+          "Phone": "",
+          "Email": "",
+          "Username": ""
+        },
+        "HireDate": "0000-00-00",
+        "LeaveDate": null,
+        "isActive": true,
+        "WorkingDays": [],
+        "ShiftStart": "",
+        "ShiftEnd": ""
+      }
     }
   ],
-
   "Patients": [
     {
       "ID": 1,
@@ -139,7 +258,8 @@
         "Phone": "76123456",
         "Email": "olivia.taylor@example.com",
         "Username": "olivia.taylor"
-      }
+      },
+      "id": "b8cc"
     },
     {
       "ID": 2,
@@ -156,7 +276,8 @@
         "Phone": "71098765",
         "Email": "liam.baker@example.com",
         "Username": "liam.baker"
-      }
+      },
+      "id": "3180"
     },
     {
       "ID": 3,
@@ -173,7 +294,8 @@
         "Phone": "78906543",
         "Email": "sophia.king@example.com",
         "Username": "sophia.king"
-      }
+      },
+      "id": "5b14"
     }
   ],
   "Doctors": [
@@ -198,13 +320,20 @@
         "HireDate": "2020-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "WorkingDays": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "ShiftStart": "09:00:00",
         "ShiftEnd": "17:00:00"
       },
       "Specialization": "Cardiologist",
       "CreatedByReceptionistID": 1,
-      "CreatedAt": "2023-01-01T08:00:00"
+      "CreatedAt": "2023-01-01T08:00:00",
+      "id": "4cd9"
     },
     {
       "ID": 2,
@@ -227,16 +356,21 @@
         "HireDate": "2019-05-20",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "WorkingDays": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday"
+        ],
         "ShiftStart": "08:00:00",
         "ShiftEnd": "16:00:00"
       },
       "Specialization": "Neurologist",
       "CreatedByReceptionistID": 2,
-      "CreatedAt": "2023-02-01T09:00:00"
+      "CreatedAt": "2023-02-01T09:00:00",
+      "id": "dfa3"
     }
   ],
-
   "Receptionists": [
     {
       "ID": 1,
@@ -248,7 +382,13 @@
         "HireDate": "2021-05-01",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "WorkingDays": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
         "Person": {
@@ -266,7 +406,8 @@
         }
       },
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-01T08:00:00"
+      "CreatedAt": "2023-01-01T08:00:00",
+      "id": "39c5"
     },
     {
       "ID": 2,
@@ -278,7 +419,13 @@
         "HireDate": "2022-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday"],
+        "WorkingDays": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Friday",
+          "Saturday"
+        ],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
         "Person": {
@@ -296,7 +443,8 @@
         }
       },
       "CreatedByAdminID": 2,
-      "CreatedAt": "2023-02-01T09:00:00"
+      "CreatedAt": "2023-02-01T09:00:00",
+      "id": "d673"
     }
   ]
 }
