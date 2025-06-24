@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogClose,
 } from "@/components/ui/dialog";
-import { useSubmit } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 
 export default function Card({
   Data,
@@ -32,7 +32,7 @@ export default function Card({
   deleteMessage?: string;
   onDeleteFn?: () => void;
 } & OptionalChildrenProps) {
-  const submit = useSubmit();
+  const fetcher = useFetcher();
 
   return (
     <Dialog>
@@ -91,7 +91,7 @@ export default function Card({
               </DialogClose>
               <Clickable
                 onClick={() => {
-                  submit(null, {
+                  fetcher.submit(null, {
                     method: "delete",
                     action: "./delete",
                   });
