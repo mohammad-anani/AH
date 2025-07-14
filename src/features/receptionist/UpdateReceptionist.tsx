@@ -9,7 +9,7 @@ export default function UpdateReceptionist() {
 
   return (
     <AddUpdateForm
-      title="Add Admin"
+      title="Edit Receptionist"
       backLink={"/admin/human-resources/receptionists/" + receptionist.ID}
       schema={ReceptionistSchema}
       defaultValues={receptionist}

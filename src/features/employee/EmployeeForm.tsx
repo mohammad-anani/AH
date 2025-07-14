@@ -75,7 +75,7 @@ export default function EmployeeForm({
               isDisabled={isSubmitting}
               options={selectOptions}
               value={selectOptions.filter((option) =>
-                field.value?.includes(option.value),
+                field.value?.includes(option.value.substring(0, 3)),
               )}
               onChange={(selected) =>
                 field.onChange(selected.map((opt) => opt.value))

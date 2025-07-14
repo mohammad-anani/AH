@@ -5,32 +5,28 @@
       "Name": "Cardiology",
       "Phone": "55510100",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00",
-      "id": "5cb2"
+      "CreatedAt": "2023-01-15T09:30:00"
     },
     {
       "ID": 2,
       "Name": "Neurology",
       "Phone": "55530100",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00",
-      "id": "9aaa"
+      "CreatedAt": "2023-01-15T09:30:00"
     },
     {
       "ID": 3,
       "Name": "Orthopedics",
       "Phone": "55530130",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00",
-      "id": "cccd"
+      "CreatedAt": "2023-01-15T09:30:00"
     },
     {
       "ID": 4,
       "Name": "Pediatrics",
       "Phone": "55530144",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00",
-      "id": "90fc"
+      "CreatedAt": "2023-01-15T09:30:00"
     }
   ],
   "Admins": [
@@ -39,90 +35,84 @@
       "CreatedByAdminID": null,
       "Employee": {
         "ID": 1,
-        "PersonID": 1,
         "Salary": 80000,
         "HireDate": "2020-01-15",
         "LeaveDate": null,
-        "isActive": true,
-        "WorkingDays": ["Monday", "Friday", "Saturday"],
-        "ShiftStart": "09:00:00",
-        "ShiftEnd": "17:00:00",
+        "isActive": "active",
+        "WorkingDays": ["Mon", "Fri", "Sat"],
+        "ShiftStart": "09:00",
+        "ShiftEnd": "17:00",
         "DepartmentID": 1,
         "Person": {
           "ID": 1,
           "FirstName": "Alice",
           "MiddleName": "Marie",
           "LastName": "Smith",
-          "Gender": "Female",
+          "Gender": "female",
           "Age": 30,
           "CountryName": "USA",
-          "Phone": "1234567890",
+          "Phone": "12345678",
           "Email": "alice@example.com",
           "Username": "alice.smith"
         }
       },
-      "CreatedAt": "2023-01-15T09:30:00",
-      "id": "ea60"
+      "CreatedAt": "2023-01-15T09:30:00"
     },
     {
       "ID": 2,
       "CreatedByAdminID": 1,
       "Employee": {
         "ID": 2,
-        "PersonID": 2,
         "Salary": 85000,
         "HireDate": "2019-05-20",
         "LeaveDate": null,
-        "isActive": true,
-        "WorkingDays": ["Monday", "Friday", "Saturday"],
-        "ShiftStart": "08:00:00",
-        "ShiftEnd": "16:00:00",
+        "isActive": "active",
+        "WorkingDays": ["Mon", "Fri", "Sat"],
+        "ShiftStart": "08:00",
+        "ShiftEnd": "16:00",
         "DepartmentID": 1,
         "Person": {
           "ID": 2,
           "FirstName": "Bob",
           "MiddleName": "John",
           "LastName": "Taylor",
-          "Gender": "Male",
+          "Gender": "male",
           "Age": 34,
           "CountryName": "UK",
-          "Phone": "9876543210",
+          "Phone": "98765432",
           "Email": "bob@example.com",
           "Username": "bob.taylor"
         }
       },
-      "CreatedAt": "2023-01-15T09:30:00",
-      "id": "0133"
+      "CreatedAt": "2023-01-15T09:30:00"
     },
     {
       "ID": 3,
       "CreatedByAdminID": 1,
       "Employee": {
         "ID": 3,
-        "PersonID": 3,
         "Salary": 78000,
         "HireDate": "2021-07-10",
         "LeaveDate": null,
-        "isActive": true,
-        "WorkingDays": ["Monday", "Friday", "Saturday"],
-        "ShiftStart": "10:00:00",
-        "ShiftEnd": "18:00:00",
+        "isActive": "active",
+        "WorkingDays": ["Mon", "Fri", "Sat"],
+        "ShiftStart": "10:00",
+        "ShiftEnd": "18:00",
         "DepartmentID": 1,
         "Person": {
           "ID": 3,
           "FirstName": "Carol",
           "MiddleName": "Ann",
           "LastName": "Brown",
-          "Gender": "Female",
+          "Gender": "female",
           "Age": 28,
           "CountryName": "Canada",
-          "Phone": "5551112233",
+          "Phone": "55511122",
           "Email": "carol@example.com",
           "Username": "carol.brown"
         }
       },
-      "CreatedAt": "2023-01-15T09:30:00",
-      "id": "1b58"
+      "CreatedAt": "2023-01-15T09:30:00"
     }
   ],
   "Patients": [
@@ -135,14 +125,13 @@
         "FirstName": "Olivia",
         "MiddleName": "Anne",
         "LastName": "Taylor",
-        "Gender": "Female",
+        "Gender": "female",
         "Age": 18,
         "CountryName": "France",
         "Phone": "76123456",
         "Email": "olivia.taylor@example.com",
         "Username": "olivia.taylor"
-      },
-      "id": "b8cc"
+      }
     },
     {
       "ID": 2,
@@ -153,14 +142,13 @@
         "FirstName": "Liam",
         "MiddleName": "Andrew",
         "LastName": "Baker",
-        "Gender": "Male",
+        "Gender": "male",
         "Age": 30,
         "CountryName": "Lebanon",
         "Phone": "71098765",
         "Email": "liam.baker@example.com",
         "Username": "liam.baker"
-      },
-      "id": "3180"
+      }
     },
     {
       "ID": 3,
@@ -171,14 +159,13 @@
         "FirstName": "Sophia",
         "MiddleName": "Marie",
         "LastName": "King",
-        "Gender": "Female",
+        "Gender": "female",
         "Age": 40,
         "CountryName": "Germany",
         "Phone": "78906543",
         "Email": "sophia.king@example.com",
         "Username": "sophia.king"
-      },
-      "id": "5b14"
+      }
     }
   ],
   "Doctors": [
@@ -191,10 +178,10 @@
           "FirstName": "Alice",
           "MiddleName": "Marie",
           "LastName": "Smith",
-          "Gender": "Female",
+          "Gender": "female",
           "Age": 30,
           "CountryName": "USA",
-          "Phone": "1234567890",
+          "Phone": "12345678",
           "Email": "alice.smith@example.com",
           "Username": "alice.smith"
         },
@@ -202,15 +189,14 @@
         "Salary": 120000,
         "HireDate": "2020-01-15",
         "LeaveDate": null,
-        "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "ShiftStart": "09:00:00",
-        "ShiftEnd": "17:00:00"
+        "isActive": "active",
+        "WorkingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+        "ShiftStart": "09:00",
+        "ShiftEnd": "17:00"
       },
       "Specialization": "Cardiologist",
       "CreatedByReceptionistID": 1,
-      "CreatedAt": "2023-01-01T08:00:00",
-      "id": "4cd9"
+      "CreatedAt": "2023-01-01T08:00:00"
     },
     {
       "ID": 2,
@@ -221,10 +207,10 @@
           "FirstName": "Bob",
           "MiddleName": "John",
           "LastName": "Taylor",
-          "Gender": "Male",
+          "Gender": "male",
           "Age": 40,
           "CountryName": "Canada",
-          "Phone": "0987654321",
+          "Phone": "09876543",
           "Email": "bob.taylor@example.com",
           "Username": "bob.taylor"
         },
@@ -232,15 +218,14 @@
         "Salary": 110000,
         "HireDate": "2019-05-20",
         "LeaveDate": null,
-        "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        "ShiftStart": "08:00:00",
-        "ShiftEnd": "16:00:00"
+        "isActive": "active",
+        "WorkingDays": ["Mon", "Tue", "Wed", "Thu"],
+        "ShiftStart": "08:00",
+        "ShiftEnd": "16:00"
       },
       "Specialization": "Neurologist",
       "CreatedByReceptionistID": 2,
-      "CreatedAt": "2023-02-01T09:00:00",
-      "id": "dfa3"
+      "CreatedAt": "2023-02-01T09:00:00"
     }
   ],
   "Receptionists": [
@@ -248,13 +233,12 @@
       "ID": 1,
       "Employee": {
         "ID": 5,
-        "PersonID": 12,
         "DepartmentID": 2,
         "Salary": 3000,
         "HireDate": "2021-05-01",
         "LeaveDate": null,
-        "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "isActive": "active",
+        "WorkingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
         "Person": {
@@ -262,30 +246,27 @@
           "FirstName": "Lara",
           "MiddleName": "Marie",
           "LastName": "Kanaan",
-          "Gender": "Male",
+          "Gender": "male",
           "Age": 45,
           "CountryName": "Lebanon",
           "Phone": "70123456",
           "Email": "lara.kanaan@example.com",
-          "Username": "desls",
-          "CreatedByReceptionistID": null
+          "Username": "deslsdddd"
         }
       },
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-01T08:00:00",
-      "id": "39c5"
+      "CreatedAt": "2023-01-01T08:00:00"
     },
     {
       "ID": 2,
       "Employee": {
         "ID": 6,
-        "PersonID": 13,
         "DepartmentID": 2,
         "Salary": 3200,
         "HireDate": "2022-01-15",
         "LeaveDate": null,
-        "isActive": true,
-        "WorkingDays": ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday"],
+        "isActive": "active",
+        "WorkingDays": ["Mon", "Tue", "Wed", "Fri", "Sat"],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
         "Person": {
@@ -293,18 +274,16 @@
           "FirstName": "Ahmad",
           "MiddleName": "Nabil",
           "LastName": "Fakhoury",
-          "Gender": "Female",
+          "Gender": "female",
           "Age": 50,
           "CountryName": "Lebanon",
           "Phone": "70987654",
           "Email": "ahmad.fakhoury@example.com",
-          "Username": "asde",
-          "CreatedByReceptionistID": 1
+          "Username": "asdeddddddd"
         }
       },
       "CreatedByAdminID": 2,
-      "CreatedAt": "2023-02-01T09:00:00",
-      "id": "d673"
+      "CreatedAt": "2023-02-01T09:00:00"
     }
   ]
 }
