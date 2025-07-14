@@ -30,7 +30,6 @@ export default function Card({
   backLink?: string;
   headerWidth?: number;
   deleteMessage?: string;
-  onDeleteFn?: () => void;
 } & OptionalChildrenProps) {
   const fetcher = useFetcher();
 

@@ -2,29 +2,34 @@
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 import type { OptionalChildrenProps } from "@/utils/models/types";
-import { FormProvider, useForm, type Resolver } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { Form, useNavigation, useSubmit } from "react-router-dom";
+import type { Schema } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function AddUpdateForm({
   title,
   backLink,
   headerWidth = 150,
-  resolver,
+  schema,
   defaultValues,
   children,
 }: {
   title: string;
   backLink: string;
-  resolver: Resolver<any>;
+  schema: Schema<any, any>;
   defaultValues: any;
   headerWidth?: number;
 } & OptionalChildrenProps) {
-  const methods = useForm({ resolver, defaultValues });
+  const methods = useForm({
+    resolver: zodResolver(schema),
+    defaultValues,
+    criteriaMode: "all",
+  });
   const {
     handleSubmit,
     formState: { isSubmitting: isSub },
   } = methods;
-
   const submit = useSubmit();
   const { state } = useNavigation();
 

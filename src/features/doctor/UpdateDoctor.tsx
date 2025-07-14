@@ -2,7 +2,6 @@ import { useOutletContext } from "react-router-dom";
 import type { Doctor } from "../../utils/models/types";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import DoctorForm from "./DoctorForm";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { DoctorSchema } from "@/utils/models/schemas";
 
 export default function UpdateDoctor() {
@@ -10,7 +9,7 @@ export default function UpdateDoctor() {
 
   return (
     <AddUpdateForm
-      resolver={zodResolver(DoctorSchema)}
+      schema={DoctorSchema}
       defaultValues={doctor}
       title="Edit Doctor"
       backLink={"/admin/human-resources/doctors/" + doctor.ID}

@@ -2,7 +2,6 @@ import { useOutletContext } from "react-router-dom";
 import type { Receptionist } from "../../utils/models/types";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ReceptionistForm from "./ReceptionistForm";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { ReceptionistSchema } from "@/utils/models/schemas";
 
 export default function UpdateReceptionist() {
@@ -12,7 +11,7 @@ export default function UpdateReceptionist() {
     <AddUpdateForm
       title="Add Admin"
       backLink={"/admin/human-resources/receptionists/" + receptionist.ID}
-      resolver={zodResolver(ReceptionistSchema)}
+      schema={ReceptionistSchema}
       defaultValues={receptionist}
     >
       <ReceptionistForm fieldPrefix="" />

@@ -20,7 +20,19 @@ export default function RegisteredInput({
 
   const isSubmitting = state === "submitting" || isSub;
 
-  const errorMessage = get(errors, name)?.message;
+  const errorObj = get(errors, name);
+
+  const errorMessages: string[][] = [];
+
+  if (errorObj) {
+    if (errorObj.types) {
+      errorMessages.push(...(Object.values(errorObj.types) as string[][]));
+    } else if (errorObj.message) {
+      errorMessages.push(errorObj.message);
+    }
+  }
+
+  console.log(errorMessages?.[0]);
 
   return (
     <span className={`flex flex-col gap-1`}>
@@ -28,9 +40,17 @@ export default function RegisteredInput({
         ...register(name),
         disabled: isSubmitting,
       })}
-      <span className="text-sm! text-red-500!">
-        {errorMessage && `* ${errorMessage}`}
-      </span>
+      {errorMessages[0] && errorMessages[0].length ? (
+        <ul className="grid grid-cols-1 text-sm! *:text-red-500!">
+          {typeof errorMessages[0] === "string" ? (
+            <li>{`* ${errorMessages[0]}`}</li>
+          ) : (
+            (errorMessages[0] as string[]).map((msg: string) => (
+              <li>{`* ${msg}`}</li>
+            ))
+          )}
+        </ul>
+      ) : null}
     </span>
   );
 }

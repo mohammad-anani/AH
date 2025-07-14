@@ -7,6 +7,7 @@ import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
+import throwError from "@/utils/helpers/throwError";
 
 export const receptionistsRoutes = [
   {
@@ -33,6 +34,10 @@ export const receptionistsRoutes = [
           },
           {
             path: "delete",
+            Component: () => {
+              throwError(404, "Not Found", "This URL is not a valid path");
+              return null;
+            },
             action: deleteAction("Receptionists"),
           },
         ],
