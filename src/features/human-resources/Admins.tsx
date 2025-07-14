@@ -1,7 +1,7 @@
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { Admin } from "@/utils/models/types";
-import AdminsHeader from "@/features/admin/AdminsHeader";
-import AdminRow from "@/features/admin/AdminRow";
+import Header from "@/features/admin/Header";
+import Row from "@/features/admin/Row";
 import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
 export default function Admins() {
@@ -11,8 +11,8 @@ export default function Admins() {
       title="Admins"
       canAdd
       emptyText="No Admins"
-      Header={<AdminsHeader />}
-      render={(admin) => <AdminRow key={admin.ID} admin={admin} />}
+      Header={<Header />}
+      render={(admin) => <Row key={admin.ID} admin={admin} />}
       filterFields={[
         ...persondFields,
         ...employeeFields,

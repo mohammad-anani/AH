@@ -1,7 +1,7 @@
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { Patient } from "@/utils/models/types";
-import PatientsHeader from "@/features/patient/PatientsHeader";
-import PatientRow from "@/features/patient/PatientRow";
+import Header from "@/features/patient/Header";
+import Row from "@/features/patient/Row";
 import { persondFields } from "@/utils/models/objectKeys";
 
 export default function Patients() {
@@ -11,8 +11,8 @@ export default function Patients() {
       title="Patients"
       canAdd={false}
       emptyText="No Patients"
-      Header={<PatientsHeader />}
-      render={(patient) => <PatientRow key={patient.ID} patient={patient} />}
+      Header={<Header />}
+      render={(patient) => <Row key={patient.ID} patient={patient} />}
       filterFields={[
         ...persondFields,
         ["CreatedAt", "datetime"],

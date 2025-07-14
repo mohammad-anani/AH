@@ -1,7 +1,7 @@
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { Doctor } from "@/utils/models/types";
-import DoctorsHeader from "@/features/doctor/DoctorsHeader";
-import DoctorRow from "@/features/doctor/DoctorRow";
+import Header from "@/features/doctor/Header";
+import Row from "@/features/doctor/Row";
 import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
 export default function Doctors() {
@@ -11,8 +11,8 @@ export default function Doctors() {
       title="Doctors"
       canAdd={false}
       emptyText="No Doctors"
-      Header={<DoctorsHeader />}
-      render={(doctor) => <DoctorRow key={doctor.ID} doctor={doctor} />}
+      Header={<Header />}
+      render={(doctor) => <Row key={doctor.ID} doctor={doctor} />}
       filterFields={[
         ...persondFields,
         ...employeeFields,

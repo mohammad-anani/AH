@@ -1,7 +1,7 @@
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { Receptionist } from "@/utils/models/types";
-import ReceptionitsHeader from "@/features/receptionist/ReceptionistsHeader";
-import ReceptionistRow from "@/features/receptionist/ReceptionistRow";
+import Header from "@/features/receptionist/Header";
+import Row from "@/features/receptionist/Row";
 import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
 export default function Receptionists() {
@@ -11,9 +11,9 @@ export default function Receptionists() {
       title="Receptionists"
       canAdd
       emptyText="No Receptionists"
-      Header={<ReceptionitsHeader />}
+      Header={<Header />}
       render={(receptionist) => (
-        <ReceptionistRow key={receptionist.ID} receptionist={receptionist} />
+        <Row key={receptionist.ID} receptionist={receptionist} />
       )}
       filterFields={[
         ...persondFields,

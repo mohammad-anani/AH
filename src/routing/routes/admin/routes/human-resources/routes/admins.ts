@@ -1,8 +1,8 @@
 import Admins from "@/features/human-resources/Admins";
-import AdminViewEdit from "@/features/admin/AdminViewEdit";
-import AdminCard from "@/features/admin/AdminCard";
-import UpdateAdmin from "@/features/admin/UpdateAdmin";
-import AddAdmin from "@/features/admin/AddAdmin";
+import ViewEdit from "@/features/admin/ViewEdit";
+import Card from "@/features/admin/Card";
+import Update from "@/features/admin/Update";
+import Add from "@/features/admin/Add";
 import listLoader from "@/utils/loaders/listLoader";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
@@ -12,7 +12,6 @@ import throwError from "@/utils/helpers/throwError";
 export const adminsRoutes = [
   {
     path: "admins",
-
     children: [
       {
         path: "",
@@ -21,13 +20,13 @@ export const adminsRoutes = [
       },
       {
         path: ":id",
-        Component: AdminViewEdit,
+        Component: ViewEdit,
         loader: findByIDLoader("Admins"),
         children: [
-          { index: true, Component: AdminCard },
+          { index: true, Component: Card },
           {
             path: "edit",
-            Component: UpdateAdmin,
+            Component: Update,
             action: addUpdateAction("Admins"),
           },
           {
@@ -40,7 +39,7 @@ export const adminsRoutes = [
           },
         ],
       },
-      { path: "add", Component: AddAdmin, action: addUpdateAction("Admins") },
+      { path: "add", Component: Add, action: addUpdateAction("Admins") },
     ],
   },
 ];

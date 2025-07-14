@@ -1,7 +1,7 @@
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { Department } from "@/utils/models/types";
-import DepartmentsHeader from "@/features/department/DepartmentsHeader";
-import DepartmentRow from "@/features/department/DepartmentRow";
+import DepartmentsHeader from "@/features/department/Header";
+import DepartmentRow from "@/features/department/Row";
 
 export default function Departments() {
   return (
