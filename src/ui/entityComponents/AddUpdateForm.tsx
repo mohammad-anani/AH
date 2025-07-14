@@ -32,7 +32,6 @@ export default function AddUpdateForm({
   } = methods;
   const submit = useSubmit();
   const { state } = useNavigation();
-
   const isSubmitting = state === "submitting" || isSub;
 
   return (

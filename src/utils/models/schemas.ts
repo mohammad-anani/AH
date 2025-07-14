@@ -30,8 +30,8 @@ const datetime = (withSeconds: boolean = true) =>
 
 const time = (withSeconds: boolean = true) =>
   z.string().time({
-    precision: withSeconds ? 0 : -1,
-    message: "Invalid time format. Use HH:mm:ss.",
+    precision: withSeconds ? 0 : 0,
+    message: "Invalid time format.",
   });
 
 const boolean = (trueLabel: string, falseLabel: string) =>
@@ -84,7 +84,7 @@ export const PersonSchema = z.object({
     message: "Country name must be at least 2 characters.",
   }),
   Phone: nonEmptyString.length(8, {
-    message: "Phone must be exactly 8 characters.",
+    message: "Phone must be exactly 8 digits.",
   }),
   Email: nonEmptyString.email({ message: "Invalid email address." }),
   Username: nonEmptyString.min(6, {
@@ -102,7 +102,7 @@ export const EmployeeSchema = z.object({
   isActive: boolean("active", "inactive"),
   WorkingDays: z
     .array(z.enum(validDays, { message: "Invalid day of the week." }))
-    .min(1)
+    .min(1, { message: "Minimum of 1 working day required." })
     .max(7, { message: "Cannot select more than 7 working days." })
     .refine((arr) => new Set(arr).size === arr.length, {
       message: "Working days must be unique.",

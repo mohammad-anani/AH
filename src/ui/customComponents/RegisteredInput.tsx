@@ -32,8 +32,6 @@ export default function RegisteredInput({
     }
   }
 
-  console.log(errorMessages?.[0]);
-
   return (
     <span className={`flex flex-col gap-1`}>
       {cloneElement(children, {

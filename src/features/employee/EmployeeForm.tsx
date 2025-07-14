@@ -48,8 +48,8 @@ export default function EmployeeForm({
       <RegisteredInput name={`${prefix}isActive`}>
         <select>
           <option value="">Select Status</option>
-          <option value="true">Active</option>
-          <option value="false">Inactive</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
         </select>
       </RegisteredInput>
 
@@ -87,12 +87,12 @@ export default function EmployeeForm({
 
       <label htmlFor="shiftStart">Shift Start:</label>
       <RegisteredInput name={`${prefix}ShiftStart`}>
-        <input type="time" />
+        <input type="time" step={60} />
       </RegisteredInput>
 
       <label htmlFor="shiftEnd">Shift End:</label>
       <RegisteredInput name={`${prefix}ShiftEnd`}>
-        <input type="time" />
+        <input type="time" step={60} />
       </RegisteredInput>
     </>
   );

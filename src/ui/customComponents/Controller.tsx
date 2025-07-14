@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Controller as Controler, useFormContext } from "react-hook-form";
+import { Controller as Controler, get, useFormContext } from "react-hook-form";
 import type { ControllerRenderProps } from "react-hook-form";
 import type { ReactElement } from "react";
 
@@ -17,16 +17,44 @@ export default function Controller({
   renderField,
   defaultValue,
 }: ControlledFieldProps) {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
+  const errorObj = get(errors, name);
+
+  const errorMessages: string[][] = [];
+
+  if (errorObj) {
+    if (errorObj.types) {
+      errorMessages.push(...(Object.values(errorObj.types) as string[][]));
+    } else if (errorObj.message) {
+      errorMessages.push(errorObj.message);
+    }
+  }
 
   return (
-    <Controler
-      control={control}
-      name={name}
-      defaultValue={defaultValue}
-      render={({ field, formState }) =>
-        renderField({ field, isSubmitting: formState.isSubmitting })
-      }
-    />
+    <span>
+      <Controler
+        control={control}
+        name={name}
+        defaultValue={defaultValue}
+        render={({ field, formState }) =>
+          renderField({ field, isSubmitting: formState.isSubmitting })
+        }
+      />
+      {errorMessages[0] && errorMessages[0].length ? (
+        <ul className="grid grid-cols-1 text-sm! *:text-red-500!">
+          {typeof errorMessages[0] === "string" ? (
+            <li>{`* ${errorMessages[0]}`}</li>
+          ) : (
+            (errorMessages[0] as string[]).map((msg: string) => (
+              <li>{`* ${msg}`}</li>
+            ))
+          )}
+        </ul>
+      ) : null}
+    </span>
   );
 }
