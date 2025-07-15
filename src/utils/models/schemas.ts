@@ -1,65 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
-
-const numberCallBack = (val: any) =>
-  typeof val === "number"
-    ? val
-    : typeof val === "string" && val.trim() !== ""
-      ? Number(val)
-      : undefined;
-
-const date = z.string().date();
-
-const nonEmptyString = z
-  .string()
-  .nonempty({ message: "This field cannot be empty." });
-
-const positiveNumber = z.preprocess(
+import {
+  nonEmptyString,
+  positiveNumber,
+  datetime,
+  date,
+  boolean,
+  validDays,
+  time,
   numberCallBack,
-  z.number().nonnegative({ message: "Number must be zero or positive." }),
-);
-
-const validDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
-
-const datetime = (withSeconds: boolean = true) =>
-  z.string().datetime({
-    local: true,
-    precision: withSeconds ? 0 : -1,
-    message: "Invalid datetime format.",
-  });
-
-const time = (withSeconds: boolean = true) =>
-  z.string().time({
-    precision: withSeconds ? 0 : 0,
-    message: "Invalid time format.",
-  });
-
-const boolean = (trueLabel: string, falseLabel: string) =>
-  z
-    .preprocess(
-      (val) => {
-        if (typeof val === "boolean")
-          return val ? trueLabel.toLowerCase() : falseLabel.toLowerCase();
-        if (typeof val === "string") return val.toLowerCase();
-        return val;
-      },
-      z.enum([trueLabel.toLowerCase(), falseLabel.toLowerCase()], {
-        message: `Value must be either "${trueLabel}" or "${falseLabel}".`,
-      }),
-    )
-    .transform((val) => val === trueLabel.toLowerCase());
-
-export const DepartmentSchema = z.object({
-  ID: positiveNumber,
-  Name: nonEmptyString.min(3, {
-    message: "Department name must be at least 3 characters.",
-  }),
-  Phone: nonEmptyString.length(8, {
-    message: "Phone must be exactly 8 characters.",
-  }),
-  CreatedByAdminID: positiveNumber,
-  CreatedAt: datetime(true),
-});
+} from "./reusableSchemas";
 
 export const PersonSchema = z.object({
   ID: positiveNumber,
@@ -111,6 +61,18 @@ export const EmployeeSchema = z.object({
   ShiftEnd: time(false),
 });
 
+export const DepartmentSchema = z.object({
+  ID: positiveNumber,
+  Name: nonEmptyString.min(3, {
+    message: "Department name must be at least 3 characters.",
+  }),
+  Phone: nonEmptyString.length(8, {
+    message: "Phone must be exactly 8 characters.",
+  }),
+  CreatedByAdminID: positiveNumber,
+  CreatedAt: datetime(true),
+});
+
 export const PatientSchema = z.object({
   ID: positiveNumber,
   Person: PersonSchema,
@@ -142,10 +104,110 @@ export const AdminSchema = z.object({
   CreatedAt: datetime(),
 });
 
+export const TestTypeSchema = z.object({
+  ID: positiveNumber,
+  DepartmentID: positiveNumber,
+  Name: nonEmptyString,
+  Cost: positiveNumber,
+  CreatedByAdminID: positiveNumber,
+  CreatedAt: datetime(),
+});
+
+export const TestAppointmentSchema = z.object({
+  ID: positiveNumber,
+  TestOrderID: positiveNumber,
+  PatientID: positiveNumber,
+  ScheduledDate: datetime(),
+  Status: nonEmptyString,
+  Result: nonEmptyString,
+  ResultDate: datetime(),
+  CreatedByReceptionistID: positiveNumber,
+  CreatedAt: datetime(),
+});
+
+export const TestOrderSchema = z.object({
+  ID: positiveNumber,
+  AppointmentID: positiveNumber,
+  TestTypeID: positiveNumber,
+  OrderedByDoctorID: positiveNumber,
+  OrderedAt: datetime(),
+});
+
+export const AppointmentSchema = z.object({
+  ID: positiveNumber,
+  DoctorID: positiveNumber,
+  PatientID: positiveNumber,
+  Time: datetime(),
+  Reason: nonEmptyString,
+  Status: nonEmptyString,
+  Notes: z.string(),
+  PaymentID: positiveNumber,
+  CreatedByReceptionistID: positiveNumber,
+  CreatedAt: datetime(),
+});
+
+export const CountrySchema = z.object({
+  ID: positiveNumber,
+  Name: nonEmptyString,
+});
+
+export const InsuranceSchema = z.object({
+  ID: positiveNumber,
+  PatientID: positiveNumber,
+  ProviderName: nonEmptyString,
+  Class: nonEmptyString,
+  ExpirationDate: date,
+  CreatedByReceptionistID: positiveNumber,
+  CreatedAt: datetime(),
+});
+
+export const OperationSchema = z.object({
+  ID: positiveNumber,
+  Name: nonEmptyString,
+  Description: nonEmptyString,
+  PatientID: positiveNumber,
+  DepartmentID: positiveNumber,
+  ScheduledDate: datetime(false),
+  Status: nonEmptyString,
+  PaymentID: positiveNumber,
+  CreatedByReceptionistID: positiveNumber,
+  CreatedAt: datetime(),
+});
+
+export const PrescriptionSchema = z.object({
+  ID: positiveNumber,
+  AppointmentID: positiveNumber,
+  Diagnosis: nonEmptyString,
+  Medication: nonEmptyString,
+  Dosage: nonEmptyString,
+  Frequency: nonEmptyString,
+  MedicationStart: datetime(),
+  MedicationEnd: datetime(),
+  Notes: nonEmptyString.nullable(),
+});
+
+export const PaymentSchema = z.object({
+  ID: positiveNumber,
+  Amount: positiveNumber,
+  PatientPaid: positiveNumber,
+  InsurancePaid: positiveNumber,
+  Method: nonEmptyString,
+  CreatedByReceptionistID: positiveNumber,
+  CreatedAt: datetime(),
+});
+
 export const schemas: Record<string, z.ZodObject<any>> = {
   Admins: AdminSchema,
   Departments: DepartmentSchema,
   Doctors: DoctorSchema,
   Patients: PatientSchema,
   Receptionists: ReceptionistSchema,
+  TestTypes: TestTypeSchema,
+  TestOrders: TestOrderSchema,
+  TestAppointments: TestAppointmentSchema,
+  Countries: CountrySchema,
+  Insurances: InsuranceSchema,
+  Operations: OperationSchema,
+  Prescriptions: PrescriptionSchema,
+  Payments: PaymentSchema,
 };
