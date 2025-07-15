@@ -7,7 +7,7 @@ import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
-import throwError from "@/utils/helpers/throwError";
+import InvalidPath from "@/ui/InvalidPath";
 
 export const patientsRoutes = [
   {
@@ -27,10 +27,7 @@ export const patientsRoutes = [
           },
           {
             path: "delete",
-            Component: () => {
-              throwError(404, "Not Found", "This URL is not a valid path");
-              return null;
-            },
+            Component: InvalidPath,
             action: deleteAction("Patients"),
           },
         ],

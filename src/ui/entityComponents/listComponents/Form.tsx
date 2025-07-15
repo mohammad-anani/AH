@@ -10,21 +10,24 @@ import {
   UnsupportedInput,
 } from "./form-inputs/index";
 import { generateLabel, isTemporalType } from "./utils";
+import SelectInput from "./form-inputs/SelectInput";
 
 const inputMap = {
   number: NumberInput,
   string: StringInput,
   phone: PhoneInput,
   array: ArrayInput,
+  select: SelectInput,
 } as const;
 
 export function Form() {
   const { fields } = useListContext();
-
+  console.log(fields);
   const renderField = (field: Key) => {
-    const [key, type, trueLabel, falseLabel] = field;
+    const [key, type, data] = field;
+
     const label = generateLabel(key) + ":";
-    const commonProps = { key, fieldKey: key, label };
+    const commonProps = { key, fieldKey: key, label, data };
 
     if (isTemporalType(type ?? "")) {
       return (
@@ -36,6 +39,8 @@ export function Form() {
     }
 
     if (type === "boolean") {
+      const [trueLabel, falseLabel] = data;
+
       return (
         <BooleanInput
           {...commonProps}

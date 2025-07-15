@@ -5,7 +5,7 @@ import UpdateDepartment from "@/features/department/Update";
 import AddDepartment from "@/features/department/Add";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
-import throwError from "@/utils/helpers/throwError";
+import InvalidPath from "@/ui/InvalidPath";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
 
@@ -20,10 +20,7 @@ export const departmentsRoutes = [
       },
       {
         path: "list",
-        Component: () => {
-          throwError(404, "Not Found", "This URL is not a valid path");
-          return null;
-        },
+        Component: InvalidPath,
         loader: listLoader("Departments"),
       },
       {

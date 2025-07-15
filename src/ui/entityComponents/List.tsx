@@ -11,7 +11,7 @@ export default function List<T>({
   items,
   canModifyUrl = true,
 }: ChildrenProps & { items: T[]; canModifyUrl?: boolean }) {
-  const [fields, setFields] = useState<Key[]>({});
+  const [fields, setFields] = useState<Key[]>({} as Key[]);
 
   return (
     <ListContext.Provider
@@ -28,6 +28,6 @@ export default function List<T>({
 }
 
 List.Items = Items;
+List.Filter = Filter;
 List.Pagination = Pagination;
 List.ClearFilter = ClearFilter;
-List.Filter = Filter;

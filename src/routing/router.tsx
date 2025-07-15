@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Error from "@/ui/Error";
+import InvalidPath from "@/ui/InvalidPath";
 import { authRoutes } from "./routes/auth";
 import { adminRoutes } from "./routes/admin";
 import { receptionistRoutes } from "./routes/receptionist";
@@ -18,10 +19,7 @@ const router = createBrowserRouter([
       ...doctorRoutes,
       {
         path: "countries",
-        Component: () => {
-          throwError(404, "Not Found", "This URL is not a valid path");
-          return null;
-        },
+        Component: InvalidPath,
         loader: listLoader("Countries"),
       },
     ],

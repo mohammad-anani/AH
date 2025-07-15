@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormContext, Controller } from "react-hook-form";
 import Select from "react-select";
 
 interface ArrayInputProps {
   fieldKey: string;
   label: string;
+  data: any[];
 }
 
 const selectStyles = {
@@ -52,17 +54,11 @@ const selectStyles = {
   }),
 };
 
-const selectOptions = [
-  { value: "Monday", label: "Monday" },
-  { value: "Tuesday", label: "Tuesday" },
-  { value: "Wednesday", label: "Wednesday" },
-  { value: "Thursday", label: "Thursday" },
-  { value: "Friday", label: "Friday" },
-  { value: "Saturday", label: "Saturday" },
-  { value: "Sunday", label: "Sunday" },
-];
+function toValueLabelArray(arr: string[]): { value: string; label: string }[] {
+  return arr.map((str) => ({ value: str, label: str }));
+}
 
-export default function ArrayInput({ fieldKey, label }: ArrayInputProps) {
+export default function ArrayInput({ fieldKey, label, data }: ArrayInputProps) {
   const { control } = useFormContext();
 
   return (
@@ -80,7 +76,7 @@ export default function ArrayInput({ fieldKey, label }: ArrayInputProps) {
             <Select
               inputId={fieldKey}
               isMulti
-              options={selectOptions}
+              options={toValueLabelArray(data)}
               value={selectedOptions}
               styles={selectStyles}
               onChange={(options) => {

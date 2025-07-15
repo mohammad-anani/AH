@@ -44,11 +44,9 @@ export type Doctor = z.infer<typeof DoctorSchema>;
 
 export type Admin = z.infer<typeof AdminSchema>;
 
-export type TestType = z.infer<typeof TestTypeSchema>;
-
 export type TestOrder = z.infer<typeof TestOrderSchema>;
 export type TestAppointment = z.infer<typeof TestAppointmentSchema>;
-
+export type TestType = z.infer<typeof TestTypeSchema>;
 export type Country = z.infer<typeof CountrySchema>;
 export type Insurance = z.infer<typeof InsuranceSchema>;
 export type Operation = z.infer<typeof OperationSchema>;
@@ -66,6 +64,8 @@ export type DataTypes =
   | "datetime"
   | "array"
   | "time"
+  | "select"
   | null;
 
-export type Key = [string, DataTypes, string?, string?];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Key = [string, DataTypes, any?];
