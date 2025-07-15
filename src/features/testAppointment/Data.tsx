@@ -69,7 +69,7 @@ export default function Data({ appointment }: DataProps) {
       <span>{ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"}</span>
       <span>Payment:</span>
       <span>
-        <Clickable as="Link" to={`/admin/finance/${PaymentID}`} variant="link">
+        <Clickable as="Link" to={`payment`} variant="link">
           View Payment
         </Clickable>
       </span>

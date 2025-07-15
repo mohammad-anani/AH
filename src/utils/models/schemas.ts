@@ -5,7 +5,7 @@ import {
   positiveNumber,
   datetime,
   date,
-  boolean,
+  // boolean,
   validDays,
   time,
   numberCallBack,
@@ -22,7 +22,7 @@ export const PersonSchema = z.object({
   LastName: nonEmptyString.min(2, {
     message: "Last name must be at least 2 characters.",
   }),
-  Gender: boolean("male", "female"),
+  Gender: z.boolean(),
   Age: z.preprocess(
     numberCallBack,
     z
@@ -49,7 +49,7 @@ export const EmployeeSchema = z.object({
   Salary: positiveNumber,
   HireDate: date,
   LeaveDate: date.nullable(),
-  isActive: boolean("active", "inactive"),
+  isActive: z.boolean(),
   WorkingDays: z
     .array(z.enum(validDays, { message: "Invalid day of the week." }))
     .min(1, { message: "Minimum of 1 working day required." })
@@ -200,9 +200,7 @@ export const PaymentSchema = z.object({
   Amount: positiveNumber,
   PatientPaid: positiveNumber,
   InsurancePaid: positiveNumber,
-  Method: nonEmptyString,
-  CreatedByReceptionistID: positiveNumber,
-  CreatedAt: datetime(),
+  IsPaid: z.boolean(),
 });
 
 export const schemas: Record<string, z.ZodObject<any>> = {

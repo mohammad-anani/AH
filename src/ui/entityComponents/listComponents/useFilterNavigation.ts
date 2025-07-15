@@ -11,7 +11,7 @@ export function useFilterNavigation(fields: Key[]) {
     const params = new URLSearchParams();
 
     for (const [field, type] of fields) {
-      if (isTemporalType(type ?? "null")) {
+      if (isTemporalType(type ?? "null") || type === "money") {
         if (data[field + "From"])
           params.set(field + "From", data[field + "From"]);
         if (data[field + "To"]) params.set(field + "To", data[field + "To"]);

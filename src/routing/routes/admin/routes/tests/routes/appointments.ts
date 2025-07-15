@@ -5,6 +5,7 @@ import InvalidPath from "@/ui/InvalidPath";
 import Appointments from "@/features/tests/Appointments";
 import listLoader from "@/utils/loaders/listLoader";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
+import Card from "@/features/payments/Card";
 
 export const testAppointmentsRoutes = [
   {
@@ -24,6 +25,10 @@ export const testAppointmentsRoutes = [
           {
             path: "edit",
             Component: UpdateTestAppointment,
+          },
+          {
+            path: "payment",
+            Component: Card,
           },
           {
             path: "delete",

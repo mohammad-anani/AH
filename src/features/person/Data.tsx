@@ -25,7 +25,7 @@ export default function Data({
       <span>Full Name:</span>
       <span>{FirstName + " " + MiddleName + " " + LastName}</span>
       <span>Gender:</span>
-      <span>{Gender}</span>
+      <span>{Gender ? "Female" : "Male"}</span>
       <span>Age:</span>
       <span>{Age}</span>
       <span>Country:</span>

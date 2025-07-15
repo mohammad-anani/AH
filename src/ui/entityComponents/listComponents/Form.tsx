@@ -11,12 +11,14 @@ import {
 } from "./form-inputs/index";
 import { generateLabel, isTemporalType } from "./utils";
 import SelectInput from "./form-inputs/SelectInput";
+import MoneyInput from "./form-inputs/MoneyInput";
 
 const inputMap = {
   number: NumberInput,
   string: StringInput,
   phone: PhoneInput,
   array: ArrayInput,
+  money: MoneyInput,
   select: SelectInput,
 } as const;
 

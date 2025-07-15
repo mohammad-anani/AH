@@ -42,17 +42,17 @@ export const time = (withSeconds: boolean = true) =>
     message: "Invalid time format.",
   });
 
-export const boolean = (trueLabel: string, falseLabel: string) =>
-  z
-    .preprocess(
-      (val) => {
-        if (typeof val === "boolean")
-          return val ? trueLabel.toLowerCase() : falseLabel.toLowerCase();
-        if (typeof val === "string") return val.toLowerCase();
-        return val;
-      },
-      z.enum([trueLabel.toLowerCase(), falseLabel.toLowerCase()], {
-        message: `Value must be either "${trueLabel}" or "${falseLabel}".`,
-      }),
-    )
-    .transform((val) => val === trueLabel.toLowerCase());
+// export const boolean = (trueLabel: string, falseLabel: string) =>
+//   z
+//     .preprocess(
+//       (val) => {
+//         if (typeof val === "boolean")
+//           return val ? trueLabel.toLowerCase() : falseLabel.toLowerCase();
+//         if (typeof val === "string") return val.toLowerCase();
+//         return val;
+//       },
+//       z.enum([trueLabel.toLowerCase(), falseLabel.toLowerCase()], {
+//         message: `Value must be either "${trueLabel}" or "${falseLabel}".`,
+//       }),
+//     )
+//     .transform((val) => val === trueLabel.toLowerCase());

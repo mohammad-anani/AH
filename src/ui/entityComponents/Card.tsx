@@ -12,6 +12,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { useFetcher } from "react-router-dom";
+import BackNavigator from "../customComponents/BackNavigator";
 
 export default function Card({
   Data,
@@ -44,7 +45,18 @@ export default function Card({
         >
           Back
         </Clickable>
-      ) : null}
+      ) : (
+        <BackNavigator pagesBack={1}>
+          <Clickable
+            className="text-sm!"
+            as="button"
+            variant="secondary"
+            to={backLink}
+          >
+            Back
+          </Clickable>
+        </BackNavigator>
+      )}
       <div className="flex items-center justify-between">
         <H2>{title}</H2>
         <div className="flex gap-x-2">

@@ -14,7 +14,7 @@ export const persondFields: Key[] = [
 
 export const employeeFields: Key[] = [
   ["DepartmentID", "number"],
-  ["Salary", "number"],
+  ["Salary", "money"],
   ["HireDate", "date"],
   ["LeaveDate", "date"],
   ["isActive", "boolean", ["Active", "Not Active"]],

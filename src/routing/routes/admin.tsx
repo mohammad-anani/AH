@@ -5,7 +5,7 @@ import { humanResourcesRoutes } from "./admin/routes/human-resources";
 import { testsRoutes } from "./admin/routes/tests";
 import { operationsRoutes } from "./admin/routes/operations";
 import { appointmentsRoutes } from "./admin/routes/appointments";
-import { financeRoutes } from "./admin/routes/finance";
+import { paymentsRoutes } from "./admin/routes/payments";
 import Layout from "@/ui/customComponents/Layout";
 import Nav from "@/interfaces/admin/Nav";
 import Error from "@/ui/Error";
@@ -29,7 +29,7 @@ export const adminRoutes = [
           ...testsRoutes,
           ...operationsRoutes,
           ...appointmentsRoutes,
-          ...financeRoutes,
+          ...paymentsRoutes,
         ],
       },
     ],

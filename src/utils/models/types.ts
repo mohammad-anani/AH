@@ -67,6 +67,7 @@ export type DataTypes =
   | "array"
   | "time"
   | "select"
+  | "money"
   | null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

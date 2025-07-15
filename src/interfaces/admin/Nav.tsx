@@ -32,8 +32,8 @@ export default function Nav() {
       <NavLink to="appointments">
         <Stethoscope /> Appointments
       </NavLink>
-      <NavLink to="finance">
-        <CircleDollarSign /> Finance
+      <NavLink to="payments">
+        <CircleDollarSign /> Payments
       </NavLink>
       <NavLink to="/">
         <LogOut /> Logout
