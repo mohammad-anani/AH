@@ -285,5 +285,115 @@
       "CreatedByAdminID": 2,
       "CreatedAt": "2023-02-01T09:00:00"
     }
+  ],
+  "TestTypes": [
+    {
+      "ID": 1,
+      "DepartmentID": 1,
+      "Name": "Blood Test",
+      "Cost": 50,
+      "CreatedByAdminID": 1,
+      "CreatedAt": "2023-01-20T10:00:00"
+    },
+    {
+      "ID": 2,
+      "DepartmentID": 2,
+      "Name": "MRI Scan",
+      "Cost": 300,
+      "CreatedByAdminID": 1,
+      "CreatedAt": "2023-01-22T11:00:00"
+    },
+    {
+      "ID": 3,
+      "DepartmentID": 3,
+      "Name": "X-Ray",
+      "Cost": 100,
+      "CreatedByAdminID": 2,
+      "CreatedAt": "2023-01-25T12:00:00"
+    }
+  ],
+  "TestOrders": [
+    {
+      "ID": 1,
+      "AppointmentID": 1,
+      "TestTypeID": 1,
+      "OrderedByDoctorID": 1,
+      "OrderedAt": "2023-02-01T09:00:00"
+    },
+    {
+      "ID": 2,
+      "AppointmentID": 2,
+      "TestTypeID": 2,
+      "OrderedByDoctorID": 2,
+      "OrderedAt": "2023-02-02T10:00:00"
+    },
+    {
+      "ID": 3,
+      "AppointmentID": 3,
+      "TestTypeID": 3,
+      "OrderedByDoctorID": 1,
+      "OrderedAt": "2023-02-03T11:00:00"
+    }
+  ],
+  "TestAppointments": [
+    {
+      "ID": 1,
+      "TestOrderID": 1,
+      "PatientID": 1,
+      "TestID": 2,
+      "ScheduledDate": "2023-02-10T08:00:00",
+      "Status": "Accepted",
+      "Result": "Normal",
+      "ResultDate": "2023-02-11T09:00:00",
+      "PaymentID": 1,
+      "CreatedByReceptionistID": 1,
+      "CreatedAt": "2023-02-09T10:00:00"
+    },
+    {
+      "ID": 2,
+      "TestOrderID": null,
+      "PatientID": 2,
+      "TestID": 1,
+      "ScheduledDate": "2023-02-12T08:00:00",
+      "Status": "Cancelled",
+      "Result": "N/A",
+      "PaymentID": 1,
+      "ResultDate": "2023-02-13T09:00:00",
+      "CreatedByReceptionistID": 2,
+      "CreatedAt": "2023-02-11T10:00:00"
+    },
+    {
+      "ID": 3,
+      "TestOrderID": null,
+      "PatientID": 3,
+      "TestID": 5,
+      "ScheduledDate": "2023-02-14T08:00:00",
+      "Status": "Accepted",
+      "Result": "Abnormal",
+      "PaymentID": 1,
+      "ResultDate": "2023-02-15T09:00:00",
+      "CreatedByReceptionistID": 3,
+      "CreatedAt": "2023-02-13T10:00:00"
+    }
+  ],
+  "TestAppointmentsList": [
+    {
+      "ID": 1,
+      "PatientName": "Olivia Anne Taylor",
+      "TestName": "Blood Test",
+      "Date": "2023-02-10T08:00:00"
+    },
+    {
+      "ID": 2,
+      "PatientName": "Liam Andrew Baker",
+      "TestName": "MRI Scan",
+      "Date": "2023-02-12T08:00:00"
+    },
+    {
+      "ID": 3,
+      "PatientName": "Sophia Marie King",
+      "TestName": "X-Ray",
+      "Date": "2023-02-14T08:00:00"
+    }
   ]
 }

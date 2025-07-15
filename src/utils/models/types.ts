@@ -16,6 +16,7 @@ import {
   OperationSchema,
   PrescriptionSchema,
   PaymentSchema,
+  TestAppointmentRowSchema,
 } from "./schemas";
 
 export type ChildrenProps = {
@@ -46,6 +47,7 @@ export type Admin = z.infer<typeof AdminSchema>;
 
 export type TestOrder = z.infer<typeof TestOrderSchema>;
 export type TestAppointment = z.infer<typeof TestAppointmentSchema>;
+export type TestAppointmentRow = z.infer<typeof TestAppointmentRowSchema>;
 export type TestType = z.infer<typeof TestTypeSchema>;
 export type Country = z.infer<typeof CountrySchema>;
 export type Insurance = z.infer<typeof InsuranceSchema>;

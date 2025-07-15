@@ -1,4 +1,9 @@
-import React from "react";
-export default function TestsHeader() {
-  return <div>Test Appointments Header</div>;
+export default function Header() {
+  return (
+    <li key="header" className="grid grid-cols-[1fr_1fr_1fr_1fr]">
+      <span>Patient</span>
+      <span>Test</span>
+      <span>Date</span>
+    </li>
+  );
 }

@@ -1,4 +1,17 @@
-import React from "react";
-export default function TestAppointmentAdd() {
-  return <div>Test Appointment Add</div>;
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
+import { AddTestAppointmentSchema } from "@/utils/models/addingSchemas";
+import { emptyTestAppointment } from "@/utils/models/emptyObjects";
+import Form from "./Form";
+
+export default function Add() {
+  return (
+    <AddUpdateForm
+      defaultValues={emptyTestAppointment}
+      schema={AddTestAppointmentSchema}
+      title="Add Test Appointment"
+      backLink="/admin/tests/appointments"
+    >
+      <Form />
+    </AddUpdateForm>
+  );
 }

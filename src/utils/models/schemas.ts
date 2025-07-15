@@ -115,12 +115,14 @@ export const TestTypeSchema = z.object({
 
 export const TestAppointmentSchema = z.object({
   ID: positiveNumber,
-  TestOrderID: positiveNumber,
+  TestOrderID: positiveNumber.nullable(),
+  TestID: positiveNumber,
   PatientID: positiveNumber,
   ScheduledDate: datetime(),
   Status: nonEmptyString,
-  Result: nonEmptyString,
-  ResultDate: datetime(),
+  Result: nonEmptyString.nullable(),
+  ResultDate: datetime().nullable(),
+  PaymentID: positiveNumber,
   CreatedByReceptionistID: positiveNumber,
   CreatedAt: datetime(),
 });
@@ -159,6 +161,13 @@ export const InsuranceSchema = z.object({
   ExpirationDate: date,
   CreatedByReceptionistID: positiveNumber,
   CreatedAt: datetime(),
+});
+
+export const TestAppointmentRowSchema = z.object({
+  ID: positiveNumber,
+  PatientName: nonEmptyString,
+  TestName: nonEmptyString,
+  Date: datetime(),
 });
 
 export const OperationSchema = z.object({
@@ -205,6 +214,7 @@ export const schemas: Record<string, z.ZodObject<any>> = {
   TestTypes: TestTypeSchema,
   TestOrders: TestOrderSchema,
   TestAppointments: TestAppointmentSchema,
+  TestAppointmentsList: TestAppointmentRowSchema,
   Countries: CountrySchema,
   Insurances: InsuranceSchema,
   Operations: OperationSchema,

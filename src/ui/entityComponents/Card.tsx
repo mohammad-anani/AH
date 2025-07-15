@@ -19,7 +19,7 @@ export default function Card({
   canEdit = true,
   canDelete = true,
   backLink = "",
-  headerWidth = 150,
+  headerWidth = 180,
   deleteMessage,
   children,
 }: {
