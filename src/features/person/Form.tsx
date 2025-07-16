@@ -31,8 +31,8 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
       <RegisteredInput name={`${prefix}Gender`}>
         <select>
           <option value="">Select Gender</option>
-          <option value={true}>Male</option>
-          <option value={false}>Female</option>
+          <option value={false}>Male</option>
+          <option value={true}>Female</option>
         </select>
       </RegisteredInput>
 

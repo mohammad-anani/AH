@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogClose,
 } from "@/components/ui/dialog";
-import { useFetcher } from "react-router-dom";
+import { useFetcher, useLocation } from "react-router-dom";
 import BackNavigator from "../customComponents/BackNavigator";
 
 export default function Card({
@@ -34,18 +34,16 @@ export default function Card({
 } & OptionalChildrenProps) {
   const fetcher = useFetcher();
 
+  let reference = false;
+  const location = useLocation();
+
+  const { state } = location;
+
+  if (state) reference = state.reference;
+
   return (
     <Dialog>
-      {backLink !== "" ? (
-        <Clickable
-          className="text-sm!"
-          as="Link"
-          variant="secondary"
-          to={backLink}
-        >
-          Back
-        </Clickable>
-      ) : (
+      {reference || backLink === "" ? (
         <BackNavigator pagesBack={1}>
           <Clickable
             className="text-sm!"
@@ -56,6 +54,15 @@ export default function Card({
             Back
           </Clickable>
         </BackNavigator>
+      ) : (
+        <Clickable
+          className="text-sm!"
+          as="Link"
+          variant="secondary"
+          to={backLink}
+        >
+          Back
+        </Clickable>
       )}
       <div className="flex items-center justify-between">
         <H2>{title}</H2>

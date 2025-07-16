@@ -6,11 +6,10 @@ import { PatientSchema } from "@/utils/models/schemas";
 
 export default function Update() {
   const { patient } = useOutletContext<{ patient: Patient }>();
-  const { ID } = patient;
+
   return (
     <AddUpdateForm
       title="Edit Patient"
-      backLink={"/admin/human-resources/patients/" + ID}
       schema={PatientSchema}
       defaultValues={patient}
     >

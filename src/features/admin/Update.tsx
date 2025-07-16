@@ -12,7 +12,6 @@ export default function Update() {
       defaultValues={admin}
       schema={AdminSchema}
       title="Edit Admin"
-      backLink={"/admin/human-resources/admins/" + admin.ID}
     >
       <Form />
     </AddUpdateForm>

@@ -51,6 +51,7 @@ export default function Data({ appointment }: DataProps) {
         <Clickable
           as="Link"
           to={`/admin/human-resources/patients/${PatientID}`}
+          state={{ reference: true }}
           variant="link"
         >
           View Patient

@@ -44,8 +44,8 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
       <RegisteredInput name={`${prefix}isActive`}>
         <select>
           <option value="">Select Status</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
+          <option value={true}>Active</option>
+          <option value={false}>Inactive</option>
         </select>
       </RegisteredInput>
 

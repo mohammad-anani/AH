@@ -9,7 +9,6 @@ export default function Update() {
   return (
     <AddUpdateForm
       title="Edit Test Appointment"
-      backLink={`/admin/tests/appointments/${appointment.ID}`}
       schema={TestAppointmentSchema}
       defaultValues={appointment}
     >

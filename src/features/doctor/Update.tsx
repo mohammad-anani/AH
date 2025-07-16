@@ -12,7 +12,6 @@ export default function Update() {
       schema={DoctorSchema}
       defaultValues={doctor}
       title="Edit Doctor"
-      backLink={"/admin/human-resources/doctors/" + doctor.ID}
     >
       <Form />
     </AddUpdateForm>
