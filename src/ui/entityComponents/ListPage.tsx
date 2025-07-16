@@ -12,6 +12,7 @@ import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "./FilterEntities";
 import type { Key } from "@/utils/models/types";
 import H2 from "../customComponents/H2";
+import BackNavigator from "../customComponents/BackNavigator";
 
 export default function ListPage<T>({
   title,
@@ -36,16 +37,22 @@ export default function ListPage<T>({
 
   return (
     <>
-      {backUrl !== "" ? (
+      {backUrl === "" ? (
+        <BackNavigator pagesBack={1}>
+          <Clickable className="text-sm!" as="button" variant="secondary">
+            Back
+          </Clickable>
+        </BackNavigator>
+      ) : (
         <Clickable
-          as="Link"
-          to={backUrl}
-          variant="secondary"
           className="text-sm!"
+          as="Link"
+          variant="secondary"
+          to={backUrl}
         >
           Back
         </Clickable>
-      ) : null}
+      )}
       <H2 className="mb-6">{title}</H2>
 
       {canAdd ? (

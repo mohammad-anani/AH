@@ -8,22 +8,19 @@ interface DataProps {
 
 export default function Data({ appointment }: DataProps) {
   const {
-    ID,
     TestOrderID,
     PatientID,
     ScheduledDate,
     Status,
     Result,
     ResultDate,
-    PaymentID,
+
     CreatedByReceptionistID,
     CreatedAt,
   } = appointment;
 
   return (
     <>
-      <span>ID:</span>
-      <span>{ID}</span>
       <span>Test ID:</span>
       <Clickable
         as="Link"

@@ -30,9 +30,9 @@ export default function Card() {
           as="Link"
           to={`pay`}
           variant="primary"
-          className="w-full text-4xl!"
+          className="h-13 w-full text-2xl!"
         >
-          Pay
+          Make Payment
         </Clickable>
       ) : null}
     </EntityCard>

@@ -4,14 +4,16 @@ import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { PaySchema } from "@/utils/models/schemas";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 import Data from "./Data";
+import InvalidPath from "@/ui/InvalidPath";
 
 export default function Update() {
   const { payment } = useOutletContext<{ payment: Payment }>();
 
-  return (
+  return !payment.IsPaid ? (
     <AddUpdateForm
       headerWidth={160}
       title="Pay"
+      submitText="Pay"
       schema={PaySchema}
       defaultValues={payment}
     >
@@ -21,5 +23,7 @@ export default function Update() {
         <input type="number" />
       </RegisteredInput>
     </AddUpdateForm>
+  ) : (
+    <InvalidPath />
   );
 }

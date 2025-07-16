@@ -79,7 +79,7 @@ export default function Card({
       >
         {Data}
       </div>
-      <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm!">
+      <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
         {children}
       </div>
       {canDelete && (

@@ -9,7 +9,7 @@ export default function Update() {
   const { ID } = patient;
   return (
     <AddUpdateForm
-      title="Add Patient"
+      title="Edit Patient"
       backLink={"/admin/human-resources/patients/" + ID}
       schema={PatientSchema}
       defaultValues={patient}

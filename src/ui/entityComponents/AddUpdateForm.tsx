@@ -14,6 +14,8 @@ export default function AddUpdateForm({
   backLink = "",
   headerWidth = 150,
   schema,
+  submitText = "Save",
+  submittingText = "Submitting...",
   defaultValues = null,
   children,
 }: {
@@ -21,6 +23,8 @@ export default function AddUpdateForm({
   backLink?: string;
   schema: Schema<any, any>;
   defaultValues: any;
+  submitText?: string;
+  submittingText?: string;
   headerWidth?: number;
 } & OptionalChildrenProps) {
   if (Array.isArray(defaultValues)) {
@@ -83,10 +87,12 @@ export default function AddUpdateForm({
             disabled={isSubmitting}
           >
             {isSubmitting
-              ? "Submitting..."
-              : !defaultValues["ID"]
-                ? "Add"
-                : "Save"}
+              ? submittingText
+              : submitText !== "Save"
+                ? submitText
+                : !defaultValues["ID"]
+                  ? "Add"
+                  : "Save"}
           </Clickable>
         </Form>
       </FormProvider>
