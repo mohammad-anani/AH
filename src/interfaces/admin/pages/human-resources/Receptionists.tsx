@@ -1,12 +1,12 @@
 import ListPage from "@/ui/entityComponents/ListPage";
-import type { Receptionist } from "@/utils/models/types";
+import type { ReceptionistRow } from "@/utils/models/types";
 import Header from "@/features/human-resources/receptionist/Header";
 import Row from "@/features/human-resources/receptionist/Row";
 import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
 export default function Receptionists() {
   return (
-    <ListPage<Receptionist>
+    <ListPage<ReceptionistRow>
       backUrl="/admin/human-resources"
       title="Receptionists"
       canAdd
