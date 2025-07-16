@@ -9,7 +9,7 @@ export default function listLoader(entity: string): LoaderFunction {
   return async function ({ request }: LoaderFunctionArgs) {
     const searchParams = formatLoaderUrl(request.url);
 
-    if (entity.endsWith("Rows")) entity = entity.replace("Row", "");
+    // if (entity.endsWith("Rows")) entity = entity.replace("Row", "");
 
     const data = await getList(entity + "?" + searchParams?.toString());
 

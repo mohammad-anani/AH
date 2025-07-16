@@ -1,7 +1,7 @@
+import Header from "@/features/tests/type/Header";
+import Row from "@/features/tests/type/Row";
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { TestType } from "@/utils/models/types";
-import Header from "../testType/Header";
-import Row from "../testType/Row";
 
 export default function Types() {
   return (
@@ -11,7 +11,7 @@ export default function Types() {
       canAdd={true}
       emptyText="No Test Orders"
       Header={<Header />}
-      render={(type) => <Row key={type.ID} type={type} />}
+      render={(type) => <Row key={type.ID} />}
       filterFields={[
         ["ID", "number"],
         ["DepartmentID", "number"],

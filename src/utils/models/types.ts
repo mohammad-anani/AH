@@ -18,6 +18,15 @@ import {
   PaymentSchema,
   TestAppointmentRowSchema,
 } from "./schema/schemas";
+import {
+  DepartmentRowSchema,
+  AdminRowSchema,
+  DoctorRowSchema,
+  PatientRowSchema,
+  ReceptionistRowSchema,
+  TestTypeRowSchema,
+  TestOrderRowSchema,
+} from "./schema/rowSchemas";
 
 export type ChildrenProps = {
   children: ReactNode;
@@ -49,6 +58,13 @@ export type TestOrder = z.infer<typeof TestOrderSchema>;
 export type TestAppointment = z.infer<typeof TestAppointmentSchema>;
 export type TestAppointmentRow = z.infer<typeof TestAppointmentRowSchema>;
 export type TestType = z.infer<typeof TestTypeSchema>;
+export type DepartmentRow = z.infer<typeof DepartmentRowSchema>;
+export type AdminRow = z.infer<typeof AdminRowSchema>;
+export type DoctorRow = z.infer<typeof DoctorRowSchema>;
+export type PatientRow = z.infer<typeof PatientRowSchema>;
+export type ReceptionistRow = z.infer<typeof ReceptionistRowSchema>;
+export type TestTypeRow = z.infer<typeof TestTypeRowSchema>;
+export type TestOrderRow = z.infer<typeof TestOrderRowSchema>;
 export type Country = z.infer<typeof CountrySchema>;
 export type Insurance = z.infer<typeof InsuranceSchema>;
 export type Operation = z.infer<typeof OperationSchema>;

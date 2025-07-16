@@ -11,7 +11,7 @@ export default function Orders() {
       canAdd={false}
       emptyText="No Test Orders"
       Header={<Header />}
-      render={(order) => <Row key={order.ID} order={order} />}
+      render={(order) => <Row key={order.ID} />}
       filterFields={[
         ["ID", "number"],
         ["AppointmentID", "number"],

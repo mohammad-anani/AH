@@ -376,7 +376,7 @@
       "CreatedAt": "2023-02-13T10:00:00"
     }
   ],
-  "TestAppointmentsList": [
+  "TestAppointmentRows": [
     {
       "ID": 1,
       "PatientName": "Olivia Anne Taylor",
@@ -418,5 +418,43 @@
       "InsurancePaid": 50,
       "IsPaid": true
     }
+  ],
+  "DepartmentRows": [
+    { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
+    { "ID": 2, "Name": "Neurology", "Phone": "55530100" },
+    { "ID": 3, "Name": "Orthopedics", "Phone": "55530130" },
+    { "ID": 4, "Name": "Pediatrics", "Phone": "55530144" }
+  ],
+  "AdminRows": [
+    { "ID": 1, "Name": "Alice Marie Smith" },
+    { "ID": 2, "Name": "Bob John Taylor" },
+    { "ID": 3, "Name": "Carol Ann Brown" }
+  ],
+  "DoctorRows": [
+    { "ID": 1, "Name": "Alice Marie Smith", "Specialization": "Cardiologist" },
+    { "ID": 2, "Name": "Bob John Taylor", "Specialization": "Neurologist" }
+  ],
+  "PatientRows": [
+    { "ID": 1, "Name": "Olivia Anne Taylor", "Age": 18, "Phone": "76123456" },
+    { "ID": 2, "Name": "Liam Andrew Baker", "Age": 30, "Phone": "71098765" },
+    { "ID": 3, "Name": "Sophia Marie King", "Age": 40, "Phone": "78906543" }
+  ],
+  "ReceptionistRows": [
+    { "ID": 1, "Name": "Lara Marie Kanaan" },
+    { "ID": 2, "Name": "Ahmad Nabil Fakhoury" }
+  ],
+  "TestTypeRows": [
+    { "ID": 1, "Name": "Blood Test", "Cost": 50 },
+    { "ID": 2, "Name": "MRI Scan", "Cost": 300 },
+    { "ID": 3, "Name": "X-Ray", "Cost": 100 }
+  ],
+  "TestOrderRows": [
+    {
+      "ID": 1,
+      "TestTypeName": "Blood Test",
+      "OrderedAt": "2023-02-01T09:00:00"
+    },
+    { "ID": 2, "TestTypeName": "MRI Scan", "OrderedAt": "2023-02-02T10:00:00" },
+    { "ID": 3, "TestTypeName": "X-Ray", "OrderedAt": "2023-02-03T11:00:00" }
   ]
 }

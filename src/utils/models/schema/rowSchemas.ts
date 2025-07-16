@@ -7,6 +7,8 @@ import {
   TestOrderSchema,
   TestTypeSchema,
 } from "./schemas";
+import { nonEmptyString } from "./reusableSchemas";
+import { z } from "zod";
 
 export const DepartmentRowSchema = DepartmentSchema.pick({
   ID: true,
@@ -16,33 +18,27 @@ export const DepartmentRowSchema = DepartmentSchema.pick({
 
 export const AdminRowSchema = AdminSchema.pick({
   ID: true,
-  Employee: true,
-});
+}).extend({ Name: nonEmptyString });
 
 export const DoctorRowSchema = DoctorSchema.pick({
   ID: true,
-  Employee: true,
+
   Specialization: true,
-});
+}).extend({ Name: nonEmptyString });
 
 export const PatientRowSchema = PatientSchema.pick({
   ID: true,
-  Person: true,
-});
+}).extend({ Name: nonEmptyString, Age: z.number(), Phone: nonEmptyString });
 
 export const ReceptionistRowSchema = ReceptionistSchema.pick({
   ID: true,
-  Employee: true,
-});
+}).extend({ Name: nonEmptyString });
 
 export const TestTypeRowSchema = TestTypeSchema.pick({
   ID: true,
   Name: true,
-  Cost: true,
-});
+}).extend({ DepartmentName: nonEmptyString });
 
 export const TestOrderRowSchema = TestOrderSchema.pick({
   ID: true,
-  TestTypeID: true,
-  OrderedAt: true,
 });
