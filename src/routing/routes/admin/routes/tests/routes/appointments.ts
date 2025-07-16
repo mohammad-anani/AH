@@ -6,6 +6,9 @@ import Appointments from "@/features/tests/Appointments";
 import listLoader from "@/utils/loaders/listLoader";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import Card from "@/features/payments/Card";
+import Update from "@/features/payments/Update";
+import ViewEdit from "@/features/payments/ViewEdit";
+import addUpdateAction from "@/utils/actions/addUpdateAction";
 
 export const testAppointmentsRoutes = [
   {
@@ -28,7 +31,15 @@ export const testAppointmentsRoutes = [
           },
           {
             path: "payment",
-            Component: Card,
+            Component: ViewEdit,
+            children: [
+              { index: true, Component: Card },
+              {
+                path: "pay",
+                Component: Update,
+                action: addUpdateAction("Payments"),
+              },
+            ],
           },
           {
             path: "delete",

@@ -7,18 +7,26 @@ interface DataProps {
 }
 
 export default function Data({ payment }: DataProps) {
-  const { Amount, PatientPaid, InsurancePaid, IsPaid } = payment;
+  const { Amount, PatientPaid, InsurancePaid } = payment;
+
+  const left = Amount - InsurancePaid - PatientPaid;
 
   return (
     <>
       <span>Amount:</span>
-      <span>{Amount ? formatMoney(Amount) : null}</span>
+      <span>{Amount || Amount === 0 ? formatMoney(Amount) : null}</span>
       <span>Patient Paid:</span>
-      <span>{PatientPaid ? formatMoney(PatientPaid) : null}</span>
+      <span>
+        {PatientPaid || PatientPaid === 0 ? formatMoney(PatientPaid) : null}
+      </span>
       <span>Insurance Paid:</span>
-      <span>{InsurancePaid ? formatMoney(InsurancePaid) : null}</span>
-      <span>Status:</span>
-      <span>{IsPaid ? "Paid" : "Not Paid"}</span>
+      <span>
+        {InsurancePaid || InsurancePaid === 0
+          ? formatMoney(InsurancePaid)
+          : null}
+      </span>
+      <span>Amount Left:</span>
+      <span>{isNaN(left) ? null : formatMoney(left)}</span>
     </>
   );
 }

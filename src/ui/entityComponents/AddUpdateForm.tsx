@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
@@ -6,21 +7,26 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Form, useNavigation, useSubmit } from "react-router-dom";
 import type { Schema } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import BackNavigator from "../customComponents/BackNavigator";
 
 export default function AddUpdateForm({
   title,
-  backLink,
+  backLink = "",
   headerWidth = 150,
   schema,
-  defaultValues,
+  defaultValues = null,
   children,
 }: {
   title: string;
-  backLink: string;
+  backLink?: string;
   schema: Schema<any, any>;
   defaultValues: any;
   headerWidth?: number;
 } & OptionalChildrenProps) {
+  if (Array.isArray(defaultValues)) {
+    return null;
+  }
+
   const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues,
@@ -36,14 +42,27 @@ export default function AddUpdateForm({
 
   return (
     <>
-      <Clickable
-        className="text-sm!"
-        as="Link"
-        variant="secondary"
-        to={backLink}
-      >
-        Back
-      </Clickable>
+      {backLink === "" ? (
+        <BackNavigator pagesBack={1}>
+          <Clickable
+            className="text-sm!"
+            as="button"
+            variant="secondary"
+            to={backLink}
+          >
+            Back
+          </Clickable>
+        </BackNavigator>
+      ) : (
+        <Clickable
+          className="text-sm!"
+          as="Link"
+          variant="secondary"
+          to={backLink}
+        >
+          Back
+        </Clickable>
+      )}
 
       <H2 className="mb-6">{title}</H2>
       <FormProvider {...methods}>

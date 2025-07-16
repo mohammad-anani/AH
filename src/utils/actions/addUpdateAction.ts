@@ -11,6 +11,6 @@ export default function addUpdateAction(entity: string) {
     if (data["ID"]) response = await update(data, entity);
     else response = await add(data, entity);
 
-    console.log(response);
+    return response.statusText;
   };
 }

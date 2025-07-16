@@ -37,6 +37,7 @@ export default function RegisteredInput({
       {cloneElement(children, {
         ...register(name),
         disabled: isSubmitting,
+        id: name,
       })}
       {errorMessages[0] && errorMessages[0].length ? (
         <ul className="grid grid-cols-1 text-sm! *:text-red-500!">

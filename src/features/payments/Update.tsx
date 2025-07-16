@@ -1,20 +1,25 @@
 import { useOutletContext } from "react-router-dom";
-import type { Patient } from "../../utils/models/types";
+import type { Payment } from "../../utils/models/types";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
-import Form from "./Form";
-import { PatientSchema } from "@/utils/models/schemas";
+import { PaySchema } from "@/utils/models/schemas";
+import RegisteredInput from "@/ui/customComponents/RegisteredInput";
+import Data from "./Data";
 
 export default function Update() {
-  const { patient } = useOutletContext<{ patient: Patient }>();
-  const { ID } = patient;
+  const { payment } = useOutletContext<{ payment: Payment }>();
+
   return (
     <AddUpdateForm
-      title="Add Patient"
-      backLink={"/admin/human-resources/patients/" + ID}
-      schema={PatientSchema}
-      defaultValues={patient}
+      headerWidth={160}
+      title="Pay"
+      schema={PaySchema}
+      defaultValues={payment}
     >
-      <Form fieldPrefix="" />
+      <Data payment={payment} />
+      <label htmlFor="toPay">Amount to Pay:</label>
+      <RegisteredInput name="toPay">
+        <input type="number" />
+      </RegisteredInput>
     </AddUpdateForm>
   );
 }

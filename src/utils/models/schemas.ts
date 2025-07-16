@@ -12,7 +12,7 @@ import {
 } from "./reusableSchemas";
 
 export const PersonSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   FirstName: nonEmptyString.min(2, {
     message: "First name must be at least 2 characters.",
   }),
@@ -43,10 +43,10 @@ export const PersonSchema = z.object({
 });
 
 export const EmployeeSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Person: PersonSchema,
-  DepartmentID: positiveNumber,
-  Salary: positiveNumber,
+  DepartmentID: positiveNumber(),
+  Salary: positiveNumber(),
   HireDate: date,
   LeaveDate: date.nullable(),
   isActive: z.boolean(),
@@ -62,130 +62,130 @@ export const EmployeeSchema = z.object({
 });
 
 export const DepartmentSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Name: nonEmptyString.min(3, {
     message: "Department name must be at least 3 characters.",
   }),
   Phone: nonEmptyString.length(8, {
     message: "Phone must be exactly 8 characters.",
   }),
-  CreatedByAdminID: positiveNumber,
+  CreatedByAdminID: positiveNumber(),
   CreatedAt: datetime(true),
 });
 
 export const PatientSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Person: PersonSchema,
-  CreatedByReceptionistID: positiveNumber,
+  CreatedByReceptionistID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const ReceptionistSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Employee: EmployeeSchema,
-  CreatedByAdminID: positiveNumber,
+  CreatedByAdminID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const DoctorSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Employee: EmployeeSchema,
   Specialization: nonEmptyString.min(2, {
     message: "Specialization must be at least 2 characters.",
   }),
-  CreatedByReceptionistID: positiveNumber,
+  CreatedByReceptionistID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const AdminSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Employee: EmployeeSchema,
-  CreatedByAdminID: positiveNumber.nullable(),
+  CreatedByAdminID: positiveNumber().nullable(),
   CreatedAt: datetime(),
 });
 
 export const TestTypeSchema = z.object({
-  ID: positiveNumber,
-  DepartmentID: positiveNumber,
+  ID: positiveNumber(),
+  DepartmentID: positiveNumber(),
   Name: nonEmptyString,
-  Cost: positiveNumber,
-  CreatedByAdminID: positiveNumber,
+  Cost: positiveNumber(),
+  CreatedByAdminID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const TestAppointmentSchema = z.object({
-  ID: positiveNumber,
-  TestOrderID: positiveNumber.nullable(),
-  TestID: positiveNumber,
-  PatientID: positiveNumber,
+  ID: positiveNumber(),
+  TestOrderID: positiveNumber().nullable(),
+  TestID: positiveNumber(),
+  PatientID: positiveNumber(),
   ScheduledDate: datetime(),
   Status: nonEmptyString,
   Result: nonEmptyString.nullable(),
   ResultDate: datetime().nullable(),
-  PaymentID: positiveNumber,
-  CreatedByReceptionistID: positiveNumber,
+  PaymentID: positiveNumber(),
+  CreatedByReceptionistID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const TestOrderSchema = z.object({
-  ID: positiveNumber,
-  AppointmentID: positiveNumber,
-  TestTypeID: positiveNumber,
-  OrderedByDoctorID: positiveNumber,
+  ID: positiveNumber(),
+  AppointmentID: positiveNumber(),
+  TestTypeID: positiveNumber(),
+  OrderedByDoctorID: positiveNumber(),
   OrderedAt: datetime(),
 });
 
 export const AppointmentSchema = z.object({
-  ID: positiveNumber,
-  DoctorID: positiveNumber,
-  PatientID: positiveNumber,
+  ID: positiveNumber(),
+  DoctorID: positiveNumber(),
+  PatientID: positiveNumber(),
   Time: datetime(),
   Reason: nonEmptyString,
   Status: nonEmptyString,
   Notes: z.string(),
-  PaymentID: positiveNumber,
-  CreatedByReceptionistID: positiveNumber,
+  PaymentID: positiveNumber(),
+  CreatedByReceptionistID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const CountrySchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Name: nonEmptyString,
 });
 
 export const InsuranceSchema = z.object({
-  ID: positiveNumber,
-  PatientID: positiveNumber,
+  ID: positiveNumber(),
+  PatientID: positiveNumber(),
   ProviderName: nonEmptyString,
   Class: nonEmptyString,
   ExpirationDate: date,
-  CreatedByReceptionistID: positiveNumber,
+  CreatedByReceptionistID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const TestAppointmentRowSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   PatientName: nonEmptyString,
   TestName: nonEmptyString,
   Date: datetime(),
 });
 
 export const OperationSchema = z.object({
-  ID: positiveNumber,
+  ID: positiveNumber(),
   Name: nonEmptyString,
   Description: nonEmptyString,
-  PatientID: positiveNumber,
-  DepartmentID: positiveNumber,
+  PatientID: positiveNumber(),
+  DepartmentID: positiveNumber(),
   ScheduledDate: datetime(false),
   Status: nonEmptyString,
-  PaymentID: positiveNumber,
-  CreatedByReceptionistID: positiveNumber,
+  PaymentID: positiveNumber(),
+  CreatedByReceptionistID: positiveNumber(),
   CreatedAt: datetime(),
 });
 
 export const PrescriptionSchema = z.object({
-  ID: positiveNumber,
-  AppointmentID: positiveNumber,
+  ID: positiveNumber(),
+  AppointmentID: positiveNumber(),
   Diagnosis: nonEmptyString,
   Medication: nonEmptyString,
   Dosage: nonEmptyString,
@@ -195,13 +195,27 @@ export const PrescriptionSchema = z.object({
   Notes: nonEmptyString.nullable(),
 });
 
+//for now payments will be added to the PatientPaid,later each transcation has a row in DB
 export const PaymentSchema = z.object({
-  ID: positiveNumber,
-  Amount: positiveNumber,
-  PatientPaid: positiveNumber,
-  InsurancePaid: positiveNumber,
+  ID: positiveNumber(),
+  Amount: positiveNumber(),
+  PatientPaid: positiveNumber(),
+  InsurancePaid: positiveNumber(),
   IsPaid: z.boolean(),
 });
+
+export const PaySchema = PaymentSchema.extend({
+  toPay: positiveNumber(false),
+}).refine(
+  (payment) => {
+    console.log(1);
+    return (
+      payment.toPay <=
+      payment.Amount - payment.InsurancePaid - payment.PatientPaid
+    );
+  },
+  { message: "Cannot Pay more than required", path: ["toPay"] },
+);
 
 export const schemas: Record<string, z.ZodObject<any>> = {
   Admins: AdminSchema,

@@ -1,8 +1,19 @@
-import { Outlet, useLoaderData } from "react-router-dom";
-import type { Patient } from "../../utils/models/types";
+import { Outlet, useFetcher, useOutletContext } from "react-router-dom";
+import type { Payment, TestAppointment } from "../../utils/models/types";
+import { useEffect } from "react";
 
 export default function ViewEdit() {
-  const patient = useLoaderData() as Patient;
+  const { appointment } = useOutletContext<{
+    appointment: TestAppointment;
+  }>();
 
-  return <Outlet context={{ patient }} />;
+  const fetcher = useFetcher();
+
+  useEffect(() => {
+    fetcher.load(`/admin/payments/${appointment.PaymentID}`);
+  }, []);
+
+  const payment: Payment = fetcher.data ?? [];
+
+  return <Outlet context={{ payment }} />;
 }

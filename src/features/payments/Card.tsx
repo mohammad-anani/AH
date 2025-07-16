@@ -1,38 +1,40 @@
-import { useFetcher, useOutletContext } from "react-router-dom";
-import type { Payment, TestAppointment } from "../../utils/models/types";
+import { useOutletContext } from "react-router-dom";
+import type { Payment } from "../../utils/models/types";
 import Clickable from "@/ui/customComponents/Clickable";
 import Data from "./Data";
 import EntityCard from "@/ui/entityComponents/Card";
-import { useEffect } from "react";
 
 export default function Card() {
-  const { appointment } = useOutletContext<{
-    appointment: TestAppointment;
+  const { payment } = useOutletContext<{
+    payment: Payment;
   }>();
 
-  const fetcher = useFetcher();
-
-  useEffect(() => {
-    fetcher.load(`/admin/payments/${appointment.PaymentID}`);
-  }, []);
-
-  const payment: Payment = fetcher.data ?? [];
+  const { IsPaid } = payment;
 
   return (
     <EntityCard
       title="Payment"
       canDelete={false}
       canEdit={false}
-      Data={<Data payment={payment} />}
+      headerWidth={160}
+      Data={
+        <>
+          <Data payment={payment} />
+          <span>Status:</span>
+          <span>{IsPaid ? "Paid" : "Not Paid"}</span>
+        </>
+      }
     >
-      <Clickable
-        as="Link"
-        to={`pay`}
-        variant="primary"
-        className="w-full text-4xl!"
-      >
-        Pay
-      </Clickable>
+      {!IsPaid ? (
+        <Clickable
+          as="Link"
+          to={`pay`}
+          variant="primary"
+          className="w-full text-4xl!"
+        >
+          Pay
+        </Clickable>
+      ) : null}
     </EntityCard>
   );
 }

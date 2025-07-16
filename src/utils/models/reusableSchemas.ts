@@ -14,10 +14,14 @@ export const nonEmptyString = z
   .string()
   .nonempty({ message: "This field cannot be empty." });
 
-export const positiveNumber = z.preprocess(
-  numberCallBack,
-  z.number().nonnegative({ message: "Number must be zero or positive." }),
-);
+export const positiveNumber = (withZero: boolean = true) =>
+  z.preprocess(
+    numberCallBack,
+    z
+      .number()
+      .nonnegative({ message: "Number must be zero or positive." })
+      .min(withZero ? 0 : 1, { message: `Minimum is ${Number(!withZero)}` }),
+  );
 
 export const validDays = [
   "Mon",
