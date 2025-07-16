@@ -1,3 +1,4 @@
+import Form from "./Form";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { AddPatientSchema } from "@/utils/models/schema/addingSchemas";
 import { emptyPatient } from "@/utils/models/emptyObjects";
@@ -9,6 +10,8 @@ export default function Add() {
       backLink="/admin/human-resources/patients"
       schema={AddPatientSchema}
       defaultValues={emptyPatient}
-    ></AddUpdateForm>
+    >
+      <Form fieldPrefix="" />
+    </AddUpdateForm>
   );
 }

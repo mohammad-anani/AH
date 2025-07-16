@@ -3,11 +3,14 @@ import formatLoaderUrl from "../formatters/formatLoaderUrl";
 import getList from "@/api/getList";
 import { z } from "zod";
 import throwError from "../helpers/throwError";
-import { schemas } from "../models/schemas";
+import { schemas } from "../models/schema/schemasObject";
 
 export default function listLoader(entity: string): LoaderFunction {
   return async function ({ request }: LoaderFunctionArgs) {
     const searchParams = formatLoaderUrl(request.url);
+
+    if (entity.endsWith("Rows")) entity = entity.replace("Row", "");
+
     const data = await getList(entity + "?" + searchParams?.toString());
 
     const schema = schemas[entity];

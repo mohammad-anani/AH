@@ -1,19 +1,23 @@
-import Doctors from "@/features/human-resources/Doctors";
-import ViewEdit from "@/features/doctor/ViewEdit";
-import Card from "@/features/doctor/Card";
-import Update from "@/features/doctor/Update";
-import Add from "@/features/doctor/Add";
+import ViewEdit from "@/features/human-resources/doctor/ViewEdit";
+import Card from "@/features/human-resources/doctor/Card";
+import Update from "@/features/human-resources/doctor/Update";
+import Add from "@/features/human-resources/doctor/Add";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
 import InvalidPath from "@/ui/InvalidPath";
+import Doctors from "@/interfaces/admin/pages/human-resources/Doctors";
 
 export const doctorsRoutes = [
   {
     path: "doctors",
     children: [
-      { path: "", Component: Doctors, loader: listLoader("Doctors") },
+      {
+        index: true,
+        Component: Doctors,
+        loader: listLoader("DoctorRows"),
+      },
       {
         path: ":id",
         Component: ViewEdit,

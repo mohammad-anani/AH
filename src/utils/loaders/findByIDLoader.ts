@@ -1,7 +1,7 @@
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import findByID from "@/api/findByID";
 import throwError from "../helpers/throwError";
-import { schemas } from "../models/schemas";
+import { schemas } from "../models/schema/schemasObject";
 
 export default function findByIDLoader(entity: string): LoaderFunction {
   return async function ({ params }: LoaderFunctionArgs) {

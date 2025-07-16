@@ -16,7 +16,7 @@ export const departmentsRoutes = [
       {
         index: true,
         Component: Departments,
-        loader: listLoader("Departments"),
+        loader: listLoader("DepartmentRows"),
       },
       {
         path: "list",

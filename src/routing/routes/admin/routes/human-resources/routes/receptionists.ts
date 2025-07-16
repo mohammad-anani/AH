@@ -1,8 +1,8 @@
-import Receptionists from "@/features/human-resources/Receptionists";
-import ViewEdit from "@/features/receptionist/ViewEdit";
-import Card from "@/features/receptionist/Card";
-import Update from "@/features/receptionist/Update";
-import Add from "@/features/receptionist/Add";
+import Receptionists from "@/interfaces/admin/pages/human-resources/Receptionists";
+import ViewEdit from "@/features/human-resources/receptionist/ViewEdit";
+import Card from "@/features/human-resources/receptionist/Card";
+import Update from "@/features/human-resources/receptionist/Update";
+import Add from "@/features/human-resources/receptionist/Add";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
@@ -14,9 +14,9 @@ export const receptionistsRoutes = [
     path: "receptionists",
     children: [
       {
-        path: "",
+        index: true,
         Component: Receptionists,
-        loader: listLoader("Receptionists"),
+        loader: listLoader("ReceptionistRows"),
       },
       {
         path: ":id",

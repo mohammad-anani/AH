@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import type { Payment } from "../../utils/models/types";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
-import { PaySchema } from "@/utils/models/schemas";
+import { PaySchema } from "@/utils/models/schema/schemas";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 import Data from "./Data";
 import InvalidPath from "@/ui/InvalidPath";

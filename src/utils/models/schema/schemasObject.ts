@@ -1,0 +1,51 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { z } from "zod";
+import {
+  AdminSchema,
+  DepartmentSchema,
+  DoctorSchema,
+  PatientSchema,
+  ReceptionistSchema,
+  TestTypeSchema,
+  TestOrderSchema,
+  TestAppointmentSchema,
+  TestAppointmentRowSchema,
+  CountrySchema,
+  InsuranceSchema,
+  OperationSchema,
+  PrescriptionSchema,
+  PaymentSchema,
+} from "./schemas";
+import {
+  DepartmentRowSchema,
+  AdminRowSchema,
+  DoctorRowSchema,
+  PatientRowSchema,
+  ReceptionistRowSchema,
+  TestTypeRowSchema,
+  TestOrderRowSchema,
+} from "./rowSchemas";
+
+export const schemas: Record<string, z.ZodObject<any>> = {
+  Admins: AdminSchema,
+  Departments: DepartmentSchema,
+  Doctors: DoctorSchema,
+  Patients: PatientSchema,
+  Receptionists: ReceptionistSchema,
+  TestTypes: TestTypeSchema,
+  TestOrders: TestOrderSchema,
+  TestAppointments: TestAppointmentSchema,
+  DepartmentRows: DepartmentRowSchema,
+  AdminRows: AdminRowSchema,
+  DoctorRows: DoctorRowSchema,
+  PatientRows: PatientRowSchema,
+  ReceptionistRows: ReceptionistRowSchema,
+  TestTypeRows: TestTypeRowSchema,
+  TestOrderRows: TestOrderRowSchema,
+  TestAppointmentRows: TestAppointmentRowSchema,
+  Countries: CountrySchema,
+  Insurances: InsuranceSchema,
+  Operations: OperationSchema,
+  Prescriptions: PrescriptionSchema,
+  Payments: PaymentSchema,
+};

@@ -1,7 +1,7 @@
-import Data from "@/features/testOrder/Data";
-import ViewEdit from "@/features/testOrder/ViewEdit";
-import Card from "@/features/testOrder/Card";
-import Update from "@/features/testOrder/Update";
+import Data from "@/features/tests/order/Data";
+import ViewEdit from "@/features/tests/order/ViewEdit";
+import Card from "@/features/tests/order/Card";
+import Update from "@/features/tests/order/Update";
 import InvalidPath from "@/ui/InvalidPath";
 
 export const testOrdersRoutes = [

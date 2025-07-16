@@ -1,22 +1,22 @@
-import Admins from "@/features/human-resources/Admins";
-import ViewEdit from "@/features/admin/ViewEdit";
-import Card from "@/features/admin/Card";
-import Update from "@/features/admin/Update";
-import Add from "@/features/admin/Add";
+import ViewEdit from "@/features/human-resources/admin/ViewEdit";
+import Card from "@/features/human-resources/admin/Card";
+import Update from "@/features/human-resources/admin/Update";
+import Add from "@/features/human-resources/admin/Add";
 import listLoader from "@/utils/loaders/listLoader";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
 import InvalidPath from "@/ui/InvalidPath";
+import Admins from "@/interfaces/admin/pages/human-resources/Admins";
 
 export const adminsRoutes = [
   {
     path: "admins",
     children: [
       {
-        path: "",
+        index: true,
         Component: Admins,
-        loader: listLoader("Admins"),
+        loader: listLoader("AdminRows"),
       },
       {
         path: ":id",

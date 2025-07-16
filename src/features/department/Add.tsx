@@ -1,7 +1,7 @@
 import Form from "./Form";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { emptyDepartment } from "@/utils/models/emptyObjects";
-import { AddDepartmentSchema } from "@/utils/models/addingSchemas";
+import { AddDepartmentSchema } from "@/utils/models/schema/addingSchemas";
 
 export default function Add() {
   return (

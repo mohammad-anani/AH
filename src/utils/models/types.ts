@@ -17,7 +17,7 @@ import {
   PrescriptionSchema,
   PaymentSchema,
   TestAppointmentRowSchema,
-} from "./schemas";
+} from "./schema/schemas";
 
 export type ChildrenProps = {
   children: ReactNode;

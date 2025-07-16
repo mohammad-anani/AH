@@ -1,8 +1,8 @@
-import testAppointmentViewEdit from "@/features/testAppointment/ViewEdit";
-import testAppointmentCard from "@/features/testAppointment/Card";
-import UpdateTestAppointment from "@/features/testAppointment/Update";
+import testAppointmentViewEdit from "@/features/tests/appointment/ViewEdit";
+import testAppointmentCard from "@/features/tests/appointment/Card";
+import UpdateTestAppointment from "@/features/tests/appointment/Update";
 import InvalidPath from "@/ui/InvalidPath";
-import Appointments from "@/features/tests/Appointments";
+import Appointments from "@/interfaces/admin/pages/tests/Appointments";
 import listLoader from "@/utils/loaders/listLoader";
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import Card from "@/features/payments/Card";
@@ -17,7 +17,7 @@ export const testAppointmentsRoutes = [
       {
         index: true,
         Component: Appointments,
-        loader: listLoader("TestAppointmentsList"),
+        loader: listLoader("TestAppointmentRows"),
       },
       {
         path: ":id",

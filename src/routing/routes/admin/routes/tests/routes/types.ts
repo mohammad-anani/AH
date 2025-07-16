@@ -1,8 +1,8 @@
-import Data from "@/features/testType/Data";
-import ViewEdit from "@/features/testType/ViewEdit";
-import Card from "@/features/testType/Card";
-import Update from "@/features/testType/Update";
-import Add from "@/features/testType/Add";
+import Data from "@/features/tests/type/Data";
+import ViewEdit from "@/features/tests/type/ViewEdit";
+import Card from "@/features/tests/type/Card";
+import Update from "@/features/tests/type/Update";
+import Add from "@/features/tests/type/Add";
 import InvalidPath from "@/ui/InvalidPath";
 
 export const testTypesRoutes = [
