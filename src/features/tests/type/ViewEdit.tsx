@@ -1,4 +1,6 @@
-import React from "react";
+import { Outlet, useLoaderData } from "react-router-dom";
 export default function ViewEdit() {
-  return <div>Test Type View/Edit</div>;
+  const { type } = useLoaderData();
+
+  return <Outlet context={type} />;
 }

@@ -1,4 +1,8 @@
-import React from "react";
 export default function Header() {
-  return <div>Test Types Header</div>;
+  return (
+    <li className="grid grid-cols-3">
+      <span>Name</span>
+      <span>Department</span>
+    </li>
+  );
 }

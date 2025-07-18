@@ -15,7 +15,6 @@ export default function Appointments() {
         <Row key={appointment.ID} appointment={appointment} />
       )}
       filterFields={[
-        ["ID", "number"],
         ["TestOrderID", "number"],
         ["PatientID", "number"],
         ["ScheduledDate", "datetime"],

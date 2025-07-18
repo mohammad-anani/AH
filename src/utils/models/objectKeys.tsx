@@ -1,3 +1,4 @@
+import DepartmentSelect from "@/features/department/DepartmentSelect";
 import type { Key } from "./types";
 
 export const persondFields: Key[] = [
@@ -13,7 +14,22 @@ export const persondFields: Key[] = [
 ];
 
 export const employeeFields: Key[] = [
-  ["DepartmentID", "number"],
+  [
+    "Department",
+    "custom",
+    [
+      ({ field, onChange, isSubmitting }) => {
+        return (
+          <DepartmentSelect
+            departmentID={field}
+            setDepartmentID={onChange}
+            isDisabled={isSubmitting}
+          />
+        );
+      },
+      "number",
+    ],
+  ],
   ["Salary", "money"],
   ["HireDate", "date"],
   ["LeaveDate", "date"],

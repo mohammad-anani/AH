@@ -87,4 +87,4 @@ export type DataTypes =
   | null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Key = [string, DataTypes, any?];
+export type Key = [string, DataTypes | "custom", any?];

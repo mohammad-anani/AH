@@ -444,9 +444,9 @@
     { "ID": 2, "Name": "Ahmad Nabil Fakhoury" }
   ],
   "TestTypeRows": [
-    { "ID": 1, "Name": "Blood Test", "Cost": 50 },
-    { "ID": 2, "Name": "MRI Scan", "Cost": 300 },
-    { "ID": 3, "Name": "X-Ray", "Cost": 100 }
+    { "ID": 1, "Name": "Blood Test", "DepartmentName": "Heart" },
+    { "ID": 2, "Name": "MRI Scan", "DepartmentName": "Sanity" },
+    { "ID": 3, "Name": "X-Ray", "DepartmentName": "Breath" }
   ],
   "TestOrderRows": [
     {

@@ -1,16 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // useFilterDefaultValues.ts
 import { useSearchParams } from "react-router-dom";
 import { convertStringToType, isTemporalType } from "./utils";
 import type { DataTypes, Key } from "@/utils/models/types";
 
-type ReduceObjectType = { [key: string]: DataTypes | string };
+type ReduceObjectType = { [key: string]: any };
 
 export function useFilterDefaultValues(fields: Key[]) {
   const [params] = useSearchParams();
   const defaults: ReduceObjectType = {};
 
-  for (const [field, type] of fields) {
-    if (isTemporalType(type ?? "null")) {
+  for (const [field, type, data] of fields) {
+    if (type === "custom") {
+      defaults[field] =
+        convertStringToType(data[1] ?? "", params.get(field) ?? "") || null;
+    } else if (isTemporalType(type ?? "null")) {
       defaults[field + "From"] = (params.get(field + "From") ??
         null) as DataTypes;
       defaults[field + "To"] = (params.get(field + "To") ?? null) as DataTypes;

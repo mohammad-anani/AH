@@ -2,9 +2,7 @@ import PersonForm from "../person/Form";
 import Select from "react-select";
 import RegisteredInput from "../../../ui/customComponents/RegisteredInput";
 import Controller from "@/ui/customComponents/Controller";
-import { useEffect } from "react";
-import { useFetcher } from "react-router-dom";
-import type { Department } from "@/utils/models/types";
+import DepartmentSelect from "@/features/department/DepartmentSelect";
 
 export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
   const prefix = fieldPrefix + "Employee.";
@@ -17,14 +15,6 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
     { value: "Saturday", label: "Saturday" },
     { value: "Sunday", label: "Sunday" },
   ];
-
-  const fetcher = useFetcher();
-
-  useEffect(() => {
-    fetcher.load("/admin/departments/list");
-  }, []);
-
-  const departments: Department[] = fetcher.data?.[0] ?? [];
 
   return (
     <>
@@ -50,16 +40,18 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
       </RegisteredInput>
 
       <label htmlFor="DepartmentID">Department:</label>
-      <RegisteredInput name={`${prefix}DepartmentID`}>
-        <select>
-          <option value="">Select Department</option>
-          {departments?.map((department) => (
-            <option key={department.ID} value={department.ID}>
-              {department.Name}
-            </option>
-          ))}
-        </select>
-      </RegisteredInput>
+      <Controller
+        name={`${prefix}DepartmentID`}
+        renderField={({ field, isSubmitting }) => {
+          return (
+            <DepartmentSelect
+              isDisabled={isSubmitting}
+              departmentID={field.value}
+              setDepartmentID={field.onChange}
+            />
+          );
+        }}
+      />
 
       <label htmlFor="workingDays">Working Days:</label>
       <Controller
