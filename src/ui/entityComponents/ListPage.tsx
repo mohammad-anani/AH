@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLoaderData } from "react-router-dom";
 import List from "./List";
 import Clickable from "../customComponents/Clickable";
 import useFilter from "@/utils/customHooks/useFilter";
-import type { ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,21 +12,21 @@ import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "./FilterEntities";
 import type { Key } from "@/utils/models/types";
 import H2 from "../customComponents/H2";
-import BackNavigator from "../customComponents/BackNavigator";
+import DetailsButton from "./DetailsButton";
 
-export default function ListPage<T>({
+export default function ListPage<T extends { [key: string]: any }>({
   title,
   canAdd,
-  emptyText,
-  render,
-  Header,
+  emptyText = `No ${title.substring(0, title.length - 1)}`,
+  rowTemplate,
   filterFields,
 }: {
   title: string;
   canAdd: boolean;
-  emptyText: string;
-  render: (item: T, index: number) => React.ReactNode;
-  Header: ReactNode;
+  emptyText?: string;
+
+  rowTemplate: [string[], (item: T) => any[], number[]];
+
   filterFields: Key[];
   backUrl?: string;
 }) {
@@ -34,24 +34,38 @@ export default function ListPage<T>({
 
   const { isFilterOpen, setIsFilterOpen } = useFilter();
 
+  const [headerFields, dataFields, gridFr] = rowTemplate;
+
+  const gridTemplate = [...gridFr, 1].map((fr) => `${fr}fr`).join(" ");
+
+  const gridStyle = {
+    display: "grid",
+    gridTemplateColumns: gridTemplate,
+  };
+
+  const Header = (
+    <li key="Header" style={gridStyle}>
+      {headerFields.map((field) => (
+        <span>{field}</span>
+      ))}
+    </li>
+  );
+
+  const render = (item: T) => (
+    <li style={gridStyle} key={item?.["ID"] || item[0]}>
+      {dataFields(item).map((field) => (
+        <span>{field}</span>
+      ))}
+      <DetailsButton ID={item["ID"]} />
+    </li>
+  );
+
   return (
     <>
-      {backUrl === "" ? (
-        <BackNavigator pagesBack={1}>
-          <Clickable className="text-sm!" as="button" variant="secondary">
-            Back
-          </Clickable>
-        </BackNavigator>
-      ) : (
-        <Clickable
-          className="text-sm!"
-          as="Link"
-          variant="secondary"
-          to={backUrl}
-        >
-          Back
-        </Clickable>
-      )}
+      <Clickable className="text-sm!" as="Back" variant="secondary">
+        Back
+      </Clickable>
+
       <H2 className="mb-6">{title}</H2>
 
       {canAdd ? (
@@ -99,11 +113,10 @@ export default function ListPage<T>({
         ) : null}
         <List.Items<T>
           render={render}
+          Header={Header}
           itemsCount={itemsCount}
           emptyText={emptyText}
-        >
-          {Header}
-        </List.Items>
+        />
         <List.Pagination itemsCount={itemsCount} />
       </List>
     </>

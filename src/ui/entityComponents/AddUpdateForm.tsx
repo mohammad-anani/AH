@@ -11,7 +11,6 @@ import BackNavigator from "../customComponents/BackNavigator";
 
 export default function AddUpdateForm({
   title,
-  backLink = "",
   headerWidth = 150,
   schema,
   submitText = "Save",
@@ -46,27 +45,9 @@ export default function AddUpdateForm({
 
   return (
     <>
-      {backLink === "" ? (
-        <BackNavigator pagesBack={1}>
-          <Clickable
-            className="text-sm!"
-            as="button"
-            variant="secondary"
-            to={backLink}
-          >
-            Back
-          </Clickable>
-        </BackNavigator>
-      ) : (
-        <Clickable
-          className="text-sm!"
-          as="Link"
-          variant="secondary"
-          to={backLink}
-        >
-          Back
-        </Clickable>
-      )}
+      <Clickable className="text-sm!" as="Back" variant="secondary">
+        Back
+      </Clickable>
 
       <H2 className="mb-6">{title}</H2>
       <FormProvider {...methods}>
