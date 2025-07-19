@@ -41,6 +41,7 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
 
       <label htmlFor="DepartmentID">Department:</label>
       <Controller
+        errorMessage="Department required."
         name={`${prefix}DepartmentID`}
         renderField={({ field, isSubmitting }) => {
           return (

@@ -7,7 +7,6 @@ import { persondFields } from "@/utils/models/objectKeys";
 export default function Patients() {
   return (
     <ListPage<PatientRow>
-      backUrl="/admin/human-resources"
       title="Patients"
       canAdd={false}
       emptyText="No Patients"

@@ -6,7 +6,6 @@ import type { TestAppointmentRow } from "@/utils/models/types";
 export default function Appointments() {
   return (
     <ListPage<TestAppointmentRow>
-      backUrl="/admin/tests"
       title="Test Appointments"
       canAdd={false}
       emptyText="No Test Appointments"

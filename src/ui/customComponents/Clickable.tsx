@@ -2,9 +2,10 @@ import type { ChildrenProps } from "@/utils/models/types";
 import type { ButtonHTMLAttributes } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import BackNavigator from "./BackNavigator";
 
 type ButtonProps = ChildrenProps & {
-  as: "button" | "Link";
+  as: "button" | "Link" | "Back";
   variant: "primary" | "secondary" | "link" | "destructive";
 } & ButtonHTMLAttributes<HTMLButtonElement> &
   Partial<LinkProps>;
@@ -51,6 +52,14 @@ export default function Clickable({
         <Link {...(rest as LinkProps)} className={buttonClassName}>
           {children}
         </Link>
+      );
+    case "Back":
+      return (
+        <BackNavigator pagesBack={1}>
+          <button {...rest} className={buttonClassName}>
+            {children}
+          </button>
+        </BackNavigator>
       );
   }
 }

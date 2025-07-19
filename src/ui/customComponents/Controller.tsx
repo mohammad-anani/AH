@@ -5,6 +5,7 @@ import type { ReactElement } from "react";
 
 interface ControlledFieldProps {
   name: string;
+  errorMessage?: string;
   renderField: (props: {
     field: ControllerRenderProps;
     isSubmitting: boolean;
@@ -15,6 +16,7 @@ interface ControlledFieldProps {
 export default function Controller({
   name,
   renderField,
+  errorMessage,
   defaultValue,
 }: ControlledFieldProps) {
   const {
@@ -46,13 +48,14 @@ export default function Controller({
       />
       {errorMessages[0] && errorMessages[0].length ? (
         <ul className="grid grid-cols-1 text-sm! *:text-red-500!">
-          {typeof errorMessages[0] === "string" ? (
-            <li>{`* ${errorMessages[0]}`}</li>
-          ) : (
-            (errorMessages[0] as string[]).map((msg: string) => (
-              <li>{`* ${msg}`}</li>
-            ))
-          )}
+          {(errorMessage && <li>{`* ${errorMessage}`}</li>) ||
+            (typeof errorMessages[0] === "string" ? (
+              <li>{`* ${errorMessages[0]}`}</li>
+            ) : (
+              (errorMessages[0] as string[]).map((msg: string) => (
+                <li>{`* ${msg}`}</li>
+              ))
+            ))}
         </ul>
       ) : null}
     </span>

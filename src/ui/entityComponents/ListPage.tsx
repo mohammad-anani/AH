@@ -21,7 +21,6 @@ export default function ListPage<T>({
   render,
   Header,
   filterFields,
-  backUrl = "",
 }: {
   title: string;
   canAdd: boolean;

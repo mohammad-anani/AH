@@ -6,7 +6,6 @@ import Row from "../../../../features/tests/order/Row";
 export default function Orders() {
   return (
     <ListPage<TestOrder>
-      backUrl="/admin/tests"
       title="Test Orders"
       canAdd={false}
       emptyText="No Test Orders"

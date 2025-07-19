@@ -5,20 +5,12 @@ import Data from "./Data";
 import EntityCard from "@/ui/entityComponents/Card";
 
 export default function Card() {
-  const { department } = useOutletContext<{ department: Department }>();
+  const department = useOutletContext<Department>();
   const { ID } = department;
 
   return (
-    <EntityCard
-      title="Department"
-      backLink="/admin/departments"
-      Data={<Data department={department} />}
-    >
-      <Clickable
-        as="Link"
-        to={`/admin/human-resources/doctors?DepartmentID=${ID}`}
-        variant="secondary"
-      >
+    <EntityCard title="Department" Data={<Data department={department} />}>
+      <Clickable as="Back" variant="secondary">
         Show Doctors
       </Clickable>
       <Clickable

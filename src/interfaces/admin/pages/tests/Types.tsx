@@ -6,7 +6,6 @@ import type { TestTypeRow } from "@/utils/models/types";
 export default function Types() {
   return (
     <ListPage<TestTypeRow>
-      backUrl="/admin/tests"
       title="Test Types"
       canAdd={true}
       emptyText="No Test Types"

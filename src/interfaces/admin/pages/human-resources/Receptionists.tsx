@@ -7,7 +7,6 @@ import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 export default function Receptionists() {
   return (
     <ListPage<ReceptionistRow>
-      backUrl="/admin/human-resources"
       title="Receptionists"
       canAdd
       emptyText="No Receptionists"

@@ -4,5 +4,5 @@ import type { Department } from "../../utils/models/types";
 export default function ViewEdit() {
   const department = useLoaderData() as Department;
 
-  return <Outlet context={{ department }} />;
+  return <Outlet context={department} />;
 }

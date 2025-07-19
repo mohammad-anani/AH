@@ -27,7 +27,7 @@ export default function DepartmentSelect({
         setDepartmentID(+e.target.value);
       }}
     >
-      <option value="">Select Department</option>
+      <option value={null}>Select Department</option>
       {departments?.map((department) => (
         <option key={department.ID} value={department.ID}>
           {department.Name}

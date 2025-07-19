@@ -7,7 +7,6 @@ import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 export default function Doctors() {
   return (
     <ListPage<DoctorRow>
-      backUrl="/admin/human-resources"
       title="Doctors"
       canAdd={false}
       emptyText="No Doctors"

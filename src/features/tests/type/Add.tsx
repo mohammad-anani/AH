@@ -1,4 +1,15 @@
-import React from "react";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
+import { emptyTestType } from "@/utils/models/emptyObjects";
+import { AddTestTypeSchema } from "@/utils/models/schema/addingSchemas";
+import Form from "./Form";
 export default function Add() {
-  return <div>Test Type Add</div>;
+  return (
+    <AddUpdateForm
+      schema={AddTestTypeSchema}
+      title="Add Test Type"
+      defaultValues={emptyTestType}
+    >
+      <Form />
+    </AddUpdateForm>
+  );
 }

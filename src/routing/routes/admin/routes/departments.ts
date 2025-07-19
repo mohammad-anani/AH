@@ -1,13 +1,13 @@
 import Departments from "@/interfaces/admin/pages/Departments";
 import DepartmentViewEdit from "@/features/department/ViewEdit";
 import DepartmentCard from "@/features/department/Card";
-import UpdateDepartment from "@/features/department/Update";
-import AddDepartment from "@/features/department/Add";
+
 import findByIDLoader from "@/utils/loaders/findByIDLoader";
 import listLoader from "@/utils/loaders/listLoader";
 import InvalidPath from "@/ui/InvalidPath";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
+import AddUpdate from "@/features/department/AddUpdate";
 
 export const departmentsRoutes = [
   {
@@ -38,14 +38,14 @@ export const departmentsRoutes = [
           },
           {
             path: "edit",
-            Component: UpdateDepartment,
+            Component: AddUpdate,
             action: addUpdateAction("Departments"),
           },
         ],
       },
       {
         path: "add",
-        Component: AddDepartment,
+        Component: AddUpdate,
         action: addUpdateAction("Departments"),
       },
     ],
