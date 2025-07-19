@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
 import {
   nonEmptyString,
   positiveNumber,
   datetime,
   date,
-  // boolean,
   validDays,
   time,
   numberCallBack,
@@ -24,7 +22,9 @@ export const PersonSchema = z.object({
   }),
   Gender: z.boolean(),
   Age: z.preprocess(
-    numberCallBack,
+    (value) => {
+      return !isNaN(Number(value)) && numberCallBack(value as string | number);
+    },
     z
       .number()
       .min(0, { message: "Age cannot be less than 0." })

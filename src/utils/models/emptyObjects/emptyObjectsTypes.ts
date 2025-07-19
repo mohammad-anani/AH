@@ -1,44 +1,69 @@
+import { z } from "zod";
+
 import type {
-  Admin,
-  Department,
-  Doctor,
-  Employee,
-  Patient,
-  Person,
-  Receptionist,
-  TestType,
-  TestOrder,
-  TestAppointment,
-  Country,
-  Insurance,
-  Operation,
-  Prescription,
-  Payment,
-} from "../types";
+  AddDepartmentSchema,
+  AddPatientSchema,
+  AddEmployeeSchema,
+  AddReceptionistSchema,
+  AddDoctorSchema,
+  AddAdminSchema,
+  AddTestTypeSchema,
+  AddTestOrderSchema,
+  AddTestAppointmentSchema,
+  AddInsuranceSchema,
+  AddOperationSchema,
+  AddPrescriptionSchema,
+  AddPaymentSchema,
+  AddPersonSchema,
+} from "../schema/addingSchemas";
 
 type NullableNumberBoolean<T> = {
   [K in keyof T]: T[K] extends number | boolean
     ? T[K] | null
-    : T[K] extends Array<infer U> // for arrays
+    : T[K] extends Array<infer U>
       ? Array<NullableNumberBoolean<U>>
       : T[K] extends object
         ? NullableNumberBoolean<T[K]>
         : T[K];
 };
 
-export type EmptyPerson = NullableNumberBoolean<Person>;
-export type EmptyDepartment = NullableNumberBoolean<Department>;
-export type EmptyPatient = NullableNumberBoolean<Patient>;
-export type EmptyEmployee = NullableNumberBoolean<Employee>;
-export type EmptyReceptionist = NullableNumberBoolean<Receptionist>;
-export type EmptyDoctor = NullableNumberBoolean<Doctor>;
-export type EmptyAdmin = NullableNumberBoolean<Admin>;
-export type EmptyTestType = NullableNumberBoolean<TestType>;
-export type EmptyTestOrder = NullableNumberBoolean<TestOrder>;
-export type EmptyTestAppointment = NullableNumberBoolean<TestAppointment>;
-
-export type EmptyCountry = NullableNumberBoolean<Country>;
-export type EmptyInsurance = NullableNumberBoolean<Insurance>;
-export type EmptyOperation = NullableNumberBoolean<Operation>;
-export type EmptyPrescription = NullableNumberBoolean<Prescription>;
-export type EmptyPayment = NullableNumberBoolean<Payment>;
+export type EmptyPerson = NullableNumberBoolean<
+  z.infer<typeof AddPersonSchema>
+>;
+export type EmptyDepartment = NullableNumberBoolean<
+  z.infer<typeof AddDepartmentSchema>
+>;
+export type EmptyPatient = NullableNumberBoolean<
+  z.infer<typeof AddPatientSchema>
+>;
+export type EmptyEmployee = NullableNumberBoolean<
+  z.infer<typeof AddEmployeeSchema>
+>;
+export type EmptyReceptionist = NullableNumberBoolean<
+  z.infer<typeof AddReceptionistSchema>
+>;
+export type EmptyDoctor = NullableNumberBoolean<
+  z.infer<typeof AddDoctorSchema>
+>;
+export type EmptyAdmin = NullableNumberBoolean<z.infer<typeof AddAdminSchema>>;
+export type EmptyTestType = NullableNumberBoolean<
+  z.infer<typeof AddTestTypeSchema>
+>;
+export type EmptyTestOrder = NullableNumberBoolean<
+  z.infer<typeof AddTestOrderSchema>
+>;
+export type EmptyTestAppointment = NullableNumberBoolean<
+  z.infer<typeof AddTestAppointmentSchema>
+>;
+export type EmptyInsurance = NullableNumberBoolean<
+  z.infer<typeof AddInsuranceSchema>
+>;
+export type EmptyOperation = NullableNumberBoolean<
+  z.infer<typeof AddOperationSchema>
+>;
+export type EmptyPrescription = NullableNumberBoolean<
+  z.infer<typeof AddPrescriptionSchema>
+>;
+export type EmptyPayment = NullableNumberBoolean<
+  z.infer<typeof AddPaymentSchema>
+>;

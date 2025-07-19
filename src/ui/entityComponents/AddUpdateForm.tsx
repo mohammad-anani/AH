@@ -1,8 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
-import type { OptionalChildrenProps } from "@/utils/models/types";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   Form,
@@ -10,36 +7,37 @@ import {
   useOutletContext,
   useSubmit,
 } from "react-router-dom";
-import type { Schema } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import DepartmentForm from "@/features/department/Form";
 import { addingSchemas } from "@/utils/models/schema/addingSchemasObject";
 import { schemas } from "@/utils/models/schema/schemasObject.ts";
 import { emptyObjects } from "@/utils/models/emptyObjects/emptyObjectsObject";
-
-const Forms: Record<string, React.ComponentType> = {
-  Departments: DepartmentForm,
-};
+import { Forms } from "../../utils/models/FormObject";
+import type { emptyObjectsTypes } from "@/utils/models/emptyObjects/emptyObjectsTypesObject";
+import type { typesObject } from "@/utils/models/types/typesObject";
+import throwError from "@/utils/helpers/throwError";
+import type { EntityKey } from "@/utils/models/types";
 
 export default function AddUpdateForm({
+  entity,
   headerWidth = 150,
   submitText = "Save",
   submittingText = "Submitting...",
 }: {
-  title: string;
-  schema: Schema<any, any>;
-  defaultValues: any;
+  entity: EntityKey;
   submitText?: string;
   submittingText?: string;
   headerWidth?: number;
-} & OptionalChildrenProps) {
-  const department = useOutletContext();
+}) {
+  const data = useOutletContext<typesObject[EntityKey]>();
 
-  const isAdd = !department;
+  const isAdd = !data;
 
-  const schema = isAdd ? addingSchemas["Departments"] : schemas["Departments"];
-  const defaultValues = isAdd ? emptyObjects["Departments"] : department;
-  const title = `${isAdd ? "Add" : "Edit"} Department`;
+  const schema = isAdd ? addingSchemas[entity] : schemas[entity];
+
+  const defaultValues = (isAdd ? emptyObjects[entity] : data) as
+    | emptyObjectsTypes[typeof entity]
+    | typesObject[typeof entity];
+  const title = `${isAdd ? "Add" : "Edit"} ${entity.slice(0, -1)}`;
 
   const methods = useForm({
     resolver: zodResolver(schema),
@@ -54,7 +52,11 @@ export default function AddUpdateForm({
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
 
-  const EntityForm = Forms["Departments"];
+  const EntityForm = Forms[entity];
+
+  if (!schema || !defaultValues || !EntityForm)
+    throwError(500, "Internal server error", "");
+
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">

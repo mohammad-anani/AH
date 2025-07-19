@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AdminSchema,
   DoctorSchema,
@@ -10,17 +9,18 @@ import {
   TestTypeSchema,
   TestOrderSchema,
   TestAppointmentSchema,
-  CountrySchema,
   InsuranceSchema,
   OperationSchema,
   PrescriptionSchema,
   PaymentSchema,
 } from "./schemas.ts";
 
-const AddPersonSchema = PersonSchema.omit({ ID: true });
+export const AddPersonSchema = PersonSchema.omit({ ID: true });
 
-const AddEmployeeSchema = EmployeeSchema.omit({
+export const AddEmployeeSchema = EmployeeSchema.omit({
   ID: true,
+  LeaveDate: true,
+  isActive: true,
 }).extend({
   Person: AddPersonSchema,
 });
@@ -36,6 +36,7 @@ export const AddAdminSchema = AdminSchema.omit({
 export const AddDoctorSchema = DoctorSchema.omit({
   ID: true,
   CreatedAt: true,
+  CreatedByReceptionistID: true,
 }).extend({
   Employee: AddEmployeeSchema,
 });
@@ -43,6 +44,7 @@ export const AddDoctorSchema = DoctorSchema.omit({
 export const AddReceptionistSchema = ReceptionistSchema.omit({
   ID: true,
   CreatedAt: true,
+  CreatedByAdminID: true,
 }).extend({
   Employee: AddEmployeeSchema,
 });
@@ -50,6 +52,7 @@ export const AddReceptionistSchema = ReceptionistSchema.omit({
 export const AddPatientSchema = PatientSchema.omit({
   ID: true,
   CreatedAt: true,
+  CreatedByReceptionistID: true,
 }).extend({
   Person: AddPersonSchema,
 });
@@ -69,16 +72,17 @@ export const AddTestTypeSchema = TestTypeSchema.omit({
 export const AddTestOrderSchema = TestOrderSchema.omit({
   ID: true,
   OrderedAt: true,
+  OrderedByDoctorID: true,
 });
 
 export const AddTestAppointmentSchema = TestAppointmentSchema.omit({
   ID: true,
   ResultDate: true,
   CreatedAt: true,
-});
-
-export const AddCountrySchema = CountrySchema.omit({
-  ID: true,
+  CreatedByReceptionistID: true,
+  Result: true,
+  Status: true,
+  PaymentID: true,
 });
 
 export const AddInsuranceSchema = InsuranceSchema.omit({
@@ -91,6 +95,8 @@ export const AddOperationSchema = OperationSchema.omit({
   ID: true,
   CreatedAt: true,
   CreatedByReceptionistID: true,
+  Status: true,
+  PaymentID: true,
 });
 
 export const AddPrescriptionSchema = PrescriptionSchema.omit({
@@ -99,4 +105,5 @@ export const AddPrescriptionSchema = PrescriptionSchema.omit({
 
 export const AddPaymentSchema = PaymentSchema.omit({
   ID: true,
+  IsPaid: true,
 });

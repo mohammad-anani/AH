@@ -6,6 +6,7 @@ export default function formatLoaderUrl(url: string) {
   const order = searchParams.get("order");
   const sort = searchParams.get("sort");
 
+  //to be removed when changing to backend
   if (order) {
     if (sort)
       searchParams.set("_sort", `${order === "desc" ? "-" : ""}${sort}`);

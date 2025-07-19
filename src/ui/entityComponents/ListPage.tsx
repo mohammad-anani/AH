@@ -28,7 +28,6 @@ export default function ListPage<T extends { [key: string]: any }>({
   rowTemplate: [string[], (item: T) => any[], number[]];
 
   filterFields: Key[];
-  backUrl?: string;
 }) {
   const [items, itemsCount] = useLoaderData();
 

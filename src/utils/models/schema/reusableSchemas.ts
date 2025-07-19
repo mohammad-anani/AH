@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
 
-export const numberCallBack = (val: any) =>
+export const numberCallBack = (val: string | number) =>
   typeof val === "number"
     ? val
     : typeof val === "string" && val.trim() !== ""
@@ -16,7 +15,9 @@ export const nonEmptyString = z
 
 export const positiveNumber = (withZero: boolean = true) =>
   z.preprocess(
-    numberCallBack,
+    (value) => {
+      return !isNaN(Number(value)) && numberCallBack(value as string | number);
+    },
     z
       .number()
       .nonnegative({ message: "Number must be zero or positive." })
@@ -45,18 +46,3 @@ export const time = (withSeconds: boolean = true) =>
     precision: withSeconds ? 0 : 0,
     message: "Invalid time format.",
   });
-
-// export const boolean = (trueLabel: string, falseLabel: string) =>
-//   z
-//     .preprocess(
-//       (val) => {
-//         if (typeof val === "boolean")
-//           return val ? trueLabel.toLowerCase() : falseLabel.toLowerCase();
-//         if (typeof val === "string") return val.toLowerCase();
-//         return val;
-//       },
-//       z.enum([trueLabel.toLowerCase(), falseLabel.toLowerCase()], {
-//         message: `Value must be either "${trueLabel}" or "${falseLabel}".`,
-//       }),
-//     )
-//     .transform((val) => val === trueLabel.toLowerCase());

@@ -1,5 +1,5 @@
 import DepartmentSelect from "@/features/department/DepartmentSelect";
-import type { Key } from "./types";
+import type { customFilterProps, Key, Setter } from "./types/util";
 
 export const persondFields: Key[] = [
   ["FirstName", "string"],
@@ -18,12 +18,11 @@ export const employeeFields: Key[] = [
     "Department",
     "custom",
     [
-      ({ field, onChange, isSubmitting }) => {
+      ({ field, onChange }: customFilterProps) => {
         return (
           <DepartmentSelect
-            departmentID={field}
-            setDepartmentID={onChange}
-            isDisabled={isSubmitting}
+            departmentID={field as number}
+            setDepartmentID={onChange as Setter<number>}
           />
         );
       },

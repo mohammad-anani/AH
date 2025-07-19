@@ -1,4 +1,9 @@
-import type { DataTypes, Key, Setter } from "@/utils/models/types";
+import type {
+  customFilterProps,
+  DataTypes,
+  Key,
+  Setter,
+} from "@/utils/models/types";
 import useListContext from "./context";
 import {
   NumberInput,
@@ -37,25 +42,15 @@ export function Form() {
       if (typeof data[0] !== "function")
         return <UnsupportedInput {...commonProps} />;
 
-      const Input = data[0] as (props: {
-        field: DataTypes;
-        onChange: Setter<DataTypes>;
-        isSubmitting: boolean;
-      }) => ReactNode;
+      const Input = data[0] as (props: customFilterProps) => ReactNode;
 
       return (
         <>
           <label htmlFor={key}>{generateLabel(label)}</label>
           <Controller
             name={key}
-            renderField={({ field, isSubmitting }) => {
-              return (
-                <Input
-                  field={field.value}
-                  onChange={field.onChange}
-                  isSubmitting={isSubmitting}
-                />
-              );
+            renderField={({ field }) => {
+              return <Input field={field.value} onChange={field.onChange} />;
             }}
           />
         </>

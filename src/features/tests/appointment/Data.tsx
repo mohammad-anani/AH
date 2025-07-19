@@ -3,10 +3,10 @@ import type { TestAppointment } from "@/utils/models/types";
 import Clickable from "@/ui/customComponents/Clickable";
 
 interface DataProps {
-  appointment: TestAppointment;
+  testAppointment: TestAppointment;
 }
 
-export default function Data({ appointment }: DataProps) {
+export default function Data({ testAppointment: testAppointment }: DataProps) {
   const {
     TestOrderID,
     PatientID,
@@ -17,7 +17,7 @@ export default function Data({ appointment }: DataProps) {
 
     CreatedByReceptionistID,
     CreatedAt,
-  } = appointment;
+  } = testAppointment;
 
   return (
     <>

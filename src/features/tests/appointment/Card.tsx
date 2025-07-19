@@ -9,7 +9,7 @@ export default function Card() {
     <EntityCard
       title="Test Appointment"
       backLink="/admin/tests/appointments"
-      Data={<Data appointment={appointment} />}
+      Data={<Data testAppointment={appointment} />}
     ></EntityCard>
   );
 }

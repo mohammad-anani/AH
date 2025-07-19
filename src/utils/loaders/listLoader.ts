@@ -5,23 +5,22 @@ import { z } from "zod";
 import throwError from "../helpers/throwError";
 import { schemas } from "../models/schema/schemasObject.ts";
 import { rowSchemas } from "../models/schema/rowSchemasObject.ts";
+import type { EntityKey } from "../models/types/util.ts";
 
-export default function listLoader(entity: string): LoaderFunction {
+export default function listLoader(
+  entity: EntityKey | `${EntityKey}Row`,
+): LoaderFunction {
   return async function ({ request }: LoaderFunctionArgs) {
     const searchParams = formatLoaderUrl(request.url);
 
-    // if (entity.endsWith("Rows")) entity = entity.replace("Row", "");
-
     const data = await getList(entity + "?" + searchParams?.toString());
 
-    const schema = (entity.endsWith("Rows") ? rowSchemas : schemas)[entity];
+    const schema = (entity.endsWith("Row") ? rowSchemas : schemas)[
+      entity.replace("Row", "") as EntityKey
+    ];
 
     if (!schema) {
-      throwError(
-        500,
-        "Internal Server Error",
-        "Sorry, we received unexpected data from the server. Please try again later.",
-      );
+      throwError(500, "Internal Server Error");
     }
 
     const apiSchema = z.tuple([z.array(schema), z.number()]);

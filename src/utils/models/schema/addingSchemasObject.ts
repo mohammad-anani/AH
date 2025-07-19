@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type { z } from "zod";
 import {
   AddAdminSchema,
@@ -10,25 +8,24 @@ import {
   AddTestTypeSchema,
   AddTestOrderSchema,
   AddTestAppointmentSchema,
-  AddCountrySchema,
   AddInsuranceSchema,
   AddOperationSchema,
   AddPrescriptionSchema,
   AddPaymentSchema,
 } from "./addingSchemas";
+import type { EntityKey } from "../types/util";
 
-export const addingSchemas: Record<string, z.ZodObject<any>> = {
-  Admins: AddAdminSchema,
-  Doctors: AddDoctorSchema,
-  Receptionists: AddReceptionistSchema,
-  Patients: AddPatientSchema,
-  Departments: AddDepartmentSchema,
-  TestTypes: AddTestTypeSchema,
-  TestOrders: AddTestOrderSchema,
-  TestAppointments: AddTestAppointmentSchema,
-  Countries: AddCountrySchema,
-  Insurances: AddInsuranceSchema,
-  Operations: AddOperationSchema,
-  Prescriptions: AddPrescriptionSchema,
-  Payments: AddPaymentSchema,
+export const addingSchemas: Record<EntityKey, z.ZodObject<z.ZodRawShape>> = {
+  Admin: AddAdminSchema,
+  Doctor: AddDoctorSchema,
+  Receptionist: AddReceptionistSchema,
+  Patient: AddPatientSchema,
+  Department: AddDepartmentSchema,
+  TestType: AddTestTypeSchema,
+  TestOrder: AddTestOrderSchema,
+  TestAppointment: AddTestAppointmentSchema,
+  Insurance: AddInsuranceSchema,
+  Operation: AddOperationSchema,
+  Prescription: AddPrescriptionSchema,
+  Payment: AddPaymentSchema,
 };

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type z from "zod";
 import {
   AdminRowSchema,
@@ -10,14 +9,21 @@ import {
   TestOrderRowSchema,
   TestAppointmentRowSchema,
 } from "./rowSchemas";
+import type { EntityKey } from "../types/util";
 
-export const rowSchemas: Record<string, z.ZodObject<any>> = {
-  AdminRows: AdminRowSchema,
-  DepartmentRows: DepartmentRowSchema,
-  DoctorRows: DoctorRowSchema,
-  PatientRows: PatientRowSchema,
-  ReceptionistRows: ReceptionistRowSchema,
-  TestTypeRows: TestTypeRowSchema,
-  TestOrderRows: TestOrderRowSchema,
-  TestAppointmentRows: TestAppointmentRowSchema,
+export const rowSchemas: Record<EntityKey, z.ZodObject<z.ZodRawShape>> = {
+  Admin: AdminRowSchema,
+  Department: DepartmentRowSchema,
+  Doctor: DoctorRowSchema,
+  Patient: PatientRowSchema,
+  Receptionist: ReceptionistRowSchema,
+  TestType: TestTypeRowSchema,
+  TestOrder: TestOrderRowSchema,
+  TestAppointment: TestAppointmentRowSchema,
+  Operation: TestAppointmentRowSchema,
+  Payment: TestAppointmentRowSchema,
+  Prescription: TestAppointmentRowSchema,
+  Insurance: TestAppointmentRowSchema,
 };
+
+//to be changed

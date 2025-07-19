@@ -1,7 +1,6 @@
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
-import type { OptionalChildrenProps } from "@/utils/models/types";
-import type { ReactNode } from "react";
+import type { ChildrenProps } from "@/utils/models/types";
 import {
   Dialog,
   DialogContent,
@@ -11,59 +10,36 @@ import {
   DialogHeader,
   DialogClose,
 } from "@/components/ui/dialog";
-import { useFetcher, useLocation } from "react-router-dom";
-import BackNavigator from "../customComponents/BackNavigator";
+import { useFetcher } from "react-router-dom";
+import { DataObject } from "@/utils/models/DataObject";
 
 export default function Card({
-  Data,
   title,
   canEdit = true,
   canDelete = true,
-  backLink = "",
+  subLinks,
   headerWidth = 180,
-  deleteMessage,
+
   children,
 }: {
-  Data: ReactNode;
   title: string;
+  subLinks: [text: string, link: string][];
   canEdit?: boolean;
   canDelete?: boolean;
-  backLink?: string;
+
   headerWidth?: number;
   deleteMessage?: string;
-} & OptionalChildrenProps) {
+} & ChildrenProps) {
   const fetcher = useFetcher();
 
-  let reference = false;
-  const location = useLocation();
-
-  const { state } = location;
-
-  if (state) reference = state.reference;
+  const Data = DataObject[title + "s"];
 
   return (
     <Dialog>
-      {reference || backLink === "" ? (
-        <BackNavigator pagesBack={1}>
-          <Clickable
-            className="text-sm!"
-            as="button"
-            variant="secondary"
-            to={backLink}
-          >
-            Back
-          </Clickable>
-        </BackNavigator>
-      ) : (
-        <Clickable
-          className="text-sm!"
-          as="Link"
-          variant="secondary"
-          to={backLink}
-        >
-          Back
-        </Clickable>
-      )}
+      <Clickable className="text-sm!" as="Back" variant="secondary">
+        Back
+      </Clickable>
+
       <div className="flex items-center justify-between">
         <H2>{title}</H2>
         <div className="flex gap-x-2">
@@ -84,10 +60,14 @@ export default function Card({
       <div
         className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-1 *:text-xl! *:odd:font-bold`}
       >
-        {Data}
+        {children}
       </div>
       <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
-        {children}
+        {subLinks.map(([text, link]) => (
+          <Clickable as="Link" to={link} variant="secondary">
+            {text}
+          </Clickable>
+        ))}
       </div>
       {canDelete && (
         <DialogPortal>
@@ -98,8 +78,7 @@ export default function Card({
               </DialogTitle>
             </DialogHeader>
             <span>
-              {deleteMessage ||
-                `Are you sure you want to delete this ${title.toLowerCase()}?`}
+              {`Are you sure you want to delete this ${title.toLowerCase()}?`}
             </span>
             <div className="flex justify-end gap-x-2">
               <DialogClose>

@@ -2,8 +2,9 @@ import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import findByID from "@/api/findByID";
 import throwError from "../helpers/throwError";
 import { schemas } from "../models/schema/schemasObject.ts";
+import type { EntityKey } from "../models/types/util.ts";
 
-export default function findByIDLoader(entity: string): LoaderFunction {
+export default function findByIDLoader(entity: EntityKey): LoaderFunction {
   return async function ({ params }: LoaderFunctionArgs) {
     const id = Number(params["id"]);
 
@@ -16,11 +17,7 @@ export default function findByIDLoader(entity: string): LoaderFunction {
     const schema = schemas[entity];
 
     if (!schema) {
-      throwError(
-        500,
-        "Internal Server Error",
-        "Sorry, we received unexpected data from the server. Please try again later.",
-      );
+      throwError(500, "Internal Server Error");
     }
 
     const result = schema.safeParse(data);

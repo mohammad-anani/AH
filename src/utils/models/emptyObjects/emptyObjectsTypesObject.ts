@@ -8,7 +8,6 @@ import type {
   EmptyTestType,
   EmptyTestOrder,
   EmptyTestAppointment,
-  EmptyCountry,
   EmptyInsurance,
   EmptyOperation,
   EmptyPrescription,
@@ -16,20 +15,19 @@ import type {
   EmptyPerson,
 } from "./emptyObjectsTypes";
 
-export type EmptyObjectsTypes = {
-  Departments: EmptyDepartment;
-  Patients: EmptyPatient;
-  Employees: EmptyEmployee;
-  Receptionists: EmptyReceptionist;
-  Doctors: EmptyDoctor;
-  Admins: EmptyAdmin;
-  TestTypes: EmptyTestType;
-  TestOrders: EmptyTestOrder;
-  TestAppointments: EmptyTestAppointment;
-  Countries: EmptyCountry;
-  Insurances: EmptyInsurance;
-  Operations: EmptyOperation;
-  Prescriptions: EmptyPrescription;
-  Payments: EmptyPayment;
-  Persons: EmptyPerson;
+export type emptyObjectsTypes = {
+  Department: EmptyDepartment;
+  Patient: EmptyPatient;
+  Employee: EmptyEmployee;
+  Receptionist: EmptyReceptionist;
+  Doctor: EmptyDoctor;
+  Admin: EmptyAdmin;
+  TestType: EmptyTestType;
+  TestOrder: EmptyTestOrder;
+  TestAppointment: EmptyTestAppointment;
+  Insurance: EmptyInsurance;
+  Operation: EmptyOperation;
+  Prescription: EmptyPrescription;
+  Payment: EmptyPayment;
+  Person: EmptyPerson;
 };

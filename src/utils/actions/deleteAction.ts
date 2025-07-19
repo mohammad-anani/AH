@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Delete from "@/api/delete";
 
 import { useParams } from "react-router-dom";
