@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormContext, Controller } from "react-hook-form";
 import Select from "react-select";
 
 interface ArrayInputProps {
   fieldKey: string;
   label: string;
-  data: any[];
+  data: [];
 }
 
 const selectStyles = {

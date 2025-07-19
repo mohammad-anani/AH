@@ -1,6 +1,6 @@
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
-import type { ChildrenProps } from "@/utils/models/types";
+
 import {
   Dialog,
   DialogContent,
@@ -10,8 +10,10 @@ import {
   DialogHeader,
   DialogClose,
 } from "@/components/ui/dialog";
-import { useFetcher } from "react-router-dom";
+import { useFetcher, useOutletContext } from "react-router-dom";
 import { DataObject } from "@/utils/models/DataObject";
+import type { EntityKey } from "@/utils/models/types/util";
+import type { typesObject } from "@/utils/models/types/typesObject";
 
 export default function Card({
   title,
@@ -19,20 +21,18 @@ export default function Card({
   canDelete = true,
   subLinks,
   headerWidth = 180,
-
-  children,
 }: {
-  title: string;
+  title: EntityKey;
   subLinks: [text: string, link: string][];
   canEdit?: boolean;
   canDelete?: boolean;
-
   headerWidth?: number;
-  deleteMessage?: string;
-} & ChildrenProps) {
+}) {
+  const data = useOutletContext<typesObject[EntityKey]>();
+
   const fetcher = useFetcher();
 
-  const Data = DataObject[title + "s"];
+  const Data = DataObject[title];
 
   return (
     <Dialog>
@@ -60,7 +60,7 @@ export default function Card({
       <div
         className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-1 *:text-xl! *:odd:font-bold`}
       >
-        {children}
+        <Data department={data} />
       </div>
       <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
         {subLinks.map(([text, link]) => (

@@ -8,7 +8,7 @@ import TestOrderForm from "@/features/tests/order/Form";
 import TestTypeForm from "@/features/tests/type/Form";
 import type { EntityKey } from "./types/util";
 
-export const Form: Record<EntityKey, React.ComponentType> = {
+export const Forms: Record<EntityKey, React.ComponentType> = {
   Department: DepartmentForm,
   Admin: AdminForm,
   Doctor: DoctorForm,

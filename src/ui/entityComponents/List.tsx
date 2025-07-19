@@ -1,4 +1,4 @@
-import type { ChildrenProps, Key } from "@/utils/models/types";
+import type { ChildrenProps, Key } from "@/utils/models/types/util";
 import { useState } from "react";
 import { ListContext } from "./listComponents/context";
 import Items from "./listComponents/Items";

@@ -1,31 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// useFilterNavigation.ts
 import { useNavigate } from "react-router-dom";
 import { isTemporalType } from "./utils";
-import type { Key } from "@/utils/models/types";
+import type { Key } from "@/utils/models/types/util";
 
 export function useFilterNavigation(fields: Key[]) {
   const navigate = useNavigate();
 
-  function buildPathWithParams(data: Record<string, any>): string {
+  function buildPathWithParams(data: Record<string, unknown>): string {
     const params = new URLSearchParams();
 
     for (const [field, type] of fields) {
-      if (isTemporalType(type ?? "null") || type === "money") {
+      if (isTemporalType(type ?? "null") || type === "number") {
         if (data[field + "From"])
-          params.set(field + "From", data[field + "From"]);
-        if (data[field + "To"]) params.set(field + "To", data[field + "To"]);
+          params.set(field + "From", String(data[field + "From"]));
+        if (data[field + "To"])
+          params.set(field + "To", String(data[field + "To"]));
       } else if (type === "array") {
-        if (data[field]?.length) params.set(field, data[field].join(","));
+        if ((data[field] as unknown[])?.length)
+          params.set(field, (data[field] as unknown[]).join(","));
       } else if (
         data[field] &&
         !(type === "boolean" && data[field] === "all")
       ) {
-        params.set(field, data[field]);
+        params.set(field, String(data[field]));
       }
     }
 
-    if (data.sort !== "None") params.set("sort", data.sort);
+    if (data.sort && data.sort !== "None")
+      params.set("sort", data.sort as string);
     if (data.order === "desc") params.set("order", "desc");
 
     const page = new URLSearchParams(location.search).get("page");
@@ -40,7 +41,7 @@ export function useFilterNavigation(fields: Key[]) {
     return `${basePath}${params.toString() ? `?${params.toString()}` : ""}`;
   }
 
-  function handleFilterSubmit(data: Record<string, any>) {
+  function handleFilterSubmit(data: Record<string, unknown>) {
     const newPath = buildPathWithParams(data);
     navigate(newPath);
   }

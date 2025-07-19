@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext } from "react";
-import type { Key, Setter } from "../../../utils/models/types";
+import type { Key, Setter } from "../../../utils/models/types/util";
 
 type ContextType<T> = {
   items: T[];
@@ -9,7 +8,7 @@ type ContextType<T> = {
   setFields: Setter<Key[]>;
 };
 
-const ListContext = createContext<ContextType<any> | undefined>(undefined);
+const ListContext = createContext<ContextType<unknown> | undefined>(undefined);
 
 export default function useListContext<T>() {
   const ctx = useContext(ListContext);

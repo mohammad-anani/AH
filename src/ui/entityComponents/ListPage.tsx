@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLoaderData } from "react-router-dom";
 import List from "./List";
 import Clickable from "../customComponents/Clickable";
@@ -10,11 +9,12 @@ import {
 } from "../../components/ui/dialog";
 import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "./FilterEntities";
-import type { Key } from "@/utils/models/types";
+import type { EntityKey, Key } from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
 import DetailsButton from "./DetailsButton";
+import type { typesObject } from "@/utils/models/types/typesObject";
 
-export default function ListPage<T extends { [key: string]: any }>({
+export default function ListPage<T extends typesObject[EntityKey]>({
   title,
   canAdd,
   emptyText = `No ${title.substring(0, title.length - 1)}`,
@@ -25,7 +25,7 @@ export default function ListPage<T extends { [key: string]: any }>({
   canAdd: boolean;
   emptyText?: string;
 
-  rowTemplate: [string[], (item: T) => any[], number[]];
+  rowTemplate: [string[], (item: T) => [], number[]];
 
   filterFields: Key[];
 }) {
@@ -51,7 +51,7 @@ export default function ListPage<T extends { [key: string]: any }>({
   );
 
   const render = (item: T) => (
-    <li style={gridStyle} key={item?.["ID"] || item[0]}>
+    <li style={gridStyle} key={item?.["ID"]}>
       {dataFields(item).map((field) => (
         <span>{field}</span>
       ))}

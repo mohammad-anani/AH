@@ -10,12 +10,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addingSchemas } from "@/utils/models/schema/addingSchemasObject";
 import { schemas } from "@/utils/models/schema/schemasObject.ts";
-import { emptyObjects } from "@/utils/models/emptyObjects/emptyObjectsObject";
-import { Forms } from "../../utils/models/FormObject";
-import type { emptyObjectsTypes } from "@/utils/models/emptyObjects/emptyObjectsTypesObject";
 import type { typesObject } from "@/utils/models/types/typesObject";
 import throwError from "@/utils/helpers/throwError";
-import type { EntityKey } from "@/utils/models/types";
+import type { EntityKey } from "@/utils/models/types/util";
+import { z } from "zod";
+import { emptyObjects } from "@/utils/models/emptyObjects/emptyObjectsObject";
+import { Forms } from "@/utils/models/FormObject";
 
 export default function AddUpdateForm({
   entity,
@@ -34,14 +34,13 @@ export default function AddUpdateForm({
 
   const schema = isAdd ? addingSchemas[entity] : schemas[entity];
 
-  const defaultValues = (isAdd ? emptyObjects[entity] : data) as
-    | emptyObjectsTypes[typeof entity]
-    | typesObject[typeof entity];
+  const defaultValues = isAdd ? emptyObjects[entity] : data;
+
   const title = `${isAdd ? "Add" : "Edit"} ${entity.slice(0, -1)}`;
 
-  const methods = useForm({
+  const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues,
+    defaultValues: defaultValues as z.infer<typeof schema>,
     criteriaMode: "all",
   });
   const {

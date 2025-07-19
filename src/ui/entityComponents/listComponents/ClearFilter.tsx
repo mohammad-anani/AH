@@ -1,5 +1,5 @@
 import { cloneElement } from "react";
-import type { ClickableChildrenProps } from "../../../utils/models/types";
+import type { ClickableChildrenProps } from "../../../utils/models/types/util";
 import { useSearchParams } from "react-router-dom";
 
 export default function ClearFilter({ children }: ClickableChildrenProps) {

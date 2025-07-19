@@ -1,4 +1,4 @@
-import type { OptionalChildrenProps } from "@/utils/models/types";
+import type { OptionalChildrenProps } from "@/utils/models/types/util";
 import useListContext from "./context";
 import type { ReactNode } from "react";
 

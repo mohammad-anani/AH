@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormContext } from "react-hook-form";
 import type { RegisterOptions, FieldValues } from "react-hook-form";
 
@@ -7,7 +6,7 @@ interface NumberInputProps {
   label: string;
   value?: string | number;
   register?: ReturnType<typeof useFormContext>["register"];
-  data: any[];
+  data: [];
   registerOptions?: RegisterOptions;
 }
 

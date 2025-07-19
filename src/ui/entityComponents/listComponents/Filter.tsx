@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormProvider, useForm } from "react-hook-form";
 // import { useEffect } from "react";
 import useListContext from "./context";
@@ -8,15 +7,13 @@ import Order from "./Order";
 import { Form } from "./Form";
 import Sort from "./Sort";
 import SearchButton from "./SearchButton";
-import type { ChildrenProps, DataTypes } from "@/utils/models/types";
+import type { ChildrenProps, Key } from "@/utils/models/types/util";
 import { useFilterDefaultValues } from "./useFilterDefaultValues";
-
-type FieldTuple = [string, DataTypes, any?];
 
 export default function Filter({
   children,
   fields,
-}: ChildrenProps & { fields: FieldTuple[] }) {
+}: ChildrenProps & { fields: Key[] }) {
   const { canModifyUrl, setFields } = useListContext();
 
   const defaultValues = useFilterDefaultValues(fields);

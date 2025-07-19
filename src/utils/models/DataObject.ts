@@ -7,7 +7,7 @@ import TestOrderData from "@/features/tests/order/Data";
 import TestAppointmentData from "@/features/tests/appointment/Data";
 import PaymentData from "@/features/payments/Data";
 import DepartmentData from "@/features/department/Data";
-import type { DataComponentPropsTypes } from "./types/util";
+import type { DataComponentPropsTypes, EntityKey } from "./types/util";
 
 export const DataObject = {
   Department: DepartmentData,
@@ -19,10 +19,11 @@ export const DataObject = {
   TestOrder: TestOrderData,
   TestAppointment: TestAppointmentData,
   Payment: PaymentData,
+  Prescription: PaymentData,
+  Operation: PaymentData,
+  Insurance: PaymentData,
 } satisfies {
-  [K in keyof DataComponentPropsTypes]: React.ComponentType<
-    DataComponentPropsTypes[K]
-  >;
+  [K in EntityKey]: React.ComponentType<DataComponentPropsTypes[K]>;
 };
 
-//to be K in EntityKey when all features are implemented
+//to be changed

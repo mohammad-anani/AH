@@ -1,7 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller as Controler, get, useFormContext } from "react-hook-form";
 import type { ControllerRenderProps } from "react-hook-form";
 import type { ReactElement } from "react";
+import type { emptyObjectsTypes } from "@/utils/models/emptyObjects/emptyObjectsTypesObject";
+import type { EntityKey } from "@/utils/models/types/util";
+import type { typesObject } from "@/utils/models/types/typesObject";
 
 interface ControlledFieldProps {
   name: string;
@@ -10,7 +12,7 @@ interface ControlledFieldProps {
     field: ControllerRenderProps;
     isSubmitting: boolean;
   }) => ReactElement;
-  defaultValue?: any;
+  defaultValue?: (emptyObjectsTypes | typesObject)[EntityKey];
 }
 
 export default function Controller({

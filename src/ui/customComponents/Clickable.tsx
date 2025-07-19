@@ -1,8 +1,8 @@
-import type { ChildrenProps } from "@/utils/models/types";
 import type { ButtonHTMLAttributes } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import BackNavigator from "./BackNavigator";
+import type { ChildrenProps } from "@/utils/models/types/util";
 
 type ButtonProps = ChildrenProps & {
   as: "button" | "Link" | "Back";

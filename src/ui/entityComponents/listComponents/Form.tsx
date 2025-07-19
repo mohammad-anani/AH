@@ -1,9 +1,4 @@
-import type {
-  customFilterProps,
-  DataTypes,
-  Key,
-  Setter,
-} from "@/utils/models/types";
+import type { customFilterProps, Key } from "@/utils/models/types/util";
 import useListContext from "./context";
 import {
   NumberInput,
@@ -17,7 +12,6 @@ import {
 import { generateLabel, isTemporalType } from "./utils";
 import SelectInput from "./form-inputs/SelectInput";
 import MoneyInput from "./form-inputs/MoneyInput";
-import React, { type ReactNode } from "react";
 import Controller from "@/ui/customComponents/Controller";
 
 const inputMap = {
@@ -29,6 +23,8 @@ const inputMap = {
   select: SelectInput,
 } as const;
 
+type inputTypes = "number" | "string" | "phone" | "array" | "money" | "select";
+
 export function Form() {
   const { fields } = useListContext();
 
@@ -36,13 +32,20 @@ export function Form() {
     const [key, type, data] = field;
 
     const label = generateLabel(key) + ":";
-    const commonProps = { key, fieldKey: key, label, data };
+    const commonProps = {
+      key,
+      fieldKey: key,
+      label,
+      data: Array.isArray(data) ? data : [],
+    };
 
     if (type === "custom") {
-      if (typeof data[0] !== "function")
+      const [element] = data as customFilterProps;
+
+      if (typeof element !== "function")
         return <UnsupportedInput {...commonProps} />;
 
-      const Input = data[0] as (props: customFilterProps) => ReactNode;
+      const Input = element;
 
       return (
         <>
@@ -67,7 +70,7 @@ export function Form() {
     }
 
     if (type === "boolean") {
-      const [trueLabel, falseLabel] = data;
+      const [trueLabel, falseLabel] = data as [string, string];
 
       return (
         <BooleanInput
@@ -78,8 +81,7 @@ export function Form() {
       );
     }
 
-    const InputComponent =
-      inputMap[type as keyof typeof inputMap] || UnsupportedInput;
+    const InputComponent = inputMap[type as inputTypes] || UnsupportedInput;
     return <InputComponent {...commonProps} />;
   };
 

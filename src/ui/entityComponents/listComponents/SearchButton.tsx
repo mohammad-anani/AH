@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cloneElement, type ReactElement } from "react";
 
 export default function SearchButton({
   children,
 }: {
-  children: ReactElement<any, any>;
+  children: ReactElement<{ type: string }, "button">;
 }) {
   return cloneElement(children, { type: "submit" });
 }

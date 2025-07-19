@@ -1,4 +1,4 @@
-import type { ChildrenProps } from "@/utils/models/types";
+import type { ChildrenProps } from "@/utils/models/types/util";
 
 export default function H2({
   children,

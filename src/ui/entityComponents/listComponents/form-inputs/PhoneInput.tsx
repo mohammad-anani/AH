@@ -1,5 +1,5 @@
-import { useFormContext } from "react-hook-form";
-import type { RegisterOptions, FieldValues } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
+import type { RegisterOptions } from "react-hook-form";
 import PhoneInp from "../../../customComponents/PhoneInput";
 
 interface PhoneInputProps {
@@ -11,12 +11,23 @@ interface PhoneInputProps {
 }
 
 export default function PhoneInput({ fieldKey, label }: PhoneInputProps) {
-  const { register } = useFormContext<FieldValues>();
+  const { control } = useFormContext();
 
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <PhoneInp name={fieldKey} id={fieldKey} register={register} />
+      <Controller
+        control={control}
+        name={fieldKey}
+        render={({ field }) => (
+          <PhoneInp
+            name={field.name}
+            format="xx xxx xxx"
+            initialValue={field.value}
+            onChange={field.onChange}
+          />
+        )}
+      />
     </>
   );
 }

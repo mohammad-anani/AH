@@ -41,7 +41,7 @@ export type DataTypes =
 export type Key = [
   string,
   DataTypes | "custom",
-  (Array<Primitive> | [(data: customFilterProps) => JSX.Element, DataTypes])?,
+  (Array<Primitive> | customFilterProps | [string, string])?,
 ];
 
 export type DataComponentPropsTypes = {
@@ -54,12 +54,16 @@ export type DataComponentPropsTypes = {
   TestOrder: { testOrder: TestOrder };
   TestAppointment: { testAppointment: TestAppointment };
   Payment: { payment: Payment };
+  Operation: { payment: Payment };
+  Insurance: { payment: Payment };
+  Prescription: { payment: Payment };
 };
 
-export type customFilterProps = {
-  field: Primitive;
-  onChange: Setter<Primitive>;
-};
+export type customFilterProps = [
+  (data: { field: Primitive; onChange: Setter<Primitive> }) => JSX.Element,
+  DataTypes,
+];
+
 export type EntityKey =
   | "Department"
   | "Admin"

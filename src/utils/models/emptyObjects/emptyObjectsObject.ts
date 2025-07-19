@@ -15,7 +15,7 @@ import {
 } from "./emptyObjects";
 import type { emptyObjectsTypes } from "./emptyObjectsTypesObject";
 
-export const emptyObject: Record<EntityKey, emptyObjectsTypes[EntityKey]> = {
+export const emptyObjects: Record<EntityKey, emptyObjectsTypes[EntityKey]> = {
   Department: emptyDepartment,
   Patient: emptyPatient,
   Receptionist: emptyReceptionist,
