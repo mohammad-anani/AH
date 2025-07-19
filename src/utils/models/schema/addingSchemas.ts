@@ -17,8 +17,6 @@ import {
   PaymentSchema,
 } from "./schemas.ts";
 
-import { z } from "zod";
-
 const AddPersonSchema = PersonSchema.omit({ ID: true });
 
 const AddEmployeeSchema = EmployeeSchema.omit({
@@ -102,19 +100,3 @@ export const AddPrescriptionSchema = PrescriptionSchema.omit({
 export const AddPaymentSchema = PaymentSchema.omit({
   ID: true,
 });
-
-export const addingSchemas: Record<string, z.ZodObject<any>> = {
-  Admins: AddAdminSchema,
-  Doctors: AddDoctorSchema,
-  Receptionists: AddReceptionistSchema,
-  Patients: AddPatientSchema,
-  Departments: AddDepartmentSchema,
-  TestTypes: AddTestTypeSchema,
-  TestOrders: AddTestOrderSchema,
-  TestAppointments: AddTestAppointmentSchema,
-  Countries: AddCountrySchema,
-  Insurances: AddInsuranceSchema,
-  Operations: AddOperationSchema,
-  Prescriptions: AddPrescriptionSchema,
-  Payments: AddPaymentSchema,
-};

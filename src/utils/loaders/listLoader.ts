@@ -3,7 +3,8 @@ import formatLoaderUrl from "../formatters/formatLoaderUrl";
 import getList from "@/api/getList";
 import { z } from "zod";
 import throwError from "../helpers/throwError";
-import { schemas } from "../models/schema/schemasObject";
+import { schemas } from "../models/schema/schemasObject.ts";
+import { rowSchemas } from "../models/schema/rowSchemasObject.ts";
 
 export default function listLoader(entity: string): LoaderFunction {
   return async function ({ request }: LoaderFunctionArgs) {
@@ -13,7 +14,7 @@ export default function listLoader(entity: string): LoaderFunction {
 
     const data = await getList(entity + "?" + searchParams?.toString());
 
-    const schema = schemas[entity];
+    const schema = (entity.endsWith("Rows") ? rowSchemas : schemas)[entity];
 
     if (!schema) {
       throwError(

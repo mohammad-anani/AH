@@ -1,6 +1,6 @@
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import { AddTestAppointmentSchema } from "@/utils/models/schema/addingSchemas";
-import { emptyTestAppointment } from "@/utils/models/emptyObjects";
+import { emptyTestAppointment } from "@/utils/models/emptyObjects/emptyObjects";
 import Form from "./Form";
 
 export default function Add() {

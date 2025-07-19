@@ -4,31 +4,42 @@ import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 import type { OptionalChildrenProps } from "@/utils/models/types";
 import { FormProvider, useForm } from "react-hook-form";
-import { Form, useNavigation, useSubmit } from "react-router-dom";
+import {
+  Form,
+  useNavigation,
+  useOutletContext,
+  useSubmit,
+} from "react-router-dom";
 import type { Schema } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import BackNavigator from "../customComponents/BackNavigator";
+import DepartmentForm from "@/features/department/Form";
+import { addingSchemas } from "@/utils/models/schema/addingSchemasObject";
+import { schemas } from "@/utils/models/schema/schemasObject.ts";
+import { emptyObjects } from "@/utils/models/emptyObjects/emptyObjectsObject";
+
+const Forms: Record<string, React.ComponentType> = {
+  Departments: DepartmentForm,
+};
 
 export default function AddUpdateForm({
-  title,
   headerWidth = 150,
-  schema,
   submitText = "Save",
   submittingText = "Submitting...",
-  defaultValues = null,
-  children,
 }: {
   title: string;
-  backLink?: string;
   schema: Schema<any, any>;
   defaultValues: any;
   submitText?: string;
   submittingText?: string;
   headerWidth?: number;
 } & OptionalChildrenProps) {
-  if (Array.isArray(defaultValues)) {
-    return null;
-  }
+  const department = useOutletContext();
+
+  const isAdd = !department;
+
+  const schema = isAdd ? addingSchemas["Departments"] : schemas["Departments"];
+  const defaultValues = isAdd ? emptyObjects["Departments"] : department;
+  const title = `${isAdd ? "Add" : "Edit"} Department`;
 
   const methods = useForm({
     resolver: zodResolver(schema),
@@ -43,6 +54,7 @@ export default function AddUpdateForm({
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
 
+  const EntityForm = Forms["Departments"];
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">
@@ -59,7 +71,7 @@ export default function AddUpdateForm({
           })}
           className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-3 *:text-xl! *:odd:font-bold`}
         >
-          {children}
+          <EntityForm />
           <Clickable
             className="col-span-2 mt-10"
             as="button"
@@ -71,7 +83,7 @@ export default function AddUpdateForm({
               ? submittingText
               : submitText !== "Save"
                 ? submitText
-                : !defaultValues["ID"]
+                : isAdd
                   ? "Add"
                   : "Save"}
           </Clickable>

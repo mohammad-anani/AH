@@ -7,7 +7,7 @@ import listLoader from "@/utils/loaders/listLoader";
 import InvalidPath from "@/ui/InvalidPath";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
-import AddUpdate from "@/features/department/AddUpdate";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 
 export const departmentsRoutes = [
   {
@@ -38,14 +38,14 @@ export const departmentsRoutes = [
           },
           {
             path: "edit",
-            Component: AddUpdate,
+            Component: AddUpdateForm,
             action: addUpdateAction("Departments"),
           },
         ],
       },
       {
         path: "add",
-        Component: AddUpdate,
+        Component: AddUpdateForm,
         action: addUpdateAction("Departments"),
       },
     ],

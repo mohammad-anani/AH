@@ -15,7 +15,7 @@ import type {
   EmptyOperation,
   EmptyPrescription,
   EmptyPayment,
-} from "@/utils/models/emptyObjectsTypes";
+} from "@/utils/models/emptyObjects/emptyObjectsTypes";
 
 const emptyNumber = null;
 const emptyBoolean = null;
@@ -109,10 +109,12 @@ export const emptyTestAppointment: EmptyTestAppointment = {
   ID: emptyNumber,
   TestOrderID: emptyNumber,
   PatientID: emptyNumber,
+  TestID: emptyNumber,
   ScheduledDate: emptyDateTime,
   Status: emptyString,
   Result: emptyString,
   ResultDate: emptyDateTime,
+  PaymentID: emptyNumber,
   CreatedByReceptionistID: emptyNumber,
   CreatedAt: emptyDateTime,
 };
@@ -162,7 +164,5 @@ export const emptyPayment: EmptyPayment = {
   Amount: emptyNumber,
   PatientPaid: emptyNumber,
   InsurancePaid: emptyNumber,
-  Method: emptyString,
-  CreatedByReceptionistID: emptyNumber,
-  CreatedAt: emptyDateTime,
+  IsPaid: emptyBoolean,
 };

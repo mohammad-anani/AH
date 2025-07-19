@@ -1,6 +1,6 @@
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import Form from "./Form";
-import { emptyAdmin } from "@/utils/models/emptyObjects";
+import { emptyAdmin } from "@/utils/models/emptyObjects/emptyObjects";
 import { AddAdminSchema } from "@/utils/models/schema/addingSchemas";
 
 export default function Add() {

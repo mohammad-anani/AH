@@ -14,7 +14,7 @@ import type {
   Operation,
   Prescription,
   Payment,
-} from "./types";
+} from "../types";
 
 type NullableNumberBoolean<T> = {
   [K in keyof T]: T[K] extends number | boolean

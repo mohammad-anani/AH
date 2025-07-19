@@ -1,7 +1,7 @@
 import { AddDoctorSchema } from "@/utils/models/schema/addingSchemas";
 import Form from "./Form";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
-import { emptyDoctor } from "@/utils/models/emptyObjects";
+import { emptyDoctor } from "@/utils/models/emptyObjects/emptyObjects";
 
 export default function Add() {
   return (

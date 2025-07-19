@@ -1,7 +1,7 @@
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import type { Person } from "../../../utils/models/types";
-import { emptyPerson } from "@/utils/models/emptyObjects";
-import type { EmptyPerson } from "@/utils/models/emptyObjectsTypes";
+import { emptyPerson } from "@/utils/models/emptyObjects/emptyObjects";
+import type { EmptyPerson } from "@/utils/models/emptyObjects/emptyObjectsTypes";
 
 export default function Data({
   person = emptyPerson,

@@ -1,7 +1,7 @@
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ReceptionistForm from "./Form";
 import { AddReceptionistSchema } from "@/utils/models/schema/addingSchemas";
-import { emptyReceptionist } from "@/utils/models/emptyObjects";
+import { emptyReceptionist } from "@/utils/models/emptyObjects/emptyObjects";
 
 export default function AddReceptionist() {
   return (

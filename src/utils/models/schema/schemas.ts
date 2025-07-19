@@ -163,13 +163,6 @@ export const InsuranceSchema = z.object({
   CreatedAt: datetime(),
 });
 
-export const TestAppointmentRowSchema = z.object({
-  ID: positiveNumber(),
-  PatientName: nonEmptyString,
-  TestName: nonEmptyString,
-  Date: datetime(),
-});
-
 export const OperationSchema = z.object({
   ID: positiveNumber(),
   Name: nonEmptyString,

@@ -4,6 +4,7 @@ import {
   DoctorSchema,
   PatientSchema,
   ReceptionistSchema,
+  TestAppointmentSchema,
   TestOrderSchema,
   TestTypeSchema,
 } from "./schemas";
@@ -42,3 +43,8 @@ export const TestTypeRowSchema = TestTypeSchema.pick({
 export const TestOrderRowSchema = TestOrderSchema.pick({
   ID: true,
 });
+
+export const TestAppointmentRowSchema = TestAppointmentSchema.pick({
+  ID: true,
+  ScheduledDate: true,
+}).extend({ PatientName: nonEmptyString, TeestName: nonEmptyString });

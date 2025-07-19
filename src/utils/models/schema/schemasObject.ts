@@ -9,22 +9,12 @@ import {
   TestTypeSchema,
   TestOrderSchema,
   TestAppointmentSchema,
-  TestAppointmentRowSchema,
   CountrySchema,
   InsuranceSchema,
   OperationSchema,
   PrescriptionSchema,
   PaymentSchema,
 } from "./schemas";
-import {
-  DepartmentRowSchema,
-  AdminRowSchema,
-  DoctorRowSchema,
-  PatientRowSchema,
-  ReceptionistRowSchema,
-  TestTypeRowSchema,
-  TestOrderRowSchema,
-} from "./rowSchemas";
 
 export const schemas: Record<string, z.ZodObject<any>> = {
   Admins: AdminSchema,
@@ -35,14 +25,6 @@ export const schemas: Record<string, z.ZodObject<any>> = {
   TestTypes: TestTypeSchema,
   TestOrders: TestOrderSchema,
   TestAppointments: TestAppointmentSchema,
-  DepartmentRows: DepartmentRowSchema,
-  AdminRows: AdminRowSchema,
-  DoctorRows: DoctorRowSchema,
-  PatientRows: PatientRowSchema,
-  ReceptionistRows: ReceptionistRowSchema,
-  TestTypeRows: TestTypeRowSchema,
-  TestOrderRows: TestOrderRowSchema,
-  TestAppointmentRows: TestAppointmentRowSchema,
   Countries: CountrySchema,
   Insurances: InsuranceSchema,
   Operations: OperationSchema,

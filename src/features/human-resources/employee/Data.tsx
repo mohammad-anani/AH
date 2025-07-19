@@ -1,10 +1,10 @@
 import { formatMoney } from "@/utils/formatters/formatMoney";
-import { emptyEmployee } from "../../../utils/models/emptyObjects";
+import { emptyEmployee } from "../../../utils/models/emptyObjects/emptyObjects";
 import type { Employee } from "../../../utils/models/types";
 import PersonData from "../person/Data";
 import Clickable from "@/ui/customComponents/Clickable";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
-import type { EmptyEmployee } from "@/utils/models/emptyObjectsTypes";
+import type { EmptyEmployee } from "@/utils/models/emptyObjects/emptyObjectsTypes";
 
 export default function Data({
   employee = emptyEmployee,
