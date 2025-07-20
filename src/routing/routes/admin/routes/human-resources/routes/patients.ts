@@ -15,7 +15,7 @@ export const patientsRoutes = route(
   [...persondFields, ["CreatedAt", "datetime"], ["ReceptionistID", "number"]],
   ({ ID }) => [
     ["Show Appointments", `/admin/appointments?PatientID=${ID}`],
-    ["Show Tests Appointments", `/admin/testAppointments?PatientID=${ID}`],
+    ["Show Tests Appointments", `/admin/tests/appointments?PatientID=${ID}`],
     ["Show Operations", `/admin/operations?PatientID=${ID}`],
     ["Show Insurances", `/admin/insurances?PatientID=${ID}`],
   ],

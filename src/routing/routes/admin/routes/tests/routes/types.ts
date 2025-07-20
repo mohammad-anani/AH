@@ -18,5 +18,8 @@ export const testTypesRoutes = route(
     ["AdminID", "number"],
     ["CreatedAt", "datetime"],
   ],
-  () => [],
+  ({ ID }) => [
+    ["Show Test Appointments", `/admin/tests/appointments?TestTypeID=${ID}`],
+    ["Show Test Orders", `/admin/tests/orders?TestTypeID=${ID}`],
+  ],
 );

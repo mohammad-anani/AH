@@ -24,7 +24,7 @@ export const departmentsRoutes = route(
       `/admin/human-resources/receptionists?Department=${ID}`,
     ],
     ["Show Admins", `/admin/human-resources/admins?Department=${ID}`],
-    ["Show Tests", `/admin/human-resources/tests?Department=${ID}`],
-    ["Show Operations", `/admin/human-resources/operations?Department=${ID}`],
+    ["Show Tests", `/admin/tests/types?Department=${ID}`],
+    ["Show Operations", `/admin/operations?Department=${ID}`],
   ],
 );

@@ -11,7 +11,11 @@ export const adminsRoutes = route(
   ({ ID }) => [
     ["Show Departments", `/admins/departments?AdminID=${ID}`],
     ["Show Tests", `/admin/tests?AdminID=${ID}`],
-    ["Show Receptionists", `/admin/receptionists?AdminID=${ID}`],
-    ["Show Admins", `/admin/admins?AdminID=${ID}`],
+    [
+      "Show Receptionists",
+      `/admin/human-resources/receptionists?AdminID=${ID}`,
+    ],
+    ["Show Admins", `/admin/human-resources/admins?AdminID=${ID}`],
+    ["Show Tests", `/admin/tests/types?AdminID=${ID}`],
   ],
 );

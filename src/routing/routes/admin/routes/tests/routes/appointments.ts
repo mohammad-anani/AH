@@ -25,5 +25,5 @@ export const testAppointmentsRoutes = route(
     ["ReceptionistID", "number"],
     ["CreatedAt", "datetime"],
   ],
-  () => [], // No sublinks in Card
+  () => [],
 );

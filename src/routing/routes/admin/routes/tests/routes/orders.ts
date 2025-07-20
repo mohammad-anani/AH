@@ -13,5 +13,7 @@ export const testOrdersRoutes = route(
     ["DoctorID", "number"],
     ["OrderAt", "datetime"],
   ],
-  () => [], // No sublinks in Card
+  ({ ID }) => [
+    ["Show Test Appointments", `/admin/tests/appointments?TestOrderID=${ID}`],
+  ],
 );
