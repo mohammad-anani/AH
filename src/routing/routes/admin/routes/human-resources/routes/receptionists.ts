@@ -1,49 +1,26 @@
-import Receptionists from "@/interfaces/admin/pages/human-resources/Receptionists";
-import ViewEdit from "@/features/human-resources/receptionist/ViewEdit";
-import Card from "@/features/human-resources/receptionist/Card";
-import Update from "@/features/human-resources/receptionist/Update";
-import Add from "@/features/human-resources/receptionist/Add";
-import findByIDLoader from "@/utils/loaders/findByIDLoader";
-import listLoader from "@/utils/loaders/listLoader";
-import addUpdateAction from "@/utils/actions/addUpdateAction";
-import deleteAction from "@/utils/actions/deleteAction";
-import InvalidPath from "@/ui/InvalidPath";
+import { route } from "@/routing/entityRoute";
+import { employeeFields, persondFields } from "@/utils/models/objectKeys";
 
-export const receptionistsRoutes = [
-  {
-    path: "receptionists",
-    children: [
-      {
-        index: true,
-        Component: Receptionists,
-        loader: listLoader("ReceptionistRows"),
-      },
-      {
-        path: ":id",
-        Component: ViewEdit,
-        loader: findByIDLoader("Receptionists"),
-        children: [
-          {
-            index: true,
-            Component: Card,
-          },
-          {
-            path: "edit",
-            Component: Update,
-            action: addUpdateAction("Receptionists"),
-          },
-          {
-            path: "delete",
-            Component: InvalidPath,
-            action: deleteAction("Receptionists"),
-          },
-        ],
-      },
-      {
-        path: "add",
-        Component: Add,
-        action: addUpdateAction("Receptionists"),
-      },
-    ],
-  },
-];
+export const receptionistsRoutes = route(
+  "Receptionist",
+  true,
+  true,
+  true,
+  [["Name"], ({ Name }) => [Name], [2]],
+  [
+    ...persondFields,
+    ...employeeFields,
+    ["CreatedAt", "datetime"],
+    ["AdminID", "number"],
+  ],
+  ({ ID }) => [
+    ["Show Appointments", `/admin/appointments?ReceptionistID=${ID}`],
+    ["Show Tests Appointments", `/admin/tests?ReceptionistID=${ID}`],
+    ["Show Tests", `/admin/tests?ReceptionistID=${ID}`],
+    ["Show Patients", `/admin/tests?ReceptionistID=${ID}`],
+    ["Show Doctors", `/admin/tests?ReceptionistID=${ID}`],
+    ["Show Operartions", `/admin/tests?ReceptionistID=${ID}`],
+    ["Show Payments", `/admin/tests?ReceptionistID=${ID}`],
+    ["Show Insurances", `/admin/tests?ReceptionistID=${ID}`],
+  ],
+);

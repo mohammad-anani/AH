@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { useFetcher, useOutletContext } from "react-router-dom";
 import { DataObject } from "@/utils/models/DataObject";
-import type { EntityKey } from "@/utils/models/types/util";
+import { entityCamelMap, type EntityKey } from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
 
 export default function Card<T extends EntityKey>({
@@ -29,6 +29,10 @@ export default function Card<T extends EntityKey>({
   headerWidth?: number;
 }) {
   const data = useOutletContext<typesObject[T]>();
+
+  console.log(entityCamelMap);
+
+  const DataProp = { [entityCamelMap[title]]: data };
 
   const fetcher = useFetcher();
 
@@ -60,7 +64,7 @@ export default function Card<T extends EntityKey>({
       <div
         className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-1 *:text-xl! *:odd:font-bold`}
       >
-        <Data department={data} />
+        <Data {...DataProp} />
       </div>
       <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
         {subLinks(data).map(([text, link]) => (

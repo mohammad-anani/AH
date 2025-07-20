@@ -8,7 +8,6 @@ import type {
   TestType,
   TestOrder,
   TestAppointment,
-  Country,
   Insurance,
   Operation,
   Prescription,
@@ -26,7 +25,6 @@ export type typesObject = {
   TestType: TestType;
   TestOrder: TestOrder;
   TestAppointment: TestAppointment;
-  Countrie: Country;
   Insurance: Insurance;
   Operation: Operation;
   Prescription: Prescription;

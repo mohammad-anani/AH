@@ -12,8 +12,8 @@ import FilterEntities from "../customComponents/FilterEntities";
 import type { EntityKey, Key } from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
 import DetailsButton from "../customComponents/DetailsButton";
-import type { typesObject } from "@/utils/models/types/typesObject";
 import type { Primitive } from "zod";
+import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 export default function ListPage<T extends EntityKey>({
   title,
@@ -26,14 +26,13 @@ export default function ListPage<T extends EntityKey>({
   canAdd: boolean;
   emptyText?: string;
 
-  rowTemplate: [string[], (item: typesObject[T]) => Primitive[], number[]];
+  rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]];
 
   filterFields: Key[];
 }) {
   const [items, itemsCount] = useLoaderData();
 
   const { isFilterOpen, setIsFilterOpen } = useFilter();
-
   const [headerFields, dataFields, gridFr] = rowTemplate;
 
   const gridTemplate = [...gridFr, 1].map((fr) => `${fr}fr`).join(" ");
@@ -51,7 +50,7 @@ export default function ListPage<T extends EntityKey>({
     </li>
   );
 
-  const render = (item: typesObject[T]) => (
+  const render = (item: rowTypesObject[T]) => (
     <li style={gridStyle} key={item?.["ID"]}>
       {dataFields(item).map((field) => (
         <span>{String(field)}</span>
@@ -112,7 +111,7 @@ export default function ListPage<T extends EntityKey>({
           </>
         ) : null}
 
-        <List.Items<typesObject[T]>
+        <List.Items<rowTypesObject[T]>
           render={render}
           Header={Header}
           itemsCount={itemsCount}

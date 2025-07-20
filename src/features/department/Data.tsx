@@ -1,7 +1,7 @@
 import Clickable from "@/ui/customComponents/Clickable";
-import type { Department } from "../../utils/models/types";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
+import type { Department } from "@/utils/models/types/types";
 
 interface DataProps {
   department: Department;

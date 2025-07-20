@@ -10,13 +10,14 @@ import type { EntityKey, Key } from "@/utils/models/types/util";
 import Card from "@/ui/entityComponents/Card";
 import type { Primitive } from "zod";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
+import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 export function route<T extends EntityKey>(
   entity: T,
   canAdd: boolean = true,
   canEdit: boolean = true,
   canDelete: boolean = true,
-  rowTemplate: [string[], (item: typesObject[T]) => Primitive[], number[]],
+  rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]],
   filterFields: Key[],
   subLinks: (item: typesObject[T]) => [text: string, link: string][],
   headerWidth?: number,

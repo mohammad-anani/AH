@@ -1,52 +1,29 @@
-import testAppointmentViewEdit from "@/features/tests/appointment/ViewEdit";
-import testAppointmentCard from "@/features/tests/appointment/Card";
-import UpdateTestAppointment from "@/features/tests/appointment/Update";
-import InvalidPath from "@/ui/InvalidPath";
-import Appointments from "@/interfaces/admin/pages/tests/Appointments";
-import listLoader from "@/utils/loaders/listLoader";
-import findByIDLoader from "@/utils/loaders/findByIDLoader";
-import Card from "@/features/payments/Card";
-import Update from "@/features/payments/Update";
-import ViewEdit from "@/features/payments/ViewEdit";
-import addUpdateAction from "@/utils/actions/addUpdateAction";
+import { route } from "@/routing/entityRoute";
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
-export const testAppointmentsRoutes = [
-  {
-    path: "appointments",
-    children: [
-      {
-        index: true,
-        Component: Appointments,
-        loader: listLoader("TestAppointmentRows"),
-      },
-      {
-        path: ":id",
-        Component: testAppointmentViewEdit,
-        loader: findByIDLoader("TestAppointments"),
-        children: [
-          { index: true, Component: testAppointmentCard },
-          {
-            path: "edit",
-            Component: UpdateTestAppointment,
-          },
-          {
-            path: "payment",
-            Component: ViewEdit,
-            children: [
-              { index: true, Component: Card },
-              {
-                path: "pay",
-                Component: Update,
-                action: addUpdateAction("Payments"),
-              },
-            ],
-          },
-          {
-            path: "delete",
-            Component: InvalidPath,
-          },
-        ],
-      },
+export const testAppointmentsRoutes = route(
+  "TestAppointment",
+  false,
+  true,
+  true,
+  [
+    ["PatientName", "TestName", "Date"],
+    ({ PatientName, TestName, ScheduledDate }) => [
+      PatientName,
+      TestName,
+      formatDateIsoToLocal(ScheduledDate),
     ],
-  },
-];
+    [1, 1, 1],
+  ],
+  [
+    ["TestOrderID", "number"],
+    ["PatientID", "number"],
+    ["ScheduledDate", "datetime"],
+    ["Status", "select", ["Cancelled", "Accepted"]],
+    ["Result", "string"],
+    ["ResultDate", "datetime"],
+    ["ReceptionistID", "number"],
+    ["CreatedAt", "datetime"],
+  ],
+  () => [], // No sublinks in Card
+);

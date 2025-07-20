@@ -64,16 +64,23 @@ export type customFilterProps = [
   DataTypes,
 ];
 
-export type EntityKey =
-  | "Department"
-  | "Admin"
-  | "Doctor"
-  | "Patient"
-  | "Receptionist"
-  | "TestType"
-  | "TestOrder"
-  | "TestAppointment"
-  | "Payment"
-  | "Insurance"
-  | "Prescription"
-  | "Operation";
+const entityKeys = [
+  "Department",
+  "Admin",
+  "Doctor",
+  "Patient",
+  "Receptionist",
+  "TestType",
+  "TestOrder",
+  "TestAppointment",
+  "Payment",
+  "Insurance",
+  "Prescription",
+  "Operation",
+] as const;
+
+export type EntityKey = (typeof entityKeys)[number];
+
+export const entityCamelMap: Record<EntityKey, string> = Object.fromEntries(
+  entityKeys.map((key) => [key, key[0].toLowerCase() + key.slice(1)]),
+) as Record<EntityKey, string>;

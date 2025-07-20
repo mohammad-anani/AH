@@ -47,4 +47,4 @@ export const TestOrderRowSchema = TestOrderSchema.pick({
 export const TestAppointmentRowSchema = TestAppointmentSchema.pick({
   ID: true,
   ScheduledDate: true,
-}).extend({ PatientName: nonEmptyString, TeestName: nonEmptyString });
+}).extend({ PatientName: nonEmptyString, TestName: nonEmptyString });

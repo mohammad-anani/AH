@@ -1,6 +1,6 @@
 import AdminHomepage from "@/interfaces/admin/pages/Homepage";
 import AdminProtectedRoute from "@/interfaces/admin/AdminProtectedRoute";
-import { departmentsRoutes } from "./admin/routes/departments.tsx";
+import { departmentsRoutes } from "./admin/routes/departments.ts";
 import { humanResourcesRoutes } from "./admin/routes/human-resources";
 import { testsRoutes } from "./admin/routes/tests";
 import { operationsRoutes } from "./admin/routes/operations";
