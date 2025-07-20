@@ -12,6 +12,7 @@ import {
   OperationSchema,
   PrescriptionSchema,
   PaymentSchema,
+  AppointmentSchema,
 } from "./schemas";
 import type { EntityKey } from "../types/util";
 
@@ -28,4 +29,5 @@ export const schemas: Record<EntityKey, z.ZodObject<z.ZodRawShape>> = {
   Operation: OperationSchema,
   Prescription: PrescriptionSchema,
   Payment: PaymentSchema,
+  Appointment: AppointmentSchema,
 };

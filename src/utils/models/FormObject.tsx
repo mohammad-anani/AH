@@ -7,6 +7,7 @@ import TestAppointmentForm from "@/features/tests/appointment/Form";
 import TestOrderForm from "@/features/tests/order/Form";
 import TestTypeForm from "@/features/tests/type/Form";
 import type { EntityKey } from "./types/util";
+import Form from "@/features/appointment/Form";
 
 export const Forms: Record<EntityKey, React.ComponentType> = {
   Department: DepartmentForm,
@@ -21,6 +22,7 @@ export const Forms: Record<EntityKey, React.ComponentType> = {
   Operation: TestAppointmentForm,
   Prescription: TestAppointmentForm,
   Payment: TestAppointmentForm,
+  Appointment: Form,
 };
 
 //to be changed

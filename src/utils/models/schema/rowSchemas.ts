@@ -1,5 +1,6 @@
 import {
   AdminSchema,
+  AppointmentSchema,
   DepartmentSchema,
   DoctorSchema,
   PatientSchema,
@@ -48,3 +49,8 @@ export const TestAppointmentRowSchema = TestAppointmentSchema.pick({
   ID: true,
   ScheduledDate: true,
 }).extend({ PatientName: nonEmptyString, TestName: nonEmptyString });
+
+export const AppointmentRowSchema = AppointmentSchema.pick({
+  ID: true,
+  Time: true,
+}).extend({ PatientName: nonEmptyString, DoctorName: nonEmptyString });

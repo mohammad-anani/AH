@@ -5,7 +5,7 @@ export const testOrdersRoutes = route(
   false,
   true,
   true,
-  [["ID"], ({ ID }) => [ID], [2, 1]],
+  [["ID"], ({ ID }) => [ID], [2]],
   [
     ["ID", "number"],
     ["AppointmentID", "number"],

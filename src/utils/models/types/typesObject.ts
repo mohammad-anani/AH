@@ -13,6 +13,7 @@ import type {
   Prescription,
   Payment,
   Person,
+  Appointment,
 } from "./types";
 
 export type typesObject = {
@@ -30,4 +31,5 @@ export type typesObject = {
   Prescription: Prescription;
   Payment: Payment;
   Person: Person;
+  Appointment: Appointment;
 };

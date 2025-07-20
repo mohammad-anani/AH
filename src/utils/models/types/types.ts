@@ -15,6 +15,7 @@ import {
   OperationSchema,
   PrescriptionSchema,
   PaymentSchema,
+  AppointmentSchema,
 } from "../schema/schemas";
 
 export type Department = z.infer<typeof DepartmentSchema>;
@@ -32,6 +33,7 @@ export type Insurance = z.infer<typeof InsuranceSchema>;
 export type Operation = z.infer<typeof OperationSchema>;
 export type Prescription = z.infer<typeof PrescriptionSchema>;
 export type Payment = z.infer<typeof PaymentSchema>;
+export type Appointment = z.infer<typeof AppointmentSchema>;
 
 export type {
   DepartmentRow,

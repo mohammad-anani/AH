@@ -13,6 +13,7 @@ import {
   OperationSchema,
   PrescriptionSchema,
   PaymentSchema,
+  AppointmentSchema,
 } from "./schemas.ts";
 
 export const AddPersonSchema = PersonSchema.omit({ ID: true });
@@ -89,6 +90,14 @@ export const AddInsuranceSchema = InsuranceSchema.omit({
   ID: true,
   CreatedAt: true,
   CreatedByReceptionistID: true,
+});
+
+export const AddAppointmentSchema = AppointmentSchema.omit({
+  ID: true,
+  CreatedAt: true,
+  CreatedByReceptionistID: true,
+  Status: true,
+  PaymentID: true,
 });
 
 export const AddOperationSchema = OperationSchema.omit({

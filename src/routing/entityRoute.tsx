@@ -22,9 +22,11 @@ export function route<T extends EntityKey>(
   subLinks: (item: typesObject[T]) => [text: string, link: string][],
   headerWidth?: number,
 ) {
+  const mainPath =
+    (entity.startsWith("Test") ? entity.replace("Test", "") : entity) + "s";
   return [
     {
-      path: entity + "s",
+      path: mainPath,
       children: [
         {
           index: true,

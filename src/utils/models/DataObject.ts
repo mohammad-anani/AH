@@ -7,7 +7,37 @@ import TestOrderData from "@/features/tests/order/Data";
 import TestAppointmentData from "@/features/tests/appointment/Data";
 import PaymentData from "@/features/payments/Data";
 import DepartmentData from "@/features/department/Data";
-import type { DataComponentPropsTypes, EntityKey } from "./types/util";
+
+import Data from "@/features/appointment/Data";
+import type {
+  Department,
+  Admin,
+  Doctor,
+  Patient,
+  Receptionist,
+  TestType,
+  TestOrder,
+  TestAppointment,
+  Payment,
+  Appointment,
+} from "./types/types";
+import type { EntityKey } from "./types/util";
+
+export type DataComponentPropsTypes = {
+  Department: { department: Department };
+  Admin: { admin: Admin };
+  Doctor: { doctor: Doctor };
+  Patient: { patient: Patient };
+  Receptionist: { receptionist: Receptionist };
+  TestType: { testType: TestType };
+  TestOrder: { testOrder: TestOrder };
+  TestAppointment: { testAppointment: TestAppointment };
+  Payment: { payment: Payment };
+  Operation: { payment: Payment };
+  Insurance: { payment: Payment };
+  Prescription: { payment: Payment };
+  Appointment: { appointment: Appointment };
+};
 
 export const DataObject = {
   Department: DepartmentData,
@@ -22,6 +52,7 @@ export const DataObject = {
   Prescription: PaymentData,
   Operation: PaymentData,
   Insurance: PaymentData,
+  Appointment: Data,
 } satisfies {
   [K in EntityKey]: React.ComponentType<DataComponentPropsTypes[K]>;
 };

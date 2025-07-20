@@ -7,7 +7,7 @@ export const testAppointmentsRoutes = route(
   true,
   true,
   [
-    ["PatientName", "TestName", "Date"],
+    ["Patient", "Test", "Date"],
     ({ PatientName, TestName, ScheduledDate }) => [
       PatientName,
       TestName,

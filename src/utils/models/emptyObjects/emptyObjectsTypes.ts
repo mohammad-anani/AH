@@ -42,6 +42,11 @@ export type EmptyEmployee = NullableNumberBoolean<
 export type EmptyReceptionist = NullableNumberBoolean<
   z.infer<typeof AddReceptionistSchema>
 >;
+
+export type EmptyAppointment = NullableNumberBoolean<
+  z.infer<typeof AddReceptionistSchema>
+>;
+
 export type EmptyDoctor = NullableNumberBoolean<
   z.infer<typeof AddDoctorSchema>
 >;

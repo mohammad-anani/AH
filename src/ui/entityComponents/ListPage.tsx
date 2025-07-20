@@ -59,13 +59,17 @@ export default function ListPage<T extends EntityKey>({
     </li>
   );
 
+  const fixedTitle = title.startsWith("Test")
+    ? title.replace("Test", "Test ")
+    : title;
+
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">
         Back
       </Clickable>
 
-      <H2 className="mb-6">{title}</H2>
+      <H2 className="mb-6">{fixedTitle}</H2>
 
       {canAdd ? (
         <Clickable as="Link" variant="primary" to="add" className="text-sm!">

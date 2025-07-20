@@ -396,6 +396,64 @@
       "Date": "2023-02-14T08:00:00"
     }
   ],
+  "Appointments": [
+    {
+      "ID": 1,
+      "DoctorID": 1,
+      "PatientID": 1,
+      "Time": "2023-02-01T09:00:00",
+      "Reason": "Routine checkup",
+      "Status": "Completed",
+      "Notes": "All good.",
+      "PaymentID": 1,
+      "CreatedByReceptionistID": 1,
+      "CreatedAt": "2023-01-31T10:00:00"
+    },
+    {
+      "ID": 2,
+      "DoctorID": 2,
+      "PatientID": 2,
+      "Time": "2023-02-02T10:00:00",
+      "Reason": "Headache",
+      "Status": "Cancelled",
+      "Notes": "Patient did not show up.",
+      "PaymentID": 2,
+      "CreatedByReceptionistID": 2,
+      "CreatedAt": "2023-02-01T11:00:00"
+    },
+    {
+      "ID": 3,
+      "DoctorID": 1,
+      "PatientID": 3,
+      "Time": "2023-02-03T11:00:00",
+      "Reason": "Follow-up",
+      "Status": "Scheduled",
+      "Notes": "To discuss test results.",
+      "PaymentID": 3,
+      "CreatedByReceptionistID": 1,
+      "CreatedAt": "2023-02-02T12:00:00"
+    }
+  ],
+  "AppointmentRows": [
+    {
+      "ID": 1,
+      "Time": "2023-02-01T09:00:00",
+      "PatientName": "Olivia Anne Taylor",
+      "DoctorName": "Alice Marie Smith"
+    },
+    {
+      "ID": 2,
+      "Time": "2023-02-02T10:00:00",
+      "PatientName": "Liam Andrew Baker",
+      "DoctorName": "Bob John Taylor"
+    },
+    {
+      "ID": 3,
+      "Time": "2023-02-03T11:00:00",
+      "PatientName": "Sophia Marie King",
+      "DoctorName": "Alice Marie Smith"
+    }
+  ],
   "Payments": [
     {
       "ID": 1,

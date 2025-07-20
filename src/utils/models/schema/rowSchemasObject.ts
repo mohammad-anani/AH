@@ -8,6 +8,7 @@ import {
   TestTypeRowSchema,
   TestOrderRowSchema,
   TestAppointmentRowSchema,
+  AppointmentRowSchema,
 } from "./rowSchemas";
 import type { EntityKey } from "../types/util";
 
@@ -24,6 +25,7 @@ export const rowSchemas: Record<EntityKey, z.ZodObject<z.ZodRawShape>> = {
   Payment: TestAppointmentRowSchema,
   Prescription: TestAppointmentRowSchema,
   Insurance: TestAppointmentRowSchema,
+  Appointment: AppointmentRowSchema,
 };
 
 //to be changed

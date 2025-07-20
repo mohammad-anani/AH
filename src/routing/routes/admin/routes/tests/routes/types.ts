@@ -6,9 +6,9 @@ export const testTypesRoutes = route(
   true,
   true,
   [
-    ["Name", "DepartmentName"],
+    ["Name", "Department"],
     ({ Name, DepartmentName }) => [Name, DepartmentName],
-    [2, 1, 1],
+    [1, 1],
   ],
   [
     ["ID", "number"],
