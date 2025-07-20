@@ -36,7 +36,7 @@ export default function AddUpdateForm({
 
   const defaultValues = isAdd ? emptyObjects[entity] : data;
 
-  const title = `${isAdd ? "Add" : "Edit"} ${entity.slice(0, -1)}`;
+  const title = `${isAdd ? "Add" : "Edit"} ${entity}`;
 
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),

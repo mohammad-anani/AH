@@ -1,7 +1,7 @@
 import { route } from "@/routing/entityRoute";
 
 export const departmentsRoutes = route(
-  "Departments",
+  "Department",
   true,
   true,
   true,

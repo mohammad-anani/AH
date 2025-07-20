@@ -25,7 +25,7 @@ export default function ListPage<T extends typesObject[EntityKey]>({
   canAdd: boolean;
   emptyText?: string;
 
-  rowTemplate: [string[], (item: T) => [], number[]];
+  rowTemplate: [string[], (item: typesObject[EntityKey]) => [], number[]];
 
   filterFields: Key[];
 }) {

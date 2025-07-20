@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import DepartmentViewEdit from "@/features/department/ViewEdit";
 import DepartmentCard from "@/features/department/Card";
 
@@ -8,31 +7,26 @@ import InvalidPath from "@/ui/InvalidPath";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
-import type { emptyObjectsTypes } from "@/utils/models/emptyObjects/emptyObjectsTypesObject";
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { typesObject } from "@/utils/models/types/typesObject";
-import type { Key } from "@/utils/models/types";
+import type { EntityKey, Key } from "@/utils/models/types/util";
 
 export const route = (
-  entity: keyof emptyObjectsTypes,
+  entity: EntityKey,
   canAdd: boolean = true,
   canEdit: boolean = true,
   canDelete: boolean = true,
-  rowTemplate: [
-    string[],
-    (item: typesObject[keyof emptyObjectsTypes]) => any[],
-    number[],
-  ],
+  rowTemplate: [string[], (item: typesObject[EntityKey]) => [], number[]],
 
   filterFields: Key[],
 ) => [
   {
-    path: entity,
+    path: entity + "s",
     children: [
       {
         index: true,
         element: (
-          <ListPage<typesObject[keyof emptyObjectsTypes]>
+          <ListPage<typesObject[EntityKey]>
             title={entity}
             canAdd={canAdd}
             rowTemplate={rowTemplate}
