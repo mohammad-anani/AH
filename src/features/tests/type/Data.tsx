@@ -1,7 +1,7 @@
 import Clickable from "@/ui/customComponents/Clickable";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { formatMoney } from "@/utils/formatters/formatMoney";
-import type { TestType } from "@/utils/models/types";
+import type { TestType } from "@/utils/models/types/types";
 export default function Data({ testType }: { testType: TestType }) {
   return (
     <>

@@ -1,5 +1,5 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
-import type { TestAppointment } from "@/utils/models/types";
+import type { TestAppointment } from "@/utils/models/types/types";
 import Clickable from "@/ui/customComponents/Clickable";
 
 interface DataProps {
