@@ -1,4 +1,4 @@
-import DetailsButton from "@/ui/entityComponents/DetailsButton";
+import DetailsButton from "@/ui/customComponents/DetailsButton";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { TestAppointmentRow } from "@/utils/models/types";
 

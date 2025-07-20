@@ -12,7 +12,7 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
       throwError(400, "Bad request", "Invalid admin ID");
     }
 
-    const data = await findByID(entity, id);
+    const data = await findByID(entity + "s", id);
 
     const schema = schemas[entity];
 

@@ -15,7 +15,7 @@ import { DataObject } from "@/utils/models/DataObject";
 import type { EntityKey } from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
 
-export default function Card({
+export default function Card<T extends EntityKey>({
   title,
   canEdit = true,
   canDelete = true,
@@ -23,12 +23,12 @@ export default function Card({
   headerWidth = 180,
 }: {
   title: EntityKey;
-  subLinks: [text: string, link: string][];
+  subLinks: (item: typesObject[T]) => [text: string, link: string][];
   canEdit?: boolean;
   canDelete?: boolean;
   headerWidth?: number;
 }) {
-  const data = useOutletContext<typesObject[EntityKey]>();
+  const data = useOutletContext<typesObject[T]>();
 
   const fetcher = useFetcher();
 
@@ -63,7 +63,7 @@ export default function Card({
         <Data department={data} />
       </div>
       <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
-        {subLinks.map(([text, link]) => (
+        {subLinks(data).map(([text, link]) => (
           <Clickable as="Link" to={link} variant="secondary">
             {text}
           </Clickable>

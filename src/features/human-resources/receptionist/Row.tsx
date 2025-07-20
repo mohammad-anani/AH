@@ -1,5 +1,5 @@
 import type { ReceptionistRow } from "@/utils/models/types";
-import DetailsButton from "@/ui/entityComponents/DetailsButton";
+import DetailsButton from "@/ui/customComponents/DetailsButton";
 
 export default function Row({
   receptionist,

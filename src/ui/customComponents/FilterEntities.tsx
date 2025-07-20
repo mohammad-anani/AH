@@ -1,6 +1,6 @@
 import type { Key } from "@/utils/models/types/util";
-import List from "./List";
-import Clickable from "../customComponents/Clickable";
+import List from "../entityComponents/List";
+import Clickable from "./Clickable";
 
 export default function FilterEntities({ fields }: { fields: Key[] }) {
   return (

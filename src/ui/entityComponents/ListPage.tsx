@@ -8,13 +8,14 @@ import {
   DialogHeader,
 } from "../../components/ui/dialog";
 import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
-import FilterEntities from "./FilterEntities";
+import FilterEntities from "../customComponents/FilterEntities";
 import type { EntityKey, Key } from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
-import DetailsButton from "./DetailsButton";
+import DetailsButton from "../customComponents/DetailsButton";
 import type { typesObject } from "@/utils/models/types/typesObject";
+import type { Primitive } from "zod";
 
-export default function ListPage<T extends typesObject[EntityKey]>({
+export default function ListPage<T extends EntityKey>({
   title,
   canAdd,
   emptyText = `No ${title.substring(0, title.length - 1)}`,
@@ -25,7 +26,7 @@ export default function ListPage<T extends typesObject[EntityKey]>({
   canAdd: boolean;
   emptyText?: string;
 
-  rowTemplate: [string[], (item: typesObject[EntityKey]) => [], number[]];
+  rowTemplate: [string[], (item: typesObject[T]) => Primitive[], number[]];
 
   filterFields: Key[];
 }) {
@@ -50,10 +51,10 @@ export default function ListPage<T extends typesObject[EntityKey]>({
     </li>
   );
 
-  const render = (item: T) => (
+  const render = (item: typesObject[T]) => (
     <li style={gridStyle} key={item?.["ID"]}>
       {dataFields(item).map((field) => (
-        <span>{field}</span>
+        <span>{String(field)}</span>
       ))}
       <DetailsButton ID={item["ID"]} />
     </li>
@@ -111,7 +112,7 @@ export default function ListPage<T extends typesObject[EntityKey]>({
           </>
         ) : null}
 
-        <List.Items<T>
+        <List.Items<typesObject[T]>
           render={render}
           Header={Header}
           itemsCount={itemsCount}

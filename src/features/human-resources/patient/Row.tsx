@@ -1,5 +1,5 @@
 import type { PatientRow } from "@/utils/models/types";
-import DetailsButton from "@/ui/entityComponents/DetailsButton";
+import DetailsButton from "@/ui/customComponents/DetailsButton";
 
 export default function Row({ patient }: { patient: PatientRow }) {
   const { ID, Name, Age, Phone } = patient;
