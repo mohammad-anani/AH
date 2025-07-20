@@ -1,7 +1,8 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
-import type { Admin } from "../../utils/models/types";
+
 import EmployeeData from "../employee/Data";
 import Clickable from "@/ui/customComponents/Clickable";
+import type { Admin } from "@/utils/models/types/types";
 
 interface DataProps {
   admin: Admin;

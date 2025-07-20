@@ -30,15 +30,6 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
         <input type="date" />
       </RegisteredInput>
 
-      <label htmlFor="isActive">Status:</label>
-      <RegisteredInput name={`${prefix}isActive`}>
-        <select>
-          <option value="">Select Status</option>
-          <option value={true}>Active</option>
-          <option value={false}>Inactive</option>
-        </select>
-      </RegisteredInput>
-
       <label htmlFor="DepartmentID">Department:</label>
       <Controller
         errorMessage="Department required."

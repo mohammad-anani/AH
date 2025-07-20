@@ -1,16 +1,10 @@
 import { formatMoney } from "@/utils/formatters/formatMoney";
-import { emptyEmployee } from "../../../utils/models/emptyObjects/emptyObjects";
-import type { Employee } from "../../../utils/models/types";
+import type { Employee } from "../../../utils/models/types/types";
 import PersonData from "../person/Data";
 import Clickable from "@/ui/customComponents/Clickable";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
-import type { EmptyEmployee } from "@/utils/models/emptyObjects/emptyObjectsTypes";
 
-export default function Data({
-  employee = emptyEmployee,
-}: {
-  employee?: Employee | EmptyEmployee;
-}) {
+export default function Data({ employee }: { employee: Employee }) {
   const {
     Person,
     DepartmentID,

@@ -1,4 +1,5 @@
-import type { Department, Setter } from "@/utils/models/types";
+import type { Department } from "@/utils/models/types/types";
+import type { Setter } from "@/utils/models/types/util";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
 
@@ -27,7 +28,7 @@ export default function DepartmentSelect({
         setDepartmentID(+e.target.value);
       }}
     >
-      <option value={null}>Select Department</option>
+      <option value={undefined}>Select Department</option>
       {departments?.map((department) => (
         <option key={department.ID} value={department.ID}>
           {department.Name}

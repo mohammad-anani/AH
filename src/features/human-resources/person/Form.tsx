@@ -28,11 +28,14 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
       </RegisteredInput>
 
       <label htmlFor="gender">Gender:</label>
-      <RegisteredInput name={`${prefix}Gender`}>
+      <RegisteredInput
+        onChange={(value) => value === "true"}
+        name={`${prefix}Gender`}
+      >
         <select>
           <option value="">Select Gender</option>
-          <option value={false}>Male</option>
-          <option value={true}>Female</option>
+          <option value="false">Male</option>
+          <option value="true">Female</option>
         </select>
       </RegisteredInput>
 

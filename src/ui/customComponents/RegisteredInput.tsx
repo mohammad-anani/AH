@@ -3,16 +3,20 @@ import { get, useFormContext } from "react-hook-form";
 
 import React from "react";
 import { useNavigation } from "react-router-dom";
+import type { Primitive } from "zod";
 
 export default function RegisteredInput({
   name,
+  onChange,
   children,
 }: {
   name: string;
+  onChange?: (value: Primitive) => Primitive;
   children: React.ReactElement<React.InputHTMLAttributes<HTMLInputElement>>;
 }) {
   const {
     register,
+    setValue,
     formState: { errors, isSubmitting: isSub },
   } = useFormContext();
 
@@ -36,6 +40,9 @@ export default function RegisteredInput({
     <span className={`flex flex-col gap-1`}>
       {cloneElement(children, {
         ...register(name),
+        onChange: (e) => {
+          setValue(name, onChange?.(e.target.value));
+        },
         disabled: isSubmitting,
         id: name,
       })}
