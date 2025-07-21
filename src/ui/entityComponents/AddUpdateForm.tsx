@@ -14,7 +14,7 @@ import type { typesObject } from "@/utils/models/types/typesObject";
 import throwError from "@/utils/helpers/throwError";
 import type { EntityKey } from "@/utils/models/types/util";
 import { z } from "zod";
-import { emptyObjects } from "@/utils/models/emptyObjects/emptyObjectsObject";
+import { emptyObjects } from "@/utils/models/types/emptyObjectsObject";
 import { Forms } from "@/utils/models/FormObject";
 
 export default function AddUpdateForm({

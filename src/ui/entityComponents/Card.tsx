@@ -11,32 +11,32 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { useFetcher, useOutletContext } from "react-router-dom";
-import { DataObject } from "@/utils/models/DataObject";
-import { entityCamelMap, type EntityKey } from "@/utils/models/types/util";
+import { type EntityKey } from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
+import type { Primitive } from "zod";
+import Data from "./Data";
 
 export default function Card<T extends EntityKey>({
   title,
   canEdit = true,
   canDelete = true,
   subLinks,
-  headerWidth = 180,
+  dataFields,
+
+  headerWidth = 150,
 }: {
   title: EntityKey;
   subLinks: (item: typesObject[T]) => [text: string, link: string][];
+  dataFields: (
+    item: typesObject[T],
+  ) => [label: string, value: Primitive, link?: string][];
   canEdit?: boolean;
   canDelete?: boolean;
   headerWidth?: number;
 }) {
   const data = useOutletContext<typesObject[T]>();
 
-  console.log(entityCamelMap);
-
-  const DataProp = { [entityCamelMap[title]]: data };
-
   const fetcher = useFetcher();
-
-  const Data = DataObject[title];
 
   return (
     <Dialog>
@@ -64,7 +64,7 @@ export default function Card<T extends EntityKey>({
       <div
         className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-1 *:text-xl! *:odd:font-bold`}
       >
-        <Data {...DataProp} />
+        <Data<T> data={data} fields={dataFields} />
       </div>
       <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
         {subLinks(data).map(([text, link]) => (

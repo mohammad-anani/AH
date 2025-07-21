@@ -1,31 +1,11 @@
-import type z from "zod";
-import {
-  AdminRowSchema,
-  DepartmentRowSchema,
-  DoctorRowSchema,
-  PatientRowSchema,
-  ReceptionistRowSchema,
-  TestTypeRowSchema,
-  TestOrderRowSchema,
-  TestAppointmentRowSchema,
-  AppointmentRowSchema,
-} from "./rowSchemas";
+import buildSchemasRecord from "@/utils/helpers/buildSchemaRecord";
 import type { EntityKey } from "../types/util";
+import * as rowSchemasNamespace from "./rowSchemas";
 
-export const rowSchemas: Record<EntityKey, z.ZodObject<z.ZodRawShape>> = {
-  Admin: AdminRowSchema,
-  Department: DepartmentRowSchema,
-  Doctor: DoctorRowSchema,
-  Patient: PatientRowSchema,
-  Receptionist: ReceptionistRowSchema,
-  TestType: TestTypeRowSchema,
-  TestOrder: TestOrderRowSchema,
-  TestAppointment: TestAppointmentRowSchema,
-  Operation: TestAppointmentRowSchema,
-  Payment: TestAppointmentRowSchema,
-  Prescription: TestAppointmentRowSchema,
-  Insurance: TestAppointmentRowSchema,
-  Appointment: AppointmentRowSchema,
-};
+export const rowSchemas = buildSchemasRecord<EntityKey, "", "RowSchema">(
+  rowSchemasNamespace,
+  "",
+  "RowSchema",
+);
 
-//to be changed
+console.log(rowSchemas);

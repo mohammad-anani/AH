@@ -1,33 +1,9 @@
-import type { z } from "zod";
-import {
-  AddAdminSchema,
-  AddDoctorSchema,
-  AddReceptionistSchema,
-  AddPatientSchema,
-  AddDepartmentSchema,
-  AddTestTypeSchema,
-  AddTestOrderSchema,
-  AddTestAppointmentSchema,
-  AddInsuranceSchema,
-  AddOperationSchema,
-  AddPrescriptionSchema,
-  AddPaymentSchema,
-  AddAppointmentSchema,
-} from "./addingSchemas";
+import buildSchemasRecord from "@/utils/helpers/buildSchemaRecord";
 import type { EntityKey } from "../types/util";
+import * as addingSchemasNamespace from "./addingSchemas";
 
-export const addingSchemas: Record<EntityKey, z.ZodObject<z.ZodRawShape>> = {
-  Admin: AddAdminSchema,
-  Doctor: AddDoctorSchema,
-  Receptionist: AddReceptionistSchema,
-  Patient: AddPatientSchema,
-  Department: AddDepartmentSchema,
-  TestType: AddTestTypeSchema,
-  TestOrder: AddTestOrderSchema,
-  TestAppointment: AddTestAppointmentSchema,
-  Insurance: AddInsuranceSchema,
-  Operation: AddOperationSchema,
-  Prescription: AddPrescriptionSchema,
-  Payment: AddPaymentSchema,
-  Appointment: AddAppointmentSchema,
-};
+export const addingSchemas = buildSchemasRecord<EntityKey, "Add", "Schema">(
+  addingSchemasNamespace,
+  "Add",
+  "Schema",
+);

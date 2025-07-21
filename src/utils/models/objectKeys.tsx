@@ -1,7 +1,7 @@
 import DepartmentSelect from "@/features/department/DepartmentSelect";
 import type { Key, Setter } from "./types/util";
 
-export const persondFields: Key[] = [
+export const personFields: Key[] = [
   ["FirstName", "string"],
   ["MiddleName", "string"],
   ["LastName", "string"],

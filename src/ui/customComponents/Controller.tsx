@@ -1,7 +1,7 @@
 import { Controller as Controler, get, useFormContext } from "react-hook-form";
 import type { ControllerRenderProps } from "react-hook-form";
 import type { ReactElement } from "react";
-import type { emptyObjectsTypes } from "@/utils/models/emptyObjects/emptyObjectsTypesObject";
+import type { emptyObjectsTypes } from "@/utils/models/types/emptyObjectsTypesObject";
 import type { EntityKey } from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
 

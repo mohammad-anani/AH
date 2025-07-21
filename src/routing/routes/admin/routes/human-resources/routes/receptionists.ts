@@ -1,5 +1,6 @@
 import { route } from "@/routing/entityRoute";
-import { employeeFields, persondFields } from "@/utils/models/objectKeys";
+import { employeeDataFields } from "@/utils/models/dataFields";
+import { employeeFields, personFields } from "@/utils/models/objectKeys";
 
 export const receptionistsRoutes = route(
   "Receptionist",
@@ -8,7 +9,7 @@ export const receptionistsRoutes = route(
   true,
   [["Name"], ({ Name }) => [Name], [2]],
   [
-    ...persondFields,
+    ...personFields,
     ...employeeFields,
     ["CreatedAt", "datetime"],
     ["AdminID", "number"],
@@ -23,5 +24,16 @@ export const receptionistsRoutes = route(
     ["Show Patients", `/admin/human-resources/patients?ReceptionistID=${ID}`],
     ["Show Doctors", `/admin/human-resources/doctors?ReceptionistID=${ID}`],
     ["Show Operartions", `/admin/operations?ReceptionistID=${ID}`],
+  ],
+  ({ Employee, CreatedByAdminID, CreatedAt }) => [
+    ...employeeDataFields(Employee),
+    CreatedByAdminID
+      ? [
+          "Created By",
+          "View Admin",
+          `/admin/human-resources/admins/${CreatedByAdminID}`,
+        ]
+      : ["Created By", "System"],
+    ["Created At", CreatedAt],
   ],
 );

@@ -16,4 +16,5 @@ export const testOrdersRoutes = route(
   ({ ID }) => [
     ["Show Test Appointments", `/admin/tests/appointments?TestOrderID=${ID}`],
   ],
+  ({ ID }) => [["ID", ID]],
 );

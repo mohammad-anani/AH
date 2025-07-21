@@ -20,10 +20,15 @@ export function route<T extends EntityKey>(
   rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]],
   filterFields: Key[],
   subLinks: (item: typesObject[T]) => [text: string, link: string][],
+  dataFields: (
+    item: typesObject[T],
+  ) => [label: string, value: Primitive, link?: string][],
+
   headerWidth?: number,
 ) {
   const mainPath =
     (entity.startsWith("Test") ? entity.replace("Test", "") : entity) + "s";
+
   return [
     {
       path: mainPath,
@@ -59,6 +64,7 @@ export function route<T extends EntityKey>(
                   canDelete={canDelete}
                   canEdit={canEdit}
                   headerWidth={headerWidth}
+                  dataFields={dataFields}
                 />
               ),
             },
