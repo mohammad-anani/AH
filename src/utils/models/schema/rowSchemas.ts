@@ -9,7 +9,7 @@ import {
   TestOrderSchema,
   TestTypeSchema,
 } from "./schemas";
-import { nonEmptyString } from "./reusableSchemas";
+import { datetime, nonEmptyString } from "./reusableSchemas";
 import { z } from "zod";
 
 export const DepartmentRowSchema = DepartmentSchema.pick({
@@ -47,8 +47,11 @@ export const TestOrderRowSchema = TestOrderSchema.pick({
 
 export const TestAppointmentRowSchema = TestAppointmentSchema.pick({
   ID: true,
-  ScheduledDate: true,
-}).extend({ PatientName: nonEmptyString, TestName: nonEmptyString });
+}).extend({
+  PatientName: nonEmptyString,
+  TestName: nonEmptyString,
+  Date: datetime(),
+});
 
 export const AppointmentRowSchema = AppointmentSchema.pick({
   ID: true,

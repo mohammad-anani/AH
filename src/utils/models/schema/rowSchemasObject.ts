@@ -7,5 +7,3 @@ export const rowSchemas = buildSchemasRecord<EntityKey, "", "RowSchema">(
   "",
   "RowSchema",
 );
-
-console.log(rowSchemas);

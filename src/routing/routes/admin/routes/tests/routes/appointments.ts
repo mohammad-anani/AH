@@ -8,10 +8,10 @@ export const testAppointmentsRoutes = route(
   true,
   [
     ["Patient", "Test", "Date"],
-    ({ PatientName, TestName, ScheduledDate }) => [
+    ({ PatientName, TestName, Date }) => [
       PatientName,
       TestName,
-      formatDateIsoToLocal(ScheduledDate),
+      formatDateIsoToLocal(Date),
     ],
     [1, 1, 1],
   ],
