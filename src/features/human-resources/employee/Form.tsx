@@ -54,9 +54,17 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
               isMulti
               isDisabled={isSubmitting}
               options={selectOptions}
-              value={selectOptions.filter((option) =>
-                field.value?.includes(option.value.substring(0, 3)),
-              )}
+              value={selectOptions.filter((option) => {
+                console.log(
+                  option.value.substring(0, 3),
+                  field.value,
+                  option.value,
+                  field.value?.includes(option.value.substring(0, 3)),
+                );
+                return (field.value as string[]).some((day) =>
+                  day.includes(option.value.substring(0, 3)),
+                );
+              })}
               onChange={(selected) =>
                 field.onChange(selected.map((opt) => opt.value))
               }
