@@ -1,6 +1,29 @@
-import type { z } from "zod";
-import type { rowSchemas } from "../schema/rowSchemasObject";
+import type {
+  AdminRow,
+  AppointmentRow,
+  DepartmentRow,
+  DoctorRow,
+  PatientRow,
+  ReceptionistRow,
+  TestAppointmentRow,
+  TestOrderRow,
+  TestTypeRow,
+} from "./rowTypes";
 
 export type rowTypesObject = {
-  [K in keyof typeof rowSchemas]: z.infer<(typeof rowSchemas)[K]>;
+  Department: DepartmentRow;
+  Patient: PatientRow;
+  Receptionist: ReceptionistRow;
+  Doctor: DoctorRow;
+  Admin: AdminRow;
+  TestType: TestTypeRow;
+  TestOrder: TestOrderRow;
+  TestAppointment: TestAppointmentRow;
+  Insurance: TestOrderRow;
+  Operation: TestOrderRow;
+  Prescription: TestOrderRow;
+  Payment: TestOrderRow;
+  Appointment: AppointmentRow;
 };
+
+//to change

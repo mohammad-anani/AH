@@ -1,8 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import type { typesObject } from "@/utils/models/types/typesObject";
 import axios from "./axios";
+import type { EntityKey } from "@/utils/models/types/util";
 
-export default async function update(data: any, entity: string) {
+export default async function update(
+  data: typesObject[EntityKey],
+  entity: string,
+) {
   const url = `/${entity}/${data["ID"]}`;
 
   const response = await axios.patch(url, data, {

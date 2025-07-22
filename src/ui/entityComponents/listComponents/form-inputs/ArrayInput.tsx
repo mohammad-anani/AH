@@ -4,7 +4,7 @@ import Select from "react-select";
 interface ArrayInputProps {
   fieldKey: string;
   label: string;
-  data: [];
+  data: unknown[];
 }
 
 const selectStyles = {
@@ -75,7 +75,7 @@ export default function ArrayInput({ fieldKey, label, data }: ArrayInputProps) {
             <Select
               inputId={fieldKey}
               isMulti
-              options={toValueLabelArray(data)}
+              options={toValueLabelArray(data as string[])}
               value={selectedOptions}
               styles={selectStyles}
               onChange={(options) => {

@@ -13,7 +13,9 @@ export default function listLoader(
   return async function ({ request }: LoaderFunctionArgs) {
     const searchParams = formatLoaderUrl(request.url);
 
-    const data = await getList(entity + "s?" + searchParams?.toString());
+    const data = await getList(
+      (entity + "s?" + searchParams?.toString()) as `${EntityKey}${string}`,
+    );
 
     const schema = (entity.endsWith("Row") ? rowSchemas : schemas)[
       entity.replace("Row", "") as EntityKey

@@ -5,3 +5,5 @@ export default async function findByID(urlEndpoint: string, id: number) {
 
   return data.data[0] || {};
 }
+
+//to be /ID only

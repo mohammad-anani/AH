@@ -1,6 +1,5 @@
 import { route } from "@/routing/entityRoute";
-import { personFields } from "@/utils/models/objectKeys";
-import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
+
 import { personDataFields } from "@/utils/models/dataFields";
 
 export const patientsRoutes = route(
@@ -8,12 +7,7 @@ export const patientsRoutes = route(
   false,
   true,
   true,
-  [
-    ["Name", "Age", "Phone"],
-    ({ Name, Age, Phone }) => [Name, Age, formatPhoneNumber(Phone)],
-    [2, 1, 1],
-  ],
-  [...personFields, ["CreatedAt", "datetime"], ["ReceptionistID", "number"]],
+
   ({ ID }) => [
     ["Show Appointments", `/admin/appointments?PatientID=${ID}`],
     ["Show Tests Appointments", `/admin/tests/appointments?PatientID=${ID}`],

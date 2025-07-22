@@ -1,11 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { isTemporalType } from "./utils";
-import type { Key } from "@/utils/models/types/util";
+import type { Key, Setter } from "@/utils/models/types/util";
 
-export function useFilterNavigation(fields: Key[]) {
-  const navigate = useNavigate();
+export function useFilterNavigation(
+  fields: Key[],
+  UrlState?: [URLSearchParams, Setter<URLSearchParams>],
+) {
+  const [, setSearchParams] = useSearchParams();
 
-  function buildPathWithParams(data: Record<string, unknown>): string {
+  function buildPathWithParams(data: Record<string, unknown>): URLSearchParams {
     const params = new URLSearchParams();
 
     for (const [field, type] of fields) {
@@ -32,18 +35,13 @@ export function useFilterNavigation(fields: Key[]) {
     const page = new URLSearchParams(location.search).get("page");
     if (page && Number(page) > 1) params.set("page", page);
 
-    const filterIndex = location.pathname.indexOf("/filter");
-    const basePath =
-      filterIndex >= 0
-        ? location.pathname.slice(0, filterIndex)
-        : location.pathname;
-
-    return `${basePath}${params.toString() ? `?${params.toString()}` : ""}`;
+    return params;
   }
 
   function handleFilterSubmit(data: Record<string, unknown>) {
-    const newPath = buildPathWithParams(data);
-    navigate(newPath);
+    const newParams = buildPathWithParams(data);
+    if (UrlState) UrlState[1](newParams);
+    else setSearchParams(newParams);
   }
 
   return { handleFilterSubmit };

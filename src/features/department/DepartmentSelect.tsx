@@ -1,4 +1,4 @@
-import type { Department } from "@/utils/models/types/types";
+import type { typesObject } from "@/utils/models/types/typesObject";
 import type { Setter } from "@/utils/models/types/util";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function DepartmentSelect({
     fetcher.load("/admin/departments/list");
   }, []);
 
-  const departments: Department[] = fetcher.data?.[0] ?? [];
+  const departments: typesObject["Department"][] = fetcher.data?.[0] ?? [];
 
   return (
     <select

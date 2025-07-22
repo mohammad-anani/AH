@@ -6,7 +6,7 @@ interface NumberInputProps {
   label: string;
   value?: string | number;
   register?: ReturnType<typeof useFormContext>["register"];
-  data: [];
+  data: unknown[];
   registerOptions?: RegisterOptions;
 }
 

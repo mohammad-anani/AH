@@ -5,19 +5,6 @@ export const testTypesRoutes = route(
   true,
   true,
   true,
-  [
-    ["Name", "Department"],
-    ({ Name, DepartmentName }) => [Name, DepartmentName],
-    [1, 1],
-  ],
-  [
-    ["ID", "number"],
-    ["DepartmentID", "number"],
-    ["Name", "string"],
-    ["Cost", "number"],
-    ["AdminID", "number"],
-    ["CreatedAt", "datetime"],
-  ],
   ({ ID }) => [
     ["Show Test Appointments", `/admin/tests/appointments?TestTypeID=${ID}`],
     ["Show Test Orders", `/admin/tests/orders?TestTypeID=${ID}`],

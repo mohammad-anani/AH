@@ -7,17 +7,6 @@ export const departmentsRoutes = route(
   true,
   true,
   true,
-  [
-    ["Name", "Phone"],
-    ({ Name, Phone }) => [Name, formatPhoneNumber(Phone)],
-    [2, 1],
-  ],
-  [
-    ["Name", "string"],
-    ["Phone", "phone"],
-    ["AdminID", "string"],
-    ["CreatedAt", "datetime"],
-  ],
   ({ ID }) => [
     ["Show Doctors", `/admin/human-resources/doctors?Department=${ID}`],
     [

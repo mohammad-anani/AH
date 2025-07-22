@@ -14,18 +14,18 @@ export default function Filter({
   children,
   fields,
 }: ChildrenProps & { fields: Key[] }) {
-  const { canModifyUrl, setFields } = useListContext();
+  const { canModifyUrl, setFields, UrlState } = useListContext();
 
-  const defaultValues = useFilterDefaultValues(fields);
+  const defaultValues = useFilterDefaultValues(fields, UrlState) || {};
 
-  const { handleFilterSubmit } = useFilterNavigation(fields);
+  const { handleFilterSubmit } = useFilterNavigation(fields, UrlState);
 
   const methods = useForm({ defaultValues });
 
   setFields(fields);
   // useEffect(() => {}, [fields, setFields]);
 
-  if (!canModifyUrl) return null;
+  if (!canModifyUrl && !UrlState) return null;
 
   return (
     <FormProvider {...methods}>

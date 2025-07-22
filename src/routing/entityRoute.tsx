@@ -6,19 +6,17 @@ import deleteAction from "@/utils/actions/deleteAction";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ListPage from "@/ui/entityComponents/ListPage";
 import type { typesObject } from "@/utils/models/types/typesObject";
-import type { EntityKey, Key } from "@/utils/models/types/util";
+import type { EntityKey } from "@/utils/models/types/util";
 import Card from "@/ui/entityComponents/Card";
 import type { Primitive } from "zod";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import { listPageConfig } from "@/utils/models/listPageConfig";
 
 export function route<T extends EntityKey>(
   entity: T,
   canAdd: boolean = true,
   canEdit: boolean = true,
   canDelete: boolean = true,
-  rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]],
-  filterFields: Key[],
   subLinks: (item: typesObject[T]) => [text: string, link: string][],
   dataFields: (
     item: typesObject[T],
@@ -28,6 +26,8 @@ export function route<T extends EntityKey>(
 ) {
   const mainPath =
     (entity.startsWith("Test") ? entity.replace("Test", "") : entity) + "s";
+
+  const [rowTemplate, filterFields] = listPageConfig[entity];
 
   return [
     {
@@ -48,7 +48,7 @@ export function route<T extends EntityKey>(
         {
           path: "list",
           Component: InvalidPath,
-          loader: listLoader(entity),
+          loader: listLoader(`${entity}Row`),
         },
         {
           path: ":id",

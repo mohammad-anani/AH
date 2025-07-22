@@ -2,11 +2,12 @@ import type { Primitive } from "zod";
 import formatDateIsoToLocal from "../formatters/formatDateIsoToLocal";
 import { formatMoney } from "../formatters/formatMoney";
 import formatPhoneNumber from "../formatters/formatPhoneNumber";
-import type { Employee, Person } from "./types/types";
-
+import type { typesObject } from "./types/typesObject";
 export const personDataFields: (
-  person: Person,
-) => [label: string, value: Primitive, link?: string][] = (person: Person) => [
+  person: typesObject["Person"],
+) => [label: string, value: Primitive, link?: string][] = (
+  person: typesObject["Person"],
+) => [
   [
     "Full Name",
     `${person.FirstName} ${person.MiddleName} ${person.LastName}`.trim(),
@@ -20,9 +21,9 @@ export const personDataFields: (
 ];
 
 export const employeeDataFields: (
-  employee: Employee,
+  employee: typesObject["Employee"],
 ) => [label: string, value: Primitive, link?: string][] = (
-  employee: Employee,
+  employee: typesObject["Employee"],
 ) => {
   const {
     Person,

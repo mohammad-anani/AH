@@ -4,7 +4,7 @@ import type { ReactElement } from "react";
 
 import type { EntityKey } from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
-import type { emptyObjectsTypes } from "@/utils/models/emptyObjects/emptyObjectsTypesObject";
+import type { emptyObjectsTypes } from "@/utils/models/types/emptyObjectsTypesObject";
 
 interface ControlledFieldProps {
   name: string;
