@@ -33,4 +33,5 @@ export const testAppointmentsRoutes = route(
     ],
     ["Created At", CreatedAt],
   ],
+  true,
 );

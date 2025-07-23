@@ -8,7 +8,7 @@ export default function useFilter(UrlState: string) {
     setIsFilterOpen(false);
   }, [searchParams, UrlState]);
 
-  return { isFilterOpen, setIsFilterOpen };
+  return [isFilterOpen, setIsFilterOpen];
 }
 
 //why modal close when go to details,do select

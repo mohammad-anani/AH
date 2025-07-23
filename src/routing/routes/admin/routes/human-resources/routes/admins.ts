@@ -28,4 +28,5 @@ export const adminsRoutes = route(
       : ["Created By", "System"],
     ["Created At", CreatedAt],
   ],
+  true,
 );

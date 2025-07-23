@@ -1,9 +1,15 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ReactPaginate from "react-paginate";
 import { useSearchParams } from "react-router-dom";
+import useListContext from "./context";
 
 export default function Pagination({ itemsCount }: { itemsCount: number }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const sparms = useSearchParams();
+
+  const { UrlState } = useListContext();
+
+  const [searchParams, setSearchParams] = UrlState ?? sparms;
+
   return (
     <ReactPaginate
       pageCount={Math.ceil(itemsCount / +import.meta.env.VITE_ITEMS_PER_PAGE)}

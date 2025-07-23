@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import List from "./List";
 import Clickable from "../customComponents/Clickable";
-import useFilter from "@/utils/customHooks/useFilter";
+
 import {
   Dialog,
   DialogContent,
@@ -14,8 +14,10 @@ import H2 from "../customComponents/H2";
 import DetailsButton from "../customComponents/DetailsButton";
 import type { Primitive } from "zod";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
-import type { typesObject } from "@/utils/models/types/typesObject";
+
 import { Check } from "lucide-react";
+import { useState } from "react";
+import useFilter from "@/utils/customHooks/useFilter";
 
 export default function ListPage<T extends EntityKey>({
   title,
@@ -29,11 +31,14 @@ export default function ListPage<T extends EntityKey>({
   isSelector = false,
   selectedObject,
   detailsLink,
+  onSelect,
+  withBack = false,
 }: {
   title: string;
   canAdd: boolean;
-
+  withBack: boolean;
   rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]];
+  onSelect?: (item: rowTypesObject[T]) => void;
 
   filterFields: Key[];
   emptyText?: string;
@@ -41,24 +46,22 @@ export default function ListPage<T extends EntityKey>({
   UrlState?: [URLSearchParams, Setter<URLSearchParams>] | undefined;
   data?: rowTypesObject[T];
   isSelector?: boolean;
-  selectedObject?: [typesObject[T], Setter<typesObject[T]>];
+  selectedObject?: [rowTypesObject[T], Setter<rowTypesObject[T]>];
   detailsLink?: string;
 }) {
   const loaderData = useLoaderData();
-
   const [items, itemsCount] = loaderData ?? data ?? null;
 
-  const { isFilterOpen, setIsFilterOpen } = useFilter(
-    UrlState?.[0].toString() ?? "",
-  );
+  const [isFilterOpen, setIsFilterOpen] = useFilter(UrlState?.toString() ?? "");
   const [headerFields, dataFields, gridFr] = rowTemplate;
 
-  const gridTemplate = [...gridFr, ...(isSelector ? [1, 1] : [1])]
+  const gridTemplate = [...gridFr, ...(isSelector ? [1, 2] : [1])]
     .map((fr) => `${fr}fr`)
     .join(" ");
 
   const gridStyle = {
     display: "grid",
+    gap: "5px",
     gridTemplateColumns: gridTemplate,
   };
 
@@ -77,17 +80,20 @@ export default function ListPage<T extends EntityKey>({
       ))}
       <DetailsButton link={detailsLink} ID={item["ID"]} />
 
-      <Clickable
-        className="ml-3! flex! items-center gap-x-1"
-        as="button"
-        variant="secondary"
-        onClick={() => {
-          selectedObject?.[1](item);
-        }}
-      >
-        <Check className="*:text-primary! h-[20px] w-[20px]" />
-        Select
-      </Clickable>
+      {isSelector &&
+      (!selectedObject?.[0] || item["ID"] !== selectedObject?.[0]["ID"]) ? (
+        <Clickable
+          className="flex! items-center gap-x-1"
+          as="button"
+          variant="secondary"
+          onClick={() => {
+            onSelect?.(item);
+          }}
+        >
+          <Check className="*:text-primary! h-[20px] w-[20px]" />
+          Select
+        </Clickable>
+      ) : null}
     </li>
   );
 
@@ -99,11 +105,12 @@ export default function ListPage<T extends EntityKey>({
     <>
       {!isSelector ? (
         <>
-          <Clickable className="text-sm!" as="Back" variant="secondary">
-            Back
-          </Clickable>
-
-          <H2 className="mb-6">{fixedTitle}</H2>
+          {withBack ? (
+            <Clickable className="text-sm!" as="Back" variant="secondary">
+              Back
+            </Clickable>
+          ) : null}
+          <H2 className="mb-6">{fixedTitle}s</H2>
         </>
       ) : null}
       {canAdd ? (

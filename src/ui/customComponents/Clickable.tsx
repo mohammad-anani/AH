@@ -17,7 +17,7 @@ const variantStyles = {
   primary:
     "border-primary text-background! bg-primary hover:bg-primary-light! hover:text-primary!",
   secondary:
-    "border-primary text-primary! bg-transparent! hover:bg-background-darker!",
+    "border-primary text-primary! bg-transparent hover:bg-background-darker!",
   destructive:
     "text-background! border-black bg-destructive hover:bg-destructive-light!",
   link: "text-primary! hover:text-primary-light! text-xl underline!",

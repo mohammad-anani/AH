@@ -20,4 +20,5 @@ export const doctorsRoutes = route(
     ],
     ["Created At", CreatedAt],
   ],
+  true,
 );

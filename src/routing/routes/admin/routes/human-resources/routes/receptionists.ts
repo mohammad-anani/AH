@@ -29,4 +29,5 @@ export const receptionistsRoutes = route(
       : ["Created By", "System"],
     ["Created At", CreatedAt],
   ],
+  true,
 );

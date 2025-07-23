@@ -11,6 +11,7 @@ import Pagination from "./listComponents/Pagination";
 import ClearFilter from "./listComponents/ClearFilter";
 import Filter from "./listComponents/Filter";
 import type { typesObject } from "@/utils/models/types/typesObject";
+import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 export default function List<T extends typesObject[EntityKey]>({
   children,
@@ -24,7 +25,7 @@ export default function List<T extends typesObject[EntityKey]>({
   canModifyUrl?: boolean;
   UrlState?: [URLSearchParams, Setter<URLSearchParams>];
   isSelector: boolean;
-  setObject?: Setter<T>;
+  setObject?: Setter<rowTypesObject[EntityKey]>;
 }) {
   const [fields, setFields] = useState<Key[]>({} as Key[]);
 

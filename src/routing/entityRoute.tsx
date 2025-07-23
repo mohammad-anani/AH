@@ -21,7 +21,7 @@ export function route<T extends EntityKey>(
   dataFields: (
     item: typesObject[T],
   ) => [label: string, value: Primitive, link?: string][],
-
+  withBack: boolean = false,
   headerWidth?: number,
 ) {
   const mainPath =
@@ -41,6 +41,7 @@ export function route<T extends EntityKey>(
               canAdd={canAdd}
               rowTemplate={rowTemplate}
               filterFields={filterFields}
+              withBack={withBack}
             />
           ),
           loader: listLoader(`${entity}Row`),

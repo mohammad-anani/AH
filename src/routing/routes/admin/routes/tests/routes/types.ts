@@ -20,4 +20,5 @@ export const testTypesRoutes = route(
     ],
     ["Created At", CreatedAt],
   ],
+  true,
 );

@@ -13,7 +13,7 @@ export default function Items<T>({
   Header: ReactNode;
   itemsCount: number;
 }) {
-  const { items } = useListContext<T>();
+  const { items } = useListContext();
 
   if (items.length > 0)
     return (
