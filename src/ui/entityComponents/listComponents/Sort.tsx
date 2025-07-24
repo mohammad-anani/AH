@@ -5,6 +5,7 @@ import { generateLabel } from "./utils";
 export default function Sort() {
   const { control } = useFormContext();
   const { fields } = useListContext();
+  const safeFields = Array.isArray(fields) ? fields : [];
 
   return (
     <>
@@ -20,7 +21,7 @@ export default function Sort() {
             onChange={field.onChange}
           >
             <option value="None">None</option>
-            {fields.map((fieldItem) => (
+            {safeFields.map((fieldItem) => (
               <option key={fieldItem[0]} value={fieldItem[0]}>
                 {generateLabel(fieldItem[0])}
               </option>

@@ -38,6 +38,8 @@ type inputTypes =
 export function Form() {
   const { fields } = useListContext();
 
+  const safeFields = Array.isArray(fields) ? fields : [];
+
   const renderField = (field: Key) => {
     const [key, type, data] = field;
 
@@ -98,10 +100,10 @@ export function Form() {
   return (
     <div
       className={`grid max-h-[300px]! w-[330px] grid-cols-[1fr_1fr] gap-y-3 overflow-x-hidden ${
-        fields.length > 10 ? "overflow-y-scroll" : ""
+        safeFields.length > 10 ? "overflow-y-scroll" : ""
       } rounded-none! p-2 text-xs! *:w-full!`}
     >
-      {fields.map(renderField)}
+      {safeFields.map(renderField)}
     </div>
   );
 }

@@ -12,12 +12,11 @@ import FilterEntities from "../customComponents/FilterEntities";
 import type { EntityKey, Key, Setter } from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
 import DetailsButton from "../customComponents/DetailsButton";
-import { z, type Primitive } from "zod";
+import type { Primitive } from "zod";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 import { Check } from "lucide-react";
 import useFilter from "@/ui/entityComponents/listComponents/useFilter";
-import { rowSchemas } from "@/utils/models/schema/rowSchemasObject";
 
 export default function ListPage<T extends EntityKey>({
   title,
@@ -48,7 +47,7 @@ export default function ListPage<T extends EntityKey>({
   isSelector?: boolean;
   selectedObject?: [
     rowTypesObject[EntityKey],
-    Setter<rowTypesObject[EntityKey]>,
+    Setter<rowTypesObject[EntityKey] | undefined>,
   ];
   detailsLink?: string;
 }) {
@@ -56,7 +55,10 @@ export default function ListPage<T extends EntityKey>({
 
   const [items, itemsCount] = isSelector ? data : loaderData;
 
-  const [isFilterOpen, setIsFilterOpen] = useFilter(filterFields);
+  const [isFilterOpen, setIsFilterOpen] = useFilter(
+    filterFields,
+    `Filter${title}s`,
+  );
   const [headerFields, dataFields, gridFr] = rowTemplate;
 
   const gridTemplate = [...gridFr, ...(isSelector ? [1, 2] : [1])]
@@ -140,7 +142,11 @@ export default function ListPage<T extends EntityKey>({
         canModifyUrl={canModifyUrl}
         UrlState={UrlState}
         isSelector={isSelector}
-        setObject={selectedObject?.[1]}
+        setObject={
+          selectedObject
+            ? (v) => v !== undefined && selectedObject[1](v)
+            : undefined
+        }
       >
         <List.ClearFilter>
           <Clickable as="button" className="text-sm!" variant="secondary">

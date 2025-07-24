@@ -1,6 +1,7 @@
 import DepartmentSelect from "@/features/department/DepartmentSelect";
 import Controller from "@/ui/customComponents/Controller";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
+import { SelectorInput } from "@/ui/entityComponents/listComponents/form-inputs";
 
 export default function Form() {
   return (
@@ -27,6 +28,7 @@ export default function Form() {
       <RegisteredInput name="Cost">
         <input type="number" min={0} />
       </RegisteredInput>
+      <SelectorInput label="Test Type" data="TestType" fieldKey="TestTypeID" />
     </>
   );
 }

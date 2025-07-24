@@ -9,7 +9,7 @@ type ContextType<T extends rowTypesObject[EntityKey]> = {
   setFields: Setter<Key[]>;
   UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
   isSelector?: boolean;
-  setObject?: Setter<T>;
+  setObject?: Setter<T | undefined>;
 };
 
 const ListContext = createContext<

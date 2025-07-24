@@ -1,6 +1,6 @@
 // SelectorTrigger.tsx
 
-import { X } from "lucide-react";
+import { PencilIcon, X } from "lucide-react";
 import type { Setter } from "@/utils/models/types/util";
 import Clickable from "@/ui/customComponents/Clickable";
 
@@ -25,6 +25,7 @@ export default function SelectorTrigger<T>({
     return (
       <span>
         <Clickable
+          type="button"
           style={{ fontSize: "inherit" }}
           as="button"
           variant="link"
@@ -42,10 +43,11 @@ export default function SelectorTrigger<T>({
       <Clickable
         style={{ fontSize: "inherit" }}
         as="button"
+        type="button"
         variant="link"
         onClick={() => setIsOpen(true)}
       >
-        Modify
+        <PencilIcon />
       </Clickable>
       <button
         onClick={() => {

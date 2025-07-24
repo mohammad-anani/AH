@@ -8,7 +8,7 @@ import { selectorConfig } from "@/utils/models/selectorConfig";
 interface SelectorInputProps {
   fieldKey: string;
   label: string;
-  data: EntityKey;
+  data: [EntityKey, string];
 }
 
 export default function SelectorInput({
@@ -22,7 +22,11 @@ export default function SelectorInput({
       <Controller
         name={fieldKey}
         renderField={({ field }) => (
-          <SelectorField entity={data} fieldProps={{ field }} />
+          <SelectorField
+            entity={data[0]}
+            fieldProps={{ field }}
+            prefix={data[1]}
+          />
         )}
       />
     </>
@@ -32,6 +36,7 @@ export default function SelectorInput({
 function SelectorField<T extends EntityKey>({
   entity,
   fieldProps,
+  prefix,
 }: {
   entity: T;
   fieldProps: {
@@ -40,6 +45,7 @@ function SelectorField<T extends EntityKey>({
       onChange: (value: unknown) => void;
     };
   };
+  prefix?: string;
 }) {
   const [selected, setSelected] = useState<rowTypesObject[T] | undefined>(
     undefined,
@@ -48,13 +54,14 @@ function SelectorField<T extends EntityKey>({
   useEffect(() => {
     fieldProps.field.onChange(selected?.["ID"]);
   }, [selected]);
-
   return (
     <Selector
       entity={entity}
       canAdd={false}
       {...selectorConfig[entity]}
       selectedObject={[selected, setSelected]}
+      ID={fieldProps.field.value as number}
+      prefix={prefix}
     />
   );
 }

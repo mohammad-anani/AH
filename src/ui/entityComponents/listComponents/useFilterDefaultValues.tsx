@@ -33,6 +33,9 @@ export function useFilterDefaultValues(
       defaults[field + "From"] = (params.get(field + "From") ??
         null) as DataTypes;
       defaults[field + "To"] = (params.get(field + "To") ?? null) as DataTypes;
+    } else if (type === "selector") {
+      defaults[field] =
+        convertStringToType("number", params.get(field) ?? "") || null;
     } else {
       const value = params.get(field) ?? "";
       defaults[field] = convertStringToType(type ?? "", value) as DataTypes;

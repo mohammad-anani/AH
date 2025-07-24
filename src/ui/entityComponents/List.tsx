@@ -24,7 +24,7 @@ export default function List<T extends rowTypesObject[EntityKey]>({
   canModifyUrl?: boolean;
   UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
   isSelector: boolean;
-  setObject?: Setter<rowTypesObject[EntityKey]>;
+  setObject?: Setter<rowTypesObject[EntityKey] | undefined>;
 }) {
   const [fields, setFields] = useState<Key[]>({} as Key[]);
 
