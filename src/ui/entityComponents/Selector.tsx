@@ -1,7 +1,10 @@
 import { type EntityKey, type Setter } from "@/utils/models/types/util";
-import { useEffect, useState, type ReactNode } from "react";
-import Clickable from "../customComponents/Clickable";
-import { X } from "lucide-react";
+import { useEffect } from "react";
+import { useFetcher } from "react-router-dom";
+import ListPage from "./ListPage";
+import { listPageConfig } from "@/utils/models/listPageConfig";
+import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+
 import {
   Dialog,
   DialogContent,
@@ -10,11 +13,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import H2 from "../customComponents/H2";
-import ListPage from "./ListPage";
-import { listPageConfig } from "@/utils/models/listPageConfig";
-import { useFetcher } from "react-router-dom";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 import { useSessionStorage } from "@/utils/customHooks/useSessionStorage";
+import SelectorTrigger from "./selectorComponents/SelectorTrigger";
+import { useSessionSyncedObject } from "./selectorComponents/useSessionSyncedObject";
+import { useUrlSearchParamsSession } from "./selectorComponents/useUrlSearchParamsSession";
 
 export default function Selector<T extends EntityKey>({
   entity,
@@ -34,88 +36,44 @@ export default function Selector<T extends EntityKey>({
 }) {
   const [object, setObject] = selectedObject;
 
-  const [storedObject, setStoredObject] = useSessionStorage<
-    rowTypesObject[T] | undefined
-  >(`selected${entity}`, undefined);
+  // Sync selectedObject with sessionStorage
+  const [, setStoredObject] = useSessionSyncedObject(
+    `selected${entity}`,
+    object,
+    setObject,
+  );
 
-  if (storedObject) setObject(storedObject);
-
+  // Modal open state with sessionStorage
   const [isOpen, setIsOpen] = useSessionStorage(
     `is${entity}SelectorOpen`,
     false,
   );
 
-  const [urlParamsString, setUrlParamsString] = useSessionStorage(
-    `urlParams${entity}`,
-    "",
-  );
-
-  const UrlState: [URLSearchParams, (params: URLSearchParams) => void] = [
-    new URLSearchParams(urlParamsString),
-    (params: URLSearchParams) => {
-      setUrlParamsString(params.toString());
-    },
-  ];
+  // URL search params with sessionStorage
+  const UrlState = useUrlSearchParamsSession(`urlParams${entity}`);
 
   const paramString = UrlState[0].toString();
 
   const fetcher = useFetcher();
-
-  // Fetch list data
   useEffect(() => {
     fetcher.load(`${path}/list?${paramString}`);
-  }, [paramString]);
+  }, [paramString, path]);
 
-  // Close dialog when selection is made
+  if (!fetcher.data) return null;
 
   const [rowTemplate, filterFields] = listPageConfig[entity];
-
-  // UI when nothing selected
-  let triggerUI: ReactNode = (
-    <span>
-      <Clickable
-        style={{ fontSize: "inherit" }}
-        as="button"
-        variant="link"
-        onClick={() => setIsOpen(true)}
-      >
-        {`Select ${entity}`}
-      </Clickable>
-    </span>
-  );
-
-  // UI when something selected
-  if (object) {
-    triggerUI = (
-      <span className="flex h-auto space-x-2 align-middle">
-        <span>{selectedDisplay(object)}</span>
-        <Clickable
-          style={{ fontSize: "inherit" }}
-          as="button"
-          variant="link"
-          onClick={() => setIsOpen(true)}
-        >
-          Modify
-        </Clickable>
-        <button
-          onClick={() => {
-            setStoredObject(undefined);
-            setObject(undefined);
-            // this will also clear sessionStorage
-          }}
-        >
-          <X />
-        </button>
-      </span>
-    );
-  }
-
-  if (!fetcher.data) return;
 
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        {triggerUI}
+        <SelectorTrigger
+          object={object}
+          setObject={setObject}
+          setStoredObject={setStoredObject}
+          selectedDisplay={selectedDisplay}
+          setIsOpen={setIsOpen}
+          entity={entity}
+        />
         {isOpen && (
           <DialogPortal>
             <DialogContent className="w-500 pt-4 text-left!">
@@ -131,7 +89,7 @@ export default function Selector<T extends EntityKey>({
                   rowTemplate={rowTemplate}
                   filterFields={filterFields}
                   UrlState={UrlState}
-                  data={fetcher?.data}
+                  data={fetcher.data}
                   isSelector={true}
                   detailsLink={path}
                   selectedObject={selectedObject}

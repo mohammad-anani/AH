@@ -1,4 +1,4 @@
-import { useFormContext, Controller } from "react-hook-form";
+import Controller from "@/ui/customComponents/Controller";
 import Select from "react-select";
 
 interface ArrayInputProps {
@@ -58,15 +58,12 @@ function toValueLabelArray(arr: string[]): { value: string; label: string }[] {
 }
 
 export default function ArrayInput({ fieldKey, label, data }: ArrayInputProps) {
-  const { control } = useFormContext();
-
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
       <Controller
-        control={control}
         name={fieldKey}
-        render={({ field }) => {
+        renderField={({ field }) => {
           const selectedOptions = field.value
             ? field.value.map((v: string) => ({ value: v, label: v }))
             : [];

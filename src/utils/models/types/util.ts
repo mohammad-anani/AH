@@ -25,12 +25,13 @@ export type DataTypes =
   | "array"
   | "time"
   | "select"
-  | "money";
+  | "money"
+  | "selector";
 
 export type Key = [
   string,
   DataTypes | "custom",
-  (Array<Primitive> | customFilterProps | [string, string])?,
+  (Array<Primitive> | customFilterProps | [string, string] | string)?,
 ];
 
 export type customFilterProps = [

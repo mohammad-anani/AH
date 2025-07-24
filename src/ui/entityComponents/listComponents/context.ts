@@ -1,25 +1,25 @@
 import { createContext, useContext } from "react";
 import type { EntityKey, Key, Setter } from "../../../utils/models/types/util";
-import type { typesObject } from "@/utils/models/types/typesObject";
+import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
-type ContextType<T extends typesObject[EntityKey]> = {
+type ContextType<T extends rowTypesObject[EntityKey]> = {
   items: T[];
   fields: Key[];
   canModifyUrl: boolean;
   setFields: Setter<Key[]>;
-  UrlState?: [URLSearchParams, Setter<URLSearchParams>];
+  UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
   isSelector?: boolean;
   setObject?: Setter<T>;
 };
 
 const ListContext = createContext<
-  ContextType<typesObject[EntityKey]> | undefined
+  ContextType<rowTypesObject[EntityKey]> | undefined
 >(undefined);
 
 export default function useListContext() {
   const ctx = useContext(ListContext);
   if (!ctx) throw new Error("useListContext must be used within a <List>");
-  return ctx as ContextType<typesObject[EntityKey]>;
+  return ctx as ContextType<rowTypesObject[EntityKey]>;
 }
 
 export { ListContext };

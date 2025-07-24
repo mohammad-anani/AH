@@ -1,4 +1,5 @@
 import Selector from "@/ui/entityComponents/Selector";
+import { selectorConfig } from "@/utils/models/selectorConfig";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 import { useState } from "react";
@@ -11,8 +12,7 @@ export default function Homepage() {
       <h1>{department ? department.Name : "No Deparmtent yet"}</h1>
       <Selector
         entity="Department"
-        selectedDisplay={({ Name }) => Name}
-        path="/admin/departments"
+        {...selectorConfig["Department"]}
         selectedObject={state}
       />
     </>

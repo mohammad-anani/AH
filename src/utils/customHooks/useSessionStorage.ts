@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const STORAGE_EVENT = "session-storage-updated";
 
@@ -24,9 +24,7 @@ export function useSessionStorage<T>(
       : initialValue;
   };
 
-  const [rawValue, setRawValue] = useState<T | undefined>(getStoredValue);
-
-  const value = useMemo(() => rawValue, [JSON.stringify(rawValue)]);
+  const [value, setValue] = useState<T | undefined>(() => getStoredValue());
 
   useEffect(() => {
     if (value === undefined) {
@@ -58,7 +56,7 @@ export function useSessionStorage<T>(
         value: T | undefined;
       }>;
       if (detail.key === key && !deepEqual(detail.value, value)) {
-        setRawValue(detail.value);
+        setValue(detail.value);
       }
     };
 
@@ -66,5 +64,5 @@ export function useSessionStorage<T>(
     return () => window.removeEventListener(STORAGE_EVENT, handleStorageChange);
   }, [key, value]);
 
-  return [value, setRawValue];
+  return [value, setValue];
 }

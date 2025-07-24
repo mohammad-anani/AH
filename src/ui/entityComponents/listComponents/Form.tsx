@@ -8,11 +8,13 @@ import {
   TemporalInput,
   ArrayInput,
   UnsupportedInput,
+  SelectorInput,
 } from "./form-inputs/index";
 import { generateLabel, isTemporalType } from "./utils";
 import SelectInput from "./form-inputs/SelectInput";
 import MoneyInput from "./form-inputs/MoneyInput";
 import Controller from "@/ui/customComponents/Controller";
+import { unknown } from "zod";
 
 const inputMap = {
   number: NumberInput,
@@ -21,9 +23,17 @@ const inputMap = {
   array: ArrayInput,
   money: MoneyInput,
   select: SelectInput,
+  selector: SelectorInput,
 } as const;
 
-type inputTypes = "number" | "string" | "phone" | "array" | "money" | "select";
+type inputTypes =
+  | "number"
+  | "string"
+  | "phone"
+  | "array"
+  | "money"
+  | "select"
+  | "selector";
 
 export function Form() {
   const { fields } = useListContext();
@@ -36,7 +46,7 @@ export function Form() {
       key,
       fieldKey: key,
       label,
-      data: Array.isArray(data) ? data : [],
+      data: data,
     };
 
     if (type === "custom") {

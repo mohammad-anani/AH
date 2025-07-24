@@ -6,9 +6,7 @@ export default async function update(
   data: typesObject[EntityKey],
   entity: string,
 ) {
-  const url = `/${entity}/${data["ID"]}`;
-
-  const response = await axios.patch(url, data, {
+  const response = await axios.patch(`/${entity}/${data["ID"]}`, data, {
     headers: {
       "Content-Type": "application/json",
     },

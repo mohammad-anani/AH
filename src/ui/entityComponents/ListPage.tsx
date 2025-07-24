@@ -12,12 +12,12 @@ import FilterEntities from "../customComponents/FilterEntities";
 import type { EntityKey, Key, Setter } from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
 import DetailsButton from "../customComponents/DetailsButton";
-import type { Primitive } from "zod";
+import { z, type Primitive } from "zod";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 import { Check } from "lucide-react";
-import { useState } from "react";
-import useFilter from "@/utils/customHooks/useFilter";
+import useFilter from "@/ui/entityComponents/listComponents/useFilter";
+import { rowSchemas } from "@/utils/models/schema/rowSchemasObject";
 
 export default function ListPage<T extends EntityKey>({
   title,
@@ -34,7 +34,7 @@ export default function ListPage<T extends EntityKey>({
   onSelect,
   withBack = false,
 }: {
-  title: string;
+  title: EntityKey;
   canAdd: boolean;
   withBack: boolean;
   rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]];
@@ -43,16 +43,20 @@ export default function ListPage<T extends EntityKey>({
   filterFields: Key[];
   emptyText?: string;
   canModifyUrl?: boolean;
-  UrlState?: [URLSearchParams, Setter<URLSearchParams>] | undefined;
+  UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
   data?: rowTypesObject[T];
   isSelector?: boolean;
-  selectedObject?: [rowTypesObject[T], Setter<rowTypesObject[T]>];
+  selectedObject?: [
+    rowTypesObject[EntityKey],
+    Setter<rowTypesObject[EntityKey]>,
+  ];
   detailsLink?: string;
 }) {
   const loaderData = useLoaderData();
-  const [items, itemsCount] = loaderData ?? data ?? null;
 
-  const [isFilterOpen, setIsFilterOpen] = useFilter(UrlState?.toString() ?? "");
+  const [items, itemsCount] = isSelector ? data : loaderData;
+
+  const [isFilterOpen, setIsFilterOpen] = useFilter(filterFields);
   const [headerFields, dataFields, gridFr] = rowTemplate;
 
   const gridTemplate = [...gridFr, ...(isSelector ? [1, 2] : [1])]
@@ -131,12 +135,12 @@ export default function ListPage<T extends EntityKey>({
       >
         Filter
       </Clickable>
-      <List
+      <List<rowTypesObject[T]>
         items={items}
         canModifyUrl={canModifyUrl}
         UrlState={UrlState}
-        selectedObject={selectedObject}
         isSelector={isSelector}
+        setObject={selectedObject?.[1]}
       >
         <List.ClearFilter>
           <Clickable as="button" className="text-sm!" variant="secondary">

@@ -6,6 +6,8 @@ import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { personFields, employeeFields } from "@/utils/models/objectKeys";
 
+//add rest
+
 export const listPageConfig: {
   [K in EntityKey]: [
     [string[], (item: rowTypesObject[K]) => Primitive[], number[]],
@@ -24,7 +26,7 @@ export const listPageConfig: {
     [
       ["Name", "string"],
       ["Phone", "phone"],
-      ["AdminID", "string"],
+      ["Admin", "selector", "Admin"],
       ["CreatedAt", "datetime"],
     ],
   ],
@@ -47,7 +49,7 @@ export const listPageConfig: {
       ...employeeFields,
       ["Specialization", "string"],
       ["CreatedAt", "datetime"],
-      ["ReceptionistID", "number"],
+      ["Receptionist", "selector", "Receptionist"],
     ],
   ],
   Patient: [
@@ -60,7 +62,11 @@ export const listPageConfig: {
       ],
       [2, 1, 1],
     ],
-    [...personFields, ["CreatedAt", "datetime"], ["ReceptionistID", "number"]],
+    [
+      ...personFields,
+      ["CreatedAt", "datetime"],
+      ["Receptionist", "selector", "Receptionist"],
+    ],
   ],
   TestType: [
     [
@@ -70,10 +76,10 @@ export const listPageConfig: {
     ],
     [
       ["ID", "number"],
-      ["DepartmentID", "number"],
+      ["Department", "selector", "Department"],
       ["Name", "string"],
       ["Cost", "number"],
-      ["AdminID", "number"],
+      ["Admin", "selector", "Admin"],
       ["CreatedAt", "datetime"],
     ],
   ],
@@ -81,9 +87,9 @@ export const listPageConfig: {
     [["ID"], (item: rowTypesObject["TestOrder"]) => [item.ID], [2]],
     [
       ["ID", "number"],
-      ["AppointmentID", "number"],
-      ["TestTypeID", "number"],
-      ["DoctorID", "number"],
+      ["Appointment", "selector", "Appointment"],
+      ["TestType", "selector", "TestType"],
+      ["Doctor", "selector", "Doctor"],
       ["OrderAt", "datetime"],
     ],
   ],
@@ -98,13 +104,13 @@ export const listPageConfig: {
       [1, 1, 1],
     ],
     [
-      ["TestOrderID", "number"],
-      ["PatientID", "number"],
+      ["TestOrder", "selector", "TestOrder"],
+      ["Patient", "selector", "Patient"],
       ["ScheduledDate", "datetime"],
       ["Status", "select", ["Cancelled", "Accepted"]],
       ["Result", "string"],
       ["ResultDate", "datetime"],
-      ["ReceptionistID", "number"],
+      ["Receptionist", "selector", "Receptionist"],
       ["CreatedAt", "datetime"],
     ],
   ],
@@ -119,13 +125,13 @@ export const listPageConfig: {
       [1, 1, 1],
     ],
     [
-      ["DoctorID", "number"],
-      ["PatientID", "number"],
+      ["Doctor", "selector", "Doctor"],
+      ["Patient", "selector", "Patient"],
       ["Time", "datetime"],
       ["Reason", "string"],
       ["Status", "select", ["Accepted", "Rejected"]],
       ["Notes", "string"],
-      ["ReceptionistID", "number"],
+      ["Receptionist", "selector", "Receptionist"],
       ["CreatedAt", "datetime"],
     ],
   ],

@@ -6,7 +6,7 @@ export function useFilterNavigation(
   fields: Key[],
   UrlState?: [URLSearchParams, Setter<URLSearchParams>],
 ) {
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function buildPathWithParams(data: Record<string, unknown>): URLSearchParams {
     const params = new URLSearchParams();
@@ -40,6 +40,13 @@ export function useFilterNavigation(
 
   function handleFilterSubmit(data: Record<string, unknown>) {
     const newParams = buildPathWithParams(data);
+
+    if (
+      newParams.toString() === UrlState?.[0].toString() ||
+      newParams.toString() === searchParams.toString()
+    )
+      return;
+
     if (UrlState) UrlState[1](newParams);
     else setSearchParams(newParams);
   }

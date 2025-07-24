@@ -6,11 +6,7 @@ export default async function add(
   data: typesObject[EntityKey],
   entity: string,
 ) {
-  // /add
-
-  const url = `/${entity}`;
-
-  const response = await axios.post(url, data, {
+  const response = await axios.post(`/${entity}`, data, {
     headers: {
       "Content-Type": "application/json",
     },

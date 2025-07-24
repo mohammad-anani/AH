@@ -10,10 +10,9 @@ import Items from "./listComponents/Items";
 import Pagination from "./listComponents/Pagination";
 import ClearFilter from "./listComponents/ClearFilter";
 import Filter from "./listComponents/Filter";
-import type { typesObject } from "@/utils/models/types/typesObject";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
-export default function List<T extends typesObject[EntityKey]>({
+export default function List<T extends rowTypesObject[EntityKey]>({
   children,
   items,
   canModifyUrl = true,
@@ -23,7 +22,7 @@ export default function List<T extends typesObject[EntityKey]>({
 }: ChildrenProps & {
   items: T[];
   canModifyUrl?: boolean;
-  UrlState?: [URLSearchParams, Setter<URLSearchParams>];
+  UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
   isSelector: boolean;
   setObject?: Setter<rowTypesObject[EntityKey]>;
 }) {
@@ -31,26 +30,15 @@ export default function List<T extends typesObject[EntityKey]>({
 
   return (
     <ListContext.Provider
-      value={
-        setObject
-          ? {
-              items,
-              fields,
-              canModifyUrl,
-              setFields,
-              UrlState,
-              isSelector,
-            }
-          : {
-              items,
-              fields,
-              canModifyUrl,
-              setFields,
-              UrlState,
-              isSelector,
-              setObject,
-            }
-      }
+      value={{
+        items,
+        fields,
+        canModifyUrl,
+        setFields,
+        UrlState,
+        isSelector,
+        setObject,
+      }}
     >
       <>{children}</>
     </ListContext.Provider>
