@@ -153,8 +153,8 @@ export default function Selector<T extends EntityKey>({
                     canDelete={false}
                     title={entity}
                     data={cardFetcher.data}
-                    dataFields={cardConfig[entity]["dataFields"]}
-                    withBack={false}
+                    {...cardConfig[entity]}
+                    isModal={true}
                   />
                 </div>
               </div>

@@ -10,7 +10,7 @@ export const cardConfig: {
     subLinks: (item: typesObject[K]) => [text: string, link: string][];
     dataFields: (
       item: typesObject[K],
-    ) => [label: string, value: Primitive, link?: string][];
+    ) => [label: string, value: Primitive, link?: string, entity?: EntityKey][];
   };
 } = {
   Department: {
@@ -31,6 +31,7 @@ export const cardConfig: {
         "Created By",
         "View Admin",
         `/admin/human-resources/admins/${CreatedByAdminID}`,
+        "Admin",
       ],
       ["Created At", formatDateIsoToLocal(CreatedAt)],
     ],
@@ -53,6 +54,7 @@ export const cardConfig: {
             "Created By",
             "View Admin",
             `/admin/human-resources/admins/${CreatedByAdminID}`,
+            "Admin",
           ]
         : ["Created By", "System"],
       ["Created At", CreatedAt],
@@ -75,6 +77,7 @@ export const cardConfig: {
         "Created By",
         "View Receptionist",
         `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+        "Receptionist",
       ],
       ["Created At", CreatedAt],
     ],
@@ -92,6 +95,7 @@ export const cardConfig: {
         "Created By",
         "View Receptionist",
         `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+        "Receptionist",
       ],
       ["Created At", CreatedAt],
     ],
@@ -114,6 +118,7 @@ export const cardConfig: {
             "Created By",
             "View Admin",
             `/admin/human-resources/admins/${CreatedByAdminID}`,
+            "Admin",
           ]
         : ["Created By", "System"],
       ["Created At", CreatedAt],
@@ -138,8 +143,14 @@ export const cardConfig: {
         "Patient",
         "View Patient",
         `/admin/human-resources/patients/${PatientID}`,
+        "Patient",
       ],
-      ["Doctor", "View Doctor", `/admin/human-resources/doctors/${DoctorID}`],
+      [
+        "Doctor",
+        "View Doctor",
+        `/admin/human-resources/doctors/${DoctorID}`,
+        "Doctor",
+      ],
       ["Time", Time],
       ["Reason", Reason],
       ["Status", Status],
@@ -148,6 +159,7 @@ export const cardConfig: {
         "Receptionist",
         "View Receptionist",
         `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+        "Receptionist",
       ],
       ["Created At", CreatedAt],
     ],
@@ -159,12 +171,18 @@ export const cardConfig: {
     ],
     dataFields: ({ Name, DepartmentID, Cost, CreatedByAdminID, CreatedAt }) => [
       ["Name", Name],
-      ["Department", "View Department", `/admin/departments/${DepartmentID}`],
+      [
+        "Department",
+        "View Department",
+        `/admin/departments/${DepartmentID}`,
+        "Department",
+      ],
       ["Cost", `${Cost} $`],
       [
         "Created By",
         "View Admin",
         `/admin/human-resources/admins/${CreatedByAdminID}`,
+        "Admin",
       ],
       ["Created At", CreatedAt],
     ],
@@ -192,12 +210,14 @@ export const cardConfig: {
             "Test Order",
             "View Test Order",
             `/admin/tests/orders/${TestOrderID}`,
+            "TestOrder",
           ]
         : ["Test Order", "None"],
       [
         "Patient",
         "View Patient",
         `/admin/human-resources/patients/${PatientID}`,
+        "Patient",
       ],
       ["Scheduled Date", ScheduledDate],
       ["Status", Status],
@@ -207,6 +227,7 @@ export const cardConfig: {
         "Created By",
         "View Receptionist",
         `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+        "Receptionist",
       ],
       ["Created At", CreatedAt],
     ],

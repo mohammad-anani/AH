@@ -11,16 +11,16 @@ type ButtonProps = ChildrenProps & {
   Partial<LinkProps>;
 
 const baseStyles =
-  "place-content-center border-[1px] px-[20px] py-[7px] text-center text-xl active:opacity-60 active:transition-none!";
+  "place-content-center border-[1px] px-[20px] py-[7px] text-center text-xl active:opacity-60 active:transition-none! disabled:opacity-50 disabled:pointer-events-none! disabled:cursor-not-allowed";
 
 const variantStyles = {
   primary:
-    "border-primary text-background! bg-primary hover:bg-primary-light! hover:text-primary!",
+    "border-primary text-background! bg-primary hover:bg-primary-light! hover:text-primary! disabled:bg-muted disabled:text-foreground disabled:border-muted",
   secondary:
-    "border-primary text-primary! bg-transparent hover:bg-background-darker!",
+    "border-primary text-primary! bg-transparent hover:bg-background-darker! disabled:text-foreground disabled:border-muted disabled:bg-muted",
   destructive:
-    "text-background! border-black bg-destructive hover:bg-destructive-light!",
-  link: "text-primary! hover:text-primary-light! text-xl underline!",
+    "text-background! border-black bg-destructive hover:bg-destructive-light! disabled:bg-muted disabled:text-foreground disabled:border-muted",
+  link: "text-primary! hover:text-primary-light! text-xl underline! disabled:cursor-not-allowed! disabled:text-foreground! disabled:line-through! disabled:no-underline disabled:bg-transparent",
 };
 
 export default function Clickable({

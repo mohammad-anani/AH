@@ -15,44 +15,82 @@ import { type EntityKey } from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
 import type { Primitive } from "zod";
 import Data from "./Data";
+import { useEffect, useState } from "react";
+import { cardConfig } from "@/utils/models/cardConfig";
 
 export default function Card<T extends EntityKey>({
   title,
   canEdit = true,
   canDelete = true,
   data,
+  isNestedCard = false,
+  isModal = false,
   subLinks,
-  withBack = true,
   dataFields,
 
   headerWidth = 150,
 }: {
   title: EntityKey;
   data?: typesObject[T];
-  subLinks?: (item: typesObject[T]) => [text: string, link: string][];
+  subLinks: (item: typesObject[T]) => [text: string, link: string][];
   dataFields: (
     item: typesObject[T],
   ) => [label: string, value: Primitive, link?: string][];
+  isModal: boolean;
+  isNestedCard: boolean;
   canEdit?: boolean;
   canDelete?: boolean;
   headerWidth?: number;
-  withBack: boolean;
 }) {
   const loaderData = useOutletContext<typesObject[T]>();
 
   const object = data ?? loaderData;
 
+  const [SubCard, setSubCard] = useState<[EntityKey, string] | undefined>(
+    undefined,
+  );
+
   const fetcher = useFetcher();
+
+  useEffect(() => {
+    if (SubCard?.[1]) fetcher.load(SubCard[1]);
+  }, [SubCard?.[1]]);
+
+  if (SubCard && fetcher.data)
+    return (
+      <>
+        <Clickable
+          as="button"
+          variant="secondary"
+          onClick={() => setSubCard(undefined)}
+        >
+          Back to {title}
+        </Clickable>
+        <div
+          className={`mt-[5px] max-h-[260px] ${cardConfig[SubCard?.[0]]["dataFields"](fetcher.data).length > 4 ? "overflow-y-scroll" : ""}`}
+        >
+          <Card
+            {...cardConfig[SubCard?.[0]]}
+            title={SubCard[0]}
+            canDelete={false}
+            canEdit={false}
+            isModal={true}
+            isNestedCard={true}
+            data={fetcher.data}
+          />
+        </div>
+      </>
+    );
 
   return (
     <Dialog>
-      {withBack ? (
+      {!isModal ? (
         <Clickable className="text-sm!" as="Back" variant="secondary">
           Back
         </Clickable>
       ) : null}
       <div className="flex items-center justify-between">
-        {withBack ? <H2>{title}</H2> : null}
+        {!isModal ? <H2>{title}</H2> : null}
         <div className="flex gap-x-2">
           {canEdit ? (
             <Clickable as="Link" variant="primary" to="edit">
@@ -71,9 +109,15 @@ export default function Card<T extends EntityKey>({
       <div
         className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-1 *:text-xl! *:odd:font-bold`}
       >
-        <Data<T> data={object} fields={dataFields} />
+        <Data<T>
+          isNestedCard={isNestedCard}
+          data={object}
+          fields={dataFields}
+          setSubCard={setSubCard}
+          isModal={isModal}
+        />
       </div>
-      {subLinks ? (
+      {!isModal ? (
         <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
           {subLinks(object).map(([text, link]) => (
             <Clickable as="Link" to={link} variant="secondary">

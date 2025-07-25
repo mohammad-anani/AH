@@ -3,9 +3,10 @@ import formatDateIsoToLocal from "../formatters/formatDateIsoToLocal";
 import { formatMoney } from "../formatters/formatMoney";
 import formatPhoneNumber from "../formatters/formatPhoneNumber";
 import type { typesObject } from "./types/typesObject";
+import type { EntityKey } from "./types/util";
 export const personDataFields: (
   person: typesObject["Person"],
-) => [label: string, value: Primitive, link?: string][] = (
+) => [label: string, value: Primitive, link?: string, entity?: EntityKey][] = (
   person: typesObject["Person"],
 ) => [
   [
@@ -22,7 +23,7 @@ export const personDataFields: (
 
 export const employeeDataFields: (
   employee: typesObject["Employee"],
-) => [label: string, value: Primitive, link?: string][] = (
+) => [label: string, value: Primitive, link?: string, entity?: EntityKey][] = (
   employee: typesObject["Employee"],
 ) => {
   const {
@@ -46,7 +47,12 @@ export const employeeDataFields: (
 
   return [
     ...personDataFields(Person),
-    ["Department", "View Department", `/admin/departments/${DepartmentID}`],
+    [
+      "Department",
+      "View Department",
+      `/admin/departments/${DepartmentID}`,
+      "Department",
+    ],
     ["Salary", formatMoney(Salary ?? 0)],
     ["Hire Date", formatDateIsoToLocal(HireDate)],
     ["Leave Date", LeaveDate ? formatDateIsoToLocal(LeaveDate) : "N/A"],
