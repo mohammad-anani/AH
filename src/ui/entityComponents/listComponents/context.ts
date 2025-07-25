@@ -1,5 +1,10 @@
 import { createContext, useContext } from "react";
-import type { EntityKey, Key, Setter } from "../../../utils/models/types/util";
+import type {
+  EntityKey,
+  Key,
+  SearchParamsState,
+  Setter,
+} from "../../../utils/models/types/util";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 type ContextType<T extends rowTypesObject[EntityKey]> = {
@@ -7,7 +12,7 @@ type ContextType<T extends rowTypesObject[EntityKey]> = {
   fields: Key[];
   canModifyUrl: boolean;
   setFields: Setter<Key[]>;
-  searchParamsState?: [URLSearchParams, (params: URLSearchParams) => void];
+  searchParamsState?: SearchParamsState;
   setObject?: Setter<T | undefined>;
 };
 

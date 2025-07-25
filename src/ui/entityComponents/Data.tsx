@@ -1,13 +1,10 @@
 import type { typesObject } from "@/utils/models/types/typesObject";
-import type { EntityKey, Setter } from "@/utils/models/types/util";
-import type { Primitive } from "zod";
+import type { dataFields, EntityKey, Setter } from "@/utils/models/types/util";
 import Clickable from "../customComponents/Clickable";
 
 type DataProps<T extends EntityKey> = {
   data: typesObject[T];
-  fields: (
-    item: typesObject[T],
-  ) => [label: string, value: Primitive, link?: string, entity?: EntityKey][];
+  fields: dataFields<T>;
   setSubCard?: Setter<[EntityKey, string] | undefined>;
   isModal: boolean;
   isNestedCard: boolean;

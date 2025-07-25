@@ -4,7 +4,7 @@ import type {
   customFilterProps,
   DataTypes,
   Key,
-  Setter,
+  SearchParamsState,
 } from "@/utils/models/types/util";
 import type { Primitive } from "zod";
 type ReduceObjectType = {
@@ -13,7 +13,7 @@ type ReduceObjectType = {
 
 export function useFilterDefaultValues(
   fields: Key[],
-  searchParamsState?: [URLSearchParams, Setter<URLSearchParams>],
+  searchParamsState?: SearchParamsState,
 ) {
   const [urlparams] = useSearchParams();
 
