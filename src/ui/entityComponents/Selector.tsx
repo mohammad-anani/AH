@@ -1,6 +1,6 @@
 import { type EntityKey, type Setter } from "@/utils/models/types/util";
-import { useEffect } from "react";
-import { useFetcher } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import ListPage from "./ListPage";
 import { listPageConfig } from "@/utils/models/listPageConfig";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
@@ -13,55 +13,76 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import H2 from "../customComponents/H2";
-import { useSessionStorage } from "@/utils/customHooks/useSessionStorage";
 import SelectorTrigger from "./selectorComponents/SelectorTrigger";
-import { useSessionSyncedObject } from "./selectorComponents/useSessionSyncedObject";
-import { useUrlSearchParamsSession } from "./selectorComponents/useUrlSearchParamsSession";
+import { useFetcher } from "react-router-dom";
+import Card from "./Card";
+import { cardConfig } from "@/utils/models/cardConfig";
+import Clickable from "../customComponents/Clickable";
 
 export default function Selector<T extends EntityKey>({
   entity,
   path,
   selectedDisplay,
-  selectedObject,
+  selectedObjectState,
   canAdd = false,
 }: {
   entity: T;
   path: string;
   selectedDisplay: (item: rowTypesObject[T]) => string;
-  selectedObject: [
+  selectedObjectState: [
     rowTypesObject[T] | undefined,
     Setter<rowTypesObject[T] | undefined>,
   ];
   canAdd?: boolean;
 }) {
-  const [object, setObject] = selectedObject;
+  const [object, setObject] = selectedObjectState;
 
-  // Sync selectedObject with sessionStorage
-  const [, setStoredObject] = useSessionSyncedObject(
-    `selected${entity}`,
-    object,
-    setObject,
-  );
+  const searchParamsState: [URLSearchParams, Setter<URLSearchParams>] =
+    useState<URLSearchParams>(new URLSearchParams());
 
-  // Modal open state with sessionStorage
-  const [isOpen, setIsOpen] = useSessionStorage(
-    `is${entity}SelectorOpen`,
-    false,
-  );
+  const [isOpen, setIsOpen] = useState(false);
 
-  // URL search params with sessionStorage
-  const UrlState = useUrlSearchParamsSession(`urlParams${entity}`);
-
-  const paramString = UrlState[0].toString();
-
-  const fetcher = useFetcher();
-  useEffect(() => {
-    fetcher.load(`${path}/list?${paramString}`);
-  }, [paramString, path]);
-
-  if (!fetcher.data) return null;
+  const [CardID, setCardID] = useState<number | undefined>(undefined);
 
   const [rowTemplate, filterFields] = listPageConfig[entity];
+
+  const [searchParams] = searchParamsState ?? [];
+
+  const paramString = searchParams?.toString() ?? "";
+
+  const listFetcher = useFetcher();
+
+  useEffect(() => {
+    listFetcher.load(`${path}/list?${paramString}`);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paramString, path]);
+
+  useEffect(() => {
+    if (searchParamsState) {
+      if (
+        listFetcher.data?.[0] &&
+        object?.["ID"] &&
+        Object.keys(object).length === 1 &&
+        Object.keys(object)[0] === "ID"
+      ) {
+        setObject?.(
+          (listFetcher.data?.[0] as rowTypesObject[T][])?.find(
+            (item) => item?.["ID"] === object?.["ID"],
+          ),
+        );
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listFetcher.data?.[0], CardID]);
+
+  const cardFetcher = useFetcher();
+
+  useEffect(() => {
+    if (CardID) cardFetcher.load(`${path}/${CardID}`);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [CardID]);
 
   return (
     <>
@@ -69,41 +90,77 @@ export default function Selector<T extends EntityKey>({
         <SelectorTrigger
           object={object}
           setObject={setObject}
-          setStoredObject={setStoredObject}
           selectedDisplay={selectedDisplay}
-          setIsOpen={setIsOpen}
           entity={entity}
         />
-        {isOpen && (
-          <DialogPortal>
-            <DialogContent className="w-500 pt-4 text-left!">
-              <DialogHeader>
-                <DialogTitle>
-                  <H2 className="text-left text-2xl!">{`Select ${entity}`}</H2>
-                </DialogTitle>
-              </DialogHeader>
+        <DialogPortal>
+          <DialogContent className="w-500 pt-4 text-left!">
+            <DialogHeader>
+              <DialogTitle>
+                <H2 className="text-left text-2xl!">{`Select ${entity}`}</H2>
+              </DialogTitle>
+            </DialogHeader>
+            {!CardID || !cardFetcher.data ? (
               <div className="space-y-2! space-x-2!">
                 <ListPage<T>
-                  title={entity}
+                  entity={entity}
+                  data={listFetcher.data}
                   canAdd={canAdd}
                   rowTemplate={rowTemplate}
                   filterFields={filterFields}
-                  UrlState={UrlState}
-                  data={fetcher.data}
-                  isSelector={true}
-                  detailsLink={path}
-                  selectedObject={selectedObject}
+                  searchParamsState={searchParamsState}
+                  selectedObjectState={
+                    selectedObjectState as [
+                      rowTypesObject[EntityKey],
+                      Setter<rowTypesObject[EntityKey] | undefined>,
+                    ]
+                  }
+                  onDetailsClick={setCardID}
+                  dataLink={path}
                   withBack={false}
                   onSelect={(item) => {
                     setObject(item);
-                    setStoredObject(item);
                     setIsOpen(false);
                   }}
                 />
               </div>
-            </DialogContent>
-          </DialogPortal>
-        )}
+            ) : (
+              <div className="space-y-2! space-x-2!">
+                <Clickable
+                  as="button"
+                  variant="secondary"
+                  onClick={() => setCardID(undefined)}
+                >
+                  Back
+                </Clickable>
+                {object?.["ID"] !== CardID ? (
+                  <Clickable
+                    as="button"
+                    variant="primary"
+                    onClick={() => {
+                      setObject({ ID: CardID });
+                      setCardID(undefined);
+                    }}
+                  >
+                    Select
+                  </Clickable>
+                ) : null}
+                <div
+                  className={`max-h-[300px] ${cardConfig[entity]["dataFields"](cardFetcher.data).length > 8 ? "overflow-y-scroll" : ""}`}
+                >
+                  <Card
+                    canEdit={false}
+                    canDelete={false}
+                    title={entity}
+                    data={cardFetcher.data}
+                    dataFields={cardConfig[entity]["dataFields"]}
+                    withBack={false}
+                  />
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </DialogPortal>
       </Dialog>
     </>
   );

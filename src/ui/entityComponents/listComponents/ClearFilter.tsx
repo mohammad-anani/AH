@@ -4,18 +4,17 @@ import { useSearchParams } from "react-router-dom";
 import useListContext from "./context";
 
 export default function ClearFilter({ children }: ClickableChildrenProps) {
-  const { UrlState } = useListContext();
+  const { searchParamsState } = useListContext();
 
-  const [state, setState] = UrlState ?? [new URLSearchParams(), null];
+  const [state, setState] = searchParamsState ?? [new URLSearchParams(), null];
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  if ((!UrlState && searchParams.size === 0) || (UrlState && state.size === 0))
-    return null;
+  if ((searchParamsState ? state?.size : searchParams.size) === 0) return null;
 
   return cloneElement(children, {
     onClick: () => {
-      if (UrlState) setState?.(new URLSearchParams());
+      if (searchParamsState) setState?.(new URLSearchParams());
       else setSearchParams("");
     },
   });

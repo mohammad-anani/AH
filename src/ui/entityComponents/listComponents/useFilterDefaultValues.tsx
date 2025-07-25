@@ -13,11 +13,11 @@ type ReduceObjectType = {
 
 export function useFilterDefaultValues(
   fields: Key[],
-  UrlState?: [URLSearchParams, Setter<URLSearchParams>],
+  searchParamsState?: [URLSearchParams, Setter<URLSearchParams>],
 ) {
   const [urlparams] = useSearchParams();
 
-  const params = UrlState ? UrlState[0] : urlparams;
+  const params = searchParamsState ? searchParamsState[0] : urlparams;
 
   if (!params) return null;
 

@@ -20,32 +20,39 @@ export default function Card<T extends EntityKey>({
   title,
   canEdit = true,
   canDelete = true,
+  data,
   subLinks,
+  withBack = true,
   dataFields,
 
   headerWidth = 150,
 }: {
   title: EntityKey;
-  subLinks: (item: typesObject[T]) => [text: string, link: string][];
+  data?: typesObject[T];
+  subLinks?: (item: typesObject[T]) => [text: string, link: string][];
   dataFields: (
     item: typesObject[T],
   ) => [label: string, value: Primitive, link?: string][];
   canEdit?: boolean;
   canDelete?: boolean;
   headerWidth?: number;
+  withBack: boolean;
 }) {
-  const data = useOutletContext<typesObject[T]>();
+  const loaderData = useOutletContext<typesObject[T]>();
+
+  const object = data ?? loaderData;
 
   const fetcher = useFetcher();
 
   return (
     <Dialog>
-      <Clickable className="text-sm!" as="Back" variant="secondary">
-        Back
-      </Clickable>
-
+      {withBack ? (
+        <Clickable className="text-sm!" as="Back" variant="secondary">
+          Back
+        </Clickable>
+      ) : null}
       <div className="flex items-center justify-between">
-        <H2>{title}</H2>
+        {withBack ? <H2>{title}</H2> : null}
         <div className="flex gap-x-2">
           {canEdit ? (
             <Clickable as="Link" variant="primary" to="edit">
@@ -64,15 +71,17 @@ export default function Card<T extends EntityKey>({
       <div
         className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-1 *:text-xl! *:odd:font-bold`}
       >
-        <Data<T> data={data} fields={dataFields} />
+        <Data<T> data={object} fields={dataFields} />
       </div>
-      <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
-        {subLinks(data).map(([text, link]) => (
-          <Clickable as="Link" to={link} variant="secondary">
-            {text}
-          </Clickable>
-        ))}
-      </div>
+      {subLinks ? (
+        <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
+          {subLinks(object).map(([text, link]) => (
+            <Clickable as="Link" to={link} variant="secondary">
+              {text}
+            </Clickable>
+          ))}
+        </div>
+      ) : null}
       {canDelete && (
         <DialogPortal>
           <DialogContent className="">

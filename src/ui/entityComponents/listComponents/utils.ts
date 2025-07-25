@@ -1,3 +1,6 @@
+import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { EntityKey } from "@/utils/models/types/util";
+
 export function convertStringToType(type: string, value: string) {
   if (value === "" && type !== "boolean") return type === "string" ? "" : null;
 
@@ -33,4 +36,9 @@ export function getTemporalValue(key: string, filter: Record<string, unknown>) {
     from: (filter[key + "From"] as string) || "",
     to: (filter[key + "To"] as string) || "",
   };
+}
+
+export function isOnlyIdFilled(obj: rowTypesObject[EntityKey]): boolean {
+  const keys = Object.keys(obj);
+  return keys.length === 1 && keys[0] === "ID" && obj["ID"] !== undefined;
 }

@@ -8,7 +8,7 @@ import { selectorConfig } from "@/utils/models/selectorConfig";
 interface SelectorInputProps {
   fieldKey: string;
   label: string;
-  data: [EntityKey, string];
+  data: EntityKey;
 }
 
 export default function SelectorInput({
@@ -22,11 +22,7 @@ export default function SelectorInput({
       <Controller
         name={fieldKey}
         renderField={({ field }) => (
-          <SelectorField
-            entity={data[0]}
-            fieldProps={{ field }}
-            prefix={data[1]}
-          />
+          <SelectorField entity={data} fieldProps={{ field }} />
         )}
       />
     </>
@@ -36,7 +32,6 @@ export default function SelectorInput({
 function SelectorField<T extends EntityKey>({
   entity,
   fieldProps,
-  prefix,
 }: {
   entity: T;
   fieldProps: {
@@ -45,23 +40,21 @@ function SelectorField<T extends EntityKey>({
       onChange: (value: unknown) => void;
     };
   };
-  prefix?: string;
 }) {
-  const [selected, setSelected] = useState<rowTypesObject[T] | undefined>(
-    undefined,
-  );
+  const [selected, setSelected] = useState<rowTypesObject[T] | undefined>({
+    ID: fieldProps.field.value as number,
+  });
 
   useEffect(() => {
     fieldProps.field.onChange(selected?.["ID"]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
   return (
     <Selector
       entity={entity}
       canAdd={false}
       {...selectorConfig[entity]}
-      selectedObject={[selected, setSelected]}
-      ID={fieldProps.field.value as number}
-      prefix={prefix}
+      selectedObjectState={[selected, setSelected]}
     />
   );
 }

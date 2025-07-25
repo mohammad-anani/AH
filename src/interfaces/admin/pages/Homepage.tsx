@@ -13,7 +13,7 @@ export default function Homepage() {
       <Selector
         entity="Department"
         {...selectorConfig["Department"]}
-        selectedObject={state}
+        selectedObjectState={state}
       />
     </>
   );

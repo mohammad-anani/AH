@@ -7,25 +7,27 @@ import Order from "./Order";
 import { Form } from "./Form";
 import Sort from "./Sort";
 import SearchButton from "./SearchButton";
-import type { ChildrenProps, Key } from "@/utils/models/types/util";
+import type { ChildrenProps, Key, Setter } from "@/utils/models/types/util";
 import { useFilterDefaultValues } from "./useFilterDefaultValues";
 
 export default function Filter({
   children,
   fields,
 }: ChildrenProps & { fields: Key[] }) {
-  const { canModifyUrl, setFields, UrlState } = useListContext();
+  const { canModifyUrl, setFields, searchParamsState } = useListContext();
 
-  const defaultValues = useFilterDefaultValues(fields, UrlState) || {};
+  const defaultValues = useFilterDefaultValues(fields);
 
-  const { handleFilterSubmit } = useFilterNavigation(fields, UrlState);
+  const { handleFilterSubmit } = useFilterNavigation(
+    fields,
+    searchParamsState as [URLSearchParams, Setter<URLSearchParams>] | undefined,
+  );
 
-  const methods = useForm({ defaultValues });
+  const methods = useForm({ defaultValues: defaultValues ?? {} });
 
   setFields(fields);
-  // useEffect(() => {}, [fields, setFields]);
 
-  if (!canModifyUrl && !UrlState) return null;
+  if (!canModifyUrl && !searchParamsState) return null;
 
   return (
     <FormProvider {...methods}>

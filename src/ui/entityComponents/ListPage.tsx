@@ -11,57 +11,57 @@ import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "../customComponents/FilterEntities";
 import type { EntityKey, Key, Setter } from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
-import DetailsButton from "../customComponents/DetailsButton";
-import type { Primitive } from "zod";
+import { type Primitive } from "zod";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
-import { Check } from "lucide-react";
+import { Check, Info } from "lucide-react";
 import useFilter from "@/ui/entityComponents/listComponents/useFilter";
 
 export default function ListPage<T extends EntityKey>({
-  title,
+  entity,
   canAdd,
-  emptyText = `No ${title}s`,
+  emptyText = `No ${entity}s`,
   rowTemplate,
   filterFields,
   canModifyUrl = true,
-  UrlState = undefined,
+  searchParamsState = undefined,
+  selectedObjectState,
+  dataLink,
   data,
-  isSelector = false,
-  selectedObject,
-  detailsLink,
   onSelect,
   withBack = false,
+  onDetailsClick,
 }: {
-  title: EntityKey;
+  entity: EntityKey;
   canAdd: boolean;
   withBack: boolean;
+  data?: [rowTypesObject[T][], number];
   rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]];
   onSelect?: (item: rowTypesObject[T]) => void;
-
+  onDetailsClick?: (ID: number) => void;
   filterFields: Key[];
   emptyText?: string;
   canModifyUrl?: boolean;
-  UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
-  data?: rowTypesObject[T];
-  isSelector?: boolean;
-  selectedObject?: [
+  searchParamsState?: [URLSearchParams, Setter<URLSearchParams> | undefined];
+
+  selectedObjectState?: [
     rowTypesObject[EntityKey],
     Setter<rowTypesObject[EntityKey] | undefined>,
   ];
-  detailsLink?: string;
+  dataLink?: string;
 }) {
   const loaderData = useLoaderData();
 
-  const [items, itemsCount] = isSelector ? data : loaderData;
-
   const [isFilterOpen, setIsFilterOpen] = useFilter(
-    filterFields,
-    `Filter${title}s`,
+    searchParamsState?.[0].toString(),
   );
+  const [items, itemsCount] = searchParamsState && data ? data : loaderData;
+
+  if (!items) return null;
+
   const [headerFields, dataFields, gridFr] = rowTemplate;
 
-  const gridTemplate = [...gridFr, ...(isSelector ? [1, 2] : [1])]
+  const gridTemplate = [...gridFr, ...(searchParamsState ? [1, 2] : [1])]
     .map((fr) => `${fr}fr`)
     .join(" ");
 
@@ -79,51 +79,67 @@ export default function ListPage<T extends EntityKey>({
     </li>
   );
 
-  const render = (item: rowTypesObject[T]) => (
-    <li style={gridStyle} key={item?.["ID"]}>
-      {dataFields(item).map((field) => (
-        <span>{String(field)}</span>
-      ))}
-      <DetailsButton link={detailsLink} ID={item["ID"]} />
-
-      {isSelector &&
-      (!selectedObject?.[0] || item["ID"] !== selectedObject?.[0]["ID"]) ? (
+  const render = (item: rowTypesObject[T]) => {
+    return (
+      <li style={gridStyle} key={item?.["ID"]}>
+        {dataFields(item ?? undefined).map((field) => (
+          <span>{String(field)}</span>
+        ))}
         <Clickable
           className="flex! items-center gap-x-1"
-          as="button"
+          as={searchParamsState ? "button" : "Link"}
           variant="secondary"
-          onClick={() => {
-            onSelect?.(item);
-          }}
+          {...(searchParamsState
+            ? {
+                onClick: () => {
+                  onDetailsClick?.(item.ID);
+                },
+              }
+            : { to: `${item?.["ID"]}` })}
         >
-          <Check className="*:text-primary! h-[20px] w-[20px]" />
-          Select
+          <Info className="*:text-primary! h-[20px] w-[20px]" />
+          Details
         </Clickable>
-      ) : null}
-    </li>
-  );
 
-  const fixedTitle = title.startsWith("Test")
-    ? title.replace("Test", "Test ")
-    : title;
+        {searchParamsState &&
+        item?.["ID"] !== selectedObjectState?.[0]?.["ID"] ? (
+          <Clickable
+            className="flex! items-center gap-x-1"
+            as="button"
+            variant="secondary"
+            onClick={() => {
+              onSelect?.(item ?? undefined);
+            }}
+          >
+            <Check className="*:text-primary! h-[20px] w-[20px]" />
+            Select
+          </Clickable>
+        ) : null}
+      </li>
+    );
+  };
+
+  const title =
+    (entity.startsWith("Test") ? entity.replace("Test", "Test ") : entity) +
+    "s";
 
   return (
     <>
-      {!isSelector ? (
+      {!searchParamsState ? (
         <>
           {withBack ? (
             <Clickable className="text-sm!" as="Back" variant="secondary">
               Back
             </Clickable>
           ) : null}
-          <H2 className="mb-6">{fixedTitle}s</H2>
+          <H2 className="mb-6">{title}</H2>
         </>
       ) : null}
       {canAdd ? (
         <Clickable
           as="Link"
           variant="primary"
-          to={detailsLink ? detailsLink + "/add" : "add"}
+          to={searchParamsState ? dataLink + "/add" : "add"}
           className="text-sm!"
         >
           Add
@@ -140,11 +156,14 @@ export default function ListPage<T extends EntityKey>({
       <List<rowTypesObject[T]>
         items={items}
         canModifyUrl={canModifyUrl}
-        UrlState={UrlState}
-        isSelector={isSelector}
+        searchParamsState={
+          searchParamsState as
+            | [URLSearchParams, (params: URLSearchParams) => void]
+            | undefined
+        }
         setObject={
-          selectedObject
-            ? (v) => v !== undefined && selectedObject[1](v)
+          selectedObjectState
+            ? (v) => v !== undefined && selectedObjectState[1](v)
             : undefined
         }
       >
@@ -153,7 +172,6 @@ export default function ListPage<T extends EntityKey>({
             Clear
           </Clickable>
         </List.ClearFilter>
-        {/* isFilterOpen ? */}
         {isFilterOpen ? (
           <>
             <Dialog
@@ -167,7 +185,7 @@ export default function ListPage<T extends EntityKey>({
                   <DialogHeader>
                     <DialogTitle>
                       <H2 className="text-left text-2xl!">
-                        {"Filter " + title}
+                        {"Filter " + entity}
                       </H2>
                     </DialogTitle>
                   </DialogHeader>

@@ -16,18 +16,15 @@ export default function List<T extends rowTypesObject[EntityKey]>({
   children,
   items,
   canModifyUrl = true,
-  UrlState,
-  isSelector,
+  searchParamsState,
   setObject,
 }: ChildrenProps & {
   items: T[];
   canModifyUrl?: boolean;
-  UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
-  isSelector: boolean;
+  searchParamsState?: [URLSearchParams, (params: URLSearchParams) => void];
   setObject?: Setter<rowTypesObject[EntityKey] | undefined>;
 }) {
   const [fields, setFields] = useState<Key[]>({} as Key[]);
-
   return (
     <ListContext.Provider
       value={{
@@ -35,8 +32,7 @@ export default function List<T extends rowTypesObject[EntityKey]>({
         fields,
         canModifyUrl,
         setFields,
-        UrlState,
-        isSelector,
+        searchParamsState: searchParamsState,
         setObject,
       }}
     >

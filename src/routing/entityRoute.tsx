@@ -5,22 +5,17 @@ import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ListPage from "@/ui/entityComponents/ListPage";
-import type { typesObject } from "@/utils/models/types/typesObject";
 import type { EntityKey } from "@/utils/models/types/util";
 import Card from "@/ui/entityComponents/Card";
-import type { Primitive } from "zod";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
 import { listPageConfig } from "@/utils/models/listPageConfig";
+import { cardConfig } from "@/utils/models/cardConfig";
 
 export function route<T extends EntityKey>(
   entity: T,
   canAdd: boolean = true,
   canEdit: boolean = true,
   canDelete: boolean = true,
-  subLinks: (item: typesObject[T]) => [text: string, link: string][],
-  dataFields: (
-    item: typesObject[T],
-  ) => [label: string, value: Primitive, link?: string][],
   withBack: boolean = false,
   headerWidth?: number,
 ) {
@@ -28,6 +23,7 @@ export function route<T extends EntityKey>(
     (entity.startsWith("Test") ? entity.replace("Test", "") : entity) + "s";
 
   const [rowTemplate, filterFields] = listPageConfig[entity];
+  const { subLinks, dataFields } = cardConfig[entity]!;
 
   return [
     {
@@ -37,7 +33,7 @@ export function route<T extends EntityKey>(
           index: true,
           element: (
             <ListPage<T>
-              title={entity}
+              entity={entity}
               canAdd={canAdd}
               rowTemplate={rowTemplate}
               filterFields={filterFields}

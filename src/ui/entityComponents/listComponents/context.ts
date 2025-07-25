@@ -7,8 +7,7 @@ type ContextType<T extends rowTypesObject[EntityKey]> = {
   fields: Key[];
   canModifyUrl: boolean;
   setFields: Setter<Key[]>;
-  UrlState?: [URLSearchParams, (params: URLSearchParams) => void];
-  isSelector?: boolean;
+  searchParamsState?: [URLSearchParams, (params: URLSearchParams) => void];
   setObject?: Setter<T | undefined>;
 };
 

@@ -4,11 +4,11 @@ import { useSearchParams } from "react-router-dom";
 import useListContext from "./context";
 
 export default function Pagination({ itemsCount }: { itemsCount: number }) {
-  const sparms = useSearchParams();
+  const urlSearchParams = useSearchParams();
 
-  const { UrlState } = useListContext();
+  const { searchParamsState } = useListContext();
 
-  const [searchParams, setSearchParams] = UrlState ?? sparms;
+  const [searchParams, setSearchParams] = searchParamsState ?? urlSearchParams;
 
   return (
     <ReactPaginate

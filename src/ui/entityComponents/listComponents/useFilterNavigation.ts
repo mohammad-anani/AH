@@ -4,7 +4,7 @@ import type { Key, Setter } from "@/utils/models/types/util";
 
 export function useFilterNavigation(
   fields: Key[],
-  UrlState?: [URLSearchParams, Setter<URLSearchParams>],
+  searchParamsState?: [URLSearchParams, Setter<URLSearchParams>],
 ) {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -42,13 +42,12 @@ export function useFilterNavigation(
     const newParams = buildPathWithParams(data);
 
     if (
-      newParams.toString() === UrlState?.[0].toString() ||
-      newParams.toString() === searchParams.toString()
+      newParams.toString() ===
+      (searchParamsState?.[0]?.toString() ?? searchParams.toString())
     )
       return;
 
-    if (UrlState) UrlState[1](newParams);
-    else setSearchParams(newParams);
+    (searchParamsState?.[1] ?? setSearchParams)(newParams);
   }
 
   return { handleFilterSubmit };
