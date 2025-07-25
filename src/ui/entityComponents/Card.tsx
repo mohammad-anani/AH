@@ -11,12 +11,27 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { useFetcher, useOutletContext } from "react-router-dom";
-import { type EntityKey } from "@/utils/models/types/util";
+import {
+  type dataFields,
+  type EntityKey,
+  type SubLinks,
+} from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
-import type { Primitive } from "zod";
 import Data from "./Data";
 import { useEffect, useState } from "react";
-import { cardConfig } from "@/utils/models/cardConfig";
+import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
+
+type CardProps<T extends EntityKey> = {
+  title: EntityKey;
+  data?: typesObject[T];
+  subLinks: SubLinks<T>;
+  dataFields: dataFields<T>;
+  isModal: boolean;
+  isNestedCard?: boolean;
+  canEdit?: boolean;
+  canDelete?: boolean;
+  headerWidth?: number;
+};
 
 export default function Card<T extends EntityKey>({
   title,
@@ -29,19 +44,7 @@ export default function Card<T extends EntityKey>({
   dataFields,
 
   headerWidth = 150,
-}: {
-  title: EntityKey;
-  data?: typesObject[T];
-  subLinks: (item: typesObject[T]) => [text: string, link: string][];
-  dataFields: (
-    item: typesObject[T],
-  ) => [label: string, value: Primitive, link?: string][];
-  isModal: boolean;
-  isNestedCard: boolean;
-  canEdit?: boolean;
-  canDelete?: boolean;
-  headerWidth?: number;
-}) {
+}: CardProps<T>) {
   const loaderData = useOutletContext<typesObject[T]>();
 
   const object = data ?? loaderData;
@@ -52,11 +55,17 @@ export default function Card<T extends EntityKey>({
 
   const fetcher = useFetcher();
 
-  useEffect(() => {
-    if (SubCard?.[1]) fetcher.load(SubCard[1]);
-  }, [SubCard?.[1]]);
+  const [subEntity, subLink] = SubCard as [EntityKey, string];
 
-  if (SubCard && fetcher.data)
+  useEffect(() => {
+    if (subLink) fetcher.load(subLink);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subLink]);
+
+  if (SubCard && fetcher.data) {
+    const { subLinks, dataFields } = cardConfig[subEntity];
+
+    const object = fetcher.data;
     return (
       <>
         <Clickable
@@ -67,11 +76,12 @@ export default function Card<T extends EntityKey>({
           Back to {title}
         </Clickable>
         <div
-          className={`mt-[5px] max-h-[260px] ${cardConfig[SubCard?.[0]]["dataFields"](fetcher.data).length > 4 ? "overflow-y-scroll" : ""}`}
+          className={`mt-[5px] max-h-[260px] ${dataFields(object).length > 4 ? "overflow-y-scroll" : ""}`}
         >
           <Card
-            {...cardConfig[SubCard?.[0]]}
-            title={SubCard[0]}
+            title={subEntity}
+            subLinks={subLinks as SubLinks<typeof subEntity>}
+            dataFields={dataFields as dataFields<typeof subEntity>}
             canDelete={false}
             canEdit={false}
             isModal={true}
@@ -81,6 +91,7 @@ export default function Card<T extends EntityKey>({
         </div>
       </>
     );
+  }
 
   return (
     <Dialog>

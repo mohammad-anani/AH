@@ -1,19 +1,69 @@
 // List page configuration for entities
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
-import type { Primitive } from "zod";
-import type { EntityKey, Key } from "@/utils/models/types/util";
+import type {
+  EntityKey,
+  Key,
+  RowTemplate,
+  Setter,
+} from "@/utils/models/types/util";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
-import { personFields, employeeFields } from "@/utils/models/objectKeys";
+
 import DepartmentSelect from "@/features/department/DepartmentSelect";
 
 //add rest
 
+const personFields: Key[] = [
+  ["FirstName", "string"],
+  ["MiddleName", "string"],
+  ["LastName", "string"],
+  ["Gender", "boolean", ["Male", "Female"]],
+  ["Age", "number"],
+  ["Phone", "phone"],
+  ["Email", "string"],
+  ["CountryName", "string"],
+  ["Username", "string"],
+];
+
+const employeeFields: Key[] = [
+  [
+    "Department",
+    "custom",
+    [
+      ({ field, onChange }) => {
+        return (
+          <DepartmentSelect
+            departmentID={field as number}
+            setDepartmentID={onChange as Setter<number>}
+          />
+        );
+      },
+      "number",
+    ],
+  ],
+  ["Salary", "money"],
+  ["HireDate", "date"],
+  ["LeaveDate", "date"],
+  ["isActive", "boolean", ["Active", "Not Active"]],
+  [
+    "WorkingDays",
+    "multiselect",
+    [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+  ],
+  ["ShiftStart", "time"],
+  ["ShiftEnd", "time"],
+];
+
 export const listPageConfig: {
-  [K in EntityKey]: [
-    [string[], (item: rowTypesObject[K]) => Primitive[], number[]],
-    Key[],
-  ];
+  [K in EntityKey]: [RowTemplate<K>, Key[]];
 } = {
   Department: [
     [
@@ -75,7 +125,7 @@ export const listPageConfig: {
           ({ field, onChange }) => (
             <DepartmentSelect
               departmentID={Number(field)}
-              setDepartmentID={onChange}
+              setDepartmentID={onChange as Setter<number>}
             />
           ),
           "number",

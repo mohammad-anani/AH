@@ -5,15 +5,17 @@ import React from "react";
 import { useNavigation } from "react-router-dom";
 import type { Primitive } from "zod";
 
+type RegisteredInputProps = {
+  name: string;
+  onChange?: (value: Primitive) => Primitive;
+  children: React.ReactElement<React.InputHTMLAttributes<HTMLInputElement>>;
+};
+
 export default function RegisteredInput({
   name,
   onChange,
   children,
-}: {
-  name: string;
-  onChange?: (value: Primitive) => Primitive;
-  children: React.ReactElement<React.InputHTMLAttributes<HTMLInputElement>>;
-}) {
+}: RegisteredInputProps) {
   const {
     register,
     setValue,

@@ -3,7 +3,7 @@ import Selector from "../../Selector";
 import type { EntityKey } from "@/utils/models/types/util";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
-import { selectorConfig } from "@/utils/models/selectorConfig";
+import { selectorConfig } from "@/utils/models/componentsConfig/selectorConfig";
 
 interface SelectorInputProps {
   fieldKey: string;

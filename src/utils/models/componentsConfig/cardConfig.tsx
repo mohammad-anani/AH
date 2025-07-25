@@ -1,16 +1,69 @@
-import type { EntityKey } from "./types/util";
-import type { typesObject } from "./types/typesObject";
-import type { Primitive } from "zod";
-import { employeeDataFields, personDataFields } from "./dataFields";
-import formatDateIsoToLocal from "../formatters/formatDateIsoToLocal";
-import formatPhoneNumber from "../formatters/formatPhoneNumber";
+import type { dataFields, EntityKey, SubLinks } from "../types/util";
+
+import formatDateIsoToLocal from "../../formatters/formatDateIsoToLocal";
+import formatPhoneNumber from "../../formatters/formatPhoneNumber";
+import type { typesObject } from "../types/typesObject";
+import { formatMoney } from "@/utils/formatters/formatMoney";
+
+const personDataFields: dataFields<"Person"> = (
+  person: typesObject["Person"],
+) => [
+  [
+    "Full Name",
+    `${person.FirstName} ${person.MiddleName} ${person.LastName}`.trim(),
+  ],
+  ["Gender", person.Gender ? "Female" : "Male"],
+  ["Age", person.Age],
+  ["Country", person.CountryName],
+  ["Phone", formatPhoneNumber(person.Phone)],
+  ["Email", person.Email],
+  ["Username", person.Username],
+];
+
+const employeeDataFields: dataFields<"Employee"> = (
+  employee: typesObject["Employee"],
+) => {
+  const {
+    Person,
+    DepartmentID,
+    Salary,
+    HireDate,
+    LeaveDate,
+    WorkingDays,
+    ShiftStart,
+    ShiftEnd,
+    isActive,
+  } = employee;
+
+  const formattedWorkingDays =
+    WorkingDays.length === 7
+      ? "Everyday"
+      : WorkingDays.length === 0
+        ? "None"
+        : WorkingDays.join(", ");
+
+  return [
+    ...personDataFields(Person),
+    [
+      "Department",
+      "View Department",
+      `/admin/departments/${DepartmentID}`,
+      "Department",
+    ],
+    ["Salary", formatMoney(Salary ?? 0)],
+    ["Hire Date", formatDateIsoToLocal(HireDate)],
+    ["Leave Date", LeaveDate ? formatDateIsoToLocal(LeaveDate) : "N/A"],
+    ["Working Days", formattedWorkingDays],
+    ["Shift Start", ShiftStart],
+    ["Shift End", ShiftEnd],
+    ["Status", isActive ? "Active" : "Inactive"],
+  ];
+};
 
 export const cardConfig: {
   [K in EntityKey]: {
-    subLinks: (item: typesObject[K]) => [text: string, link: string][];
-    dataFields: (
-      item: typesObject[K],
-    ) => [label: string, value: Primitive, link?: string, entity?: EntityKey][];
+    subLinks: SubLinks<K>;
+    dataFields: dataFields<K>;
   };
 } = {
   Department: {

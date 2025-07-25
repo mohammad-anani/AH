@@ -31,3 +31,5 @@ export default function formatPhoneNumber(
 
   return result;
 }
+
+//81091174 becomes 81 091 174

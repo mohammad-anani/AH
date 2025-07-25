@@ -17,17 +17,19 @@ import { z } from "zod";
 import { emptyObjects } from "@/utils/models/types/emptyObjectsObject";
 import { Forms } from "@/utils/models/FormObject";
 
+type FormProps = {
+  entity: EntityKey;
+  submitText?: string;
+  submittingText?: string;
+  headerWidth?: number;
+};
+
 export default function AddUpdateForm({
   entity,
   headerWidth = 150,
   submitText = "Save",
   submittingText = "Submitting...",
-}: {
-  entity: EntityKey;
-  submitText?: string;
-  submittingText?: string;
-  headerWidth?: number;
-}) {
+}: FormProps) {
   const data = useOutletContext<typesObject[EntityKey]>();
 
   const isAdd = !data;

@@ -3,12 +3,14 @@ import { cloneElement } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+type BackNavigatorType = ClickableChildrenProps & {
+  pagesBack: number;
+};
+
 export default function BackNavigator({
   children,
   pagesBack,
-}: ClickableChildrenProps & {
-  pagesBack: number;
-}) {
+}: BackNavigatorType) {
   const navigate = useNavigate();
 
   return cloneElement(children, {

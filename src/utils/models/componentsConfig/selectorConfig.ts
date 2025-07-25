@@ -1,11 +1,7 @@
-import type { rowTypesObject } from "./types/rowTypesObject";
-import type { EntityKey } from "./types/util";
+import type { EntityKey, SelectorConfig } from "../types/util";
 
 export const selectorConfig: {
-  [K in EntityKey]: {
-    selectedDisplay: (item: rowTypesObject[K]) => string;
-    path: string;
-  };
+  [K in EntityKey]: SelectorConfig<K>;
 } = {
   Admin: {
     selectedDisplay: ({ Name }) => Name,

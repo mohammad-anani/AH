@@ -9,13 +9,37 @@ import {
 } from "../../components/ui/dialog";
 import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "../customComponents/FilterEntities";
-import type { EntityKey, Key, Setter } from "@/utils/models/types/util";
+import type {
+  EntityKey,
+  Key,
+  RowTemplate,
+  Setter,
+} from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
-import { type Primitive } from "zod";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 import { Check, Info } from "lucide-react";
 import useFilter from "@/ui/entityComponents/listComponents/useFilter";
+
+type ListPageProps<T extends EntityKey> = {
+  entity: EntityKey;
+  canAdd: boolean;
+  withBack: boolean;
+  data?: [rowTypesObject[T][], number];
+  rowTemplate: RowTemplate<T>;
+  onSelect?: (item: rowTypesObject[T]) => void;
+  onDetailsClick?: (ID: number) => void;
+  filterFields: Key[];
+  emptyText?: string;
+  canModifyUrl?: boolean;
+  searchParamsState?: [URLSearchParams, Setter<URLSearchParams> | undefined];
+
+  selectedObjectState?: [
+    rowTypesObject[EntityKey],
+    Setter<rowTypesObject[EntityKey] | undefined>,
+  ];
+  dataLink?: string;
+};
 
 export default function ListPage<T extends EntityKey>({
   entity,
@@ -31,25 +55,7 @@ export default function ListPage<T extends EntityKey>({
   onSelect,
   withBack = false,
   onDetailsClick,
-}: {
-  entity: EntityKey;
-  canAdd: boolean;
-  withBack: boolean;
-  data?: [rowTypesObject[T][], number];
-  rowTemplate: [string[], (item: rowTypesObject[T]) => Primitive[], number[]];
-  onSelect?: (item: rowTypesObject[T]) => void;
-  onDetailsClick?: (ID: number) => void;
-  filterFields: Key[];
-  emptyText?: string;
-  canModifyUrl?: boolean;
-  searchParamsState?: [URLSearchParams, Setter<URLSearchParams> | undefined];
-
-  selectedObjectState?: [
-    rowTypesObject[EntityKey],
-    Setter<rowTypesObject[EntityKey] | undefined>,
-  ];
-  dataLink?: string;
-}) {
+}: ListPageProps<T>) {
   const loaderData = useLoaderData();
 
   const [isFilterOpen, setIsFilterOpen] = useFilter(

@@ -8,8 +8,8 @@ import ListPage from "@/ui/entityComponents/ListPage";
 import type { EntityKey } from "@/utils/models/types/util";
 import Card from "@/ui/entityComponents/Card";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
-import { listPageConfig } from "@/utils/models/listPageConfig";
-import { cardConfig } from "@/utils/models/cardConfig";
+import { listPageConfig } from "@/utils/models/componentsConfig/listPageConfig";
+import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
 
 export function route<T extends EntityKey>(
   entity: T,

@@ -3,13 +3,7 @@ import type { EntityKey, Setter } from "@/utils/models/types/util";
 import type { Primitive } from "zod";
 import Clickable from "../customComponents/Clickable";
 
-export default function Data<T extends EntityKey>({
-  data,
-  fields,
-  isModal = false,
-  setSubCard,
-  isNestedCard = false,
-}: {
+type DataProps<T extends EntityKey> = {
   data: typesObject[T];
   fields: (
     item: typesObject[T],
@@ -17,7 +11,15 @@ export default function Data<T extends EntityKey>({
   setSubCard?: Setter<[EntityKey, string] | undefined>;
   isModal: boolean;
   isNestedCard: boolean;
-}) {
+};
+
+export default function Data<T extends EntityKey>({
+  data,
+  fields,
+  isModal = false,
+  setSubCard,
+  isNestedCard = false,
+}: DataProps<T>) {
   return (
     <>
       {fields(data).map(([label, value, link, entity]) => (

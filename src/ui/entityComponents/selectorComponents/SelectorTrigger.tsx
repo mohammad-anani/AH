@@ -7,18 +7,18 @@ import { DialogTrigger } from "@radix-ui/react-dialog";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 type SelectorTriggerProps<T extends rowTypesObject[EntityKey]> = {
-  object: T | undefined;
-  setObject: Setter<T | undefined>;
+  selectedObject: [T | undefined, Setter<T | undefined>];
   selectedDisplay: (item: T) => string;
   entity: string;
 };
 
 export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
-  object,
-  setObject,
+  selectedObject,
   selectedDisplay,
   entity,
 }: SelectorTriggerProps<T>) {
+  const [object, setObject] = selectedObject;
+
   const title = entity.startsWith("Test")
     ? entity.replace("Test", "Test ")
     : entity;

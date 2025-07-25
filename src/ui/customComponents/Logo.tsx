@@ -1,4 +1,6 @@
-export default function Logo({ className = "" }: { className?: string }) {
+type LogoProps = { className?: string };
+
+export default function Logo({ className = "" }: LogoProps) {
   return (
     <h1
       className={

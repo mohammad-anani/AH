@@ -2,7 +2,9 @@ import type { Key } from "@/utils/models/types/util";
 import List from "../entityComponents/List";
 import Clickable from "./Clickable";
 
-export default function FilterEntities({ fields }: { fields: Key[] }) {
+type FilterEntititesProps = { fields: Key[] };
+
+export default function FilterEntities({ fields }: FilterEntititesProps) {
   return (
     <>
       <List.Filter fields={fields}>
