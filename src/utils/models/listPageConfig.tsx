@@ -40,11 +40,7 @@ export const listPageConfig: {
     [...personFields, ...employeeFields, ["CreatedAt", "datetime"]],
   ],
   Doctor: [
-    [
-      ["Name", "Specialization"],
-      (item: rowTypesObject["Doctor"]) => [item.Name, item.Specialization],
-      [2, 1],
-    ],
+    [["Name"], (item: rowTypesObject["Doctor"]) => [item.Name], [2]],
     [
       ...personFields,
       ...employeeFields,
@@ -55,13 +51,9 @@ export const listPageConfig: {
   ],
   Patient: [
     [
-      ["Name", "Age", "Phone"],
-      (item: rowTypesObject["Patient"]) => [
-        item.Name,
-        item.Age,
-        formatPhoneNumber(item.Phone),
-      ],
-      [2, 1, 1],
+      ["Name", "Age"],
+      (item: rowTypesObject["Patient"]) => [item.Name, item.Age],
+      [2, 1],
     ],
     [
       ...personFields,
@@ -119,7 +111,7 @@ export const listPageConfig: {
       ["TestOrder", "selector", "TestOrder"],
       ["Patient", "selector", "Patient"],
       ["ScheduledDate", "datetime"],
-      ["Status", "select", ["Cancelled", "Accepted"]],
+      ["Status", "uniselect", ["Cancelled", "Accepted"]],
       ["Result", "string"],
       ["ResultDate", "datetime"],
       ["Receptionist", "selector", "Receptionist"],
@@ -141,7 +133,7 @@ export const listPageConfig: {
       ["Patient", "selector", "Patient"],
       ["Time", "datetime"],
       ["Reason", "string"],
-      ["Status", "select", ["Accepted", "Rejected"]],
+      ["Status", "uniselect", ["Accepted", "Rejected"]],
       ["Notes", "string"],
       ["Receptionist", "selector", "Receptionist"],
       ["CreatedAt", "datetime"],

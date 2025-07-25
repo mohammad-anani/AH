@@ -84,6 +84,10 @@ export default function Selector<T extends EntityKey>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [CardID]);
 
+  const title = entity.startsWith("Test")
+    ? entity.replace("Test", "Test ")
+    : entity;
+
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -97,7 +101,7 @@ export default function Selector<T extends EntityKey>({
           <DialogContent className="w-500 pt-4 text-left!">
             <DialogHeader>
               <DialogTitle>
-                <H2 className="text-left text-2xl!">{`Select ${entity}`}</H2>
+                <H2 className="text-left text-2xl!">{`Select ${title}`}</H2>
               </DialogTitle>
             </DialogHeader>
             {!CardID || !cardFetcher.data ? (

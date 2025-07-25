@@ -17,7 +17,7 @@ export function useFilterNavigation(
           params.set(field + "From", String(data[field + "From"]));
         if (data[field + "To"])
           params.set(field + "To", String(data[field + "To"]));
-      } else if (type === "array") {
+      } else if (type === "multiselect") {
         if ((data[field] as unknown[])?.length)
           params.set(field, (data[field] as unknown[]).join(","));
       } else if (

@@ -11,7 +11,7 @@ import {
   SelectorInput,
 } from "./form-inputs/index";
 import { generateLabel, isTemporalType } from "./utils";
-import SelectInput from "./form-inputs/SelectInput";
+import SelectInput from "./form-inputs/UniSelectInput";
 import MoneyInput from "./form-inputs/MoneyInput";
 import Controller from "@/ui/customComponents/Controller";
 
@@ -19,9 +19,9 @@ const inputMap = {
   number: NumberInput,
   string: StringInput,
   phone: PhoneInput,
-  array: ArrayInput,
+  multiselect: ArrayInput,
   money: MoneyInput,
-  select: SelectInput,
+  uniselect: SelectInput,
   selector: SelectorInput,
 } as const;
 
@@ -29,9 +29,9 @@ type inputTypes =
   | "number"
   | "string"
   | "phone"
-  | "array"
+  | "multiselect"
   | "money"
-  | "select"
+  | "uniselect"
   | "selector";
 
 export function Form() {

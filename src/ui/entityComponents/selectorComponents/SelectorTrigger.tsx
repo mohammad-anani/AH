@@ -19,6 +19,10 @@ export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
   selectedDisplay,
   entity,
 }: SelectorTriggerProps<T>) {
+  const title = entity.startsWith("Test")
+    ? entity.replace("Test", "Test ")
+    : entity;
+
   if (!object?.["ID"]) {
     return (
       <span>
@@ -29,7 +33,7 @@ export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
             as="button"
             variant="link"
           >
-            {`Select ${entity}`}
+            {`Select ${title}`}
           </Clickable>
         </DialogTrigger>
       </span>

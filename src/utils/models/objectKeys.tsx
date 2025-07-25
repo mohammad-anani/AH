@@ -35,7 +35,7 @@ export const employeeFields: Key[] = [
   ["isActive", "boolean", ["Active", "Not Active"]],
   [
     "WorkingDays",
-    "array",
+    "multiselect",
     [
       "Monday",
       "Tuesday",

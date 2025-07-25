@@ -42,3 +42,5 @@ export default function MoneyInput({ fieldKey, label }: TemporalInputProps) {
     </>
   );
 }
+
+//no from to,just a value

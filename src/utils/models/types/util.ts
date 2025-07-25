@@ -22,9 +22,9 @@ export type DataTypes =
   | "phone"
   | "date"
   | "datetime"
-  | "array"
+  | "multiselect"
   | "time"
-  | "select"
+  | "uniselect"
   | "money"
   | "selector";
 
