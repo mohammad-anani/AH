@@ -7,3 +7,4 @@ export { default as ArrayInput } from "./MultiSelectInput";
 export { default as UnsupportedInput } from "./UnsupportedInput";
 export { default as SelectInput } from "./UniSelectInput";
 export { default as SelectorInput } from "./SelectorInput";
+export { default as EmailInput } from "./EmailInput";

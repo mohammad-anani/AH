@@ -29,7 +29,7 @@ export function useFilterDefaultValues(
 
       defaults[field] =
         convertStringToType(customType ?? "", params.get(field) ?? "") || null;
-    } else if (isTemporalType(type ?? "null")) {
+    } else if (isTemporalType(type ?? "null") || type === "money") {
       defaults[field + "From"] = (params.get(field + "From") ??
         null) as DataTypes;
       defaults[field + "To"] = (params.get(field + "To") ?? null) as DataTypes;

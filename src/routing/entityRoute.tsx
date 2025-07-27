@@ -62,6 +62,7 @@ export function route<T extends EntityKey>(
                   canEdit={canEdit}
                   headerWidth={headerWidth}
                   dataFields={dataFields}
+                  isModal={false}
                 />
               ),
             },

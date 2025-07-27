@@ -1,9 +1,11 @@
 import { cloneElement } from "react";
-import { get, useFormContext, useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 
 import React from "react";
 import { useNavigation } from "react-router-dom";
 import type { Primitive } from "zod";
+import useError from "../form-inputs/useError";
+import FormError from "./FormError";
 
 type RegisteredInputProps = {
   name: string;
@@ -20,22 +22,13 @@ export default function RegisteredInput({
     register,
     setValue,
     control,
-    formState: { errors, isSubmitting: isSub },
+    formState: { isSubmitting: isSub },
   } = useFormContext();
 
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
 
-  const errorObj = get(errors, name);
-  const errorMessages: string[][] = [];
-
-  if (errorObj) {
-    if (errorObj.types) {
-      errorMessages.push(...(Object.values(errorObj.types) as string[][]));
-    } else if (errorObj.message) {
-      errorMessages.push(errorObj.message);
-    }
-  }
+  const errorMessages = useError(name);
 
   const registered = register(name);
   const value = useWatch({ name, control });
@@ -53,17 +46,7 @@ export default function RegisteredInput({
         disabled: isSubmitting,
         id: name,
       })}
-      {errorMessages[0] && errorMessages[0].length ? (
-        <ul className="grid grid-cols-1 text-sm! *:text-red-500!">
-          {typeof errorMessages[0] === "string" ? (
-            <li>{`* ${errorMessages[0]}`}</li>
-          ) : (
-            (errorMessages[0] as string[]).map((msg: string, i) => (
-              <li key={i}>{`* ${msg}`}</li>
-            ))
-          )}
-        </ul>
-      ) : null}
+      <FormError errorMessages={errorMessages} />
     </span>
   );
 }

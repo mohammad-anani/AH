@@ -6,11 +6,10 @@ import {
   date,
   validDays,
   time,
-  numberCallBack,
 } from "./reusableSchemas";
 
+//remove id,edit age
 export const PersonSchema = z.object({
-  ID: positiveNumber(),
   FirstName: nonEmptyString.min(2, {
     message: "First name must be at least 2 characters.",
   }),
@@ -21,15 +20,28 @@ export const PersonSchema = z.object({
     message: "Last name must be at least 2 characters.",
   }),
   Gender: z.boolean(),
-  Age: z.preprocess(
-    (value) => {
-      return !isNaN(Number(value)) && numberCallBack(value as string | number);
-    },
-    z
-      .number()
-      .min(0, { message: "Age cannot be less than 0." })
-      .max(120, { message: "Age cannot be greater than 120." }),
-  ),
+  DateOfBirth: date
+    .refine(
+      (val) => {
+        const date = new Date(val);
+        const now = new Date();
+        return date <= now;
+      },
+      {
+        message: "Date cannot be in the future",
+      },
+    )
+    .refine(
+      (val) => {
+        const date = new Date(val);
+        const minDate = new Date();
+        minDate.setFullYear(new Date().getFullYear() - 120);
+        return date >= minDate;
+      },
+      {
+        message: "Date cannot be more than 120 years ago",
+      },
+    ),
   CountryName: nonEmptyString.min(2, {
     message: "Country name must be at least 2 characters.",
   }),
@@ -43,7 +55,6 @@ export const PersonSchema = z.object({
 });
 
 export const EmployeeSchema = z.object({
-  ID: positiveNumber(),
   Person: PersonSchema,
   DepartmentID: positiveNumber(),
   Salary: positiveNumber(),

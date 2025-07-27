@@ -2,7 +2,7 @@ import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 import { FormProvider, useForm } from "react-hook-form";
 import {
-  Form,
+  Form as RouterForm,
   useNavigation,
   useOutletContext,
   useSubmit,
@@ -15,7 +15,9 @@ import throwError from "@/utils/helpers/throwError";
 import type { EntityKey } from "@/utils/models/types/util";
 import { z } from "zod";
 import { emptyObjects } from "@/utils/models/types/emptyObjectsObject";
-import { Forms } from "@/utils/models/FormObject";
+import { formConfig } from "@/utils/models/componentsConfig/FormConfig";
+import Form from "./Form";
+import { formatTitle } from "@/utils/formatters/formatTitle";
 
 type FormProps = {
   entity: EntityKey;
@@ -38,7 +40,7 @@ export default function AddUpdateForm({
 
   const defaultValues = isAdd ? emptyObjects[entity] : data;
 
-  const title = `${isAdd ? "Add" : "Edit"} ${entity}`;
+  const title = `${isAdd ? "Add" : "Edit"} ${formatTitle(entity)}`;
 
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -53,10 +55,9 @@ export default function AddUpdateForm({
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
 
-  const EntityForm = Forms[entity];
+  if (!schema || !defaultValues) throwError(500, "Internal server error", "");
 
-  if (!schema || !defaultValues || !EntityForm)
-    throwError(500, "Internal server error", "");
+  const formFields = formConfig[entity];
 
   return (
     <>
@@ -66,7 +67,7 @@ export default function AddUpdateForm({
 
       <H2 className="mb-6">{title}</H2>
       <FormProvider {...methods}>
-        <Form
+        <RouterForm
           replace
           method="POST"
           onSubmit={handleSubmit((data) => {
@@ -74,7 +75,7 @@ export default function AddUpdateForm({
           })}
           className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-3 *:text-xl! *:odd:font-bold`}
         >
-          <EntityForm />
+          <Form fields={formFields} mode={isAdd ? "add" : "update"} />
           <Clickable
             className="col-span-2 mt-10"
             as="button"
@@ -90,7 +91,7 @@ export default function AddUpdateForm({
                   ? "Add"
                   : "Save"}
           </Clickable>
-        </Form>
+        </RouterForm>
       </FormProvider>
     </>
   );

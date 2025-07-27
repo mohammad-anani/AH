@@ -20,6 +20,7 @@ import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
 import { Check, Info } from "lucide-react";
 import useFilter from "@/ui/entityComponents/listComponents/useFilter";
+import { formatTitle } from "@/utils/formatters/formatTitle";
 
 type ListPageProps<T extends EntityKey> = {
   entity: EntityKey;
@@ -125,9 +126,7 @@ export default function ListPage<T extends EntityKey>({
     );
   };
 
-  const title =
-    (entity.startsWith("Test") ? entity.replace("Test", "Test ") : entity) +
-    "s";
+  const title = formatTitle(entity);
 
   return (
     <>
@@ -191,7 +190,7 @@ export default function ListPage<T extends EntityKey>({
                   <DialogHeader>
                     <DialogTitle>
                       <H2 className="text-left text-2xl!">
-                        {"Filter " + entity}
+                        {"Filter " + title + "s"}
                       </H2>
                     </DialogTitle>
                   </DialogHeader>

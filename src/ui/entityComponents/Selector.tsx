@@ -20,6 +20,7 @@ import SelectorTrigger from "./selectorComponents/SelectorTrigger";
 import useSelector from "./selectorComponents/useSelector";
 import CardSection from "./selectorComponents/CardSection";
 import ListSection from "./selectorComponents/ListSection";
+import { formatTitle } from "@/utils/formatters/formatTitle";
 
 type SelectorProps<T extends EntityKey> = {
   entity: T;
@@ -52,9 +53,7 @@ export default function Selector<T extends EntityKey>({
     dataFields,
   } = useSelector(entity, selectedObjectState, path);
 
-  const title = entity.startsWith("Test")
-    ? entity.replace("Test", "Test ")
-    : entity;
+  const title = formatTitle(entity);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -101,6 +100,7 @@ export default function Selector<T extends EntityKey>({
                   ID: CardID,
                 });
                 setCardID(undefined);
+                setIsOpen(false);
               }}
             />
           )}

@@ -1,15 +1,9 @@
 // List page configuration for entities
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
-import type {
-  EntityKey,
-  Key,
-  RowTemplate,
-  Setter,
-} from "@/utils/models/types/util";
+import type { EntityKey, Key, RowTemplate } from "@/utils/models/types/util";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
-
-import DepartmentSelect from "@/features/department/DepartmentSelect";
+import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 
 //add rest
 
@@ -17,34 +11,20 @@ const personFields: Key[] = [
   ["FirstName", "string"],
   ["MiddleName", "string"],
   ["LastName", "string"],
-  ["Gender", "boolean", ["Male", "Female"]],
+  ["Gender", "boolean", ["Male", "Female", "All"]],
   ["Age", "number"],
   ["Phone", "phone"],
-  ["Email", "string"],
+  ["Email", "email"],
   ["CountryName", "string"],
   ["Username", "string"],
 ];
 
 const employeeFields: Key[] = [
-  [
-    "Department",
-    "custom",
-    [
-      ({ field, onChange }) => {
-        return (
-          <DepartmentSelect
-            departmentID={field as number}
-            setDepartmentID={onChange as Setter<number>}
-          />
-        );
-      },
-      "number",
-    ],
-  ],
+  ["Department", "custom", DepartmentSelectCallBack],
   ["Salary", "money"],
   ["HireDate", "date"],
   ["LeaveDate", "date"],
-  ["isActive", "boolean", ["Active", "Not Active"]],
+  ["isActive", "boolean", ["Active", "Not Active", "All"]],
   [
     "WorkingDays",
     "multiselect",
@@ -118,19 +98,7 @@ export const listPageConfig: {
       [1, 1],
     ],
     [
-      [
-        "Department",
-        "custom",
-        [
-          ({ field, onChange }) => (
-            <DepartmentSelect
-              departmentID={Number(field)}
-              setDepartmentID={onChange as Setter<number>}
-            />
-          ),
-          "number",
-        ],
-      ],
+      ["Department", "custom", DepartmentSelectCallBack],
       ["Name", "string"],
       ["Cost", "number"],
       ["Admin", "selector", "Admin"],

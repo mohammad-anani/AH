@@ -20,6 +20,7 @@ import type { typesObject } from "@/utils/models/types/typesObject";
 import Data from "./Data";
 import { useEffect, useState } from "react";
 import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
+import { formatTitle } from "@/utils/formatters/formatTitle";
 
 type CardProps<T extends EntityKey> = {
   title: EntityKey;
@@ -55,7 +56,10 @@ export default function Card<T extends EntityKey>({
 
   const fetcher = useFetcher();
 
-  const [subEntity, subLink] = SubCard as [EntityKey, string];
+  const [subEntity, subLink] = (SubCard as [EntityKey, string]) ?? [
+    undefined,
+    undefined,
+  ];
 
   useEffect(() => {
     if (subLink) fetcher.load(subLink);
@@ -101,7 +105,7 @@ export default function Card<T extends EntityKey>({
         </Clickable>
       ) : null}
       <div className="flex items-center justify-between">
-        {!isModal ? <H2>{title}</H2> : null}
+        {!isModal ? <H2>{formatTitle(title)}</H2> : null}
         <div className="flex gap-x-2">
           {canEdit ? (
             <Clickable as="Link" variant="primary" to="edit">

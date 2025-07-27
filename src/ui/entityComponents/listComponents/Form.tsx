@@ -1,19 +1,26 @@
-import type { customFilterProps, Key } from "@/utils/models/types/util";
+import type {
+  customFilterProps,
+  DataTypes,
+  Key,
+} from "@/utils/models/types/util";
 import useListContext from "./context";
+
+import { generateLabel } from "./utils";
+
+import Controller from "@/ui/customComponents/Controller";
 import {
   NumberInput,
   StringInput,
   PhoneInput,
+  ArrayInput,
+  SelectInput,
+  EmailInput,
+  SelectorInput,
   BooleanInput,
   TemporalInput,
-  ArrayInput,
   UnsupportedInput,
-  SelectorInput,
-} from "./form-inputs/index";
-import { generateLabel, isTemporalType } from "./utils";
-import SelectInput from "./form-inputs/UniSelectInput";
-import MoneyInput from "./form-inputs/MoneyInput";
-import Controller from "@/ui/customComponents/Controller";
+} from "@/ui/form-inputs";
+import MoneyInput from "@/ui/form-inputs/MoneyInput";
 
 const inputMap = {
   number: NumberInput,
@@ -22,17 +29,13 @@ const inputMap = {
   multiselect: ArrayInput,
   money: MoneyInput,
   uniselect: SelectInput,
+  email: EmailInput,
   selector: SelectorInput,
+  boolean: BooleanInput,
+  date: TemporalInput,
+  datetime: TemporalInput,
+  time: TemporalInput,
 } as const;
-
-type inputTypes =
-  | "number"
-  | "string"
-  | "phone"
-  | "multiselect"
-  | "money"
-  | "uniselect"
-  | "selector";
 
 export function Form() {
   const { fields } = useListContext();
@@ -44,10 +47,9 @@ export function Form() {
 
     const label = generateLabel(key) + ":";
     const commonProps = {
-      key,
       fieldKey: key,
       label,
-      data: data,
+      data: data || type,
     };
 
     if (type === "custom") {
@@ -71,28 +73,7 @@ export function Form() {
       );
     }
 
-    if (isTemporalType(type ?? "")) {
-      return (
-        <TemporalInput
-          {...commonProps}
-          type={type as "date" | "datetime" | "time"}
-        />
-      );
-    }
-
-    if (type === "boolean") {
-      const [trueLabel, falseLabel] = data as [string, string];
-
-      return (
-        <BooleanInput
-          {...commonProps}
-          trueLabel={trueLabel}
-          falseLabel={falseLabel}
-        />
-      );
-    }
-
-    const InputComponent = inputMap[type as inputTypes] || UnsupportedInput;
+    const InputComponent = inputMap[type as DataTypes] || UnsupportedInput;
     return <InputComponent {...commonProps} />;
   };
 

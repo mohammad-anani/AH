@@ -1,29 +1,51 @@
+import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 import { useFormContext } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 
 interface TemporalInputProps {
   fieldKey: string;
   label: string;
-  type: "date" | "datetime" | "time";
+  data: "date" | "datetime" | "time";
 }
 
 export default function TemporalInput({
   fieldKey,
   label,
-  type,
+  data: type,
 }: TemporalInputProps) {
   const {
     register,
     formState: { errors },
+    getValues,
     watch,
   } = useFormContext<FieldValues>();
+
+  //booleans to be changed,date of birth to be added with age
+
+  const isFromTo = Object.keys(getValues()).some(
+    (key) => key === fieldKey + "From" || key === fieldKey + "To",
+  );
+
   const inputType = type === "datetime" ? "datetime-local" : type;
+
+  const labelSpan = <label htmlFor={fieldKey}>{label}</label>;
+
+  if (!isFromTo)
+    return (
+      <>
+        {labelSpan}
+        <RegisteredInput name={fieldKey}>
+          <input type={inputType} />
+        </RegisteredInput>
+      </>
+    );
 
   const dateTo = watch(fieldKey + "To");
 
   return (
     <>
-      <label htmlFor={fieldKey}>{label}</label>
+      {labelSpan}
+
       <span id={fieldKey} className="grid w-full! grid-cols-[50px_1fr] gap-y-1">
         <label htmlFor={fieldKey + "From"}>From:</label>
         <input

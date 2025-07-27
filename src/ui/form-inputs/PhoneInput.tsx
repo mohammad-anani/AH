@@ -1,4 +1,4 @@
-import PhoneInp from "../../../customComponents/PhoneInput";
+import PhoneInp from "../customComponents/PhoneInput";
 import Controller from "@/ui/customComponents/Controller";
 
 interface PhoneInputProps {

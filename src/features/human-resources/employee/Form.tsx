@@ -55,12 +55,8 @@ export default function Form({ fieldPrefix = "" }: { fieldPrefix?: string }) {
               isDisabled={isSubmitting}
               options={selectOptions}
               value={selectOptions.filter((option) => {
-                console.log(
-                  option.value.substring(0, 3),
-                  field.value,
-                  option.value,
-                  field.value?.includes(option.value.substring(0, 3)),
-                );
+                if (!field.value) return false;
+
                 return (field.value as string[]).some((day) =>
                   day.includes(option.value.substring(0, 3)),
                 );

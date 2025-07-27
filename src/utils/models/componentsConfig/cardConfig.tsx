@@ -4,6 +4,7 @@ import formatDateIsoToLocal from "../../formatters/formatDateIsoToLocal";
 import formatPhoneNumber from "../../formatters/formatPhoneNumber";
 import type { typesObject } from "../types/typesObject";
 import { formatMoney } from "@/utils/formatters/formatMoney";
+import { calculateAge } from "@/utils/formatters/calculateAge";
 
 const personDataFields: dataFields<"Person"> = (
   person: typesObject["Person"],
@@ -13,7 +14,7 @@ const personDataFields: dataFields<"Person"> = (
     `${person.FirstName} ${person.MiddleName} ${person.LastName}`.trim(),
   ],
   ["Gender", person.Gender ? "Female" : "Male"],
-  ["Age", person.Age],
+  ["Age", calculateAge(person.DateOfBirth)],
   ["Country", person.CountryName],
   ["Phone", formatPhoneNumber(person.Phone)],
   ["Email", person.Email],

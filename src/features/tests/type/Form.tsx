@@ -1,9 +1,29 @@
 import DepartmentSelect from "@/features/department/DepartmentSelect";
+import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 import Controller from "@/ui/customComponents/Controller";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
-import { SelectorInput } from "@/ui/entityComponents/listComponents/form-inputs";
+import EntityForm from "@/ui/entityComponents/Form";
+import { SelectorInput } from "@/ui/form-inputs";
 
 export default function Form() {
+  return (
+    <EntityForm
+      entity="TestType"
+      fields={[
+        ["Name", "Name", "string", "both"],
+        [
+          "Department",
+          "DepartmentID",
+          "custom",
+          "add",
+          DepartmentSelectCallBack,
+        ],
+        ["Cost", "Cost", "money", "both"],
+      ]}
+      mode="add"
+    />
+  );
+
   return (
     <>
       <label>Name:</label>

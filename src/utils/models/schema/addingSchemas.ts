@@ -16,10 +16,9 @@ import {
   AppointmentSchema,
 } from "./schemas.ts";
 
-export const AddPersonSchema = PersonSchema.omit({ ID: true });
+export const AddPersonSchema = PersonSchema;
 
 export const AddEmployeeSchema = EmployeeSchema.omit({
-  ID: true,
   LeaveDate: true,
   isActive: true,
 }).extend({

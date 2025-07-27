@@ -1,0 +1,62 @@
+import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
+import type { typesObject } from "../types/typesObject";
+import type { AllEntityKeys, EntityKey, FormKey } from "../types/util";
+
+const personFields: FormKey<"Person">[] = [
+  ["First Name", "FirstName", "string", "both"],
+  ["Middle Name", "MiddleName", "string", "both"],
+  ["Last Name", "LastName", "string", "both"],
+  ["Birth Date", "DateOfBirth", "date", "both"],
+  ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
+  ["Country", "CountryName", "string", "both"],
+  ["Phone", "Phone", "phone", "both"],
+  ["Email", "Email", "string", "both"],
+  ["Username", "Username", "string", "both"],
+];
+
+const employeeFields: FormKey<"Employee">[] = [
+  ...prefixFields<"Employee">("Person", personFields),
+  ["Department", "DepartmentID", "custom", "both", DepartmentSelectCallBack],
+  ["Salary", "Salary", "money", "both"],
+  ["Hire Date", "HireDate", "date", "both"],
+  ["Shift Start", "ShiftStart", "time", "both"],
+  ["Shift End", "ShiftEnd", "time", "both"],
+  ["Active", "isActive", "boolean", "both", ["Active", "Not Active", "None"]],
+];
+
+export const formConfig: {
+  [K in EntityKey]: FormKey<K>[];
+} = {
+  Admin: [...prefixFields<"Admin">("Employee", employeeFields)],
+  Doctor: [
+    ...prefixFields<"Doctor">("Employee", employeeFields),
+    ["Specialization", "Specialization", "string", "both"],
+  ],
+  Receptionist: [...prefixFields<"Receptionist">("Employee", employeeFields)],
+  Patient: [...prefixFields<"Patient">("Person", personFields)],
+  Department: [
+    ["Name", "Name", "string", "both"],
+    ["Phone", "Phone", "phone", "both"],
+  ],
+  TestType: [
+    ["Name", "Name", "string", "both"],
+    ["Department", "DepartmentID", "custom", "both", DepartmentSelectCallBack],
+    ["Cost", "Cost", "money", "both"],
+  ],
+  // Add other entities as needed
+};
+
+//edit names
+
+function prefixFields<T extends AllEntityKeys>(
+  prefix: string,
+  baseFields: FormKey<AllEntityKeys>[],
+): FormKey<T>[] {
+  return baseFields.map(([label, fieldKey, type, mode, ...rest]) => [
+    label,
+    `${prefix}.${fieldKey}` as keyof typesObject[T],
+    type,
+    mode,
+    ...rest,
+  ]) as FormKey<T>[];
+}

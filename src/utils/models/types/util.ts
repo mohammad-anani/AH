@@ -28,17 +28,29 @@ export type DataTypes =
   | "time"
   | "uniselect"
   | "money"
-  | "selector";
-
-export type Key = [
-  string,
-  DataTypes | "custom",
-  (Array<Primitive> | customFilterProps | [string, string] | string)?,
-];
+  | "selector"
+  | "email";
 
 export type customFilterProps = [
   (data: { field: Primitive; onChange: Setter<Primitive> }) => JSX.Element,
   DataTypes,
+];
+
+export type customFormProps = [
+  (data: {
+    field: Primitive;
+    onChange: Setter<Primitive>;
+    isSubmitting?: boolean;
+  }) => JSX.Element,
+  DataTypes,
+];
+
+export type FormKey<T extends AllEntityKeys> = [
+  label: string,
+  fieldKey: DotAccess<typesObject[T]>,
+  type: DataTypes | "custom",
+  mode: "add" | "update" | "both",
+  data?: Array<Primitive> | customFormProps | [string, string] | string,
 ];
 
 export type AllEntityKeys = EntityKey | "Person" | "Employee";
@@ -90,3 +102,18 @@ export type RowTemplate<T extends EntityKey> = [
   (item: rowTypesObject[T]) => Primitive[],
   number[],
 ];
+export type Key = [
+  name: string,
+  type: DataTypes | "custom",
+  data?: Array<Primitive> | customFilterProps | [string, string] | string,
+];
+
+type DotAccess<T, Prefix extends string = ""> = T extends object
+  ? {
+      [K in keyof T]: T[K] extends object
+        ? DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
+        : `${Prefix}${Extract<K, string>}`;
+    }[keyof T]
+  : never;
+
+//{Employee:{Name}} become Employee.Name

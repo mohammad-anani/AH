@@ -1,5 +1,5 @@
 import Controller from "@/ui/customComponents/Controller";
-import Selector from "../../Selector";
+import Selector from "../entityComponents/Selector";
 import type { EntityKey } from "@/utils/models/types/util";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
