@@ -1,23 +1,12 @@
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
-import { FormProvider, useForm } from "react-hook-form";
-import {
-  Form as RouterForm,
-  useNavigation,
-  useOutletContext,
-  useSubmit,
-} from "react-router-dom";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addingSchemas } from "@/utils/models/schema/addingSchemasObject";
-import { schemas } from "@/utils/models/schema/schemasObject.ts";
-import type { typesObject } from "@/utils/models/types/typesObject";
-import throwError from "@/utils/helpers/throwError";
+import { FormProvider } from "react-hook-form";
+import { Form as RouterForm } from "react-router-dom";
+
 import type { EntityKey } from "@/utils/models/types/util";
-import { z } from "zod";
-import { emptyObjects } from "@/utils/models/types/emptyObjectsObject";
-import { formConfig } from "@/utils/models/componentsConfig/FormConfig";
 import Form from "./Form";
-import { formatTitle } from "@/utils/formatters/formatTitle";
+
+import useAddUpdateForm from "./hooks/useAddUpdateForm";
 
 type FormProps = {
   entity: EntityKey;
@@ -32,32 +21,15 @@ export default function AddUpdateForm({
   submitText = "Save",
   submittingText = "Submitting...",
 }: FormProps) {
-  const data = useOutletContext<typesObject[EntityKey]>();
-
-  const isAdd = !data;
-
-  const schema = isAdd ? addingSchemas[entity] : schemas[entity];
-
-  const defaultValues = isAdd ? emptyObjects[entity] : data;
-
-  const title = `${isAdd ? "Add" : "Edit"} ${formatTitle(entity)}`;
-
-  const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: defaultValues as z.infer<typeof schema>,
-    criteriaMode: "all",
-  });
   const {
+    title,
+    methods,
     handleSubmit,
-    formState: { isSubmitting: isSub },
-  } = methods;
-  const submit = useSubmit();
-  const { state } = useNavigation();
-  const isSubmitting = state === "submitting" || isSub;
-
-  if (!schema || !defaultValues) throwError(500, "Internal server error", "");
-
-  const formFields = formConfig[entity];
+    submit,
+    formFields,
+    isAdd,
+    isSubmitting,
+  } = useAddUpdateForm(entity);
 
   return (
     <>

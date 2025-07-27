@@ -17,10 +17,9 @@ import {
 
 import H2 from "../customComponents/H2";
 import SelectorTrigger from "./selectorComponents/SelectorTrigger";
-import useSelector from "./selectorComponents/useSelector";
+import useSelector from "./hooks/useSelector";
 import CardSection from "./selectorComponents/CardSection";
 import ListSection from "./selectorComponents/ListSection";
-import { formatTitle } from "@/utils/formatters/formatTitle";
 
 type SelectorProps<T extends EntityKey> = {
   entity: T;
@@ -51,9 +50,8 @@ export default function Selector<T extends EntityKey>({
     filterFields,
     subLinks,
     dataFields,
+    title,
   } = useSelector(entity, selectedObjectState, path);
-
-  const title = formatTitle(entity);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

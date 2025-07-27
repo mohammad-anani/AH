@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import { isTemporalType } from "./utils";
 import type { Key, SearchParamsState } from "@/utils/models/types/util";
+import { isTemporalType } from "../listComponents/utils";
 
 export function useFilterNavigation(
   fields: Key[],

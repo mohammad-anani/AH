@@ -21,6 +21,7 @@ import Data from "./Data";
 import { useEffect, useState } from "react";
 import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
 import { formatTitle } from "@/utils/formatters/formatTitle";
+import useCard from "./hooks/useCard";
 
 type CardProps<T extends EntityKey> = {
   title: EntityKey;
@@ -46,30 +47,16 @@ export default function Card<T extends EntityKey>({
 
   headerWidth = 150,
 }: CardProps<T>) {
-  const loaderData = useOutletContext<typesObject[T]>();
+  const {
+    subEntity,
+    setSubCard,
+    subSubLinks,
+    subDataFields,
+    object,
+    subObject,
+  } = useCard<T>(data);
 
-  const object = data ?? loaderData;
-
-  const [SubCard, setSubCard] = useState<[EntityKey, string] | undefined>(
-    undefined,
-  );
-
-  const fetcher = useFetcher();
-
-  const [subEntity, subLink] = (SubCard as [EntityKey, string]) ?? [
-    undefined,
-    undefined,
-  ];
-
-  useEffect(() => {
-    if (subLink) fetcher.load(subLink);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subLink]);
-
-  if (SubCard && fetcher.data) {
-    const { subLinks, dataFields } = cardConfig[subEntity];
-
-    const object = fetcher.data;
+  if (subSubLinks && subObject) {
     return (
       <>
         <Clickable
@@ -80,23 +67,22 @@ export default function Card<T extends EntityKey>({
           Back to {title}
         </Clickable>
         <div
-          className={`mt-[5px] max-h-[260px] ${dataFields(object).length > 4 ? "overflow-y-scroll" : ""}`}
+          className={`mt-[5px] max-h-[260px] ${subDataFields(subObject).length > 4 ? "overflow-y-scroll" : ""}`}
         >
           <Card
             title={subEntity}
-            subLinks={subLinks as SubLinks<typeof subEntity>}
-            dataFields={dataFields as dataFields<typeof subEntity>}
+            subLinks={subSubLinks as SubLinks<typeof subEntity>}
+            dataFields={subDataFields as dataFields<typeof subEntity>}
             canDelete={false}
             canEdit={false}
             isModal={true}
             isNestedCard={true}
-            data={fetcher.data}
+            data={subObject}
           />
         </div>
       </>
     );
   }
-
   return (
     <Dialog>
       {!isModal ? (

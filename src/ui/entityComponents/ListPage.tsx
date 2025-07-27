@@ -1,4 +1,3 @@
-import { useLoaderData } from "react-router-dom";
 import List from "./List";
 import Clickable from "../customComponents/Clickable";
 
@@ -13,14 +12,14 @@ import type {
   EntityKey,
   Key,
   RowTemplate,
+  SearchParamsState,
+  SelectedObjectState,
   Setter,
 } from "@/utils/models/types/util";
 import H2 from "../customComponents/H2";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 
-import { Check, Info } from "lucide-react";
-import useFilter from "@/ui/entityComponents/listComponents/useFilter";
-import { formatTitle } from "@/utils/formatters/formatTitle";
+import useListPage from "./hooks/useListPage";
 
 type ListPageProps<T extends EntityKey> = {
   entity: EntityKey;
@@ -33,7 +32,7 @@ type ListPageProps<T extends EntityKey> = {
   filterFields: Key[];
   emptyText?: string;
   canModifyUrl?: boolean;
-  searchParamsState?: [URLSearchParams, Setter<URLSearchParams> | undefined];
+  searchParamsState?: SearchParamsState;
 
   selectedObjectState?: [
     rowTypesObject[EntityKey],
@@ -57,76 +56,23 @@ export default function ListPage<T extends EntityKey>({
   withBack = false,
   onDetailsClick,
 }: ListPageProps<T>) {
-  const loaderData = useLoaderData();
-
-  const [isFilterOpen, setIsFilterOpen] = useFilter(
-    searchParamsState?.[0].toString(),
+  const {
+    isFilterOpen,
+    setIsFilterOpen,
+    items,
+    itemsCount,
+    Header,
+    render,
+    title,
+  } = useListPage(
+    entity as T,
+    rowTemplate,
+    searchParamsState,
+    data,
+    onDetailsClick,
+    selectedObjectState as SelectedObjectState<T>,
+    onSelect,
   );
-  const [items, itemsCount] = searchParamsState && data ? data : loaderData;
-
-  if (!items) return null;
-
-  const [headerFields, dataFields, gridFr] = rowTemplate;
-
-  const gridTemplate = [...gridFr, ...(searchParamsState ? [1, 2] : [1])]
-    .map((fr) => `${fr}fr`)
-    .join(" ");
-
-  const gridStyle = {
-    display: "grid",
-    gap: "5px",
-    gridTemplateColumns: gridTemplate,
-  };
-
-  const Header = (
-    <li key="Header" style={gridStyle}>
-      {headerFields.map((field) => (
-        <span>{field}</span>
-      ))}
-    </li>
-  );
-
-  const render = (item: rowTypesObject[T]) => {
-    return (
-      <li style={gridStyle} key={item?.["ID"]}>
-        {dataFields(item ?? undefined).map((field) => (
-          <span>{String(field)}</span>
-        ))}
-        <Clickable
-          className="flex! items-center gap-x-1"
-          as={searchParamsState ? "button" : "Link"}
-          variant="secondary"
-          {...(searchParamsState
-            ? {
-                onClick: () => {
-                  onDetailsClick?.(item.ID);
-                },
-              }
-            : { to: `${item?.["ID"]}` })}
-        >
-          <Info className="*:text-primary! h-[20px] w-[20px]" />
-          Details
-        </Clickable>
-
-        {searchParamsState &&
-        item?.["ID"] !== selectedObjectState?.[0]?.["ID"] ? (
-          <Clickable
-            className="flex! items-center gap-x-1"
-            as="button"
-            variant="secondary"
-            onClick={() => {
-              onSelect?.(item ?? undefined);
-            }}
-          >
-            <Check className="*:text-primary! h-[20px] w-[20px]" />
-            Select
-          </Clickable>
-        ) : null}
-      </li>
-    );
-  };
-
-  const title = formatTitle(entity);
 
   return (
     <>

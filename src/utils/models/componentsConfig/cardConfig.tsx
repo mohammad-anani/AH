@@ -5,6 +5,7 @@ import formatPhoneNumber from "../../formatters/formatPhoneNumber";
 import type { typesObject } from "../types/typesObject";
 import { formatMoney } from "@/utils/formatters/formatMoney";
 import { calculateAge } from "@/utils/formatters/calculateAge";
+import { convert24To12 } from "@/utils/formatters/convert24To12";
 
 const personDataFields: dataFields<"Person"> = (
   person: typesObject["Person"],
@@ -55,8 +56,8 @@ const employeeDataFields: dataFields<"Employee"> = (
     ["Hire Date", formatDateIsoToLocal(HireDate)],
     ["Leave Date", LeaveDate ? formatDateIsoToLocal(LeaveDate) : "N/A"],
     ["Working Days", formattedWorkingDays],
-    ["Shift Start", ShiftStart],
-    ["Shift End", ShiftEnd],
+    ["Shift Start", convert24To12(ShiftStart)],
+    ["Shift End", convert24To12(ShiftEnd)],
     ["Status", isActive ? "Active" : "Inactive"],
   ];
 };

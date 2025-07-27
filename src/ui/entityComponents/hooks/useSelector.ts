@@ -1,3 +1,4 @@
+import { formatTitle } from "@/utils/formatters/formatTitle";
 import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
 import { listPageConfig } from "@/utils/models/componentsConfig/listPageConfig";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
@@ -66,6 +67,8 @@ export default function useSelector<T extends EntityKey>(
 
   const { subLinks, dataFields } = cardConfig[entity];
 
+  const title = formatTitle(entity);
+
   return {
     isOpen,
     setIsOpen,
@@ -80,5 +83,6 @@ export default function useSelector<T extends EntityKey>(
     filterFields,
     subLinks,
     dataFields,
+    title,
   };
 }
