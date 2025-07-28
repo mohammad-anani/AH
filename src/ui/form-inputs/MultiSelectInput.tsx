@@ -10,8 +10,9 @@ interface ArrayInputProps {
 const selectStyles = {
   control: (base: Record<string, unknown>) => ({
     ...base,
-    fontSize: 10,
-    minHeight: 24,
+    fontSize: "inherit",
+    minHeight: "auto", // remove fixed height
+    height: "100%", // fill available height
   }),
   valueContainer: (base: Record<string, unknown>) => ({
     ...base,
@@ -24,7 +25,7 @@ const selectStyles = {
   }),
   indicatorsContainer: (base: Record<string, unknown>) => ({
     ...base,
-    height: 24,
+    height: "100%", // fill height here too
   }),
   dropdownIndicator: (base: Record<string, unknown>) => ({
     ...base,

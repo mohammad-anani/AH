@@ -1,15 +1,15 @@
-import type { AllEntityKeys, FormKey } from "@/utils/models/types/util";
+import type { EntityKey, FormKey } from "@/utils/models/types/util";
 
 import useForm from "./hooks/useForm";
 
 //make formFields
 
-type FormProps<T extends AllEntityKeys> = {
+type FormProps<T extends EntityKey> = {
   fields: FormKey<T>[];
   mode: "add" | "update";
 };
 
-export default function Form<T extends AllEntityKeys>({
+export default function Form<T extends EntityKey>({
   fields,
   mode,
 }: FormProps<T>) {

@@ -108,12 +108,14 @@ export type Key = [
   data?: Array<Primitive> | customFilterProps | [string, string] | string,
 ];
 
-type DotAccess<T, Prefix extends string = ""> = T extends object
-  ? {
-      [K in keyof T]: T[K] extends object
-        ? DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
-        : `${Prefix}${Extract<K, string>}`;
-    }[keyof T]
-  : never;
+export type DotAccess<T, Prefix extends string = ""> = {
+  [K in keyof T]: T[K] extends object
+    ? T[K] extends Array<Primitive>
+      ? `${Prefix}${Extract<K, string>}` // don't recurse into arrays
+      :
+          | `${Prefix}${Extract<K, string>}`
+          | DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
+    : `${Prefix}${Extract<K, string>}`;
+}[keyof T];
 
 //{Employee:{Name}} become Employee.Name

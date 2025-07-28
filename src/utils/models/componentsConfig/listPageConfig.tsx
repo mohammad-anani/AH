@@ -4,6 +4,7 @@ import type { EntityKey, Key, RowTemplate } from "@/utils/models/types/util";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
+import { CountrySelectCallBack } from "@/features/Country/CountrySelectCallback";
 
 //add rest
 
@@ -15,7 +16,7 @@ const personFields: Key[] = [
   ["Age", "number"],
   ["Phone", "phone"],
   ["Email", "email"],
-  ["CountryName", "string"],
+  ["CountryName", "custom", CountrySelectCallBack],
   ["Username", "string"],
 ];
 

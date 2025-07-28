@@ -42,7 +42,7 @@ export const PersonSchema = z.object({
         message: "Date cannot be more than 120 years ago",
       },
     ),
-  CountryID: positiveNumber(),
+  Country: z.object({ ID: positiveNumber(), Name: nonEmptyString }),
   Phone: nonEmptyString.length(8, {
     message: "Phone must be exactly 8 digits.",
   }),

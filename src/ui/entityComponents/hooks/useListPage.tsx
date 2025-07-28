@@ -87,7 +87,7 @@ export default function useListPage<T extends EntityKey>(
     );
   };
 
-  const title = formatTitle(entity);
+  const title = formatTitle(entity) + "s";
 
   return {
     isFilterOpen,

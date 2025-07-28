@@ -48,7 +48,7 @@
           "LastName": "Smith",
           "Gender": true,
           "DateOfBirth": "1993-01-01",
-          "CountryID": 1,
+          "Country": { "ID": 1, "Name": "United States" },
           "Phone": "12345678",
           "Email": "alice@example.com",
           "Username": "alice.smith"
@@ -74,7 +74,7 @@
           "LastName": "Taylor",
           "Gender": false,
           "DateOfBirth": "1989-01-01",
-          "CountryID": 5,
+          "Country": { "ID": 5, "Name": "France" },
           "Phone": "98765432",
           "Email": "bob@example.com",
           "Username": "bob.taylor"
@@ -100,7 +100,7 @@
           "LastName": "Brown",
           "Gender": true,
           "DateOfBirth": "1995-01-01",
-          "CountryID": 2,
+          "Country": { "ID": 2, "Name": "Canada" },
           "Phone": "55511122",
           "Email": "carol@example.com",
           "Username": "carol.brown"
@@ -120,7 +120,7 @@
         "LastName": "Taylor",
         "Gender": true,
         "DateOfBirth": "2005-01-01",
-        "CountryID": 5,
+        "Country": { "ID": 5, "Name": "France" },
         "Phone": "76123456",
         "Email": "olivia.taylor@example.com",
         "Username": "olivia.taylor"
@@ -136,7 +136,7 @@
         "LastName": "Baker",
         "Gender": false,
         "DateOfBirth": "1993-01-01",
-        "CountryID": 10,
+        "Country": { "ID": 10, "Name": "South Africa" },
         "Phone": "71098765",
         "Email": "liam.baker@example.com",
         "Username": "liam.baker"
@@ -152,7 +152,7 @@
         "LastName": "King",
         "Gender": true,
         "DateOfBirth": "1983-01-01",
-        "CountryID": 4,
+        "Country": { "ID": 4, "Name": "Germany" },
         "Phone": "78906543",
         "Email": "sophia.king@example.com",
         "Username": "sophia.king"
@@ -169,7 +169,7 @@
           "LastName": "Smith",
           "Gender": true,
           "DateOfBirth": "1993-01-01",
-          "CountryID": 1,
+          "Country": { "ID": 1, "Name": "United States" },
           "Phone": "12345678",
           "Email": "alice.smith@example.com",
           "Username": "alice.smith"
@@ -196,7 +196,7 @@
           "LastName": "Taylor",
           "Gender": true,
           "DateOfBirth": "1983-01-01",
-          "CountryID": 2,
+          "Country": { "ID": 2, "Name": "Canada" },
           "Phone": "09876543",
           "Email": "bob.taylor@example.com",
           "Username": "bob.taylor"
@@ -233,7 +233,7 @@
           "LastName": "Kanaan",
           "Gender": true,
           "DateOfBirth": "1978-01-01",
-          "CountryID": 10,
+          "Country": { "ID": 10, "Name": "South Africa" },
           "Phone": "70123456",
           "Email": "lara.kanaan@example.com",
           "Username": "deslsdddd"
@@ -259,7 +259,7 @@
           "LastName": "Fakhoury",
           "Gender": false,
           "DateOfBirth": "1973-01-01",
-          "CountryID": 10,
+          "Country": { "ID": 10, "Name": "South Africa" },
           "Phone": "70987654",
           "Email": "ahmad.fakhoury@example.com",
           "Username": "asdeddddddd"
