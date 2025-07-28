@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogClose,
 } from "@/components/ui/dialog";
-import { useFetcher, useOutletContext } from "react-router-dom";
+
 import {
   type dataFields,
   type EntityKey,
@@ -18,8 +18,6 @@ import {
 } from "@/utils/models/types/util";
 import type { typesObject } from "@/utils/models/types/typesObject";
 import Data from "./Data";
-import { useEffect, useState } from "react";
-import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import useCard from "./hooks/useCard";
 
@@ -54,6 +52,7 @@ export default function Card<T extends EntityKey>({
     subDataFields,
     object,
     subObject,
+    fetcher,
   } = useCard<T>(data);
 
   if (subSubLinks && subObject) {

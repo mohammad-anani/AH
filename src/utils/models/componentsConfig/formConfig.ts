@@ -1,6 +1,7 @@
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 import type { typesObject } from "../types/typesObject";
 import type { AllEntityKeys, EntityKey, FormKey } from "../types/util";
+import { CountrySelectCallBack } from "@/features/Country/CountrySelectCallback";
 
 const personFields: FormKey<"Person">[] = [
   ["First Name", "FirstName", "string", "both"],
@@ -8,7 +9,7 @@ const personFields: FormKey<"Person">[] = [
   ["Last Name", "LastName", "string", "both"],
   ["Birth Date", "DateOfBirth", "date", "both"],
   ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
-  ["Country", "CountryName", "string", "both"],
+  ["Country", "CountryName", "custom", "both", CountrySelectCallBack],
   ["Phone", "Phone", "phone", "both"],
   ["Email", "Email", "string", "both"],
   ["Username", "Username", "string", "both"],

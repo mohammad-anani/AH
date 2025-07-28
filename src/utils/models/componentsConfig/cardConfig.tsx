@@ -16,7 +16,7 @@ const personDataFields: dataFields<"Person"> = (
   ],
   ["Gender", person.Gender ? "Female" : "Male"],
   ["Age", calculateAge(person.DateOfBirth)],
-  ["Country", person.CountryName],
+  ["Country", person.CountryID],
   ["Phone", formatPhoneNumber(person.Phone)],
   ["Email", person.Email],
   ["Username", person.Username],

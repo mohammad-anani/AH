@@ -42,9 +42,7 @@ export const PersonSchema = z.object({
         message: "Date cannot be more than 120 years ago",
       },
     ),
-  CountryName: nonEmptyString.min(2, {
-    message: "Country name must be at least 2 characters.",
-  }),
+  CountryID: positiveNumber(),
   Phone: nonEmptyString.length(8, {
     message: "Phone must be exactly 8 digits.",
   }),

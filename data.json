@@ -34,7 +34,6 @@
       "ID": 1,
       "CreatedByAdminID": null,
       "Employee": {
-        "ID": 1,
         "Salary": 80000,
         "HireDate": "2020-01-15",
         "LeaveDate": null,
@@ -44,13 +43,12 @@
         "ShiftEnd": "17:00",
         "DepartmentID": 1,
         "Person": {
-          "ID": 1,
           "FirstName": "Alice",
           "MiddleName": "Marie",
           "LastName": "Smith",
           "Gender": true,
           "DateOfBirth": "1993-01-01",
-          "CountryName": "USA",
+          "CountryID": 1,
           "Phone": "12345678",
           "Email": "alice@example.com",
           "Username": "alice.smith"
@@ -62,7 +60,6 @@
       "ID": 2,
       "CreatedByAdminID": 1,
       "Employee": {
-        "ID": 2,
         "Salary": 85000,
         "HireDate": "2019-05-20",
         "LeaveDate": null,
@@ -72,13 +69,12 @@
         "ShiftEnd": "16:00",
         "DepartmentID": 1,
         "Person": {
-          "ID": 2,
           "FirstName": "Bob",
           "MiddleName": "John",
           "LastName": "Taylor",
           "Gender": false,
           "DateOfBirth": "1989-01-01",
-          "CountryName": "UK",
+          "CountryID": 5,
           "Phone": "98765432",
           "Email": "bob@example.com",
           "Username": "bob.taylor"
@@ -90,7 +86,6 @@
       "ID": 3,
       "CreatedByAdminID": 1,
       "Employee": {
-        "ID": 3,
         "Salary": 78000,
         "HireDate": "2021-07-10",
         "LeaveDate": null,
@@ -100,13 +95,12 @@
         "ShiftEnd": "18:00",
         "DepartmentID": 1,
         "Person": {
-          "ID": 3,
           "FirstName": "Carol",
           "MiddleName": "Ann",
           "LastName": "Brown",
           "Gender": true,
           "DateOfBirth": "1995-01-01",
-          "CountryName": "Canada",
+          "CountryID": 2,
           "Phone": "55511122",
           "Email": "carol@example.com",
           "Username": "carol.brown"
@@ -121,13 +115,12 @@
       "CreatedByReceptionistID": 1,
       "CreatedAt": "2023-01-15T09:30:00",
       "Person": {
-        "ID": 6,
         "FirstName": "Olivia",
         "MiddleName": "Anne",
         "LastName": "Taylor",
         "Gender": true,
         "DateOfBirth": "2005-01-01",
-        "CountryName": "France",
+        "CountryID": 5,
         "Phone": "76123456",
         "Email": "olivia.taylor@example.com",
         "Username": "olivia.taylor"
@@ -138,13 +131,12 @@
       "CreatedByReceptionistID": 2,
       "CreatedAt": "2023-02-20T10:45:00",
       "Person": {
-        "ID": 7,
         "FirstName": "Liam",
         "MiddleName": "Andrew",
         "LastName": "Baker",
         "Gender": false,
         "DateOfBirth": "1993-01-01",
-        "CountryName": "Lebanon",
+        "CountryID": 10,
         "Phone": "71098765",
         "Email": "liam.baker@example.com",
         "Username": "liam.baker"
@@ -155,13 +147,12 @@
       "CreatedByReceptionistID": 3,
       "CreatedAt": "2023-03-10T11:00:00",
       "Person": {
-        "ID": 8,
         "FirstName": "Sophia",
         "MiddleName": "Marie",
         "LastName": "King",
         "Gender": true,
         "DateOfBirth": "1983-01-01",
-        "CountryName": "Germany",
+        "CountryID": 4,
         "Phone": "78906543",
         "Email": "sophia.king@example.com",
         "Username": "sophia.king"
@@ -172,15 +163,13 @@
     {
       "ID": 1,
       "Employee": {
-        "ID": 1,
         "Person": {
-          "ID": 1,
           "FirstName": "Alice",
           "MiddleName": "Marie",
           "LastName": "Smith",
           "Gender": true,
           "DateOfBirth": "1993-01-01",
-          "CountryName": "USA",
+          "CountryID": 1,
           "Phone": "12345678",
           "Email": "alice.smith@example.com",
           "Username": "alice.smith"
@@ -201,15 +190,13 @@
     {
       "ID": 2,
       "Employee": {
-        "ID": 2,
         "Person": {
-          "ID": 2,
           "FirstName": "Bob",
           "MiddleName": "John",
           "LastName": "Taylor",
           "Gender": true,
           "DateOfBirth": "1983-01-01",
-          "CountryName": "Canada",
+          "CountryID": 2,
           "Phone": "09876543",
           "Email": "bob.taylor@example.com",
           "Username": "bob.taylor"
@@ -232,7 +219,6 @@
     {
       "ID": 1,
       "Employee": {
-        "ID": 5,
         "DepartmentID": 2,
         "Salary": 3000,
         "HireDate": "2021-05-01",
@@ -242,13 +228,12 @@
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
         "Person": {
-          "ID": 12,
           "FirstName": "Lara",
           "MiddleName": "Marie",
           "LastName": "Kanaan",
           "Gender": true,
           "DateOfBirth": "1978-01-01",
-          "CountryName": "Lebanon",
+          "CountryID": 10,
           "Phone": "70123456",
           "Email": "lara.kanaan@example.com",
           "Username": "deslsdddd"
@@ -260,7 +245,6 @@
     {
       "ID": 2,
       "Employee": {
-        "ID": 6,
         "DepartmentID": 2,
         "Salary": 3200,
         "HireDate": "2022-01-15",
@@ -270,13 +254,12 @@
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
         "Person": {
-          "ID": 13,
           "FirstName": "Ahmad",
           "MiddleName": "Nabil",
           "LastName": "Fakhoury",
           "Gender": false,
           "DateOfBirth": "1973-01-01",
-          "CountryName": "Lebanon",
+          "CountryID": 10,
           "Phone": "70987654",
           "Email": "ahmad.fakhoury@example.com",
           "Username": "asdeddddddd"
@@ -514,5 +497,18 @@
     },
     { "ID": 2, "TestTypeName": "MRI Scan", "OrderedAt": "2023-02-02T10:00:00" },
     { "ID": 3, "TestTypeName": "X-Ray", "OrderedAt": "2023-02-03T11:00:00" }
+  ],
+
+  "Countries": [
+    { "ID": 1, "Name": "United States" },
+    { "ID": 2, "Name": "Canada" },
+    { "ID": 3, "Name": "United Kingdom" },
+    { "ID": 4, "Name": "Germany" },
+    { "ID": 5, "Name": "France" },
+    { "ID": 6, "Name": "Australia" },
+    { "ID": 7, "Name": "India" },
+    { "ID": 8, "Name": "Brazil" },
+    { "ID": 9, "Name": "Japan" },
+    { "ID": 10, "Name": "South Africa" }
   ]
 }

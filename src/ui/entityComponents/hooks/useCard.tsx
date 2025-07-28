@@ -38,5 +38,6 @@ export default function useCard<T extends EntityKey>(data?: typesObject[T]) {
     subDataFields,
     object,
     subObject,
+    fetcher,
   };
 }

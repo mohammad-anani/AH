@@ -10,6 +10,7 @@ import Card from "@/ui/entityComponents/Card";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
 import { listPageConfig } from "@/utils/models/componentsConfig/listPageConfig";
 import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
+import type { RouteObject } from "react-router-dom";
 
 export function route<T extends EntityKey>(
   entity: T,
@@ -17,6 +18,7 @@ export function route<T extends EntityKey>(
   canEdit: boolean = true,
   canDelete: boolean = true,
   withBack: boolean = false,
+  extraRoutes?: [routes: RouteObject[], location: "index" | "id"][],
   headerWidth?: number,
 ) {
   const mainPath =
@@ -75,6 +77,7 @@ export function route<T extends EntityKey>(
               element: <AddUpdateForm entity={entity} />,
               action: addUpdateAction(entity),
             },
+            { ...extraRoutes?.filter(([, location]) => location === "id")[0] },
           ],
         },
         canAdd && {
@@ -82,6 +85,7 @@ export function route<T extends EntityKey>(
           element: <AddUpdateForm entity={entity} />,
           action: addUpdateAction(entity),
         },
+        { ...extraRoutes?.filter(([, location]) => location === "index")[0] },
       ],
     },
   ];
