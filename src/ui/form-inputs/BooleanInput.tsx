@@ -17,21 +17,16 @@ export default function BooleanInput({
     <>
       <label htmlFor={fieldKey}>{label}</label>
       <RegisteredInput name={fieldKey}>
-        <select>
-          <option value={lowercaseFirstLetter(none ?? "None")}>
-            {none ?? "None"}
-          </option>
+        <select
+          onChange={(e) =>
+            e.target.value === undefined ? undefined : e.target.value === "true"
+          }
+        >
+          <option value={undefined}>{none ?? "None"}</option>
           <option value={"true"}>{trueLabel ?? "true"}</option>
-          <option value={falseLabel}>{falseLabel ?? "true"}</option>
+          <option value={"false"}>{falseLabel ?? "true"}</option>
         </select>
       </RegisteredInput>
     </>
   );
-}
-
-//for forms,all becomes none
-
-function lowercaseFirstLetter(word: string): string {
-  if (!word) return "";
-  return word.charAt(0).toLowerCase() + word.slice(1);
 }

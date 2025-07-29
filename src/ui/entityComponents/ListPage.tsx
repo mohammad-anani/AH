@@ -136,7 +136,7 @@ export default function ListPage<T extends EntityKey>({
                   <DialogHeader>
                     <DialogTitle>
                       <H2 className="text-left text-2xl!">
-                        {"Filter " + title + "s"}
+                        {"Filter " + title}
                       </H2>
                     </DialogTitle>
                   </DialogHeader>
