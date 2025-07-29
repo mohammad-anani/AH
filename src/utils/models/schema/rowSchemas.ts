@@ -3,6 +3,7 @@ import {
   AppointmentSchema,
   DepartmentSchema,
   DoctorSchema,
+  InsuranceSchema,
   PatientSchema,
   ReceptionistSchema,
   TestAppointmentSchema,
@@ -43,6 +44,13 @@ export const TestTypeRowSchema = TestTypeSchema.pick({
 
 export const TestOrderRowSchema = TestOrderSchema.pick({
   ID: true,
+});
+
+export const InsuranceRowSchema = InsuranceSchema.pick({
+  ID: true,
+  ProviderName: true,
+  Coverage: true,
+  isActive: true,
 });
 
 export const TestAppointmentRowSchema = TestAppointmentSchema.pick({

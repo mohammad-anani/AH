@@ -70,14 +70,14 @@ export const cardConfig: {
 } = {
   Department: {
     subLinks: ({ ID }) => [
-      ["Show Doctors", `/admin/human-resources/doctors?Department=${ID}`],
+      ["Show Doctors", `/admin/human-resources/doctors?DepartmentID=${ID}`],
       [
         "Show Receptionists",
-        `/admin/human-resources/receptionists?Department=${ID}`,
+        `/admin/human-resources/receptionists?DepartmentID=${ID}`,
       ],
-      ["Show Admins", `/admin/human-resources/admins?Department=${ID}`],
-      ["Show Tests", `/admin/tests/types?Department=${ID}`],
-      ["Show Operations", `/admin/operations?Department=${ID}`],
+      ["Show Admins", `/admin/human-resources/admins?DepartmentID=${ID}`],
+      ["Show Tests", `/admin/tests/types?DepartmentID=${ID}`],
+      ["Show Operations", `/admin/operations?DepartmentID=${ID}`],
     ],
     dataFields: ({ Name, Phone, CreatedByAdminID, CreatedAt }) => [
       ["Name", Name],
@@ -93,14 +93,13 @@ export const cardConfig: {
   },
   Admin: {
     subLinks: ({ ID }) => [
-      ["Show Departments", `/admins/departments?AdminID=${ID}`],
-      ["Show Tests", `/admin/tests?AdminID=${ID}`],
+      ["Show Departments", `/admin/departments?AdminID=${ID}`],
       [
         "Show Receptionists",
         `/admin/human-resources/receptionists?AdminID=${ID}`,
       ],
       ["Show Admins", `/admin/human-resources/admins?AdminID=${ID}`],
-      ["Show Tests", `/admin/tests/types?AdminID=${ID}`],
+      ["Show Test Types", `/admin/tests/types?AdminID=${ID}`],
     ],
     dataFields: ({ Employee, CreatedByAdminID, CreatedAt }) => [
       ...employeeDataFields(Employee),
@@ -112,7 +111,7 @@ export const cardConfig: {
             "Admin",
           ]
         : ["Created By", "System"],
-      ["Created At", CreatedAt],
+      ["Created At", formatDateIsoToLocal(CreatedAt)],
     ],
   },
   Doctor: {
@@ -134,7 +133,7 @@ export const cardConfig: {
         `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
         "Receptionist",
       ],
-      ["Created At", CreatedAt],
+      ["Created At", formatDateIsoToLocal(CreatedAt)],
     ],
   },
   Patient: {
@@ -142,7 +141,7 @@ export const cardConfig: {
       ["Show Appointments", `/admin/appointments?PatientID=${ID}`],
       ["Show Tests Appointments", `/admin/tests/appointments?PatientID=${ID}`],
       ["Show Operations", `/admin/operations?PatientID=${ID}`],
-      ["Show Insurances", `/admin/insurances?PatientID=${ID}`],
+      ["Show Insurances", `insurances`],
     ],
     dataFields: ({ Person, CreatedByReceptionistID, CreatedAt }) => [
       ...personDataFields(Person),
@@ -152,7 +151,7 @@ export const cardConfig: {
         `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
         "Receptionist",
       ],
-      ["Created At", CreatedAt],
+      ["Created At", formatDateIsoToLocal(CreatedAt)],
     ],
   },
   Receptionist: {
@@ -176,7 +175,7 @@ export const cardConfig: {
             "Admin",
           ]
         : ["Created By", "System"],
-      ["Created At", CreatedAt],
+      ["Created At", formatDateIsoToLocal(CreatedAt)],
     ],
   },
   Appointment: {

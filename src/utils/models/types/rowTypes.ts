@@ -9,6 +9,7 @@ import type {
   TestOrderRowSchema,
   TestAppointmentRowSchema,
   AppointmentRowSchema,
+  InsuranceRowSchema,
 } from "../schema/rowSchemas";
 
 export type DepartmentRow = z.infer<typeof DepartmentRowSchema>;
@@ -20,3 +21,4 @@ export type TestTypeRow = z.infer<typeof TestTypeRowSchema>;
 export type TestOrderRow = z.infer<typeof TestOrderRowSchema>;
 export type TestAppointmentRow = z.infer<typeof TestAppointmentRowSchema>;
 export type AppointmentRow = z.infer<typeof AppointmentRowSchema>;
+export type InsuranceRow = z.infer<typeof InsuranceRowSchema>;

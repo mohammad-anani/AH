@@ -8,61 +8,78 @@ import {
   time,
 } from "./reusableSchemas";
 
-//remove id,edit age
+// Person schema with friendly messages
 export const PersonSchema = z.object({
   FirstName: nonEmptyString.min(2, {
-    message: "First name must be at least 2 characters.",
+    message: "First name must be at least 2 characters long.",
   }),
   MiddleName: nonEmptyString.min(2, {
-    message: "Middle name must be at least 2 characters.",
+    message: "Middle name must be at least 2 characters long.",
   }),
   LastName: nonEmptyString.min(2, {
-    message: "Last name must be at least 2 characters.",
+    message: "Last name must be at least 2 characters long.",
   }),
-  Gender: z.boolean(),
+  Gender: z.boolean({
+    required_error: "Gender is required.",
+  }),
   DateOfBirth: date
     .refine(
       (val) => {
-        const date = new Date(val);
-        const now = new Date();
-        return date <= now;
+        const d = new Date(val);
+        return d <= new Date();
       },
-      {
-        message: "Date cannot be in the future",
-      },
+      { message: "Date of birth cannot be in the future." },
     )
     .refine(
       (val) => {
-        const date = new Date(val);
+        const d = new Date(val);
         const minDate = new Date();
-        minDate.setFullYear(new Date().getFullYear() - 120);
-        return date >= minDate;
+        minDate.setFullYear(minDate.getFullYear() - 120);
+        return d >= minDate;
       },
-      {
-        message: "Date cannot be more than 120 years ago",
-      },
+      { message: "Date of birth cannot be more than 120 years ago." },
     ),
-  Country: z.object({ ID: positiveNumber(), Name: nonEmptyString }),
-  Phone: nonEmptyString.length(8, {
-    message: "Phone must be exactly 8 digits.",
+  Country: z.object({
+    ID: positiveNumber().refine((v) => v > 0, {
+      message: "Country ID must be a positive number.",
+    }),
+    Name: nonEmptyString,
   }),
-  Email: nonEmptyString.email({ message: "Invalid email address." }),
+  Phone: nonEmptyString.length(8, {
+    message: "Phone number must be exactly 8 characters.",
+  }),
+  Email: nonEmptyString.email({
+    message: "Please enter a valid email address.",
+  }),
   Username: nonEmptyString.min(6, {
-    message: "Username must be at least 6 characters.",
+    message: "Username must be at least 6 characters long.",
   }),
 });
 
+// Employee schema
 export const EmployeeSchema = z.object({
   Person: PersonSchema,
-  DepartmentID: positiveNumber(),
-  Salary: positiveNumber(),
-  HireDate: date,
-  LeaveDate: date.nullable(),
-  isActive: z.boolean(),
+  DepartmentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Department must be selected.",
+  }),
+  Salary: positiveNumber(false).refine((v) => v > 0, {
+    message: "Salary must be greater than zero.",
+  }),
+  HireDate: date.refine((val) => new Date(val) <= new Date(), {
+    message: "Hire date cannot be in the future.",
+  }),
+  LeaveDate: date
+    .nullable()
+    .refine((val) => !val || new Date(val) <= new Date(), {
+      message: "Leave date cannot be in the future.",
+    }),
+  isActive: z.boolean({
+    required_error: "Active status must be set.",
+  }),
   WorkingDays: z
     .array(z.enum(validDays, { message: "Invalid day of the week." }))
-    .min(1, { message: "Minimum of 1 working day required." })
-    .max(7, { message: "Cannot select more than 7 working days." })
+    .min(1, { message: "Please select at least one working day." })
+    .max(7, { message: "You cannot select more than 7 working days." })
     .refine((arr) => new Set(arr).size === arr.length, {
       message: "Working days must be unique.",
     }),
@@ -70,151 +87,308 @@ export const EmployeeSchema = z.object({
   ShiftEnd: time(false),
 });
 
+// Department schema
 export const DepartmentSchema = z.object({
-  ID: positiveNumber(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Department ID is required.",
+  }),
   Name: nonEmptyString.min(3, {
-    message: "Department name must be at least 3 characters.",
+    message: "Department name must be at least 3 characters long.",
   }),
   Phone: nonEmptyString.length(8, {
-    message: "Phone must be exactly 8 characters.",
+    message: "Phone number must be exactly 8 characters.",
   }),
-  CreatedByAdminID: positiveNumber(),
-  CreatedAt: datetime(true),
+  CreatedByAdminID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Creator Admin ID is required.",
+  }),
+  CreatedAt: datetime(true).refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// Patient schema
 export const PatientSchema = z.object({
-  ID: positiveNumber(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Patient ID is required.",
+  }),
   Person: PersonSchema,
-  CreatedByReceptionistID: positiveNumber(),
-  CreatedAt: datetime(),
+  CreatedByReceptionistID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Receptionist ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// Receptionist schema
 export const ReceptionistSchema = z.object({
-  ID: positiveNumber(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Receptionist ID is required.",
+  }),
   Employee: EmployeeSchema,
-  CreatedByAdminID: positiveNumber(),
-  CreatedAt: datetime(),
+  CreatedByAdminID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Creator Admin ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// Doctor schema
 export const DoctorSchema = z.object({
-  ID: positiveNumber(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Doctor ID is required.",
+  }),
   Employee: EmployeeSchema,
   Specialization: nonEmptyString.min(2, {
-    message: "Specialization must be at least 2 characters.",
+    message: "Specialization must be at least 2 characters long.",
   }),
-  CreatedByReceptionistID: positiveNumber(),
-  CreatedAt: datetime(),
+  CreatedByReceptionistID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Receptionist ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// Admin schema
 export const AdminSchema = z.object({
-  ID: positiveNumber(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Admin ID is required.",
+  }),
   Employee: EmployeeSchema,
-  CreatedByAdminID: positiveNumber().nullable(),
-  CreatedAt: datetime(),
+  CreatedByAdminID: positiveNumber(true).nullable(),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// TestType schema
 export const TestTypeSchema = z.object({
-  ID: positiveNumber(),
-  DepartmentID: positiveNumber(),
-  Name: nonEmptyString,
-  Cost: positiveNumber(),
-  CreatedByAdminID: positiveNumber(),
-  CreatedAt: datetime(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Test type ID is required.",
+  }),
+  DepartmentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Department ID is required.",
+  }),
+  Name: nonEmptyString.min(2, {
+    message: "Test type name must be at least 2 characters long.",
+  }),
+  Cost: positiveNumber(false).refine((v) => v > 0, {
+    message: "Cost must be greater than zero.",
+  }),
+  CreatedByAdminID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Creator Admin ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// TestAppointment schema
 export const TestAppointmentSchema = z.object({
-  ID: positiveNumber(),
-  TestOrderID: positiveNumber().nullable(),
-  TestID: positiveNumber(),
-  PatientID: positiveNumber(),
-  ScheduledDate: datetime(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Test appointment ID is required.",
+  }),
+  TestOrderID: positiveNumber(false).nullable(),
+  TestID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Test ID is required.",
+  }),
+  PatientID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Patient ID is required.",
+  }),
+  ScheduledDate: datetime().refine(Boolean, {
+    message: "Scheduled date and time is required.",
+  }),
   Status: nonEmptyString,
   Result: nonEmptyString.nullable(),
   ResultDate: datetime().nullable(),
-  PaymentID: positiveNumber(),
-  CreatedByReceptionistID: positiveNumber(),
-  CreatedAt: datetime(),
+  PaymentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Payment ID is required.",
+  }),
+  CreatedByReceptionistID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Receptionist ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// TestOrder schema
 export const TestOrderSchema = z.object({
-  ID: positiveNumber(),
-  AppointmentID: positiveNumber(),
-  TestTypeID: positiveNumber(),
-  OrderedByDoctorID: positiveNumber(),
-  OrderedAt: datetime(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Test order ID is required.",
+  }),
+  AppointmentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Appointment ID is required.",
+  }),
+  TestTypeID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Test type ID is required.",
+  }),
+  OrderedByDoctorID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Ordering doctor ID is required.",
+  }),
+  OrderedAt: datetime().refine(Boolean, {
+    message: "Order date and time is required.",
+  }),
 });
 
+// Appointment schema
 export const AppointmentSchema = z.object({
-  ID: positiveNumber(),
-  DoctorID: positiveNumber(),
-  PatientID: positiveNumber(),
-  Time: datetime(),
-  Reason: nonEmptyString,
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Appointment ID is required.",
+  }),
+  DoctorID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Doctor ID is required.",
+  }),
+  PatientID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Patient ID is required.",
+  }),
+  Time: datetime().refine(Boolean, {
+    message: "Appointment date and time is required.",
+  }),
+  Reason: nonEmptyString.min(5, {
+    message: "Please provide a reason with at least 5 characters.",
+  }),
   Status: nonEmptyString,
   Notes: z.string(),
-  PaymentID: positiveNumber(),
-  CreatedByReceptionistID: positiveNumber(),
-  CreatedAt: datetime(),
+  PaymentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Payment ID is required.",
+  }),
+  CreatedByReceptionistID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Receptionist ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// Country schema
 export const CountrySchema = z.object({
-  ID: positiveNumber(),
-  Name: nonEmptyString,
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Country ID is required.",
+  }),
+  Name: nonEmptyString.min(2, {
+    message: "Country name must be at least 2 characters long.",
+  }),
 });
 
+// Insurance schema
 export const InsuranceSchema = z.object({
-  ID: positiveNumber(),
-  PatientID: positiveNumber(),
-  ProviderName: nonEmptyString,
-  Class: nonEmptyString,
-  ExpirationDate: date,
-  CreatedByReceptionistID: positiveNumber(),
-  CreatedAt: datetime(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Insurance ID is required.",
+  }),
+  PatientID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Patient ID is required.",
+  }),
+  ProviderName: nonEmptyString.min(2, {
+    message: "Provider name must be at least 2 characters long.",
+  }),
+  Coverage: z
+    .number({
+      required_error: "Coverage is required.",
+      invalid_type_error: "Coverage must be a number between 0.01 and 1.00.",
+    })
+    .min(0.01, { message: "Coverage must be at least 1% (0.01)." })
+    .max(1.0, { message: "Coverage cannot exceed 100% (1.00)." }),
+  ExpirationDate: date.refine((val) => new Date(val) > new Date(), {
+    message: "Expiration date must be in the future.",
+  }),
+  isActive: z.boolean({
+    required_error: "Active status must be set.",
+  }),
+  CreatedByReceptionistID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Receptionist ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// Operation schema
 export const OperationSchema = z.object({
-  ID: positiveNumber(),
-  Name: nonEmptyString,
-  Description: nonEmptyString,
-  PatientID: positiveNumber(),
-  DepartmentID: positiveNumber(),
-  ScheduledDate: datetime(false),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Operation ID is required.",
+  }),
+  Name: nonEmptyString.min(2, {
+    message: "Operation name must be at least 2 characters long.",
+  }),
+  Description: nonEmptyString.min(5, {
+    message: "Description must be at least 5 characters long.",
+  }),
+  PatientID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Patient ID is required.",
+  }),
+  DepartmentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Department ID is required.",
+  }),
+  ScheduledDate: datetime(false).refine(Boolean, {
+    message: "Scheduled date and time is required.",
+  }),
   Status: nonEmptyString,
-  PaymentID: positiveNumber(),
-  CreatedByReceptionistID: positiveNumber(),
-  CreatedAt: datetime(),
+  PaymentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Payment ID is required.",
+  }),
+  CreatedByReceptionistID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Receptionist ID is required.",
+  }),
+  CreatedAt: datetime().refine(Boolean, {
+    message: "Creation date is required.",
+  }),
 });
 
+// Prescription schema
 export const PrescriptionSchema = z.object({
-  ID: positiveNumber(),
-  AppointmentID: positiveNumber(),
-  Diagnosis: nonEmptyString,
-  Medication: nonEmptyString,
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Prescription ID is required.",
+  }),
+  AppointmentID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Appointment ID is required.",
+  }),
+  Diagnosis: nonEmptyString.min(5, {
+    message: "Diagnosis must be at least 5 characters long.",
+  }),
+  Medication: nonEmptyString.min(2, {
+    message: "Medication name must be at least 2 characters long.",
+  }),
   Dosage: nonEmptyString,
   Frequency: nonEmptyString,
-  MedicationStart: datetime(),
-  MedicationEnd: datetime(),
+  MedicationStart: datetime().refine(Boolean, {
+    message: "Medication start date is required.",
+  }),
+  MedicationEnd: datetime().refine(Boolean, {
+    message: "Medication end date is required.",
+  }),
   Notes: nonEmptyString.nullable(),
 });
 
-//for now payments will be added to the PatientPaid,later each transcation has a row in DB
+// Payment schema
 export const PaymentSchema = z.object({
-  ID: positiveNumber(),
-  Amount: positiveNumber(),
-  PatientPaid: positiveNumber(),
-  InsurancePaid: positiveNumber(),
+  ID: positiveNumber(false).refine((v) => v > 0, {
+    message: "Payment ID is required.",
+  }),
+  Amount: positiveNumber(false).refine((v) => v > 0, {
+    message: "Amount must be greater than zero.",
+  }),
+  PatientPaid: positiveNumber(true),
+  InsurancePaid: positiveNumber(true),
   IsPaid: z.boolean(),
 });
 
+// Pay schema with refinement and message
 export const PaySchema = PaymentSchema.extend({
-  toPay: positiveNumber(false),
+  toPay: positiveNumber(false).refine((v) => v > 0, {
+    message: "Amount to pay must be greater than zero.",
+  }),
 }).refine(
   (payment) => {
-    console.log(1);
     return (
       payment.toPay <=
       payment.Amount - payment.InsurancePaid - payment.PatientPaid
     );
   },
-  { message: "Cannot Pay more than required", path: ["toPay"] },
+  {
+    message: "You cannot pay more than the remaining amount.",
+    path: ["toPay"],
+  },
 );

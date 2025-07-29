@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// Converts a string or number input into a number (if valid)
 export const numberCallBack = (val: string | number) =>
   typeof val === "number"
     ? val
@@ -7,23 +8,35 @@ export const numberCallBack = (val: string | number) =>
       ? Number(val)
       : undefined;
 
-export const date = z.string().date();
+// Validates that the string is a valid date
+export const date = z.string().refine((val) => !isNaN(Date.parse(val)), {
+  message: "Please enter a valid date.",
+});
 
+// Requires a non-empty string
 export const nonEmptyString = z
   .string()
-  .nonempty({ message: "This field cannot be empty." });
+  .nonempty({ message: "This field is required." });
 
+// Validates a number and optionally allows 0
 export const positiveNumber = (withZero: boolean = true) =>
   z.preprocess(
-    (value) => {
-      return !isNaN(Number(value)) && numberCallBack(value as string | number);
-    },
+    (value) =>
+      !isNaN(Number(value)) && numberCallBack(value as string | number),
     z
-      .number()
-      .nonnegative({ message: "Number must be zero or positive." })
-      .min(withZero ? 0 : 1, { message: `Minimum is ${Number(!withZero)}` }),
+      .number({
+        required_error: "Please enter a number.",
+        invalid_type_error: "Only numbers are allowed.",
+      })
+      .nonnegative({ message: "The number must be positive." })
+      .min(withZero ? 0 : 1, {
+        message: withZero
+          ? "The minimum allowed value is 0."
+          : "The minimum allowed value is 1.",
+      }),
   );
 
+// Days of the week for dropdowns or validations
 export const validDays = [
   "Mon",
   "Tue",
@@ -34,15 +47,19 @@ export const validDays = [
   "Sun",
 ] as const;
 
+// Validates an ISO datetime string with a user-friendly error
 export const datetime = (withSeconds: boolean = true) =>
   z.string().datetime({
     local: true,
     precision: withSeconds ? 0 : -1,
-    message: "Invalid datetime format.",
+    message: "Please enter a valid date and time (e.g. 2024-01-01T14:30).",
   });
 
+// Validates a time string (HH:mm or HH:mm:ss)
 export const time = (withSeconds: boolean = true) =>
   z.string().time({
     precision: withSeconds ? 0 : 0,
-    message: "Invalid time format.",
+    message: withSeconds
+      ? "Please enter a valid time (e.g. 14:30:00)."
+      : "Please enter a valid time (e.g. 14:30).",
   });

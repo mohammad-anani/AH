@@ -61,6 +61,7 @@ const entityKeys = [
   "Doctor",
   "Patient",
   "Receptionist",
+  "Country",
   "TestType",
   "Appointment",
   "TestOrder",
@@ -72,6 +73,8 @@ const entityKeys = [
 ] as const;
 
 export type EntityKey = (typeof entityKeys)[number];
+
+export const entitiesWithNoSearchParams: EntityKey[] = ["Country", "Insurance"];
 
 export type SelectorConfig<T extends EntityKey> = {
   selectedDisplay: (item: rowTypesObject[T]) => string;

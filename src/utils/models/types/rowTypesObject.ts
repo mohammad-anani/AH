@@ -3,6 +3,7 @@ import type {
   AppointmentRow,
   DepartmentRow,
   DoctorRow,
+  InsuranceRow,
   PatientRow,
   ReceptionistRow,
   TestAppointmentRow,
@@ -19,7 +20,7 @@ export type rowTypesObject = {
   TestType: TestTypeRow;
   TestOrder: TestOrderRow;
   TestAppointment: TestAppointmentRow;
-  Insurance: TestOrderRow;
+  Insurance: InsuranceRow;
   Operation: TestOrderRow;
   Prescription: TestOrderRow;
   Payment: TestOrderRow;
