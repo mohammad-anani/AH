@@ -1,33 +1,45 @@
-import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
+import type {
+  LoaderFunction,
+  LoaderFunctionArgs,
+  Params,
+} from "react-router-dom";
 import formatLoaderUrl from "../formatters/formatLoaderUrl";
 import getList from "@/api/getList";
 import { z } from "zod";
+import pluralize from "pluralize";
 import throwError from "../helpers/throwError";
 import { schemas } from "../models/schema/schemasObject.ts";
 import { rowSchemas } from "../models/schema/rowSchemasObject.ts";
-import type { EntityKey } from "../models/types/util.ts";
-import { CountrySchema } from "../models/schema/schemas.ts";
-
+import {
+  entitiesWithNoSearchParams,
+  type EntityKey,
+} from "../models/types/util.ts";
 export default function listLoader(
-  entity: EntityKey | `${EntityKey}Row` | "Countries",
+  entity: EntityKey | `${EntityKey}Row`,
+  pathPrefix?: (params: Params) => string,
+  requiredParams: string[] | undefined = undefined,
 ): LoaderFunction {
-  return async function ({ request }: LoaderFunctionArgs) {
+  return async function ({ params, request }: LoaderFunctionArgs) {
     const searchParams = formatLoaderUrl(request.url);
 
+    if (requiredParams)
+      requiredParams.forEach((param) => {
+        if (!searchParams.has(param)) throwError(400, "Bad request");
+      });
+
+    const isRow = entity.endsWith("Row");
+    const entityName = (isRow ? entity.slice(0, -3) : entity) as EntityKey;
+
     const data = await getList(
-      entity === "Countries"
-        ? entity
-        : ((entity +
-            "s?" +
-            searchParams?.toString()) as `${EntityKey}s${string}`),
+      (pathPrefix?.(params) ?? "") +
+        "/" +
+        pluralize(entity) +
+        (!entitiesWithNoSearchParams.includes(entityName as EntityKey)
+          ? "?" + searchParams?.toString()
+          : ""),
     );
 
-    const schema =
-      entity === "Countries"
-        ? CountrySchema
-        : (entity.endsWith("Row") ? rowSchemas : schemas)[
-            entity.replace("Row", "") as EntityKey
-          ];
+    const schema = isRow ? rowSchemas[entityName] : schemas[entityName];
 
     if (!schema) {
       throwError(500, "Internal Server Error");

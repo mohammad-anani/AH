@@ -510,5 +510,60 @@
     { "ID": 8, "Name": "Brazil" },
     { "ID": 9, "Name": "Japan" },
     { "ID": 10, "Name": "South Africa" }
+  ],
+  "Insurances": [
+    {
+      "ID": 1,
+      "PatientID": 1,
+      "ProviderName": "Alpha Insurance",
+      "Coverage": 0.8,
+      "ExpirationDate": "2026-08-01",
+      "isActive": true,
+      "CreatedByReceptionistID": 3,
+      "CreatedAt": "2025-07-28T10:00:00Z"
+    },
+    {
+      "ID": 2,
+      "PatientID": 2,
+      "ProviderName": "BetaCare",
+      "Coverage": 0.9,
+      "ExpirationDate": "2027-01-15",
+      "isActive": true,
+      "CreatedByReceptionistID": 1,
+      "CreatedAt": "2025-07-25T09:30:00Z"
+    },
+    {
+      "ID": 3,
+      "PatientID": 3,
+      "ProviderName": "HealthSecure",
+      "Coverage": 1.0,
+      "ExpirationDate": "2025-12-31",
+      "isActive": true,
+      "CreatedByReceptionistID": 2,
+      "CreatedAt": "2025-07-20T08:45:00Z"
+    }
+  ],
+  "InsuranceRows": [
+    {
+      "ID": 1,
+      "PatientID": 1,
+      "ProviderName": "Alpha Insurance",
+      "Coverage": 0.8,
+      "isActive": true
+    },
+    {
+      "ID": 2,
+      "PatientID": 2,
+      "ProviderName": "BetaCare",
+      "Coverage": 0.9,
+      "isActive": true
+    },
+    {
+      "ID": 3,
+      "PatientID": 3,
+      "ProviderName": "HealthSecure",
+      "Coverage": 1.0,
+      "isActive": true
+    }
   ]
 }

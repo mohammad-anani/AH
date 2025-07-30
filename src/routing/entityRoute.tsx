@@ -10,7 +10,7 @@ import Card from "@/ui/entityComponents/Card";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
 import { listPageConfig } from "@/utils/models/componentsConfig/listPageConfig";
 import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
-import type { RouteObject } from "react-router-dom";
+import type { Params, RouteObject } from "react-router-dom";
 
 export function route<T extends EntityKey>(
   entity: T,
@@ -18,7 +18,10 @@ export function route<T extends EntityKey>(
   canEdit: boolean = true,
   canDelete: boolean = true,
   withBack: boolean = false,
+  pathPrefix?: (params: Params) => string,
   extraRoutes?: [routes: RouteObject[], location: "index" | "id"][],
+  withList: boolean = true,
+  withID: boolean = true,
   headerWidth?: number,
 ) {
   const mainPath =
@@ -31,7 +34,7 @@ export function route<T extends EntityKey>(
     {
       path: mainPath,
       children: [
-        {
+        withList && {
           index: true,
           element: (
             <ListPage<T>
@@ -42,14 +45,14 @@ export function route<T extends EntityKey>(
               withBack={withBack}
             />
           ),
-          loader: listLoader(`${entity}Row`),
+          loader: listLoader(`${entity}Row`, pathPrefix),
         },
         {
           path: "list",
           Component: InvalidPath,
-          loader: listLoader(`${entity}Row`),
+          loader: listLoader(`${entity}Row`, pathPrefix),
         },
-        {
+        withID && {
           path: ":id",
           Component: ViewEdit<T>,
           loader: findByIDLoader(entity),
@@ -77,7 +80,10 @@ export function route<T extends EntityKey>(
               element: <AddUpdateForm entity={entity} />,
               action: addUpdateAction(entity),
             },
-            { ...extraRoutes?.filter(([, location]) => location === "id")[0] },
+
+            ...(extraRoutes
+              ?.filter(([, location]) => location === "id")
+              .flatMap(([routes]) => routes) ?? []),
           ],
         },
         canAdd && {
@@ -85,8 +91,13 @@ export function route<T extends EntityKey>(
           element: <AddUpdateForm entity={entity} />,
           action: addUpdateAction(entity),
         },
-        { ...extraRoutes?.filter(([, location]) => location === "index")[0] },
+
+        ...(extraRoutes
+          ?.filter(([, location]) => location === "index")
+          .flatMap(([routes]) => routes) ?? []),
       ],
     },
   ];
 }
+
+//finish confirm form

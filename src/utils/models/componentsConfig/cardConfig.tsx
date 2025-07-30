@@ -141,10 +141,38 @@ export const cardConfig: {
       ["Show Appointments", `/admin/appointments?PatientID=${ID}`],
       ["Show Tests Appointments", `/admin/tests/appointments?PatientID=${ID}`],
       ["Show Operations", `/admin/operations?PatientID=${ID}`],
-      ["Show Insurances", `insurances`],
+      ["Show Insurances", `/admin/insurances?PatientID=${ID}`],
     ],
     dataFields: ({ Person, CreatedByReceptionistID, CreatedAt }) => [
       ...personDataFields(Person),
+      [
+        "Created By",
+        "View Receptionist",
+        `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+        "Receptionist",
+      ],
+      ["Created At", formatDateIsoToLocal(CreatedAt)],
+    ],
+  },
+  Insurance: {
+    subLinks: () => [],
+    dataFields: ({
+      ProviderName,
+      Coverage,
+      isActive,
+      CreatedAt,
+      PatientID,
+      CreatedByReceptionistID,
+    }) => [
+      [
+        "Patient",
+        "View Patient",
+        "/admin/human-resources/patients/" + PatientID,
+        "Patient",
+      ],
+      ["Provider", ProviderName],
+      ["Coverage", Coverage * 100 + "%"],
+      ["Status", isActive],
       [
         "Created By",
         "View Receptionist",

@@ -7,12 +7,26 @@ import type { EntityKey } from "@/utils/models/types/util";
 import Form from "./Form";
 
 import useAddUpdateForm from "./hooks/useAddUpdateForm";
+import {
+  Dialog,
+  DialogContent,
+  DialogPortal,
+  DialogTitle,
+} from "@radix-ui/react-dialog";
+import { useState } from "react";
+import { DialogFooter } from "@/components/ui/dialog";
 
 type FormProps = {
   entity: EntityKey;
   submitText?: string;
   submittingText?: string;
   headerWidth?: number;
+  confirmation?: {
+    title: string;
+    content: string;
+    cancel: string;
+    confirm: string;
+  };
 };
 
 export default function AddUpdateForm({
@@ -20,6 +34,7 @@ export default function AddUpdateForm({
   headerWidth = 150,
   submitText = "Save",
   submittingText = "Submitting...",
+  confirmation,
 }: FormProps) {
   const {
     title,
@@ -30,6 +45,8 @@ export default function AddUpdateForm({
     isAdd,
     isSubmitting,
   } = useAddUpdateForm(entity);
+
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   return (
     <>
@@ -51,7 +68,8 @@ export default function AddUpdateForm({
           <Clickable
             className="col-span-2 mt-10"
             as="button"
-            type="submit"
+            type={confirmation ? "button" : "submit"}
+            onClick={confirmation ? () => setIsConfirmOpen(true) : undefined}
             variant="primary"
             disabled={isSubmitting}
           >
@@ -64,6 +82,30 @@ export default function AddUpdateForm({
                   : "Save"}
           </Clickable>
         </RouterForm>
+        {confirmation ? (
+          <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+            <DialogPortal>
+              <DialogContent>
+                <DialogTitle>
+                  <H2>{confirmation.title}</H2>
+                </DialogTitle>
+                <span>{confirmation.content}</span>
+                <DialogFooter>
+                  <Clickable
+                    as="button"
+                    variant="secondary"
+                    onClick={() => setIsConfirmOpen(false)}
+                  >
+                    {confirmation.cancel}
+                  </Clickable>
+                  <Clickable as="button" variant="secondary" type="submit">
+                    {confirmation.confirm}
+                  </Clickable>
+                </DialogFooter>
+              </DialogContent>
+            </DialogPortal>
+          </Dialog>
+        ) : null}
       </FormProvider>
     </>
   );

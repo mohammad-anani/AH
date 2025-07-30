@@ -74,7 +74,7 @@ const entityKeys = [
 
 export type EntityKey = (typeof entityKeys)[number];
 
-export const entitiesWithNoSearchParams: EntityKey[] = ["Country", "Insurance"];
+export const entitiesWithNoSearchParams: EntityKey[] = ["Country"];
 
 export type SelectorConfig<T extends EntityKey> = {
   selectedDisplay: (item: rowTypesObject[T]) => string;

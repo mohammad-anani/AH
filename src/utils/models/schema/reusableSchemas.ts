@@ -1,12 +1,13 @@
 import { z } from "zod";
 
 // Converts a string or number input into a number (if valid)
-export const numberCallBack = (val: string | number) =>
-  typeof val === "number"
+export const numberCallBack = (val: string | number) => {
+  return typeof val === "number"
     ? val
     : typeof val === "string" && val.trim() !== ""
       ? Number(val)
       : undefined;
+};
 
 // Validates that the string is a valid date
 export const date = z.string().refine((val) => !isNaN(Date.parse(val)), {
@@ -21,8 +22,9 @@ export const nonEmptyString = z
 // Validates a number and optionally allows 0
 export const positiveNumber = (withZero: boolean = true) =>
   z.preprocess(
-    (value) =>
-      !isNaN(Number(value)) && numberCallBack(value as string | number),
+    (value) => {
+      if (!isNaN(Number(value))) return numberCallBack(Number(value));
+    },
     z
       .number({
         required_error: "Please enter a number.",
@@ -33,6 +35,25 @@ export const positiveNumber = (withZero: boolean = true) =>
         message: withZero
           ? "The minimum allowed value is 0."
           : "The minimum allowed value is 1.",
+      }),
+  );
+
+export const floatNumber = (min: number, max: number) =>
+  z.preprocess(
+    (value) => {
+      if (!isNaN(Number(value))) return numberCallBack(Number(value));
+    },
+    z
+      .number({
+        required_error: "Please enter a number.",
+        invalid_type_error: "Only numbers are allowed.",
+      })
+      .nonnegative({ message: "The number must be positive." })
+      .min(min, {
+        message: "The minimum allowed value is " + min + " .",
+      })
+      .max(max, {
+        message: "The maximum allowed value is " + max + " .",
       }),
   );
 

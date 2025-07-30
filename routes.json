@@ -1,0 +1,4 @@
+{
+  "/patients/:id/insurances": "/insurances?PatientID=:id",
+  "/patients/:id/insurancerows": "/insurances?PatientID=:id"
+}

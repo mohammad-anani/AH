@@ -13,8 +13,7 @@ import type z from "zod";
 
 export default function useAddUpdateForm(entity: EntityKey) {
   const data = useOutletContext<typesObject[EntityKey]>();
-
-  const isAdd = !data;
+  const isAdd = !data || !schemas[entity].safeParse(data).success;
 
   const schema = isAdd ? addingSchemas[entity] : schemas[entity];
 

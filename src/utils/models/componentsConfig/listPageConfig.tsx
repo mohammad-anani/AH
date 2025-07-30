@@ -136,6 +136,25 @@ export const listPageConfig: {
       ["CreatedAt", "datetime"],
     ],
   ],
+  Insurance: [
+    [
+      ["Provider", "Coverage", "status"],
+      (item: rowTypesObject["Insurance"]) => [
+        item.ProviderName,
+        item.Coverage * 100 + "%",
+        item.isActive ? "Active" : "Inactive",
+      ],
+      [1, 1, 1],
+    ],
+    [
+      ["ProviderName", "string"],
+      ["Coverage", "number"],
+      ["isActive", "boolean", ["Active", "Inactive"]],
+      ["ExpirationDate", "date"],
+      ["ReceptionistID", "selector", "Receptionist"],
+      ["CreatedAt", "datetime"],
+    ],
+  ],
   Appointment: [
     [
       ["Patient", "Doctor", "Time"],

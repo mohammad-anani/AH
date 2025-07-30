@@ -9,7 +9,7 @@ export default function NumberInput({ fieldKey, label }: NumberInputProps) {
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <RegisteredInput name={fieldKey}>
+      <RegisteredInput name={fieldKey} onChange={(value) => Number(value)}>
         <input type="number" />
       </RegisteredInput>
     </>

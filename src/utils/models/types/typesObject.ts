@@ -14,6 +14,7 @@ import type {
   Payment,
   Person,
   Appointment,
+  Country,
 } from "./types";
 
 export type typesObject = {
@@ -24,6 +25,7 @@ export type typesObject = {
   Doctor: Doctor;
   Admin: Admin;
   TestType: TestType;
+  Country: Country;
   TestOrder: TestOrder;
   TestAppointment: TestAppointment;
   Insurance: Insurance;

@@ -6,6 +6,7 @@ import {
   date,
   validDays,
   time,
+  floatNumber,
 } from "./reusableSchemas";
 
 // Person schema with friendly messages
@@ -284,13 +285,7 @@ export const InsuranceSchema = z.object({
   ProviderName: nonEmptyString.min(2, {
     message: "Provider name must be at least 2 characters long.",
   }),
-  Coverage: z
-    .number({
-      required_error: "Coverage is required.",
-      invalid_type_error: "Coverage must be a number between 0.01 and 1.00.",
-    })
-    .min(0.01, { message: "Coverage must be at least 1% (0.01)." })
-    .max(1.0, { message: "Coverage cannot exceed 100% (1.00)." }),
+  Coverage: floatNumber(0.0, 1.0),
   ExpirationDate: date.refine((val) => new Date(val) > new Date(), {
     message: "Expiration date must be in the future.",
   }),

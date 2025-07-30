@@ -85,7 +85,7 @@ export default function CountrySelect({
         if (selected) setCountryID(selected.value);
       }}
       isDisabled={isDisabled}
-      placeholder="Select a country"
+      placeholder="Select a Country"
     />
   );
 }

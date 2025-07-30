@@ -10,6 +10,7 @@ import type {
   TestOrderRow,
   TestTypeRow,
 } from "./rowTypes";
+import type { Country } from "./types";
 
 export type rowTypesObject = {
   Department: DepartmentRow;
@@ -19,6 +20,7 @@ export type rowTypesObject = {
   Admin: AdminRow;
   TestType: TestTypeRow;
   TestOrder: TestOrderRow;
+  Country: Country;
   TestAppointment: TestAppointmentRow;
   Insurance: InsuranceRow;
   Operation: TestOrderRow;

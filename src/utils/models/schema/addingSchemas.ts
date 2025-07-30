@@ -87,6 +87,7 @@ export const AddTestAppointmentSchema = TestAppointmentSchema.omit({
 
 export const AddInsuranceSchema = InsuranceSchema.omit({
   ID: true,
+  isActive: true,
   CreatedAt: true,
   CreatedByReceptionistID: true,
 });

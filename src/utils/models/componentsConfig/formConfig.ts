@@ -16,7 +16,7 @@ const personFields: FormKey<"Person">[] = [
   ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
   ["Country", "Country.ID", "custom", "both", CountrySelectCallBack],
   ["Phone", "Phone", "phone", "both"],
-  ["Email", "Email", "string", "both"],
+  ["Email", "Email", "email", "both"],
   ["Username", "Username", "string", "both"],
 ];
 
@@ -52,6 +52,13 @@ export const formConfig: {
   Doctor: [
     ...prefixFields<"Doctor", "Employee">("Employee", employeeFields),
     ["Specialization", "Specialization", "string", "both"],
+  ],
+  Insurance: [
+    ["Patient", "PatientID", "selector", "add", "Patient"],
+    ["Provider Name", "ProviderName", "string", "both"],
+    ["Coverage", "Coverage", "number", "both"],
+    ["Expiration Date", "ExpirationDate", "date", "both"],
+    ["Status", "isActive", "boolean", "update", ["Active", "Inactive"]],
   ],
   Receptionist: [
     ...prefixFields<"Receptionist", "Employee">("Employee", employeeFields),

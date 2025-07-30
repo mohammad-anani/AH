@@ -1,6 +1,5 @@
 import { cloneElement } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-
 import React from "react";
 import { useNavigation } from "react-router-dom";
 import type { Primitive } from "zod";
@@ -10,7 +9,9 @@ import FormError from "./FormError";
 type RegisteredInputProps = {
   name: string;
   onChange?: (value: Primitive) => Primitive;
-  children: React.ReactElement<React.InputHTMLAttributes<HTMLInputElement>>;
+  children: React.ReactElement<
+    React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>
+  >;
 };
 
 export default function RegisteredInput({
@@ -29,20 +30,21 @@ export default function RegisteredInput({
   const isSubmitting = state === "submitting" || isSub;
 
   const errorMessages = useError(name);
-
   const registered = register(name);
   const value = useWatch({ name, control });
 
   return (
-    <span className={`flex flex-col gap-1`}>
+    <span className="flex flex-col gap-1">
       {cloneElement(children, {
         ...registered,
         onChange: (e) => {
-          const newValue = onChange?.(e.target.value) ?? e.target.value;
-          setValue(name, newValue);
-          registered.onChange(e);
+          const raw = e.target.value;
+          const transformed = onChange?.(raw) ?? raw;
+
+          setValue(name, transformed);
         },
         value,
+        name,
         disabled: isSubmitting,
         id: name,
       })}

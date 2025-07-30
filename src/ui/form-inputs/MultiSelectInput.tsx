@@ -1,5 +1,6 @@
 import Controller from "@/ui/customComponents/Controller";
 import Select from "react-select";
+import { generateLabel } from "../entityComponents/listComponents/utils";
 
 interface ArrayInputProps {
   fieldKey: string;
@@ -59,6 +60,8 @@ function toValueLabelArray(arr: string[]): { value: string; label: string }[] {
 }
 
 export default function ArrayInput({ fieldKey, label, data }: ArrayInputProps) {
+  const placeholder = fieldKey.split(".").at(-1);
+
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
@@ -74,6 +77,7 @@ export default function ArrayInput({ fieldKey, label, data }: ArrayInputProps) {
               inputId={fieldKey}
               isMulti
               options={toValueLabelArray(data as string[])}
+              placeholder={`Select ${generateLabel(placeholder ?? "")}`}
               value={selectedOptions}
               styles={selectStyles}
               onChange={(options) => {

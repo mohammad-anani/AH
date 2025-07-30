@@ -51,6 +51,7 @@ export const InsuranceRowSchema = InsuranceSchema.pick({
   ProviderName: true,
   Coverage: true,
   isActive: true,
+  PatientID: true,
 });
 
 export const TestAppointmentRowSchema = TestAppointmentSchema.pick({

@@ -29,7 +29,7 @@ type ListPageProps<T extends EntityKey> = {
   rowTemplate: RowTemplate<T>;
   onSelect?: (item: rowTypesObject[T]) => void;
   onDetailsClick?: (ID: number) => void;
-  filterFields: Key[];
+  filterFields?: Key[];
   emptyText?: string;
   canModifyUrl?: boolean;
   searchParamsState?: SearchParamsState;
@@ -96,14 +96,16 @@ export default function ListPage<T extends EntityKey>({
           Add
         </Clickable>
       ) : null}
-      <Clickable
-        as="button"
-        variant="primary"
-        className="text-sm!"
-        onClick={() => setIsFilterOpen(true)}
-      >
-        Filter
-      </Clickable>
+      {filterFields ? (
+        <Clickable
+          as="button"
+          variant="primary"
+          className="text-sm!"
+          onClick={() => setIsFilterOpen(true)}
+        >
+          Filter
+        </Clickable>
+      ) : null}
       <List<rowTypesObject[T]>
         items={items}
         canModifyUrl={canModifyUrl}

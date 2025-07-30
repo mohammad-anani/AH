@@ -9,6 +9,7 @@ import { paymentsRoutes } from "./admin/routes/payments";
 import Layout from "@/ui/customComponents/Layout";
 import Nav from "@/interfaces/admin/Nav";
 import Error from "@/ui/Error";
+import { insuranceRoute } from "./admin/routes/insurances.tsx";
 
 export const adminRoutes = [
   {
@@ -30,6 +31,7 @@ export const adminRoutes = [
           ...operationsRoutes,
           ...appointmentsRoutes,
           ...paymentsRoutes,
+          ...insuranceRoute,
         ],
       },
     ],

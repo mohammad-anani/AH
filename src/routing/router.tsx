@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       {
         path: "countries",
         Component: InvalidPath,
-        loader: listLoader("Countries"),
+        loader: listLoader("Country"),
       },
     ],
   },
