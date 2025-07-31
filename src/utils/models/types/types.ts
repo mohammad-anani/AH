@@ -1,11 +1,11 @@
 import type z from "zod";
-import type { PaymentSchema } from "../zod/schemas/paymentSchema";
+import type { PaymentSchema, PaySchema } from "../zod/schemas/paymentSchema";
 import type { PrescriptionSchema } from "../zod/schemas/prescriptionSchema";
 import type { OperationSchema } from "../zod/schemas/operationSchema";
 import type { InsuranceSchema } from "../zod/schemas/insuranceSchema";
 import type { AppointmentSchema } from "../zod/schemas/appointmentSchema";
 import type { DepartmentSchema } from "../zod/schemas/departmentSchema";
-import type { CountrySchema } from "../zod/schemas/hr-schemas";
+import type { CountrySchema, DoctorSchema } from "../zod/schemas/hr-schemas";
 import type {
   TestOrderSchema,
   TestAppointmentSchema,
@@ -18,7 +18,6 @@ import type {
   AdminSchema,
 } from "../zod/schemas/hr-schemas";
 import type { PersonSchema } from "../zod/schemas/hr-schemas";
-import type { DoctorSchema } from "../zod/DoctorSchema";
 
 export type Department = z.infer<typeof DepartmentSchema>;
 export type Person = z.infer<typeof PersonSchema>;

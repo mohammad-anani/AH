@@ -33,19 +33,21 @@ export function route<T extends EntityKey>(
     {
       path: mainPath,
       children: [
-        withList && {
-          index: true,
-          element: (
-            <ListPage<T>
-              entity={entity}
-              canAdd={canAdd}
-              rowTemplate={rowTemplate}
-              filterFields={filterFields}
-              withBack={withBack ?? false}
-            />
-          ),
-          loader: listLoader(`${entity}Row`, pathPrefix),
-        },
+        withList
+          ? {
+              index: true,
+              element: (
+                <ListPage<T>
+                  entity={entity}
+                  canAdd={canAdd}
+                  rowTemplate={rowTemplate}
+                  filterFields={filterFields}
+                  withBack={withBack ?? false}
+                />
+              ),
+              loader: listLoader(`${entity}Row`, pathPrefix),
+            }
+          : { path: "", Component: InvalidPath },
         {
           path: "list",
           Component: InvalidPath,

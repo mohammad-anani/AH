@@ -65,4 +65,5 @@ export const subLinks: {
   ],
 
   TestAppointment: () => [],
+  Payment: ({ IsPaid }) => (IsPaid ? [] : [["Make a Payment", "pay"]]),
 };

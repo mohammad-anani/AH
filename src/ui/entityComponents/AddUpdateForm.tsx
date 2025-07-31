@@ -22,6 +22,7 @@ type FormProps<T extends EntityKey> = {
   formConfig: FormKey<T>;
   submittingText?: string;
   headerWidth?: number;
+  withHeader?: boolean;
   confirmation?: {
     title: string;
     content: string;
@@ -36,6 +37,7 @@ export default function AddUpdateForm<T extends EntityKey>({
   formConfig,
   submittingText = "Submitting...",
   confirmation,
+  withHeader = true,
 }: FormProps<T>) {
   const { title, methods, handleSubmit, submit, isAdd, isSubmitting } =
     useAddUpdateForm(entity);
@@ -44,11 +46,15 @@ export default function AddUpdateForm<T extends EntityKey>({
 
   return (
     <>
-      <Clickable className="text-sm!" as="Back" variant="secondary">
-        Back
-      </Clickable>
+      {withHeader ? (
+        <>
+          <Clickable className="text-sm!" as="Back" variant="secondary">
+            Back
+          </Clickable>
 
-      <H2 className="mb-6">{title}</H2>
+          <H2 className="mb-6">{title}</H2>
+        </>
+      ) : null}
       <FormProvider {...methods}>
         <RouterForm
           replace

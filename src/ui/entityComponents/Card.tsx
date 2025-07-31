@@ -26,11 +26,12 @@ type CardProps<T extends EntityKey> = {
   data?: typesObject[T];
   subLinks?: SubLinks<T>;
   dataFields: dataFields<T>;
-  isModal: boolean;
+  isModal?: boolean;
   isNestedCard?: boolean;
   canEdit?: boolean;
   canDelete?: boolean;
   headerWidth?: number;
+  titleText?: string;
 };
 
 export default function Card<T extends EntityKey>({
@@ -42,6 +43,7 @@ export default function Card<T extends EntityKey>({
   isModal = false,
   subLinks,
   dataFields,
+  titleText,
 }: CardProps<T>) {
   const {
     subEntity,
@@ -88,7 +90,7 @@ export default function Card<T extends EntityKey>({
         </Clickable>
       ) : null}
       <div className="flex items-center justify-between">
-        {!isModal ? <H2>{formatTitle(title)}</H2> : null}
+        {!isModal ? <H2>{titleText ?? formatTitle(title)}</H2> : null}
         <div className="flex gap-x-2">
           {canEdit ? (
             <Clickable as="Link" variant="primary" to="edit">

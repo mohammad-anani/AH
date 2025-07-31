@@ -284,4 +284,14 @@ export const dataFields: {
     ],
     ["Created At", formatDateIsoToLocal(operation.CreatedAt)],
   ],
+  Payment: ({ Amount, PatientPaid, InsurancePaid, IsPaid }) => {
+    const left = Amount - InsurancePaid - PatientPaid;
+    return [
+      ["Amount", formatMoney(Amount)],
+      ["Patient Paid", formatMoney(PatientPaid)],
+      ["Insurance Paid", formatMoney(InsurancePaid)],
+      ["Amount Left", formatMoney(left)],
+      ["Is Paid", IsPaid ? "Paid" : "Not Paid"],
+    ];
+  },
 };

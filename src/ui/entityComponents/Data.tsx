@@ -6,8 +6,8 @@ type DataProps<T extends EntityKey> = {
   data: typesObject[T];
   fields: dataFields<T>;
   setSubCard?: Setter<[EntityKey, string] | undefined>;
-  isModal: boolean;
-  isNestedCard: boolean;
+  isModal?: boolean;
+  isNestedCard?: boolean;
 };
 
 export default function Data<T extends EntityKey>({
