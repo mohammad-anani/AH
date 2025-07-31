@@ -1,8 +1,8 @@
-import type { Key } from "@/utils/models/types/util";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import List from "../entityComponents/List";
 import Clickable from "./Clickable";
 
-type FilterEntititesProps = { fields: Key[] };
+type FilterEntititesProps = { fields: FilterKey[] };
 
 export default function FilterEntities({ fields }: FilterEntititesProps) {
   return (

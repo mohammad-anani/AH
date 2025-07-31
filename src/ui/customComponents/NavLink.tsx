@@ -1,4 +1,4 @@
-import type { ChildrenProps } from "@/utils/models/types/util";
+import type { ChildrenProps } from "@/utils/models/types/utils/basics";
 import {
   NavLink as NLink,
   type NavLinkProps as NavProps,

@@ -1,17 +1,15 @@
 import { createContext, useContext } from "react";
-import type {
-  EntityKey,
-  Key,
-  SearchParamsState,
-  Setter,
-} from "../../../utils/models/types/util";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { FilterKey } from "../../../utils/models/types/utils/Form&Filter";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { Setter } from "@/utils/models/types/utils/basics";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 type ContextType<T extends rowTypesObject[EntityKey]> = {
   items: T[];
-  fields: Key[];
+  fields: FilterKey[];
   canModifyUrl: boolean;
-  setFields: Setter<Key[]>;
+  setFields: Setter<FilterKey[]>;
   searchParamsState?: SearchParamsState;
   setObject?: Setter<T | undefined>;
 };

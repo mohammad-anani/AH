@@ -1,7 +1,7 @@
 import { dataFields } from "@/utils/models/componentsConfig/dataFields";
 import { subLinks } from "@/utils/models/componentsConfig/subLinks";
-import type { typesObject } from "@/utils/models/types/typesObject";
-import type { EntityKey } from "@/utils/models/types/util";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useState, useEffect } from "react";
 import { useOutletContext, useFetcher } from "react-router-dom";
 

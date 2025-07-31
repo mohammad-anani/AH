@@ -6,14 +6,15 @@ import Order from "./Order";
 import { Form } from "./Form";
 import Sort from "./Sort";
 import SearchButton from "./SearchButton";
-import type { ChildrenProps, Key, Setter } from "@/utils/models/types/util";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type { ChildrenProps, Setter } from "@/utils/models/types/utils/basics";
 import { useFilterDefaultValues } from "../hooks/useFilterDefaultValues";
 import { useFilterNavigation } from "../hooks/useFilterNavigation";
 
 export default function Filter({
   children,
   fields,
-}: ChildrenProps & { fields: Key[] }) {
+}: ChildrenProps & { fields: FilterKey[] }) {
   const { canModifyUrl, setFields, searchParamsState } = useListContext();
 
   const defaultValues = useFilterDefaultValues(fields);

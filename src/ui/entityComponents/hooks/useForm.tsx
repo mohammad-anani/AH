@@ -5,7 +5,7 @@ import type {
   customFormProps,
   DataTypes,
   AllEntityKeys,
-} from "@/utils/models/types/util";
+} from "@/utils/models/types/utils/Form&Filter";
 import { generateLabel } from "../listComponents/utils";
 import Controller from "@/ui/customComponents/Controller";
 

@@ -1,7 +1,7 @@
 import Delete from "@/api/delete";
 
 import { useParams } from "react-router-dom";
-import type { EntityKey } from "../models/types/util";
+import type { EntityKey } from "../models/types/utils/entityKeys";
 
 export default function deleteAction(entity: EntityKey) {
   return async function () {

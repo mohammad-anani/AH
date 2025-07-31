@@ -1,15 +1,13 @@
 import Clickable from "@/ui/customComponents/Clickable";
 import { formatTitle } from "@/utils/formatters/formatTitle";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 import { Info, Check } from "lucide-react";
 import { useLoaderData } from "react-router-dom";
 import useFilter from "./useFilter";
-import type {
-  EntityKey,
-  RowTemplate,
-  SearchParamsState,
-  SelectedObjectState,
-} from "@/utils/models/types/util";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
+import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
 export default function useListPage<T extends EntityKey>(
   entity: T,

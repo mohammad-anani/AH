@@ -1,6 +1,7 @@
 // subLinksConfig.ts
 
-import type { EntityKey, SubLinks } from "../types/util";
+import type { SubLinks } from "../types/utils/routeTypes";
+import type { EntityKey } from "../types/utils/entityKeys";
 
 export const subLinks: {
   [K in EntityKey]: SubLinks<K>;

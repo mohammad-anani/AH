@@ -9,7 +9,7 @@ import Card from "@/ui/entityComponents/Card";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
 import type { Params, RouteObject } from "react-router-dom";
 import type { RouteConfigType } from "@/utils/models/componentsConfig/routeConfig";
-import type { EntityKey } from "@/utils/models/types/util";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
 export function route<T extends EntityKey>(
   entity: T,

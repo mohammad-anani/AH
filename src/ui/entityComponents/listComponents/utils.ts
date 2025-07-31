@@ -1,5 +1,5 @@
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
-import type { EntityKey } from "@/utils/models/types/util";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
 export function convertStringToType(type: string, value: string) {
   if (value === "" && type !== "boolean") return type === "string" ? "" : null;

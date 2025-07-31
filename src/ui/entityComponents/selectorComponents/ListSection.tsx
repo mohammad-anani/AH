@@ -1,12 +1,10 @@
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
-import type {
-  EntityKey,
-  Key,
-  RowTemplate,
-  SearchParamsState,
-  SelectedObjectState,
-  Setter,
-} from "@/utils/models/types/util";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
+import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { Setter } from "@/utils/models/types/utils/basics";
 import ListPage from "../ListPage";
 
 type ListProps<T extends EntityKey> = {
@@ -15,7 +13,7 @@ type ListProps<T extends EntityKey> = {
   selectedObjectState: SelectedObjectState<T>;
   canAdd: boolean;
   rowTemplate: RowTemplate<T>;
-  filterFields: Key[];
+  filterFields: FilterKey[];
   searchParamsState: SearchParamsState;
   onDetailsClick: (id: number) => void;
   onSelect: (item: rowTypesObject[T]) => void;

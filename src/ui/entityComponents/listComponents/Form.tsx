@@ -1,8 +1,8 @@
 import type {
   customFilterProps,
   DataTypes,
-  Key,
-} from "@/utils/models/types/util";
+  FilterKey,
+} from "@/utils/models/types/utils/Form&Filter";
 import useListContext from "./context";
 
 import { generateLabel } from "./utils";
@@ -42,7 +42,7 @@ export function Form() {
 
   const safeFields = Array.isArray(fields) ? fields : [];
 
-  const renderField = (field: Key) => {
+  const renderField = (field: FilterKey) => {
     const [key, type, data] = field;
 
     const label = generateLabel(key) + ":";

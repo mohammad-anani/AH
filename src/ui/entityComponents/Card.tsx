@@ -11,12 +11,10 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 
-import {
-  type dataFields,
-  type EntityKey,
-  type SubLinks,
-} from "@/utils/models/types/util";
-import type { typesObject } from "@/utils/models/types/typesObject";
+import { type dataFields } from "@/utils/models/types/utils/routeTypes";
+import { type SubLinks } from "@/utils/models/types/utils/routeTypes";
+import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import Data from "./Data";
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import useCard from "./hooks/useCard";

@@ -1,4 +1,4 @@
-import type { ClickableChildrenProps } from "@/utils/models/types/util";
+import type { ClickableChildrenProps } from "@/utils/models/types/utils/basics";
 import { cloneElement } from "react";
 
 import { useNavigate } from "react-router-dom";

@@ -2,10 +2,10 @@ import { formatTitle } from "@/utils/formatters/formatTitle";
 import throwError from "@/utils/helpers/throwError";
 
 import { addingSchemas } from "@/utils/models/zod/addingSchemasObject";
-import { schemas } from "@/utils/models/zod/schemas/schemasObject";
-import { emptyObjects } from "@/utils/models/types/emptyObjectsObject";
-import type { typesObject } from "@/utils/models/types/typesObject";
-import type { EntityKey } from "@/utils/models/types/util";
+import { schemas } from "@/utils/models/zod/schemas/schemas";
+import { emptyObjects } from "@/utils/models/types/empty/emptyObjects";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {

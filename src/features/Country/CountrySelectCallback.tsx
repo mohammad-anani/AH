@@ -1,4 +1,5 @@
-import type { customFormProps, Setter } from "@/utils/models/types/util";
+import type { customFormProps } from "@/utils/models/types/utils/Form&Filter";
+import type { Setter } from "@/utils/models/types/utils/basics";
 import CountrySelect from "./CountrySelect";
 
 export const CountrySelectCallBack: customFormProps = [

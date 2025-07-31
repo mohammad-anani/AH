@@ -1,12 +1,10 @@
 // filterFields.ts
 
-import type {
-  dataFields as DataFields,
-  EntityKey,
-  Key,
-  RowTemplate,
-  SelectorConfig,
-} from "@/utils/models/types/util";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type { SelectorConfig } from "../types/utils/selectorTypes";
+import type { RowTemplate } from "./routeConfig";
+import type { dataFields as DataFields } from "../types/utils/routeTypes";
+import type { EntityKey } from "../types/utils/entityKeys";
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 import { CountrySelectCallBack } from "@/features/Country/CountrySelectCallback";
 import { selectorConfig } from "./selectorConfig";
@@ -17,25 +15,25 @@ import { dataFields } from "./dataFields";
 // Field Builders
 // ------------------------
 
-const stringField = (label: string): Key => [label, "string"];
-const numberField = (label: string): Key => [label, "number"];
-const phoneField = (label: string): Key => [label, "phone"];
-const emailField = (label: string): Key => [label, "email"];
-const dateField = (label: string): Key => [label, "date"];
-const datetimeField = (label: string): Key => [label, "datetime"];
-const timeField = (label: string): Key => [label, "time"];
-const moneyField = (label: string): Key => [label, "money"];
+const stringField = (label: string): FilterKey => [label, "string"];
+const numberField = (label: string): FilterKey => [label, "number"];
+const phoneField = (label: string): FilterKey => [label, "phone"];
+const emailField = (label: string): FilterKey => [label, "email"];
+const dateField = (label: string): FilterKey => [label, "date"];
+const datetimeField = (label: string): FilterKey => [label, "datetime"];
+const timeField = (label: string): FilterKey => [label, "time"];
+const moneyField = (label: string): FilterKey => [label, "money"];
 const booleanField = (
   label: string,
   labels: [string, string, string?],
-): Key => [label, "boolean", labels];
+): FilterKey => [label, "boolean", labels];
 
-const uniselectField = (label: string, values: string[]): Key => [
+const uniselectField = (label: string, values: string[]): FilterKey => [
   label,
   "uniselect",
   values,
 ];
-const multiselectField = (label: string, values: string[]): Key => [
+const multiselectField = (label: string, values: string[]): FilterKey => [
   label,
   "multiselect",
   values,
@@ -45,7 +43,7 @@ const multiselectField = (label: string, values: string[]): Key => [
 // Lazy selectorField (with lazy filterFields)
 // ------------------------
 
-const selectorField = (fieldKey: string, entity: EntityKey): Key => [
+const selectorField = (fieldKey: string, entity: EntityKey): FilterKey => [
   fieldKey,
   "selector",
   [
@@ -61,7 +59,7 @@ const selectorField = (fieldKey: string, entity: EntityKey): Key => [
 // Shared Field Groups
 // ------------------------
 
-const personFields: Key[] = [
+const personFields: FilterKey[] = [
   stringField("FirstName"),
   stringField("MiddleName"),
   stringField("LastName"),
@@ -73,7 +71,7 @@ const personFields: Key[] = [
   stringField("Username"),
 ];
 
-const employeeFields: Key[] = [
+const employeeFields: FilterKey[] = [
   ["Department", "custom", DepartmentSelectCallBack],
   moneyField("Salary"),
   dateField("HireDate"),
@@ -94,7 +92,7 @@ const employeeFields: Key[] = [
 
 type CreatorRole = "Admin" | "Receptionist" | "Doctor";
 
-const generateAuditFields = (creator: CreatorRole): Key[] => [
+const generateAuditFields = (creator: CreatorRole): FilterKey[] => [
   datetimeField("CreatedAt"),
   selectorField(`${creator}ID`, creator),
 ];
@@ -104,7 +102,7 @@ const generateAuditFields = (creator: CreatorRole): Key[] => [
 // ------------------------
 
 export const getFilterFields = (): {
-  [K in EntityKey]: Key[];
+  [K in EntityKey]: FilterKey[];
 } => ({
   Department: [
     stringField("Name"),

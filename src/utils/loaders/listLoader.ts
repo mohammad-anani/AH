@@ -8,12 +8,10 @@ import getList from "@/api/getList";
 import { z } from "zod";
 import pluralize from "pluralize";
 import throwError from "../helpers/throwError";
-import { schemas } from "../models/zod/schemas/schemasObject.ts";
-import { rowSchemas } from "../models/zod/rowSchemasObject.ts";
-import {
-  entitiesWithNoSearchParams,
-  type EntityKey,
-} from "../models/types/util.ts";
+import { schemas } from "../models/zod/schemas/schemas.ts";
+import { rowSchemas } from "../models/zod/rowSchemas/rowSchemas.ts";
+import { entitiesWithNoSearchParams } from "../models/types/utils/Form&Filter.ts";
+import { type EntityKey } from "../models/types/utils/entityKeys.ts";
 export default function listLoader(
   entity: EntityKey | `${EntityKey}Row`,
   pathPrefix?: (params: Params) => string,

@@ -1,5 +1,5 @@
 import { cloneElement } from "react";
-import type { ClickableChildrenProps } from "../../../utils/models/types/util";
+import type { ClickableChildrenProps } from "@/utils/models/types/utils/basics";
 import { useSearchParams } from "react-router-dom";
 import useListContext from "./context";
 

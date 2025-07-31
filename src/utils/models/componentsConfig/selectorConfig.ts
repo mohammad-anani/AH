@@ -1,4 +1,5 @@
-import type { EntityKey, SelectorConfig } from "../types/util";
+import type { SelectorConfig } from "../types/utils/selectorTypes";
+import type { EntityKey } from "../types/utils/entityKeys";
 
 export const selectorConfig: {
   [K in EntityKey]: SelectorConfig<K>;

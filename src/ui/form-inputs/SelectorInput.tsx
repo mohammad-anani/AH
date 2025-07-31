@@ -1,14 +1,12 @@
 import Controller from "@/ui/customComponents/Controller";
 import Selector from "../entityComponents/Selector";
-import type {
-  dataFields,
-  EntityKey,
-  Key,
-  RowTemplate,
-  SelectorConfig,
-} from "@/utils/models/types/util";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type { SelectorConfig } from "@/utils/models/types/utils/selectorTypes";
+import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+import type { dataFields } from "@/utils/models/types/utils/routeTypes";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 interface SelectorInputProps {
   fieldKey: string;
@@ -18,7 +16,7 @@ interface SelectorInputProps {
     SelectorConfig<EntityKey>,
     RowTemplate<EntityKey>,
     dataFields<EntityKey>,
-    Key[],
+    FilterKey[],
   ];
 }
 
@@ -44,7 +42,7 @@ function SelectorField<T extends EntityKey>({
   fieldProps,
   data,
 }: {
-  data: [T, SelectorConfig<T>, RowTemplate<T>, dataFields<T>, Key[]];
+  data: [T, SelectorConfig<T>, RowTemplate<T>, dataFields<T>, FilterKey[]];
   fieldProps: {
     field: {
       value: unknown;

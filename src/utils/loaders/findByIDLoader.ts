@@ -1,8 +1,8 @@
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import findByID from "@/api/findByID";
 import throwError from "../helpers/throwError";
-import { schemas } from "../models/zod/schemas/schemasObject.ts";
-import type { EntityKey } from "../models/types/util.ts";
+import { schemas } from "../models/zod/schemas/schemas.ts";
+import type { EntityKey } from "../models/types/utils/entityKeys.ts";
 
 export default function findByIDLoader(entity: EntityKey): LoaderFunction {
   return async function ({ params }: LoaderFunctionArgs) {

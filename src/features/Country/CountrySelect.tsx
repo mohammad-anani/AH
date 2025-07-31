@@ -1,5 +1,5 @@
-import type { Country } from "@/utils/models/types/types";
-import type { Setter } from "@/utils/models/types/util";
+import type { Country } from "@/utils/models/types/normal/types";
+import type { Setter } from "@/utils/models/types/utils/basics";
 import Select from "react-select";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";

@@ -1,7 +1,7 @@
 import add from "@/api/add";
 import update from "@/api/update";
 import { type ActionFunctionArgs } from "react-router-dom";
-import type { EntityKey } from "../models/types/util";
+import type { EntityKey } from "../models/types/utils/entityKeys";
 
 export default function addUpdateAction(entity: EntityKey) {
   return async function ({ request }: ActionFunctionArgs) {

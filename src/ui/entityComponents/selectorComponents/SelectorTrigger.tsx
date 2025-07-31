@@ -1,10 +1,11 @@
 // SelectorTrigger.tsx
 
 import { PencilIcon, X } from "lucide-react";
-import type { EntityKey, Setter } from "@/utils/models/types/util";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { Setter } from "@/utils/models/types/utils/basics";
 import Clickable from "@/ui/customComponents/Clickable";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 type SelectorTriggerProps<T extends rowTypesObject[EntityKey]> = {
   selectedObject: [T | undefined, Setter<T | undefined>];

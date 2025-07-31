@@ -1,15 +1,13 @@
 // Selector.tsx
-import {
-  type dataFields,
-  type EntityKey,
-  type Key,
-  type RowTemplate,
-  type SelectedObjectState,
-  type Setter,
-  type SubLinks,
-} from "@/utils/models/types/util";
+import { type FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import { type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import { type RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+import { type dataFields } from "@/utils/models/types/utils/routeTypes";
+import { type SubLinks } from "@/utils/models/types/utils/routeTypes";
+import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
+import { type Setter } from "@/utils/models/types/utils/basics";
 
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 import {
   Dialog,
@@ -32,7 +30,7 @@ type SelectorProps<T extends EntityKey> = {
   selectedObjectState: SelectedObjectState<T>;
   rowTemplate: RowTemplate<T>;
   dataFields: dataFields<T>;
-  filterFields: Key[];
+  filterFields: FilterKey[];
   canAdd?: boolean;
 };
 

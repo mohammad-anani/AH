@@ -3,7 +3,8 @@ import Clickable from "@/ui/customComponents/Clickable";
 import { FormProvider } from "react-hook-form";
 import { Form as RouterForm } from "react-router-dom";
 
-import type { EntityKey, FormKey } from "@/utils/models/types/util";
+import type { FormKey } from "@/utils/models/types/utils/Form&Filter";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import Form from "./Form";
 
 import useAddUpdateForm from "./hooks/useAddUpdateForm";

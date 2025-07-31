@@ -3,16 +3,16 @@ import { convertStringToType, isTemporalType } from "../listComponents/utils";
 import type {
   customFilterProps,
   DataTypes,
-  Key,
-  SearchParamsState,
-} from "@/utils/models/types/util";
+  FilterKey,
+} from "@/utils/models/types/utils/Form&Filter";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 import type { Primitive } from "zod";
 type ReduceObjectType = {
   [key: string]: Primitive | string[];
 };
 
 export function useFilterDefaultValues(
-  fields: Key[],
+  fields: FilterKey[],
   searchParamsState?: SearchParamsState,
 ) {
   const [urlparams] = useSearchParams();

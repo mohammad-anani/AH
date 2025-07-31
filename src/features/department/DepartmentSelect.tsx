@@ -1,5 +1,5 @@
-import type { typesObject } from "@/utils/models/types/typesObject";
-import type { Setter } from "@/utils/models/types/util";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { Setter } from "@/utils/models/types/utils/basics";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
 

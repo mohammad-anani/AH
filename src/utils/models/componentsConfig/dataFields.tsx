@@ -3,8 +3,9 @@ import formatPhoneNumber from "../../formatters/formatPhoneNumber";
 import { formatMoney } from "@/utils/formatters/formatMoney";
 import { calculateAge } from "@/utils/formatters/calculateAge";
 import { convert24To12 } from "@/utils/formatters/convert24To12";
-import type { dataFields as DataFields, EntityKey } from "../types/util";
-import type { typesObject } from "../types/typesObject";
+import type { dataFields as DataFields } from "../types/utils/routeTypes";
+import type { EntityKey } from "../types/utils/entityKeys";
+import type { typesObject } from "../types/normal/typesObject";
 
 // Person data fields
 export const personDataFields: DataFields<"Person"> = (

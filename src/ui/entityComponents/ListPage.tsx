@@ -8,16 +8,14 @@ import {
 } from "../../components/ui/dialog";
 import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "../customComponents/FilterEntities";
-import type {
-  EntityKey,
-  Key,
-  RowTemplate,
-  SearchParamsState,
-  SelectedObjectState,
-  Setter,
-} from "@/utils/models/types/util";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
+import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { Setter } from "@/utils/models/types/utils/basics";
 import H2 from "../customComponents/H2";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 import useListPage from "./hooks/useListPage";
 
@@ -29,7 +27,7 @@ type ListPageProps<T extends EntityKey> = {
   rowTemplate: RowTemplate<T>;
   onSelect?: (item: rowTypesObject[T]) => void;
   onDetailsClick?: (ID: number) => void;
-  filterFields?: Key[];
+  filterFields?: FilterKey[];
   emptyText?: string;
   canModifyUrl?: boolean;
   searchParamsState?: SearchParamsState;

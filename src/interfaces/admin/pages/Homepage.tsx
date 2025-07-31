@@ -1,6 +1,6 @@
 import Selector from "@/ui/entityComponents/Selector";
 import { selectorConfig } from "@/utils/models/componentsConfig/selectorConfig";
-import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 import { useState } from "react";
 

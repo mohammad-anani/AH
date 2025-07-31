@@ -1,5 +1,7 @@
-import type { typesObject } from "@/utils/models/types/typesObject";
-import type { dataFields, EntityKey, Setter } from "@/utils/models/types/util";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { dataFields } from "@/utils/models/types/utils/routeTypes";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { Setter } from "@/utils/models/types/utils/basics";
 import Clickable from "../customComponents/Clickable";
 
 type DataProps<T extends EntityKey> = {

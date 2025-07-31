@@ -1,16 +1,16 @@
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 import { CountrySelectCallBack } from "@/features/Country/CountrySelectCallback";
-import type { typesObject } from "../types/typesObject";
+import type { typesObject } from "../types/normal/typesObject";
 import type {
   AllEntityKeys,
-  dataFields as DataFields,
   DotAccess,
-  EntityKey,
   FormKey,
-  Key,
-  RowTemplate,
-  SelectorConfig,
-} from "../types/util";
+  FilterKey,
+} from "../types/utils/Form&Filter";
+import type { SelectorConfig } from "../types/utils/selectorTypes";
+import type { RowTemplate } from "./routeConfig";
+import type { dataFields as DataFields } from "../types/utils/routeTypes";
+import type { EntityKey } from "../types/utils/entityKeys";
 import { selectorConfig } from "./selectorConfig";
 import { dataFields } from "./dataFields";
 import { filterFields } from "./filterFields";
@@ -92,7 +92,7 @@ const insuranceForm: FormKey<"Insurance">[] = [
       selectorConfig["Patient"] as SelectorConfig<EntityKey>,
       rowTemplates["Patient"] as RowTemplate<EntityKey>,
       dataFields["Patient"] as DataFields<EntityKey>,
-      filterFields["Patient"] as Key[],
+      filterFields["Patient"] as FilterKey[],
     ],
   ],
   ["Provider Name", "ProviderName", "string", "both"],

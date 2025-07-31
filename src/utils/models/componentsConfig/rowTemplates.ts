@@ -1,4 +1,5 @@
-import type { EntityKey, RowTemplate } from "@/utils/models/types/util";
+import type { RowTemplate } from "./routeConfig";
+import type { EntityKey } from "../types/utils/entityKeys";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 

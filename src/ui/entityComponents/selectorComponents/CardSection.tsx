@@ -1,12 +1,10 @@
 import Clickable from "@/ui/customComponents/Clickable";
 
-import type {
-  dataFields,
-  EntityKey,
-  SubLinks,
-} from "@/utils/models/types/util";
+import type { dataFields } from "@/utils/models/types/utils/routeTypes";
+import type { SubLinks } from "@/utils/models/types/utils/routeTypes";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import Card from "../Card";
-import type { typesObject } from "@/utils/models/types/typesObject";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { dataFields as dataFieldsConfig } from "@/utils/models/componentsConfig/dataFields";
 
 type CardProps<T extends EntityKey> = {

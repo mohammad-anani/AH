@@ -1,4 +1,4 @@
-import type { OptionalChildrenProps } from "@/utils/models/types/util";
+import type { OptionalChildrenProps } from "@/utils/models/types/utils/basics";
 import useListContext from "./context";
 import type { ReactNode } from "react";
 export default function Items<T>({
