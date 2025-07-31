@@ -1,5 +1,5 @@
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
-import { AddPatientSchema } from "@/utils/models/schema/addingSchemas";
+import { AddPatientSchema } from "@/utils/models/zod/addingSchemas";
 import { emptyPatient } from "@/utils/models/types/emptyObjects";
 
 export default function Add() {

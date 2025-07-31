@@ -1,5 +1,5 @@
 import Clickable from "@/ui/customComponents/Clickable";
-import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
+
 import type {
   dataFields,
   EntityKey,
@@ -7,13 +7,14 @@ import type {
 } from "@/utils/models/types/util";
 import Card from "../Card";
 import type { typesObject } from "@/utils/models/types/typesObject";
+import { dataFields as dataFieldsConfig } from "@/utils/models/componentsConfig/dataFields";
 
 type CardProps<T extends EntityKey> = {
   entity: T;
   cardData: typesObject[T];
   cardID: number;
   objectID?: number;
-  subLinks: SubLinks<T>;
+  subLinks?: SubLinks<T>;
   dataFields: dataFields<T>;
   onBack: () => void;
   onSelect: () => void;
@@ -30,9 +31,7 @@ export default function CardSection<T extends EntityKey>({
   onSelect,
 }: CardProps<T>) {
   const scrollClass =
-    cardConfig[entity]["dataFields"](cardData).length > 8
-      ? "overflow-y-scroll"
-      : "";
+    dataFieldsConfig[entity](cardData).length > 8 ? "overflow-y-scroll" : "";
 
   return (
     <div className="space-y-2! space-x-2!">

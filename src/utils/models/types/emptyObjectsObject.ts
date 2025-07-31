@@ -1,4 +1,4 @@
-import { addingSchemas } from "../schema/addingSchemasObject";
+import { addingSchemas } from "../zod/addingSchemasObject";
 import {
   ZodType,
   ZodObject,

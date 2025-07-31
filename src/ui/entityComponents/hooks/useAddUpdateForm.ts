@@ -1,23 +1,33 @@
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import throwError from "@/utils/helpers/throwError";
-import { formConfig } from "@/utils/models/componentsConfig/formConfig";
-import { addingSchemas } from "@/utils/models/schema/addingSchemasObject";
-import { schemas } from "@/utils/models/schema/schemasObject";
+
+import { addingSchemas } from "@/utils/models/zod/addingSchemasObject";
+import { schemas } from "@/utils/models/zod/schemas/schemasObject";
 import { emptyObjects } from "@/utils/models/types/emptyObjectsObject";
 import type { typesObject } from "@/utils/models/types/typesObject";
 import type { EntityKey } from "@/utils/models/types/util";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useSubmit, useNavigation, useOutletContext } from "react-router-dom";
+import {
+  useSubmit,
+  useNavigation,
+  useOutletContext,
+  useLocation,
+} from "react-router-dom";
 import type z from "zod";
 
-export default function useAddUpdateForm(entity: EntityKey) {
+export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
   const data = useOutletContext<typesObject[EntityKey]>();
+
+  const location = useLocation();
+
+  const navData = location.state;
+
   const isAdd = !data || !schemas[entity].safeParse(data).success;
 
   const schema = isAdd ? addingSchemas[entity] : schemas[entity];
 
-  const defaultValues = isAdd ? emptyObjects[entity] : data;
+  const defaultValues = isAdd ? { ...emptyObjects[entity], ...navData } : data;
 
   const title = `${isAdd ? "Add" : "Edit"} ${formatTitle(entity)}`;
 
@@ -34,16 +44,15 @@ export default function useAddUpdateForm(entity: EntityKey) {
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
 
-  if (!schema || !defaultValues) throwError(500, "Internal server error", "");
-
-  const formFields = formConfig[entity];
+  if (!schema || !defaultValues)
+    throwError(500, "schema or default values didn't load.");
 
   return {
     title,
     methods,
     handleSubmit,
     submit,
-    formFields,
+
     isAdd,
     isSubmitting,
   };

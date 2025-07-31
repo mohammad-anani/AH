@@ -1,10 +1,26 @@
 import { UNSAFE_ErrorResponseImpl } from "react-router-dom";
 
+// Common HTTP status phrases map
+const statusPhrases: Record<number, string> = {
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  405: "Method Not Allowed",
+  408: "Request Timeout",
+  429: "Too Many Requests",
+  500: "Internal Server Error",
+  501: "Not Implemented",
+  503: "Service Unavailable",
+  // add more as needed
+};
+
 export default function throwError(
   statusCode: number,
-  statusPhrase: string,
-  message: string = "An error has occured.",
+  message: string = "An error has occurred.",
 ) {
+  const statusPhrase = statusPhrases[statusCode] ?? "Unknown Error";
+
   const error = new UNSAFE_ErrorResponseImpl(
     statusCode,
     statusPhrase,

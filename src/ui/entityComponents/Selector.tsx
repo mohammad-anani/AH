@@ -1,8 +1,12 @@
 // Selector.tsx
 import {
+  type dataFields,
   type EntityKey,
+  type Key,
+  type RowTemplate,
   type SelectedObjectState,
   type Setter,
+  type SubLinks,
 } from "@/utils/models/types/util";
 
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
@@ -26,12 +30,18 @@ type SelectorProps<T extends EntityKey> = {
   path: string;
   selectedDisplay: (item: rowTypesObject[T]) => string;
   selectedObjectState: SelectedObjectState<T>;
+  rowTemplate: RowTemplate<T>;
+  dataFields: dataFields<T>;
+  filterFields: Key[];
   canAdd?: boolean;
 };
 
 export default function Selector<T extends EntityKey>({
   entity,
   path,
+  rowTemplate,
+  filterFields,
+  dataFields,
   selectedDisplay,
   selectedObjectState,
   canAdd = false,
@@ -46,10 +56,7 @@ export default function Selector<T extends EntityKey>({
     cardData,
     listData,
     searchParamsState,
-    rowTemplate,
-    filterFields,
-    subLinks,
-    dataFields,
+
     title,
   } = useSelector(entity, selectedObjectState, path);
 
@@ -90,7 +97,6 @@ export default function Selector<T extends EntityKey>({
               cardData={cardData}
               cardID={CardID}
               objectID={object?.["ID"]}
-              subLinks={subLinks}
               dataFields={dataFields}
               onBack={() => setCardID(undefined)}
               onSelect={() => {

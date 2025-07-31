@@ -50,12 +50,23 @@ export type FormKey<T extends AllEntityKeys> = [
   fieldKey: DotAccess<typesObject[T]>,
   type: DataTypes | "custom",
   mode: "add" | "update" | "both",
-  data?: Array<Primitive> | customFormProps | [string, string] | string,
+  data?:
+    | Array<Primitive>
+    | customFormProps
+    | [string, string]
+    | string
+    | [
+        EntityKey,
+        SelectorConfig<EntityKey>,
+        RowTemplate<EntityKey>,
+        dataFields<EntityKey>,
+        Key[],
+      ],
 ];
 
 export type AllEntityKeys = EntityKey | "Person" | "Employee";
 
-const entityKeys = [
+export const entityKeys = [
   "Department",
   "Admin",
   "Doctor",
@@ -85,9 +96,13 @@ export const entityCamelMap: Record<EntityKey, string> = Object.fromEntries(
   entityKeys.map((key) => [key, key[0].toLowerCase() + key.slice(1)]),
 ) as Record<EntityKey, string>;
 
-export type SubLinks<T extends AllEntityKeys> = (
+export type SubLinks<T extends EntityKey> = (
   item: typesObject[T],
-) => [text: string, link: string][];
+) => [
+  text: string,
+  link: string,
+  state?: Record<keyof typesObject[EntityKey], Primitive>,
+][];
 
 export type dataFields<T extends AllEntityKeys> = (
   item: typesObject[T],
@@ -108,7 +123,18 @@ export type RowTemplate<T extends EntityKey> = [
 export type Key = [
   name: string,
   type: DataTypes | "custom",
-  data?: Array<Primitive> | customFilterProps | [string, string] | string,
+  data?:
+    | Array<Primitive>
+    | customFilterProps
+    | [string, string]
+    | string
+    | [
+        EntityKey,
+        SelectorConfig<EntityKey>,
+        RowTemplate<EntityKey>,
+        dataFields<EntityKey>,
+        Key[],
+      ],
 ];
 
 export type DotAccess<T, Prefix extends string = ""> = {

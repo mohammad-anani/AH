@@ -24,7 +24,7 @@ import useCard from "./hooks/useCard";
 type CardProps<T extends EntityKey> = {
   title: EntityKey;
   data?: typesObject[T];
-  subLinks: SubLinks<T>;
+  subLinks?: SubLinks<T>;
   dataFields: dataFields<T>;
   isModal: boolean;
   isNestedCard?: boolean;
@@ -42,8 +42,6 @@ export default function Card<T extends EntityKey>({
   isModal = false,
   subLinks,
   dataFields,
-
-  headerWidth = 150,
 }: CardProps<T>) {
   const {
     subEntity,
@@ -107,7 +105,7 @@ export default function Card<T extends EntityKey>({
         </div>
       </div>
       <div
-        className={`grid grid-cols-[${headerWidth}px_1fr] gap-y-1 *:text-xl! *:odd:font-bold`}
+        className={`grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 *:text-xl! *:odd:font-bold`}
       >
         <Data<T>
           isNestedCard={isNestedCard}
@@ -119,7 +117,7 @@ export default function Card<T extends EntityKey>({
       </div>
       {!isModal ? (
         <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
-          {subLinks(object).map(([text, link]) => (
+          {subLinks?.(object).map(([text, link]) => (
             <Clickable as="Link" to={link} variant="secondary">
               {text}
             </Clickable>

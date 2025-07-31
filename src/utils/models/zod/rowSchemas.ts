@@ -1,17 +1,20 @@
+import { InsuranceSchema } from "./schemas/insuranceSchema";
+import { AppointmentSchema } from "./schemas/appointmentSchema";
+import { DepartmentSchema } from "./schemas/departmentSchema";
 import {
-  AdminSchema,
-  AppointmentSchema,
-  DepartmentSchema,
-  DoctorSchema,
-  InsuranceSchema,
-  PatientSchema,
-  ReceptionistSchema,
   TestAppointmentSchema,
   TestOrderSchema,
   TestTypeSchema,
-} from "./schemas";
+} from "./schemas/test-shemas";
+import {
+  AdminSchema,
+  DoctorSchema,
+  PatientSchema,
+  ReceptionistSchema,
+} from "./schemas/hr-schemas";
 import { datetime, nonEmptyString } from "./reusableSchemas";
 import { z } from "zod";
+import { OperationSchema } from "./schemas/operationSchema";
 
 export const DepartmentRowSchema = DepartmentSchema.pick({
   ID: true,
@@ -44,7 +47,7 @@ export const TestTypeRowSchema = TestTypeSchema.pick({
 
 export const TestOrderRowSchema = TestOrderSchema.pick({
   ID: true,
-});
+}).extend({ PatientName: nonEmptyString, TestName: nonEmptyString });
 
 export const InsuranceRowSchema = InsuranceSchema.pick({
   ID: true,
@@ -66,3 +69,8 @@ export const AppointmentRowSchema = AppointmentSchema.pick({
   ID: true,
   Time: true,
 }).extend({ PatientName: nonEmptyString, DoctorName: nonEmptyString });
+
+export const OperationRowSchema = OperationSchema.pick({ ID: true }).extend({
+  PatientName: nonEmptyString,
+  Name: nonEmptyString,
+});

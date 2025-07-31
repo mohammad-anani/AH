@@ -1,22 +1,24 @@
 import type z from "zod";
+import type { PaymentSchema } from "../zod/schemas/paymentSchema";
+import type { PrescriptionSchema } from "../zod/schemas/prescriptionSchema";
+import type { OperationSchema } from "../zod/schemas/operationSchema";
+import type { InsuranceSchema } from "../zod/schemas/insuranceSchema";
+import type { AppointmentSchema } from "../zod/schemas/appointmentSchema";
+import type { DepartmentSchema } from "../zod/schemas/departmentSchema";
+import type { CountrySchema } from "../zod/schemas/hr-schemas";
 import type {
-  DepartmentSchema,
-  PersonSchema,
-  PatientSchema,
-  EmployeeSchema,
-  ReceptionistSchema,
-  DoctorSchema,
-  AdminSchema,
   TestOrderSchema,
   TestAppointmentSchema,
   TestTypeSchema,
-  CountrySchema,
-  InsuranceSchema,
-  OperationSchema,
-  PrescriptionSchema,
-  PaymentSchema,
-  AppointmentSchema,
-} from "../schema/schemas";
+} from "../zod/schemas/test-shemas";
+import type {
+  PatientSchema,
+  EmployeeSchema,
+  ReceptionistSchema,
+  AdminSchema,
+} from "../zod/schemas/hr-schemas";
+import type { PersonSchema } from "../zod/schemas/hr-schemas";
+import type { DoctorSchema } from "../zod/DoctorSchema";
 
 export type Department = z.infer<typeof DepartmentSchema>;
 export type Person = z.infer<typeof PersonSchema>;

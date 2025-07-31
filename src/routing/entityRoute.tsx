@@ -5,30 +5,29 @@ import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
 import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ListPage from "@/ui/entityComponents/ListPage";
-import type { EntityKey } from "@/utils/models/types/util";
 import Card from "@/ui/entityComponents/Card";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
-import { listPageConfig } from "@/utils/models/componentsConfig/listPageConfig";
-import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
 import type { Params, RouteObject } from "react-router-dom";
+import type { RouteConfigType } from "@/utils/models/componentsConfig/routeConfig";
+import type { EntityKey } from "@/utils/models/types/util";
 
 export function route<T extends EntityKey>(
   entity: T,
   canAdd: boolean = true,
   canEdit: boolean = true,
   canDelete: boolean = true,
-  withBack: boolean = false,
+  routeConfig: RouteConfigType<T>,
+  withBack?: boolean,
   pathPrefix?: (params: Params) => string,
   extraRoutes?: [routes: RouteObject[], location: "index" | "id"][],
   withList: boolean = true,
   withID: boolean = true,
-  headerWidth?: number,
 ) {
+  const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
+    routeConfig;
+
   const mainPath =
     (entity.startsWith("Test") ? entity.replace("Test", "") : entity) + "s";
-
-  const [rowTemplate, filterFields] = listPageConfig[entity];
-  const { subLinks, dataFields } = cardConfig[entity]!;
 
   return [
     {
@@ -42,7 +41,7 @@ export function route<T extends EntityKey>(
               canAdd={canAdd}
               rowTemplate={rowTemplate}
               filterFields={filterFields}
-              withBack={withBack}
+              withBack={withBack ?? false}
             />
           ),
           loader: listLoader(`${entity}Row`, pathPrefix),
@@ -65,7 +64,6 @@ export function route<T extends EntityKey>(
                   subLinks={subLinks}
                   canDelete={canDelete}
                   canEdit={canEdit}
-                  headerWidth={headerWidth}
                   dataFields={dataFields}
                   isModal={false}
                 />
@@ -77,7 +75,9 @@ export function route<T extends EntityKey>(
             },
             canEdit && {
               path: "edit",
-              element: <AddUpdateForm entity={entity} />,
+              element: (
+                <AddUpdateForm formConfig={formConfig} entity={entity} />
+              ),
               action: addUpdateAction(entity),
             },
 
@@ -88,7 +88,7 @@ export function route<T extends EntityKey>(
         },
         canAdd && {
           path: "add",
-          element: <AddUpdateForm entity={entity} />,
+          element: <AddUpdateForm formConfig={formConfig} entity={entity} />,
           action: addUpdateAction(entity),
         },
 

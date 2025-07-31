@@ -15,7 +15,7 @@ import type {
   AddPrescriptionSchema,
   AddPaymentSchema,
   AddPersonSchema,
-} from "../schema/addingSchemas";
+} from "../zod/addingSchemas";
 
 type NullableNumberBoolean<T> = {
   [K in keyof T]: T[K] extends number | boolean

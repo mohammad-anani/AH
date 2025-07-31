@@ -8,8 +8,8 @@ import getList from "@/api/getList";
 import { z } from "zod";
 import pluralize from "pluralize";
 import throwError from "../helpers/throwError";
-import { schemas } from "../models/schema/schemasObject.ts";
-import { rowSchemas } from "../models/schema/rowSchemasObject.ts";
+import { schemas } from "../models/zod/schemas/schemasObject.ts";
+import { rowSchemas } from "../models/zod/rowSchemasObject.ts";
 import {
   entitiesWithNoSearchParams,
   type EntityKey,
@@ -52,7 +52,7 @@ export default function listLoader(
       console.log(result.error);
       throwError(
         500,
-        "Internal Server Error",
+
         "Sorry, we received unexpected data from the server. Please try again later.",
       );
     }

@@ -1,7 +1,8 @@
 import { route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
-import { listPageConfig } from "@/utils/models/componentsConfig/listPageConfig";
+import { routeConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import { rowTemplates } from "@/utils/models/componentsConfig/rowTemplates";
 import type { RouteObject } from "react-router-dom";
 
 const insuranceListRoute: RouteObject[] = [
@@ -11,9 +12,9 @@ const insuranceListRoute: RouteObject[] = [
     element: (
       <ListPage
         entity="Insurance"
-        canAdd={true}
+        canAdd={false}
         canModifyUrl={false}
-        rowTemplate={listPageConfig["Insurance"][0]}
+        rowTemplate={rowTemplates["Insurance"]}
         filterFields={undefined}
         withBack={true}
       />
@@ -23,10 +24,11 @@ const insuranceListRoute: RouteObject[] = [
 
 export const insuranceRoute = route(
   "Insurance",
+  false,
+  false,
   true,
-  true,
-  true,
-  true,
+  routeConfigs["Insurance"],
+  false,
   undefined,
   [[insuranceListRoute, "index"]],
   false,

@@ -1,20 +1,20 @@
 import {
   AdminSchema,
-  DoctorSchema,
-  ReceptionistSchema,
-  PatientSchema,
+  AppointmentSchema,
   DepartmentSchema,
+  DoctorSchema,
   EmployeeSchema,
-  PersonSchema,
-  TestTypeSchema,
-  TestOrderSchema,
-  TestAppointmentSchema,
   InsuranceSchema,
   OperationSchema,
-  PrescriptionSchema,
+  PatientSchema,
   PaymentSchema,
-  AppointmentSchema,
-} from "./schemas.ts";
+  PersonSchema,
+  PrescriptionSchema,
+  ReceptionistSchema,
+  TestAppointmentSchema,
+  TestOrderSchema,
+  TestTypeSchema,
+} from "./schemas/schemas";
 
 export const AddPersonSchema = PersonSchema;
 
@@ -36,7 +36,7 @@ export const AddAdminSchema = AdminSchema.omit({
 export const AddDoctorSchema = DoctorSchema.omit({
   ID: true,
   CreatedAt: true,
-  CreatedByReceptionistID: true,
+  CreatedByAdminID: true,
 }).extend({
   Employee: AddEmployeeSchema,
 });
@@ -71,8 +71,6 @@ export const AddTestTypeSchema = TestTypeSchema.omit({
 
 export const AddTestOrderSchema = TestOrderSchema.omit({
   ID: true,
-  OrderedAt: true,
-  OrderedByDoctorID: true,
 });
 
 export const AddTestAppointmentSchema = TestAppointmentSchema.omit({

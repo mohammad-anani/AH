@@ -1,6 +1,5 @@
 import { formatTitle } from "@/utils/formatters/formatTitle";
-import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
-import { listPageConfig } from "@/utils/models/componentsConfig/listPageConfig";
+
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
 import type {
   EntityKey,
@@ -24,8 +23,6 @@ export default function useSelector<T extends EntityKey>(
   const [isOpen, setIsOpen] = useState(false);
 
   const [CardID, setCardID] = useState<number | undefined>(undefined);
-
-  const [rowTemplate, filterFields] = listPageConfig[entity];
 
   const [searchParams] = searchParamsState ?? [];
 
@@ -65,8 +62,6 @@ export default function useSelector<T extends EntityKey>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [CardID]);
 
-  const { subLinks, dataFields } = cardConfig[entity];
-
   const title = formatTitle(entity);
 
   return {
@@ -79,10 +74,7 @@ export default function useSelector<T extends EntityKey>(
     cardData: cardFetcher.data,
     listData: listFetcher.data,
     searchParamsState,
-    rowTemplate,
-    filterFields,
-    subLinks,
-    dataFields,
+
     title,
   };
 }

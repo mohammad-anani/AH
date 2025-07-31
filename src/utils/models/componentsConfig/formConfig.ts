@@ -1,90 +1,128 @@
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
+import { CountrySelectCallBack } from "@/features/Country/CountrySelectCallback";
 import type { typesObject } from "../types/typesObject";
 import type {
   AllEntityKeys,
+  dataFields as DataFields,
   DotAccess,
   EntityKey,
   FormKey,
+  Key,
+  RowTemplate,
+  SelectorConfig,
 } from "../types/util";
-import { CountrySelectCallBack } from "@/features/Country/CountrySelectCallback";
+import { selectorConfig } from "./selectorConfig";
+import { dataFields } from "./dataFields";
+import { filterFields } from "./filterFields";
+import { rowTemplates } from "./rowTemplates";
 
-const personFields: FormKey<"Person">[] = [
+// --- Constants ---
+const weekdays = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+const genderLabels = ["Male", "Female", "None"];
+const statusLabels = ["Active", "Inactive"];
+
+// --- Base Groups ---
+const personForm: FormKey<"Person">[] = [
   ["First Name", "FirstName", "string", "both"],
   ["Middle Name", "MiddleName", "string", "both"],
   ["Last Name", "LastName", "string", "both"],
   ["Birth Date", "DateOfBirth", "date", "both"],
-  ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
+  ["Gender", "Gender", "boolean", "both", genderLabels],
   ["Country", "Country.ID", "custom", "both", CountrySelectCallBack],
   ["Phone", "Phone", "phone", "both"],
   ["Email", "Email", "email", "both"],
   ["Username", "Username", "string", "both"],
 ];
 
-const employeeFields: FormKey<"Employee">[] = [
-  ...prefixFields<"Employee", "Person">("Person", personFields),
+const employeeForm: FormKey<"Employee">[] = [
+  ...prefixFields<"Employee", "Person">("Person", personForm),
   ["Department", "DepartmentID", "custom", "both", DepartmentSelectCallBack],
   ["Salary", "Salary", "money", "both"],
   ["Hire Date", "HireDate", "date", "both"],
-  [
-    "Working Days",
-    "WorkingDays",
-    "multiselect",
-    "both",
-    [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-  ],
+  ["Working Days", "WorkingDays", "multiselect", "both", weekdays],
   ["Shift Start", "ShiftStart", "time", "both"],
   ["Shift End", "ShiftEnd", "time", "both"],
-  ["Active", "isActive", "boolean", "update", ["Active", "Not Active", "None"]],
+  ["Status", "isActive", "boolean", "update", statusLabels],
 ];
 
+const adminForm: FormKey<"Admin">[] = [
+  ...prefixFields<"Admin", "Employee">("Employee", employeeForm),
+];
+
+const doctorForm: FormKey<"Doctor">[] = [
+  ...prefixFields<"Doctor", "Employee">("Employee", employeeForm),
+  ["Specialization", "Specialization", "string", "both"],
+];
+
+const receptionistForm: FormKey<"Receptionist">[] = [
+  ...prefixFields<"Receptionist", "Employee">("Employee", employeeForm),
+];
+
+const patientForm: FormKey<"Patient">[] = [
+  ...prefixFields<"Patient", "Person">("Person", personForm),
+];
+
+const departmentForm: FormKey<"Department">[] = [
+  ["Name", "Name", "string", "both"],
+  ["Phone", "Phone", "phone", "both"],
+];
+
+const testTypeForm: FormKey<"TestType">[] = [
+  ["Name", "Name", "string", "both"],
+  ["Department", "DepartmentID", "custom", "both", DepartmentSelectCallBack],
+  ["Cost", "Cost", "money", "both"],
+];
+
+const insuranceForm: FormKey<"Insurance">[] = [
+  [
+    "Patient",
+    "PatientID",
+    "selector",
+    "add",
+    [
+      "Patient",
+      selectorConfig["Patient"] as SelectorConfig<EntityKey>,
+      rowTemplates["Patient"] as RowTemplate<EntityKey>,
+      dataFields["Patient"] as DataFields<EntityKey>,
+      filterFields["Patient"] as Key[],
+    ],
+  ],
+  ["Provider Name", "ProviderName", "string", "both"],
+  ["Coverage", "Coverage", "number", "both"],
+  ["Expiration Date", "ExpirationDate", "date", "both"],
+  ["Status", "isActive", "boolean", "update", statusLabels],
+];
+
+// --- Final Config ---
 export const formConfig: {
   [K in EntityKey]: FormKey<K>[];
 } = {
-  Admin: [...prefixFields<"Admin", "Employee">("Employee", employeeFields)],
-  Doctor: [
-    ...prefixFields<"Doctor", "Employee">("Employee", employeeFields),
-    ["Specialization", "Specialization", "string", "both"],
-  ],
-  Insurance: [
-    ["Patient", "PatientID", "selector", "add", "Patient"],
-    ["Provider Name", "ProviderName", "string", "both"],
-    ["Coverage", "Coverage", "number", "both"],
-    ["Expiration Date", "ExpirationDate", "date", "both"],
-    ["Status", "isActive", "boolean", "update", ["Active", "Inactive"]],
-  ],
-  Receptionist: [
-    ...prefixFields<"Receptionist", "Employee">("Employee", employeeFields),
-  ],
-  Patient: [...prefixFields<"Patient", "Person">("Person", personFields)],
-  Department: [
-    ["Name", "Name", "string", "both"],
-    ["Phone", "Phone", "phone", "both"],
-  ],
-  TestType: [
-    ["Name", "Name", "string", "both"],
-    ["Department", "DepartmentID", "custom", "both", DepartmentSelectCallBack],
-    ["Cost", "Cost", "money", "both"],
-  ],
-  // Add other entities as needed
+  Admin: adminForm,
+  Doctor: doctorForm,
+  Receptionist: receptionistForm,
+  Patient: patientForm,
+  Department: departmentForm,
+  TestType: testTypeForm,
+  Insurance: insuranceForm,
+  // Add other entities here
 };
 
-//edit names
-
+// --- Utility ---
 function prefixFields<T extends AllEntityKeys, B extends AllEntityKeys = T>(
   prefix: string,
   baseFields: FormKey<B>[],
 ): FormKey<T>[] {
   return baseFields.map(([label, fieldKey, type, mode, ...rest]) => [
     label,
-    `${prefix}.${fieldKey}` as DotAccess<typesObject[T]>, // make sure DotAccess is used here
+    `${prefix}.${fieldKey}` as DotAccess<typesObject[T]>,
     type,
     mode,
     ...rest,

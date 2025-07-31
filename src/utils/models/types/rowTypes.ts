@@ -10,7 +10,7 @@ import type {
   TestAppointmentRowSchema,
   AppointmentRowSchema,
   InsuranceRowSchema,
-} from "../schema/rowSchemas";
+} from "../zod/rowSchemas";
 
 export type DepartmentRow = z.infer<typeof DepartmentRowSchema>;
 export type AdminRow = z.infer<typeof AdminRowSchema>;

@@ -1,4 +1,5 @@
-import { cardConfig } from "@/utils/models/componentsConfig/cardConfig";
+import { dataFields } from "@/utils/models/componentsConfig/dataFields";
+import { subLinks } from "@/utils/models/componentsConfig/subLinks";
 import type { typesObject } from "@/utils/models/types/typesObject";
 import type { EntityKey } from "@/utils/models/types/util";
 import { useState, useEffect } from "react";
@@ -25,17 +26,13 @@ export default function useCard<T extends EntityKey>(data?: typesObject[T]) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subLink]);
 
-  const { subLinks: subSubLinks, dataFields: subDataFields } = cardConfig[
-    subEntity
-  ] ?? { subLinks: undefined, dataFields: undefined };
-
   const subObject = fetcher.data;
 
   return {
     subEntity,
     setSubCard,
-    subSubLinks,
-    subDataFields,
+    subSubLinks: subLinks[subEntity] || undefined,
+    subDataFields: dataFields[subEntity] || undefined,
     object,
     subObject,
     fetcher,

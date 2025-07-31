@@ -1,14 +1,25 @@
 import Controller from "@/ui/customComponents/Controller";
 import Selector from "../entityComponents/Selector";
-import type { EntityKey } from "@/utils/models/types/util";
+import type {
+  dataFields,
+  EntityKey,
+  Key,
+  RowTemplate,
+  SelectorConfig,
+} from "@/utils/models/types/util";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/rowTypesObject";
-import { selectorConfig } from "@/utils/models/componentsConfig/selectorConfig";
 
 interface SelectorInputProps {
   fieldKey: string;
   label: string;
-  data: EntityKey;
+  data: [
+    EntityKey,
+    SelectorConfig<EntityKey>,
+    RowTemplate<EntityKey>,
+    dataFields<EntityKey>,
+    Key[],
+  ];
 }
 
 export default function SelectorInput({
@@ -22,7 +33,7 @@ export default function SelectorInput({
       <Controller
         name={fieldKey}
         renderField={({ field }) => (
-          <SelectorField entity={data} fieldProps={{ field }} />
+          <SelectorField data={data} fieldProps={{ field }} />
         )}
       />
     </>
@@ -30,10 +41,10 @@ export default function SelectorInput({
 }
 
 function SelectorField<T extends EntityKey>({
-  entity,
   fieldProps,
+  data,
 }: {
-  entity: T;
+  data: [T, SelectorConfig<T>, RowTemplate<T>, dataFields<T>, Key[]];
   fieldProps: {
     field: {
       value: unknown;
@@ -49,11 +60,17 @@ function SelectorField<T extends EntityKey>({
     fieldProps.field.onChange(selected?.["ID"]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
+
+  const [entity, selectorConfig, rowTemplate, dataFields, filterFields] = data;
+
   return (
     <Selector
       entity={entity}
       canAdd={false}
-      {...selectorConfig[entity]}
+      {...selectorConfig}
+      rowTemplate={rowTemplate}
+      dataFields={dataFields}
+      filterFields={filterFields}
       selectedObjectState={[selected, setSelected]}
     />
   );

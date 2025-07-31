@@ -184,7 +184,7 @@
         "ShiftEnd": "17:00"
       },
       "Specialization": "Cardiologist",
-      "CreatedByReceptionistID": 1,
+      "CreatedByAdminID": 1,
       "CreatedAt": "2023-01-01T08:00:00"
     },
     {
@@ -211,7 +211,7 @@
         "ShiftEnd": "16:00"
       },
       "Specialization": "Neurologist",
-      "CreatedByReceptionistID": 2,
+      "CreatedByAdminID": 2,
       "CreatedAt": "2023-02-01T09:00:00"
     }
   ],
@@ -492,11 +492,11 @@
   "TestOrderRows": [
     {
       "ID": 1,
-      "TestTypeName": "Blood Test",
-      "OrderedAt": "2023-02-01T09:00:00"
+      "TestName": "Blood Test",
+      "PatientName": "Olivia Anne Taylor"
     },
-    { "ID": 2, "TestTypeName": "MRI Scan", "OrderedAt": "2023-02-02T10:00:00" },
-    { "ID": 3, "TestTypeName": "X-Ray", "OrderedAt": "2023-02-03T11:00:00" }
+    { "ID": 2, "TestName": "MRI Scan", "PatientName": "Sophia Marie King" },
+    { "ID": 3, "TestName": "X-Ray", "PatientName": "Liam Andrew Baker" }
   ],
 
   "Countries": [
@@ -564,6 +564,28 @@
       "ProviderName": "HealthSecure",
       "Coverage": 1.0,
       "isActive": true
+    }
+  ],
+  "Operations": [
+    {
+      "ID": 1,
+      "Name": "Appendectomy",
+      "Description": "Surgical removal of the appendix due to inflammation.",
+      "PatientID": 1,
+      "DepartmentID": 5,
+      "ScheduledDate": "2026-01-15T09:30:00",
+      "ResultDate": "2024-01-15T09:30:00",
+      "Status": "Scheduled",
+      "PaymentID": 1,
+      "CreatedByReceptionistID": 7,
+      "CreatedAt": "2023-01-15T09:30:00"
+    }
+  ],
+  "OperationRows": [
+    {
+      "ID": 1,
+      "PatientName": "Ali Mansour",
+      "Name": "Appendectomy"
     }
   ]
 }

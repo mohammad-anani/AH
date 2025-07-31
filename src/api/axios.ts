@@ -14,7 +14,7 @@ axios.interceptors.response.use(
   (error) => {
     if (isAxiosError(error)) {
       const status = error.response?.status ?? 0;
-      const statusText = error.response?.statusText ?? "Network Error";
+
       const message =
         error.response?.data?.message ||
         error.message ||
@@ -23,7 +23,7 @@ axios.interceptors.response.use(
       if (!error.response) {
         throwError(
           503,
-          "Service Unavailable",
+
           "Network error: Unable to reach the server. Please check your connection.",
         );
       }
@@ -31,12 +31,12 @@ axios.interceptors.response.use(
       if (status === 500) {
         throwError(
           status,
-          statusText,
+
           message || "Internal Server Error occurred on the server.",
         );
       }
 
-      throwError(status, statusText, message);
+      throwError(status, message);
     }
 
     throw error;

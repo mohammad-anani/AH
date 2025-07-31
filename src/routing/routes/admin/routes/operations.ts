@@ -1,8 +1,10 @@
-import Operations from "@/interfaces/admin/pages/Operations";
+import { route } from "@/routing/entityRoute";
+import { routeConfigs } from "@/utils/models/componentsConfig/routeConfig";
 
-export const operationsRoutes = [
-  {
-    path: "operations",
-    Component: Operations,
-  },
-];
+export const operationsRoutes = route(
+  "Operation",
+  false,
+  false,
+  true,
+  routeConfigs["Operation"],
+);
