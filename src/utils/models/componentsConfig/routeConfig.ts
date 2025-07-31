@@ -1,14 +1,15 @@
-import { filterFields } from "./filterFields";
-import { rowTemplates } from "./rowTemplates";
-import { dataFields } from "./dataFields";
-import { formConfig } from "./formConfig";
-import { subLinks } from "./subLinks";
+import { filterFields } from "./filterField.ts/filterFields";
+import { rowTemplates } from "./rowTemplate/rowTemplates";
+
 import { type FormKey, type FilterKey } from "../types/utils/Form&Filter";
 import { type dataFields as DataFields } from "../types/utils/routeTypes";
 import { type SubLinks } from "../types/utils/routeTypes";
 import { entityKeys, type EntityKey } from "../types/utils/entityKeys";
 import type { Primitive } from "zod";
 import type { rowTypesObject } from "../types/row/rowTypesObject";
+import { dataFields } from "./dataFields/dataFields";
+import { formConfig } from "./formConfig/formConfig";
+import { subLinks } from "./subLinks/subLinks";
 
 export type RouteConfigType<K extends EntityKey> = {
   rowTemplate: RowTemplate<K>;

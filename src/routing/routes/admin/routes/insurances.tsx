@@ -2,7 +2,7 @@ import { route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
 import { routeConfigs } from "@/utils/models/componentsConfig/routeConfig";
-import { rowTemplates } from "@/utils/models/componentsConfig/rowTemplates";
+import { rowTemplates } from "@/utils/models/componentsConfig/rowTemplate/rowTemplates";
 import type { RouteObject } from "react-router-dom";
 
 const insuranceListRoute: RouteObject[] = [

@@ -4,7 +4,7 @@ import type { typesObject } from "../normal/typesObject";
 import type { Setter } from "./basics";
 
 import type { dataFields, RowTemplate } from "./routeTypes";
-import type { EntityKey } from "./entityKeys";
+import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 import type { SelectorConfig } from "./selectorTypes";
 
 export type DataTypes =
@@ -35,7 +35,7 @@ export type customFormProps = [
   DataTypes,
 ];
 
-export type FormKey<T extends EntityKey> = [
+export type FormKey<T extends DisplayEntityKey> = [
   label: string,
   fieldKey: DotAccess<typesObject[T]>,
   type: DataTypes | "custom",
