@@ -24,7 +24,7 @@ export type rowTypesObject = {
   Insurance: InsuranceRow;
   Operation: OperationRow;
   Appointment: AppointmentRow;
-  Prescription: "hi";
+  Prescription: { ID: number };
 };
 
 //to change

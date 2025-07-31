@@ -1,8 +1,8 @@
-import type { Country } from "@/utils/models/types/normal/types";
 import type { Setter } from "@/utils/models/types/utils/basics";
 import Select from "react-select";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
+import type { Country } from "@/utils/models/types/normal/types";
 
 export default function CountrySelect({
   countryID,
@@ -17,11 +17,12 @@ export default function CountrySelect({
 
   useEffect(() => {
     fetcher.load("/countries");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const countries: Country[] = fetcher.data?.[0] ?? [];
 
-  // Convert to react-select format: { value: ID, label: Name }
   const options = countries.map((country) => ({
     value: country.ID,
     label: country.Name,

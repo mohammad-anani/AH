@@ -10,10 +10,13 @@ import pluralize from "pluralize";
 import throwError from "../helpers/throwError";
 import { schemas } from "../models/zod/schemas/schemas.ts";
 import { rowSchemas } from "../models/zod/rowSchemas/rowSchemas.ts";
-import { entitiesWithNoSearchParams } from "../models/types/utils/Form&Filter.ts";
-import { type EntityKey } from "../models/types/utils/entityKeys.ts";
+import {
+  type EntityKey,
+  type FetchingEntityKey,
+} from "../models/types/utils/entityKeys.ts";
+
 export default function listLoader(
-  entity: EntityKey | `${EntityKey}Row`,
+  entity: FetchingEntityKey | `${EntityKey}Row`,
   pathPrefix?: (params: Params) => string,
   requiredParams: string[] | undefined = undefined,
 ): LoaderFunction {
@@ -32,9 +35,8 @@ export default function listLoader(
       (pathPrefix?.(params) ?? "") +
         "/" +
         pluralize(entity) +
-        (!entitiesWithNoSearchParams.includes(entityName as EntityKey)
-          ? "?" + searchParams?.toString()
-          : ""),
+        "?" +
+        searchParams?.toString(),
     );
 
     const schema = isRow ? rowSchemas[entityName] : schemas[entityName];

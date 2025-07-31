@@ -3,6 +3,7 @@ import findByID from "@/api/findByID";
 import throwError from "../helpers/throwError";
 import { schemas } from "../models/zod/schemas/schemas.ts";
 import type { EntityKey } from "../models/types/utils/entityKeys.ts";
+import pluralize from "pluralize";
 
 export default function findByIDLoader(entity: EntityKey): LoaderFunction {
   return async function ({ params }: LoaderFunctionArgs) {
@@ -12,7 +13,7 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
       throwError(400, "Invalid admin ID");
     }
 
-    const data = await findByID(entity + "s", id);
+    const data = await findByID(`/${pluralize(entity)}/${id}`);
 
     console.log(data);
     const schema = schemas[entity];

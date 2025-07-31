@@ -8,6 +8,7 @@ import Pagination from "./listComponents/Pagination";
 import ClearFilter from "./listComponents/ClearFilter";
 import Filter from "./listComponents/Filter";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 
 type ListProps<T extends rowTypesObject[EntityKey]> = ChildrenProps & {
   items: T[];
@@ -31,7 +32,7 @@ export default function List<T extends rowTypesObject[EntityKey]>({
         fields,
         canModifyUrl,
         setFields,
-        searchParamsState: searchParamsState,
+        searchParamsState: searchParamsState as SearchParamsState,
         setObject,
       }}
     >

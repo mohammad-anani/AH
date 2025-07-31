@@ -5,7 +5,6 @@ import type { SubLinks } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import Card from "../Card";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { dataFields as dataFieldsConfig } from "@/utils/models/componentsConfig/dataFields";
 
 type CardProps<T extends EntityKey> = {
   entity: T;
@@ -29,7 +28,7 @@ export default function CardSection<T extends EntityKey>({
   onSelect,
 }: CardProps<T>) {
   const scrollClass =
-    dataFieldsConfig[entity](cardData).length > 8 ? "overflow-y-scroll" : "";
+    dataFields(cardData).length > 8 ? "overflow-y-scroll" : "";
 
   return (
     <div className="space-y-2! space-x-2!">

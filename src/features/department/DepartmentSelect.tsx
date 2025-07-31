@@ -16,6 +16,7 @@ export default function DepartmentSelect({
 
   useEffect(() => {
     fetcher.load("/admin/departments/list");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const departments: typesObject["Department"][] = fetcher.data?.[0] ?? [];

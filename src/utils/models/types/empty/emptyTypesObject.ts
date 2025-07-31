@@ -28,4 +28,5 @@ export type emptyObjectsTypes = {
   Operation: EmptyOperation;
   Person: EmptyPerson;
   Appointment: EmptyAppointment;
+  Prescription: "1";
 };

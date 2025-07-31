@@ -4,12 +4,12 @@ import type {
   FormKey,
   customFormProps,
   DataTypes,
-  AllEntityKeys,
 } from "@/utils/models/types/utils/Form&Filter";
 import { generateLabel } from "../listComponents/utils";
 import Controller from "@/ui/customComponents/Controller";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
-export default function useForm<T extends AllEntityKeys>(
+export default function useForm<T extends EntityKey>(
   fields: FormKey<T>[],
   mode: "add" | "update",
 ) {

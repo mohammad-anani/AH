@@ -28,5 +28,5 @@ export type typesObject = {
   Operation: Operation;
   Person: Person;
   Appointment: Appointment;
-  Prescription: "hi";
+  Prescription: { ID: number };
 };

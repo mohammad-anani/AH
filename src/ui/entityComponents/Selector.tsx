@@ -3,7 +3,6 @@ import { type FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import { type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 import { type RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
 import { type dataFields } from "@/utils/models/types/utils/routeTypes";
-import { type SubLinks } from "@/utils/models/types/utils/routeTypes";
 import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { type Setter } from "@/utils/models/types/utils/basics";
 
