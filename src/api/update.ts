@@ -1,12 +1,7 @@
-import type { typesObject } from "@/utils/models/types/typesObject";
 import axios from "./axios";
-import type { EntityKey } from "@/utils/models/types/util";
 
-export default async function update(
-  data: typesObject[EntityKey],
-  entity: string,
-) {
-  const response = await axios.patch(`/${entity}/${data["ID"]}`, data, {
+export default async function add(data: unknown, url: string) {
+  const response = await axios.patch(url, data, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -14,3 +9,5 @@ export default async function update(
 
   return response;
 }
+
+//to implement response

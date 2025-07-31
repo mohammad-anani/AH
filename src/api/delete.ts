@@ -1,7 +1,9 @@
 import axios from "./axios";
 
-export default async function Delete(entity: string, id: number) {
-  const response = await axios.delete(`/${entity}/${id}`);
+export default async function Delete(url: string) {
+  const response = await axios.delete(url);
 
   return response;
 }
+
+//to implement response

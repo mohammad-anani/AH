@@ -1,9 +1,9 @@
 import axios from "./axios";
 
-export default async function findByID(urlEndpoint: string, id: number) {
-  const data = await axios.get(`/${urlEndpoint}?ID=${id}`);
+export default async function findByID(url: string) {
+  const data = await axios.get(url);
 
-  return data.data[0] || {};
+  return data.data[0] || undefined;
 }
 
-//to be /ID only
+//to be changed

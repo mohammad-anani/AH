@@ -6,3 +6,5 @@ export default async function getList(url: string) {
 
   return obj;
 }
+
+//to change obj
