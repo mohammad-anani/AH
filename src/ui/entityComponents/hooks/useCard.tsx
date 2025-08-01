@@ -1,11 +1,21 @@
-import { dataFields } from "@/utils/models/componentsConfig/dataFields/dataFields";
-import { subLinks } from "@/utils/models/componentsConfig/subLinks/subLinks";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type {
+  DataFields,
+  SubLinks,
+} from "@/utils/models/types/utils/routeTypes";
 import { useState, useEffect } from "react";
 import { useOutletContext, useFetcher } from "react-router-dom";
 
-export default function useCard<T extends EntityKey>(data?: typesObject[T]) {
+export default function useCard<T extends EntityKey>(
+  subLinksObject?: {
+    [K in EntityKey]: SubLinks<K>;
+  },
+  dataFieldsObject?: {
+    [K in EntityKey]: DataFields<K>;
+  },
+  data?: typesObject[T],
+) {
   const loaderData = useOutletContext<typesObject[T]>();
 
   const object = data ?? loaderData;
@@ -28,15 +38,14 @@ export default function useCard<T extends EntityKey>(data?: typesObject[T]) {
 
   const subObject = fetcher.data;
 
+  console.log(subLinksObject, dataFieldsObject);
   return {
     subEntity,
     setSubCard,
-    subSubLinks: subLinks[subEntity] || undefined,
-    subDataFields: dataFields[subEntity] || undefined,
+    subSubLinks: subLinksObject?.[subEntity] || undefined,
+    subDataFields: dataFieldsObject?.[subEntity] || undefined,
     object,
     subObject,
     fetcher,
   };
 }
-
-//to make it

@@ -31,14 +31,15 @@ export const multiselectField = (
   values: string[],
 ): FilterKey => [label, "multiselect", values];
 
-export type CreatorRole = "Admin" | "Receptionist" | "Doctor";
+export type Role = "Admin" | "Receptionist" | "Doctor";
 
 export const generateAuditFields = (
-  creator: CreatorRole,
+  creator: Role,
   filterFields: FilterKey[],
   selectorConfig: SelectorConfig<EntityKey>,
   rowTemplate: RowTemplate<EntityKey>,
   dataFields: DataFields<EntityKey>,
+  role: Role,
 ): FilterKey[] => [
   datetimeField("CreatedAt"),
   selectorField(
@@ -48,6 +49,7 @@ export const generateAuditFields = (
     selectorConfig,
     rowTemplate,
     dataFields,
+    role,
   ),
 ]; // ✅ Use cached object in selectorField()
 
@@ -58,8 +60,9 @@ export const selectorField = (
   selectorConfig: SelectorConfig<EntityKey>,
   rowTemplate: RowTemplate<EntityKey>,
   dataFields: DataFields<EntityKey>,
+  role: Role,
 ): FilterKey => [
   fieldKey,
   "selector",
-  [entity, selectorConfig, rowTemplate, dataFields, filterFields],
+  [entity, selectorConfig, rowTemplate, dataFields, filterFields, role],
 ];

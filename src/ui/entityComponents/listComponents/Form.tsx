@@ -8,34 +8,8 @@ import useListContext from "./context";
 import { generateLabel } from "./utils";
 
 import Controller from "@/ui/customComponents/Controller";
-import {
-  NumberInput,
-  StringInput,
-  PhoneInput,
-  ArrayInput,
-  SelectInput,
-  EmailInput,
-  SelectorInput,
-  BooleanInput,
-  TemporalInput,
-  UnsupportedInput,
-} from "@/ui/form-inputs";
-import MoneyInput from "@/ui/form-inputs/MoneyInput";
-
-const inputMap = {
-  number: NumberInput,
-  string: StringInput,
-  phone: PhoneInput,
-  multiselect: ArrayInput,
-  money: MoneyInput,
-  uniselect: SelectInput,
-  email: EmailInput,
-  selector: SelectorInput,
-  boolean: BooleanInput,
-  date: TemporalInput,
-  datetime: TemporalInput,
-  time: TemporalInput,
-} as const;
+import { UnsupportedInput } from "@/ui/form-inputs";
+import { inputMap } from "@/utils/models/inputMap";
 
 export function Form({ isNestedFilter = false }: { isNestedFilter?: boolean }) {
   const { fields } = useListContext();

@@ -22,6 +22,7 @@ export const insuranceForm: FormKey<"Insurance">[] = [
       rowTemplates["Patient"] as RowTemplate<EntityKey>,
       dataFields["Patient"] as DataFields<EntityKey>,
       filterFields["Patient"],
+      "Admin",
     ],
   ],
   ["Provider Name", "ProviderName", "string", "both"],

@@ -7,6 +7,9 @@ import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { Role } from "@/utils/models/componentsConfig/filterField.ts/reusableFields";
+import { subLinks } from "@/utils/models/componentsConfig/subLinks/subLinks";
+import { dataFields as dataFieldsObject } from "@/utils/models/componentsConfig/dataFields/dataFields";
 
 interface SelectorInputProps {
   fieldKey: string;
@@ -17,6 +20,7 @@ interface SelectorInputProps {
     RowTemplate<EntityKey>,
     DataFields<EntityKey>,
     FilterKey[],
+    Role,
   ];
 }
 
@@ -42,7 +46,14 @@ function SelectorField<T extends EntityKey>({
   fieldProps,
   data,
 }: {
-  data: [T, SelectorConfig<T>, RowTemplate<T>, DataFields<T>, FilterKey[]];
+  data: [
+    T,
+    SelectorConfig<T>,
+    RowTemplate<T>,
+    DataFields<T>,
+    FilterKey[],
+    Role,
+  ];
   fieldProps: {
     field: {
       value: unknown;
@@ -59,7 +70,8 @@ function SelectorField<T extends EntityKey>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
-  const [entity, selectorConfig, rowTemplate, dataFields, filterFields] = data;
+  const [entity, selectorConfig, rowTemplate, dataFields, filterFields, role] =
+    data;
 
   return (
     <Selector
@@ -70,6 +82,8 @@ function SelectorField<T extends EntityKey>({
       dataFields={dataFields}
       filterFields={filterFields}
       selectedObjectState={[selected, setSelected]}
+      subLinksObject={role === "Admin" && subLinks}
+      dataFieldsObject={role === "Admin" && dataFieldsObject}
     />
   );
 }

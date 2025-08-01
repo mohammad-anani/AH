@@ -6,6 +6,7 @@ import type { DataFields, RowTemplate } from "./routeTypes";
 import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 import type { SelectorConfig } from "./selectorTypes";
 import type { Primitive } from "react-hook-form";
+import type { Role } from "../../componentsConfig/filterField.ts/reusableFields";
 
 export type DataTypes =
   | "string"
@@ -51,6 +52,7 @@ export type FormKey<T extends DisplayEntityKey> = [
         RowTemplate<EntityKey>,
         DataFields<EntityKey>,
         FilterKey[],
+        Role,
       ],
 ];
 
@@ -68,6 +70,7 @@ export type FilterKey = [
         RowTemplate<EntityKey>,
         DataFields<EntityKey>,
         FilterKey[],
+        Role,
       ],
 ];
 
