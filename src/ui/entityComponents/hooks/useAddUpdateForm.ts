@@ -1,13 +1,13 @@
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import throwError from "@/utils/helpers/throwError";
 
-import { addingSchemas } from "@/utils/models/zod/addingSchemasObject";
 import { schemas } from "@/utils/models/zod/schemas/schemas";
+import { schemas as addingSchemas } from "@/utils/models/zod/addingSchemas/addingSchemas";
 import { emptyObjects } from "@/utils/models/types/empty/emptyObjects";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, type DefaultValues } from "react-hook-form";
 import {
   useSubmit,
   useNavigation,
@@ -31,9 +31,10 @@ export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
 
   const title = `${isAdd ? "Add" : "Edit"} ${formatTitle(entity)}`;
 
+  //to check
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues as z.infer<typeof schema>,
+    defaultValues: defaultValues as DefaultValues<z.infer<typeof schema>>,
     criteriaMode: "all",
   });
   const {

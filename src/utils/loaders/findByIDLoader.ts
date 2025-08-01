@@ -13,7 +13,8 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
       throwError(400, "Invalid admin ID");
     }
 
-    const data = await findByID(`/${pluralize(entity)}/${id}`);
+    //to be changed
+    const data = await findByID(`/${pluralize(entity)}?ID=${id}`);
 
     console.log(data);
     const schema = schemas[entity];

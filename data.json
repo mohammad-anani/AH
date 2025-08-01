@@ -5,7 +5,7 @@
       "Name": "Cardiology",
       "Phone": "55510100",
       "CreatedByAdminID": 1,
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00Z"
     },
     {
       "ID": 2,
@@ -54,7 +54,7 @@
           "Username": "alice.smith"
         }
       },
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30"
     },
     {
       "ID": 2,

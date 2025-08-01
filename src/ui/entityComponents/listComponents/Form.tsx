@@ -37,7 +37,7 @@ const inputMap = {
   time: TemporalInput,
 } as const;
 
-export function Form() {
+export function Form({ isNestedFilter = false }: { isNestedFilter?: boolean }) {
   const { fields } = useListContext();
 
   const safeFields = Array.isArray(fields) ? fields : [];
@@ -73,13 +73,15 @@ export function Form() {
       );
     }
 
+    if (type === "selector" && isNestedFilter) return null;
+
     const InputComponent = inputMap[type as DataTypes] || UnsupportedInput;
     return <InputComponent {...commonProps} />;
   };
 
   return (
     <div
-      className={`grid max-h-[300px]! w-[330px] grid-cols-[1fr_1fr] gap-y-3 overflow-x-hidden ${
+      className={`grid max-h-[300px]! w-[330px] grid-cols-[auto_1fr] gap-x-2 gap-y-3 overflow-x-hidden ${
         safeFields.length > 10 ? "overflow-y-scroll" : ""
       } rounded-none! p-2 text-xs! *:w-full!`}
     >

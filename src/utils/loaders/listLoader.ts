@@ -31,6 +31,14 @@ export default function listLoader(
     const isRow = entity.endsWith("Row");
     const entityName = (isRow ? entity.slice(0, -3) : entity) as EntityKey;
 
+    console.log(
+      (pathPrefix?.(params) ?? "") +
+        "/" +
+        pluralize(entity) +
+        "?" +
+        searchParams?.toString(),
+    );
+
     const data = await getList(
       (pathPrefix?.(params) ?? "") +
         "/" +

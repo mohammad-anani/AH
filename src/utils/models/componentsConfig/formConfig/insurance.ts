@@ -1,12 +1,13 @@
 import type { EntityKey } from "../../types/utils/entityKeys";
 import type { FormKey } from "../../types/utils/Form&Filter";
-import type { dataFields as DataFields } from "../../types/utils/routeTypes";
+import type { DataFields as DataFields } from "../../types/utils/routeTypes";
 import type { SelectorConfig } from "../../types/utils/selectorTypes";
 import { dataFields } from "../dataFields/dataFields";
 import { filterFields } from "../filterField.ts/filterFields";
+
 import type { RowTemplate } from "../routeConfig";
 import { rowTemplates } from "../rowTemplate/rowTemplates";
-import { selectorConfig } from "../selectorConfig";
+import { selectorConfig } from "../selectorConfig/selectorConfig";
 import { statusLabels } from "./human-resources/employee";
 
 export const insuranceForm: FormKey<"Insurance">[] = [

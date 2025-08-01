@@ -1,40 +1,39 @@
 import { z } from "zod";
 
+// Required non-empty string
 export const nonEmptyString = (name: string) =>
-  z.string().nonempty({ message: `${name} is required.` });
+  z.string().nonempty({ error: `${name} is required.` });
 
+// Positive number with min/max
 export const positiveNumber = (
   name: string,
-  min: number = Number.MIN_SAFE_INTEGER,
+  min: number = 1,
   max: number = Number.MAX_SAFE_INTEGER,
 ) =>
   z
-    .number({
-      required_error: `${name} is required.`,
-      invalid_type_error: `${name} must be a number.`,
-    })
-    .nonnegative({ message: `${name} must be positive.` })
-    .min(min, { message: `${name} must be at least ${min}.` })
-    .max(max, { message: `${name} must be at most ${max}.` });
+    .number({ error: `${name} is required and must be a number.` })
+    .min(min, { error: `${name} must be at least ${min}.` })
+    .max(max, { error: `${name} must be at most ${max}.` });
 
-export const datetime = (name: string, withSeconds: boolean = false) =>
+// Datetime with or without seconds
+export const datetime = (name: string) =>
   z.string().datetime({
     local: true,
-    precision: withSeconds ? 0 : -1,
-    message: `Please enter a valid ${name}.`,
+    error: `${name} must be a valid datetime.`,
   });
 
-export const time = (name: string, withSeconds: boolean = true) =>
+// Time with or without seconds
+export const time = (name: string) =>
   z.string().time({
-    precision: withSeconds ? 0 : 0,
-    message: `Please enter a valid ${name}.`,
+    error: `${name} must be a valid time.`,
   });
 
+// Date (ISO)
 export const date = (name: string) =>
-  z.string().date(`Please enter a valid ${name}.`);
-
-export const booleanField = (name: string) =>
-  z.boolean({
-    required_error: `${name} is required.`,
-    invalid_type_error: `${name} must be true or false.`,
+  z.string().date({
+    error: `${name} must be a valid date.`,
   });
+
+// Boolean field
+export const booleanField = (name: string) =>
+  z.boolean({ error: `${name} must be true or false.` });

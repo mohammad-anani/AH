@@ -3,13 +3,9 @@
 import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
 
 import type { EntityKey } from "../../types/utils/entityKeys";
-import { filterFields } from "../filterFields";
-import { rowTemplates } from "../rowTemplate/rowTemplates";
-import { selectorConfig } from "../selectorConfig";
+import type { DataFields as DataFields } from "../../types/utils/routeTypes";
 import type { SelectorConfig } from "../../types/utils/selectorTypes";
 import type { RowTemplate } from "../routeConfig";
-import type { dataFields as DataFields } from "../../types/utils/routeTypes";
-import { dataFields } from "../dataFields/dataFields";
 
 // Field Builders
 export const stringField = (label: string): FilterKey => [label, "string"];
@@ -35,25 +31,35 @@ export const multiselectField = (
   values: string[],
 ): FilterKey => [label, "multiselect", values];
 
-// Lazy selectorField builder
+export type CreatorRole = "Admin" | "Receptionist" | "Doctor";
+
+export const generateAuditFields = (
+  creator: CreatorRole,
+  filterFields: FilterKey[],
+  selectorConfig: SelectorConfig<EntityKey>,
+  rowTemplate: RowTemplate<EntityKey>,
+  dataFields: DataFields<EntityKey>,
+): FilterKey[] => [
+  datetimeField("CreatedAt"),
+  selectorField(
+    `${creator}ID`,
+    creator,
+    filterFields,
+    selectorConfig,
+    rowTemplate,
+    dataFields,
+  ),
+]; // ✅ Use cached object in selectorField()
+
 export const selectorField = (
   fieldKey: string,
   entity: EntityKey,
+  filterFields: FilterKey[],
+  selectorConfig: SelectorConfig<EntityKey>,
+  rowTemplate: RowTemplate<EntityKey>,
+  dataFields: DataFields<EntityKey>,
 ): FilterKey => [
   fieldKey,
   "selector",
-  [
-    entity,
-    selectorConfig[entity] as SelectorConfig<EntityKey>,
-    rowTemplates[entity] as RowTemplate<EntityKey>,
-    dataFields[entity] as DataFields<EntityKey>,
-    (() => filterFields[entity])(),
-  ],
-];
-
-export type CreatorRole = "Admin" | "Receptionist" | "Doctor";
-
-export const generateAuditFields = (creator: CreatorRole): FilterKey[] => [
-  datetimeField("CreatedAt"),
-  selectorField(`${creator}ID`, creator),
+  [entity, selectorConfig, rowTemplate, dataFields, filterFields],
 ];

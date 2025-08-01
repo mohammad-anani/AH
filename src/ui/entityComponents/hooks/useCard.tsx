@@ -1,5 +1,5 @@
-import { dataFields } from "@/utils/models/componentsConfig/dataFields";
-import { subLinks } from "@/utils/models/componentsConfig/subLinks";
+import { dataFields } from "@/utils/models/componentsConfig/dataFields/dataFields";
+import { subLinks } from "@/utils/models/componentsConfig/subLinks/subLinks";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useState, useEffect } from "react";
@@ -38,3 +38,5 @@ export default function useCard<T extends EntityKey>(data?: typesObject[T]) {
     fetcher,
   };
 }
+
+//to make it

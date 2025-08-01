@@ -2,13 +2,16 @@ import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import List from "../entityComponents/List";
 import Clickable from "./Clickable";
 
-type FilterEntititesProps = { fields: FilterKey[] };
+type FilterEntititesProps = { fields: FilterKey[]; isNested?: boolean };
 
-export default function FilterEntities({ fields }: FilterEntititesProps) {
+export default function FilterEntities({
+  fields,
+  isNested = false,
+}: FilterEntititesProps) {
   return (
     <>
       <List.Filter fields={fields}>
-        <List.Filter.Form />
+        <List.Filter.Form isNestedFilter={isNested} />
         <hr className="border-primary h-[1px]" />
         <div className="grid grid-cols-[50px_1fr_30px] gap-x-2 text-sm!">
           <List.Filter.Sort />

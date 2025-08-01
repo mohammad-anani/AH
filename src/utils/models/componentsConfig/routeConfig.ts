@@ -1,4 +1,3 @@
-import { getFilterFields } from "./filterField.ts/filterFields";
 import { rowTemplates } from "./rowTemplate/rowTemplates";
 
 import { type FormKey, type FilterKey } from "../types/utils/Form&Filter";
@@ -10,6 +9,7 @@ import type { rowTypesObject } from "../types/row/rowTypesObject";
 import { dataFields } from "./dataFields/dataFields";
 import { formConfig } from "./formConfig/formConfig";
 import { subLinks } from "./subLinks/subLinks";
+import { filterFields } from "./filterField.ts/filterFields";
 
 export type RouteConfigType<K extends EntityKey> = {
   rowTemplate: RowTemplate<K>;
@@ -25,7 +25,7 @@ export const routeConfigs = Object.fromEntries(
     {
       rowTemplate: rowTemplates[key],
       dataFields: dataFields[key],
-      filterFields: getFilterFields()[key],
+      filterFields: filterFields[key],
       formConfig: formConfig[key],
       subLinks: subLinks[key],
     },

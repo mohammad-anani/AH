@@ -4,3 +4,4 @@ export * from "./human-resources";
 export * from "./insurance";
 export * from "./operation";
 export * from "./test";
+export * from "./CountrySchema";

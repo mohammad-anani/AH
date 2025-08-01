@@ -17,7 +17,6 @@ export default function CountrySelect({
 
   useEffect(() => {
     fetcher.load("/countries");
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,7 +75,6 @@ export default function CountrySelect({
       padding: "4px 8px",
     }),
   };
-
   return (
     <Select
       styles={selectStyles}

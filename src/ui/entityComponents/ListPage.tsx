@@ -140,7 +140,10 @@ export default function ListPage<T extends EntityKey>({
                       </H2>
                     </DialogTitle>
                   </DialogHeader>
-                  <FilterEntities fields={filterFields ?? []} />
+                  <FilterEntities
+                    isNested={!!selectedObjectState}
+                    fields={filterFields ?? []}
+                  />
                 </DialogContent>
               </DialogPortal>
             </Dialog>

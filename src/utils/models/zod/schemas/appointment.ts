@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { positiveNumber, datetime, nonEmptyString } from "../reusableSchemas";
+import { positiveNumber, nonEmptyString, datetime } from "../reusableSchemas";
 
 export const AppointmentSchema = z.object({
   ID: positiveNumber("Appointment ID", 1),

@@ -1,11 +1,11 @@
 import type { JSX } from "react";
-import type { Primitive } from "zod";
 import type { typesObject } from "../normal/typesObject";
 import type { Setter } from "./basics";
 
 import type { DataFields, RowTemplate } from "./routeTypes";
 import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 import type { SelectorConfig } from "./selectorTypes";
+import type { Primitive } from "react-hook-form";
 
 export type DataTypes =
   | "string"
