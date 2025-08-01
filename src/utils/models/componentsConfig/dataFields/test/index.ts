@@ -1,3 +1,3 @@
-export { testType } from "./type";
-export { testAppointment } from "./appointment";
-export { testOrder } from "./order";
+export * from "./type";
+export * from "./order";
+export * from "./appointment";

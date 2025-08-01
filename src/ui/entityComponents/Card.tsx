@@ -11,7 +11,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 
-import { type dataFields } from "@/utils/models/types/utils/routeTypes";
+import { type DataFields } from "@/utils/models/types/utils/routeTypes";
 import { type SubLinks } from "@/utils/models/types/utils/routeTypes";
 import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
@@ -23,7 +23,7 @@ type CardProps<T extends EntityKey> = {
   title: EntityKey;
   data?: typesObject[T];
   subLinks?: SubLinks<T>;
-  dataFields: dataFields<T>;
+  dataFields: DataFields<T>;
   isModal?: boolean;
   isNestedCard?: boolean;
   canEdit?: boolean;
@@ -69,7 +69,7 @@ export default function Card<T extends EntityKey>({
           <Card
             title={subEntity}
             subLinks={subSubLinks as SubLinks<typeof subEntity>}
-            dataFields={subDataFields as dataFields<typeof subEntity>}
+            dataFields={subDataFields as DataFields<typeof subEntity>}
             canDelete={false}
             canEdit={false}
             isModal={true}

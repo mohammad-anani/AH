@@ -1,6 +1,6 @@
 import Clickable from "@/ui/customComponents/Clickable";
 
-import type { dataFields } from "@/utils/models/types/utils/routeTypes";
+import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { SubLinks } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import Card from "../Card";
@@ -12,7 +12,7 @@ type CardProps<T extends EntityKey> = {
   cardID: number;
   objectID?: number;
   subLinks?: SubLinks<T>;
-  dataFields: dataFields<T>;
+  dataFields: DataFields<T>;
   onBack: () => void;
   onSelect: () => void;
 };

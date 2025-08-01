@@ -3,7 +3,7 @@ import Selector from "../entityComponents/Selector";
 import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import type { SelectorConfig } from "@/utils/models/types/utils/selectorTypes";
 import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
-import type { dataFields } from "@/utils/models/types/utils/routeTypes";
+import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
@@ -15,7 +15,7 @@ interface SelectorInputProps {
     EntityKey,
     SelectorConfig<EntityKey>,
     RowTemplate<EntityKey>,
-    dataFields<EntityKey>,
+    DataFields<EntityKey>,
     FilterKey[],
   ];
 }
@@ -42,7 +42,7 @@ function SelectorField<T extends EntityKey>({
   fieldProps,
   data,
 }: {
-  data: [T, SelectorConfig<T>, RowTemplate<T>, dataFields<T>, FilterKey[]];
+  data: [T, SelectorConfig<T>, RowTemplate<T>, DataFields<T>, FilterKey[]];
   fieldProps: {
     field: {
       value: unknown;

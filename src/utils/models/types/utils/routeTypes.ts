@@ -11,7 +11,7 @@ export type SubLinks<T extends EntityKey> = (
   state?: Record<keyof typesObject[EntityKey], Primitive>,
 ][];
 
-export type dataFields<T extends EntityKey> = (
+export type DataFields<T extends EntityKey> = (
   item: typesObject[T],
 ) => [label: string, value: Primitive, link?: string, entity?: EntityKey][];
 

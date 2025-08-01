@@ -3,7 +3,7 @@ import { convert24To12 } from "@/utils/formatters/convert24To12";
 import { person } from "./person";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { dataFields as DataFields } from "@/utils/models/types/utils/routeTypes";
+import type { DataFields as DataFields } from "@/utils/models/types/utils/routeTypes";
 
 export const employee: DataFields<"Employee"> = (
   employee: typesObject["Employee"],

@@ -2,7 +2,7 @@
 import { type FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import { type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 import { type RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
-import { type dataFields } from "@/utils/models/types/utils/routeTypes";
+import { type DataFields } from "@/utils/models/types/utils/routeTypes";
 import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { type Setter } from "@/utils/models/types/utils/basics";
 
@@ -28,7 +28,7 @@ type SelectorProps<T extends EntityKey> = {
   selectedDisplay: (item: rowTypesObject[T]) => string;
   selectedObjectState: SelectedObjectState<T>;
   rowTemplate: RowTemplate<T>;
-  dataFields: dataFields<T>;
+  dataFields: DataFields<T>;
   filterFields: FilterKey[];
   canAdd?: boolean;
 };

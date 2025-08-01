@@ -1,8 +1,8 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
-import type { dataFields } from "../../types/utils/routeTypes";
+import type { DataFields } from "../../types/utils/routeTypes";
 
-export const department: dataFields<"Department"> = ({
+export const department: DataFields<"Department"> = ({
   Name,
   Phone,
   CreatedByAdminID,

@@ -1,3 +1,3 @@
-export { testTypeFields } from "./type";
-export { testAppointmentFields } from "./appointment";
-export { testOrderFields } from "./order";
+export * from "./type";
+export * from "./order";
+export * from "./appointment";

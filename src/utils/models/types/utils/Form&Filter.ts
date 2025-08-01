@@ -3,7 +3,7 @@ import type { Primitive } from "zod";
 import type { typesObject } from "../normal/typesObject";
 import type { Setter } from "./basics";
 
-import type { dataFields, RowTemplate } from "./routeTypes";
+import type { DataFields, RowTemplate } from "./routeTypes";
 import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 import type { SelectorConfig } from "./selectorTypes";
 
@@ -49,7 +49,7 @@ export type FormKey<T extends DisplayEntityKey> = [
         EntityKey,
         SelectorConfig<EntityKey>,
         RowTemplate<EntityKey>,
-        dataFields<EntityKey>,
+        DataFields<EntityKey>,
         FilterKey[],
       ],
 ];
@@ -66,7 +66,7 @@ export type FilterKey = [
         EntityKey,
         SelectorConfig<EntityKey>,
         RowTemplate<EntityKey>,
-        dataFields<EntityKey>,
+        DataFields<EntityKey>,
         FilterKey[],
       ],
 ];

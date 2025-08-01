@@ -1,4 +1,4 @@
-import type { dataFields as DataFields } from "@/utils/models/types/utils/routeTypes";
+import type { DataFields as DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 export const testOrder: DataFields<"TestOrder"> = ({

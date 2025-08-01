@@ -1,7 +1,7 @@
 import { calculateAge } from "@/utils/formatters/calculateAge";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { dataFields as DataFields } from "@/utils/models/types/utils/routeTypes";
+import type { DataFields as DataFields } from "@/utils/models/types/utils/routeTypes";
 
 export const person: DataFields<"Person"> = (person: typesObject["Person"]) => [
   [

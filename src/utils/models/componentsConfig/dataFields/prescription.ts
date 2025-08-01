@@ -1,3 +1,3 @@
-import type { dataFields } from "../../types/utils/routeTypes";
+import type { DataFields } from "../../types/utils/routeTypes";
 
-export const prescriptionDataFields: dataFields<"Prescription"> = () => [];
+export const prescriptionDataFields: DataFields<"Prescription"> = () => [];

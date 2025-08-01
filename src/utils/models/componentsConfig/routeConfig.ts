@@ -1,8 +1,8 @@
-import { filterFields } from "./filterField.ts/filterFields";
+import { getFilterFields } from "./filterField.ts/filterFields";
 import { rowTemplates } from "./rowTemplate/rowTemplates";
 
 import { type FormKey, type FilterKey } from "../types/utils/Form&Filter";
-import { type dataFields as DataFields } from "../types/utils/routeTypes";
+import { type DataFields as DataFields } from "../types/utils/routeTypes";
 import { type SubLinks } from "../types/utils/routeTypes";
 import { entityKeys, type EntityKey } from "../types/utils/entityKeys";
 import type { Primitive } from "zod";
@@ -16,7 +16,7 @@ export type RouteConfigType<K extends EntityKey> = {
   dataFields: DataFields<K>;
   filterFields: FilterKey[];
   formConfig: FormKey<K>[];
-  subLinks: SubLinks<K>;
+  subLinks?: SubLinks<K>;
 };
 
 export const routeConfigs = Object.fromEntries(
@@ -25,7 +25,7 @@ export const routeConfigs = Object.fromEntries(
     {
       rowTemplate: rowTemplates[key],
       dataFields: dataFields[key],
-      filterFields: filterFields[key],
+      filterFields: getFilterFields()[key],
       formConfig: formConfig[key],
       subLinks: subLinks[key],
     },
