@@ -1,7 +1,7 @@
-import type { Primitive } from "zod";
 import type { typesObject } from "../normal/typesObject";
-import type { EntityKey } from "./entityKeys";
+import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 import type { rowTypesObject } from "../row/rowTypesObject";
+import type { Primitive } from "react-hook-form";
 
 export type SubLinks<T extends EntityKey> = (
   item: typesObject[T],
@@ -11,7 +11,7 @@ export type SubLinks<T extends EntityKey> = (
   state?: Record<keyof typesObject[EntityKey], Primitive>,
 ][];
 
-export type DataFields<T extends EntityKey> = (
+export type DataFields<T extends DisplayEntityKey> = (
   item: typesObject[T],
 ) => [label: string, value: Primitive, link?: string, entity?: EntityKey][];
 

@@ -12,6 +12,7 @@ import type {
   EmptyOperation,
   EmptyPerson,
   EmptyAppointment,
+  EmptyBill,
 } from "./emptyObjectsTypes";
 
 export type emptyObjectsTypes = {
@@ -29,4 +30,5 @@ export type emptyObjectsTypes = {
   Person: EmptyPerson;
   Appointment: EmptyAppointment;
   Prescription: "1";
+  Bill: EmptyBill;
 };

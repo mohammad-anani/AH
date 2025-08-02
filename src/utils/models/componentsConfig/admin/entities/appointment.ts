@@ -1,0 +1,85 @@
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
+
+import {
+  adminSelectorField,
+  admingenerateAuditFields,
+} from "../utils/adminRoleUtil.ts";
+import {
+  datetimeField,
+  stringField,
+  uniselectField,
+} from "../utils/reusableFields.ts";
+
+import { doctor } from "./human-resources/doctor.ts";
+import type { Config } from "../../routeConfig.ts";
+
+export const appointment: Config<"Appointment"> = {
+  dataFields: ({
+    PatientID,
+    DoctorID,
+    Time,
+    Reason,
+    Status,
+    Notes,
+    CreatedByReceptionistID,
+    CreatedAt,
+  }: typesObject["Appointment"]) => [
+    [
+      "Patient",
+      "View Patient",
+      `/admin/human-resources/patients/${PatientID}`,
+      "Patient",
+    ],
+    [
+      "Doctor",
+      "View Doctor",
+      `/admin/human-resources/doctors/${DoctorID}`,
+      "Doctor",
+    ],
+    ["Time", Time],
+    ["Reason", Reason],
+    ["Status", Status],
+    ["Notes", Notes],
+    [
+      "Receptionist",
+      "View Receptionist",
+      `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+      "Receptionist",
+    ],
+    ["Created At", formatDateIsoToLocal(CreatedAt)],
+  ],
+  filterFields: [
+    adminSelectorField(
+      "DoctorID",
+      "Doctor",
+      doctor["filterFields"],
+      doctor.selectorConfig,
+      doctor.rowTemplate,
+      doctor.dataFields,
+    ),
+    datetimeField("Time"),
+    stringField("Reason"),
+    uniselectField("Status", ["Accepted", "Rejected"]),
+    stringField("Notes"),
+    ...admingenerateAuditFields("Receptionist"),
+  ],
+  formConfig: [],
+  selectorConfig: {
+    selectedDisplay: ({ DoctorName, PatientName }) =>
+      DoctorName + "," + PatientName,
+    path: "/admin/appointments",
+  },
+  rowTemplate: [
+    ["Patient", "Doctor", "Time"],
+    (item) => [
+      item.PatientName,
+      item.DoctorName,
+      formatDateIsoToLocal(item.Time),
+    ],
+    [1, 1, 1],
+  ],
+  subLinks: ({ ID }) => [
+    ["Show Test Orders", `/admin/tests/orders?AppointmentID=${ID}`],
+  ],
+};

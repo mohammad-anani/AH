@@ -7,9 +7,9 @@ import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
-import type { Role } from "@/utils/models/componentsConfig/filterField.ts/reusableFields";
-import { subLinks } from "@/utils/models/componentsConfig/subLinks/subLinks";
-import { dataFields as dataFieldsObject } from "@/utils/models/componentsConfig/dataFields/dataFields";
+
+import { subLinks } from "@/utils/models/componentsConfig/admin/subLinks";
+import type { Role } from "@/utils/models/componentsConfig/admin/utils/reusableFields";
 
 interface SelectorInputProps {
   fieldKey: string;
@@ -83,7 +83,7 @@ function SelectorField<T extends EntityKey>({
       filterFields={filterFields}
       selectedObjectState={[selected, setSelected]}
       subLinksObject={role === "Admin" && subLinks}
-      dataFieldsObject={role === "Admin" && dataFieldsObject}
+      dataFieldsObject={role === "Admin" && dataFields}
     />
   );
 }

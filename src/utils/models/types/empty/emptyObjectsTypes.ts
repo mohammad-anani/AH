@@ -12,6 +12,7 @@ import type {
   AddTestAppointmentSchema,
   AddInsuranceSchema,
   AddOperationSchema,
+  AddingBillSchema,
 } from "../../zod/addingSchemas";
 
 type NullableNumberBoolean<T> = {
@@ -63,3 +64,5 @@ export type EmptyInsurance = NullableNumberBoolean<
 export type EmptyOperation = NullableNumberBoolean<
   z.infer<typeof AddOperationSchema>
 >;
+
+export type EmptyBill = NullableNumberBoolean<z.infer<typeof AddingBillSchema>>;

@@ -1,6 +1,7 @@
 import type {
   AdminRow,
   AppointmentRow,
+  BillRow,
   DepartmentRow,
   DoctorRow,
   InsuranceRow,
@@ -25,6 +26,7 @@ export type rowTypesObject = {
   Operation: OperationRow;
   Appointment: AppointmentRow;
   Prescription: { ID: number };
+  Bill: BillRow;
 };
 
 //to change

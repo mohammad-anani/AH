@@ -11,6 +11,7 @@ import type {
   InsuranceSchema,
   OperationSchema,
   AppointmentSchema,
+  BillSchema,
 } from "../../zod/schemas";
 import type { AdminSchema } from "../../zod/schemas/human-resources/admin";
 import type { DoctorSchema } from "../../zod/schemas/human-resources/doctor";
@@ -33,3 +34,5 @@ export type Operation = z.infer<typeof OperationSchema>;
 export type Appointment = z.infer<typeof AppointmentSchema>;
 
 export type Country = z.infer<typeof CountrySchema>;
+
+export type Bill = z.infer<typeof BillSchema>;

@@ -12,6 +12,7 @@ import type {
   Operation,
   Person,
   Appointment,
+  Bill,
 } from "./types";
 
 export type typesObject = {
@@ -29,4 +30,5 @@ export type typesObject = {
   Person: Person;
   Appointment: Appointment;
   Prescription: { ID: number };
+  Bill: Bill;
 };
