@@ -10,6 +10,7 @@ import {
   insurance,
   operation,
   patient,
+  payment,
   prescription,
   receptionist,
   testAppointment,
@@ -33,4 +34,5 @@ export const subLinks: {
   TestAppointment: testAppointment["subLinks"],
   TestOrder: testOrder["subLinks"],
   TestType: testType["subLinks"],
+  Payment: payment["subLinks"],
 };

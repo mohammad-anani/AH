@@ -11,9 +11,9 @@ export const OperationSchema = z.object({
   }),
   PatientID: positiveNumber("Patient ID", 1),
   DepartmentID: positiveNumber("Department ID", 1),
-  ScheduledDate: datetime("Scheduled date", true),
+  ScheduledDate: datetime("Scheduled date"),
   Status: nonEmptyString("Status"),
-  PaymentID: positiveNumber("Payment ID", 1),
+  BillID: positiveNumber("Payment ID", 1),
   CreatedByReceptionistID: positiveNumber("Receptionist ID", 1),
   CreatedAt: datetime("Creation date"),
 });

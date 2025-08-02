@@ -11,12 +11,14 @@ type SelectorTriggerProps<T extends rowTypesObject[EntityKey]> = {
   selectedObject: [T | undefined, Setter<T | undefined>];
   selectedDisplay: (item: T) => string;
   entity: string;
+  disabled?: boolean;
 };
 
 export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
   selectedObject,
   selectedDisplay,
   entity,
+  disabled = false,
 }: SelectorTriggerProps<T>) {
   const [object, setObject] = selectedObject;
 
@@ -29,6 +31,7 @@ export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
       <span>
         <DialogTrigger>
           <Clickable
+            disabled={disabled}
             type="button"
             style={{ fontSize: "inherit" }}
             as="button"
@@ -44,26 +47,31 @@ export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
   return (
     <span className="flex h-auto items-center space-x-2 align-middle">
       <span>{selectedDisplay(object)}</span>
-      <DialogTrigger>
-        <Clickable
-          style={{ fontSize: "inherit" }}
-          className="align-middle"
-          as="button"
-          type="button"
-          variant="link"
-        >
-          <PencilIcon className="w-[16px]" />
-        </Clickable>
-      </DialogTrigger>
-      <button
-        onClick={() => {
-          setObject(undefined);
-        }}
-        className="align-middle"
-        aria-label={`Clear selected ${entity}`}
-      >
-        <X className="w-[20px]" />
-      </button>
+      {!disabled ? (
+        <>
+          <DialogTrigger>
+            <Clickable
+              disabled={disabled}
+              style={{ fontSize: "inherit" }}
+              className="align-middle"
+              as="button"
+              type="button"
+              variant="link"
+            >
+              <PencilIcon className="w-[16px]" />
+            </Clickable>
+          </DialogTrigger>
+          <button
+            onClick={() => {
+              setObject(undefined);
+            }}
+            className="align-middle"
+            aria-label={`Clear selected ${entity}`}
+          >
+            <X className="w-[20px]" />
+          </button>
+        </>
+      ) : null}
     </span>
   );
 }

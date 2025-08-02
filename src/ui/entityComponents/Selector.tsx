@@ -40,11 +40,13 @@ type SelectorProps<T extends EntityKey> = {
   dataFieldsObject?: {
     [K in EntityKey]: DataFields<K>;
   };
+  disabled?: boolean;
 };
 
 export default function Selector<T extends EntityKey>({
   entity,
   path,
+  disabled = false,
   rowTemplate,
   filterFields,
   dataFields,
@@ -71,6 +73,7 @@ export default function Selector<T extends EntityKey>({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <SelectorTrigger
+        disabled={disabled}
         selectedObject={selectedObjectState}
         selectedDisplay={selectedDisplay}
         entity={entity}

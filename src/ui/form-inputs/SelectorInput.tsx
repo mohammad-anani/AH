@@ -22,12 +22,14 @@ interface SelectorInputProps {
     FilterKey[],
     Role,
   ];
+  disabled: boolean;
 }
 
 export default function SelectorInput({
   fieldKey,
   label,
   data,
+  disabled,
 }: SelectorInputProps) {
   return (
     <>
@@ -35,7 +37,11 @@ export default function SelectorInput({
       <Controller
         name={fieldKey}
         renderField={({ field }) => (
-          <SelectorField data={data} fieldProps={{ field }} />
+          <SelectorField
+            data={data}
+            disabled={disabled}
+            fieldProps={{ field }}
+          />
         )}
       />
     </>
@@ -45,6 +51,7 @@ export default function SelectorInput({
 function SelectorField<T extends EntityKey>({
   fieldProps,
   data,
+  disabled,
 }: {
   data: [
     T,
@@ -54,6 +61,7 @@ function SelectorField<T extends EntityKey>({
     FilterKey[],
     Role,
   ];
+  disabled: boolean;
   fieldProps: {
     field: {
       value: unknown;
@@ -76,6 +84,7 @@ function SelectorField<T extends EntityKey>({
   return (
     <Selector
       entity={entity}
+      disabled={disabled}
       canAdd={false}
       {...selectorConfig}
       rowTemplate={rowTemplate}

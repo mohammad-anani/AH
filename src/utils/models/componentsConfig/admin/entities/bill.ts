@@ -8,7 +8,7 @@ export const bill: Config<"Bill"> = {
     ["Amount Paid", formatMoney(AmountPaid)],
     [
       "Created By",
-      "View Admin",
+      "View Receptionist",
       `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
       "Admin",
     ],
@@ -26,11 +26,14 @@ export const bill: Config<"Bill"> = {
   ],
   formConfig: [["Amount", "Amount", "money", "both"]],
   selectorConfig: {
-    selectedDisplay: ({ ID }) => String(ID),
+    selectedDisplay: ({ AmountPaid, Amount }) =>
+      `Amount: ${formatMoney(Amount ?? "")}  |  Paid: ${formatMoney(AmountPaid ?? "")}`,
     path: "/admin/bills",
   },
   subLinks: ({ ID }) => [
-    ["Show Payments", `payments`],
-    ["Make a Payment", `/payments/${ID}`],
+    ["Show Payments", `/admin/payments?BillID=${ID}`],
+    ["Make a Payment", `/admin/payments/add`, { BillID: ID }],
   ],
 };
+
+//disable given state input

@@ -10,7 +10,7 @@ import {
   ZodDefault,
   type ZodRawShape,
 } from "zod";
-import type { DisplayEntityKey } from "../utils/entityKeys.ts";
+import type { DisplayEntityKey } from "../utils/entityKeys";
 
 function createEmptyValue(schema: ZodType<ZodRawShape>) {
   if (schema instanceof ZodString) {

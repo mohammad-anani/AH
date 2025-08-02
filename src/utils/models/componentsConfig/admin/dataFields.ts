@@ -16,6 +16,7 @@ import {
   bill,
   person,
   employee,
+  payment,
 } from "./entities/index.ts";
 
 export const dataFields: { [K in DisplayEntityKey]: DataFields<K> } = {
@@ -34,4 +35,5 @@ export const dataFields: { [K in DisplayEntityKey]: DataFields<K> } = {
   Bill: bill["dataFields"],
   Person: person["dataFields"],
   Employee: employee["dataFields"],
+  Payment: payment["dataFields"],
 };

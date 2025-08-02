@@ -8,5 +8,3 @@ export const patientsRoutes = route(
   true,
   routeConfigs["Patient"],
 );
-
-//to edit EntityKey...

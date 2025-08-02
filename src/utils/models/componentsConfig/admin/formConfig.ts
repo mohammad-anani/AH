@@ -11,6 +11,7 @@ import {
   insurance,
   operation,
   patient,
+  payment,
   person,
   prescription,
   receptionist,
@@ -37,4 +38,5 @@ export const formConfig: {
   TestType: testType["formConfig"],
   Person: person["formConfig"],
   Employee: employee["formConfig"],
+  Payment: payment["formConfig"],
 };

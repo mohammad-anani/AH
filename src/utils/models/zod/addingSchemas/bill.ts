@@ -1,3 +1,3 @@
 import { BillSchema } from "../schemas";
 
-export const AddingBillSchema = BillSchema.pick({ Amount: true });
+export const AddBillSchema = BillSchema.pick({ Amount: true });

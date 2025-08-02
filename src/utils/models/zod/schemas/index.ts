@@ -6,3 +6,4 @@ export * from "./operation";
 export * from "./test";
 export * from "./CountrySchema";
 export * from "./bill";
+export * from "./payment";

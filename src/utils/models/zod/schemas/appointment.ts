@@ -11,7 +11,7 @@ export const AppointmentSchema = z.object({
   }),
   Status: nonEmptyString("Status"),
   Notes: z.string(),
-  PaymentID: positiveNumber("Payment ID", 1),
+  BillID: positiveNumber("Payment ID", 1),
   CreatedByReceptionistID: positiveNumber("Receptionist ID", 1),
   CreatedAt: datetime("Creation date"),
 });

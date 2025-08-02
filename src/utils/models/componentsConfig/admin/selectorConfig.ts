@@ -10,6 +10,7 @@ import {
   insurance,
   operation,
   patient,
+  payment,
   prescription,
   receptionist,
   testAppointment,
@@ -33,4 +34,5 @@ export const selectorConfig: {
   TestAppointment: testAppointment["selectorConfig"],
   TestOrder: testOrder["selectorConfig"],
   TestType: testType["selectorConfig"],
+  Payment: payment["selectorConfig"],
 };

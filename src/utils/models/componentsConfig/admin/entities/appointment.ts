@@ -24,6 +24,7 @@ export const appointment: Config<"Appointment"> = {
     Notes,
     CreatedByReceptionistID,
     CreatedAt,
+    BillID,
   }: typesObject["Appointment"]) => [
     [
       "Patient",
@@ -41,6 +42,7 @@ export const appointment: Config<"Appointment"> = {
     ["Reason", Reason],
     ["Status", Status],
     ["Notes", Notes],
+    ["Bill", "View Bill", "/admin/bills/" + BillID, "Bill"],
     [
       "Receptionist",
       "View Receptionist",

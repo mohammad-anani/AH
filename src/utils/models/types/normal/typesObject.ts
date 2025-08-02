@@ -13,6 +13,7 @@ import type {
   Person,
   Appointment,
   Bill,
+  Payment,
 } from "./types";
 
 export type typesObject = {
@@ -31,4 +32,5 @@ export type typesObject = {
   Appointment: Appointment;
   Prescription: { ID: number };
   Bill: Bill;
+  Payment: Payment;
 };

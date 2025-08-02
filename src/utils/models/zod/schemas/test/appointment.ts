@@ -14,7 +14,7 @@ export const TestAppointmentSchema = z.object({
   Status: nonEmptyString("Status"),
   Result: nonEmptyString("Result").nullable(),
   ResultDate: datetime("Result date").nullable(),
-  PaymentID: positiveNumber("Payment ID", 1),
+  BillID: positiveNumber("Payment ID", 1),
   CreatedByReceptionistID: positiveNumber("Receptionist ID", 1),
   CreatedAt: datetime("Creation date"),
 });

@@ -125,8 +125,8 @@ export default function Card<T extends EntityKey>({
       </div>
       {!isModal ? (
         <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
-          {subLinks?.(object).map(([text, link]) => (
-            <Clickable as="Link" to={link} variant="secondary">
+          {subLinks?.(object).map(([text, link, state]) => (
+            <Clickable as="Link" to={link} variant="secondary" state={state}>
               {text}
             </Clickable>
           ))}

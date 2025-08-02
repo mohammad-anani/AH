@@ -5,5 +5,5 @@ export const AddAppointmentSchema = AppointmentSchema.omit({
   CreatedAt: true,
   CreatedByReceptionistID: true,
   Status: true,
-  PaymentID: true,
+  BillID: true,
 });

@@ -12,6 +12,7 @@ export const entityKeys = [
   "Operation",
   "Prescription",
   "Bill",
+  "Payment",
 ] as const;
 
 export type EntityKey = (typeof entityKeys)[number];

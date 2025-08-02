@@ -5,5 +5,5 @@ export const AddOperationSchema = OperationSchema.omit({
   CreatedAt: true,
   CreatedByReceptionistID: true,
   Status: true,
-  PaymentID: true,
+  BillID: true,
 });

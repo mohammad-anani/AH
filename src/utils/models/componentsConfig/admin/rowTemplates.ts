@@ -15,6 +15,7 @@ import { prescription } from "./entities/prescription";
 import { operation } from "./entities/operation";
 
 import { testAppointment, testOrder, testType } from "./entities/test";
+import { payment } from "./entities";
 
 export const rowTemplates: {
   [K in EntityKey]: RowTemplate<K> | undefined;
@@ -32,4 +33,5 @@ export const rowTemplates: {
   TestAppointment: testAppointment["rowTemplate"],
   TestOrder: testOrder["rowTemplate"],
   TestType: testType["rowTemplate"],
+  Payment: payment["rowTemplate"],
 };

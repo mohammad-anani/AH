@@ -30,9 +30,9 @@ export const operation: Config<"Operation"> = {
     ["Scheduled Date", formatDateIsoToLocal(operation.ScheduledDate)],
     ["Status", operation.Status],
     [
-      "Payment",
-      operation.PaymentID ? "View Payment" : "N/A",
-      operation.PaymentID ? `/admin/payments/${operation.PaymentID}` : "",
+      "Bill",
+      operation.BillID ? "View Bill" : "N/A",
+      operation.BillID ? `/admin/bills/${operation.BillID}` : "",
     ],
     [
       "Created By",

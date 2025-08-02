@@ -24,6 +24,7 @@ export const testAppointment: Config<"TestAppointment"> = {
     ResultDate,
     CreatedByReceptionistID,
     CreatedAt,
+    BillID,
   }: typesObject["TestAppointment"]) => [
     TestOrderID
       ? [
@@ -42,6 +43,7 @@ export const testAppointment: Config<"TestAppointment"> = {
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Status", Status],
     ["Result", Result],
+    ["Bill", "View Bill", "/admin/bills/" + BillID, "Bill"],
     ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
     [
       "Created By",

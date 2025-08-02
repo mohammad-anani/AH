@@ -26,9 +26,9 @@ export function prefixFields<
   ]);
 }
 
-export const selectorField = <T extends EntityKey>(
+export const selectorField = <T extends EntityKey, B extends EntityKey>(
   label: string,
-  fieldKey: DotAccess<typesObject[T]>,
+  fieldKey: DotAccess<typesObject[B]>,
   entity: T,
   mode: "add" | "both",
   filterFields: FilterKey[],
@@ -36,7 +36,7 @@ export const selectorField = <T extends EntityKey>(
   rowTemplate: RowTemplate<EntityKey>,
   dataFields: DataFields<EntityKey>,
   role: Role,
-): FormKey<T> => [
+): FormKey<EntityKey> => [
   label,
   fieldKey,
   "selector",

@@ -5,11 +5,12 @@ import { humanResourcesRoutes } from "./admin/routes/human-resources";
 import { testsRoutes } from "./admin/routes/tests";
 import { operationsRoutes } from "./admin/routes/operations";
 import { appointmentsRoutes } from "./admin/routes/appointments";
-import { billsRoutes } from "./admin/routes/bills.tsx";
+import { billRoute } from "./admin/routes/bills.tsx";
 import Layout from "@/ui/customComponents/Layout";
 import Nav from "@/interfaces/admin/Nav";
 import Error from "@/ui/Error";
 import { insuranceRoute } from "./admin/routes/insurances.tsx";
+import { paymentRoute } from "./admin/routes/payments.tsx";
 
 export const adminRoutes = [
   {
@@ -30,8 +31,9 @@ export const adminRoutes = [
           ...testsRoutes,
           ...operationsRoutes,
           ...appointmentsRoutes,
-          ...billsRoutes,
+          ...billRoute,
           ...insuranceRoute,
+          ...paymentRoute,
         ],
       },
     ],

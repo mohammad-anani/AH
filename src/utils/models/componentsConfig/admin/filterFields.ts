@@ -17,6 +17,7 @@ import { testAppointment, testOrder, testType } from "./entities/test";
 
 import type { DisplayEntityKey } from "../../types/utils/entityKeys";
 import type { FilterKey } from "../../types/utils/Form&Filter";
+import { payment } from "./entities";
 
 export const filterFields: {
   [K in DisplayEntityKey]: FilterKey[];
@@ -36,4 +37,5 @@ export const filterFields: {
   Bill: bill["filterFields"],
   Operation: operation["filterFields"],
   Insurance: insurance["filterFields"],
+  Payment: payment["filterFields"],
 };

@@ -8,11 +8,14 @@ import type {
 import { generateLabel } from "../listComponents/utils";
 import Controller from "@/ui/customComponents/Controller";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import { useLocation } from "react-router-dom";
 
 export default function useForm<T extends EntityKey>(
   fields: FormKey<T>[],
   mode: "add" | "update",
 ) {
+  const location = useLocation();
+  const state = location.state;
   const safeFields = Array.isArray(fields) ? fields : [];
 
   const isAdd = mode === "add";
@@ -24,10 +27,12 @@ export default function useForm<T extends EntityKey>(
   const renderField = (field: FormKey<T>) => {
     const [label, key, type, , data] = field;
 
+    console.log(state);
     const commonProps = {
       fieldKey: key,
       label: label + ":",
       data: data || type,
+      disabled: Object.keys(state).includes(key),
     };
 
     if (type === "custom") {
