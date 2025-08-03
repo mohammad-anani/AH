@@ -3,4 +3,4 @@ export { humanResourcesRoutes } from "./routes/human-resources";
 export { testsRoutes } from "./routes/tests";
 export { operationsRoutes } from "./routes/operations";
 export { appointmentsRoutes } from "./routes/appointments";
-export { billsRoutes } from "./routes/bills";
+export { billRoute } from "./routes/bills";

@@ -7,4 +7,5 @@ export const receptionistsRoutes = route(
   true,
   true,
   routeConfigs["Receptionist"],
+  true,
 );

@@ -7,4 +7,5 @@ export const testTypesRoutes = route(
   true,
   true,
   routeConfigs["TestType"],
+  true,
 );

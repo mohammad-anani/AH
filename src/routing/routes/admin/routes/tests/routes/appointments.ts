@@ -7,4 +7,5 @@ export const testAppointmentsRoutes = route(
   false,
   true,
   routeConfigs["TestAppointment"],
+  true,
 );

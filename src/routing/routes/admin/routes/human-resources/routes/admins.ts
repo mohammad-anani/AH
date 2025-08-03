@@ -7,4 +7,5 @@ export const adminsRoutes = route(
   true,
   true,
   routeConfigs["Admin"],
+  true,
 );

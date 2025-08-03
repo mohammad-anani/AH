@@ -36,6 +36,7 @@ type ListPageProps<T extends EntityKey> = {
     rowTypesObject[EntityKey],
     Setter<rowTypesObject[EntityKey] | undefined>,
   ];
+  detailsLink?: (ID: number) => string;
   dataLink?: string;
 };
 
@@ -53,6 +54,7 @@ export default function ListPage<T extends EntityKey>({
   onSelect,
   withBack = false,
   onDetailsClick,
+  detailsLink,
 }: ListPageProps<T>) {
   const {
     isFilterOpen,
@@ -70,6 +72,7 @@ export default function ListPage<T extends EntityKey>({
     onDetailsClick,
     selectedObjectState as SelectedObjectState<T>,
     onSelect,
+    detailsLink,
   );
 
   return (

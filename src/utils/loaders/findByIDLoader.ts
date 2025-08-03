@@ -16,7 +16,6 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
     //to be changed
     const data = await findByID(`/${pluralize(entity)}?ID=${id}`);
 
-    console.log(data);
     const schema = schemas[entity];
 
     if (!schema) {

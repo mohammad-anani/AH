@@ -17,6 +17,7 @@ export default function useListPage<T extends EntityKey>(
   onDetailsClick?: (ID: number) => void,
   selectedObjectState?: SelectedObjectState<T>,
   onSelect?: (object: rowTypesObject[T]) => void,
+  detailsLink?: (ID: number) => string,
 ) {
   const loaderData = useLoaderData();
 
@@ -61,7 +62,9 @@ export default function useListPage<T extends EntityKey>(
                   onDetailsClick?.(item.ID);
                 },
               }
-            : { to: `${item?.["ID"]}` })}
+            : {
+                to: detailsLink ? detailsLink(item?.["ID"]) : `${item?.["ID"]}`,
+              })}
         >
           <Info className="*:text-primary! h-[20px] w-[20px]" />
           Details

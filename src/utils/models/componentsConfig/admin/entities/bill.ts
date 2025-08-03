@@ -30,10 +30,9 @@ export const bill: Config<"Bill"> = {
       `Amount: ${formatMoney(Amount ?? "")}  |  Paid: ${formatMoney(AmountPaid ?? "")}`,
     path: "/admin/bills",
   },
-  subLinks: ({ ID }) => [
-    ["Show Payments", `/admin/payments?BillID=${ID}`],
-    ["Make a Payment", `/admin/payments/add`, { BillID: ID }],
-  ],
+  subLinks: ({ ID }) => [["Show Payments", `/admin/payments?BillID=${ID}`]],
 };
 
 //disable given state input
+
+//  ["Make a Payment", `/admin/payments/add`, { BillID: ID }],

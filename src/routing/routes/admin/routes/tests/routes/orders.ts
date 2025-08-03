@@ -7,4 +7,5 @@ export const testOrdersRoutes = route(
   false,
   true,
   routeConfigs["TestOrder"],
+  true,
 );

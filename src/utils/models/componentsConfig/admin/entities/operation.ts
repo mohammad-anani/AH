@@ -27,6 +27,7 @@ export const operation: Config<"Operation"> = {
       `/admin/departments/${operation.DepartmentID}`,
       "Department",
     ],
+    ["Doctors", "View Doctors", `doctors`, "Department"],
     ["Scheduled Date", formatDateIsoToLocal(operation.ScheduledDate)],
     ["Status", operation.Status],
     [

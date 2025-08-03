@@ -7,4 +7,5 @@ export const doctorsRoutes = route(
   true,
   true,
   routeConfigs["Doctor"],
+  true,
 );

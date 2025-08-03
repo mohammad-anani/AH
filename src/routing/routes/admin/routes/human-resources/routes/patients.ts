@@ -7,4 +7,5 @@ export const patientsRoutes = route(
   false,
   true,
   routeConfigs["Patient"],
+  true,
 );
