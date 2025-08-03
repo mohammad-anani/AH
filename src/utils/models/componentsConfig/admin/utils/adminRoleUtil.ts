@@ -12,21 +12,21 @@ import {
 import { adminAudit } from "../entities/human-resources/Audit/adminAudit.ts";
 import { receptionistAudit } from "../entities/human-resources/Audit/receptionistAudit.ts";
 
-export const adminSelectorField = (
+export const adminSelectorField = <T extends EntityKey>(
   fieldKey: string,
   entity: EntityKey,
   filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
+  selectorConfig: SelectorConfig<T>,
+  rowTemplate: RowTemplate<T>,
+  dataFields: DataFields<T>,
 ) =>
   selectorField(
     fieldKey,
     entity,
     filterFields,
-    selectorConfig,
-    rowTemplate,
-    dataFields,
+    selectorConfig as SelectorConfig<EntityKey>,
+    rowTemplate as RowTemplate<EntityKey>,
+    dataFields as DataFields<EntityKey>,
     "Admin",
   );
 
@@ -49,9 +49,9 @@ export const admingenerateAuditFields = (creator: Role) => {
   return generateAuditFields(
     creator,
     config.filterFields,
-    config.selectorConfig,
-    config.rowTemplate,
-    config.dataFields,
+    config.selectorConfig as SelectorConfig<EntityKey>,
+    config.rowTemplate as RowTemplate<EntityKey>,
+    config.dataFields as DataFields<EntityKey>,
     "Admin",
   );
 };

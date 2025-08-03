@@ -13,7 +13,7 @@ import {
   booleanField,
 } from "../../utils/reusableFields";
 import { prefixFields } from "../../utils/formUtils";
-import type { Config } from "../../../routeConfig";
+import type { DisplayingConfig } from "../../../routeConfig";
 
 export const weekdays = [
   "Monday",
@@ -27,7 +27,7 @@ export const weekdays = [
 
 export const statusLabels = ["Active", "Inactive"];
 
-export const employee: Config<"Employee"> = {
+export const employee: DisplayingConfig<"Employee"> = {
   dataFields: (employee: typesObject["Employee"]) => {
     const {
       Person,

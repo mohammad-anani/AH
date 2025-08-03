@@ -78,8 +78,7 @@ function SelectorField<T extends EntityKey>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
-  const [entity, selectorConfig, rowTemplate, dataFields, filterFields, role] =
-    data;
+  const [entity, selectorConfig, rowTemplate, dataFields, filterFields] = data;
 
   return (
     <Selector
@@ -91,8 +90,9 @@ function SelectorField<T extends EntityKey>({
       dataFields={dataFields}
       filterFields={filterFields}
       selectedObjectState={[selected, setSelected]}
-      subLinksObject={role === "Admin" && subLinks}
-      dataFieldsObject={role === "Admin" && dataFields}
+      subLinksObject={subLinks}
+      dataFieldsObject={dataFields}
     />
   );
 }
+//to add role changing when destructing data

@@ -26,20 +26,29 @@ export function prefixFields<
   ]);
 }
 
+//T is selector type
+//B is source type
 export const selectorField = <T extends EntityKey, B extends EntityKey>(
   label: string,
   fieldKey: DotAccess<typesObject[B]>,
   entity: T,
   mode: "add" | "both",
   filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
+  selectorConfig: SelectorConfig<T>,
+  rowTemplate: RowTemplate<T>,
+  dataFields: DataFields<T>,
   role: Role,
-): FormKey<EntityKey> => [
+): FormKey<B> => [
   label,
   fieldKey,
   "selector",
   mode,
-  [entity, selectorConfig, rowTemplate, dataFields, filterFields, role],
+  [
+    entity,
+    selectorConfig as SelectorConfig<EntityKey>,
+    rowTemplate as RowTemplate<EntityKey>,
+    dataFields as DataFields<EntityKey>,
+    filterFields,
+    role,
+  ],
 ];

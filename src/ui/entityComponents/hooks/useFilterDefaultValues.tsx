@@ -6,7 +6,7 @@ import type {
   FilterKey,
 } from "@/utils/models/types/utils/Form&Filter";
 import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
-import type { Primitive } from "zod";
+import type { Primitive } from "react-hook-form";
 type ReduceObjectType = {
   [key: string]: Primitive | string[];
 };

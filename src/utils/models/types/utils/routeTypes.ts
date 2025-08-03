@@ -5,11 +5,7 @@ import type { Primitive } from "react-hook-form";
 
 export type SubLinks<T extends EntityKey> = (
   item: typesObject[T],
-) => [
-  text: string,
-  link: string,
-  state?: Record<keyof typesObject[EntityKey], Primitive>,
-][];
+) => [text: string, link: string, state?: Record<string, Primitive>][];
 
 export type DataFields<T extends DisplayEntityKey> = (
   item: typesObject[T],

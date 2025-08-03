@@ -10,9 +10,9 @@ import {
   emailField,
   booleanField,
 } from "../../utils/reusableFields";
-import type { Config } from "../../../routeConfig";
+import type { DisplayingConfig } from "../../../routeConfig";
 
-export const person: Config<"Person"> = {
+export const person: DisplayingConfig<"Person"> = {
   dataFields: (person: typesObject["Person"]) => [
     [
       "Full Name",

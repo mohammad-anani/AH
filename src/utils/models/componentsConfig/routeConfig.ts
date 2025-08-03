@@ -39,11 +39,19 @@ export type RowTemplate<T extends EntityKey> = [
   (item: rowTypesObject[T]) => Primitive[],
   number[],
 ];
-export type Config<T extends DisplayEntityKey> = {
+export type Config<T extends EntityKey> = {
   dataFields: DataFields<T>;
   filterFields: FilterKey[];
   formConfig: FormKey<T>[];
-  rowTemplate?: RowTemplate<T>;
+  rowTemplate: RowTemplate<T>;
   selectorConfig: SelectorConfig<T>;
-  subLinks?: SubLinks<T>;
+  subLinks: SubLinks<T>;
+};
+
+export type DisplayingConfig<T extends DisplayEntityKey> = {
+  dataFields: DataFields<T>;
+  filterFields: FilterKey[];
+  formConfig: FormKey<T>[];
+
+  selectorConfig: SelectorConfig<T>;
 };

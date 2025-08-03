@@ -11,5 +11,3 @@ export default function useFilter(
 
   return [isFilterOpen, setIsFilterOpen];
 }
-
-//on list open it all closes

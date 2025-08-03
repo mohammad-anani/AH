@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { schemas } from "../../zod/addingSchemas/addingSchemas.ts";
 import {
   ZodType,
@@ -10,7 +13,7 @@ import {
   ZodDefault,
   type ZodRawShape,
 } from "zod";
-import type { DisplayEntityKey } from "../utils/entityKeys";
+import type { DisplayEntityKey } from "../utils/entityKeys.ts";
 
 function createEmptyValue(schema: ZodType<ZodRawShape>) {
   if (schema instanceof ZodString) {
@@ -34,7 +37,7 @@ function createEmptyValue(schema: ZodType<ZodRawShape>) {
     return obj;
   }
   if (schema instanceof ZodOptional || schema instanceof ZodDefault) {
-    return createEmptyValue(schema._def.innerType);
+    return createEmptyValue(schema.def.innerType);
   }
 
   return null;

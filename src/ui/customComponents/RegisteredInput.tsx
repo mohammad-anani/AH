@@ -2,7 +2,7 @@ import { cloneElement } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import React from "react";
 import { useNavigation } from "react-router-dom";
-import type { Primitive } from "zod";
+import type { Primitive } from "react-hook-form";
 import useError from "../form-inputs/useError";
 import FormError from "./FormError";
 

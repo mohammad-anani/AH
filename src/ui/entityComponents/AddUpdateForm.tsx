@@ -1,7 +1,7 @@
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 import { FormProvider } from "react-hook-form";
-import { Form as RouterForm } from "react-router-dom";
+import { Form as RouterForm, type SubmitTarget } from "react-router-dom";
 
 import type { FormKey } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
@@ -20,7 +20,7 @@ import { DialogFooter } from "@/components/ui/dialog";
 type FormProps<T extends EntityKey> = {
   entity: T;
   submitText?: string;
-  formConfig: FormKey<T>;
+  formConfig: FormKey<T>[];
   submittingText?: string;
   headerWidth?: number;
   withHeader?: boolean;
@@ -61,7 +61,10 @@ export default function AddUpdateForm<T extends EntityKey>({
           replace
           method="POST"
           onSubmit={handleSubmit((data) => {
-            submit(data, { method: "POST", encType: "application/json" });
+            submit(data as SubmitTarget, {
+              method: "POST",
+              encType: "application/json",
+            });
           })}
           className={`grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 *:text-xl! *:odd:font-bold`}
         >
