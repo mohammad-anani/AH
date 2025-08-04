@@ -1,9 +1,9 @@
-import { admingenerateAuditFields } from "../../utils/adminRoleUtil";
+import { admingenerateAuditFields } from "../../../utils/RoleUtil";
 import { employee } from "./employee";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
-import { prefixFields } from "../../utils/formUtils";
+import { prefixFields } from "../../../utils/formUtils";
 import { person } from "./person";
 import type { Config } from "../../../routeConfig";
 
@@ -49,5 +49,6 @@ export const admin: Config<"Admin"> = {
     ],
     ["Show Admins", `/admin/human-resources/admins?AdminID=${ID}`],
     ["Show Test Types", `/admin/tests/types?AdminID=${ID}`],
+    ["Show Doctors", `/admin/human-resources/doctors?AdminID=${ID}`],
   ],
 };

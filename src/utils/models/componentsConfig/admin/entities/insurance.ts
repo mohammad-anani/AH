@@ -1,7 +1,6 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { statusLabels } from "./human-resources/employee";
 import type { Config } from "../../routeConfig";
 
 export const insurance: Config<"Insurance"> = {
@@ -32,12 +31,7 @@ export const insurance: Config<"Insurance"> = {
   ],
   filterFields: [],
   //solve patient id selector here
-  formConfig: [
-    ["Provider Name", "ProviderName", "string", "both"],
-    ["Coverage", "Coverage", "number", "both"],
-    ["Expiration Date", "ExpirationDate", "date", "both"],
-    ["Status", "isActive", "boolean", "update", statusLabels],
-  ],
+  formConfig: [],
   selectorConfig: {
     selectedDisplay: ({ ID }) => String(ID),
     path: "/admin/insurances",

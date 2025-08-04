@@ -12,10 +12,6 @@ export default function Tests() {
           Types
         </Clickable>
 
-        <Clickable as="Link" to="orders" variant="primary">
-          Orders
-        </Clickable>
-
         <Clickable as="Link" to="appointments" variant="primary">
           Appointments
         </Clickable>

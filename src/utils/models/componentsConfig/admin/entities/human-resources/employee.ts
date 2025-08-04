@@ -11,8 +11,8 @@ import {
   multiselectField,
   timeField,
   booleanField,
-} from "../../utils/reusableFields";
-import { prefixFields } from "../../utils/formUtils";
+} from "../../../utils/reusableFields";
+import { prefixFields } from "../../../utils/formUtils";
 import type { DisplayingConfig } from "../../../routeConfig";
 
 export const weekdays = [

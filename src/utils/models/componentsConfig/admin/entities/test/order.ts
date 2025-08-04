@@ -1,9 +1,9 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { adminSelectorField } from "../../utils/adminRoleUtil";
-import { datetimeField } from "../../utils/reusableFields";
-import { admin } from "../human-resources";
-import { appointment } from "../appointment";
+import { adminFilterSelectorField } from "../../../utils/RoleUtil";
+import { datetimeField } from "../../../utils/reusableFields";
 import type { Config } from "../../../routeConfig";
+import { appointment } from "../appointment";
+import { doctor } from "../human-resources";
 
 export const testOrder: Config<"TestOrder"> = {
   dataFields: ({ TestTypeID, AppointmentID }: typesObject["TestOrder"]) => [
@@ -16,22 +16,22 @@ export const testOrder: Config<"TestOrder"> = {
     ],
   ],
   filterFields: [
-    adminSelectorField(
+    adminFilterSelectorField(
       "AppointmentID",
       "Appointment",
       appointment["filterFields"],
-      appointment.selectorConfig,
-      appointment.rowTemplate,
-      appointment.dataFields,
+      appointment["selectorConfig"],
+      appointment["rowTemplate"],
+      appointment["dataFields"],
     ),
 
-    adminSelectorField(
-      "AdminID",
-      "Admin",
-      admin["filterFields"],
-      admin.selectorConfig,
-      admin.rowTemplate,
-      admin.dataFields,
+    adminFilterSelectorField(
+      "DoctorID",
+      "Doctor",
+      doctor["filterFields"],
+      doctor["selectorConfig"],
+      doctor["rowTemplate"],
+      doctor["dataFields"],
     ),
     datetimeField("OrderAt"),
   ],

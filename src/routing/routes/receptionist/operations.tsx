@@ -1,0 +1,34 @@
+import { route } from "@/routing/entityRoute";
+import ListPage from "@/ui/entityComponents/ListPage";
+import listLoader from "@/utils/loaders/listLoader";
+import { doctor } from "@/utils/models/componentsConfig/receptionist/entities";
+import { receptionistRouteConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import type { RouteObject } from "react-router-dom";
+
+const doctorsRoute: RouteObject[] = [
+  {
+    path: "doctors",
+    loader: listLoader("DoctorRow", ({ id }) => `/operations/${id}`),
+    element: (
+      <ListPage
+        entity="Doctor"
+        canAdd={false}
+        rowTemplate={doctor["rowTemplate"]}
+        withBack={true}
+        canModifyUrl={false}
+        detailsLink={(ID) => `/receptionist/human-resources/doctors/${ID}`}
+      />
+    ),
+  },
+];
+
+export const operationsRoutes = route(
+  "Operation",
+  true,
+  true,
+  false,
+  receptionistRouteConfigs["Operation"],
+  false,
+  undefined,
+  [[doctorsRoute, "id"]],
+);

@@ -6,7 +6,7 @@ import type { DataFields, RowTemplate } from "./routeTypes";
 
 import type { SelectorConfig } from "./selectorTypes";
 import type { Primitive } from "react-hook-form";
-import type { Role } from "../../componentsConfig/admin/utils/reusableFields";
+import type { Role } from "../../componentsConfig/utils/reusableFields";
 import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 
 export type DataTypes =

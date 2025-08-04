@@ -1,8 +1,7 @@
 import { person } from "./person";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { admingenerateAuditFields } from "../../utils/adminRoleUtil";
-import { prefixFields } from "../../utils/formUtils";
+import { admingenerateAuditFields } from "../../../utils/RoleUtil";
 import type { Config } from "../../../routeConfig";
 
 export const patient: Config<"Patient"> = {
@@ -31,9 +30,7 @@ export const patient: Config<"Patient"> = {
     ...admingenerateAuditFields("Receptionist"),
   ],
   rowTemplate: [["Name", "Age"], (item) => [item.Name, item.Age], [2, 1]],
-  formConfig: [
-    ...prefixFields<"Patient", "Person">("Person", person["formConfig"]),
-  ],
+  formConfig: [],
   selectorConfig: {
     selectedDisplay: ({ Name }) => Name,
     path: "/admin/human-resources/patients",

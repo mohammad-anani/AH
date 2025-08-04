@@ -4,11 +4,16 @@ import {
   type NavLinkProps as NavProps,
 } from "react-router-dom";
 
-type NavLinkProps = ChildrenProps & { to: string } & NavProps;
+type NavLinkProps = ChildrenProps & { to: string; classes?: string } & NavProps;
 
-export default function NavLink({ children, to, ...props }: NavLinkProps) {
+export default function NavLink({
+  children,
+  to,
+  classes,
+  ...props
+}: NavLinkProps) {
   return (
-    <div className="w-[110px]">
+    <div className={"w-[110px] " + classes}>
       <NLink
         to={to}
         {...props}

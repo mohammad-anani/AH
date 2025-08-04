@@ -38,7 +38,11 @@
         "HireDate": "2020-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Mon", "Fri", "Sat"],
+        "WorkingDays": [
+          "Mon",
+          "Fri",
+          "Sat"
+        ],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
         "DepartmentID": 1,
@@ -48,7 +52,10 @@
           "LastName": "Smith",
           "Gender": true,
           "DateOfBirth": "1993-01-01",
-          "Country": { "ID": 1, "Name": "United States" },
+          "Country": {
+            "ID": 1,
+            "Name": "United States"
+          },
           "Phone": "12345678",
           "Email": "alice@example.com",
           "Username": "alice.smith"
@@ -64,7 +71,11 @@
         "HireDate": "2019-05-20",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Mon", "Fri", "Sat"],
+        "WorkingDays": [
+          "Mon",
+          "Fri",
+          "Sat"
+        ],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
         "DepartmentID": 1,
@@ -74,7 +85,10 @@
           "LastName": "Taylor",
           "Gender": false,
           "DateOfBirth": "1989-01-01",
-          "Country": { "ID": 5, "Name": "France" },
+          "Country": {
+            "ID": 5,
+            "Name": "France"
+          },
           "Phone": "98765432",
           "Email": "bob@example.com",
           "Username": "bob.taylor"
@@ -90,7 +104,11 @@
         "HireDate": "2021-07-10",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Mon", "Fri", "Sat"],
+        "WorkingDays": [
+          "Mon",
+          "Fri",
+          "Sat"
+        ],
         "ShiftStart": "10:00",
         "ShiftEnd": "18:00",
         "DepartmentID": 1,
@@ -100,7 +118,10 @@
           "LastName": "Brown",
           "Gender": true,
           "DateOfBirth": "1995-01-01",
-          "Country": { "ID": 2, "Name": "Canada" },
+          "Country": {
+            "ID": 2,
+            "Name": "Canada"
+          },
           "Phone": "55511122",
           "Email": "carol@example.com",
           "Username": "carol.brown"
@@ -120,7 +141,10 @@
         "LastName": "Taylor",
         "Gender": true,
         "DateOfBirth": "2005-01-01",
-        "Country": { "ID": 5, "Name": "France" },
+        "Country": {
+          "ID": 5,
+          "Name": "France"
+        },
         "Phone": "76123456",
         "Email": "olivia.taylor@example.com",
         "Username": "olivia.taylor"
@@ -136,7 +160,10 @@
         "LastName": "Baker",
         "Gender": false,
         "DateOfBirth": "1993-01-01",
-        "Country": { "ID": 10, "Name": "South Africa" },
+        "Country": {
+          "ID": 10,
+          "Name": "South Africa"
+        },
         "Phone": "71098765",
         "Email": "liam.baker@example.com",
         "Username": "liam.baker"
@@ -152,7 +179,10 @@
         "LastName": "King",
         "Gender": true,
         "DateOfBirth": "1983-01-01",
-        "Country": { "ID": 4, "Name": "Germany" },
+        "Country": {
+          "ID": 4,
+          "Name": "Germany"
+        },
         "Phone": "78906543",
         "Email": "sophia.king@example.com",
         "Username": "sophia.king"
@@ -169,7 +199,10 @@
           "LastName": "Smith",
           "Gender": true,
           "DateOfBirth": "1993-01-01",
-          "Country": { "ID": 1, "Name": "United States" },
+          "Country": {
+            "ID": 1,
+            "Name": "United States"
+          },
           "Phone": "12345678",
           "Email": "alice.smith@example.com",
           "Username": "alice.smith"
@@ -179,7 +212,13 @@
         "HireDate": "2020-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+        "WorkingDays": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00"
       },
@@ -196,7 +235,10 @@
           "LastName": "Taylor",
           "Gender": true,
           "DateOfBirth": "1983-01-01",
-          "Country": { "ID": 2, "Name": "Canada" },
+          "Country": {
+            "ID": 2,
+            "Name": "Canada"
+          },
           "Phone": "09876543",
           "Email": "bob.taylor@example.com",
           "Username": "bob.taylor"
@@ -206,7 +248,12 @@
         "HireDate": "2019-05-20",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Mon", "Tue", "Wed", "Thu"],
+        "WorkingDays": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu"
+        ],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00"
       },
@@ -224,7 +271,13 @@
         "HireDate": "2021-05-01",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+        "WorkingDays": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
         "Person": {
@@ -233,7 +286,10 @@
           "LastName": "Kanaan",
           "Gender": true,
           "DateOfBirth": "1978-01-01",
-          "Country": { "ID": 10, "Name": "South Africa" },
+          "Country": {
+            "ID": 10,
+            "Name": "South Africa"
+          },
           "Phone": "70123456",
           "Email": "lara.kanaan@example.com",
           "Username": "deslsdddd"
@@ -250,7 +306,13 @@
         "HireDate": "2022-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": ["Mon", "Tue", "Wed", "Fri", "Sat"],
+        "WorkingDays": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Fri",
+          "Sat"
+        ],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
         "Person": {
@@ -259,7 +321,10 @@
           "LastName": "Fakhoury",
           "Gender": false,
           "DateOfBirth": "1973-01-01",
-          "Country": { "ID": 10, "Name": "South Africa" },
+          "Country": {
+            "ID": 10,
+            "Name": "South Africa"
+          },
           "Phone": "70987654",
           "Email": "ahmad.fakhoury@example.com",
           "Username": "asdeddddddd"
@@ -437,7 +502,6 @@
       "DoctorName": "Alice Marie Smith"
     }
   ],
-
   "Bills": [
     {
       "ID": 1,
@@ -537,42 +601,143 @@
     }
   ],
   "PaymentRows": [
-    { "ID": 1, "Method": "Cash", "Amount": 50, "BillID": 1 },
-    { "ID": 2, "Method": "Card", "Amount": 30, "BillID": 1 },
-    { "ID": 3, "Method": "Insurance", "Amount": 80, "BillID": 2 },
-    { "ID": 4, "Method": "Cash", "Amount": 100, "BillID": 2 },
-    { "ID": 5, "Method": "Card", "Amount": 120, "BillID": 2 },
-    { "ID": 6, "Method": "Cash", "Amount": 150, "BillID": 3 },
-    { "ID": 7, "Method": "Insurance", "Amount": 20, "BillID": 3 }
+    {
+      "ID": 1,
+      "Method": "Cash",
+      "Amount": 50,
+      "BillID": 1
+    },
+    {
+      "ID": 2,
+      "Method": "Card",
+      "Amount": 30,
+      "BillID": 1
+    },
+    {
+      "ID": 3,
+      "Method": "Insurance",
+      "Amount": 80,
+      "BillID": 2
+    },
+    {
+      "ID": 4,
+      "Method": "Cash",
+      "Amount": 100,
+      "BillID": 2
+    },
+    {
+      "ID": 5,
+      "Method": "Card",
+      "Amount": 120,
+      "BillID": 2
+    },
+    {
+      "ID": 6,
+      "Method": "Cash",
+      "Amount": 150,
+      "BillID": 3
+    },
+    {
+      "ID": 7,
+      "Method": "Insurance",
+      "Amount": 20,
+      "BillID": 3
+    }
   ],
   "DepartmentRows": [
-    { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
-    { "ID": 2, "Name": "Neurology", "Phone": "55530100" },
-    { "ID": 3, "Name": "Orthopedics", "Phone": "55530130" },
-    { "ID": 4, "Name": "Pediatrics", "Phone": "55530144" }
+    {
+      "ID": 1,
+      "Name": "Cardiology",
+      "Phone": "55510100"
+    },
+    {
+      "ID": 2,
+      "Name": "Neurology",
+      "Phone": "55530100"
+    },
+    {
+      "ID": 3,
+      "Name": "Orthopedics",
+      "Phone": "55530130"
+    },
+    {
+      "ID": 4,
+      "Name": "Pediatrics",
+      "Phone": "55530144"
+    }
   ],
   "AdminRows": [
-    { "ID": 1, "Name": "Alice Marie Smith" },
-    { "ID": 2, "Name": "Bob John Taylor" },
-    { "ID": 3, "Name": "Carol Ann Brown" }
+    {
+      "ID": 1,
+      "Name": "Alice Marie Smith"
+    },
+    {
+      "ID": 2,
+      "Name": "Bob John Taylor"
+    },
+    {
+      "ID": 3,
+      "Name": "Carol Ann Brown"
+    }
   ],
   "DoctorRows": [
-    { "ID": 1, "Name": "Alice Marie Smith", "Specialization": "Cardiologist" },
-    { "ID": 2, "Name": "Bob John Taylor", "Specialization": "Neurologist" }
+    {
+      "ID": 1,
+      "Name": "Alice Marie Smith",
+      "Specialization": "Cardiologist"
+    },
+    {
+      "ID": 2,
+      "Name": "Bob John Taylor",
+      "Specialization": "Neurologist"
+    }
   ],
   "PatientRows": [
-    { "ID": 1, "Name": "Olivia Anne Taylor", "Age": 18, "Phone": "76123456" },
-    { "ID": 2, "Name": "Liam Andrew Baker", "Age": 30, "Phone": "71098765" },
-    { "ID": 3, "Name": "Sophia Marie King", "Age": 40, "Phone": "78906543" }
+    {
+      "ID": 1,
+      "Name": "Olivia Anne Taylor",
+      "Age": 18,
+      "Phone": "76123456"
+    },
+    {
+      "ID": 2,
+      "Name": "Liam Andrew Baker",
+      "Age": 30,
+      "Phone": "71098765"
+    },
+    {
+      "ID": 3,
+      "Name": "Sophia Marie King",
+      "Age": 40,
+      "Phone": "78906543"
+    }
   ],
   "ReceptionistRows": [
-    { "ID": 1, "Name": "Lara Marie Kanaan" },
-    { "ID": 2, "Name": "Ahmad Nabil Fakhoury" }
+    {
+      "ID": 1,
+      "Name": "Lara Marie Kanaan"
+    },
+    {
+      "ID": 2,
+      "Name": "Ahmad Nabil Fakhoury"
+    }
   ],
   "TestTypeRows": [
-    { "ID": 1, "Name": "Blood Test", "DepartmentName": "Heart" },
-    { "ID": 2, "Name": "MRI Scan", "DepartmentName": "Sanity" },
-    { "ID": 3, "Name": "X-Ray", "DepartmentName": "Breath" }
+    {
+      "ID": 1,
+      "Name": "Blood Test",
+      "DepartmentName": "Heart"
+    },
+    {
+      "ID": 2,
+      "Name": "MRI Scan",
+      "DepartmentName": "Sanity"
+    },
+    {
+      "ID": 3,
+      "Name": "X-Ray",
+      "DepartmentName": "Breath"
+    }
   ],
   "TestOrderRows": [
     {
@@ -580,21 +745,58 @@
       "TestName": "Blood Test",
       "PatientName": "Olivia Anne Taylor"
     },
-    { "ID": 2, "TestName": "MRI Scan", "PatientName": "Sophia Marie King" },
-    { "ID": 3, "TestName": "X-Ray", "PatientName": "Liam Andrew Baker" }
+    {
+      "ID": 2,
+      "TestName": "MRI Scan",
+      "PatientName": "Sophia Marie King"
+    },
+    {
+      "ID": 3,
+      "TestName": "X-Ray",
+      "PatientName": "Liam Andrew Baker"
+    }
   ],
-
   "Countries": [
-    { "ID": 1, "Name": "United States" },
-    { "ID": 2, "Name": "Canada" },
-    { "ID": 3, "Name": "United Kingdom" },
-    { "ID": 4, "Name": "Germany" },
-    { "ID": 5, "Name": "France" },
-    { "ID": 6, "Name": "Australia" },
-    { "ID": 7, "Name": "India" },
-    { "ID": 8, "Name": "Brazil" },
-    { "ID": 9, "Name": "Japan" },
-    { "ID": 10, "Name": "South Africa" }
+    {
+      "ID": 1,
+      "Name": "United States"
+    },
+    {
+      "ID": 2,
+      "Name": "Canada"
+    },
+    {
+      "ID": 3,
+      "Name": "United Kingdom"
+    },
+    {
+      "ID": 4,
+      "Name": "Germany"
+    },
+    {
+      "ID": 5,
+      "Name": "France"
+    },
+    {
+      "ID": 6,
+      "Name": "Australia"
+    },
+    {
+      "ID": 7,
+      "Name": "India"
+    },
+    {
+      "ID": 8,
+      "Name": "Brazil"
+    },
+    {
+      "ID": 9,
+      "Name": "Japan"
+    },
+    {
+      "ID": 10,
+      "Name": "South Africa"
+    }
   ],
   "Insurances": [
     {
@@ -621,7 +823,7 @@
       "ID": 3,
       "PatientID": 3,
       "ProviderName": "HealthSecure",
-      "Coverage": 1.0,
+      "Coverage": 1,
       "ExpirationDate": "2025-12-31",
       "isActive": true,
       "CreatedByReceptionistID": 2,
@@ -647,7 +849,7 @@
       "ID": 3,
       "PatientID": 3,
       "ProviderName": "HealthSecure",
-      "Coverage": 1.0,
+      "Coverage": 1,
       "isActive": true
     }
   ],

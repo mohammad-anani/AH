@@ -2,8 +2,8 @@ import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
-import { admingenerateAuditFields } from "../../utils/adminRoleUtil";
-import { stringField, numberField } from "../../utils/reusableFields";
+import { admingenerateAuditFields } from "../../../utils/RoleUtil";
+import { stringField, numberField } from "../../../utils/reusableFields";
 import type { Config } from "../../../routeConfig";
 
 export const testType: Config<"TestType"> = {

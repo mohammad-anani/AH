@@ -2,7 +2,7 @@ import { formatMoney } from "@/utils/formatters/formatMoney";
 import type { Config } from "../../routeConfig";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { methods } from "@/utils/models/zod/schemas";
-import { selectorField } from "../utils/formUtils";
+import { selectorField } from "../../utils/formUtils";
 import { bill } from "./bill";
 
 export const payment: Config<"Payment"> = {

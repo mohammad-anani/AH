@@ -2,17 +2,17 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import {
-  adminSelectorField,
+  adminFilterSelectorField,
   admingenerateAuditFields,
-} from "../utils/adminRoleUtil.ts";
+} from "../../utils/RoleUtil.ts";
 import {
   datetimeField,
   stringField,
   uniselectField,
-} from "../utils/reusableFields.ts";
+} from "../../utils/reusableFields.ts";
 
-import { doctor } from "./human-resources/doctor.ts";
 import type { Config } from "../../routeConfig.ts";
+import { doctor } from "./human-resources/doctor.ts";
 
 export const appointment: Config<"Appointment"> = {
   dataFields: ({
@@ -52,13 +52,13 @@ export const appointment: Config<"Appointment"> = {
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
   filterFields: [
-    adminSelectorField(
+    adminFilterSelectorField(
       "DoctorID",
       "Doctor",
       doctor["filterFields"],
-      doctor.selectorConfig,
-      doctor.rowTemplate,
-      doctor.dataFields,
+      doctor["selectorConfig"],
+      doctor["rowTemplate"],
+      doctor["dataFields"],
     ),
     datetimeField("Time"),
     stringField("Reason"),
@@ -81,7 +81,5 @@ export const appointment: Config<"Appointment"> = {
     ],
     [1, 1, 1],
   ],
-  subLinks: ({ ID }) => [
-    ["Show Test Orders", `/admin/tests/orders?AppointmentID=${ID}`],
-  ],
+  subLinks: () => [["Show Test Orders", `test-orders`]],
 };

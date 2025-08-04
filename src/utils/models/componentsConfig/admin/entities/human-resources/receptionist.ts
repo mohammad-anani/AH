@@ -2,10 +2,10 @@ import { employee } from "./employee";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
-import { prefixFields } from "../../utils/formUtils";
+import { prefixFields } from "../../../utils/formUtils";
 import { person } from "./person";
 
-import { admingenerateAuditFields } from "../../utils/adminRoleUtil";
+import { admingenerateAuditFields } from "../../../utils/RoleUtil";
 import type { Config } from "../../../routeConfig";
 
 export const receptionist: Config<"Receptionist"> = {
@@ -48,7 +48,6 @@ export const receptionist: Config<"Receptionist"> = {
       `/admin/tests/appointments?ReceptionistID=${ID}`,
     ],
     ["Show Patients", `/admin/human-resources/patients?ReceptionistID=${ID}`],
-    ["Show Doctors", `/admin/human-resources/doctors?ReceptionistID=${ID}`],
     ["Show Operartions", `/admin/operations?ReceptionistID=${ID}`],
   ],
 };

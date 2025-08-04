@@ -1,16 +1,17 @@
-import AdminHomepage from "@/interfaces/admin/pages/Homepage";
 import AdminProtectedRoute from "@/interfaces/admin/AdminProtectedRoute";
-import { departmentsRoutes } from "./admin/routes/departments.ts";
-import { humanResourcesRoutes } from "./admin/routes/human-resources";
-import { testsRoutes } from "./admin/routes/tests";
-import { operationsRoutes } from "./admin/routes/operations";
-import { appointmentsRoutes } from "./admin/routes/appointments";
-import { billRoute } from "./admin/routes/bills.tsx";
-import Layout from "@/ui/customComponents/Layout";
 import Nav from "@/interfaces/admin/Nav";
+
+import { appointmentsRoutes } from "./admin/appointments";
+import { billRoute } from "./admin/bills";
+import { departmentsRoutes } from "./admin/departments";
+import { humanResourcesRoutes } from "./admin/human-resources";
+import { insuranceRoute } from "./admin/insurances";
+import { operationsRoutes } from "./admin/operations";
+import { paymentRoute } from "./admin/payments";
+import { testsRoutes } from "./admin/tests";
 import Error from "@/ui/Error";
-import { insuranceRoute } from "./admin/routes/insurances.tsx";
-import { paymentRoute } from "./admin/routes/payments.tsx";
+import Layout from "@/ui/customComponents/Layout";
+import AdminHomepage from "@/interfaces/admin/pages/Homepage";
 
 export const adminRoutes = [
   {

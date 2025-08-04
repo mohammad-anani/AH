@@ -18,16 +18,19 @@ export function route<T extends EntityKey>(
   canDelete: boolean = true,
   routeConfig: RouteConfigType<T>,
   withBack?: boolean,
-  pathPrefix?: (params: Params) => string,
+  loaderPathPrefix?: (params: Params) => string,
   extraRoutes?: [routes: RouteObject[], location: "index" | "id"][],
   withList: boolean = true,
   withID: boolean = true,
+  urlPathPrefix?: string,
 ) {
   const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
     routeConfig;
 
   const mainPath =
-    (entity.startsWith("Test") ? entity.replace("Test", "") : entity) + "s";
+    (urlPathPrefix ?? "") +
+    (entity.startsWith("Test") ? entity.replace("Test", "") : entity) +
+    "s";
 
   return [
     {
@@ -45,13 +48,13 @@ export function route<T extends EntityKey>(
                   withBack={withBack ?? false}
                 />
               ),
-              loader: listLoader(`${entity}Row`, pathPrefix),
+              loader: listLoader(`${entity}Row`, loaderPathPrefix),
             }
           : { path: "", Component: InvalidPath },
         {
           path: "list",
           Component: InvalidPath,
-          loader: listLoader(`${entity}Row`, pathPrefix),
+          loader: listLoader(`${entity}Row`, loaderPathPrefix),
         },
         withID && {
           path: ":id",

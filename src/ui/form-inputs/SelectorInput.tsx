@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 import { subLinks } from "@/utils/models/componentsConfig/admin/subLinks";
-import type { Role } from "@/utils/models/componentsConfig/admin/utils/reusableFields";
+import type { Role } from "@/utils/models/componentsConfig/utils/reusableFields";
 
 interface SelectorInputProps {
   fieldKey: string;

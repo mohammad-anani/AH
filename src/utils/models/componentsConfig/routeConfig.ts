@@ -14,6 +14,12 @@ import { rowTemplates } from "./admin/rowTemplates";
 import { subLinks } from "./admin/subLinks";
 import type { SelectorConfig } from "../types/utils/selectorTypes";
 
+import { filterFields as receptionistFilterFields } from "./receptionist/filterFields.ts";
+import { rowTemplates as receptionistRowTemplates } from "./receptionist/rowTemplates.ts";
+import { dataFields as receptionistDataFields } from "./receptionist/dataFields.ts";
+import { formConfig as receptionistFormConfig } from "./receptionist//formConfig";
+import { subLinks as receptionistSubLinks } from "./receptionist/subLinks";
+
 export type RouteConfigType<K extends EntityKey> = {
   rowTemplate: RowTemplate<K>;
   dataFields: DataFields<K>;
@@ -22,7 +28,7 @@ export type RouteConfigType<K extends EntityKey> = {
   subLinks?: SubLinks<K>;
 };
 
-export const routeConfigs = Object.fromEntries(
+export const adminRouteConfigs = Object.fromEntries(
   entityKeys.map((key) => [
     key,
     {
@@ -34,6 +40,20 @@ export const routeConfigs = Object.fromEntries(
     },
   ]),
 ) as { [K in EntityKey]: RouteConfigType<K> };
+
+export const receptionistRouteConfigs = Object.fromEntries(
+  entityKeys.map((key) => [
+    key,
+    {
+      rowTemplate: receptionistRowTemplates[key],
+      dataFields: receptionistDataFields[key],
+      filterFields: receptionistFilterFields[key],
+      formConfig: receptionistFormConfig[key],
+      subLinks: receptionistSubLinks[key],
+    },
+  ]),
+) as { [K in EntityKey]: RouteConfigType<K> };
+
 export type RowTemplate<T extends EntityKey> = [
   string[],
   (item: rowTypesObject[T]) => Primitive[],

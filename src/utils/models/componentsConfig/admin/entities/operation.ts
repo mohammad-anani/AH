@@ -3,12 +3,12 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 import {
-  adminSelectorField,
+  adminFilterSelectorField,
   admingenerateAuditFields,
-} from "../utils/adminRoleUtil";
-import { stringField, datetimeField } from "../utils/reusableFields";
-import { patient } from "./human-resources";
+} from "../../utils/RoleUtil";
+import { stringField, datetimeField } from "../../utils/reusableFields";
 import type { Config } from "../../routeConfig";
+import { patient } from "./human-resources";
 
 export const operation: Config<"Operation"> = {
   dataFields: (operation: typesObject["Operation"]) => [
@@ -27,7 +27,7 @@ export const operation: Config<"Operation"> = {
       `/admin/departments/${operation.DepartmentID}`,
       "Department",
     ],
-    ["Doctors", "View Doctors", `doctors`, "Department"],
+
     ["Scheduled Date", formatDateIsoToLocal(operation.ScheduledDate)],
     ["Status", operation.Status],
     [
@@ -46,13 +46,13 @@ export const operation: Config<"Operation"> = {
   filterFields: [
     stringField("Name"),
     stringField("Description"),
-    adminSelectorField(
+    adminFilterSelectorField(
       "PatientID",
       "Patient",
       patient["filterFields"],
-      patient.selectorConfig,
-      patient.rowTemplate,
-      patient.dataFields,
+      patient["selectorConfig"],
+      patient["rowTemplate"],
+      patient["dataFields"],
     ),
     ["Department", "custom", DepartmentSelectCallBack],
     datetimeField("Scheduled Date"),
@@ -69,5 +69,5 @@ export const operation: Config<"Operation"> = {
     ({ Name, PatientName }) => [Name, PatientName],
     [2, 2],
   ],
-  subLinks: () => [],
+  subLinks: () => [["View Doctors", "doctors"]],
 };

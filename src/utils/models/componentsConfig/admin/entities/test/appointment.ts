@@ -5,14 +5,15 @@ import {
   datetimeField,
   uniselectField,
   stringField,
-} from "../../utils/reusableFields.ts";
-import { patient } from "../human-resources/patient.ts";
+} from "../../../utils/reusableFields.ts";
 import {
-  adminSelectorField,
+  adminFilterSelectorField,
   admingenerateAuditFields,
-} from "../../utils/adminRoleUtil.ts";
-import { testOrder } from "./order.ts";
+} from "../../../utils/RoleUtil.ts";
 import type { Config } from "../../../routeConfig.ts";
+import { testType } from "./type.ts";
+import { testOrder } from "./order.ts";
+import { patient } from "../human-resources/patient.ts";
 
 export const testAppointment: Config<"TestAppointment"> = {
   dataFields: ({
@@ -54,21 +55,29 @@ export const testAppointment: Config<"TestAppointment"> = {
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
   filterFields: [
-    adminSelectorField(
+    adminFilterSelectorField(
+      "TestTypeID",
+      "TestType",
+      testType["filterFields"],
+      testType["selectorConfig"],
+      testType["rowTemplate"],
+      testType["dataFields"],
+    ),
+    adminFilterSelectorField(
       "TestOrderID",
       "TestOrder",
       testOrder["filterFields"],
-      testOrder.selectorConfig,
-      testOrder.rowTemplate,
-      testOrder.dataFields,
+      testOrder["selectorConfig"],
+      testOrder["rowTemplate"],
+      testOrder["dataFields"],
     ),
-    adminSelectorField(
+    adminFilterSelectorField(
       "PatientID",
       "Patient",
       patient["filterFields"],
-      patient.selectorConfig,
-      patient.rowTemplate,
-      patient.dataFields,
+      patient["selectorConfig"],
+      patient["rowTemplate"],
+      patient["dataFields"],
     ),
     datetimeField("ScheduledDate"),
     uniselectField("Status", ["Cancelled", "Accepted"]),
