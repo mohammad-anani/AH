@@ -1,14 +1,13 @@
 import type { SelectorConfig } from "@/utils/models/types/utils/selectorTypes";
 import type { typesObject } from "../../types/normal/typesObject";
 import type { DisplayEntityKey, EntityKey } from "../../types/utils/entityKeys";
+import type { DotAccess, FormKey } from "../../types/utils/Form&Filter";
+import type { RouteConfig } from "../routeConfig";
 import type {
-  DotAccess,
-  FilterKey,
-  FormKey,
-} from "../../types/utils/Form&Filter";
-import type { RowTemplate } from "../routeConfig";
-import type { DataFields } from "@/utils/models/types/utils/routeTypes";
-import type { Role } from "./filterReusableFields";
+  DataFields,
+  RowTemplate,
+} from "@/utils/models/types/utils/routeTypes";
+import type { Role } from "../../types/utils/Form&Filter";
 
 export function prefixFields<
   T extends DisplayEntityKey,
@@ -23,20 +22,24 @@ export function prefixFields<
   ]);
 }
 
-export const formSelectorField = <T extends EntityKey>(
+export const formSelectorField = <T extends EntityKey, B extends EntityKey>(
   label: string,
   fieldKey: DotAccess<typesObject[T]>,
-  entity: EntityKey,
+  entity: B,
   mode: "add" | "update" | "both",
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
+  entityObject: RouteConfig<B>,
   role: Role,
 ): FormKey<T> => [
   label,
   fieldKey,
   "selector",
   mode,
-  [entity, selectorConfig, rowTemplate, dataFields, filterFields, role],
+  [
+    entity,
+    entityObject["selectorConfig"] as SelectorConfig<EntityKey>,
+    entityObject["rowTemplate"] as RowTemplate<EntityKey>,
+    entityObject["dataFields"] as DataFields<EntityKey>,
+    entityObject["filterFields"],
+    role,
+  ],
 ];

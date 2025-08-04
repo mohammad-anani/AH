@@ -1,118 +1,67 @@
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys.ts";
-import type {
-  DotAccess,
-  FilterKey,
-} from "@/utils/models/types/utils/Form&Filter";
-import type { DataFields } from "@/utils/models/types/utils/routeTypes";
-import type { SelectorConfig } from "@/utils/models/types/utils/selectorTypes";
-import type { RowTemplate } from "../routeConfig.ts";
+import type { DotAccess } from "@/utils/models/types/utils/Form&Filter";
 
+import type { RouteConfig } from "../routeConfig.ts";
 import {
   filterSelectorField,
-  type Role,
   generateAuditFields,
 } from "./filterReusableFields.ts";
+import { type Role } from "../../types/utils/Form&Filter.ts";
 import { formSelectorField } from "./formUtils.ts";
 
 import type { typesObject } from "../../types/normal/typesObject.ts";
-import { adminAudit } from "../admin/entities/human-resources/Audit/adminAudit.ts";
-import { receptionistAudit } from "../admin/entities/human-resources/Audit/receptionistAudit.ts";
+import { adminAudit } from "../admin/human-resources/Audit/adminAudit.ts";
+import { receptionistAudit } from "../admin/human-resources/Audit/receptionistAudit.ts";
 
-// ─── Admin ─────────────────────────────────────
-
-export const adminFilterSelectorField = (
+export const adminFilterSelectorField = <T extends EntityKey>(
   fieldKey: string,
-  entity: EntityKey,
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
-) =>
-  filterSelectorField(
-    fieldKey,
-    entity,
-    filterFields,
-    selectorConfig,
-    rowTemplate,
-    dataFields,
-    "Admin",
-  );
-
-export const adminFormSelectorField = <T extends EntityKey>(
-  label: string,
-  fieldKey: DotAccess<typesObject[T]>,
-  entity: EntityKey,
-  mode: "add" | "update" | "both",
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
-) =>
-  formSelectorField(
-    label,
-    fieldKey,
-    entity,
-    mode,
-    filterFields,
-    selectorConfig,
-    rowTemplate,
-    dataFields,
-    "Admin",
-  );
-
-// ─── Receptionist ──────────────────────────────
-
-export const receptionistFilterSelectorField = (
-  fieldKey: string,
-  entity: EntityKey,
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
-) =>
-  filterSelectorField(
-    fieldKey,
-    entity,
-    filterFields,
-    selectorConfig,
-    rowTemplate,
-    dataFields,
-    "Receptionist",
-  );
-
-export const receptionistFormSelectorField = <T extends EntityKey>(
-  label: string,
-  fieldKey: DotAccess<typesObject[T]>,
-  entity: EntityKey,
-  mode: "add" | "update" | "both",
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
-) =>
-  formSelectorField(
-    label,
-    fieldKey,
-    entity,
-    mode,
-    filterFields,
-    selectorConfig,
-    rowTemplate,
-    dataFields,
-    "Receptionist",
-  );
-
-// ─── Audit Generator ──────────────────────────
+  entity: T,
+  entityObject: RouteConfig<T>,
+) => filterSelectorField(fieldKey, entity, entityObject, "Admin");
 
 export const admingenerateAuditFields = (creator: Role) => {
-  const audit = creator === "Admin" ? adminAudit : receptionistAudit;
-
-  return generateAuditFields(
-    creator,
-    audit.filterFields,
-    audit.selectorConfig as SelectorConfig<EntityKey>,
-    audit.rowTemplate as RowTemplate<EntityKey>,
-    audit.dataFields as DataFields<EntityKey>,
-    "Admin", // You mentioned this being fixed; leave it if intentional.
-  );
+  switch (creator) {
+    case "Admin":
+      return generateAuditFields("Admin", adminAudit, "Admin");
+    case "Receptionist":
+      return generateAuditFields("Receptionist", receptionistAudit, "Admin");
+    default:
+      return undefined;
+  }
 };
+
+export const adminFormSelectorField = <
+  T extends EntityKey,
+  B extends EntityKey,
+>(
+  label: string,
+  fieldKey: DotAccess<typesObject[T]>,
+  entity: B,
+  mode: "add" | "update" | "both",
+  entityObject: RouteConfig<B>,
+) => formSelectorField(label, fieldKey, entity, mode, entityObject, "Admin");
+
+export const receptionistFilterSelectorField = <T extends EntityKey>(
+  fieldKey: string,
+  entity: T,
+  entityObject: RouteConfig<T>,
+) => filterSelectorField(fieldKey, entity, entityObject, "Receptionist");
+
+export const receptionistFormSelectorField = <
+  T extends EntityKey,
+  B extends EntityKey,
+>(
+  label: string,
+  fieldKey: DotAccess<typesObject[T]>,
+  entity: B,
+  mode: "add" | "update" | "both",
+  entityObject: RouteConfig<B>,
+) =>
+  formSelectorField(
+    label,
+    fieldKey,
+    entity,
+    mode,
+    entityObject,
+    "Receptionist",
+  );

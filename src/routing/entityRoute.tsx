@@ -8,7 +8,7 @@ import ListPage from "@/ui/entityComponents/ListPage";
 import Card from "@/ui/entityComponents/Card";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
 import type { Params, RouteObject } from "react-router-dom";
-import type { RouteConfigType } from "@/utils/models/componentsConfig/routeConfig";
+import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
 export function route<T extends EntityKey>(
@@ -16,7 +16,7 @@ export function route<T extends EntityKey>(
   canAdd: boolean = true,
   canEdit: boolean = true,
   canDelete: boolean = true,
-  routeConfig: RouteConfigType<T>,
+  entityObject: RouteConfig<T>,
   withBack?: boolean,
   loaderPathPrefix?: (params: Params) => string,
   extraRoutes?: [routes: RouteObject[], location: "index" | "id"][],
@@ -25,7 +25,7 @@ export function route<T extends EntityKey>(
   urlPathPrefix?: string,
 ) {
   const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
-    routeConfig;
+    entityObject;
 
   const mainPath =
     (urlPathPrefix ?? "") +

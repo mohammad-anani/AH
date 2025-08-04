@@ -6,7 +6,6 @@ import type { DataFields, RowTemplate } from "./routeTypes";
 
 import type { SelectorConfig } from "./selectorTypes";
 import type { Primitive } from "react-hook-form";
-import type { Role } from "../../componentsConfig/utils/filterReusableFields";
 import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 
 export type DataTypes =
@@ -84,3 +83,4 @@ export type DotAccess<T, Prefix extends string = ""> = {
           | DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
     : `${Prefix}${Extract<K, string>}`;
 }[keyof T];
+export type Role = "Admin" | "Receptionist" | "Doctor";

@@ -1,14 +1,19 @@
 import Controller from "@/ui/customComponents/Controller";
 import Selector from "../entityComponents/Selector";
 import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
-import type { SelectorConfig } from "@/utils/models/types/utils/selectorTypes";
-import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
-import type { DataFields } from "@/utils/models/types/utils/routeTypes";
+import type {
+  SelectedObjectState,
+  SelectorConfig,
+} from "@/utils/models/types/utils/selectorTypes";
+import type {
+  DataFields,
+  RowTemplate,
+} from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
-import type { Role } from "@/utils/models/componentsConfig/utils/filterReusableFields";
+import type { Role } from "@/utils/models/types/utils/Form&Filter";
 import { dataFields } from "@/utils/models/componentsConfig/admin/dataFields";
 
 interface SelectorInputProps {
@@ -69,7 +74,9 @@ function SelectorField<T extends EntityKey>({
     };
   };
 }) {
-  const [selected, setSelected] = useState<rowTypesObject[T] | undefined>({
+  const [selected, setSelected] = useState<
+    rowTypesObject[T] | undefined | { ID: number }
+  >({
     ID: fieldProps.field.value as number,
   });
 
@@ -90,7 +97,7 @@ function SelectorField<T extends EntityKey>({
       rowTemplate={rowTemplate}
       dataFields={supDataFields}
       filterFields={filterFields}
-      selectedObjectState={[selected, setSelected]}
+      selectedObjectState={[selected, setSelected] as SelectedObjectState<T>}
       dataFieldsObject={dataFields}
     />
   );

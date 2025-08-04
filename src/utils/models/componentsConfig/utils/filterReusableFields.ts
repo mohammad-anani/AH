@@ -1,13 +1,12 @@
-// reusableFields.ts
-
-import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
-
+import type { FilterKey, Role } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "../../types/utils/entityKeys";
-import type { DataFields as DataFields } from "../../types/utils/routeTypes";
+import type {
+  DataFields as DataFields,
+  RowTemplate,
+} from "../../types/utils/routeTypes";
 import type { SelectorConfig } from "../../types/utils/selectorTypes";
-import type { RowTemplate } from "../routeConfig";
+import type { RouteConfig } from "../routeConfig";
 
-// Field Builders
 export const stringField = (label: string): FilterKey => [label, "string"];
 export const numberField = (label: string): FilterKey => [label, "number"];
 export const phoneField = (label: string): FilterKey => [label, "phone"];
@@ -31,38 +30,29 @@ export const multiselectField = (
   values: string[],
 ): FilterKey => [label, "multiselect", values];
 
-export type Role = "Admin" | "Receptionist" | "Doctor";
-
-export const generateAuditFields = (
-  creator: Role,
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
-  role: Role,
-): FilterKey[] => [
-  datetimeField("CreatedAt"),
-  filterSelectorField(
-    `${creator}ID`,
-    creator,
-    filterFields,
-    selectorConfig,
-    rowTemplate,
-    dataFields,
-    role,
-  ),
-]; // ✅ Use cached object in selectorField()
-
-export const filterSelectorField = (
+export const filterSelectorField = <T extends EntityKey>(
   fieldKey: string,
-  entity: EntityKey,
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
+  entity: T,
+  entityObject: RouteConfig<T>,
   role: Role,
 ): FilterKey => [
   fieldKey,
   "selector",
-  [entity, selectorConfig, rowTemplate, dataFields, filterFields, role],
+  [
+    entity,
+    entityObject["selectorConfig"] as SelectorConfig<EntityKey>,
+    entityObject["rowTemplate"] as RowTemplate<EntityKey>,
+    entityObject["dataFields"] as DataFields<EntityKey>,
+    entityObject["filterFields"],
+    role,
+  ],
+];
+
+export const generateAuditFields = <T extends Role>(
+  creator: T,
+  entityObject: RouteConfig<T>,
+  role: Role,
+): FilterKey[] => [
+  datetimeField("CreatedAt"),
+  filterSelectorField(`${creator}ID`, creator, entityObject, role),
 ];
