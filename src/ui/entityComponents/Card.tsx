@@ -30,9 +30,7 @@ type CardProps<T extends EntityKey> = {
   canDelete?: boolean;
   headerWidth?: number;
   titleText?: string;
-  subLinksObject?: {
-    [K in EntityKey]: SubLinks<K>;
-  };
+
   dataFieldsObject?: {
     [K in EntityKey]: DataFields<K>;
   };
@@ -48,20 +46,20 @@ export default function Card<T extends EntityKey>({
   subLinks,
   dataFields,
   titleText,
-  subLinksObject,
+
   dataFieldsObject,
 }: CardProps<T>) {
   const {
     subEntity,
     setSubCard,
-    subSubLinks,
+
     subDataFields,
     object,
     subObject,
     fetcher,
-  } = useCard<T>(subLinksObject, dataFieldsObject, data);
+  } = useCard<T>(dataFieldsObject, data);
 
-  if (subSubLinks && subObject && subDataFields) {
+  if (subObject && subDataFields) {
     return (
       <>
         <Clickable
@@ -76,7 +74,6 @@ export default function Card<T extends EntityKey>({
         >
           <Card
             title={subEntity}
-            subLinks={subSubLinks as SubLinks<typeof subEntity>}
             dataFields={subDataFields as DataFields<typeof subEntity>}
             canDelete={false}
             canEdit={false}

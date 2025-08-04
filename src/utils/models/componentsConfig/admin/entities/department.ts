@@ -1,7 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import { admingenerateAuditFields } from "../../utils/RoleUtil";
-import { stringField, phoneField } from "../../utils/reusableFields";
+import { stringField, phoneField } from "../../utils/filterReusableFields";
 import type { Config } from "../../routeConfig";
 
 export const department: Config<"Department"> = {

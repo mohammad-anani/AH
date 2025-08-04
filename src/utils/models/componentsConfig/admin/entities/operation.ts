@@ -6,7 +6,7 @@ import {
   adminFilterSelectorField,
   admingenerateAuditFields,
 } from "../../utils/RoleUtil";
-import { stringField, datetimeField } from "../../utils/reusableFields";
+import { stringField, datetimeField } from "../../utils/filterReusableFields";
 import type { Config } from "../../routeConfig";
 import { patient } from "./human-resources";
 

@@ -1,16 +1,11 @@
 // reusableFields.ts
 
-import type {
-  DotAccess,
-  FilterKey,
-  FormKey,
-} from "@/utils/models/types/utils/Form&Filter";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
 
 import type { EntityKey } from "../../types/utils/entityKeys";
 import type { DataFields as DataFields } from "../../types/utils/routeTypes";
 import type { SelectorConfig } from "../../types/utils/selectorTypes";
 import type { RowTemplate } from "../routeConfig";
-import type { typesObject } from "../../types/normal/typesObject";
 
 // Field Builders
 export const stringField = (label: string): FilterKey => [label, "string"];
@@ -69,23 +64,5 @@ export const filterSelectorField = (
 ): FilterKey => [
   fieldKey,
   "selector",
-  [entity, selectorConfig, rowTemplate, dataFields, filterFields, role],
-];
-
-export const formSelectorField = <T extends EntityKey>(
-  label: string,
-  fieldKey: DotAccess<typesObject[T]>,
-  entity: EntityKey,
-  mode: "add" | "update" | "both",
-  filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<EntityKey>,
-  rowTemplate: RowTemplate<EntityKey>,
-  dataFields: DataFields<EntityKey>,
-  role: Role,
-): FormKey<T> => [
-  label,
-  fieldKey,
-  "selector",
-  mode,
   [entity, selectorConfig, rowTemplate, dataFields, filterFields, role],
 ];

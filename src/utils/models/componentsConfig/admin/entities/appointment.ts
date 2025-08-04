@@ -9,7 +9,7 @@ import {
   datetimeField,
   stringField,
   uniselectField,
-} from "../../utils/reusableFields.ts";
+} from "../../utils/filterReusableFields.ts";
 
 import type { Config } from "../../routeConfig.ts";
 import { doctor } from "./human-resources/doctor.ts";

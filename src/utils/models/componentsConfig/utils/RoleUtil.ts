@@ -11,8 +11,8 @@ import {
   filterSelectorField,
   type Role,
   generateAuditFields,
-  formSelectorField,
-} from "./reusableFields.ts";
+} from "./filterReusableFields.ts";
+import { formSelectorField } from "./formUtils.ts";
 
 import type { typesObject } from "../../types/normal/typesObject.ts";
 import { adminAudit } from "../admin/entities/human-resources/Audit/adminAudit.ts";

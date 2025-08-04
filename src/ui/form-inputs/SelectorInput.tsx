@@ -8,8 +8,8 @@ import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
-import { subLinks } from "@/utils/models/componentsConfig/admin/subLinks";
-import type { Role } from "@/utils/models/componentsConfig/utils/reusableFields";
+import type { Role } from "@/utils/models/componentsConfig/utils/filterReusableFields";
+import { dataFields } from "@/utils/models/componentsConfig/admin/dataFields";
 
 interface SelectorInputProps {
   fieldKey: string;
@@ -78,7 +78,8 @@ function SelectorField<T extends EntityKey>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
-  const [entity, selectorConfig, rowTemplate, dataFields, filterFields] = data;
+  const [entity, selectorConfig, rowTemplate, supDataFields, filterFields] =
+    data;
 
   return (
     <Selector
@@ -87,10 +88,9 @@ function SelectorField<T extends EntityKey>({
       canAdd={false}
       {...selectorConfig}
       rowTemplate={rowTemplate}
-      dataFields={dataFields}
+      dataFields={supDataFields}
       filterFields={filterFields}
       selectedObjectState={[selected, setSelected]}
-      subLinksObject={subLinks}
       dataFieldsObject={dataFields}
     />
   );

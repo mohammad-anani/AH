@@ -1,5 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { stringField } from "../../../utils/reusableFields";
+import { stringField } from "../../../utils/filterReusableFields";
 import { employee } from "./employee";
 
 import { person } from "./person";

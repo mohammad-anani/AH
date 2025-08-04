@@ -11,7 +11,7 @@ import {
   multiselectField,
   timeField,
   booleanField,
-} from "../../../utils/reusableFields";
+} from "../../../utils/filterReusableFields";
 import { prefixFields } from "../../../utils/formUtils";
 import type { DisplayingConfig } from "../../../routeConfig";
 

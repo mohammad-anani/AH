@@ -17,9 +17,6 @@ type CardProps<T extends EntityKey> = {
   subSubLinks?: SubLinks<EntityKey>;
   subDataFields?: DataFields<EntityKey>;
   onSelect: () => void;
-  subLinksObject?: {
-    [K in EntityKey]: SubLinks<K>;
-  };
   dataFieldsObject?: {
     [K in EntityKey]: DataFields<K>;
   };
@@ -34,7 +31,7 @@ export default function CardSection<T extends EntityKey>({
   dataFields,
   onBack,
   onSelect,
-  subLinksObject,
+
   dataFieldsObject,
 }: CardProps<T>) {
   const scrollClass =
@@ -60,7 +57,6 @@ export default function CardSection<T extends EntityKey>({
           dataFields={dataFields}
           isModal={true}
           dataFieldsObject={dataFieldsObject}
-          subLinksObject={subLinksObject}
         />
       </div>
     </div>

@@ -13,7 +13,7 @@ import {
   multiselectField,
   timeField,
   booleanField,
-} from "../../../utils/reusableFields";
+} from "../../../utils/filterReusableFields";
 
 export const weekdays = [
   "Monday",

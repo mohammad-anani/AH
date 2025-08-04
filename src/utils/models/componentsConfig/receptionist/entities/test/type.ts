@@ -1,7 +1,7 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 
-import { stringField, numberField } from "../../../utils/reusableFields";
+import { stringField, numberField } from "../../../utils/filterReusableFields";
 import type { Config } from "../../../routeConfig";
 
 export const testType: Config<"TestType"> = {

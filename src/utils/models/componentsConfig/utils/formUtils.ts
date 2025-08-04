@@ -8,7 +8,7 @@ import type {
 } from "../../types/utils/Form&Filter";
 import type { RowTemplate } from "../routeConfig";
 import type { DataFields } from "@/utils/models/types/utils/routeTypes";
-import type { Role } from "./reusableFields";
+import type { Role } from "./filterReusableFields";
 
 export function prefixFields<
   T extends DisplayEntityKey,
@@ -23,29 +23,20 @@ export function prefixFields<
   ]);
 }
 
-//T is selector type
-//B is source type
-export const selectorField = <T extends EntityKey, B extends EntityKey>(
+export const formSelectorField = <T extends EntityKey>(
   label: string,
-  fieldKey: DotAccess<typesObject[B]>,
-  entity: T,
-  mode: "add" | "both",
+  fieldKey: DotAccess<typesObject[T]>,
+  entity: EntityKey,
+  mode: "add" | "update" | "both",
   filterFields: FilterKey[],
-  selectorConfig: SelectorConfig<T>,
-  rowTemplate: RowTemplate<T>,
-  dataFields: DataFields<T>,
+  selectorConfig: SelectorConfig<EntityKey>,
+  rowTemplate: RowTemplate<EntityKey>,
+  dataFields: DataFields<EntityKey>,
   role: Role,
-): FormKey<B> => [
+): FormKey<T> => [
   label,
   fieldKey,
   "selector",
   mode,
-  [
-    entity,
-    selectorConfig as SelectorConfig<EntityKey>,
-    rowTemplate as RowTemplate<EntityKey>,
-    dataFields as DataFields<EntityKey>,
-    filterFields,
-    role,
-  ],
+  [entity, selectorConfig, rowTemplate, dataFields, filterFields, role],
 ];

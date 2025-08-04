@@ -9,7 +9,7 @@ import {
   phoneField,
   emailField,
   booleanField,
-} from "../../../utils/reusableFields";
+} from "../../../utils/filterReusableFields";
 import type { DisplayingConfig } from "../../../routeConfig";
 
 export const person: DisplayingConfig<"Person"> = {

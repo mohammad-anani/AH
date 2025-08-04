@@ -5,11 +5,12 @@ import {
   datetimeField,
   stringField,
   uniselectField,
-} from "../../utils/reusableFields.ts";
+} from "../../utils/filterReusableFields.ts";
 
 import type { Config } from "../../routeConfig.ts";
 import { receptionistFilterSelectorField } from "../../utils/RoleUtil.ts";
 import { doctor } from "./human-resources/doctor.ts";
+import { patient } from "./human-resources/patient.ts";
 
 export const appointment: Config<"Appointment"> = {
   dataFields: ({
@@ -40,6 +41,14 @@ export const appointment: Config<"Appointment"> = {
     ["Bill", "View Bill", "/receptionist/bills/" + BillID, "Bill"],
   ],
   filterFields: [
+    receptionistFilterSelectorField(
+      "PatientID",
+      "Patient",
+      patient["filterFields"],
+      patient["selectorConfig"],
+      patient["rowTemplate"],
+      patient["dataFields"],
+    ),
     receptionistFilterSelectorField(
       "DoctorID",
       "Doctor",

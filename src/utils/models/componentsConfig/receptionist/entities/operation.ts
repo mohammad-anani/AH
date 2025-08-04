@@ -3,7 +3,7 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
 
-import { stringField, datetimeField } from "../../utils/reusableFields";
+import { stringField, datetimeField } from "../../utils/filterReusableFields";
 import type { Config } from "../../routeConfig";
 import { receptionistFilterSelectorField } from "../../utils/RoleUtil";
 import { patient } from "./human-resources";

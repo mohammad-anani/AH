@@ -1,6 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
-import { datetimeField } from "../../../utils/reusableFields";
+import { datetimeField } from "../../../utils/filterReusableFields";
 import type { Config } from "../../../routeConfig";
 import { receptionistFilterSelectorField } from "../../../utils/RoleUtil";
 import { appointment } from "../appointment";

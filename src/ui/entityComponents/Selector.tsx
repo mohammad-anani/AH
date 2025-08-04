@@ -2,10 +2,7 @@
 import { type FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import { type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 import { type RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
-import {
-  type DataFields,
-  type SubLinks,
-} from "@/utils/models/types/utils/routeTypes";
+import { type DataFields } from "@/utils/models/types/utils/routeTypes";
 import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { type Setter } from "@/utils/models/types/utils/basics";
 
@@ -34,9 +31,7 @@ type SelectorProps<T extends EntityKey> = {
   dataFields: DataFields<T>;
   filterFields: FilterKey[];
   canAdd?: boolean;
-  subLinksObject?: {
-    [K in EntityKey]: SubLinks<K>;
-  };
+
   dataFieldsObject?: {
     [K in EntityKey]: DataFields<K>;
   };
@@ -53,7 +48,7 @@ export default function Selector<T extends EntityKey>({
   selectedDisplay,
   selectedObjectState,
   canAdd = false,
-  subLinksObject,
+
   dataFieldsObject,
 }: SelectorProps<T>) {
   const {
@@ -108,7 +103,6 @@ export default function Selector<T extends EntityKey>({
               cardData={cardData}
               cardID={CardID}
               dataFieldsObject={dataFieldsObject}
-              subLinksObject={subLinksObject}
               objectID={object?.["ID"]}
               dataFields={dataFields}
               onBack={() => setCardID(undefined)}

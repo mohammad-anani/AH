@@ -1,6 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { admingenerateAuditFields } from "../../../utils/RoleUtil";
-import { stringField } from "../../../utils/reusableFields";
+import { stringField } from "../../../utils/filterReusableFields";
 import { prefixFields } from "../../../utils/formUtils";
 import { employee } from "./employee";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";

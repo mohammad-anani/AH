@@ -5,11 +5,15 @@ import {
   datetimeField,
   uniselectField,
   stringField,
-} from "../../../utils/reusableFields.ts";
+} from "../../../utils/filterReusableFields.ts";
 import type { Config } from "../../../routeConfig.ts";
-import { receptionistFilterSelectorField } from "../../../utils/RoleUtil.ts";
+import {
+  receptionistFilterSelectorField,
+  receptionistFormSelectorField,
+} from "../../../utils/RoleUtil.ts";
 import { testOrder } from "./order.ts";
 import { patient } from "../human-resources/patient.ts";
+import { testType } from "./type.ts";
 
 export const testAppointment: Config<"TestAppointment"> = {
   dataFields: ({
@@ -44,6 +48,14 @@ export const testAppointment: Config<"TestAppointment"> = {
   ],
   filterFields: [
     receptionistFilterSelectorField(
+      "TestTypeID",
+      "TestType",
+      testType["filterFields"],
+      testType["selectorConfig"],
+      testType["rowTemplate"],
+      testType["dataFields"],
+    ),
+    receptionistFilterSelectorField(
       "TestOrderID",
       "TestOrder",
       testOrder["filterFields"],
@@ -64,7 +76,18 @@ export const testAppointment: Config<"TestAppointment"> = {
     stringField("Result"),
     datetimeField("ResultDate"),
   ],
-  formConfig: [["Test", "TestID", "selector", "add", ["TestType"]]],
+  formConfig: [
+    receptionistFormSelectorField(
+      "Test",
+      "TestID",
+      "TestType",
+      "add",
+      testType["filterFields"],
+      testType["selectorConfig"],
+      testType["rowTemplate"],
+      testType["dataFields"],
+    ),
+  ],
   selectorConfig: {
     selectedDisplay: ({ TestName, PatientName }) =>
       TestName + "," + PatientName,
