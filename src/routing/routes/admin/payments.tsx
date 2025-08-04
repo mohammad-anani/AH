@@ -1,12 +1,10 @@
 import { route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
-import { rowTemplates } from "@/utils/models/componentsConfig/admin/rowTemplates";
-import {
-  adminRouteConfigs,
-  type RowTemplate,
-} from "@/utils/models/componentsConfig/routeConfig";
+import { payment } from "@/utils/models/componentsConfig/admin";
+
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 import type { RouteObject } from "react-router-dom";
 
 const paymentListRoute: RouteObject[] = [
@@ -18,7 +16,7 @@ const paymentListRoute: RouteObject[] = [
         entity="Payment"
         canAdd={false}
         canModifyUrl={false}
-        rowTemplate={rowTemplates["Payment"] as RowTemplate<EntityKey>}
+        rowTemplate={payment["rowTemplate"] as RowTemplate<EntityKey>}
         filterFields={undefined}
         withBack={true}
       />
@@ -31,7 +29,7 @@ export const paymentRoute = route(
   true,
   false,
   true,
-  adminRouteConfigs["Payment"],
+  payment,
   false,
   undefined,
   [[paymentListRoute, "index"]],

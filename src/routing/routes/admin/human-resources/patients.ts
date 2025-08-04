@@ -1,11 +1,11 @@
 import { route } from "@/routing/entityRoute";
-import { adminRouteConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import { patient } from "@/utils/models/componentsConfig/admin";
 
 export const patientsRoutes = route(
   "Patient",
   false,
   false,
   true,
-  adminRouteConfigs["Patient"],
+  patient,
   true,
 );

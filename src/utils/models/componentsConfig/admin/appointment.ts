@@ -12,7 +12,7 @@ import {
 } from "../utils/filterReusableFields.ts";
 
 import type { RouteConfig } from "../routeConfig.ts";
-import { doctor } from "./entities/human-resources/doctor.ts";
+import { doctor } from "./human-resources/doctor.ts";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({

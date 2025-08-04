@@ -1,11 +1,4 @@
 import { route } from "@/routing/entityRoute";
-import { adminRouteConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import { doctor } from "@/utils/models/componentsConfig/admin";
 
-export const doctorsRoutes = route(
-  "Doctor",
-  true,
-  true,
-  true,
-  adminRouteConfigs["Doctor"],
-  true,
-);
+export const doctorsRoutes = route("Doctor", true, true, true, doctor, true);

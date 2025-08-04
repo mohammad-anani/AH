@@ -1,11 +1,11 @@
 import { route } from "@/routing/entityRoute";
-import { adminRouteConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import { testAppointment } from "@/utils/models/componentsConfig/admin";
 
 export const testAppointmentsRoutes = route(
   "TestAppointment",
   false,
   false,
   true,
-  adminRouteConfigs["TestAppointment"],
+  testAppointment,
   true,
 );

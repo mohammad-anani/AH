@@ -1,8 +1,7 @@
 import { route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
-import { testOrder } from "@/utils/models/componentsConfig/admin";
-import { adminRouteConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import { appointment, testOrder } from "@/utils/models/componentsConfig/admin";
 import type { RouteObject } from "react-router-dom";
 
 const testOrdersRoute: RouteObject[] = [
@@ -27,7 +26,7 @@ export const appointmentsRoutes = route(
   false,
   false,
   true,
-  adminRouteConfigs["Appointment"],
+  appointment,
   true,
   undefined,
   [[testOrdersRoute, "id"]],

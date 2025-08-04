@@ -1,12 +1,12 @@
 import { route } from "@/routing/entityRoute";
-import { receptionistRouteConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import { patient } from "@/utils/models/componentsConfig/receptionist";
 
 export const patientRoutes = route(
   "Patient",
   true,
   true,
   false,
-  receptionistRouteConfigs["Patient"],
+  patient,
   true,
   undefined,
   undefined,

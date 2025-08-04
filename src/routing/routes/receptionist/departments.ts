@@ -1,10 +1,10 @@
 import { route } from "@/routing/entityRoute";
-import { receptionistRouteConfigs } from "@/utils/models/componentsConfig/routeConfig";
+import { department } from "@/utils/models/componentsConfig/receptionist";
 
 export const departmentsRoutes = route(
   "Department",
   false,
   false,
   false,
-  receptionistRouteConfigs["Department"],
+  department,
 );
