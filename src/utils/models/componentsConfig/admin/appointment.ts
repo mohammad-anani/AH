@@ -38,7 +38,7 @@ export const appointment: RouteConfig<"Appointment"> = {
       `/admin/human-resources/doctors/${DoctorID}`,
       "Doctor",
     ],
-    ["Time", Time],
+    ["Time", formatDateIsoToLocal(Time)],
     ["Reason", Reason],
     ["Status", Status],
     ["Notes", Notes],
@@ -66,13 +66,15 @@ export const appointment: RouteConfig<"Appointment"> = {
     path: "/admin/appointments",
   },
   rowTemplate: [
-    ["Patient", "Doctor", "Time"],
+    ["Patient", "Doctor", "Time", "Status", "Is Paid"],
     (item) => [
       item.PatientName,
       item.DoctorName,
       formatDateIsoToLocal(item.Time),
+      item.Status,
+      item.IsPaid,
     ],
-    [1, 1, 1],
+    [1, 1, 1, 1, 1],
   ],
   subLinks: () => [["Show Test Orders", `test-orders`]],
 };

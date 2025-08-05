@@ -5,7 +5,10 @@ import { DepartmentSelectCallBack } from "@/features/department/departmentSelect
 
 import { stringField, datetimeField } from "../utils/filterReusableFields";
 import type { RouteConfig } from "../routeConfig";
-import { receptionistFilterSelectorField } from "../utils/RoleUtil";
+import {
+  receptionistFilterSelectorField,
+  receptionistFormSelectorField,
+} from "../utils/RoleUtil";
 import { patient } from "./human-resources";
 import { DoctorSelectorCallback } from "@/features/doctor/doctorSelectCallback";
 
@@ -44,15 +47,39 @@ export const operation: RouteConfig<"Operation"> = {
     datetimeField("Scheduled Date"),
     ["Status", "uniselect", ["Done", "UnDone"]],
   ],
-  formConfig: [],
+  formConfig: [
+    ["Name", "Name", "string", "both"],
+    ["Description", "Description", "string", "both"],
+    receptionistFormSelectorField(
+      "Patient",
+      "PatientID",
+      "Patient",
+      "add",
+      patient,
+    ),
+    [
+      "Department",
+      "DepartmentID",
+      "custom",
+      "add",
+      DepartmentSelectCallBack("receptionist"),
+    ],
+    ["Doctors", "Doctors", "custom", "both", DoctorSelectorCallback],
+    ["Scheduled Date", "ScheduledDate", "datetime", "both"],
+  ],
   selectorConfig: {
     selectedDisplay: ({ ID }) => String(ID),
     path: "/receptionist/operations",
   },
   rowTemplate: [
-    ["Name", "Patient"],
-    ({ Name, PatientName }) => [Name, PatientName],
-    [2, 2],
+    ["Name", "Patient", "Status", "Is Paid"],
+    ({ Name, PatientName, Status, IsPaid }) => [
+      Name,
+      PatientName,
+      Status,
+      IsPaid,
+    ],
+    [2, 2, 2, 2],
   ],
   subLinks: () => [["View Doctors", "doctors"]],
 };

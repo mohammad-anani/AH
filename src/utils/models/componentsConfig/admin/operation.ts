@@ -58,9 +58,14 @@ export const operation: RouteConfig<"Operation"> = {
     path: "/admin/operations",
   },
   rowTemplate: [
-    ["Name", "Patient"],
-    ({ Name, PatientName }) => [Name, PatientName],
-    [2, 2],
+    ["Name", "Patient", "Status", "Is Paid"],
+    ({ Name, PatientName, Status, IsPaid }) => [
+      Name,
+      PatientName,
+      Status,
+      IsPaid,
+    ],
+    [2, 2, 2, 2],
   ],
   subLinks: () => [["View Doctors", "doctors"]],
 };

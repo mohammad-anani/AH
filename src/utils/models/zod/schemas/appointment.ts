@@ -1,5 +1,10 @@
 import { z } from "zod";
-import { positiveNumber, nonEmptyString, datetime } from "../reusableSchemas";
+import {
+  positiveNumber,
+  nonEmptyString,
+  datetime,
+  statusField,
+} from "../reusableSchemas";
 
 export const AppointmentSchema = z.object({
   ID: positiveNumber("Appointment ID", 1),
@@ -9,7 +14,7 @@ export const AppointmentSchema = z.object({
   Reason: nonEmptyString("Reason").min(5, {
     message: "Please provide a reason with at least 5 characters.",
   }),
-  Status: nonEmptyString("Status"),
+  Status: statusField("Status"),
   Notes: z.string(),
   BillID: positiveNumber("Payment ID", 1),
   CreatedByReceptionistID: positiveNumber("Receptionist ID", 1),

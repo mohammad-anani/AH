@@ -46,18 +46,11 @@ export default function Card<T extends EntityKey>({
   subLinks,
   dataFields,
   titleText,
-
+  headerWidth,
   dataFieldsObject,
 }: CardProps<T>) {
-  const {
-    subEntity,
-    setSubCard,
-
-    subDataFields,
-    object,
-    subObject,
-    fetcher,
-  } = useCard<T>(dataFieldsObject, data);
+  const { subEntity, setSubCard, subDataFields, object, subObject, fetcher } =
+    useCard<T>(dataFieldsObject, data);
 
   if (subObject && subDataFields) {
     return (
@@ -110,7 +103,7 @@ export default function Card<T extends EntityKey>({
         </div>
       </div>
       <div
-        className={`grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 *:text-xl! *:odd:font-bold`}
+        className={`grid ${headerWidth ? "grid-cols-[" + headerWidth + "px_1fr]" : "grid-cols-[auto_1fr]"} gap-x-2 gap-y-1 *:text-xl! *:odd:font-bold`}
       >
         <Data<T>
           isNestedCard={isNestedCard}

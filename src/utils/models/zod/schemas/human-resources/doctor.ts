@@ -15,6 +15,8 @@ export const DoctorSchema = z.object({
     message: "Specialization must be at least 2 characters long.",
   }),
 
+  AppointmentCost: positiveNumber("Appointment Cost"),
+
   CreatedByAdminID: positiveNumber("Admin ID", 1),
 
   CreatedAt: datetime("Creation date"),

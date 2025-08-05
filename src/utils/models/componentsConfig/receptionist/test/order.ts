@@ -42,5 +42,6 @@ export const testOrder: RouteConfig<"TestOrder"> = {
       "Show Test Appointments",
       `/receptionist/tests/appointments?TestOrderID=${ID}`,
     ],
+    ["Reserve", "reserve"],
   ],
 };

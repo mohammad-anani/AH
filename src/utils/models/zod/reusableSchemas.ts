@@ -37,3 +37,10 @@ export const date = (name: string) =>
 // Boolean field
 export const booleanField = (name: string) =>
   z.boolean({ error: `${name} must be true or false.` });
+
+const statuses = ["Scheduled", "In Progress", "Completed", "Cancelled"];
+
+export const statusField = (name: string) =>
+  z.enum(statuses, {
+    error: `${name} must be one of these : ${statuses.join(",")}`,
+  });

@@ -12,7 +12,7 @@ export function useFilterNavigation(
   function buildPathWithParams(data: Record<string, unknown>): URLSearchParams {
     const params = new URLSearchParams();
 
-    for (const [field, type, misc] of fields) {
+    for (const [field, type] of fields) {
       if (isTemporalType(type ?? "null") || type === "money") {
         if (data[field + "From"])
           params.set(field + "From", String(data[field + "From"]));

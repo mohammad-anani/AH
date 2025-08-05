@@ -12,6 +12,8 @@ import { testAppointmentsRoutes } from "./receptionist/tests/appointments";
 import { testTypesRoutes } from "./receptionist/tests/types";
 import { testOrdersRoutes } from "./receptionist/tests/orders";
 import { departmentsRoutes } from "./receptionist/departments";
+import { billRoute } from "./receptionist/bills";
+import { paymentRoute } from "./receptionist/payments";
 
 export const receptionistRoutes = [
   {
@@ -36,6 +38,8 @@ export const receptionistRoutes = [
           ...testTypesRoutes,
           ...testOrdersRoutes,
           ...departmentsRoutes,
+          ...billRoute,
+          ...paymentRoute,
         ],
       },
     ],

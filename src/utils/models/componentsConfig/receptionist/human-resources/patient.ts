@@ -17,6 +17,7 @@ export const patient: RouteConfig<"Patient"> = {
     ],
     ["Show Operations", `/receptionist/operations?PatientID=${ID}`],
     ["Show Insurances", `/receptionist/insurances?PatientID=${ID}`],
+    ["Add Insurance", `/receptionist/insurances/add`, { PatientID: ID }],
   ],
   filterFields: [...person["filterFields"]],
   rowTemplate: [["Name", "Age"], (item) => [item.Name, item.Age], [2, 1]],

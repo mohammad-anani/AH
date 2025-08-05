@@ -63,6 +63,14 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
       "add",
       testType,
     ),
+    receptionistFormSelectorField(
+      "Patient",
+      "PatientID",
+      "Patient",
+      "add",
+      patient,
+    ),
+    ["Scheduled Date", "ScheduledDate", "datetime", "both"],
   ],
   selectorConfig: {
     selectedDisplay: ({ TestName, PatientName }) =>
@@ -70,13 +78,15 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     path: "/receptionist/tests/appointments",
   },
   rowTemplate: [
-    ["Patient", "Test", "Date"],
+    ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [
       item.PatientName,
       item.TestName,
       formatDateIsoToLocal(item.Date),
+      item.Status,
+      item.IsPaid,
     ],
-    [1, 1, 1],
+    [1, 1, 1, 1, 1],
   ],
   subLinks: () => [],
 };

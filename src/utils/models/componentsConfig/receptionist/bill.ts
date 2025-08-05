@@ -24,6 +24,7 @@ export const bill: RouteConfig<"Bill"> = {
   },
   subLinks: ({ ID }) => [
     ["Show Payments", `/receptionist/payments?BillID=${ID}`],
+    ["Make a Payment", "pay"],
   ],
 };
 

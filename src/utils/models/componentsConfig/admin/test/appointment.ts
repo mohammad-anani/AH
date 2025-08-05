@@ -71,13 +71,15 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     path: "/admin/tests/appointments",
   },
   rowTemplate: [
-    ["Patient", "Test", "Date"],
+    ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [
       item.PatientName,
       item.TestName,
       formatDateIsoToLocal(item.Date),
+      item.Status,
+      item.IsPaid,
     ],
-    [1, 1, 1],
+    [1, 1, 1, 1, 1],
   ],
   subLinks: () => [],
 };

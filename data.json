@@ -205,6 +205,7 @@
         "ShiftEnd": "17:00"
       },
       "Specialization": "Cardiologist",
+      "AppointmentCost": 150,
       "CreatedByAdminID": 1,
       "CreatedAt": "2023-01-01T08:00:00"
     },
@@ -235,6 +236,7 @@
         "ShiftEnd": "16:00"
       },
       "Specialization": "Neurologist",
+      "AppointmentCost": 140,
       "CreatedByAdminID": 2,
       "CreatedAt": "2023-02-01T09:00:00"
     }
@@ -355,7 +357,7 @@
       "PatientID": 1,
       "TestID": 2,
       "ScheduledDate": "2023-02-10T08:00:00",
-      "Status": "Accepted",
+      "Status": "Scheduled",
       "Result": "Normal",
       "ResultDate": "2023-02-11T09:00:00",
       "BillID": 2,
@@ -381,7 +383,7 @@
       "PatientID": 3,
       "TestID": 5,
       "ScheduledDate": "2023-02-14T08:00:00",
-      "Status": "Accepted",
+      "Status": "Cancelled",
       "Result": "Abnormal",
       "BillID": 1,
       "ResultDate": "2023-02-15T09:00:00",
@@ -394,19 +396,25 @@
       "ID": 1,
       "PatientName": "Olivia Anne Taylor",
       "TestName": "Blood Test",
-      "Date": "2023-02-10T08:00:00"
+      "Date": "2023-02-10T08:00:00",
+      "Status": "Scheduled",
+      "IsPaid": false
     },
     {
       "ID": 2,
       "PatientName": "Liam Andrew Baker",
       "TestName": "MRI Scan",
-      "Date": "2023-02-12T08:00:00"
+      "Date": "2023-02-12T08:00:00",
+      "Status": "Cancelled",
+      "IsPaid": false
     },
     {
       "ID": 3,
       "PatientName": "Sophia Marie King",
       "TestName": "X-Ray",
-      "Date": "2023-02-14T08:00:00"
+      "Date": "2023-02-14T08:00:00",
+      "Status": "Cancelled",
+      "IsPaid": false
     }
   ],
   "Appointments": [
@@ -452,19 +460,25 @@
       "ID": 1,
       "Time": "2023-02-01T09:00:00",
       "PatientName": "Olivia Anne Taylor",
-      "DoctorName": "Alice Marie Smith"
+      "DoctorName": "Alice Marie Smith",
+      "Status": "Completed",
+      "IsPaid": false
     },
     {
       "ID": 2,
       "Time": "2023-02-02T10:00:00",
       "PatientName": "Liam Andrew Baker",
-      "DoctorName": "Bob John Taylor"
+      "DoctorName": "Bob John Taylor",
+      "Status": "Cancelled",
+      "IsPaid": false
     },
     {
       "ID": 3,
       "Time": "2023-02-03T11:00:00",
       "PatientName": "Sophia Marie King",
-      "DoctorName": "Alice Marie Smith"
+      "DoctorName": "Alice Marie Smith",
+      "Status": "Scheduled",
+      "IsPaid": true
     }
   ],
   "Bills": [
@@ -870,14 +884,17 @@
       "Status": "Scheduled",
       "BillID": 1,
       "CreatedByReceptionistID": 7,
-      "CreatedAt": "2023-01-15T09:30:00"
+      "CreatedAt": "2023-01-15T09:30:00",
+      "Doctors": [1, 2, 3]
     }
   ],
   "OperationRows": [
     {
       "ID": 1,
       "PatientName": "Ali Mansour",
-      "Name": "Appendectomy"
+      "Name": "Appendectomy",
+      "Status": "Scheduled",
+      "IsPaid": false
     }
   ]
 }

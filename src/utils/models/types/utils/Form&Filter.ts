@@ -24,7 +24,7 @@ export type customFilterProps = [
   (data: {
     field: Primitive;
     onChange: Setter<Primitive>;
-    role: "admin" | "receptionist" | "doctor";
+    role?: "admin" | "receptionist" | "doctor";
   }) => JSX.Element,
   DataTypes,
 ];

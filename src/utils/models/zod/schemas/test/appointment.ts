@@ -3,6 +3,7 @@ import {
   positiveNumber,
   nonEmptyString,
   datetime,
+  statusField,
 } from "../../reusableSchemas";
 
 export const TestAppointmentSchema = z.object({
@@ -11,7 +12,7 @@ export const TestAppointmentSchema = z.object({
   TestID: positiveNumber("Test ID", 1),
   PatientID: positiveNumber("Patient ID", 1),
   ScheduledDate: datetime("Scheduled date and time"),
-  Status: nonEmptyString("Status"),
+  Status: statusField("Status"),
   Result: nonEmptyString("Result").nullable(),
   ResultDate: datetime("Result date").nullable(),
   BillID: positiveNumber("Payment ID", 1),
