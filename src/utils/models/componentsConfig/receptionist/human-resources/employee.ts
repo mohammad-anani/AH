@@ -66,7 +66,7 @@ export const employee: DisplayingConfig<"Employee"> = {
     ];
   },
   filterFields: [
-    ["Department", "custom", DepartmentSelectCallBack],
+    ["Department", "custom", DepartmentSelectCallBack("receptionist")],
     moneyField("Salary"),
     dateField("HireDate"),
     dateField("LeaveDate"),

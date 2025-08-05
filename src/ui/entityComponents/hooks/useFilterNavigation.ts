@@ -12,12 +12,17 @@ export function useFilterNavigation(
   function buildPathWithParams(data: Record<string, unknown>): URLSearchParams {
     const params = new URLSearchParams();
 
-    for (const [field, type] of fields) {
+    for (const [field, type, misc] of fields) {
       if (isTemporalType(type ?? "null") || type === "money") {
         if (data[field + "From"])
           params.set(field + "From", String(data[field + "From"]));
         if (data[field + "To"])
           params.set(field + "To", String(data[field + "To"]));
+      } else if (type === "custom") {
+        const ids = data[field] as number[];
+
+        if (ids?.length > 0) params.set(field, ids?.join(","));
+        else params.delete(field);
       } else if (type === "multiselect") {
         if ((data[field] as unknown[])?.length)
           params.set(field, (data[field] as unknown[]).join(","));

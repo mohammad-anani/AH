@@ -1,7 +1,7 @@
 // Selector.tsx
-import { type FilterKey } from "@/utils/models/types/utils/Form&Filter";
+
 import { type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
-import { type RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+
 import { type DataFields } from "@/utils/models/types/utils/routeTypes";
 import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { type Setter } from "@/utils/models/types/utils/basics";
@@ -21,35 +21,36 @@ import SelectorTrigger from "./selectorComponents/SelectorTrigger";
 import useSelector from "./hooks/useSelector";
 import CardSection from "./selectorComponents/CardSection";
 import ListSection from "./selectorComponents/ListSection";
+import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 
 type SelectorProps<T extends EntityKey> = {
   entity: T;
-  path: string;
-  selectedDisplay: (item: rowTypesObject[T]) => string;
+  path?: string;
+  entityObject: RouteConfig<T>;
   selectedObjectState: SelectedObjectState<T>;
-  rowTemplate: RowTemplate<T>;
-  dataFields: DataFields<T>;
-  filterFields: FilterKey[];
+
   canAdd?: boolean;
 
   dataFieldsObject?: {
     [K in EntityKey]: DataFields<K>;
   };
   disabled?: boolean;
+  data?: [rowTypesObject[T][], number];
+  onEdit?: (object: rowTypesObject[T]) => void;
+  onDelete?: (object: rowTypesObject[T]) => void;
 };
 
 export default function Selector<T extends EntityKey>({
   entity,
   path,
   disabled = false,
-  rowTemplate,
-  filterFields,
-  dataFields,
-  selectedDisplay,
+  entityObject,
   selectedObjectState,
   canAdd = false,
-
+  data,
   dataFieldsObject,
+  onEdit,
+  onDelete,
 }: SelectorProps<T>) {
   const {
     isOpen,
@@ -61,17 +62,22 @@ export default function Selector<T extends EntityKey>({
     cardData,
     listData,
     searchParamsState,
-
     title,
-  } = useSelector(entity, selectedObjectState, path);
+  } = useSelector(
+    entity,
+    selectedObjectState,
+    entityObject.selectorConfig.path,
+    data,
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <SelectorTrigger
         disabled={disabled}
         selectedObject={selectedObjectState}
-        selectedDisplay={selectedDisplay}
+        selectedDisplay={entityObject["selectorConfig"].selectedDisplay}
         entity={entity}
+        onDelete={onDelete}
       />
       <DialogPortal>
         <DialogContent className="w-500 pt-4 text-left!">
@@ -87,11 +93,12 @@ export default function Selector<T extends EntityKey>({
               data={listData}
               selectedObjectState={selectedObjectState}
               canAdd={canAdd}
-              rowTemplate={rowTemplate}
-              filterFields={filterFields}
+              rowTemplate={entityObject["rowTemplate"]}
+              filterFields={entityObject["filterFields"]}
               searchParamsState={searchParamsState}
               onDetailsClick={setCardID}
               onSelect={(item) => {
+                onEdit?.(item);
                 setObject(item);
                 setIsOpen(false);
               }}
@@ -104,7 +111,7 @@ export default function Selector<T extends EntityKey>({
               cardID={CardID}
               dataFieldsObject={dataFieldsObject}
               objectID={object?.["ID"]}
-              dataFields={dataFields}
+              dataFields={entityObject["dataFields"]}
               onBack={() => setCardID(undefined)}
               onSelect={() => {
                 (setObject as Setter<rowTypesObject[T] | { ID: number }>)({

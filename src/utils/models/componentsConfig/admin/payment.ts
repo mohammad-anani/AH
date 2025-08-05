@@ -1,9 +1,6 @@
 import { formatMoney } from "@/utils/formatters/formatMoney";
 import type { RouteConfig } from "../routeConfig";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
-import { methods } from "@/utils/models/zod/schemas";
-import { formSelectorField } from "../utils/formUtils";
-import { bill } from "./bill";
 
 export const payment: RouteConfig<"Payment"> = {
   dataFields: ({
@@ -27,18 +24,7 @@ export const payment: RouteConfig<"Payment"> = {
   filterFields: [],
   selectorConfig: { selectedDisplay: () => "", path: "" },
   subLinks: () => [],
-  formConfig: [
-    formSelectorField<"Payment", "Bill">(
-      "Bill",
-      "BillID",
-      "Bill",
-      "add",
-      bill,
-      "Admin",
-    ),
-    ["Amount", "Amount", "money", "add"],
-    ["Method", "Method", "uniselect", "add", methods],
-  ],
+  formConfig: [],
   rowTemplate: [
     ["Amount", "Method"],
     ({ Amount, Method }) => [formatMoney(Amount), Method],

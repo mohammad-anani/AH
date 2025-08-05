@@ -1,10 +1,6 @@
 import type { FilterKey, Role } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "../../types/utils/entityKeys";
-import type {
-  DataFields as DataFields,
-  RowTemplate,
-} from "../../types/utils/routeTypes";
-import type { SelectorConfig } from "../../types/utils/selectorTypes";
+
 import type { RouteConfig } from "../routeConfig";
 
 export const stringField = (label: string): FilterKey => [label, "string"];
@@ -35,18 +31,7 @@ export const filterSelectorField = <T extends EntityKey>(
   entity: T,
   entityObject: RouteConfig<T>,
   role: Role,
-): FilterKey => [
-  fieldKey,
-  "selector",
-  [
-    entity,
-    entityObject["selectorConfig"] as SelectorConfig<EntityKey>,
-    entityObject["rowTemplate"] as RowTemplate<EntityKey>,
-    entityObject["dataFields"] as DataFields<EntityKey>,
-    entityObject["filterFields"],
-    role,
-  ],
-];
+): FilterKey => [fieldKey, "selector", [entity, entityObject, role]];
 
 export const generateAuditFields = <T extends Role>(
   creator: T,

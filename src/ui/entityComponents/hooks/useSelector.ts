@@ -11,6 +11,7 @@ export default function useSelector<T extends EntityKey>(
   entity: T,
   selectedObjectState: SelectedObjectState<T>,
   path: string,
+  data?: [rowTypesObject[T][], number],
 ) {
   const [object, setObject] = selectedObjectState;
 
@@ -27,9 +28,10 @@ export default function useSelector<T extends EntityKey>(
   const paramString = searchParams?.toString() ?? "";
 
   const listFetcher = useFetcher();
+  const findFetcher = useFetcher();
 
   useEffect(() => {
-    listFetcher.load(`${path}/list?${paramString}`);
+    if (!data) listFetcher.load(`${path}/list?${paramString}`);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paramString, path]);
@@ -37,20 +39,17 @@ export default function useSelector<T extends EntityKey>(
   useEffect(() => {
     if (searchParamsState) {
       if (
-        listFetcher.data?.[0] &&
         object?.["ID"] &&
         Object.keys(object).length === 1 &&
         Object.keys(object)[0] === "ID"
       ) {
-        setObject?.(
-          (listFetcher.data?.[0] as rowTypesObject[T][])?.find(
-            (item) => item?.["ID"] === object?.["ID"],
-          ),
-        );
+        findFetcher.load(`${path}/list?ID=${object["ID"]}`);
+        if (findFetcher.data)
+          setObject?.(findFetcher.data[0][0] as rowTypesObject[T]);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listFetcher.data?.[0], CardID]);
+  }, [listFetcher.data?.[0], CardID, findFetcher.data?.[0]]);
 
   const cardFetcher = useFetcher();
 
@@ -70,9 +69,11 @@ export default function useSelector<T extends EntityKey>(
     CardID,
     setCardID,
     cardData: cardFetcher.data,
-    listData: listFetcher.data,
+    listData: data || listFetcher.data,
     searchParamsState,
 
     title,
   };
 }
+
+//fix getting ready ID

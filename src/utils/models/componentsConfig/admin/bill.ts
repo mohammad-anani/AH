@@ -24,7 +24,7 @@ export const bill: RouteConfig<"Bill"> = {
     },
     [1, 1],
   ],
-  formConfig: [["Amount", "Amount", "money", "both"]],
+  formConfig: [],
   selectorConfig: {
     selectedDisplay: ({ AmountPaid, Amount }) =>
       `Amount: ${formatMoney(Amount ?? "")}  |  Paid: ${formatMoney(AmountPaid ?? "")}`,

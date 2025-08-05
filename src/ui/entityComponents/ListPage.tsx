@@ -38,6 +38,7 @@ type ListPageProps<T extends EntityKey> = {
   ];
   detailsLink?: (ID: number) => string;
   dataLink?: string;
+  itemsClassName?: string;
 };
 
 export default function ListPage<T extends EntityKey>({
@@ -54,6 +55,7 @@ export default function ListPage<T extends EntityKey>({
   onSelect,
   withBack = false,
   onDetailsClick,
+  itemsClassName,
   detailsLink,
 }: ListPageProps<T>) {
   const {
@@ -158,6 +160,7 @@ export default function ListPage<T extends EntityKey>({
           Header={Header}
           itemsCount={itemsCount}
           emptyText={emptyText}
+          className={itemsClassName}
         />
         <List.Pagination itemsCount={itemsCount} />
       </List>

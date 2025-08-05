@@ -7,7 +7,7 @@ export const patientRoutes = route(
   true,
   false,
   patient,
-  true,
+  false,
   undefined,
   undefined,
   true,

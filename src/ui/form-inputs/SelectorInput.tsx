@@ -1,32 +1,20 @@
 import Controller from "@/ui/customComponents/Controller";
 import Selector from "../entityComponents/Selector";
-import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
-import type {
-  SelectedObjectState,
-  SelectorConfig,
-} from "@/utils/models/types/utils/selectorTypes";
-import type {
-  DataFields,
-  RowTemplate,
-} from "@/utils/models/types/utils/routeTypes";
+
+import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 import type { Role } from "@/utils/models/types/utils/Form&Filter";
 import { dataFields } from "@/utils/models/componentsConfig/admin/dataFields";
+import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 
 interface SelectorInputProps {
   fieldKey: string;
   label: string;
-  data: [
-    EntityKey,
-    SelectorConfig<EntityKey>,
-    RowTemplate<EntityKey>,
-    DataFields<EntityKey>,
-    FilterKey[],
-    Role,
-  ];
+  data: [EntityKey, RouteConfig<EntityKey>, Role];
   disabled: boolean;
 }
 
@@ -58,14 +46,7 @@ function SelectorField<T extends EntityKey>({
   data,
   disabled,
 }: {
-  data: [
-    T,
-    SelectorConfig<T>,
-    RowTemplate<T>,
-    DataFields<T>,
-    FilterKey[],
-    Role,
-  ];
+  data: [T, RouteConfig<T>, Role];
   disabled: boolean;
   fieldProps: {
     field: {
@@ -85,19 +66,17 @@ function SelectorField<T extends EntityKey>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
-  const [entity, selectorConfig, rowTemplate, supDataFields, filterFields] =
-    data;
+  const [entity, entityObject] = data;
 
   return (
     <Selector
       entity={entity}
       disabled={disabled}
       canAdd={false}
-      {...selectorConfig}
-      rowTemplate={rowTemplate}
-      dataFields={supDataFields}
-      filterFields={filterFields}
-      selectedObjectState={[selected, setSelected] as SelectedObjectState<T>}
+      entityObject={entityObject}
+      selectedObjectState={
+        [selected, setSelected] as SelectedObjectState<EntityKey>
+      }
       dataFieldsObject={dataFields}
     />
   );

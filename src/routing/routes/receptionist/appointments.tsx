@@ -30,7 +30,7 @@ export const appointmentsRoutes = route(
   true,
   false,
   appointment,
-  true,
+  false,
   undefined,
   [[testOrdersRoute, "id"]],
 );

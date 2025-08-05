@@ -12,6 +12,8 @@ type SelectorTriggerProps<T extends rowTypesObject[EntityKey]> = {
   selectedDisplay: (item: T) => string;
   entity: string;
   disabled?: boolean;
+
+  onDelete?: (object: T) => void;
 };
 
 export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
@@ -19,6 +21,7 @@ export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
   selectedDisplay,
   entity,
   disabled = false,
+  onDelete,
 }: SelectorTriggerProps<T>) {
   const [object, setObject] = selectedObject;
 
@@ -62,7 +65,9 @@ export default function SelectorTrigger<T extends rowTypesObject[EntityKey]>({
             </Clickable>
           </DialogTrigger>
           <button
+            type="button"
             onClick={() => {
+              onDelete?.(selectedObject?.[0] as T);
               setObject(undefined);
             }}
             className="align-middle"

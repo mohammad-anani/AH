@@ -2,10 +2,11 @@ import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
-import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { Setter } from "@/utils/models/types/utils/basics";
 import ListPage from "../ListPage";
+import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 
 type ListProps<T extends EntityKey> = {
   entity: T;
@@ -33,7 +34,7 @@ export default function ListSection<T extends EntityKey>({
   path,
 }: ListProps<T>) {
   return (
-    <div className="space-y-2! space-x-2!">
+    <div className="max-h-[380px] space-y-2! space-x-2!">
       <ListPage<T>
         entity={entity}
         data={data}
@@ -51,6 +52,7 @@ export default function ListSection<T extends EntityKey>({
         dataLink={path}
         withBack={false}
         onSelect={onSelect}
+        itemsClassName={data?.[1] > 8 ? "overflow-y-scroll max-h-[300px]" : ""}
       />
     </div>
   );

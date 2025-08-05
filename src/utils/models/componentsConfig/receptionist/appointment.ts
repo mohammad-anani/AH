@@ -8,7 +8,10 @@ import {
 } from "../utils/filterReusableFields.ts";
 
 import type { RouteConfig } from "../routeConfig.ts";
-import { receptionistFilterSelectorField } from "../utils/RoleUtil.ts";
+import {
+  receptionistFilterSelectorField,
+  receptionistFormSelectorField,
+} from "../utils/RoleUtil.ts";
 import { doctor } from "./human-resources/doctor.ts";
 import { patient } from "./human-resources/patient.ts";
 
@@ -48,7 +51,25 @@ export const appointment: RouteConfig<"Appointment"> = {
     uniselectField("Status", ["Accepted", "Rejected"]),
     stringField("Notes"),
   ],
-  formConfig: [],
+  formConfig: [
+    receptionistFormSelectorField(
+      "Patient",
+      "PatientID",
+      "Patient",
+      "add",
+      patient,
+    ),
+    receptionistFormSelectorField(
+      "Doctor",
+      "DoctorID",
+      "Doctor",
+      "add",
+      doctor,
+    ),
+    ["Time", "Time", "datetime", "both"],
+    ["Reason", "Reason", "string", "both"],
+    ["Notes", "Notes", "string", "both"],
+  ],
   selectorConfig: {
     selectedDisplay: ({ DoctorName, PatientName }) =>
       DoctorName + "," + PatientName,

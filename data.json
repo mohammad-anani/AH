@@ -38,11 +38,7 @@
         "HireDate": "2020-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": [
-          "Mon",
-          "Fri",
-          "Sat"
-        ],
+        "WorkingDays": ["Mon", "Fri", "Sat"],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
         "DepartmentID": 1,
@@ -71,11 +67,7 @@
         "HireDate": "2019-05-20",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": [
-          "Mon",
-          "Fri",
-          "Sat"
-        ],
+        "WorkingDays": ["Mon", "Fri", "Sat"],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
         "DepartmentID": 1,
@@ -104,11 +96,7 @@
         "HireDate": "2021-07-10",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": [
-          "Mon",
-          "Fri",
-          "Sat"
-        ],
+        "WorkingDays": ["Mon", "Fri", "Sat"],
         "ShiftStart": "10:00",
         "ShiftEnd": "18:00",
         "DepartmentID": 1,
@@ -212,13 +200,7 @@
         "HireDate": "2020-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": [
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri"
-        ],
+        "WorkingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00"
       },
@@ -248,12 +230,7 @@
         "HireDate": "2019-05-20",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": [
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu"
-        ],
+        "WorkingDays": ["Mon", "Tue", "Wed", "Thu"],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00"
       },
@@ -271,13 +248,7 @@
         "HireDate": "2021-05-01",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": [
-          "Mon",
-          "Tue",
-          "Wed",
-          "Thu",
-          "Fri"
-        ],
+        "WorkingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
         "Person": {
@@ -306,13 +277,7 @@
         "HireDate": "2022-01-15",
         "LeaveDate": null,
         "isActive": true,
-        "WorkingDays": [
-          "Mon",
-          "Tue",
-          "Wed",
-          "Fri",
-          "Sat"
-        ],
+        "WorkingDays": ["Mon", "Tue", "Wed", "Fri", "Sat"],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
         "Person": {
@@ -690,6 +655,46 @@
       "ID": 2,
       "Name": "Bob John Taylor",
       "Specialization": "Neurologist"
+    },
+    {
+      "ID": 3,
+      "Name": "Catherine Lee Jones",
+      "Specialization": "Dermatologist"
+    },
+    {
+      "ID": 4,
+      "Name": "Daniel Mark Brown",
+      "Specialization": "Orthopedic Surgeon"
+    },
+    {
+      "ID": 5,
+      "Name": "Emily Rose Davis",
+      "Specialization": "Pediatrician"
+    },
+    {
+      "ID": 6,
+      "Name": "Frank Thomas White",
+      "Specialization": "Radiologist"
+    },
+    {
+      "ID": 7,
+      "Name": "Grace Olivia Moore",
+      "Specialization": "Oncologist"
+    },
+    {
+      "ID": 8,
+      "Name": "Henry Scott Wilson",
+      "Specialization": "Endocrinologist"
+    },
+    {
+      "ID": 9,
+      "Name": "Isabella Marie Clark",
+      "Specialization": "Psychiatrist"
+    },
+    {
+      "ID": 10,
+      "Name": "Jack William Martinez",
+      "Specialization": "General Surgeon"
     }
   ],
   "PatientRows": [

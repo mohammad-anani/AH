@@ -47,7 +47,7 @@ export const operation: RouteConfig<"Operation"> = {
     stringField("Name"),
     stringField("Description"),
     adminFilterSelectorField("PatientID", "Patient", patient),
-    ["Department", "custom", DepartmentSelectCallBack],
+    ["Department", "custom", DepartmentSelectCallBack("admin")],
     datetimeField("Scheduled Date"),
     ["Status", "uniselect", ["Done", "UnDone"]],
     ...(admingenerateAuditFields("Receptionist") ?? []),

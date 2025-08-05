@@ -12,7 +12,7 @@ export function convertStringToType(type: string, value: string) {
       return value;
     case "boolean":
       return value !== "" ? value : "all";
-    case "array":
+    case "multiselect":
       if (value) return value.split(",");
       break;
     default:

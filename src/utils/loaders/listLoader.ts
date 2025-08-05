@@ -23,8 +23,6 @@ export default function listLoader(
   return async function ({ params, request }: LoaderFunctionArgs) {
     const searchParams = formatLoaderUrl(request.url);
 
-    console.log(params);
-
     if (requiredParams)
       requiredParams.forEach((param) => {
         if (!searchParams.has(param)) throwError(400, "Bad request");

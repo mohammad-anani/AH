@@ -31,14 +31,20 @@ export const testType: RouteConfig<"TestType"> = {
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
   filterFields: [
-    ["Department", "custom", DepartmentSelectCallBack],
+    ["Department", "custom", DepartmentSelectCallBack("admin")],
     stringField("Name"),
     numberField("Cost"),
     ...(admingenerateAuditFields("Admin") ?? []),
   ],
   formConfig: [
     ["Name", "Name", "string", "both"],
-    ["Department", "DepartmentID", "custom", "both", DepartmentSelectCallBack],
+    [
+      "Department",
+      "DepartmentID",
+      "custom",
+      "add",
+      DepartmentSelectCallBack("admin"),
+    ],
     ["Cost", "Cost", "money", "both"],
   ],
   selectorConfig: {

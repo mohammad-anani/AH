@@ -7,6 +7,7 @@ import { stringField, datetimeField } from "../utils/filterReusableFields";
 import type { RouteConfig } from "../routeConfig";
 import { receptionistFilterSelectorField } from "../utils/RoleUtil";
 import { patient } from "./human-resources";
+import { DoctorSelectorCallback } from "@/features/doctor/doctorSelectCallback";
 
 export const operation: RouteConfig<"Operation"> = {
   dataFields: (operation: typesObject["Operation"]) => [
@@ -38,7 +39,8 @@ export const operation: RouteConfig<"Operation"> = {
     stringField("Name"),
     stringField("Description"),
     receptionistFilterSelectorField("PatientID", "Patient", patient),
-    ["Department", "custom", DepartmentSelectCallBack],
+    ["Doctors", "custom", DoctorSelectorCallback],
+    ["Department", "custom", DepartmentSelectCallBack("receptionist")],
     datetimeField("Scheduled Date"),
     ["Status", "uniselect", ["Done", "UnDone"]],
   ],

@@ -66,7 +66,7 @@ export const employee: DisplayingConfig<"Employee"> = {
     ];
   },
   filterFields: [
-    ["Department", "custom", DepartmentSelectCallBack],
+    ["Department", "custom", DepartmentSelectCallBack("admin")],
     moneyField("Salary"),
     dateField("HireDate"),
     dateField("LeaveDate"),
@@ -85,7 +85,13 @@ export const employee: DisplayingConfig<"Employee"> = {
   ],
   formConfig: [
     ...prefixFields<"Employee", "Person">("Person", person["formConfig"]),
-    ["Department", "DepartmentID", "custom", "both", DepartmentSelectCallBack],
+    [
+      "Department",
+      "DepartmentID",
+      "custom",
+      "both",
+      DepartmentSelectCallBack("admin"),
+    ],
     ["Salary", "Salary", "money", "both"],
     ["Hire Date", "HireDate", "date", "both"],
     ["Working Days", "WorkingDays", "multiselect", "both", weekdays],

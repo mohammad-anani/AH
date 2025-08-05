@@ -7,15 +7,17 @@ export default function DepartmentSelect({
   departmentID,
   setDepartmentID,
   isDisabled = false,
+  role = "admin",
 }: {
   departmentID: number;
   setDepartmentID: Setter<number>;
   isDisabled?: boolean;
+  role?: "admin" | "receptionist" | "doctor";
 }) {
   const fetcher = useFetcher();
 
   useEffect(() => {
-    fetcher.load("/admin/departments/list");
+    fetcher.load(`/${role}/departments/list`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

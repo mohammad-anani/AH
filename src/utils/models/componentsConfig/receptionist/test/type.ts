@@ -16,7 +16,7 @@ export const testType: RouteConfig<"TestType"> = {
     ["Cost", `${Cost} $`],
   ],
   filterFields: [
-    ["Department", "custom", DepartmentSelectCallBack],
+    ["Department", "custom", DepartmentSelectCallBack("receptionist")],
     stringField("Name"),
     numberField("Cost"),
   ],
