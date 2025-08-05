@@ -6,8 +6,9 @@ import { useLoaderData } from "react-router-dom";
 import useFilter from "./useFilter";
 import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
-import type { RowTemplate } from "@/utils/models/componentsConfig/routeConfig";
+
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 
 export default function useListPage<T extends EntityKey>(
   entity: T,

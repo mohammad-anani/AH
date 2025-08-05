@@ -18,5 +18,4 @@ export const testOrdersRoutes = route(
   [[makeAppointmentRoute, "id"]],
   true,
   true,
-  "tests/",
 );

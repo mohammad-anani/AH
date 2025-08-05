@@ -60,11 +60,8 @@ export const appointment: RouteConfig<"Appointment"> = {
     ...(admingenerateAuditFields("Receptionist") ?? []),
   ],
   formConfig: [],
-  selectorConfig: {
-    selectedDisplay: ({ DoctorName, PatientName }) =>
-      DoctorName + "," + PatientName,
-    path: "/admin/appointments",
-  },
+  selectorDisplay: ({ DoctorName, PatientName }) =>
+    DoctorName + "," + PatientName,
   rowTemplate: [
     ["Patient", "Doctor", "Time", "Status", "Is Paid"],
     (item) => [

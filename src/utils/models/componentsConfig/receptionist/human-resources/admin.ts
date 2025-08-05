@@ -1,7 +1,7 @@
 import type { RouteConfig } from "../../routeConfig";
 
 export const admin: RouteConfig<"Admin"> = {
-  selectorConfig: { selectedDisplay: () => "", path: "" },
+  selectorDisplay: () => "",
   subLinks: () => [],
   filterFields: [],
   formConfig: [],

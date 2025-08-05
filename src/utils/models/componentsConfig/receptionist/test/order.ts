@@ -28,10 +28,7 @@ export const testOrder: RouteConfig<"TestOrder"> = {
     datetimeField("OrderAt"),
   ],
   formConfig: [],
-  selectorConfig: {
-    selectedDisplay: ({ ID }) => String(ID),
-    path: "/receptionist/tests/orders",
-  },
+  selectorDisplay: ({ ID }) => String(ID),
   rowTemplate: [
     ["Patient", "Test"],
     (item) => [item.PatientName, item.TestName],

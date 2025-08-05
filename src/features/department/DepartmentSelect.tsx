@@ -1,3 +1,4 @@
+import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { Setter } from "@/utils/models/types/utils/basics";
 import { useEffect } from "react";
@@ -7,21 +8,12 @@ export default function DepartmentSelect({
   departmentID,
   setDepartmentID,
   isDisabled = false,
-  role = "admin",
 }: {
   departmentID: number;
   setDepartmentID: Setter<number>;
   isDisabled?: boolean;
-  role?: "admin" | "receptionist" | "doctor";
 }) {
-  const fetcher = useFetcher();
-
-  useEffect(() => {
-    fetcher.load(`/${role}/departments/list`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const departments: typesObject["Department"][] = fetcher.data?.[0] ?? [];
+  const departments = useDepartments();
 
   return (
     <select
@@ -39,4 +31,17 @@ export default function DepartmentSelect({
       ))}
     </select>
   );
+}
+
+function useDepartments() {
+  const fetcher = useFetcher();
+
+  useEffect(() => {
+    fetcher.load(fetchingPaths["Department"]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const departments: typesObject["Department"][] = fetcher.data?.[0] ?? [];
+
+  return departments;
 }

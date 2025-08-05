@@ -9,14 +9,14 @@ import type {
   SubLinks,
 } from "../types/utils/routeTypes";
 
-import type { SelectorConfig } from "../types/utils/selectorTypes";
+import type { SelectorDisplay } from "../types/utils/selectorTypes";
 
 export type RouteConfig<T extends EntityKey> = {
   dataFields: DataFields<T>;
   filterFields: FilterKey[];
   formConfig: FormKey<T>[];
   rowTemplate: RowTemplate<T>;
-  selectorConfig: SelectorConfig<T>;
+  selectorDisplay: SelectorDisplay<T>;
   subLinks: SubLinks<T>;
 };
 

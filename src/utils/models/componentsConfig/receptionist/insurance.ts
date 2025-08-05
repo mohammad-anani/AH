@@ -36,10 +36,8 @@ export const insurance: RouteConfig<"Insurance"> = {
     ["Expiration Date", "ExpirationDate", "date", "both"],
     ["Status", "isActive", "boolean", "update", statusLabels],
   ],
-  selectorConfig: {
-    selectedDisplay: ({ ID }) => String(ID),
-    path: "/receptionist/insurances",
-  },
+  selectorDisplay: ({ ID }) => String(ID),
+
   rowTemplate: [
     ["Provider", "Coverage", "status"],
     (item) => [

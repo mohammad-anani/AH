@@ -13,7 +13,7 @@ export const payment: RouteConfig<"Payment"> = {
     ["Method", Method],
   ],
   filterFields: [],
-  selectorConfig: { selectedDisplay: () => "", path: "" },
+  selectorDisplay: () => "",
   subLinks: () => [],
   formConfig: [
     receptionistFormSelectorField<"Payment", "Bill">(

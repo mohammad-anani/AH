@@ -1,5 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
+import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
 
 import { stringField, numberField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
@@ -16,15 +16,13 @@ export const testType: RouteConfig<"TestType"> = {
     ["Cost", `${Cost} $`],
   ],
   filterFields: [
-    ["Department", "custom", DepartmentSelectCallBack("receptionist")],
+    ["Department", "custom", DepartmentFilterSelectCallBack],
     stringField("Name"),
     numberField("Cost"),
   ],
   formConfig: [],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/receptionist/tests/types",
-  },
+  selectorDisplay: ({ Name }) => Name,
+
   rowTemplate: [
     ["Name", "Department"],
     (item) => [item.Name, item.DepartmentName],

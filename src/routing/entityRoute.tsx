@@ -23,7 +23,8 @@ export function route<T extends EntityKey>(
   withList: boolean = true,
   withID: boolean = true,
   urlPathPrefix?: string,
-) {
+  withCard?: boolean,
+): RouteObject[] {
   const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
     entityObject;
 
@@ -50,59 +51,73 @@ export function route<T extends EntityKey>(
               ),
               loader: listLoader(`${entity}Row`, loaderPathPrefix),
             }
-          : { path: "", Component: InvalidPath },
+          : {
+              path: "",
+              Component: InvalidPath,
+            },
         {
           path: "list",
           Component: InvalidPath,
           loader: listLoader(`${entity}Row`, loaderPathPrefix),
         },
-        withID && {
-          path: ":id",
-          Component: ViewEdit<T>,
-          loader: findByIDLoader(entity),
-          children: [
-            {
-              index: true,
-              element: (
-                <Card
-                  title={entity}
-                  subLinks={subLinks}
-                  canDelete={canDelete}
-                  canEdit={canEdit}
-                  dataFields={dataFields}
-                  isModal={false}
-                />
-              ),
-            },
-            canDelete && {
-              path: "delete",
-              action: deleteAction(entity),
-            },
-            canEdit && {
-              path: "edit",
+        withID
+          ? {
+              path: ":id",
+              Component: ViewEdit<T>,
+              loader: findByIDLoader(entity),
+              children: [
+                withCard
+                  ? {
+                      index: true,
+                      element: (
+                        <Card
+                          title={entity}
+                          subLinks={subLinks}
+                          canDelete={canDelete}
+                          canEdit={canEdit}
+                          dataFields={dataFields}
+                          isModal={false}
+                        />
+                      ),
+                    }
+                  : {},
+                canDelete
+                  ? {
+                      path: "delete",
+                      action: deleteAction(entity),
+                    }
+                  : {},
+                canEdit
+                  ? {
+                      path: "edit",
+                      element: (
+                        <AddUpdateForm
+                          formConfig={formConfig}
+                          entity={entity}
+                        />
+                      ),
+                      action: addUpdateAction(entity),
+                    }
+                  : {},
+                ...(extraRoutes
+                  ?.filter(([, location]) => location === "id")
+                  .flatMap(([routes]) => routes) ?? []),
+              ].filter(Boolean),
+            }
+          : {},
+        canAdd
+          ? {
+              path: "add",
               element: (
                 <AddUpdateForm formConfig={formConfig} entity={entity} />
               ),
               action: addUpdateAction(entity),
-            },
-
-            ...(extraRoutes
-              ?.filter(([, location]) => location === "id")
-              .flatMap(([routes]) => routes) ?? []),
-          ],
-        },
-        canAdd && {
-          path: "add",
-          element: <AddUpdateForm formConfig={formConfig} entity={entity} />,
-          action: addUpdateAction(entity),
-        },
-
+            }
+          : {},
         ...(extraRoutes
           ?.filter(([, location]) => location === "index")
           .flatMap(([routes]) => routes) ?? []),
-      ],
+      ].filter(Boolean),
     },
   ];
 }
-
-//finish confirm form

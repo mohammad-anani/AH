@@ -33,10 +33,7 @@ export const receptionistAudit: RouteConfig<"Receptionist"> = {
     ),
   ],
 
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/admin/human-resources/receptionists",
-  },
+  selectorDisplay: ({ Name }) => Name,
 
   rowTemplate: [["Name"], (item) => [item.Name], [2]],
 

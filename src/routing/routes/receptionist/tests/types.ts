@@ -12,5 +12,4 @@ export const testTypesRoutes = route(
   undefined,
   true,
   true,
-  "tests/",
 );

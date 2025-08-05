@@ -8,7 +8,7 @@ import useListContext from "./context";
 import { generateLabel } from "./utils";
 
 import Controller from "@/ui/customComponents/Controller";
-import { UnsupportedInput } from "@/ui/form-inputs";
+import UnsupportedInput from "@/ui/form-inputs/UnsupportedInput";
 import { inputMap } from "@/utils/models/inputMap";
 
 export function Form({ isNestedFilter = false }: { isNestedFilter?: boolean }) {

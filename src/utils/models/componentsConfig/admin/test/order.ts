@@ -26,10 +26,8 @@ export const testOrder: RouteConfig<"TestOrder"> = {
     ...(admingenerateAuditFields("Doctor") ?? []),
   ],
   formConfig: [],
-  selectorConfig: {
-    selectedDisplay: ({ ID }) => String(ID),
-    path: "/admin/tests/orders",
-  },
+  selectorDisplay: ({ ID }) => String(ID),
+
   rowTemplate: [
     ["Patient", "Test"],
     (item) => [item.PatientName, item.TestName],

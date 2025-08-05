@@ -17,11 +17,8 @@ export const bill: RouteConfig<"Bill"> = {
     [1, 1],
   ],
   formConfig: [["Amount", "Amount", "money", "both"]],
-  selectorConfig: {
-    selectedDisplay: ({ AmountPaid, Amount }) =>
-      `Amount: ${formatMoney(Amount ?? "")}  |  Paid: ${formatMoney(AmountPaid ?? "")}`,
-    path: "/receptionist/bills",
-  },
+  selectorDisplay: ({ AmountPaid, Amount }) =>
+    `Amount: ${formatMoney(Amount ?? "")}  |  Paid: ${formatMoney(AmountPaid ?? "")}`,
   subLinks: ({ ID }) => [
     ["Show Payments", `/receptionist/payments?BillID=${ID}`],
     ["Make a Payment", "pay"],

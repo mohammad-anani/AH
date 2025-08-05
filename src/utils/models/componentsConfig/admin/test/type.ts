@@ -1,7 +1,10 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
+import {
+  DepartmentFilterSelectCallBack,
+  DepartmentFormSelectCallBack,
+} from "@/features/department/departmentSelectCallback";
 import { admingenerateAuditFields } from "../../utils/RoleUtil";
 import { stringField, numberField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
@@ -31,7 +34,7 @@ export const testType: RouteConfig<"TestType"> = {
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
   filterFields: [
-    ["Department", "custom", DepartmentSelectCallBack("admin")],
+    ["Department", "custom", DepartmentFilterSelectCallBack],
     stringField("Name"),
     numberField("Cost"),
     ...(admingenerateAuditFields("Admin") ?? []),
@@ -43,14 +46,12 @@ export const testType: RouteConfig<"TestType"> = {
       "DepartmentID",
       "custom",
       "add",
-      DepartmentSelectCallBack("admin"),
+      DepartmentFormSelectCallBack,
     ],
     ["Cost", "Cost", "money", "both"],
   ],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/admin/tests/types",
-  },
+  selectorDisplay: ({ Name }) => Name,
+
   rowTemplate: [
     ["Name", "Department"],
     (item) => [item.Name, item.DepartmentName],

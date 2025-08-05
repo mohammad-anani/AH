@@ -36,10 +36,7 @@ export const receptionist: RouteConfig<"Receptionist"> = {
       employee["formConfig"],
     ),
   ],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/admin/human-resources/receptionists",
-  },
+  selectorDisplay: ({ Name }) => Name,
   rowTemplate: [["Name"], (item) => [item.Name], [2]],
   subLinks: ({ ID }) => [
     ["Show Appointments", `/admin/appointments?ReceptionistID=${ID}`],

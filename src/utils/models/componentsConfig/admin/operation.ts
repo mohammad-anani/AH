@@ -1,7 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
-import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
+import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
 import {
   adminFilterSelectorField,
   admingenerateAuditFields,
@@ -47,16 +47,14 @@ export const operation: RouteConfig<"Operation"> = {
     stringField("Name"),
     stringField("Description"),
     adminFilterSelectorField("PatientID", "Patient", patient),
-    ["Department", "custom", DepartmentSelectCallBack("admin")],
+    ["Department", "custom", DepartmentFilterSelectCallBack],
     datetimeField("Scheduled Date"),
     ["Status", "uniselect", ["Done", "UnDone"]],
     ...(admingenerateAuditFields("Receptionist") ?? []),
   ],
   formConfig: [],
-  selectorConfig: {
-    selectedDisplay: ({ ID }) => String(ID),
-    path: "/admin/operations",
-  },
+  selectorDisplay: ({ ID }) => String(ID),
+
   rowTemplate: [
     ["Name", "Patient", "Status", "Is Paid"],
     ({ Name, PatientName, Status, IsPaid }) => [

@@ -56,7 +56,7 @@ export default function listLoader(
         "Sorry, we received unexpected data from the server. Please try again later.",
       );
     }
-
+    console.log(data);
     return data;
   };
 }

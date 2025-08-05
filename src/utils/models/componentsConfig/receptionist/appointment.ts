@@ -70,11 +70,8 @@ export const appointment: RouteConfig<"Appointment"> = {
     ["Reason", "Reason", "string", "both"],
     ["Notes", "Notes", "string", "both"],
   ],
-  selectorConfig: {
-    selectedDisplay: ({ DoctorName, PatientName }) =>
-      DoctorName + "," + PatientName,
-    path: "/receptionist/appointments",
-  },
+  selectorDisplay: ({ DoctorName, PatientName }) =>
+    DoctorName + "," + PatientName,
   rowTemplate: [
     ["Patient", "Doctor", "Time", "Status", "Is Paid"],
     (item) => [

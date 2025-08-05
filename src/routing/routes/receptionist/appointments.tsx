@@ -1,5 +1,6 @@
 import { route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
+import ServiceCard from "@/ui/entityComponents/ServicesCard";
 import listLoader from "@/utils/loaders/listLoader";
 import {
   appointment,
@@ -24,6 +25,19 @@ const testOrdersRoute: RouteObject[] = [
   },
 ];
 
+const appointmentCard: RouteObject[] = [
+  {
+    index: true,
+    element: (
+      <ServiceCard
+        title="Appointment"
+        subLinks={appointment.subLinks}
+        dataFields={appointment.dataFields}
+      />
+    ),
+  },
+];
+
 export const appointmentsRoutes = route(
   "Appointment",
   true,
@@ -32,5 +46,12 @@ export const appointmentsRoutes = route(
   appointment,
   false,
   undefined,
-  [[testOrdersRoute, "id"]],
+  [
+    [testOrdersRoute, "id"],
+    [appointmentCard, "id"],
+  ],
+  true,
+  true,
+  undefined,
+  false,
 );

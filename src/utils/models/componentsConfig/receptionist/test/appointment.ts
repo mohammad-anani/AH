@@ -72,11 +72,8 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ),
     ["Scheduled Date", "ScheduledDate", "datetime", "both"],
   ],
-  selectorConfig: {
-    selectedDisplay: ({ TestName, PatientName }) =>
-      TestName + "," + PatientName,
-    path: "/receptionist/tests/appointments",
-  },
+  selectorDisplay: ({ TestName, PatientName }) => TestName + "," + PatientName,
+
   rowTemplate: [
     ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [

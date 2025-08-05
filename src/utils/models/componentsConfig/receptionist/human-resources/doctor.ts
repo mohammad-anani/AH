@@ -24,9 +24,6 @@ export const doctor: RouteConfig<"Doctor"> = {
   ],
   formConfig: [],
   rowTemplate: [["Name"], (item) => [item.Name], [2]],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/receptionist/human-resources/doctors",
-  },
+  selectorDisplay: ({ Name }) => Name,
   subLinks: () => [],
 };

@@ -40,10 +40,7 @@ export const doctor: RouteConfig<"Doctor"> = {
     ["Appointment Cost", "AppointmentCost", "money", "both"],
   ],
   rowTemplate: [["Name"], (item) => [item.Name], [2]],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/admin/human-resources/doctors",
-  },
+  selectorDisplay: ({ Name }) => Name,
   subLinks: ({ ID }) => [
     ["Show Appointments", `/admin/appointments?DoctorID=${ID}`],
     ["Show Operations", `/admin/operations?DoctorID=${ID}`],

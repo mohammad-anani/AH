@@ -12,5 +12,4 @@ export const testAppointmentsRoutes = route(
   undefined,
   true,
   true,
-  "tests/",
 );

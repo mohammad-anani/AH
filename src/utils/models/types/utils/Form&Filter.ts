@@ -22,8 +22,8 @@ export type DataTypes =
 
 export type customFilterProps = [
   (data: {
-    field: Primitive;
-    onChange: Setter<Primitive>;
+    field: Primitive | Primitive[];
+    onChange: Setter<Primitive | Primitive[]>;
     role?: "admin" | "receptionist" | "doctor";
   }) => JSX.Element,
   DataTypes,
@@ -34,7 +34,6 @@ export type customFormProps = [
     field: Primitive;
     onChange: Setter<Primitive>;
     isSubmitting?: boolean;
-    role: "admin" | "receptionist" | "doctor";
   }) => JSX.Element,
   DataTypes,
 ];
@@ -73,3 +72,4 @@ export type DotAccess<T, Prefix extends string = ""> = {
     : `${Prefix}${Extract<K, string>}`;
 }[keyof T];
 export type Role = "Admin" | "Receptionist" | "Doctor";
+export type smallRole = "admin" | "receptionist" | "doctor";

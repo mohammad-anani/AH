@@ -32,10 +32,8 @@ export const insurance: RouteConfig<"Insurance"> = {
   filterFields: [],
   //solve patient id selector here
   formConfig: [],
-  selectorConfig: {
-    selectedDisplay: ({ ID }) => String(ID),
-    path: "/admin/insurances",
-  },
+  selectorDisplay: ({ ID }) => String(ID),
+
   rowTemplate: [
     ["Provider", "Coverage", "status"],
     (item) => [

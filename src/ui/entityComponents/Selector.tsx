@@ -66,7 +66,7 @@ export default function Selector<T extends EntityKey>({
   } = useSelector(
     entity,
     selectedObjectState,
-    entityObject.selectorConfig.path,
+
     data,
   );
 
@@ -75,7 +75,7 @@ export default function Selector<T extends EntityKey>({
       <SelectorTrigger
         disabled={disabled}
         selectedObject={selectedObjectState}
-        selectedDisplay={entityObject["selectorConfig"].selectedDisplay}
+        selectedDisplay={entityObject.selectorDisplay}
         entity={entity}
         onDelete={onDelete}
       />
@@ -102,7 +102,7 @@ export default function Selector<T extends EntityKey>({
                 setObject(item);
                 setIsOpen(false);
               }}
-              path={path}
+              path={path ?? ""}
             />
           ) : (
             <CardSection

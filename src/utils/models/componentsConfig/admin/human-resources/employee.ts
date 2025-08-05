@@ -3,7 +3,10 @@ import { convert24To12 } from "@/utils/formatters/convert24To12";
 import { person } from "./person";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { DepartmentSelectCallBack } from "@/features/department/departmentSelectCallback";
+import {
+  DepartmentFilterSelectCallBack,
+  DepartmentFormSelectCallBack,
+} from "@/features/department/departmentSelectCallback";
 
 import {
   moneyField,
@@ -66,7 +69,7 @@ export const employee: DisplayingConfig<"Employee"> = {
     ];
   },
   filterFields: [
-    ["Department", "custom", DepartmentSelectCallBack("admin")],
+    ["Department", "custom", DepartmentFilterSelectCallBack],
     moneyField("Salary"),
     dateField("HireDate"),
     dateField("LeaveDate"),
@@ -90,7 +93,7 @@ export const employee: DisplayingConfig<"Employee"> = {
       "DepartmentID",
       "custom",
       "both",
-      DepartmentSelectCallBack("admin"),
+      DepartmentFormSelectCallBack,
     ],
     ["Salary", "Salary", "money", "both"],
     ["Hire Date", "HireDate", "date", "both"],

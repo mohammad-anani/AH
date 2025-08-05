@@ -12,5 +12,4 @@ export const patientRoutes = route(
   undefined,
   true,
   true,
-  "human-resources/",
 );

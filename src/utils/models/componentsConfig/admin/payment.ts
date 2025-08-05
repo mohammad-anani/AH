@@ -22,7 +22,7 @@ export const payment: RouteConfig<"Payment"> = {
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
   filterFields: [],
-  selectorConfig: { selectedDisplay: () => "", path: "" },
+  selectorDisplay: () => "",
   subLinks: () => [],
   formConfig: [],
   rowTemplate: [

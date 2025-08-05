@@ -21,6 +21,16 @@ const router = createBrowserRouter([
         Component: InvalidPath,
         loader: listLoader("Country"),
       },
+      {
+        path: "doctors",
+        Component: InvalidPath,
+        loader: listLoader("Country"),
+      },
+      {
+        path: "departments",
+        Component: InvalidPath,
+        loader: listLoader("Country"),
+      },
     ],
   },
 ]);

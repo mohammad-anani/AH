@@ -31,8 +31,5 @@ export const patient: RouteConfig<"Patient"> = {
   ],
   rowTemplate: [["Name", "Age"], (item) => [item.Name, item.Age], [2, 1]],
   formConfig: [],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/admin/human-resources/patients",
-  },
+  selectorDisplay: ({ Name }) => Name,
 };

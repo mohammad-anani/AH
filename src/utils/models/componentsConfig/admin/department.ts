@@ -25,10 +25,8 @@ export const department: RouteConfig<"Department"> = {
     ["Name", "Name", "string", "both"],
     ["Phone", "Phone", "phone", "both"],
   ],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/admin/departments",
-  },
+  selectorDisplay: ({ Name }) => Name,
+
   rowTemplate: [
     ["Name", "Phone"],
     (item) => [item.Name, formatPhoneNumber(item.Phone)],

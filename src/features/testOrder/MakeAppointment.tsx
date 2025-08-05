@@ -16,7 +16,7 @@ import type { TestOrder } from "@/utils/models/types/normal/types";
 import { useEffect } from "react";
 import Card from "@/ui/entityComponents/Card";
 import { testType } from "@/utils/models/componentsConfig/receptionist";
-import { TemporalInput } from "@/ui/form-inputs";
+import TemporalInput from "@/ui/form-inputs/TemporalInput";
 
 export default function MakeAppointment() {
   const methods = useForm({ resolver: zodResolver(TestAppointmentSchema) });
@@ -30,6 +30,7 @@ export default function MakeAppointment() {
 
   useEffect(() => {
     fetcher.load("/receptionist/tests/types/" + testOrder.TestTypeID);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {

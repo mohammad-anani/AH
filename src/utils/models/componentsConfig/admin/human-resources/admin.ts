@@ -37,10 +37,7 @@ export const admin: RouteConfig<"Admin"> = {
 
   rowTemplate: [["Name"], (item) => [item.Name], [2]],
 
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/admin/human-resources/admins",
-  },
+  selectorDisplay: ({ Name }) => Name,
   subLinks: ({ ID }) => [
     ["Show Departments", `/admin/departments?AdminID=${ID}`],
     [

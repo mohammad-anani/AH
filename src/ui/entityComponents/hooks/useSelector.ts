@@ -6,11 +6,12 @@ import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTyp
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useState, useEffect } from "react";
 import { useFetcher } from "react-router-dom";
+import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 
 export default function useSelector<T extends EntityKey>(
   entity: T,
   selectedObjectState: SelectedObjectState<T>,
-  path: string,
+
   data?: [rowTypesObject[T][], number],
 ) {
   const [object, setObject] = selectedObjectState;
@@ -31,10 +32,10 @@ export default function useSelector<T extends EntityKey>(
   const findFetcher = useFetcher();
 
   useEffect(() => {
-    if (!data) listFetcher.load(`${path}/list?${paramString}`);
+    if (!data) listFetcher.load(`${fetchingPaths[entity]}?${paramString}`);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paramString, path]);
+  }, [paramString]);
 
   useEffect(() => {
     if (searchParamsState) {
@@ -43,7 +44,7 @@ export default function useSelector<T extends EntityKey>(
         Object.keys(object).length === 1 &&
         Object.keys(object)[0] === "ID"
       ) {
-        findFetcher.load(`${path}/list?ID=${object["ID"]}`);
+        findFetcher.load(`${fetchingPaths[entity]}/list?ID=${object["ID"]}`);
         if (findFetcher.data)
           setObject?.(findFetcher.data[0][0] as rowTypesObject[T]);
       }
@@ -54,7 +55,7 @@ export default function useSelector<T extends EntityKey>(
   const cardFetcher = useFetcher();
 
   useEffect(() => {
-    if (CardID) cardFetcher.load(`${path}/${CardID}`);
+    if (CardID) cardFetcher.load(`${fetchingPaths[entity]}/${CardID}`);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [CardID]);

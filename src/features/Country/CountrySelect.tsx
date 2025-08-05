@@ -3,6 +3,7 @@ import Select from "react-select";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
 import type { Country } from "@/utils/models/types/normal/types";
+import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 
 export default function CountrySelect({
   countryID,
@@ -13,10 +14,27 @@ export default function CountrySelect({
   setCountryID: Setter<number>;
   isDisabled?: boolean;
 }) {
+  const { selectStyles, selectedOption, options } = useCountries(countryID);
+
+  return (
+    <Select
+      styles={selectStyles}
+      options={options}
+      value={selectedOption}
+      onChange={(selected) => {
+        if (selected) setCountryID(selected.value);
+      }}
+      isDisabled={isDisabled}
+      placeholder="Select a Country"
+    />
+  );
+}
+
+function useCountries(countryID: number) {
   const fetcher = useFetcher();
 
   useEffect(() => {
-    fetcher.load("/countries");
+    fetcher.load(fetchingPaths["Country"]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -75,16 +93,5 @@ export default function CountrySelect({
       padding: "4px 8px",
     }),
   };
-  return (
-    <Select
-      styles={selectStyles}
-      options={options}
-      value={selectedOption}
-      onChange={(selected) => {
-        if (selected) setCountryID(selected.value);
-      }}
-      isDisabled={isDisabled}
-      placeholder="Select a Country"
-    />
-  );
+  return { selectStyles, options, selectedOption };
 }

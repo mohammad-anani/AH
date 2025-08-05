@@ -24,8 +24,5 @@ export const patient: RouteConfig<"Patient"> = {
   formConfig: [
     ...prefixFields<"Patient", "Person">("Person", person["formConfig"]),
   ],
-  selectorConfig: {
-    selectedDisplay: ({ Name }) => Name,
-    path: "/receptionist/human-resources/patients",
-  },
+  selectorDisplay: ({ Name }) => Name,
 };

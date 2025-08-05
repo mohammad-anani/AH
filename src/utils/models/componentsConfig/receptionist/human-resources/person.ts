@@ -1,4 +1,7 @@
-import { CountrySelectCallBack } from "@/features/Country/CountrySelectCallback";
+import {
+  CountryFilterSelectCallBack,
+  CountryFormSelectCallBack,
+} from "@/features/Country/CountrySelectCallback";
 import { calculateAge } from "@/utils/formatters/calculateAge";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
@@ -33,7 +36,7 @@ export const person: DisplayingConfig<"Person"> = {
     numberField("Age"),
     phoneField("Phone"),
     emailField("Email"),
-    ["CountryName", "custom", CountrySelectCallBack],
+    ["CountryName", "custom", CountryFilterSelectCallBack],
     stringField("Username"),
   ],
   formConfig: [
@@ -42,7 +45,7 @@ export const person: DisplayingConfig<"Person"> = {
     ["Last Name", "LastName", "string", "both"],
     ["Birth Date", "DateOfBirth", "date", "both"],
     ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
-    ["Country", "Country.ID", "custom", "both", CountrySelectCallBack],
+    ["Country", "Country.ID", "custom", "both", CountryFormSelectCallBack],
     ["Phone", "Phone", "phone", "both"],
     ["Email", "Email", "email", "both"],
     ["Username", "Username", "string", "both"],

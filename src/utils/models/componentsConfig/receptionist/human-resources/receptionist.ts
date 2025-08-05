@@ -1,7 +1,7 @@
 import type { RouteConfig } from "../../routeConfig";
 
 export const receptionist: RouteConfig<"Receptionist"> = {
-  selectorConfig: { selectedDisplay: () => "", path: "" },
+  selectorDisplay: () => "",
   subLinks: () => [],
   filterFields: [],
   formConfig: [],
