@@ -68,7 +68,7 @@ export const appointment: RouteConfig<"Appointment"> = {
     ),
     ["Time", "Time", "datetime", "both"],
     ["Reason", "Reason", "string", "both"],
-    ["Notes", "Notes", "string", "both"],
+    ["Notes", "Notes", "text", "both"],
   ],
   selectorDisplay: ({ DoctorName, PatientName }) =>
     DoctorName + "," + PatientName,

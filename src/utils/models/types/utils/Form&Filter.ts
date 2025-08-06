@@ -8,6 +8,7 @@ import type { RouteConfig } from "../../componentsConfig/routeConfig";
 
 export type DataTypes =
   | "string"
+  | "text"
   | "number"
   | "boolean"
   | "phone"

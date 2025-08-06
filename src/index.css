@@ -96,7 +96,8 @@ a {
 } */
 
 input,
-select {
+select,
+textarea {
   @apply w-full bg-white pl-[5px];
 }
 

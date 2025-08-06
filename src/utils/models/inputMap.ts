@@ -10,6 +10,7 @@ import {
   BooleanInput,
   TemporalInput,
 } from "../../ui/form-inputs";
+import TextareaInput from "@/ui/form-inputs/textareaInput";
 
 export const inputMap = {
   number: NumberInput,
@@ -24,4 +25,5 @@ export const inputMap = {
   date: TemporalInput,
   datetime: TemporalInput,
   time: TemporalInput,
+  text: TextareaInput,
 } as const;

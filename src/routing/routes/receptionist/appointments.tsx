@@ -1,5 +1,6 @@
 import { route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
+import ServiceProcess from "@/ui/entityComponents/ServiceProcess";
 import ServiceCard from "@/ui/entityComponents/ServicesCard";
 import listLoader from "@/utils/loaders/listLoader";
 import {
@@ -34,6 +35,15 @@ const appointmentCard: RouteObject[] = [
         subLinks={appointment.subLinks}
         dataFields={appointment.dataFields}
       />
+    ),
+  },
+];
+
+const appointmentStart: RouteObject[] = [
+  {
+    path: "start",
+    element: (
+      <ServiceProcess process="Start" entity="Appointment"></ServiceProcess>
     ),
   },
 ];
