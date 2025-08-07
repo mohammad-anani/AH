@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import React from "react";
 import { useNavigation } from "react-router-dom";
 import type { Primitive } from "react-hook-form";
-import useError from "../form-inputs/useError";
+import { useError } from "../form-inputs";
 import FormError from "./FormError";
 
 type RegisteredInputProps = {
@@ -33,6 +33,8 @@ export default function RegisteredInput({
   const registered = register(name);
   const value = useWatch({ name, control });
 
+  const errorId = `${name}-error`;
+
   return (
     <span className="flex flex-col gap-1">
       {cloneElement(children, {
@@ -47,8 +49,10 @@ export default function RegisteredInput({
         name,
         disabled: isSubmitting,
         id: name,
+        "aria-describedby": errorMessages ? errorId : undefined,
+        "aria-invalid": !!errorMessages,
       })}
-      <FormError errorMessages={errorMessages} />
+      <FormError errorMessages={errorMessages} id={errorId} />
     </span>
   );
 }

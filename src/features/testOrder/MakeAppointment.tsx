@@ -17,27 +17,54 @@ import { useEffect } from "react";
 import Card from "@/ui/entityComponents/Card";
 import { testType } from "@/utils/models/componentsConfig/receptionist";
 import TemporalInput from "@/ui/form-inputs/TemporalInput";
+import type { DataFields } from "@/utils/models/types/utils/routeTypes";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
 export default function MakeAppointment() {
   const methods = useForm({ resolver: zodResolver(TestAppointmentSchema) });
   const submit = useSubmit();
 
   const testOrder = useOutletContext<TestOrder>();
-
   const fetcher = useFetcher();
 
-  console.log(testOrder);
+  // Log test order data in development
+  if (import.meta.env.DEV) {
+    console.log("Test Order Context:", testOrder);
+  }
 
   useEffect(() => {
-    fetcher.load("/receptionist/tests/types/" + testOrder.TestTypeID);
+    if (testOrder?.TestTypeID) {
+      fetcher.load("/receptionist/tests/types/" + testOrder.TestTypeID);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [testOrder?.TestTypeID]);
 
   const {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
 
+  // Loading state while fetching test type data
+  if (fetcher.state === "loading") {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-lg">Loading test type information...</div>
+      </div>
+    );
+  }
+
+  // Error state if data fetch failed
+  if (!fetcher.data && fetcher.state === "idle") {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-lg text-red-500">
+          Failed to load test type information
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if no data yet
   if (!fetcher.data) return null;
 
   return (
@@ -56,7 +83,7 @@ export default function MakeAppointment() {
         canEdit={false}
         data={fetcher?.data}
         title="TestType"
-        dataFields={testType.dataFields}
+        dataFields={testType.dataFields as DataFields<EntityKey>}
       />
       <FormProvider {...methods}>
         <RouterForm

@@ -8,14 +8,20 @@ import { LoginSchema } from "@/utils/models/zod/Login";
 
 export default function Login() {
   const methods = useForm({ resolver: zodResolver(LoginSchema) });
-  const { handleSubmit } = methods;
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods;
   const submit = useSubmit();
 
   return (
-    <main className="mt-20 grid content-center gap-y-4">
-      <Logo className="h-auto! w-auto! text-9xl!" />
-      <div className="flex justify-center">
-        {/* no longer use <Form> from react-router-dom here */}
+    <main className="mt-20 grid content-center gap-y-4" role="main">
+      <header className="text-center">
+        <Logo className="h-auto! w-auto! text-9xl!" />
+        <h1 className="sr-only">Hospital Management System Login</h1>
+      </header>
+
+      <section className="flex justify-center" aria-label="Login form">
         <FormProvider {...methods}>
           <Form
             onSubmit={handleSubmit((data) => {
@@ -25,30 +31,53 @@ export default function Login() {
               });
             })}
             className="flex flex-col items-center gap-y-4 text-xl"
+            aria-label="Login credentials"
           >
-            <div className="grid grid-cols-[120px_1fr] gap-y-2">
-              <label htmlFor="username">Username:</label>
+            <fieldset
+              className="grid grid-cols-[120px_1fr] gap-y-2"
+              disabled={isSubmitting}
+            >
+              <legend className="sr-only">Login Credentials</legend>
+
+              <label htmlFor="username-input" className="pr-2 text-right">
+                Username:
+              </label>
               <RegisteredInput name="Username">
-                <input type="text" />
+                <input
+                  id="username-input"
+                  type="text"
+                  autoComplete="username"
+                  aria-required="true"
+                  autoFocus
+                />
               </RegisteredInput>
 
-              <label htmlFor="password">Password:</label>
+              <label htmlFor="password-input" className="pr-2 text-right">
+                Password:
+              </label>
               <RegisteredInput name="Password">
-                <input type="password" />
+                <input
+                  id="password-input"
+                  type="password"
+                  autoComplete="current-password"
+                  aria-required="true"
+                />
               </RegisteredInput>
-            </div>
+            </fieldset>
 
             <Clickable
               className="w-[120px]"
               variant="primary"
               as="button"
               type="submit"
+              disabled={isSubmitting}
+              aria-label={isSubmitting ? "Logging in..." : "Login to system"}
             >
-              Login
+              {isSubmitting ? "Logging in..." : "Login"}
             </Clickable>
           </Form>
         </FormProvider>
-      </div>
+      </section>
     </main>
   );
 }

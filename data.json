@@ -888,7 +888,11 @@
       "BillID": 1,
       "CreatedByReceptionistID": 7,
       "CreatedAt": "2023-01-15T09:30:00",
-      "Doctors": [1, 2, 3]
+      "Doctors": [
+        [1, "Lead Surgeon"],
+        [2, "Assistant Surgeon"],
+        [3, "Anesthesiologist"]
+      ]
     }
   ],
   "OperationRows": [
@@ -898,6 +902,32 @@
       "Name": "Appendectomy",
       "Status": "Scheduled",
       "IsPaid": false
+    }
+  ],
+  "OperationDoctorRows": [
+    {
+      "Doctor": {
+        "ID": 1,
+        "Name": "Alice Marie Smith",
+        "Specialization": "Cardiologist"
+      },
+      "Role": "Lead Surgeon"
+    },
+    {
+      "Doctor": {
+        "ID": 2,
+        "Name": "Bob John Taylor",
+        "Specialization": "Neurologist"
+      },
+      "Role": "Assistant Surgeon"
+    },
+    {
+      "Doctor": {
+        "ID": 3,
+        "Name": "Catherine Lee Jones",
+        "Specialization": "Dermatologist"
+      },
+      "Role": "Anesthesiologist"
     }
   ]
 }

@@ -9,7 +9,10 @@ import type { Setter } from "@/utils/models/types/utils/basics";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
 
-export type DoctorSelectState = (DoctorRow | { ID: number })[];
+export type DoctorSelectState = {
+  doctor: DoctorRow | { ID: number };
+  role: string;
+}[];
 
 export default function DoctorSelect({
   disabled = false,
@@ -36,19 +39,32 @@ export default function DoctorSelect({
         const selected = doctors[index] ?? undefined;
 
         return (
-          <Selector
-            disabled={disabled}
-            key={index}
-            selectedObjectState={[
-              selected as DoctorRow,
-              (doctor) => onSelect(doctor as DoctorRow, index),
-            ]}
-            entity="Doctor"
-            entityObject={doctor}
-            onDelete={onDelete}
-            data={[items, count]}
-            onEdit={(doc) => onEdit(doc, index)}
-          />
+          <>
+            <Selector
+              disabled={disabled}
+              key={index}
+              selectedObjectState={[
+                selected.doctor as DoctorRow,
+                (doctor) => onSelect(doctor as DoctorRow, index),
+              ]}
+              entity="Doctor"
+              entityObject={doctor}
+              onDelete={onDelete}
+              data={[items, count]}
+              onEdit={(doc) => onEdit(doc, index)}
+            />
+            <input
+              type="text"
+              value={selected.role}
+              onChange={(e) =>
+                setDoctors((docs) =>
+                  docs.map((doc, subIndex) =>
+                    index === subIndex ? { ...doc, role: e.target.value } : doc,
+                  ),
+                )
+              }
+            />
+          </>
         );
       })}
     </div>
@@ -74,7 +90,7 @@ function useDoctors(
 
   // Exclude already selected doctors
   const availableDoctors = items.filter(
-    (doc) => !doctors.some((sdoc) => sdoc?.ID === doc.ID),
+    (doc) => !doctors.some((sdoc) => sdoc?.doctor?.ID === doc.ID),
   );
 
   // Handler to select/set doctor at a specific index
@@ -85,14 +101,15 @@ function useDoctors(
       const updated = [...prev];
 
       const isAlreadySelected = updated.some(
-        (d, i) => d?.ID === doctor.ID && i !== index,
+        (d, i) => d?.doctor?.ID === doctor.ID && i !== index,
       );
       if (isAlreadySelected) return prev;
 
       //to see
-      while (updated.length <= index) updated.push({} as DoctorRow);
+      while (updated.length <= index)
+        updated.push({ doctor: {} as DoctorRow, role: "" });
 
-      updated[index] = doctor;
+      updated[index].doctor = doctor;
 
       return updated;
     });
@@ -102,7 +119,7 @@ function useDoctors(
   function onDelete(doctor: DoctorRow) {
     if (!doctor || typeof doctor.ID === "undefined") return;
 
-    setDoctors((prev) => prev.filter((doc) => doc?.ID !== doctor.ID));
+    setDoctors((prev) => prev.filter((doc) => doc?.doctor.ID !== doctor.ID));
   }
 
   // Handler to edit/update doctor at index
@@ -111,8 +128,9 @@ function useDoctors(
 
     setDoctors((prev) => {
       const updated = [...prev];
-      while (updated.length <= index) updated.push({} as DoctorRow);
-      updated[index] = doctor;
+      while (updated.length <= index)
+        updated.push({ doctor: {} as DoctorRow, role: "" });
+      updated[index].doctor = doctor;
       return updated;
     });
   }

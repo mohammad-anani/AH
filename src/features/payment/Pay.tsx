@@ -71,21 +71,44 @@ export default function Pay() {
           </Clickable>
         </RouterForm>
 
-        <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+        <Dialog
+          open={isConfirmOpen}
+          onOpenChange={setIsConfirmOpen}
+          aria-labelledby="payment-confirm-title"
+          aria-describedby="payment-confirm-description"
+        >
           <DialogPortal>
             <DialogContent>
-              <DialogTitle>
+              <DialogTitle id="payment-confirm-title">
                 <H2>Confirm Payment?</H2>
               </DialogTitle>
+              <p
+                id="payment-confirm-description"
+                className="mb-4 text-gray-600"
+              >
+                Are you sure you want to proceed with this payment? This action
+                cannot be undone.
+              </p>
               <div className="flex justify-end space-x-2">
                 <Clickable
                   as="button"
                   variant="secondary"
                   onClick={() => setIsConfirmOpen(false)}
+                  autoFocus
                 >
                   Cancel
                 </Clickable>
-                <Clickable as="button" variant="primary" type="submit">
+                <Clickable
+                  as="button"
+                  variant="primary"
+                  type="submit"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      // Handle payment confirmation
+                    }
+                  }}
+                >
                   Confirm
                 </Clickable>
               </div>

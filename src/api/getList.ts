@@ -1,10 +1,57 @@
 import axios from "./axios";
+import { listCache, createCacheKey } from "./cache";
 
-export default async function getList(url: string) {
-  const response = await axios.get(url);
-  const obj = [response.data, response.data.length];
-
-  return obj;
+interface GetListOptions {
+  useCache?: boolean;
+  cacheTtl?: number;
+  filters?: Record<string, unknown>;
 }
 
-//to change obj
+export default async function getList(
+  url: string,
+  options: GetListOptions = {},
+): Promise<[unknown[], number]> {
+  const { useCache = true, cacheTtl, filters } = options;
+
+  // Extract entity type from URL for cache key
+  const entityType = url.split("/").filter(Boolean).pop() || "unknown";
+  const cacheKey = createCacheKey.list(entityType, filters);
+
+  // Try to get from cache first
+  if (useCache) {
+    const cached = listCache.get<[unknown[], number]>(cacheKey);
+    if (cached) {
+      if (import.meta.env.DEV) {
+        console.log(`Cache hit for list: ${entityType}`);
+      }
+      return cached;
+    }
+  }
+
+  try {
+    const response = await axios.get(url);
+    const result: [unknown[], number] = [response.data, response.data.length];
+
+    // Cache the result
+    if (useCache) {
+      listCache.set(cacheKey, result, cacheTtl);
+      if (import.meta.env.DEV) {
+        console.log(`Cached list data for: ${entityType}`);
+      }
+    }
+
+    return result;
+  } catch (error) {
+    // If cache exists and request fails, return stale data
+    if (useCache) {
+      const stale = listCache.get<[unknown[], number]>(cacheKey);
+      if (stale) {
+        if (import.meta.env.DEV) {
+          console.warn(`Returning stale cache data for: ${entityType}`);
+        }
+        return stale;
+      }
+    }
+    throw error;
+  }
+}

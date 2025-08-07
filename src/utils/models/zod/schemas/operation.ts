@@ -22,7 +22,14 @@ export const OperationSchema = z.object({
   CreatedByReceptionistID: positiveNumber("Receptionist ID", 1),
   CreatedAt: datetime("Creation date"),
   Doctors: z
-    .array(z.number())
+    .array(
+      z.tuple([
+        positiveNumber("Doctor ID", 1),
+        nonEmptyString("Doctor role").min(2, {
+          message: "Doctor role must be at least 2 characters long.",
+        }),
+      ]),
+    )
     .min(1, { message: "Minimum 1 doctor required" })
     .max(5, { message: "Maximum 5 doctors permitted" }),
   Notes: z.string().optional(),

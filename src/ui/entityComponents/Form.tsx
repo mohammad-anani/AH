@@ -13,9 +13,6 @@ export default function Form<T extends EntityKey>({
   fields,
   mode,
 }: FormProps<T>) {
-  // const { getValues } = useFormContext();
-  // console.log(getValues());
-
   const { selectedFields, renderField } = useForm<T>(fields, mode);
 
   return <>{selectedFields.map(renderField)}</>;

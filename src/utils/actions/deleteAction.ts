@@ -6,14 +6,20 @@ import pluralize from "pluralize";
 
 export default function deleteAction(entity: EntityKey) {
   return async function () {
-    let response;
     const params = useParams();
     const ID = Number(params["ID"]);
 
-    if (ID) {
-      response = await Delete(`/${pluralize(entity)}/${ID}`);
+    if (!ID) {
+      throw new Error("No ID provided for deletion");
     }
 
-    console.log(response);
+    const response = await Delete(`/${pluralize(entity)}/${ID}`);
+
+    // Return success response with status
+    return {
+      success: true,
+      status: response.status,
+      message: "Item deleted successfully",
+    };
   };
 }

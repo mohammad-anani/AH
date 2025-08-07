@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 import type { Role } from "@/utils/models/types/utils/Form&Filter";
-import { dataFields } from "@/utils/models/componentsConfig/admin/dataFields";
+import { dataFields as adminDataFields } from "@/utils/models/componentsConfig/admin/dataFields";
+import { dataFields as doctorDataFields } from "@/utils/models/componentsConfig/doctor/dataFields";
+import { dataFields as receptionistDataFields } from "@/utils/models/componentsConfig/receptionist/dataFields";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 
 interface SelectorInputProps {
@@ -66,7 +68,7 @@ function SelectorField<T extends EntityKey>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
-  const [entity, entityObject] = data;
+  const [entity, entityObject, role] = data;
 
   return (
     <Selector
@@ -77,8 +79,13 @@ function SelectorField<T extends EntityKey>({
       selectedObjectState={
         [selected, setSelected] as SelectedObjectState<EntityKey>
       }
-      dataFieldsObject={dataFields}
+      dataFieldsObject={
+        role === "Admin"
+          ? adminDataFields
+          : role === "Receptionist"
+            ? receptionistDataFields
+            : doctorDataFields
+      }
     />
   );
 }
-//to add role changing when destructing data

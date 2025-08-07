@@ -8,7 +8,7 @@ import useListContext from "./context";
 import { generateLabel } from "./utils";
 
 import Controller from "@/ui/customComponents/Controller";
-import UnsupportedInput from "@/ui/form-inputs/UnsupportedInput";
+import { UnsupportedInput } from "@/ui/form-inputs";
 import { inputMap } from "@/utils/models/inputMap";
 
 export function Form({ isNestedFilter = false }: { isNestedFilter?: boolean }) {
@@ -50,7 +50,10 @@ export function Form({ isNestedFilter = false }: { isNestedFilter?: boolean }) {
     if (type === "selector" && isNestedFilter) return null;
 
     const InputComponent = inputMap[type as DataTypes] || UnsupportedInput;
-    return <InputComponent {...commonProps} />;
+
+    // TypeScript struggles with the union of all component prop types
+    // Using explicit props object to ensure compatibility
+    return <InputComponent fieldKey={key} label={label} data={data || type} />;
   };
 
   return (

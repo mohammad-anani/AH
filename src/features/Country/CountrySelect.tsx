@@ -14,7 +14,8 @@ export default function CountrySelect({
   setCountryID: Setter<number>;
   isDisabled?: boolean;
 }) {
-  const { selectStyles, selectedOption, options } = useCountries(countryID);
+  const { selectStyles, selectedOption, options, isLoading } =
+    useCountries(countryID);
 
   return (
     <Select
@@ -25,7 +26,8 @@ export default function CountrySelect({
         if (selected) setCountryID(selected.value);
       }}
       isDisabled={isDisabled}
-      placeholder="Select a Country"
+      isLoading={isLoading}
+      placeholder={isLoading ? "Loading countries..." : "Select a Country"}
     />
   );
 }
@@ -39,6 +41,7 @@ function useCountries(countryID: number) {
   }, []);
 
   const countries: Country[] = fetcher.data?.[0] ?? [];
+  const isLoading = fetcher.state === "loading";
 
   const options = countries.map((country) => ({
     value: country.ID,
@@ -93,5 +96,5 @@ function useCountries(countryID: number) {
       padding: "4px 8px",
     }),
   };
-  return { selectStyles, options, selectedOption };
+  return { selectStyles, options, selectedOption, isLoading };
 }

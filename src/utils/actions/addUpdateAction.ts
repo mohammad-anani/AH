@@ -8,12 +8,20 @@ export default function addUpdateAction(entity: EntityKey) {
   return async function ({ request }: ActionFunctionArgs) {
     const data = await request.json();
 
-    console.log(data);
+    // Log data in development for debugging
+    if (import.meta.env.DEV) {
+      console.log("Form data:", data);
+    }
 
+    // Fix: Use consistent URL pattern for both add and update
     const response = data["ID"]
-      ? await update(data, `/${entity}s/${data["ID"]}`)
+      ? await update(data, `/${pluralize(entity)}/${data["ID"]}`)
       : await add(data, `/${pluralize(entity)}`);
 
-    return response.statusText;
+    return {
+      success: true,
+      status: response.status,
+      message: data["ID"] ? "Updated successfully" : "Created successfully",
+    };
   };
 }

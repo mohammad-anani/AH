@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 
@@ -36,7 +37,7 @@ type CardProps<T extends EntityKey> = {
   };
 };
 
-export default function Card<T extends EntityKey>({
+const Card = memo(function Card<T extends EntityKey>({
   title,
   canEdit = true,
   canDelete = true,
@@ -52,6 +53,18 @@ export default function Card<T extends EntityKey>({
   const { subEntity, setSubCard, subDataFields, object, subObject, fetcher } =
     useCard<T>(dataFieldsObject, data);
 
+  // Memoize the computed title text to avoid recalculation
+  const displayTitle = useMemo(
+    () => titleText ?? formatTitle(title),
+    [titleText, title],
+  );
+
+  // Memoize the overflow check to avoid recalculation
+  const shouldOverflow = useMemo(() => {
+    if (!subObject || !subDataFields) return false;
+    return subDataFields(subObject).length > 4;
+  }, [subObject, subDataFields]);
+
   if (subObject && subDataFields) {
     return (
       <>
@@ -63,7 +76,7 @@ export default function Card<T extends EntityKey>({
           Back to {title}
         </Clickable>
         <div
-          className={`mt-[5px] max-h-[260px] ${subDataFields(subObject).length > 4 ? "overflow-y-scroll" : ""}`}
+          className={`mt-[5px] max-h-[260px] ${shouldOverflow ? "overflow-y-scroll" : ""}`}
         >
           <Card
             title={subEntity}
@@ -86,7 +99,7 @@ export default function Card<T extends EntityKey>({
         </Clickable>
       ) : null}
       <div className="flex items-center justify-between">
-        {!isModal ? <H2>{titleText ?? formatTitle(title)}</H2> : null}
+        {!isModal ? <H2>{displayTitle}</H2> : null}
         <div className="flex gap-x-2">
           {canEdit ? (
             <Clickable as="Link" variant="primary" to="edit">
@@ -105,10 +118,10 @@ export default function Card<T extends EntityKey>({
       <div
         className={`grid ${headerWidth ? "grid-cols-[" + headerWidth + "px_1fr]" : "grid-cols-[auto_1fr]"} gap-x-2 gap-y-1 *:text-xl! *:odd:font-bold`}
       >
-        <Data<T>
+        <Data
           isNestedCard={isNestedCard}
           data={object}
-          fields={dataFields}
+          fields={dataFields as DataFields<EntityKey>}
           setSubCard={setSubCard}
           isModal={isModal}
         />
@@ -157,4 +170,6 @@ export default function Card<T extends EntityKey>({
       )}
     </Dialog>
   );
-}
+});
+
+export default Card;

@@ -1,5 +1,5 @@
-import MoneyInput from "@/ui/form-inputs/MoneyInput";
 import {
+  MoneyInput,
   NumberInput,
   StringInput,
   PhoneInput,
@@ -9,8 +9,8 @@ import {
   SelectorInput,
   BooleanInput,
   TemporalInput,
+  TextareaInput,
 } from "../../ui/form-inputs";
-import TextareaInput from "@/ui/form-inputs/textareaInput";
 
 export const inputMap = {
   number: NumberInput,

@@ -19,4 +19,4 @@ export type EntityKey = (typeof entityKeys)[number];
 
 export type DisplayEntityKey = EntityKey | "Person" | "Employee";
 
-export type FetchingEntityKey = EntityKey | "Country";
+export type FetchingEntityKey = EntityKey | "Country" | "OperationDoctor";

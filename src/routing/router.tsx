@@ -5,6 +5,7 @@ import { authRoutes } from "./routes/auth";
 import { adminRoutes } from "./routes/admin";
 import { receptionistRoutes } from "./routes/receptionist";
 import { doctorRoutes } from "./routes/doctor.tsx";
+import listLoader from "@/utils/loaders/listLoader.ts";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,11 @@ const router = createBrowserRouter([
       ...adminRoutes,
       ...receptionistRoutes,
       ...doctorRoutes,
+      {
+        path: "countries",
+        loader: listLoader("Country"),
+        Component: InvalidPath,
+      },
     ],
   },
 ]);

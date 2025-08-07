@@ -25,10 +25,12 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
     const result = schema.safeParse(data);
 
     if (!result.success) {
-      console.log(result.error);
+      // Log validation errors for debugging in development
+      if (import.meta.env.DEV) {
+        console.error("API validation error:", result.error);
+      }
       throwError(
         500,
-
         "Sorry, we received unexpected data from the server. Please try again later.",
       );
     }

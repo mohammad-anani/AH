@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
@@ -12,16 +13,19 @@ type DataProps<T extends EntityKey> = {
   isNestedCard?: boolean;
 };
 
-export default function Data<T extends EntityKey>({
+const Data = memo(function Data<T extends EntityKey>({
   data,
   fields,
   isModal = false,
   setSubCard,
   isNestedCard = false,
 }: DataProps<T>) {
+  // Memoize the fields computation to avoid recalculation on every render
+  const fieldData = useMemo(() => fields(data), [fields, data]);
+
   return (
     <>
-      {fields(data).map(([label, value, link, entity]) => (
+      {fieldData.map(([label, value, link, entity]) => (
         <>
           <span>{label}:</span>
 
@@ -46,4 +50,6 @@ export default function Data<T extends EntityKey>({
       ))}
     </>
   );
-}
+});
+
+export default Data;

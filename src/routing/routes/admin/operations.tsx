@@ -1,21 +1,16 @@
+import OperationDoctorListPage from "@/features/doctor/OperationDoctorListPage";
 import { route } from "@/routing/entityRoute";
-import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
-import { doctor, operation } from "@/utils/models/componentsConfig/admin";
+import { operation } from "@/utils/models/componentsConfig/admin";
 import type { RouteObject } from "react-router-dom";
 
 const doctorsRoute: RouteObject[] = [
   {
     path: "doctors",
-    loader: listLoader("DoctorRow", ({ id }) => `/operations/${id}`),
+    loader: listLoader("OperationDoctorRow"),
     element: (
-      <ListPage
-        entity="Doctor"
-        canAdd={false}
-        rowTemplate={doctor["rowTemplate"]}
-        withBack={true}
-        canModifyUrl={false}
-        detailsLink={(ID) => `/admin/human-resources/doctors/${ID}`}
+      <OperationDoctorListPage
+        detailsLink={(ID) => "/doctor/human-resources/doctors/" + ID}
       />
     ),
   },

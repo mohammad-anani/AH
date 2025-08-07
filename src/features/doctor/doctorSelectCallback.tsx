@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import type { DoctorRow } from "@/utils/models/types/row/rowTypes";
 import DoctorSelect, { type DoctorSelectState } from "./DoctorSelect";
 import { doctor } from "@/utils/models/componentsConfig/receptionist";
 import type {
@@ -9,18 +8,21 @@ import type {
 import type { Setter } from "@/utils/models/types/utils/basics";
 
 export function useSelectedDoctors(
-  field: number[] | undefined,
+  field: [id: number, role: string][] | undefined,
   onChange: Setter<number[] | undefined>,
 ): [DoctorSelectState, Setter<DoctorSelectState>] {
   const [selectedDoctors, setSelectedDoctors] = useState<DoctorSelectState>(
-    field?.map((id) => ({ ID: id })) || [],
+    field?.map((f) => ({ doctor: { ID: f[0] }, role: f[1] })) || [],
   );
 
   useEffect(() => {
     const ids = selectedDoctors
-      .filter((doc): doc is DoctorRow => !!doc && typeof doc.ID === "number")
-      .map((doc) => doc.ID);
-    onChange(ids);
+      .filter(
+        (docItem) =>
+          docItem?.doctor?.ID && typeof docItem.doctor.ID === "number",
+      )
+      .map((docItem) => docItem.doctor.ID);
+    onChange(ids.length > 0 ? ids : undefined);
   }, [selectedDoctors, onChange]);
 
   return [selectedDoctors, setSelectedDoctors] as const;
@@ -29,7 +31,7 @@ export function useSelectedDoctors(
 export const DoctorFormSelectorCallback: customFormProps = [
   ({ field, onChange, isSubmitting }) => {
     const [selectedDoctors, setSelectedDoctors] = useSelectedDoctors(
-      field as number[] | undefined,
+      field as [id: number, role: string][] | undefined,
       onChange as Setter<number[] | undefined>,
     );
 
@@ -48,7 +50,7 @@ export const DoctorFormSelectorCallback: customFormProps = [
 export const DoctorFilterSelectorCallback: customFilterProps = [
   ({ field, onChange }) => {
     const [selectedDoctors, setSelectedDoctors] = useSelectedDoctors(
-      field as number[] | undefined,
+      field as [id: number, role: string][] | undefined,
       onChange as Setter<number[] | undefined>,
     );
 

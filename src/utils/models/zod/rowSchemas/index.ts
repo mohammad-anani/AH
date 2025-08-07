@@ -6,3 +6,4 @@ export * from "./operation";
 export * from "./test";
 export * from "./bill";
 export * from "./payment";
+export * from "./OperationDoctor";

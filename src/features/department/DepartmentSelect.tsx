@@ -13,17 +13,20 @@ export default function DepartmentSelect({
   setDepartmentID: Setter<number>;
   isDisabled?: boolean;
 }) {
-  const departments = useDepartments();
+  const { departments, isLoading } = useDepartments();
 
   return (
     <select
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
       value={departmentID || ""}
       onChange={(e) => {
         setDepartmentID(+e.target.value);
       }}
+      aria-label="Select Department"
     >
-      <option value={undefined}>Select Department</option>
+      <option value="">
+        {isLoading ? "Loading departments..." : "Select Department"}
+      </option>
       {departments?.map((department) => (
         <option key={department.ID} value={department.ID}>
           {department.Name}
@@ -42,6 +45,7 @@ function useDepartments() {
   }, []);
 
   const departments: typesObject["Department"][] = fetcher.data?.[0] ?? [];
+  const isLoading = fetcher.state === "loading";
 
-  return departments;
+  return { departments, isLoading };
 }

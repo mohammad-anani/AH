@@ -5,7 +5,7 @@ import type { ReactElement } from "react";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { emptyObjectsTypes } from "@/utils/models/types/empty/emptyTypesObject";
-import useError from "../form-inputs/useError";
+import { useError } from "../form-inputs";
 import FormError from "./FormError";
 
 interface ControlledFieldProps {
