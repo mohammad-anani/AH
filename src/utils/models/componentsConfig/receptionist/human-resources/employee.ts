@@ -8,7 +8,6 @@ import { DepartmentFilterSelectCallBack } from "@/features/department/department
 import type { DisplayingConfig } from "../../routeConfig";
 
 import {
-  moneyField,
   dateField,
   multiselectField,
   timeField,
@@ -67,7 +66,7 @@ export const employee: DisplayingConfig<"Employee"> = {
   },
   filterFields: [
     ["Department", "custom", DepartmentFilterSelectCallBack],
-    moneyField("Salary"),
+
     dateField("HireDate"),
     dateField("LeaveDate"),
     booleanField("isActive", ["Active", "Not Active", "All"]),

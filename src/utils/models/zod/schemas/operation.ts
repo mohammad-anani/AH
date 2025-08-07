@@ -25,4 +25,5 @@ export const OperationSchema = z.object({
     .array(z.number())
     .min(1, { message: "Minimum 1 doctor required" })
     .max(5, { message: "Maximum 5 doctors permitted" }),
+  Notes: z.string().optional(),
 });

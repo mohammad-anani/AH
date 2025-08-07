@@ -23,7 +23,7 @@ export function route<T extends EntityKey>(
   withList: boolean = true,
   withID: boolean = true,
   urlPathPrefix?: string,
-  withCard?: boolean,
+  withCard: boolean = true,
 ): RouteObject[] {
   const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
     entityObject;

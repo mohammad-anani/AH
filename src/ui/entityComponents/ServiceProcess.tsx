@@ -13,6 +13,8 @@ import { inputMap } from "@/utils/models/inputMap";
 import { UnsupportedInput } from "../form-inputs";
 import { generateLabel } from "./listComponents/utils";
 import Controller from "../customComponents/Controller";
+import { Form, useOutletContext } from "react-router-dom";
+import { FormProvider, useForm } from "react-hook-form";
 
 export type Process = "Start" | "Cancel" | "Complete";
 
@@ -23,8 +25,12 @@ export default function ServiceProcess<T extends ServicesEntities>({
 }: {
   process: Process;
   entity: T;
-  formFields: FormKey<T>;
+  formFields?: FormKey<T>[];
 }) {
+  const object = useOutletContext();
+
+  const methods = useForm({ defaultValues: object });
+
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">
@@ -34,15 +40,22 @@ export default function ServiceProcess<T extends ServicesEntities>({
       <div className="flex items-center justify-between">
         <H2>{process + " " + formatTitle(entity)}</H2>
       </div>
-
-      <Clickable
-        className="col-span-2 mt-10"
-        as="button"
-        type="submit"
-        variant="primary"
-      >
-        {process}
-      </Clickable>
+      <FormProvider {...methods}>
+        <Form
+          replace
+          className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 *:text-xl! *:odd:font-bold"
+        >
+          {(formFields as FormKey<EntityKey>[])?.map(renderField)}
+          <Clickable
+            className="col-span-2 mt-10"
+            as="button"
+            type="submit"
+            variant="primary"
+          >
+            {process}
+          </Clickable>
+        </Form>
+      </FormProvider>
     </>
   );
 }

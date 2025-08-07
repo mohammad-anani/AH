@@ -1,34 +1,40 @@
 import Controller from "@/ui/customComponents/Controller";
 import Select from "react-select";
 import { generateLabel } from "../entityComponents/listComponents/utils";
+import type { CSSObjectWithLabel } from "react-select";
+
+interface SelectOption {
+  value: string | number;
+  label: string;
+}
 
 interface ArrayInputProps {
   fieldKey: string;
   label: string;
-  data: unknown[];
+  data: string[] | SelectOption[];
 }
 
 const selectStyles = {
-  control: (base: Record<string, unknown>) => ({
+  control: (base: CSSObjectWithLabel) => ({
     ...base,
     fontSize: "inherit",
     minHeight: "auto", // remove fixed height
     height: "100%", // fill available height
   }),
-  valueContainer: (base: Record<string, unknown>) => ({
+  valueContainer: (base: CSSObjectWithLabel) => ({
     ...base,
     padding: "0 6px",
   }),
-  input: (base: Record<string, unknown>) => ({
+  input: (base: CSSObjectWithLabel) => ({
     ...base,
     margin: 0,
     padding: 0,
   }),
-  indicatorsContainer: (base: Record<string, unknown>) => ({
+  indicatorsContainer: (base: CSSObjectWithLabel) => ({
     ...base,
     height: "100%", // fill height here too
   }),
-  dropdownIndicator: (base: Record<string, unknown>) => ({
+  dropdownIndicator: (base: CSSObjectWithLabel) => ({
     ...base,
     padding: 2,
     svg: {
@@ -36,7 +42,7 @@ const selectStyles = {
       height: 12,
     },
   }),
-  clearIndicator: (base: Record<string, unknown>) => ({
+  clearIndicator: (base: CSSObjectWithLabel) => ({
     ...base,
     padding: 2,
     svg: {
@@ -44,23 +50,33 @@ const selectStyles = {
       height: 12,
     },
   }),
-  menu: (base: Record<string, unknown>) => ({
+  menu: (base: CSSObjectWithLabel) => ({
     ...base,
     fontSize: 10,
   }),
-  option: (base: Record<string, unknown>) => ({
+  option: (base: CSSObjectWithLabel) => ({
     ...base,
     fontSize: 10,
     padding: "4px 8px",
   }),
 };
 
-function toValueLabelArray(arr: string[]): { value: string; label: string }[] {
+function isSelectOptionArray(
+  data: string[] | SelectOption[],
+): data is SelectOption[] {
+  return data.length > 0 && typeof data[0] === "object" && "value" in data[0];
+}
+
+function toValueLabelArray(arr: string[] | SelectOption[]): SelectOption[] {
+  if (isSelectOptionArray(arr)) {
+    return arr;
+  }
   return arr.map((str) => ({ value: str, label: str }));
 }
 
 export default function ArrayInput({ fieldKey, label, data }: ArrayInputProps) {
   const placeholder = fieldKey.split(".").at(-1);
+  const options = toValueLabelArray(data);
 
   return (
     <>
@@ -76,7 +92,7 @@ export default function ArrayInput({ fieldKey, label, data }: ArrayInputProps) {
             <Select
               inputId={fieldKey}
               isMulti
-              options={toValueLabelArray(data as string[])}
+              options={options}
               placeholder={`Select ${generateLabel(placeholder ?? "")}`}
               value={selectedOptions}
               styles={selectStyles}

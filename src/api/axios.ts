@@ -2,7 +2,7 @@ import throwError from "@/utils/helpers/throwError";
 import a, { isAxiosError } from "axios";
 
 const axios = a.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

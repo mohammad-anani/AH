@@ -40,7 +40,7 @@ export const appointment: RouteConfig<"Appointment"> = {
     ["Time", formatDateIsoToLocal(Time)],
     ["Reason", Reason],
     ["Status", Status],
-    ["Notes", Notes],
+    ["Notes", Notes?.length ? Notes : "N/A"],
     ["Bill", "View Bill", "/receptionist/bills/" + BillID, "Bill"],
   ],
   filterFields: [

@@ -17,16 +17,23 @@ type CardProps<T extends ServicesEntities> = {
   title: T;
   subLinks?: SubLinks<T>;
   dataFields: DataFields<T>;
+  canStart?: boolean;
+  canCancel?: boolean;
+  canComplete?: boolean;
+  canEdit?: boolean;
 };
 
 export default function ServiceCard<T extends ServicesEntities>({
   title,
   subLinks,
   dataFields,
+  canStart = true,
+  canCancel = true,
+  canComplete = true,
+  canEdit = true,
 }: CardProps<T>) {
   const object = useOutletContext<typesObject[T]>();
   const status = object.Status;
-
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">
@@ -36,29 +43,36 @@ export default function ServiceCard<T extends ServicesEntities>({
       <div className="flex items-center justify-between">
         <H2>{formatTitle(title)}</H2>
         <div className="flex gap-x-2">
-          <Clickable as="Link" variant="primary" to="edit">
-            Edit
-          </Clickable>
+          {canEdit && (
+            <Clickable as="Link" variant="primary" to="edit">
+              Edit
+            </Clickable>
+          )}
 
           {status === "Scheduled" ? (
             <>
-              <Clickable
-                className="bg-amber-400! text-black! hover:bg-amber-300! hover:text-black!"
-                as="Link"
-                to="start"
-                variant="primary"
-              >
-                Start
-              </Clickable>
-
-              <Clickable as="Link" to="cancel" variant="destructive">
-                Cancel
-              </Clickable>
+              {canStart && (
+                <Clickable
+                  className="bg-amber-400! text-black! hover:bg-amber-300! hover:text-black!"
+                  as="Link"
+                  to="start"
+                  variant="primary"
+                >
+                  Start
+                </Clickable>
+              )}
+              {canCancel && (
+                <Clickable as="Link" to="cancel" variant="destructive">
+                  Cancel
+                </Clickable>
+              )}
             </>
           ) : status === "In Progress" ? (
-            <Clickable as="Link" to="complete" variant="primary">
-              Complete
-            </Clickable>
+            canComplete && (
+              <Clickable as="Link" to="complete" variant="primary">
+                Complete
+              </Clickable>
+            )
           ) : null}
         </div>
       </div>

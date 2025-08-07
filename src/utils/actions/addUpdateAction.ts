@@ -12,7 +12,7 @@ export default function addUpdateAction(entity: EntityKey) {
 
     const response = data["ID"]
       ? await update(data, `/${entity}s/${data["ID"]}`)
-      : await add(data, `/${pluralize(entity)}/${data["ID"]}`);
+      : await add(data, `/${pluralize(entity)}`);
 
     return response.statusText;
   };

@@ -33,7 +33,6 @@ export const statusLabels = ["Active", "Inactive"];
 export const employee: DisplayingConfig<"Employee"> = {
   dataFields: (employee: typesObject["Employee"]) => {
     const {
-      Person,
       DepartmentID,
       Salary,
       HireDate,
@@ -52,7 +51,6 @@ export const employee: DisplayingConfig<"Employee"> = {
           : WorkingDays.join(", ");
 
     return [
-      ...person["dataFields"](Person),
       [
         "Department",
         "View Department",

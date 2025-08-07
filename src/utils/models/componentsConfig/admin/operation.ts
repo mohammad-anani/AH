@@ -30,6 +30,7 @@ export const operation: RouteConfig<"Operation"> = {
 
     ["Scheduled Date", formatDateIsoToLocal(operation.ScheduledDate)],
     ["Status", operation.Status],
+    ["Notes", operation.Notes?.length ? operation.Notes : "N/A"],
     [
       "Bill",
       operation.BillID ? "View Bill" : "N/A",

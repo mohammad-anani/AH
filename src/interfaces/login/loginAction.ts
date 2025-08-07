@@ -10,4 +10,6 @@ export default async function loginAction({ request }: ActionFunctionArgs) {
   if (Username === "admin") return redirect("/admin");
 
   if (Username === "receptionist") return redirect("/receptionist");
+
+  if (Username === "doctor") return redirect("/doctor");
 }

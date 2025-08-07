@@ -20,8 +20,6 @@ export default function TemporalInput({
     watch,
   } = useFormContext<FieldValues>();
 
-  //booleans to be changed,date of birth to be added with age
-
   const isFromTo = Object.keys(getValues()).some(
     (key) => key === fieldKey + "From" || key === fieldKey + "To",
   );

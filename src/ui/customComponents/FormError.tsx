@@ -1,18 +1,21 @@
-export default function FormError({
-  errorMessages,
-}: {
-  errorMessages: string[][] | undefined;
-}) {
-  if (!(errorMessages?.[0] && errorMessages[0].length)) return null;
+interface FormErrorProps {
+  errorMessages: string[] | undefined;
+}
+
+export default function FormError({ errorMessages }: FormErrorProps) {
+  if (!errorMessages || errorMessages.length === 0) {
+    return null;
+  }
+
   return (
-    <ul className="grid grid-cols-1 text-sm! *:text-red-500!">
-      {typeof errorMessages[0] === "string" ? (
-        <li>{`* ${errorMessages[0]}`}</li>
-      ) : (
-        (errorMessages[0] as string[]).map((msg: string, i) => (
-          <li key={i}>{`* ${msg}`}</li>
-        ))
-      )}
+    <ul
+      className="grid grid-cols-1 text-sm! *:text-red-500!"
+      role="alert"
+      aria-live="polite"
+    >
+      {errorMessages.map((message, index) => (
+        <li key={index}>{`* ${message}`}</li>
+      ))}
     </ul>
   );
 }

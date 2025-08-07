@@ -4,8 +4,7 @@ import InvalidPath from "@/ui/InvalidPath";
 import { authRoutes } from "./routes/auth";
 import { adminRoutes } from "./routes/admin";
 import { receptionistRoutes } from "./routes/receptionist";
-import { doctorRoutes } from "./routes/doctor";
-import listLoader from "@/utils/loaders/listLoader";
+import { doctorRoutes } from "./routes/doctor.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,21 +15,6 @@ const router = createBrowserRouter([
       ...adminRoutes,
       ...receptionistRoutes,
       ...doctorRoutes,
-      {
-        path: "countries",
-        Component: InvalidPath,
-        loader: listLoader("Country"),
-      },
-      {
-        path: "doctors",
-        Component: InvalidPath,
-        loader: listLoader("Country"),
-      },
-      {
-        path: "departments",
-        Component: InvalidPath,
-        loader: listLoader("Country"),
-      },
     ],
   },
 ]);

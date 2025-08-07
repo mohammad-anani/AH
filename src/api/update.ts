@@ -1,6 +1,6 @@
 import axios from "./axios";
 
-export default async function add(data: unknown, url: string) {
+export default async function update(data: unknown, url: string) {
   const response = await axios.patch(url, data, {
     headers: {
       "Content-Type": "application/json",

@@ -362,7 +362,8 @@
       "ResultDate": "2023-02-11T09:00:00",
       "BillID": 2,
       "CreatedByReceptionistID": 1,
-      "CreatedAt": "2023-02-09T10:00:00"
+      "CreatedAt": "2023-02-09T10:00:00",
+      "Notes": ""
     },
     {
       "ID": 2,
@@ -375,7 +376,8 @@
       "BillID": 1,
       "ResultDate": "2023-02-13T09:00:00",
       "CreatedByReceptionistID": 2,
-      "CreatedAt": "2023-02-11T10:00:00"
+      "CreatedAt": "2023-02-11T10:00:00",
+      "Notes": ""
     },
     {
       "ID": 3,
@@ -388,7 +390,8 @@
       "BillID": 1,
       "ResultDate": "2023-02-15T09:00:00",
       "CreatedByReceptionistID": 3,
-      "CreatedAt": "2023-02-13T10:00:00"
+      "CreatedAt": "2023-02-13T10:00:00",
+      "Notes": ""
     }
   ],
   "TestAppointmentRows": [

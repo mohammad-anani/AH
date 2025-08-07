@@ -18,4 +18,5 @@ export const TestAppointmentSchema = z.object({
   BillID: positiveNumber("Payment ID", 1),
   CreatedByReceptionistID: positiveNumber("Receptionist ID", 1),
   CreatedAt: datetime("Creation date"),
+  Notes: z.string().optional(),
 });

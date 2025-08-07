@@ -22,6 +22,7 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ScheduledDate,
     Status,
     Result,
+    Notes,
     ResultDate,
     CreatedByReceptionistID,
     CreatedAt,
@@ -44,6 +45,7 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Status", Status],
     ["Result", Result],
+    ["Notes", Notes?.length ? Notes : "N/A"],
     ["Bill", "View Bill", "/admin/bills/" + BillID, "Bill"],
     ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
     [

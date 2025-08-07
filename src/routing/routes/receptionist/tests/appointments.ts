@@ -1,15 +1,12 @@
-import { route } from "@/routing/entityRoute";
+import { serviceRoute } from "@/routing/serviceRoute";
 import { testAppointment } from "@/utils/models/componentsConfig/receptionist";
 
-export const testAppointmentsRoutes = route(
+export const testAppointmentsRoutes = serviceRoute(
   "TestAppointment",
-  true,
-  true,
-  false,
   testAppointment,
-  false,
+  [["Notes", "Notes", "text", "both"]],
   undefined,
-  undefined,
+  true,
   true,
   true,
 );

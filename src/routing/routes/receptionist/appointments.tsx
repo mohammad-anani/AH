@@ -1,7 +1,6 @@
-import { route } from "@/routing/entityRoute";
+import { serviceRoute } from "@/routing/serviceRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
-import ServiceProcess from "@/ui/entityComponents/ServiceProcess";
-import ServiceCard from "@/ui/entityComponents/ServicesCard";
+
 import listLoader from "@/utils/loaders/listLoader";
 import {
   appointment,
@@ -26,42 +25,12 @@ const testOrdersRoute: RouteObject[] = [
   },
 ];
 
-const appointmentCard: RouteObject[] = [
-  {
-    index: true,
-    element: (
-      <ServiceCard
-        title="Appointment"
-        subLinks={appointment.subLinks}
-        dataFields={appointment.dataFields}
-      />
-    ),
-  },
-];
-
-const appointmentStart: RouteObject[] = [
-  {
-    path: "start",
-    element: (
-      <ServiceProcess process="Start" entity="Appointment"></ServiceProcess>
-    ),
-  },
-];
-
-export const appointmentsRoutes = route(
+export const appointmentsRoutes = serviceRoute(
   "Appointment",
-  true,
-  true,
-  false,
   appointment,
-  false,
-  undefined,
-  [
-    [testOrdersRoute, "id"],
-    [appointmentCard, "id"],
-  ],
+  [["Notes", "Notes", "text", "both"]],
+  [[testOrdersRoute, "id"]],
   true,
   true,
-  undefined,
   false,
 );

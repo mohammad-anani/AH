@@ -66,7 +66,7 @@ export default function AddUpdateForm<T extends EntityKey>({
               encType: "application/json",
             });
           })}
-          className={`grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 *:text-xl! *:odd:font-bold`}
+          className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 *:text-xl! *:odd:font-bold"
         >
           <Form fields={formConfig} mode={isAdd ? "add" : "update"} />
           <Clickable
