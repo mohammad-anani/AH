@@ -1,10 +1,11 @@
-import MakeAppointment from "@/features/testOrder/makeAppointment";
+import MakeAppointment from "@/features/testOrder/MakeAppointment";
 import { route } from "@/routing/entityRoute";
 import { testOrder } from "@/utils/models/componentsConfig/receptionist";
 import type { RouteObject } from "react-router-dom";
+import reserveAction from "../../../actions/reserveAppointnemntAction";
 
 const makeAppointmentRoute: RouteObject[] = [
-  { path: "reserve", Component: MakeAppointment },
+  { path: "reserve", Component: MakeAppointment, action: reserveAction },
 ];
 
 export const testOrdersRoutes = route(

@@ -14,7 +14,9 @@ import { UnsupportedInput } from "../form-inputs";
 import { generateLabel } from "./listComponents/utils";
 import Controller from "../customComponents/Controller";
 import { Form, useOutletContext } from "react-router-dom";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, type Primitive } from "react-hook-form";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import throwError from "@/utils/helpers/throwError";
 
 export type Process = "Start" | "Cancel" | "Complete";
 
@@ -27,9 +29,32 @@ export default function ServiceProcess<T extends ServicesEntities>({
   entity: T;
   formFields?: FormKey<T>[];
 }) {
-  const object = useOutletContext();
+  const object = useOutletContext() as typesObject[T];
+  const { Status } = object;
 
-  const methods = useForm({ defaultValues: object });
+  const defaultValues =
+    formFields?.reduce(
+      (acc, [, fieldKey]) => {
+        acc[fieldKey] = getNestedValue(object, fieldKey as string);
+        return acc;
+      },
+      {} as Record<string, Primitive>,
+    ) ?? {};
+
+  const methods = useForm({ defaultValues: defaultValues });
+
+  if (["Completed", "Cancelled"].includes(Status))
+    throwError(
+      403,
+      "Can't " + process + " a completed or cancelled " + formatTitle(entity),
+    );
+  if (Status === "Scheduled" && process === "Complete")
+    throwError(403, "Can't complete a scheduled " + formatTitle(entity));
+  if (Status === "In Progress" && ["Cancel", "Start"].includes(process))
+    throwError(
+      403,
+      "Can't " + process + " a " + formatTitle(entity) + " in progress",
+    );
 
   return (
     <>
@@ -94,3 +119,7 @@ const renderField = (field: FormKey<EntityKey>) => {
 
   return <InputComponent {...commonProps} />;
 };
+
+function getNestedValue(obj: any, path: string): any {
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+}

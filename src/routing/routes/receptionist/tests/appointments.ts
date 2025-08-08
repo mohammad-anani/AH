@@ -4,7 +4,11 @@ import { testAppointment } from "@/utils/models/componentsConfig/receptionist";
 export const testAppointmentsRoutes = serviceRoute(
   "TestAppointment",
   testAppointment,
-  [["Notes", "Notes", "text", "both"]],
+
+  [
+    ["Result", "Result", "text", "both"],
+    ["Notes", "Notes", "text", "both"],
+  ],
   undefined,
   true,
   true,

@@ -27,5 +27,5 @@ export default async function add(data: unknown, url: string) {
     // removed console.log
   }
 
-  return response;
+  return response.data?.["ID"];
 }

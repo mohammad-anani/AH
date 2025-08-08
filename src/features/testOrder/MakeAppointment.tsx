@@ -19,12 +19,15 @@ import { testType } from "@/utils/models/componentsConfig/receptionist";
 import TemporalInput from "@/ui/form-inputs/TemporalInput";
 import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 
 export default function MakeAppointment() {
-  const methods = useForm({ resolver: zodResolver(TestAppointmentSchema) });
+  const testOrder = useOutletContext<TestOrder>();
+  const methods = useForm({
+    resolver: zodResolver(TestAppointmentSchema.pick({ ScheduledDate: true })),
+  });
   const submit = useSubmit();
 
-  const testOrder = useOutletContext<TestOrder>();
   const fetcher = useFetcher();
 
   // Log test order data in development
@@ -34,13 +37,14 @@ export default function MakeAppointment() {
 
   useEffect(() => {
     if (testOrder?.TestTypeID) {
-      fetcher.load("/receptionist/tests/types/" + testOrder.TestTypeID);
+      fetcher.load(fetchingPaths["TestType"] + "/" + testOrder?.TestTypeID);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testOrder?.TestTypeID]);
 
   const {
     handleSubmit,
+    register,
     formState: { isSubmitting },
   } = methods;
 
@@ -66,7 +70,6 @@ export default function MakeAppointment() {
 
   // Don't render if no data yet
   if (!fetcher.data) return null;
-
   return (
     <>
       <>
@@ -102,6 +105,7 @@ export default function MakeAppointment() {
             label="Scheduled Date:"
             data="datetime"
           />
+
           <Clickable
             className="col-span-2 mt-10"
             as="button"

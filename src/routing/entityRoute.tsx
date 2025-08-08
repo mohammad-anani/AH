@@ -84,7 +84,9 @@ export function route<T extends EntityKey>(
                 canDelete
                   ? {
                       path: "delete",
-                      action: deleteAction(entity),
+                      action: deleteAction(entity, (request) =>
+                        request.url.replace(/\/[^/]+\/delete$/, ""),
+                      ),
                     }
                   : {},
                 canEdit
@@ -96,7 +98,10 @@ export function route<T extends EntityKey>(
                           entity={entity}
                         />
                       ),
-                      action: addUpdateAction(entity),
+                      action: addUpdateAction(
+                        entity,
+                        (request) => `${request.url.replace("/edit", "")}`,
+                      ),
                     }
                   : {},
                 ...(extraRoutes
@@ -111,7 +116,11 @@ export function route<T extends EntityKey>(
               element: (
                 <AddUpdateForm formConfig={formConfig} entity={entity} />
               ),
-              action: addUpdateAction(entity),
+              action: addUpdateAction(
+                entity,
+                (request, newID) =>
+                  `${request.url.replace("/add", `/${String(newID)}`)}`,
+              ),
             }
           : {},
         ...(extraRoutes

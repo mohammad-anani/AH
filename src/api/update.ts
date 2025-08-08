@@ -33,5 +33,5 @@ export default async function update(data: unknown, url: string) {
     // removed console.log
   }
 
-  return response;
+  return response.status === 200;
 }

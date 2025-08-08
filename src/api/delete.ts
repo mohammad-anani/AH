@@ -29,5 +29,5 @@ export default async function Delete(url: string) {
     // removed console.log
   }
 
-  return response;
+  return response.status === 200;
 }

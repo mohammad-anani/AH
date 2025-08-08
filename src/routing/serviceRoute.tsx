@@ -8,6 +8,7 @@ import ServiceCard, {
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 import type { FormKey } from "@/utils/models/types/utils/Form&Filter";
 import type { Params, RouteObject } from "react-router-dom";
+import processService from "./actions/processService";
 
 export function serviceRoute<T extends ServicesEntities>(
   entity: T,
@@ -47,6 +48,7 @@ export function serviceRoute<T extends ServicesEntities>(
   const Start: RouteObject[] = [
     {
       path: "start",
+      action: processService(entity),
       element: (
         <ServiceProcess
           process="Start"
@@ -60,6 +62,8 @@ export function serviceRoute<T extends ServicesEntities>(
   const Cancel: RouteObject[] = [
     {
       path: "cancel",
+      action: processService(entity),
+
       element: (
         <ServiceProcess
           process="Cancel"
@@ -73,6 +77,8 @@ export function serviceRoute<T extends ServicesEntities>(
   const Complete: RouteObject[] = [
     {
       path: "complete",
+      action: processService(entity),
+
       element: (
         <ServiceProcess
           process="Complete"
@@ -82,6 +88,7 @@ export function serviceRoute<T extends ServicesEntities>(
       ),
     },
   ];
+
   return route(
     entity,
     canAdd,
