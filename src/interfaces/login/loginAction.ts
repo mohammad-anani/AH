@@ -6,7 +6,7 @@ export default async function loginAction({ request }: ActionFunctionArgs) {
 
   // Log login attempts in development
   if (import.meta.env.DEV) {
-    console.log("Login attempt:", { username: data.Username });
+    // removed console.log
   }
 
   const { Username } = data;

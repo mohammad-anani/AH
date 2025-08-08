@@ -41,14 +41,13 @@ export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
 
   const {
     handleSubmit,
-    getValues,
-    formState: { isSubmitting: isSub, errors },
+    formState: { isSubmitting: isSub },
   } = methods;
   const submit = useSubmit();
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
 
-  console.log(errors, getValues());
+  // removed console.log
 
   if (!schema || !defaultValues)
     throwError(500, "schema or default values didn't load.");

@@ -29,7 +29,7 @@ export default function MakeAppointment() {
 
   // Log test order data in development
   if (import.meta.env.DEV) {
-    console.log("Test Order Context:", testOrder);
+    // removed console.log
   }
 
   useEffect(() => {

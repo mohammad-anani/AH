@@ -24,7 +24,7 @@ export default async function add(data: unknown, url: string) {
   });
 
   if (import.meta.env.DEV) {
-    console.log(`Invalidated list cache for entity type: ${entityType}`);
+    // removed console.log
   }
 
   return response;

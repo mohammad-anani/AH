@@ -45,7 +45,7 @@ export const date = (name: string) =>
 export const booleanField = (name: string) =>
   z.preprocess(
     (val: boolean | "true" | "false" | "") => {
-      console.log(val);
+      // removed console.log
       if (typeof val === "boolean") return val;
       if (typeof val === "string") return val === "" ? null : val === "true";
       return null;

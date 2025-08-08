@@ -26,7 +26,7 @@ export default async function Delete(url: string) {
   });
 
   if (import.meta.env.DEV) {
-    console.log(`Invalidated cache after deleting: ${entityType}:${entityId}`);
+    // removed console.log
   }
 
   return response;

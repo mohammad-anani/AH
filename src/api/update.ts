@@ -30,7 +30,7 @@ export default async function update(data: unknown, url: string) {
   });
 
   if (import.meta.env.DEV) {
-    console.log(`Invalidated cache for entity: ${entityType}:${entityId}`);
+    // removed console.log
   }
 
   return response;

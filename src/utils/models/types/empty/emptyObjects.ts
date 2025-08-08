@@ -60,7 +60,7 @@ function createEmptyValue(schema: ZodTypeAny): EmptyValueType {
 
 export const emptyObjects = Object.fromEntries(
   Object.entries(schemas).map(([key, schema]) => {
-    console.log(key);
+    // removed console.log
     return [key, createEmptyValue(schema)];
   }),
 ) as {

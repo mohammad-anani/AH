@@ -10,7 +10,7 @@ export default function addUpdateAction(entity: EntityKey) {
 
     // Log data in development for debugging
     if (import.meta.env.DEV) {
-      console.log("Form data:", data);
+      // removed console.log
     }
 
     // Fix: Use consistent URL pattern for both add and update

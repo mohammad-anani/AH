@@ -7,7 +7,7 @@ export default function FormError({ errorMessages, id }: FormErrorProps) {
   if (!errorMessages || errorMessages?.length === 0) {
     return null;
   }
-  console.log(errorMessages);
+  // removed console.log
   return (
     <ul
       id={id}

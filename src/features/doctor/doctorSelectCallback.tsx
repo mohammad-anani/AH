@@ -20,7 +20,7 @@ export function useSelectedDoctors(
       ID: docItem.Doctor.ID,
       Role: docItem.Role,
     }));
-    console.log(formDoctors);
+    // removed console.log
     onChange(formDoctors);
   }, [selectedDoctors, onChange]);
 

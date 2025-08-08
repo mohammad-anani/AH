@@ -20,7 +20,7 @@ export const cacheManager = {
         0,
       );
       if (total > 0) {
-        console.log(`Cache cleanup removed ${total} expired entries:`, results);
+        // removed console.log
       }
     }
 
@@ -36,7 +36,7 @@ export const cacheManager = {
     metadataCache.clear();
 
     if (import.meta.env.DEV) {
-      console.log("All caches cleared");
+      // removed console.log
     }
   },
 
@@ -76,9 +76,7 @@ export const cacheManager = {
     });
 
     if (import.meta.env.DEV) {
-      console.log(
-        `Cleared ${cleared} cache entries for entity type: ${entityType}`,
-      );
+      // removed console.log
     }
 
     return cleared;
@@ -92,7 +90,7 @@ export const cacheManager = {
     const intervalId = setInterval(cacheManager.cleanup, intervalMs);
 
     if (import.meta.env.DEV) {
-      console.log(`Cache cleanup interval started (${intervalMs}ms)`);
+      // removed console.log
     }
 
     return intervalId;

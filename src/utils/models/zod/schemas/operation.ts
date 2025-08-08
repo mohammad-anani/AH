@@ -50,6 +50,6 @@ export const OperationSchema = z
     Notes: z.string().optional(),
   })
   .refine((data) => {
-    console.log(data);
+    // removed console.log
     return data;
   });
