@@ -21,9 +21,6 @@ export default async function getList(
   if (useCache) {
     const cached = listCache.get<[unknown[], number]>(cacheKey);
     if (cached) {
-      if (import.meta.env.DEV) {
-        console.log(`Cache hit for list: ${entityType}`);
-      }
       return cached;
     }
   }
@@ -35,9 +32,6 @@ export default async function getList(
     // Cache the result
     if (useCache) {
       listCache.set(cacheKey, result, cacheTtl);
-      if (import.meta.env.DEV) {
-        console.log(`Cached list data for: ${entityType}`);
-      }
     }
 
     return result;

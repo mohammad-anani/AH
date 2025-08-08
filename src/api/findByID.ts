@@ -22,9 +22,6 @@ export default async function findByID(
   if (useCache) {
     const cached = entityCache.get<unknown>(cacheKey);
     if (cached) {
-      if (import.meta.env.DEV) {
-        console.log(`Cache hit for entity: ${entityType}:${entityId}`);
-      }
       return cached;
     }
   }
@@ -36,9 +33,6 @@ export default async function findByID(
     // Cache the result
     if (useCache && result) {
       entityCache.set(cacheKey, result, cacheTtl);
-      if (import.meta.env.DEV) {
-        console.log(`Cached entity data for: ${entityType}:${entityId}`);
-      }
     }
 
     return result;

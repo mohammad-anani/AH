@@ -23,8 +23,8 @@ export type DataTypes =
 
 export type customFilterProps = [
   (data: {
-    field: Primitive | Primitive[];
-    onChange: Setter<Primitive | Primitive[]>;
+    field: Primitive | Primitive[] | [][];
+    onChange: Setter<Primitive | Primitive[] | [][]>;
     role?: "admin" | "receptionist" | "doctor";
   }) => JSX.Element,
   DataTypes,
@@ -32,8 +32,8 @@ export type customFilterProps = [
 
 export type customFormProps = [
   (data: {
-    field: Primitive;
-    onChange: Setter<Primitive>;
+    field: Primitive | Primitive[] | [][];
+    onChange: Setter<Primitive | Primitive[] | [][]>;
     isSubmitting?: boolean;
   }) => JSX.Element,
   DataTypes,

@@ -38,13 +38,17 @@ export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
     defaultValues: defaultValues as DefaultValues<z.infer<typeof schema>>,
     criteriaMode: "all",
   });
+
   const {
     handleSubmit,
+    getValues,
     formState: { isSubmitting: isSub },
   } = methods;
   const submit = useSubmit();
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
+
+  console.log(getValues());
 
   if (!schema || !defaultValues)
     throwError(500, "schema or default values didn't load.");

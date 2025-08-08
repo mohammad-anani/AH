@@ -1,5 +1,9 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import {
+  DoctorFilterSelectorCallback,
+  DoctorFormSelectorCallback,
+} from "@/features/doctor/doctorSelectCallback";
 
 import {
   DepartmentFilterSelectCallBack,
@@ -12,7 +16,7 @@ import {
   receptionistFilterSelectorField,
   receptionistFormSelectorField,
 } from "../utils/RoleUtil";
-import { patient } from "./human-resources";
+import { patient } from "./human-resources/patient";
 
 export const operation: RouteConfig<"Operation"> = {
   dataFields: (operation: typesObject["Operation"]) => [
@@ -45,7 +49,7 @@ export const operation: RouteConfig<"Operation"> = {
     stringField("Name"),
     stringField("Description"),
     receptionistFilterSelectorField("PatientID", "Patient", patient),
-    ["Doctors", "custom", () => DoctorFilterSelectorCallback],
+    ["Doctors", "custom", DoctorFilterSelectorCallback],
     ["Department", "custom", DepartmentFilterSelectCallBack],
     datetimeField("Scheduled Date"),
     ["Status", "uniselect", ["Done", "UnDone"]],
@@ -67,7 +71,7 @@ export const operation: RouteConfig<"Operation"> = {
       "add",
       DepartmentFormSelectCallBack,
     ],
-    ["Doctors", "Doctors", "custom", "both", () => DoctorFormSelectorCallback],
+    ["Doctors", "Doctors", "custom", "both", DoctorFormSelectorCallback],
     ["Scheduled Date", "ScheduledDate", "datetime", "both"],
   ],
   selectorDisplay: ({ ID }) => String(ID),
@@ -84,8 +88,3 @@ export const operation: RouteConfig<"Operation"> = {
   ],
   subLinks: () => [["View Doctors", "doctors"]],
 };
-
-import {
-  DoctorFilterSelectorCallback,
-  DoctorFormSelectorCallback,
-} from "@/features/doctor/doctorSelectCallback";
