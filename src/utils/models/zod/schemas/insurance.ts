@@ -8,8 +8,8 @@ import {
 } from "../reusableSchemas";
 
 export const InsuranceSchema = z.object({
-  ID: positiveNumber("Insurance ID", 1),
-  PatientID: positiveNumber("Patient ID", 1),
+  ID: positiveNumber("Insurance", 1),
+  Patient: positiveNumber("Patient", 1, Number.MAX_SAFE_INTEGER, true),
   ProviderName: nonEmptyString("Provider name").min(2, {
     message: "Provider name must be at least 2 characters long.",
   }),
@@ -21,6 +21,6 @@ export const InsuranceSchema = z.object({
     },
   ),
   isActive: booleanField("Active status"),
-  CreatedByReceptionistID: positiveNumber("Receptionist ID", 1),
+  CreatedByReceptionistID: positiveNumber("Receptionist ID"),
   CreatedAt: datetime("Creation date"),
 });

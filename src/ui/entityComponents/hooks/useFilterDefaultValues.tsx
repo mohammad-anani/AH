@@ -26,9 +26,14 @@ export function useFilterDefaultValues(
   for (const [field, type, data] of fields) {
     if (type === "custom") {
       const [, customType] = data as customFilterProps;
-
-      defaults[field] =
-        convertStringToType(customType ?? "", params.get(field) ?? "") || null;
+      const value = params.get(field);
+      if (customType === "object") {
+        // If value exists, return { ID: value as number }, else null
+        defaults[field] = value ? { ID: Number(value) } : null;
+      } else {
+        defaults[field] =
+          convertStringToType(customType ?? "", value ?? "") || null;
+      }
     } else if (isTemporalType(type ?? "null") || type === "money") {
       defaults[field + "From"] = (params.get(field + "From") ??
         null) as DataTypes;

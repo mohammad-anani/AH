@@ -36,7 +36,7 @@ export const person: DisplayingConfig<"Person"> = {
     numberField("Age"),
     phoneField("Phone"),
     emailField("Email"),
-    ["CountryName", "custom", CountryFilterSelectCallBack],
+    ["Country", "custom", CountryFilterSelectCallBack],
     stringField("Username"),
   ],
   formConfig: [
@@ -45,7 +45,7 @@ export const person: DisplayingConfig<"Person"> = {
     ["Last Name", "LastName", "string", "both"],
     ["Birth Date", "DateOfBirth", "date", "both"],
     ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
-    ["Country", "Country.ID", "custom", "both", CountryFormSelectCallBack],
+    ["Country", "Country", "custom", "both", CountryFormSelectCallBack],
     ["Phone", "Phone", "phone", "both"],
     ["Email", "Email", "email", "both"],
     ["Username", "Username", "string", "both"],

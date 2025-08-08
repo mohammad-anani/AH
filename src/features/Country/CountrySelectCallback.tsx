@@ -6,24 +6,26 @@ import type { Setter } from "@/utils/models/types/utils/basics";
 import CountrySelect from "./CountrySelect";
 
 export const CountryFormSelectCallBack: customFormProps = [
-  ({ field, onChange, isSubmitting }) => (
-    <CountrySelect
-      setCountryID={onChange as Setter<number>}
-      countryID={field as number}
-      isDisabled={isSubmitting}
-    />
-  ),
-  "number",
+  ({ field, onChange, isSubmitting }) => {
+    return (
+      <CountrySelect
+        setCountry={onChange as Setter<{ ID: number; Name?: string }>}
+        country={field as { ID: number; Name?: string }}
+        isDisabled={isSubmitting}
+      />
+    );
+  },
+  "object",
 ];
 
 export const CountryFilterSelectCallBack: customFilterProps = [
   ({ field, onChange }) => (
     <CountrySelect
-      setCountryID={onChange as Setter<number>}
-      countryID={field as number}
+      setCountry={onChange as Setter<{ ID: number; Name?: string }>}
+      country={field as { ID: number; Name?: string }}
     />
   ),
-  "number",
+  "object",
 ];
 
 //to debug

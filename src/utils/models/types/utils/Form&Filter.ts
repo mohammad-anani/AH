@@ -19,12 +19,13 @@ export type DataTypes =
   | "uniselect"
   | "money"
   | "selector"
-  | "email";
+  | "email"
+  | "object";
 
 export type customFilterProps = [
   (data: {
-    field: Primitive | Primitive[] | [][];
-    onChange: Setter<Primitive | Primitive[] | [][]>;
+    field: Primitive | Primitive[] | [][] | object;
+    onChange: Setter<Primitive | Primitive[] | [][] | object>;
     role?: "admin" | "receptionist" | "doctor";
   }) => JSX.Element,
   DataTypes,
@@ -32,8 +33,8 @@ export type customFilterProps = [
 
 export type customFormProps = [
   (data: {
-    field: Primitive | Primitive[] | [][];
-    onChange: Setter<Primitive | Primitive[] | [][]>;
+    field: Primitive | Primitive[] | [][] | object;
+    onChange: Setter<Primitive | Primitive[] | [][] | object>;
     isSubmitting?: boolean;
   }) => JSX.Element,
   DataTypes,

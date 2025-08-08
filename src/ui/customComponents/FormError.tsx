@@ -4,10 +4,10 @@ interface FormErrorProps {
 }
 
 export default function FormError({ errorMessages, id }: FormErrorProps) {
-  if (!errorMessages || errorMessages.length === 0) {
+  if (!errorMessages || errorMessages?.length === 0) {
     return null;
   }
-
+  console.log(errorMessages);
   return (
     <ul
       id={id}
@@ -15,7 +15,7 @@ export default function FormError({ errorMessages, id }: FormErrorProps) {
       role="alert"
       aria-live="polite"
     >
-      {errorMessages.map((message, index) => (
+      {errorMessages?.map?.((message, index) => (
         <li key={index}>{`* ${message}`}</li>
       ))}
     </ul>

@@ -1,5 +1,8 @@
 import { useSearchParams } from "react-router-dom";
-import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type {
+  customFilterProps,
+  FilterKey,
+} from "@/utils/models/types/utils/Form&Filter";
 import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 import { isTemporalType } from "../listComponents/utils";
 
@@ -12,17 +15,40 @@ export function useFilterNavigation(
   function buildPathWithParams(data: Record<string, unknown>): URLSearchParams {
     const params = new URLSearchParams();
 
-    for (const [field, type] of fields) {
+    for (const [field, type, misc] of fields) {
       if (isTemporalType(type ?? "null") || type === "money") {
         if (data[field + "From"])
           params.set(field + "From", String(data[field + "From"]));
         if (data[field + "To"])
           params.set(field + "To", String(data[field + "To"]));
       } else if (type === "custom") {
-        const ids = data[field] as number[];
-
-        if (ids?.length > 0) params.set(field, ids?.join(","));
-        else params.delete(field);
+        const [, subType] = misc as customFilterProps;
+        // Handle subType as if it were multiselect, uniselect, etc.
+        if (subType === "object") {
+          params.set(field, data?.[field]?.["ID"]);
+        } else if (subType === "multiselect") {
+          if ((data[field] as unknown[])?.length)
+            params.set(field, (data[field] as unknown[]).join(","));
+        } else if (
+          subType === "uniselect" ||
+          subType === "number" ||
+          subType === "string"
+        ) {
+          if (
+            data[field] !== undefined &&
+            data[field] !== null &&
+            data[field] !== ""
+          )
+            params.set(field, String(data[field]));
+        } else if (subType === "boolean") {
+          if (data[field] && data[field] !== "all")
+            params.set(field, String(data[field]));
+        } else {
+          // fallback: treat as array if possible
+          const ids = data[field] as number[];
+          if (ids?.length > 0) params.set(field, ids?.join(","));
+          else params.delete(field);
+        }
       } else if (type === "multiselect") {
         if ((data[field] as unknown[])?.length)
           params.set(field, (data[field] as unknown[]).join(","));

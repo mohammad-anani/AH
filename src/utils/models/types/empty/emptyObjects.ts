@@ -37,13 +37,14 @@ function createEmptyValue(schema: ZodTypeAny): EmptyValueType {
     return 0;
   }
   if (schema instanceof ZodBoolean) {
-    return false;
+    return null;
   }
   if (schema instanceof ZodArray) {
     return [] as Array<EmptyObjectValue>;
   }
   if (schema instanceof ZodObject) {
     const shape = schema.shape;
+
     const obj: EmptyObjectValue = {};
     for (const key in shape) {
       obj[key] = createEmptyValue(shape[key] as ZodTypeAny);
@@ -58,10 +59,10 @@ function createEmptyValue(schema: ZodTypeAny): EmptyValueType {
 }
 
 export const emptyObjects = Object.fromEntries(
-  Object.entries(schemas).map(([key, schema]) => [
-    key,
-    createEmptyValue(schema),
-  ]),
+  Object.entries(schemas).map(([key, schema]) => {
+    console.log(key);
+    return [key, createEmptyValue(schema)];
+  }),
 ) as {
   [K in DisplayEntityKey]: EmptyValueType;
 };

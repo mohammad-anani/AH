@@ -16,9 +16,12 @@ export default function BooleanInput({
   return (
     <>
       <label htmlFor={fieldKey}>{label}</label>
-      <RegisteredInput name={fieldKey} onChange={(val) => val === "true"}>
+      <RegisteredInput
+        name={fieldKey}
+        onChange={(val) => (val === "" ? null : val === "true")}
+      >
         <select>
-          <option value={undefined}>{none ?? "None"}</option>
+          <option value={""}>{none ?? "None"}</option>
           <option value={"true"}>{trueLabel ?? "true"}</option>
           <option value={"false"}>{falseLabel ?? "true"}</option>
         </select>

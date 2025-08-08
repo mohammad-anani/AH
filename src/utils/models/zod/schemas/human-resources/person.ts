@@ -31,12 +31,20 @@ export const PersonSchema = z.object({
         message: "Date of birth cannot be more than 120 years ago.",
       },
     ),
-  Country: z.object({
-    ID: positiveNumber("Country ID").refine((v) => v > 0, {
-      message: "Country ID must be a positive number.",
-    }),
-    Name: nonEmptyString("Country name"),
-  }),
+  Country: z
+    .object({
+      ID: positiveNumber("Country ID").refine((v) => v > 0, {
+        message: "Country ID must be a positive number.",
+      }),
+      Name: nonEmptyString("Country name"),
+    })
+    .refine(
+      (val) => val.ID != null && val.Name != null && val.Name.trim() !== "",
+      {
+        message: "Country is required",
+        path: [], // attach error to the object itself
+      },
+    ),
   Phone: nonEmptyString("Phone").length(8, {
     message: "Phone number must be exactly 8 characters.",
   }),

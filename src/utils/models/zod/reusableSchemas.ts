@@ -9,11 +9,18 @@ export const positiveNumber = (
   name: string,
   min: number = 1,
   max: number = Number.MAX_SAFE_INTEGER,
-) =>
-  z
-    .number({ error: `${name} is required and must be a number.` })
+  isSelector: boolean = false,
+) => {
+  const base = z.number({ error: `${name} is required.` });
+  if (isSelector) {
+    return base.refine((val) => val !== 0, {
+      message: `${name} is required.`,
+    });
+  }
+  return base
     .min(min, { error: `${name} must be at least ${min}.` })
     .max(max, { error: `${name} must be at most ${max}.` });
+};
 
 // Datetime with or without seconds
 export const datetime = (name: string) =>
@@ -36,7 +43,15 @@ export const date = (name: string) =>
 
 // Boolean field
 export const booleanField = (name: string) =>
-  z.boolean({ error: `${name} must be true or false.` });
+  z.preprocess(
+    (val: boolean | "true" | "false" | "") => {
+      console.log(val);
+      if (typeof val === "boolean") return val;
+      if (typeof val === "string") return val === "" ? null : val === "true";
+      return null;
+    },
+    z.boolean({ error: `${name} is required.` }),
+  );
 
 const statuses = ["Scheduled", "In Progress", "Completed", "Cancelled"];
 
