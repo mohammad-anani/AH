@@ -1,7 +1,7 @@
-import { AdminSchema } from "../../schemas/human-resources/admin";
+import { FormAdminSchema } from "../../formSchemas/human-resources/admin";
 import { AddEmployeeSchema } from "./employee";
 
-export const AddAdminSchema = AdminSchema.omit({
+export const AddAdminSchema = FormAdminSchema.omit({
   ID: true,
   CreatedAt: true,
   CreatedByAdminID: true,

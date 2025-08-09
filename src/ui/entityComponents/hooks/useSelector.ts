@@ -44,7 +44,7 @@ export default function useSelector<T extends EntityKey>(
         Object.keys(object).length === 1 &&
         Object.keys(object)[0] === "ID"
       ) {
-        findFetcher.load(`${fetchingPaths[entity]}/list?ID=${object["ID"]}`);
+        findFetcher.load(`${fetchingPaths[entity]}/?ID=${object["ID"]}`);
         if (findFetcher.data)
           setObject?.(findFetcher.data[0][0] as rowTypesObject[T]);
       }

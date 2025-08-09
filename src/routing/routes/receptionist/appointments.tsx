@@ -28,9 +28,21 @@ const testOrdersRoute: RouteObject[] = [
 export const appointmentsRoutes = serviceRoute(
   "Appointment",
   appointment,
-  [["Notes", "Notes", "text", "both"]],
+  [
+    ["Notes", "Notes", "text", "All"],
+    ["Scheduled Date", "ScheduledDate", "datetime", new Set(["Reschedule"])],
+  ],
   [[testOrdersRoute, "id"]],
   true,
   true,
   false,
+  true,
+  true,
+  false,
+  false,
+  undefined,
+  true,
+  true,
+  undefined,
+  true,
 );

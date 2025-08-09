@@ -17,20 +17,12 @@ export const PersonSchema = z.object({
     message: "Last name must be at least 2 characters long.",
   }),
   Gender: booleanField("Gender"),
-  DateOfBirth: date("Date of birth")
-    .refine((val) => new Date(val) <= new Date(), {
+  DateOfBirth: date("Date of birth").refine(
+    (val) => new Date(val) <= new Date(),
+    {
       message: "Date of birth cannot be in the future.",
-    })
-    .refine(
-      (val) => {
-        const min = new Date();
-        min.setFullYear(min.getFullYear() - 120);
-        return new Date(val) >= min;
-      },
-      {
-        message: "Date of birth cannot be more than 120 years ago.",
-      },
-    ),
+    },
+  ),
   Country: z
     .object({
       ID: positiveNumber("Country ID").refine((v) => v > 0, {

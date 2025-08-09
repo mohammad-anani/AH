@@ -1,3 +1,3 @@
-import { BillSchema } from "../schemas";
+import { FormBillSchema } from "../formSchemas/bill";
 
-export const AddBillSchema = BillSchema.pick({ Amount: true });
+export const AddBillSchema = FormBillSchema.pick({ Amount: true });

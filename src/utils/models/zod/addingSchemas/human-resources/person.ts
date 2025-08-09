@@ -1,3 +1,3 @@
-import { PersonSchema } from "../../schemas/human-resources/person";
+import { FormPersonSchema } from "../../formSchemas/human-resources/person";
 
-export const AddPersonSchema = PersonSchema;
+export const AddPersonSchema = FormPersonSchema;

@@ -1,7 +1,7 @@
-import { EmployeeSchema } from "../../schemas/human-resources";
+import { FormEmployeeSchema } from "../../formSchemas/human-resources/employee";
 import { AddPersonSchema } from "./person";
 
-export const AddEmployeeSchema = EmployeeSchema.omit({
+export const AddEmployeeSchema = FormEmployeeSchema.omit({
   LeaveDate: true,
   isActive: true,
 }).extend({

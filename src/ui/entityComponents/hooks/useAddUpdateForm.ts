@@ -1,7 +1,7 @@
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import throwError from "@/utils/helpers/throwError";
 
-import { schemas } from "@/utils/models/zod/schemas/schemas";
+import { schemas as formSchemas } from "@/utils/models/zod/formSchemas/formSchemas";
 import { schemas as addingSchemas } from "@/utils/models/zod/addingSchemas/addingSchemas";
 import { emptyObjects } from "@/utils/models/types/empty/emptyObjects";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
@@ -24,9 +24,9 @@ export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
 
   const navData = location.state;
 
-  const isAdd = !data || !schemas[entity].safeParse(data).success;
+  const isAdd = !data?.ID && location.pathname.includes("/add");
 
-  const schema = isAdd ? addingSchemas[entity] : schemas[entity];
+  const schema = isAdd ? addingSchemas[entity] : formSchemas[entity];
 
   const defaultValues = isAdd ? { ...emptyObjects[entity], ...navData } : data;
 

@@ -45,7 +45,7 @@ export const person: DisplayingConfig<"Person"> = {
     ["Last Name", "LastName", "string", "both"],
     ["Birth Date", "DateOfBirth", "date", "both"],
     ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
-    ["Country", "Country", "custom", "both", CountryFormSelectCallBack],
+    ["Country", "Country.ID", "custom", "both", CountryFormSelectCallBack],
     ["Phone", "Phone", "phone", "both"],
     ["Email", "Email", "email", "both"],
     ["Username", "Username", "string", "both"],

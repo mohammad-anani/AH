@@ -1,5 +1,5 @@
-import { TestOrderSchema } from "../../schemas/test";
+import { FormTestOrderSchema } from "../../formSchemas/test/order";
 
-export const AddTestOrderSchema = TestOrderSchema.omit({
+export const AddTestOrderSchema = FormTestOrderSchema.omit({
   ID: true,
 });

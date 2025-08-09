@@ -1,6 +1,6 @@
-import { DepartmentSchema } from "../schemas/department";
+import { FormDepartmentSchema } from "../formSchemas/department";
 
-export const AddDepartmentSchema = DepartmentSchema.omit({
+export const AddDepartmentSchema = FormDepartmentSchema.omit({
   ID: true,
   CreatedAt: true,
   CreatedByAdminID: true,

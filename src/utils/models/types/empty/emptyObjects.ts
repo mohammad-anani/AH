@@ -34,7 +34,7 @@ function createEmptyValue(schema: ZodTypeAny): EmptyValueType {
     return "";
   }
   if (schema instanceof ZodNumber) {
-    return 0;
+    return -1;
   }
   if (schema instanceof ZodBoolean) {
     return null;

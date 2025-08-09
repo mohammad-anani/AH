@@ -2,7 +2,7 @@ import { AppointmentSchema } from "../schemas";
 import { booleanField, nonEmptyString } from "../reusableSchemas";
 export const AppointmentRowSchema = AppointmentSchema.pick({
   ID: true,
-  Time: true,
+  ScheduledDate: true,
   Status: true,
 }).extend({
   PatientName: nonEmptyString("Patient name"),

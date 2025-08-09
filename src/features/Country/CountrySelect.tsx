@@ -6,29 +6,24 @@ import type { Country } from "@/utils/models/types/normal/types";
 import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 
 export default function CountrySelect({
-  country,
-  setCountry,
+  countryID,
+  setCountryID,
   isDisabled = false,
 }: {
-  country: Country | { ID: number };
-  setCountry: Setter<Country | { ID: number }>;
+  countryID: number;
+  setCountryID: Setter<number>;
   isDisabled?: boolean;
 }) {
-  const { selectStyles, selectedOption, options, isLoading, countries } =
-    useCountries(country?.ID);
+  const { selectStyles, selectedOption, options, isLoading } =
+    useCountries(countryID);
+
   return (
     <Select
       styles={selectStyles}
       options={options}
       value={selectedOption}
       onChange={(selected) => {
-        if (selected) {
-          // Find the full country object by ID
-          const found = countries.find((c) => c.ID === selected.value);
-
-          if (found) setCountry(found);
-          else setCountry({ ID: selected.value });
-        }
+        if (selected) setCountryID(selected.value);
       }}
       isDisabled={isDisabled}
       isLoading={isLoading}
@@ -101,5 +96,5 @@ function useCountries(countryID: number) {
       padding: "4px 8px",
     }),
   };
-  return { selectStyles, options, selectedOption, isLoading, countries };
+  return { selectStyles, options, selectedOption, isLoading };
 }

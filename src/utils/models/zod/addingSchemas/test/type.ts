@@ -1,6 +1,6 @@
-import { TestTypeSchema } from "../../schemas/test";
+import { FormTestTypeSchema } from "../../formSchemas/test/type";
 
-export const AddTestTypeSchema = TestTypeSchema.omit({
+export const AddTestTypeSchema = FormTestTypeSchema.omit({
   ID: true,
   CreatedAt: true,
   CreatedByAdminID: true,

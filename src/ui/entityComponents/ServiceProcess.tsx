@@ -5,7 +5,6 @@ import H2 from "../customComponents/H2";
 import type {
   customFormProps,
   DataTypes,
-  FormKey,
 } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { inputMap } from "@/utils/models/inputMap";
@@ -13,12 +12,20 @@ import { inputMap } from "@/utils/models/inputMap";
 import { UnsupportedInput } from "../form-inputs";
 import { generateLabel } from "./listComponents/utils";
 import Controller from "../customComponents/Controller";
-import { Form, useOutletContext } from "react-router-dom";
+import {
+  Form,
+  useOutletContext,
+  useSubmit,
+  type SubmitTarget,
+} from "react-router-dom";
 import { FormProvider, useForm, type Primitive } from "react-hook-form";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import throwError from "@/utils/helpers/throwError";
+import type { FormKey } from "@/routing/serviceRoute";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { schemas } from "@/utils/models/zod/formSchemas/formSchemas";
 
-export type Process = "Start" | "Cancel" | "Complete";
+export type Process = "Start" | "Cancel" | "Complete" | "Reschedule";
 
 export default function ServiceProcess<T extends ServicesEntities>({
   process,
@@ -29,21 +36,20 @@ export default function ServiceProcess<T extends ServicesEntities>({
   entity: T;
   formFields?: FormKey<T>[];
 }) {
+  const submit = useSubmit();
   const object = useOutletContext() as typesObject[T];
   const { Status } = object;
 
-  const defaultValues =
-    formFields?.reduce(
-      (acc, [, fieldKey]) => {
-        acc[fieldKey] = getNestedValue(object, fieldKey as string);
-        return acc;
-      },
-      {} as Record<string, Primitive>,
-    ) ?? {};
+  const defaultValues = object;
 
-  const methods = useForm({ defaultValues: defaultValues });
+  const methods = useForm({
+    defaultValues: defaultValues,
+    resolver: zodResolver(schemas[entity]),
+  });
 
-  if (["Completed", "Cancelled"].includes(Status))
+  const { handleSubmit } = methods;
+
+  if (Status === "Completed")
     throwError(
       403,
       "Can't " + process + " a completed or cancelled " + formatTitle(entity),
@@ -55,7 +61,11 @@ export default function ServiceProcess<T extends ServicesEntities>({
       403,
       "Can't " + process + " a " + formatTitle(entity) + " in progress",
     );
-
+  if (
+    Status === "Cancelled" &&
+    ["Cancel", "Start", "Complete"].includes(process)
+  )
+    throwError(403, "Can't " + process + " a cancelled" + formatTitle(entity));
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">
@@ -68,9 +78,23 @@ export default function ServiceProcess<T extends ServicesEntities>({
       <FormProvider {...methods}>
         <Form
           replace
+          method="POST"
+          onSubmit={handleSubmit((data) => {
+            submit(data as SubmitTarget, {
+              method: "POST",
+              encType: "application/json",
+            });
+          })}
           className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 *:text-xl! *:odd:font-bold"
         >
-          {(formFields as FormKey<EntityKey>[])?.map(renderField)}
+          {(formFields as FormKey<EntityKey>[])
+            ?.filter(([, , , mode]) => {
+              // Only render fields where mode is undefined or includes the current process
+              return (
+                mode === "All" || !mode || Array.from(mode).includes(process)
+              );
+            })
+            .map(renderField)}
           <Clickable
             className="col-span-2 mt-10"
             as="button"
@@ -119,7 +143,3 @@ const renderField = (field: FormKey<EntityKey>) => {
 
   return <InputComponent {...commonProps} />;
 };
-
-function getNestedValue(obj: any, path: string): any {
-  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
-}

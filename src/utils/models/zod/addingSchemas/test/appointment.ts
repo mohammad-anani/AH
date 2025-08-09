@@ -1,6 +1,6 @@
-import { TestAppointmentSchema } from "../../schemas/test";
+import { FormTestAppointmentSchema } from "../../formSchemas/test/appointment";
 
-export const AddTestAppointmentSchema = TestAppointmentSchema.omit({
+export const AddTestAppointmentSchema = FormTestAppointmentSchema.omit({
   ID: true,
   ResultDate: true,
   CreatedAt: true,

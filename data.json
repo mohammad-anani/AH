@@ -425,7 +425,7 @@
       "ID": 1,
       "DoctorID": 1,
       "PatientID": 1,
-      "Time": "2023-02-01T09:00:00",
+      "ScheduledDate": "2023-02-01T09:00:00",
       "Reason": "Routine checkup",
       "Status": "Completed",
       "Notes": "All good.\nGOod",
@@ -437,7 +437,7 @@
       "ID": 2,
       "DoctorID": 2,
       "PatientID": 2,
-      "Time": "2023-02-02T10:00:00",
+      "ScheduledDate": "2023-02-02T10:00:00",
       "Reason": "Headache",
       "Status": "Cancelled",
       "Notes": "Patient did not show up.",
@@ -449,7 +449,7 @@
       "ID": 3,
       "DoctorID": 1,
       "PatientID": 3,
-      "Time": "2023-02-03T11:00:00",
+      "ScheduledDate": "2023-02-03T11:00:00",
       "Reason": "Follow-up",
       "Status": "Scheduled",
       "Notes": "To discuss test results.",
@@ -461,7 +461,7 @@
   "AppointmentRows": [
     {
       "ID": 1,
-      "Time": "2023-02-01T09:00:00",
+      "ScheduledDate": "2023-02-01T09:00:00",
       "PatientName": "Olivia Anne Taylor",
       "DoctorName": "Alice Marie Smith",
       "Status": "Completed",
@@ -469,7 +469,7 @@
     },
     {
       "ID": 2,
-      "Time": "2023-02-02T10:00:00",
+      "ScheduledDate": "2023-02-02T10:00:00",
       "PatientName": "Liam Andrew Baker",
       "DoctorName": "Bob John Taylor",
       "Status": "Cancelled",
@@ -477,7 +477,7 @@
     },
     {
       "ID": 3,
-      "Time": "2023-02-03T11:00:00",
+      "ScheduledDate": "2023-02-03T11:00:00",
       "PatientName": "Sophia Marie King",
       "DoctorName": "Alice Marie Smith",
       "Status": "Scheduled",

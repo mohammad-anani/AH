@@ -21,6 +21,7 @@ type CardProps<T extends ServicesEntities> = {
   canCancel?: boolean;
   canComplete?: boolean;
   canEdit?: boolean;
+  canReschedule?: boolean;
 };
 
 export default function ServiceCard<T extends ServicesEntities>({
@@ -31,24 +32,30 @@ export default function ServiceCard<T extends ServicesEntities>({
   canCancel = true,
   canComplete = true,
   canEdit = true,
+  canReschedule = false,
 }: CardProps<T>) {
   const object = useOutletContext<typesObject[T]>();
   const status = object.Status;
+
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">
         Back
       </Clickable>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between">
         <H2>{formatTitle(title)}</H2>
-        <div className="flex gap-x-2">
+        <div className="flex flex-wrap justify-end space-y-1 gap-x-2">
           {canEdit && (
             <Clickable as="Link" variant="primary" to="edit">
               Edit
             </Clickable>
           )}
-
+          {["Scheduled", "Cancelled"].includes(status) && canReschedule && (
+            <Clickable as="Link" to="reschedule" variant="primary">
+              Reschedule
+            </Clickable>
+          )}
           {status === "Scheduled" ? (
             <>
               {canStart && (

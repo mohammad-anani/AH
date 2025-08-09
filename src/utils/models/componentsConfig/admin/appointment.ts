@@ -18,7 +18,7 @@ export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
     PatientID,
     DoctorID,
-    Time,
+    ScheduledDate,
     Reason,
     Status,
     Notes,
@@ -38,7 +38,7 @@ export const appointment: RouteConfig<"Appointment"> = {
       `/admin/human-resources/doctors/${DoctorID}`,
       "Doctor",
     ],
-    ["Time", formatDateIsoToLocal(Time)],
+    ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Reason", Reason],
     ["Status", Status],
     ["Notes", Notes?.length ? Notes : "N/A"],
@@ -53,7 +53,7 @@ export const appointment: RouteConfig<"Appointment"> = {
   ],
   filterFields: [
     adminFilterSelectorField("DoctorID", "Doctor", doctor),
-    datetimeField("Time"),
+    datetimeField("ScheduledDate"),
     stringField("Reason"),
     uniselectField("Status", ["Accepted", "Rejected"]),
     stringField("Notes"),
@@ -63,11 +63,11 @@ export const appointment: RouteConfig<"Appointment"> = {
   selectorDisplay: ({ DoctorName, PatientName }) =>
     DoctorName + "," + PatientName,
   rowTemplate: [
-    ["Patient", "Doctor", "Time", "Status", "Is Paid"],
+    ["Patient", "Doctor", "ScheduledDate", "Status", "Is Paid"],
     (item) => [
       item.PatientName,
       item.DoctorName,
-      formatDateIsoToLocal(item.Time),
+      formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,
     ],

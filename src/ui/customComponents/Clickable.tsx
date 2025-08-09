@@ -19,7 +19,7 @@ const variantStyles = {
   secondary:
     "border-primary text-primary! bg-transparent hover:bg-background-darker! disabled:text-foreground disabled:border-muted disabled:bg-muted",
   destructive:
-    "text-background! border-black bg-destructive hover:bg-destructive-light! disabled:bg-muted disabled:text-foreground disabled:border-muted",
+    "text-background! border-black bg-destructive hover:bg-destructive-light! disabled:bg-muted disabled:text-foreground disabled:border-muted mb-[4px]",
   link: "text-primary! hover:text-primary-light! text-xl underline! disabled:cursor-not-allowed! disabled:text-foreground! disabled:line-through! disabled:no-underline disabled:bg-transparent",
 };
 

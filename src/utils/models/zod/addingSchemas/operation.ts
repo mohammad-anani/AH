@@ -1,6 +1,6 @@
-import { OperationSchema } from "../schemas/operation";
+import { FormOperationSchema } from "../formSchemas/operation";
 
-export const AddOperationSchema = OperationSchema.omit({
+export const AddOperationSchema = FormOperationSchema.omit({
   ID: true,
   CreatedAt: true,
   CreatedByReceptionistID: true,

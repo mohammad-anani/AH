@@ -1,6 +1,6 @@
-import { PaymentSchema } from "../schemas";
+import { FormPaymentSchema } from "../formSchemas/payment";
 
-export const AddPaymentSchema = PaymentSchema.pick({
+export const AddPaymentSchema = FormPaymentSchema.pick({
   Amount: true,
   Method: true,
 });

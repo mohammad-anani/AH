@@ -1,14 +1,40 @@
 import { route } from "@/routing/entityRoute";
 
-import ServiceProcess from "@/ui/entityComponents/ServiceProcess";
+import ServiceProcess, {
+  type Process,
+} from "@/ui/entityComponents/ServiceProcess";
 import ServiceCard, {
   type ServicesEntities,
 } from "@/ui/entityComponents/ServicesCard";
 
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
-import type { FormKey } from "@/utils/models/types/utils/Form&Filter";
+import type {
+  customFormProps,
+  DataTypes,
+  DotAccess,
+  Role,
+} from "@/utils/models/types/utils/Form&Filter";
 import type { Params, RouteObject } from "react-router-dom";
 import processService from "./actions/processService";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type {
+  DisplayEntityKey,
+  EntityKey,
+} from "@/utils/models/types/utils/entityKeys";
+import type { Primitive } from "react-hook-form";
+
+export type FormKey<T extends DisplayEntityKey> = [
+  label: string,
+  fieldKey: DotAccess<typesObject[T]>,
+  type: DataTypes | "custom",
+  mode: Set<Process> | "All",
+  data?:
+    | Array<Primitive>
+    | customFormProps
+    | [string, string]
+    | string
+    | [EntityKey, RouteConfig<EntityKey>, Role],
+];
 
 export function serviceRoute<T extends ServicesEntities>(
   entity: T,
@@ -26,7 +52,8 @@ export function serviceRoute<T extends ServicesEntities>(
   withList: boolean = true,
   withID: boolean = true,
   urlPathPrefix?: string,
-  withCard: boolean = false,
+
+  canReschedule: boolean = false,
 ) {
   const Card: RouteObject[] = [
     {
@@ -40,6 +67,7 @@ export function serviceRoute<T extends ServicesEntities>(
           canStart={canStart}
           canComplete={canComplete}
           canEdit={canEdit}
+          canReschedule={canReschedule}
         />
       ),
     },
@@ -89,6 +117,21 @@ export function serviceRoute<T extends ServicesEntities>(
     },
   ];
 
+  const Reschedule: RouteObject[] = [
+    {
+      path: "reschedule",
+      action: processService(entity),
+
+      element: (
+        <ServiceProcess
+          process="Reschedule"
+          entity={entity}
+          formFields={formFields}
+        />
+      ),
+    },
+  ];
+
   return route(
     entity,
     canAdd,
@@ -102,11 +145,12 @@ export function serviceRoute<T extends ServicesEntities>(
       canStart ? [Start, "id"] : [[], "id"],
       canCancel ? [Cancel, "id"] : [[], "id"],
       canComplete ? [Complete, "id"] : [[], "id"],
+      canReschedule ? [Reschedule, "id"] : [[], "id"],
       ...(extraRoutes || []),
     ],
     withList,
     withID,
     urlPathPrefix,
-    withCard,
+    false,
   );
 }

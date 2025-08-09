@@ -19,7 +19,7 @@ export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
     PatientID,
     DoctorID,
-    Time,
+    ScheduledDate,
     Reason,
     Status,
     Notes,
@@ -37,7 +37,7 @@ export const appointment: RouteConfig<"Appointment"> = {
       `/receptionist/human-resources/doctors/${DoctorID}`,
       "Doctor",
     ],
-    ["Time", formatDateIsoToLocal(Time)],
+    ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Reason", Reason],
     ["Status", Status],
     ["Notes", Notes?.length ? Notes : "N/A"],
@@ -46,7 +46,7 @@ export const appointment: RouteConfig<"Appointment"> = {
   filterFields: [
     receptionistFilterSelectorField("PatientID", "Patient", patient),
     receptionistFilterSelectorField("DoctorID", "Doctor", doctor),
-    datetimeField("Time"),
+    datetimeField("ScheduledDate"),
     stringField("Reason"),
     uniselectField("Status", ["Accepted", "Rejected"]),
     stringField("Notes"),
@@ -66,18 +66,18 @@ export const appointment: RouteConfig<"Appointment"> = {
       "add",
       doctor,
     ),
-    ["Time", "Time", "datetime", "both"],
+    ["Scheduled Date", "ScheduledDate", "datetime", "add"],
     ["Reason", "Reason", "string", "both"],
     ["Notes", "Notes", "text", "both"],
   ],
   selectorDisplay: ({ DoctorName, PatientName }) =>
     DoctorName + "," + PatientName,
   rowTemplate: [
-    ["Patient", "Doctor", "Time", "Status", "Is Paid"],
+    ["Patient", "Doctor", "Scheduled Date", "Status", "Is Paid"],
     (item) => [
       item.PatientName,
       item.DoctorName,
-      formatDateIsoToLocal(item.Time),
+      formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,
     ],

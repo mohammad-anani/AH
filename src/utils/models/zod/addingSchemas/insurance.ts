@@ -1,6 +1,6 @@
-import { InsuranceSchema } from "../schemas/insurance";
+import { FormInsuranceSchema } from "../formSchemas/insurance";
 
-export const AddInsuranceSchema = InsuranceSchema.omit({
+export const AddInsuranceSchema = FormInsuranceSchema.omit({
   ID: true,
   isActive: true,
   CreatedAt: true,

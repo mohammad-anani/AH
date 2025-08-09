@@ -8,18 +8,15 @@ import {
 } from "../utils/filterReusableFields.ts";
 
 import type { RouteConfig } from "../routeConfig.ts";
-import {
-  receptionistFilterSelectorField,
-  receptionistFormSelectorField,
-} from "../utils/RoleUtil.ts";
-import { doctor } from "./human-resources/doctor.ts";
+import { receptionistFilterSelectorField } from "../utils/RoleUtil.ts";
+
 import { patient } from "./human-resources/patient.ts";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
     PatientID,
 
-    Time,
+    ScheduledDate,
     Reason,
     Status,
     Notes,
@@ -31,14 +28,14 @@ export const appointment: RouteConfig<"Appointment"> = {
       "Patient",
     ],
 
-    ["Time", formatDateIsoToLocal(Time)],
+    ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Reason", Reason],
     ["Status", Status],
     ["Notes", Notes?.length ? Notes : "N/A"],
   ],
   filterFields: [
     receptionistFilterSelectorField("PatientID", "Patient", patient),
-    datetimeField("Time"),
+    datetimeField("ScheduledDate"),
     stringField("Reason"),
     uniselectField("Status", ["Accepted", "Rejected"]),
     stringField("Notes"),
@@ -47,11 +44,11 @@ export const appointment: RouteConfig<"Appointment"> = {
   selectorDisplay: ({ DoctorName, PatientName }) =>
     DoctorName + "," + PatientName,
   rowTemplate: [
-    ["Patient", "Time", "Status", "Is Paid"],
+    ["Patient", "Scheduled Date", "Status", "Is Paid"],
     (item) => [
       item.PatientName,
 
-      formatDateIsoToLocal(item.Time),
+      formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,
     ],
