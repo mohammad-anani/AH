@@ -7,12 +7,14 @@ import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { person } from "./person";
 import type { RouteConfig } from "../../routeConfig";
 import { formatMoney } from "@/utils/formatters/formatMoney";
+import { admin } from "./admin";
+import { adminAudit } from "./Audit/adminAudit";
 
 export const doctor: RouteConfig<"Doctor"> = {
   dataFields: ({
     Employee,
     Specialization,
-    CreatedByAdminID,
+    CreatedByAdmin,
     CreatedAt,
     AppointmentCost,
   }: typesObject["Doctor"]) => [
@@ -21,9 +23,10 @@ export const doctor: RouteConfig<"Doctor"> = {
     ["Appointment Cost", formatMoney(AppointmentCost)],
     [
       "Created By",
-      "View Admin",
-      `/admin/human-resources/admins/${CreatedByAdminID}`,
+      CreatedByAdmin,
+      `/admin/human-resources/admins/${CreatedByAdmin.ID}`,
       "Admin",
+      adminAudit,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],

@@ -4,35 +4,35 @@
       "ID": 1,
       "Name": "Cardiology",
       "Phone": "55510100",
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-15T09:30:00Z"
     },
     {
       "ID": 2,
       "Name": "Neurology",
       "Phone": "55530100",
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-15T09:30:00"
     },
     {
       "ID": 3,
       "Name": "Orthopedics",
       "Phone": "55530130",
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-15T09:30:00"
     },
     {
       "ID": 4,
       "Name": "Pediatrics",
       "Phone": "55530144",
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-15T09:30:00"
     }
   ],
   "Admins": [
     {
       "ID": 1,
-      "CreatedByAdminID": null,
+      "CreatedByAdmin": null,
       "Employee": {
         "Salary": 80000,
         "HireDate": "2020-01-15",
@@ -41,7 +41,7 @@
         "WorkingDays": ["Mon", "Fri", "Sat"],
         "ShiftStart": "09:00",
         "ShiftEnd": "17:00",
-        "DepartmentID": 1,
+        "Department": { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
         "Person": {
           "FirstName": "Alice",
           "MiddleName": "Marie",
@@ -61,7 +61,7 @@
     },
     {
       "ID": 2,
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "Employee": {
         "Salary": 85000,
         "HireDate": "2019-05-20",
@@ -70,7 +70,7 @@
         "WorkingDays": ["Mon", "Fri", "Sat"],
         "ShiftStart": "08:00",
         "ShiftEnd": "16:00",
-        "DepartmentID": 1,
+        "Department": { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
         "Person": {
           "FirstName": "Bob",
           "MiddleName": "John",
@@ -90,7 +90,7 @@
     },
     {
       "ID": 3,
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "Employee": {
         "Salary": 78000,
         "HireDate": "2021-07-10",
@@ -99,7 +99,7 @@
         "WorkingDays": ["Mon", "Fri", "Sat"],
         "ShiftStart": "10:00",
         "ShiftEnd": "18:00",
-        "DepartmentID": 1,
+        "Department": { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
         "Person": {
           "FirstName": "Carol",
           "MiddleName": "Ann",
@@ -121,7 +121,7 @@
   "Patients": [
     {
       "ID": 1,
-      "CreatedByReceptionistID": 1,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2023-01-15T09:30:00",
       "Person": {
         "FirstName": "Olivia",
@@ -140,7 +140,7 @@
     },
     {
       "ID": 2,
-      "CreatedByReceptionistID": 2,
+      "CreatedByReceptionist": { "ID": 2, "Name": "Ahmad Nabil Fakhoury" },
       "CreatedAt": "2023-02-20T10:45:00",
       "Person": {
         "FirstName": "Liam",
@@ -159,7 +159,7 @@
     },
     {
       "ID": 3,
-      "CreatedByReceptionistID": 3,
+      "CreatedByReceptionist": null,
       "CreatedAt": "2023-03-10T11:00:00",
       "Person": {
         "FirstName": "Sophia",
@@ -195,7 +195,7 @@
           "Email": "alice.smith@example.com",
           "Username": "alice.smith"
         },
-        "DepartmentID": 1,
+        "Department": { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
         "Salary": 120000,
         "HireDate": "2020-01-15",
         "LeaveDate": null,
@@ -206,7 +206,7 @@
       },
       "Specialization": "Cardiologist",
       "AppointmentCost": 150,
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-01T08:00:00"
     },
     {
@@ -226,7 +226,7 @@
           "Email": "bob.taylor@example.com",
           "Username": "bob.taylor"
         },
-        "DepartmentID": 2,
+        "Department": { "ID": 2, "Name": "Neurology", "Phone": "55530100" },
         "Salary": 110000,
         "HireDate": "2019-05-20",
         "LeaveDate": null,
@@ -237,7 +237,7 @@
       },
       "Specialization": "Neurologist",
       "AppointmentCost": 140,
-      "CreatedByAdminID": 2,
+      "CreatedByAdmin": { "ID": 2, "Name": "Bob John Taylor" },
       "CreatedAt": "2023-02-01T09:00:00"
     }
   ],
@@ -245,7 +245,7 @@
     {
       "ID": 1,
       "Employee": {
-        "DepartmentID": 2,
+        "Department": { "ID": 2, "Name": "Neurology", "Phone": "55530100" },
         "Salary": 3000,
         "HireDate": "2021-05-01",
         "LeaveDate": null,
@@ -268,13 +268,13 @@
           "Username": "deslsdddd"
         }
       },
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-01T08:00:00"
     },
     {
       "ID": 2,
       "Employee": {
-        "DepartmentID": 2,
+        "Department": { "ID": 2, "Name": "Neurology", "Phone": "55530100" },
         "Salary": 3200,
         "HireDate": "2022-01-15",
         "LeaveDate": null,
@@ -297,99 +297,151 @@
           "Username": "asdeddddddd"
         }
       },
-      "CreatedByAdminID": 2,
+      "CreatedByAdmin": { "ID": 2, "Name": "Bob John Taylor" },
       "CreatedAt": "2023-02-01T09:00:00"
     }
   ],
   "TestTypes": [
     {
       "ID": 1,
-      "DepartmentID": 1,
+      "Department": { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
       "Name": "Blood Test",
       "Cost": 50,
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-20T10:00:00"
     },
     {
       "ID": 2,
-      "DepartmentID": 2,
+      "Department": { "ID": 2, "Name": "Neurology", "Phone": "55530100" },
       "Name": "MRI Scan",
       "Cost": 300,
-      "CreatedByAdminID": 1,
+      "CreatedByAdmin": { "ID": 1, "Name": "Alice Marie Smith" },
       "CreatedAt": "2023-01-22T11:00:00"
     },
     {
       "ID": 3,
-      "DepartmentID": 3,
+      "Department": { "ID": 3, "Name": "Orthopedics", "Phone": "55530130" },
       "Name": "X-Ray",
       "Cost": 100,
-      "CreatedByAdminID": 2,
+      "CreatedByAdmin": { "ID": 2, "Name": "Bob John Taylor" },
       "CreatedAt": "2023-01-25T12:00:00"
     }
   ],
   "TestOrders": [
     {
       "ID": 1,
-      "AppointmentID": 1,
-      "TestTypeID": 1,
-      "OrderedByDoctorID": 1,
+      "Appointment": {
+        "ID": 1,
+        "ScheduledDate": "2023-02-01T09:00:00",
+        "PatientName": "Olivia Anne Taylor",
+        "DoctorName": "Alice Marie Smith",
+        "Status": "Completed",
+        "IsPaid": false
+      },
+      "TestType": { "ID": 1, "Name": "Blood Test", "DepartmentName": "Heart" },
+      "OrderedByDoctor": {
+        "ID": 1,
+        "Name": "Alice Marie Smith",
+        "Specialization": "Cardiologist"
+      },
       "OrderedAt": "2023-02-01T09:00:00"
     },
     {
       "ID": 2,
-      "AppointmentID": 2,
-      "TestTypeID": 2,
-      "OrderedByDoctorID": 2,
+      "Appointment": {
+        "ID": 2,
+        "ScheduledDate": "2023-02-02T10:00:00",
+        "PatientName": "Liam Andrew Baker",
+        "DoctorName": "Bob John Taylor",
+        "Status": "Cancelled",
+        "IsPaid": false
+      },
+      "TestType": { "ID": 2, "Name": "MRI Scan", "DepartmentName": "Sanity" },
+      "OrderedByDoctor": {
+        "ID": 2,
+        "Name": "Bob John Taylor",
+        "Specialization": "Neurologist"
+      },
       "OrderedAt": "2023-02-02T10:00:00"
     },
     {
       "ID": 3,
-      "AppointmentID": 3,
-      "TestTypeID": 3,
-      "OrderedByDoctorID": 1,
+      "Appointment": {
+        "ID": 3,
+        "ScheduledDate": "2023-02-03T11:00:00",
+        "PatientName": "Sophia Marie King",
+        "DoctorName": "Alice Marie Smith",
+        "Status": "Scheduled",
+        "IsPaid": true
+      },
+      "TestType": { "ID": 3, "Name": "X-Ray", "DepartmentName": "Breath" },
+      "OrderedByDoctor": {
+        "ID": 1,
+        "Name": "Alice Marie Smith",
+        "Specialization": "Cardiologist"
+      },
       "OrderedAt": "2023-02-03T11:00:00"
     }
   ],
   "TestAppointments": [
     {
       "ID": 1,
-      "TestOrderID": 1,
-      "PatientID": 1,
-      "TestID": 2,
+      "TestOrder": {
+        "ID": 1,
+        "TestName": "Blood Test",
+        "PatientName": "Olivia Anne Taylor"
+      },
+      "Patient": {
+        "ID": 1,
+        "Name": "Olivia Anne Taylor",
+        "Age": 18,
+        "Phone": "76123456"
+      },
+      "Test": { "ID": 2, "Name": "MRI Scan", "DepartmentName": "Sanity" },
       "ScheduledDate": "2023-02-10T08:00:00",
       "Status": "Scheduled",
       "Result": "Normal",
       "ResultDate": "2023-02-11T09:00:00",
-      "BillID": 2,
-      "CreatedByReceptionistID": 1,
+      "Bill": { "ID": 2, "Amount": 300, "AmountPaid": 80 },
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2023-02-09T10:00:00",
       "Notes": ""
     },
     {
       "ID": 2,
-      "TestOrderID": null,
-      "PatientID": 2,
-      "TestID": 1,
+      "TestOrder": null,
+      "Patient": {
+        "ID": 2,
+        "Name": "Liam Andrew Baker",
+        "Age": 30,
+        "Phone": "71098765"
+      },
+      "Test": { "ID": 1, "Name": "Blood Test", "DepartmentName": "Heart" },
       "ScheduledDate": "2023-02-12T08:00:00",
       "Status": "Cancelled",
       "Result": "N/A",
-      "BillID": 1,
+      "Bill": { "ID": 1, "Amount": 100, "AmountPaid": 80 },
       "ResultDate": "2023-02-13T09:00:00",
-      "CreatedByReceptionistID": 2,
+      "CreatedByReceptionist": { "ID": 2, "Name": "Ahmad Nabil Fakhoury" },
       "CreatedAt": "2023-02-11T10:00:00",
       "Notes": ""
     },
     {
       "ID": 3,
-      "TestOrderID": null,
-      "PatientID": 3,
-      "TestID": 5,
+      "TestOrder": null,
+      "Patient": {
+        "ID": 3,
+        "Name": "Sophia Marie King",
+        "Age": 40,
+        "Phone": "78906543"
+      },
+      "Test": null,
       "ScheduledDate": "2023-02-14T08:00:00",
       "Status": "Cancelled",
       "Result": "Abnormal",
-      "BillID": 1,
+      "Bill": { "ID": 1, "Amount": 100, "AmountPaid": 80 },
       "ResultDate": "2023-02-15T09:00:00",
-      "CreatedByReceptionistID": 3,
+      "CreatedByReceptionist": null,
       "CreatedAt": "2023-02-13T10:00:00",
       "Notes": ""
     }
@@ -423,38 +475,65 @@
   "Appointments": [
     {
       "ID": 1,
-      "DoctorID": 1,
-      "PatientID": 1,
+      "Doctor": {
+        "ID": 1,
+        "Name": "Alice Marie Smith",
+        "Specialization": "Cardiologist"
+      },
+      "Patient": {
+        "ID": 1,
+        "Name": "Olivia Anne Taylor",
+        "Age": 18,
+        "Phone": "76123456"
+      },
       "ScheduledDate": "2023-02-01T09:00:00",
       "Reason": "Routine checkup",
       "Status": "Completed",
       "Notes": "All good.\nGOod",
-      "BillID": 1,
-      "CreatedByReceptionistID": 1,
+      "Bill": { "ID": 1, "Amount": 100, "AmountPaid": 80 },
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2023-01-31T10:00:00"
     },
     {
       "ID": 2,
-      "DoctorID": 2,
-      "PatientID": 2,
+      "Doctor": {
+        "ID": 2,
+        "Name": "Bob John Taylor",
+        "Specialization": "Neurologist"
+      },
+      "Patient": {
+        "ID": 2,
+        "Name": "Liam Andrew Baker",
+        "Age": 30,
+        "Phone": "71098765"
+      },
       "ScheduledDate": "2023-02-02T10:00:00",
       "Reason": "Headache",
       "Status": "Cancelled",
       "Notes": "Patient did not show up.",
-      "BillID": 2,
-      "CreatedByReceptionistID": 2,
+      "Bill": { "ID": 2, "Amount": 300, "AmountPaid": 80 },
+      "CreatedByReceptionist": { "ID": 2, "Name": "Ahmad Nabil Fakhoury" },
       "CreatedAt": "2023-02-01T11:00:00"
     },
     {
       "ID": 3,
-      "DoctorID": 1,
-      "PatientID": 3,
+      "Doctor": {
+        "ID": 1,
+        "Name": "Alice Marie Smith",
+        "Specialization": "Cardiologist"
+      },
+      "Patient": {
+        "ID": 3,
+        "Name": "Sophia Marie King",
+        "Age": 40,
+        "Phone": "78906543"
+      },
       "ScheduledDate": "2023-02-03T11:00:00",
       "Reason": "Follow-up",
       "Status": "Scheduled",
       "Notes": "To discuss test results.",
-      "BillID": 3,
-      "CreatedByReceptionistID": 1,
+      "Bill": { "ID": 3, "Amount": 150, "AmountPaid": 150 },
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2023-02-02T12:00:00"
     }
   ],
@@ -489,21 +568,21 @@
       "ID": 1,
       "Amount": 100,
       "AmountPaid": 80,
-      "CreatedByReceptionistID": 1,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2025-08-02T10:30:00Z"
     },
     {
       "ID": 2,
       "Amount": 300,
       "AmountPaid": 80,
-      "CreatedByReceptionistID": 2,
+      "CreatedByReceptionist": { "ID": 2, "Name": "Ahmad Nabil Fakhoury" },
       "CreatedAt": "2025-08-01T15:00:00Z"
     },
     {
       "ID": 3,
       "Amount": 150,
       "AmountPaid": 150,
-      "CreatedByReceptionistID": 1,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2025-07-30T08:45:00Z"
     }
   ],
@@ -527,58 +606,58 @@
   "Payments": [
     {
       "ID": 1,
-      "BillID": 1,
+      "Bill": { "ID": 1, "Amount": 100, "AmountPaid": 80 },
       "Amount": 50,
       "Method": "Cash",
-      "CreatedByReceptionistID": 1,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2025-08-02T11:00:00Z"
     },
     {
       "ID": 2,
-      "BillID": 1,
+      "Bill": { "ID": 1, "Amount": 100, "AmountPaid": 80 },
       "Amount": 30,
       "Method": "Card",
-      "CreatedByReceptionistID": 2,
+      "CreatedByReceptionist": { "ID": 2, "Name": "Ahmad Nabil Fakhoury" },
       "CreatedAt": "2025-08-02T15:30:00Z"
     },
     {
       "ID": 3,
-      "BillID": 2,
+      "Bill": { "ID": 2, "Amount": 300, "AmountPaid": 80 },
       "Amount": 80,
       "Method": "Insurance",
-      "CreatedByReceptionistID": 1,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2025-08-01T16:00:00Z"
     },
     {
       "ID": 4,
-      "BillID": 2,
+      "Bill": { "ID": 2, "Amount": 300, "AmountPaid": 80 },
       "Amount": 100,
       "Method": "Cash",
-      "CreatedByReceptionistID": 3,
+      "CreatedByReceptionist": null,
       "CreatedAt": "2025-08-02T09:00:00Z"
     },
     {
       "ID": 5,
-      "BillID": 2,
+      "Bill": { "ID": 2, "Amount": 300, "AmountPaid": 80 },
       "Amount": 120,
       "Method": "Card",
-      "CreatedByReceptionistID": 2,
+      "CreatedByReceptionist": { "ID": 2, "Name": "Ahmad Nabil Fakhoury" },
       "CreatedAt": "2025-08-02T10:45:00Z"
     },
     {
       "ID": 6,
-      "BillID": 3,
+      "Bill": { "ID": 3, "Amount": 150, "AmountPaid": 150 },
       "Amount": 150,
       "Method": "Cash",
-      "CreatedByReceptionistID": 1,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2025-07-31T09:00:00Z"
     },
     {
       "ID": 7,
-      "BillID": 3,
+      "Bill": { "ID": 3, "Amount": 150, "AmountPaid": 150 },
       "Amount": 20,
       "Method": "Insurance",
-      "CreatedByReceptionistID": 3,
+      "CreatedByReceptionist": null,
       "CreatedAt": "2025-08-01T08:30:00Z"
     }
   ],
@@ -753,12 +832,14 @@
     {
       "ID": 2,
       "Name": "MRI Scan",
-      "DepartmentName": "Sanity"
+      "DepartmentName": "Sanity",
+      "Phone": "55530100"
     },
     {
       "ID": 3,
       "Name": "X-Ray",
-      "DepartmentName": "Breath"
+      "DepartmentName": "Breath",
+      "Phone": "55530130"
     }
   ],
   "TestOrderRows": [
@@ -823,32 +904,47 @@
   "Insurances": [
     {
       "ID": 1,
-      "PatientID": 1,
+      "Patient": {
+        "ID": 1,
+        "Name": "Olivia Anne Taylor",
+        "Age": 18,
+        "Phone": "76123456"
+      },
       "ProviderName": "Alpha Insurance",
       "Coverage": 0.8,
       "ExpirationDate": "2026-08-01",
       "isActive": true,
-      "CreatedByReceptionistID": 3,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2025-07-28T10:00:00Z"
     },
     {
       "ID": 2,
-      "PatientID": 2,
+      "Patient": {
+        "ID": 2,
+        "Name": "Liam Andrew Baker",
+        "Age": 30,
+        "Phone": "71098765"
+      },
       "ProviderName": "BetaCare",
       "Coverage": 0.9,
       "ExpirationDate": "2027-01-15",
       "isActive": true,
-      "CreatedByReceptionistID": 1,
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2025-07-25T09:30:00Z"
     },
     {
       "ID": 3,
-      "PatientID": 3,
+      "Patient": {
+        "ID": 3,
+        "Name": "Sophia Marie King",
+        "Age": 40,
+        "Phone": "78906543"
+      },
       "ProviderName": "HealthSecure",
       "Coverage": 1,
       "ExpirationDate": "2025-12-31",
       "isActive": true,
-      "CreatedByReceptionistID": 2,
+      "CreatedByReceptionist": { "ID": 2, "Name": "Ahmad Nabil Fakhoury" },
       "CreatedAt": "2025-07-20T08:45:00Z"
     }
   ],
@@ -880,18 +976,23 @@
       "ID": 1,
       "Name": "Appendectomy",
       "Description": "Surgical removal of the appendix due to inflammation.",
-      "PatientID": 1,
-      "DepartmentID": 5,
+      "Patient": {
+        "ID": 1,
+        "Name": "Olivia Anne Taylor",
+        "Age": 18,
+        "Phone": "76123456"
+      },
+      "Department": { "ID": 1, "Name": "Cardiology", "Phone": "55510100" },
       "ScheduledDate": "2026-01-15T09:30:00",
       "ResultDate": "2024-01-15T09:30:00",
       "Status": "Scheduled",
-      "BillID": 1,
-      "CreatedByReceptionistID": 7,
+      "Bill": { "ID": 1, "Amount": 100, "AmountPaid": 80 },
+      "CreatedByReceptionist": { "ID": 1, "Name": "Lara Marie Kanaan" },
       "CreatedAt": "2023-01-15T09:30:00",
       "Doctors": [
-        [1, "Lead Surgeon"],
-        [2, "Assistant Surgeon"],
-        [3, "Anesthesiologist"]
+        { "ID": 1, "Role": "Lead Surgeon" },
+        { "ID": 2, "Role": "Assistant Surgeon" },
+        { "ID": 3, "Role": "Anesthesiologist" }
       ]
     }
   ],

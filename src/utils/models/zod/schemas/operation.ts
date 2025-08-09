@@ -5,6 +5,10 @@ import {
   datetime,
   statusField,
 } from "../reusableSchemas";
+import { PatientRowSchema } from "../rowSchemas/human-resources/patient";
+import { DepartmentRowSchema } from "../rowSchemas/department";
+import { BillRowSchema } from "../rowSchemas/bill";
+import { ReceptionistRowSchema } from "../rowSchemas/human-resources/receptionist";
 
 export const OperationSchema = z
   .object({
@@ -15,17 +19,12 @@ export const OperationSchema = z
     Description: nonEmptyString("Description").min(5, {
       message: "Description must be at least 5 characters long.",
     }),
-    PatientID: positiveNumber("Patient", 1, Number.MAX_SAFE_INTEGER, true),
-    DepartmentID: positiveNumber(
-      "Department",
-      1,
-      Number.MAX_SAFE_INTEGER,
-      true,
-    ),
+    Patient: PatientRowSchema,
+    Department: DepartmentRowSchema,
     ScheduledDate: datetime("Scheduled date"),
     Status: statusField("Status"),
-    BillID: positiveNumber("Payment", 1, Number.MAX_SAFE_INTEGER, true),
-    CreatedByReceptionistID: positiveNumber("Receptionist ID"),
+    Bill: BillRowSchema,
+    CreatedByReceptionist: ReceptionistRowSchema,
     CreatedAt: datetime("Creation date"),
     Doctors: z
       .array(

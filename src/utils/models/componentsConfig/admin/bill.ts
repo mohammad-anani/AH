@@ -1,16 +1,18 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { formatMoney } from "@/utils/formatters/formatMoney";
 import type { RouteConfig } from "../routeConfig";
+import { receptionist } from "./human-resources/receptionist";
 
 export const bill: RouteConfig<"Bill"> = {
-  dataFields: ({ Amount, AmountPaid, CreatedByReceptionistID, CreatedAt }) => [
+  dataFields: ({ Amount, AmountPaid, CreatedByReceptionist, CreatedAt }) => [
     ["Amount", formatMoney(Amount)],
     ["Amount Paid", formatMoney(AmountPaid)],
     [
       "Created By",
-      "View Receptionist",
-      `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
-      "Admin",
+      CreatedByReceptionist,
+      `/admin/human-resources/receptionists/${CreatedByReceptionist.ID}`,
+      "Receptionist",
+      receptionist,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],

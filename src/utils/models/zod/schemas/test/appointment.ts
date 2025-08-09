@@ -5,23 +5,23 @@ import {
   datetime,
   statusField,
 } from "../../reusableSchemas";
+import { TestTypeRowSchema } from "../../rowSchemas/test/type";
+import { TestOrderRowSchema } from "../../rowSchemas/test/order";
+import { PatientRowSchema } from "../../rowSchemas/human-resources/patient";
+import { BillRowSchema } from "../../rowSchemas/bill";
+import { ReceptionistRowSchema } from "../../rowSchemas/human-resources/receptionist";
 
 export const TestAppointmentSchema = z.object({
   ID: positiveNumber("Test appointment", 1),
-  TestOrderID: positiveNumber(
-    "Test Order",
-    1,
-    Number.MAX_SAFE_INTEGER,
-    true,
-  ).nullable(),
-  TestID: positiveNumber("Test", 1, Number.MAX_SAFE_INTEGER, true),
-  PatientID: positiveNumber("Patient", 1, Number.MAX_SAFE_INTEGER, true),
+  TestOrder: TestOrderRowSchema.nullable(),
+  Test: TestTypeRowSchema,
+  Patient: PatientRowSchema,
   ScheduledDate: datetime("Scheduled date and time"),
   Status: statusField("Status"),
   Result: nonEmptyString("Result").nullable(),
   ResultDate: datetime("Result date").nullable(),
-  BillID: positiveNumber("Payment", 1, Number.MAX_SAFE_INTEGER, true),
-  CreatedByReceptionistID: positiveNumber("Receptionist ID"),
+  Bill: BillRowSchema,
+  CreatedByReceptionist: ReceptionistRowSchema,
   CreatedAt: datetime("Creation date"),
   Notes: z.string().optional(),
 });

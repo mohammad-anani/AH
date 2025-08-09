@@ -30,7 +30,7 @@ export const employee: DisplayingConfig<"Employee"> = {
   dataFields: (employee: typesObject["Employee"]) => {
     const {
       Person,
-      DepartmentID,
+      Department,
       Salary,
       HireDate,
       LeaveDate,
@@ -52,7 +52,7 @@ export const employee: DisplayingConfig<"Employee"> = {
       [
         "Department",
         "View Department",
-        `/receptionist/departments/${DepartmentID}`,
+        `/receptionist/departments/${Department.ID}`,
         "Department",
       ],
       ["Salary", formatMoney(Salary ?? 0)],

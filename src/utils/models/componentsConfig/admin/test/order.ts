@@ -1,4 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import {
   adminFilterSelectorField,
   admingenerateAuditFields,
@@ -8,15 +10,23 @@ import type { RouteConfig } from "../../routeConfig";
 
 import { doctor } from "../human-resources";
 import { appointment } from "../appointment";
+import { testType } from "./type";
 
 export const testOrder: RouteConfig<"TestOrder"> = {
-  dataFields: ({ TestTypeID, AppointmentID }: typesObject["TestOrder"]) => [
-    ["Test Type", "View Type", "/admin/tests/types/" + TestTypeID, "TestType"],
+  dataFields: ({ TestType, Appointment }: typesObject["TestOrder"]) => [
+    [
+      "Test Type",
+      TestType,
+      "/admin/tests/types/" + TestType.ID,
+      "TestType",
+      testType.selectorDisplay as SelectorDisplay<EntityKey>,
+    ],
     [
       "Appointment",
-      "View Appointment",
-      "/admin/appointments/" + AppointmentID,
-      "TestType",
+      Appointment,
+      "/admin/appointments/" + Appointment.ID,
+      "Appointment",
+      appointment.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
   ],
   filterFields: [
@@ -26,7 +36,7 @@ export const testOrder: RouteConfig<"TestOrder"> = {
     ...(admingenerateAuditFields("Doctor") ?? []),
   ],
   formConfig: [],
-  selectorDisplay: ({ ID }) => String(ID),
+  selectorDisplay: ({ PatientName, TestName }) => PatientName + "," + TestName,
 
   rowTemplate: [
     ["Patient", "Test"],

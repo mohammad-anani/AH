@@ -14,7 +14,7 @@ import { patient } from "./human-resources/patient.ts";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
-    PatientID,
+    Patient,
 
     ScheduledDate,
     Reason,
@@ -23,9 +23,10 @@ export const appointment: RouteConfig<"Appointment"> = {
   }: typesObject["Appointment"]) => [
     [
       "Patient",
-      "View Patient",
-      `/receptionist/human-resources/patients/${PatientID}`,
+      Patient,
+      `/receptionist/human-resources/patients/${Patient.ID}`,
       "Patient",
+      patient,
     ],
 
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],

@@ -6,15 +6,14 @@ import {
   booleanField,
 } from "../../reusableSchemas";
 import { PersonSchema } from "./person";
+import { DepartmentRowSchema } from "../../rowSchemas/department";
 
 const validDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
 
 export const EmployeeSchema = z.object({
   Person: PersonSchema,
 
-  DepartmentID: positiveNumber("Department").refine((v) => v > 0, {
-    message: "Department must be selected.",
-  }),
+  Department: DepartmentRowSchema,
 
   Salary: positiveNumber("Salary", 0.01).refine((v) => v > 0, {
     message: "Salary must be greater than zero.",

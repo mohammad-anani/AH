@@ -4,7 +4,7 @@ import { AddPersonSchema } from "./person";
 export const AddPatientSchema = FormPatientSchema.omit({
   ID: true,
   CreatedAt: true,
-  CreatedByReceptionistID: true,
+  CreatedByReceptionist: true,
 }).extend({
   Person: AddPersonSchema,
 });

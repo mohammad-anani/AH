@@ -5,6 +5,7 @@ import {
   positiveNumber,
 } from "../../reusableSchemas";
 import { EmployeeSchema } from "./employee";
+import { AdminRowSchema } from "../../rowSchemas/human-resources/admin";
 
 export const DoctorSchema = z.object({
   ID: positiveNumber("Doctor ID"),
@@ -17,7 +18,7 @@ export const DoctorSchema = z.object({
 
   AppointmentCost: positiveNumber("Appointment Cost"),
 
-  CreatedByAdminID: positiveNumber("Admin ID", 1),
+  CreatedByAdmin: AdminRowSchema,
 
   CreatedAt: datetime("Creation date"),
 });

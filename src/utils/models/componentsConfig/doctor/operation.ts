@@ -1,5 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import {
   DepartmentFilterSelectCallBack,
@@ -12,11 +14,10 @@ import {
   filterSelectorField,
 } from "../utils/filterReusableFields";
 import type { RouteConfig } from "../routeConfig";
-import {
-  receptionistFilterSelectorField,
-  receptionistFormSelectorField,
-} from "../utils/RoleUtil";
+import { receptionistFormSelectorField } from "../utils/RoleUtil";
 import { patient } from "./human-resources/patient";
+import { department } from "./department";
+import { bill } from "../receptionist/bill";
 import {
   DoctorFilterSelectorCallback,
   DoctorFormSelectorCallback,
@@ -29,15 +30,17 @@ export const operation: RouteConfig<"Operation"> = {
 
     [
       "Patient",
-      "View Patient",
-      `/receptionist/human-resources/patients/${operation.PatientID}`,
+      operation.Patient,
+      `/receptionist/human-resources/patients/${operation.Patient.ID}`,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     [
       "Department",
-      "View Department",
-      `/receptionist/departments/${operation.DepartmentID}`,
+      operation.Department,
+      `/receptionist/departments/${operation.Department.ID}`,
       "Department",
+      department.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
 
     ["Scheduled Date", formatDateIsoToLocal(operation.ScheduledDate)],
@@ -45,8 +48,10 @@ export const operation: RouteConfig<"Operation"> = {
     ["Notes", operation.Notes?.length ? operation.Notes : "N/A"],
     [
       "Bill",
-      operation.BillID ? "View Bill" : "N/A",
-      operation.BillID ? `/receptionist/bills/${operation.BillID}` : "",
+      operation.Bill || "N/A",
+      operation.Bill ? `/receptionist/bills/${operation.Bill.ID}` : "",
+      "Bill",
+      bill.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
   ],
   filterFields: [
@@ -63,14 +68,14 @@ export const operation: RouteConfig<"Operation"> = {
     ["Description", "Description", "string", "both"],
     receptionistFormSelectorField(
       "Patient",
-      "PatientID",
+      "Patient.ID",
       "Patient",
       "add",
       patient,
     ),
     [
       "Department",
-      "DepartmentID",
+      "Department.ID",
       "custom",
       "add",
       DepartmentFormSelectCallBack,

@@ -1,4 +1,6 @@
 import type { typesObject } from "../../../types/normal/typesObject";
+import type { EntityKey } from "../../../types/utils/entityKeys";
+import type { SelectorDisplay } from "../../../types/utils/selectorTypes";
 import { datetimeField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
 import { receptionistFilterSelectorField } from "../../utils/RoleUtil";
@@ -6,13 +8,20 @@ import { appointment } from "../../receptionist/appointment";
 import { testType } from "./type";
 
 export const testOrder: RouteConfig<"TestOrder"> = {
-  dataFields: ({ TestTypeID, AppointmentID }: typesObject["TestOrder"]) => [
-    ["Test Type", "View Type", "/doctor/tests/types/" + TestTypeID, "TestType"],
+  dataFields: ({ TestType, Appointment }: typesObject["TestOrder"]) => [
+    [
+      "Test Type",
+      TestType,
+      "/doctor/tests/types/" + TestType.ID,
+      "TestType",
+      testType.selectorDisplay as SelectorDisplay<EntityKey>,
+    ],
     [
       "Appointment",
-      "View Appointment",
-      "/doctor/appointments/" + AppointmentID,
-      "TestType",
+      Appointment,
+      "/doctor/appointments/" + Appointment.ID,
+      "Appointment",
+      appointment.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
   ],
   filterFields: [
@@ -22,7 +31,7 @@ export const testOrder: RouteConfig<"TestOrder"> = {
     datetimeField("OrderAt"),
   ],
   formConfig: [],
-  selectorDisplay: ({ TestName }) => TestName,
+  selectorDisplay: ({ PatientName, TestName }) => PatientName + "," + TestName,
   rowTemplate: [
     ["Patient", "Test"],
     (item) => [item.PatientName, item.TestName],

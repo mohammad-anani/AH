@@ -1,5 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
 import {
@@ -9,6 +11,9 @@ import {
 import { stringField, datetimeField } from "../utils/filterReusableFields";
 import type { RouteConfig } from "../routeConfig";
 import { patient } from "./human-resources";
+import { department } from "./department";
+import { bill } from "./bill";
+import { receptionist } from "./human-resources/receptionist";
 
 export const operation: RouteConfig<"Operation"> = {
   dataFields: (operation: typesObject["Operation"]) => [
@@ -17,30 +22,37 @@ export const operation: RouteConfig<"Operation"> = {
 
     [
       "Patient",
-      "View Patient",
-      `/admin/human-resources/patients/${operation.PatientID}`,
+      operation.Patient,
+      `/admin/human-resources/patients/${operation.Patient.ID}`,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     [
       "Department",
-      "View Department",
-      `/admin/departments/${operation.DepartmentID}`,
+      operation.Department,
+      `/admin/departments/${operation.Department.ID}`,
       "Department",
+      department.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
 
     ["Scheduled Date", formatDateIsoToLocal(operation.ScheduledDate)],
     ["Status", operation.Status],
     ["Notes", operation.Notes?.length ? operation.Notes : "N/A"],
-    [
-      "Bill",
-      operation.BillID ? "View Bill" : "N/A",
-      operation.BillID ? `/admin/bills/${operation.BillID}` : "",
-    ],
+    operation.Bill
+      ? [
+          "Bill",
+          operation.Bill,
+          `/admin/bills/${operation.Bill.ID}`,
+          "Bill",
+          bill.selectorDisplay as SelectorDisplay<EntityKey>,
+        ]
+      : ["Bill", "N/A"],
     [
       "Created By",
-      "View Receptionist",
-      `/admin/human-resources/receptionists/${operation.CreatedByReceptionistID}`,
+      operation.CreatedByReceptionist,
+      `/admin/human-resources/receptionists/${operation.CreatedByReceptionist.ID}`,
       "Receptionist",
+      receptionist.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Created At", formatDateIsoToLocal(operation.CreatedAt)],
   ],

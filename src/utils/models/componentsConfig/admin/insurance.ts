@@ -1,7 +1,11 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import type { RouteConfig } from "../routeConfig";
+import { patient } from "./human-resources/patient";
+import { receptionist } from "./human-resources/receptionist";
 
 export const insurance: RouteConfig<"Insurance"> = {
   dataFields: ({
@@ -9,23 +13,25 @@ export const insurance: RouteConfig<"Insurance"> = {
     Coverage,
     isActive,
     CreatedAt,
-    PatientID,
-    CreatedByReceptionistID,
+    Patient,
+    CreatedByReceptionist,
   }: typesObject["Insurance"]) => [
     [
       "Patient",
-      "View Patient",
-      "/admin/human-resources/patients/" + PatientID,
+      Patient,
+      "/admin/human-resources/patients/" + Patient.ID,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Provider", ProviderName],
     ["Coverage", Coverage * 100 + "%"],
     ["Status", isActive ? "Active" : "Inactive"],
     [
       "Created By",
-      "View Receptionist",
-      `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+      CreatedByReceptionist,
+      `/admin/human-resources/receptionists/${CreatedByReceptionist.ID}`,
       "Receptionist",
+      receptionist.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],

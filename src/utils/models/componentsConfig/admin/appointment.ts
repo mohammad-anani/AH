@@ -1,4 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import {
@@ -13,41 +15,53 @@ import {
 
 import type { RouteConfig } from "../routeConfig.ts";
 import { doctor } from "./human-resources/doctor.ts";
+import { patient } from "./human-resources/patient.ts";
+import { bill } from "./bill.ts";
+import { receptionist } from "./human-resources/receptionist.ts";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
-    PatientID,
-    DoctorID,
+    Patient,
+    Doctor,
     ScheduledDate,
     Reason,
     Status,
     Notes,
-    CreatedByReceptionistID,
+    CreatedByReceptionist,
     CreatedAt,
-    BillID,
+    Bill,
   }: typesObject["Appointment"]) => [
     [
       "Patient",
-      "View Patient",
-      `/admin/human-resources/patients/${PatientID}`,
+      Patient,
+      `/admin/human-resources/patients/${Patient.ID}`,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     [
       "Doctor",
-      "View Doctor",
-      `/admin/human-resources/doctors/${DoctorID}`,
+      Doctor,
+      `/admin/human-resources/doctors/${Doctor.ID}`,
       "Doctor",
+      doctor.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Reason", Reason],
     ["Status", Status],
     ["Notes", Notes?.length ? Notes : "N/A"],
-    ["Bill", "View Bill", "/admin/bills/" + BillID, "Bill"],
+    [
+      "Bill",
+      Bill,
+      "/admin/bills/" + Bill.ID,
+      "Bill",
+      bill.selectorDisplay as SelectorDisplay<EntityKey>,
+    ],
     [
       "Receptionist",
-      "View Receptionist",
-      `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+      CreatedByReceptionist,
+      `/admin/human-resources/receptionists/${CreatedByReceptionist.ID}`,
       "Receptionist",
+      receptionist.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],

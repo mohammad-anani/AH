@@ -17,6 +17,7 @@ import {
 } from "../../utils/filterReusableFields";
 import { prefixFields } from "../../utils/formUtils";
 import type { DisplayingConfig } from "../../routeConfig";
+import { department } from "../department";
 
 export const weekdays = [
   "Monday",
@@ -33,7 +34,7 @@ export const statusLabels = ["Active", "Inactive"];
 export const employee: DisplayingConfig<"Employee"> = {
   dataFields: (employee: typesObject["Employee"]) => {
     const {
-      DepartmentID,
+      Department,
       Salary,
       HireDate,
       LeaveDate,
@@ -53,9 +54,10 @@ export const employee: DisplayingConfig<"Employee"> = {
     return [
       [
         "Department",
-        "View Department",
-        `/admin/departments/${DepartmentID}`,
+        Department,
+        Department ? `/admin/departments/${Department.ID}` : undefined,
         "Department",
+        department,
       ],
       ["Salary", formatMoney(Salary ?? 0)],
       ["Hire Date", formatDateIsoToLocal(HireDate)],
@@ -88,7 +90,7 @@ export const employee: DisplayingConfig<"Employee"> = {
     ...prefixFields<"Employee", "Person">("Person", person["formConfig"]),
     [
       "Department",
-      "DepartmentID",
+      "Department.ID",
       "custom",
       "both",
       DepartmentFormSelectCallBack,

@@ -6,10 +6,12 @@ import {
   datetime,
   booleanField,
 } from "../reusableSchemas";
+import { ReceptionistRowSchema } from "../rowSchemas/human-resources/receptionist";
+import { PatientRowSchema } from "../rowSchemas/human-resources/patient";
 
 export const InsuranceSchema = z.object({
   ID: positiveNumber("Insurance", 1),
-  Patient: positiveNumber("Patient", 1, Number.MAX_SAFE_INTEGER, true),
+  Patient: PatientRowSchema,
   ProviderName: nonEmptyString("Provider name").min(2, {
     message: "Provider name must be at least 2 characters long.",
   }),
@@ -21,6 +23,6 @@ export const InsuranceSchema = z.object({
     },
   ),
   isActive: booleanField("Active status"),
-  CreatedByReceptionistID: positiveNumber("Receptionist ID"),
+  CreatedByReceptionist: ReceptionistRowSchema,
   CreatedAt: datetime("Creation date"),
 });

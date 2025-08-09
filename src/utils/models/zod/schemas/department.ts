@@ -9,6 +9,9 @@ export const DepartmentSchema = z.object({
   Phone: nonEmptyString("Phone").length(8, {
     message: "Phone must be exactly 8 characters.",
   }),
-  CreatedByAdminID: positiveNumber("Creator Admin ID", 1),
+  CreatedByAdmin: z.object({
+    ID: positiveNumber("Creator Admin ID"),
+    Name: nonEmptyString("ACreator Admin Name"),
+  }),
   CreatedAt: datetime("Creation Date"),
 });

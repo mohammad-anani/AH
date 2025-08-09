@@ -4,10 +4,12 @@ import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { Setter } from "@/utils/models/types/utils/basics";
 import Clickable from "../customComponents/Clickable";
+import { formatTitle } from "@/utils/formatters/formatTitle";
 
 type DataProps<T extends EntityKey> = {
   data: typesObject[T];
   fields: DataFields<T>;
+
   setSubCard?: Setter<[EntityKey, string] | undefined>;
   isModal?: boolean;
   isNestedCard?: boolean;
@@ -22,32 +24,40 @@ const Data = memo(function Data<T extends EntityKey>({
 }: DataProps<T>) {
   // Memoize the fields computation to avoid recalculation on every render
   const fieldData = useMemo(() => fields(data), [fields, data]);
-
   return (
     <>
-      {fieldData.map(([label, value, link, entity]) => (
-        <>
-          <span>{label}:</span>
+      {fieldData.map(([label, value, link, entity, display]) => {
+        console.log(value);
+        return (
+          <>
+            <span>{label}:</span>
 
-          <span>
-            {link ? (
-              <Clickable
-                disabled={isNestedCard}
-                title={isNestedCard ? "Can't open more nested cards" : ""}
-                as={isModal ? "button" : "Link"}
-                {...(isModal
-                  ? { onClick: () => setSubCard?.([entity as EntityKey, link]) }
-                  : { to: link })}
-                variant="link"
-              >
-                {String(value)}
-              </Clickable>
-            ) : (
-              String(value)
-            )}
-          </span>
-        </>
-      ))}
+            <span className="flex space-x-2 whitespace-pre-line">
+              {link ? (
+                <>
+                  <span>{display?.(value)}</span>
+                  <Clickable
+                    disabled={isNestedCard}
+                    title={isNestedCard ? "Can't open more nested cards" : ""}
+                    as={isModal ? "button" : "Link"}
+                    {...(isModal
+                      ? {
+                          onClick: () =>
+                            setSubCard?.([entity as EntityKey, link]),
+                        }
+                      : { to: link })}
+                    variant="link"
+                  >
+                    View {formatTitle(entity ?? "")}
+                  </Clickable>
+                </>
+              ) : (
+                String(value)
+              )}
+            </span>
+          </>
+        );
+      })}
     </>
   );
 });

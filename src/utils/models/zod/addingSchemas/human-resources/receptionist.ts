@@ -4,7 +4,7 @@ import { AddEmployeeSchema } from "./employee";
 export const AddReceptionistSchema = FormReceptionistSchema.omit({
   ID: true,
   CreatedAt: true,
-  CreatedByAdminID: true,
+  CreatedByAdmin: true,
 }).extend({
   Employee: AddEmployeeSchema,
 });

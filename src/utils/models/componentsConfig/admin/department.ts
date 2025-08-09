@@ -1,26 +1,24 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
-import { admingenerateAuditFields } from "../utils/RoleUtil";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import { stringField, phoneField } from "../utils/filterReusableFields";
 import type { RouteConfig } from "../routeConfig";
 
 export const department: RouteConfig<"Department"> = {
-  dataFields: ({ Name, Phone, CreatedByAdminID, CreatedAt }) => [
+  dataFields: ({ Name, Phone, CreatedByAdmin, CreatedAt }) => [
     ["Name", Name],
     ["Phone", formatPhoneNumber(Phone)],
     [
       "Created By",
-      "View Admin",
-      `/admin/human-resources/admins/${CreatedByAdminID}`,
+      CreatedByAdmin,
+      `/admin/human-resources/admins/${CreatedByAdmin.ID}`,
       "Admin",
+      (admin) => admin?.Name,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
-  filterFields: [
-    stringField("Name"),
-    phoneField("Phone"),
-    ...(admingenerateAuditFields("Admin") ?? []),
-  ],
+  filterFields: [stringField("Name"), phoneField("Phone")],
   formConfig: [
     ["Name", "Name", "string", "both"],
     ["Phone", "Phone", "phone", "both"],

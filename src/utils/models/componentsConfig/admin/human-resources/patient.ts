@@ -3,19 +3,21 @@ import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { admingenerateAuditFields } from "../../utils/RoleUtil";
 import type { RouteConfig } from "../../routeConfig";
+import { receptionist } from "./receptionist";
 
 export const patient: RouteConfig<"Patient"> = {
   dataFields: ({
     Person,
-    CreatedByReceptionistID,
+    CreatedByReceptionist,
     CreatedAt,
   }: typesObject["Patient"]) => [
     ...person["dataFields"](Person),
     [
       "Created By",
-      "View Receptionist",
-      `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+      CreatedByReceptionist,
+      `/admin/human-resources/receptionists/${CreatedByReceptionist.ID}`,
       "Receptionist",
+      receptionist,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],

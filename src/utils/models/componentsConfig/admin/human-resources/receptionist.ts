@@ -7,20 +7,22 @@ import { person } from "./person";
 
 import { admingenerateAuditFields } from "../../utils/RoleUtil";
 import type { RouteConfig } from "../../routeConfig";
+import { admin } from "./admin";
 
 export const receptionist: RouteConfig<"Receptionist"> = {
   dataFields: ({
     Employee,
-    CreatedByAdminID,
+    CreatedByAdmin,
     CreatedAt,
   }: typesObject["Receptionist"]) => [
     ...employee["dataFields"](Employee),
-    CreatedByAdminID
+    CreatedByAdmin
       ? [
           "Created By",
-          "View Admin",
-          `/admin/human-resources/admins/${CreatedByAdminID}`,
+          CreatedByAdmin,
+          `/admin/human-resources/admins/${CreatedByAdmin.ID}`,
           "Admin",
+          admin,
         ]
       : ["Created By", "System"],
     ["Created At", formatDateIsoToLocal(CreatedAt)],

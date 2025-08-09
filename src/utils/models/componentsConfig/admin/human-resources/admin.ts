@@ -2,6 +2,8 @@ import { admingenerateAuditFields } from "../../utils/RoleUtil";
 import { employee } from "./employee";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import { prefixFields } from "../../utils/formUtils";
 import { person } from "./person";
@@ -10,16 +12,17 @@ import type { RouteConfig } from "../../routeConfig";
 export const admin: RouteConfig<"Admin"> = {
   dataFields: ({
     Employee,
-    CreatedByAdminID,
+    CreatedByAdmin,
     CreatedAt,
   }: typesObject["Admin"]) => [
     ...employee["dataFields"](Employee),
-    CreatedByAdminID
+    CreatedByAdmin
       ? [
           "Created By",
-          "View Admin",
-          `/admin/human-resources/admins/${CreatedByAdminID}`,
+          CreatedByAdmin,
+          `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
           "Admin",
+          admin.selectorDisplay as SelectorDisplay<EntityKey>,
         ]
       : ["Created By", "System"],
     ["Created At", formatDateIsoToLocal(CreatedAt)],

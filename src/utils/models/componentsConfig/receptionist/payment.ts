@@ -1,5 +1,7 @@
 import { formatMoney } from "@/utils/formatters/formatMoney";
 import type { RouteConfig } from "../routeConfig";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import { methods } from "@/utils/models/zod/schemas";
 
@@ -7,8 +9,14 @@ import { bill } from "./bill";
 import { receptionistFormSelectorField } from "../utils/RoleUtil";
 
 export const payment: RouteConfig<"Payment"> = {
-  dataFields: ({ Amount, Method, BillID }) => [
-    ["Bill", "View Bill", `/admin/bills/${BillID}`],
+  dataFields: ({ Amount, Method, Bill }) => [
+    [
+      "Bill",
+      Bill,
+      `/admin/bills/${Bill.ID}`,
+      "Bill",
+      bill.selectorDisplay as SelectorDisplay<EntityKey>,
+    ],
     ["Amount", formatMoney(Amount)],
     ["Method", Method],
   ],
@@ -18,7 +26,7 @@ export const payment: RouteConfig<"Payment"> = {
   formConfig: [
     receptionistFormSelectorField<"Payment", "Bill">(
       "Bill",
-      "BillID",
+      "Bill.ID",
       "Bill",
       "add",
       bill,

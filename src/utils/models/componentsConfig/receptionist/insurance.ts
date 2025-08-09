@@ -1,4 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import { statusLabels } from "./human-resources/employee";
 import type { RouteConfig } from "../routeConfig";
 import { receptionistFormSelectorField } from "../utils/RoleUtil";
@@ -9,13 +11,14 @@ export const insurance: RouteConfig<"Insurance"> = {
     ProviderName,
     Coverage,
     isActive,
-    PatientID,
+    Patient,
   }: typesObject["Insurance"]) => [
     [
       "Patient",
-      "View Patient",
-      "/receptionist/human-resources/patients/" + PatientID,
+      Patient,
+      "/receptionist/human-resources/patients/" + Patient.ID,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Provider", ProviderName],
     ["Coverage", Coverage * 100 + "%"],
@@ -26,7 +29,7 @@ export const insurance: RouteConfig<"Insurance"> = {
   formConfig: [
     receptionistFormSelectorField(
       "Patient",
-      "PatientID",
+      "Patient.ID",
       "Patient",
       "add",
       patient,

@@ -1,5 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import {
   datetimeField,
@@ -17,34 +19,34 @@ import { testType } from "./type.ts";
 
 export const testAppointment: RouteConfig<"TestAppointment"> = {
   dataFields: ({
-    TestOrderID,
-    PatientID,
+    TestOrder,
+    Patient,
     ScheduledDate,
     Status,
     Result,
     Notes,
     ResultDate,
-    BillID,
   }: typesObject["TestAppointment"]) => [
-    TestOrderID
+    TestOrder
       ? [
           "Test Order",
-          "View Test Order",
-          `/receptionist/tests/orders/${TestOrderID}`,
+          TestOrder,
+          `/receptionist/tests/orders/${TestOrder?.ID}`,
           "TestOrder",
+          testOrder.selectorDisplay as SelectorDisplay<EntityKey>,
         ]
       : ["Test Order", "None"],
     [
       "Patient",
-      "View Patient",
-      `/receptionist/human-resources/patients/${PatientID}`,
+      Patient,
+      `/receptionist/human-resources/patients/${Patient?.ID}`,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Status", Status],
     ["Result", Result],
     ["Notes", Notes?.length ? Notes : "N/A"],
-    ["Bill", "View Bill", "/receptionist/bills/" + BillID, "Bill"],
     ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
   ],
   filterFields: [
@@ -59,14 +61,14 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
   formConfig: [
     receptionistFormSelectorField(
       "Test",
-      "TestID",
+      "Test.ID",
       "TestType",
       "add",
       testType,
     ),
     receptionistFormSelectorField(
       "Patient",
-      "PatientID",
+      "Patient.ID",
       "Patient",
       "add",
       patient,

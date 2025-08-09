@@ -5,20 +5,22 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { prefixFields } from "../../../utils/formUtils";
 import { person } from "../person";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
+import { adminAudit } from "./adminAudit";
 
 export const receptionistAudit: RouteConfig<"Receptionist"> = {
   dataFields: ({
     Employee,
-    CreatedByAdminID,
+    CreatedByAdmin,
     CreatedAt,
   }: typesObject["Receptionist"]) => [
     ...employee["dataFields"](Employee),
-    CreatedByAdminID
+    CreatedByAdmin
       ? [
           "Created By",
-          "View Admin",
-          `/admin/human-resources/admins/${CreatedByAdminID}`,
+          CreatedByAdmin,
+          `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
           "Admin",
+          adminAudit,
         ]
       : ["Created By", "System"],
     ["Created At", formatDateIsoToLocal(CreatedAt)],

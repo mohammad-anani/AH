@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { datetime, positiveNumber } from "../../reusableSchemas";
+import {
+  datetime,
+  nonEmptyString,
+  positiveNumber,
+} from "../../reusableSchemas";
 import { EmployeeSchema } from "./employee";
 
 export const AdminSchema = z.object({
@@ -9,7 +13,12 @@ export const AdminSchema = z.object({
 
   Employee: EmployeeSchema,
 
-  CreatedByAdminID: positiveNumber("Admin ID", 1).nullable(),
+  CreatedByAdmin: z
+    .object({
+      ID: positiveNumber("Creator Admin ID"),
+      Name: nonEmptyString("Creator Admin Name"),
+    })
+    .nullable(),
 
   CreatedAt: datetime("Creation date"),
 });

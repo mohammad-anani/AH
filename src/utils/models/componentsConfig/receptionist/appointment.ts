@@ -1,4 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import {
@@ -14,34 +16,43 @@ import {
 } from "../utils/RoleUtil.ts";
 import { doctor } from "./human-resources/doctor.ts";
 import { patient } from "./human-resources/patient.ts";
+import { bill } from "./bill.ts";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
-    PatientID,
-    DoctorID,
+    Patient,
+    Doctor,
     ScheduledDate,
     Reason,
     Status,
     Notes,
-    BillID,
+    Bill,
   }: typesObject["Appointment"]) => [
     [
       "Patient",
-      "View Patient",
-      `/receptionist/human-resources/patients/${PatientID}`,
+      Patient,
+      `/receptionist/human-resources/patients/${Patient.ID}`,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     [
       "Doctor",
-      "View Doctor",
-      `/receptionist/human-resources/doctors/${DoctorID}`,
+      Doctor,
+      `/receptionist/human-resources/doctors/${Doctor.ID}`,
       "Doctor",
+      doctor.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Reason", Reason],
     ["Status", Status],
     ["Notes", Notes?.length ? Notes : "N/A"],
-    ["Bill", "View Bill", "/receptionist/bills/" + BillID, "Bill"],
+    [
+      "Bill",
+      Bill,
+      "/receptionist/bills/" + Bill.ID,
+      "Bill",
+      bill.selectorDisplay as SelectorDisplay<EntityKey>,
+    ],
   ],
   filterFields: [
     receptionistFilterSelectorField("PatientID", "Patient", patient),

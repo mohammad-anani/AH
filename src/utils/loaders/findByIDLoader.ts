@@ -15,15 +15,13 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
 
     //to be changed
     const data = await findByID(`/${pluralize(entity)}?ID=${id}`);
-
     const schema = schemas[entity];
-
     if (!schema) {
       throwError(500, "Internal schema error");
     }
 
     const result = schema.safeParse(data);
-
+    console.log(result);
     if (!result.success) {
       // Log validation errors for debugging in development
       if (import.meta.env.DEV) {

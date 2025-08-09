@@ -1,5 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import {
   datetimeField,
@@ -14,45 +16,58 @@ import type { RouteConfig } from "../../routeConfig.ts";
 import { testType } from "./type.ts";
 import { testOrder } from "./order.ts";
 import { patient } from "../human-resources/patient.ts";
+import { bill } from "../bill.ts";
+import { receptionist } from "../human-resources/receptionist.ts";
 
 export const testAppointment: RouteConfig<"TestAppointment"> = {
   dataFields: ({
-    TestOrderID,
-    PatientID,
+    TestOrder,
+    Patient,
     ScheduledDate,
     Status,
     Result,
     Notes,
     ResultDate,
-    CreatedByReceptionistID,
+    CreatedByReceptionist,
     CreatedAt,
-    BillID,
+    Bill,
   }: typesObject["TestAppointment"]) => [
-    TestOrderID
+    TestOrder?.ID
       ? [
           "Test Order",
-          "View Test Order",
-          `/admin/tests/orders/${TestOrderID}`,
+          TestOrder,
+          `/admin/tests/orders/${TestOrder.ID}`,
           "TestOrder",
+          testOrder.selectorDisplay as SelectorDisplay<EntityKey>,
         ]
       : ["Test Order", "None"],
     [
       "Patient",
-      "View Patient",
-      `/admin/human-resources/patients/${PatientID}`,
+      Patient,
+      `/admin/human-resources/patients/${Patient.ID}`,
       "Patient",
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     ["Status", Status],
     ["Result", Result],
     ["Notes", Notes?.length ? Notes : "N/A"],
-    ["Bill", "View Bill", "/admin/bills/" + BillID, "Bill"],
+    [
+      "Bill",
+      Bill,
+      "/admin/bills/" + Bill.ID,
+      "Bill",
+      bill.selectorDisplay as SelectorDisplay<EntityKey>,
+    ],
     ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
     [
       "Created By",
-      "View Receptionist",
-      `/admin/human-resources/receptionists/${CreatedByReceptionistID}`,
+      CreatedByReceptionist || "N/A",
+      CreatedByReceptionist
+        ? `/admin/human-resources/receptionists/${CreatedByReceptionist.ID}`
+        : "",
       "Receptionist",
+      receptionist.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],

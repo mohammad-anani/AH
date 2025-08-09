@@ -19,5 +19,5 @@ export const department: RouteConfig<"Department"> = {
   ],
   formConfig: [],
   rowTemplate: [[], () => [], []],
-  selectorDisplay: () => "",
+  selectorDisplay: (dep) => dep.Name,
 };
