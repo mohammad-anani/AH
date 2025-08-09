@@ -68,7 +68,7 @@ export const operation: RouteConfig<"Operation"> = {
     ["Description", "Description", "string", "both"],
     receptionistFormSelectorField(
       "Patient",
-      "Patient.ID",
+      "PatientID",
       "Patient",
       "add",
       patient,

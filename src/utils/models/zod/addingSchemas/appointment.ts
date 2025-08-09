@@ -3,7 +3,7 @@ import { FormAppointmentSchema } from "../formSchemas/appointment";
 export const AddAppointmentSchema = FormAppointmentSchema.omit({
   ID: true,
   CreatedAt: true,
-  CreatedByReceptionist: true,
+  CreatedByReceptionistID: true,
   Status: true,
-  Bill: true,
+  BillID: true,
 });

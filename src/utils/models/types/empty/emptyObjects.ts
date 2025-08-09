@@ -1,4 +1,3 @@
-import { schemas } from "../../zod/addingSchemas/addingSchemas.ts";
 import {
   ZodObject,
   ZodString,
@@ -10,6 +9,7 @@ import {
   type ZodTypeAny,
 } from "zod";
 import type { DisplayEntityKey } from "../utils/entityKeys.ts";
+import { schemas } from "../../zod/addingSchemas/addingSchemas.ts";
 
 interface EmptyObjectValue {
   [key: string]:
@@ -61,6 +61,7 @@ function createEmptyValue(schema: ZodTypeAny): EmptyValueType {
 export const emptyObjects = Object.fromEntries(
   Object.entries(schemas).map(([key, schema]) => {
     // removed console.log
+
     return [key, createEmptyValue(schema)];
   }),
 ) as {

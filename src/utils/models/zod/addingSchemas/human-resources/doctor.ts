@@ -4,7 +4,7 @@ import { AddEmployeeSchema } from "./employee";
 export const AddDoctorSchema = FormDoctorSchema.omit({
   ID: true,
   CreatedAt: true,
-  CreatedByAdmin: true,
+  CreatedByAdminID: true,
 }).extend({
   Employee: AddEmployeeSchema,
 });

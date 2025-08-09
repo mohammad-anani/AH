@@ -61,14 +61,14 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
   formConfig: [
     receptionistFormSelectorField(
       "Test",
-      "Test.ID",
+      "TestID",
       "TestType",
       "add",
       testType,
     ),
     receptionistFormSelectorField(
       "Patient",
-      "Patient.ID",
+      "PatientID",
       "Patient",
       "add",
       patient,

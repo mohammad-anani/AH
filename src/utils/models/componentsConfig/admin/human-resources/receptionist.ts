@@ -8,6 +8,8 @@ import { person } from "./person";
 import { admingenerateAuditFields } from "../../utils/RoleUtil";
 import type { RouteConfig } from "../../routeConfig";
 import { admin } from "./admin";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 export const receptionist: RouteConfig<"Receptionist"> = {
   dataFields: ({
@@ -22,7 +24,7 @@ export const receptionist: RouteConfig<"Receptionist"> = {
           CreatedByAdmin,
           `/admin/human-resources/admins/${CreatedByAdmin.ID}`,
           "Admin",
-          admin,
+          admin.selectorDisplay as SelectorDisplay<EntityKey>,
         ]
       : ["Created By", "System"],
     ["Created At", formatDateIsoToLocal(CreatedAt)],

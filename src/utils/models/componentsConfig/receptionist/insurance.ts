@@ -29,7 +29,7 @@ export const insurance: RouteConfig<"Insurance"> = {
   formConfig: [
     receptionistFormSelectorField(
       "Patient",
-      "Patient.ID",
+      "PatientID",
       "Patient",
       "add",
       patient,

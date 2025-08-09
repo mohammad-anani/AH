@@ -3,7 +3,7 @@ import { FormOperationSchema } from "../formSchemas/operation";
 export const AddOperationSchema = FormOperationSchema.omit({
   ID: true,
   CreatedAt: true,
-  CreatedByReceptionist: true,
+  CreatedByReceptionistID: true,
   Status: true,
-  Bill: true,
+  BillID: true,
 });

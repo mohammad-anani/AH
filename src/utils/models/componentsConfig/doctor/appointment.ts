@@ -11,6 +11,8 @@ import type { RouteConfig } from "../routeConfig.ts";
 import { receptionistFilterSelectorField } from "../utils/RoleUtil.ts";
 
 import { patient } from "./human-resources/patient.ts";
+import type { EntityKey } from "../../types/utils/entityKeys.ts";
+import type { SelectorDisplay } from "../../types/utils/selectorTypes.ts";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
@@ -26,7 +28,7 @@ export const appointment: RouteConfig<"Appointment"> = {
       Patient,
       `/receptionist/human-resources/patients/${Patient.ID}`,
       "Patient",
-      patient,
+      patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
 
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],

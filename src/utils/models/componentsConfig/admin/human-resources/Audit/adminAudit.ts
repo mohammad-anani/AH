@@ -6,6 +6,8 @@ import { prefixFields } from "../../../utils/formUtils";
 import { person } from "../person";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
 export const adminAudit: RouteConfig<"Admin"> = {
   dataFields: ({
@@ -20,7 +22,8 @@ export const adminAudit: RouteConfig<"Admin"> = {
           CreatedByAdmin,
           `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
           "Admin",
-          (admin: rowTypesObject["Admin"]) => admin?.Name,
+          ((admin: rowTypesObject["Admin"]) =>
+            admin?.Name) as SelectorDisplay<EntityKey>,
         ]
       : ["Created By", "System"],
     ["Created At", formatDateIsoToLocal(CreatedAt)],

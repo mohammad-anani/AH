@@ -4,8 +4,8 @@ export const AddTestAppointmentSchema = FormTestAppointmentSchema.omit({
   ID: true,
   ResultDate: true,
   CreatedAt: true,
-  CreatedByReceptionist: true,
+  CreatedByReceptionistID: true,
   Result: true,
   Status: true,
-  Bill: true,
+  BillID: true,
 });

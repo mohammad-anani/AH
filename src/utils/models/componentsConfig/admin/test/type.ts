@@ -49,7 +49,7 @@ export const testType: RouteConfig<"TestType"> = {
     ["Name", "Name", "string", "both"],
     [
       "Department",
-      "DepartmentID",
+      "Department.ID",
       "custom",
       "add",
       DepartmentFormSelectCallBack,

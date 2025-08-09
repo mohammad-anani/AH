@@ -4,5 +4,5 @@ export const AddInsuranceSchema = FormInsuranceSchema.omit({
   ID: true,
   isActive: true,
   CreatedAt: true,
-  CreatedByReceptionist: true,
+  CreatedByReceptionistID: true,
 });

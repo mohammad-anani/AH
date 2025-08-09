@@ -3,7 +3,7 @@ import throwError from "@/utils/helpers/throwError";
 
 import { schemas as formSchemas } from "@/utils/models/zod/formSchemas/formSchemas";
 import { schemas as addingSchemas } from "@/utils/models/zod/addingSchemas/addingSchemas";
-import { emptyObjects } from "@/utils/models/types/empty/emptyObjects";
+
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +16,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import type z from "zod";
+import { emptyObjects } from "@/utils/models/types/empty/emptyObjects";
 
 export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
   const data = useOutletContext<typesObject[EntityKey]>();
@@ -27,7 +28,6 @@ export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
   const isAdd = !data?.ID && location.pathname.includes("/add");
 
   const schema = isAdd ? addingSchemas[entity] : formSchemas[entity];
-
   const defaultValues = isAdd ? { ...emptyObjects[entity], ...navData } : data;
 
   const title = `${isAdd ? "Add" : "Edit"} ${formatTitle(entity)}`;

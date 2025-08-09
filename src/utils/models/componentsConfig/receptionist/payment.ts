@@ -26,7 +26,7 @@ export const payment: RouteConfig<"Payment"> = {
   formConfig: [
     receptionistFormSelectorField<"Payment", "Bill">(
       "Bill",
-      "Bill.ID",
+      "BillID",
       "Bill",
       "add",
       bill,

@@ -7,8 +7,9 @@ import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { person } from "./person";
 import type { RouteConfig } from "../../routeConfig";
 import { formatMoney } from "@/utils/formatters/formatMoney";
-import { admin } from "./admin";
 import { adminAudit } from "./Audit/adminAudit";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
 export const doctor: RouteConfig<"Doctor"> = {
   dataFields: ({
@@ -26,7 +27,7 @@ export const doctor: RouteConfig<"Doctor"> = {
       CreatedByAdmin,
       `/admin/human-resources/admins/${CreatedByAdmin.ID}`,
       "Admin",
-      adminAudit,
+      adminAudit.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],

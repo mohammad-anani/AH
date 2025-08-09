@@ -2,6 +2,8 @@ import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { formatMoney } from "@/utils/formatters/formatMoney";
 import type { RouteConfig } from "../routeConfig";
 import { receptionist } from "./human-resources/receptionist";
+import type { EntityKey } from "../../types/utils/entityKeys";
+import type { SelectorDisplay } from "../../types/utils/selectorTypes";
 
 export const bill: RouteConfig<"Bill"> = {
   dataFields: ({ Amount, AmountPaid, CreatedByReceptionist, CreatedAt }) => [
@@ -12,7 +14,7 @@ export const bill: RouteConfig<"Bill"> = {
       CreatedByReceptionist,
       `/admin/human-resources/receptionists/${CreatedByReceptionist.ID}`,
       "Receptionist",
-      receptionist,
+      receptionist.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
