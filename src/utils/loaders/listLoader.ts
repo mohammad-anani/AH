@@ -42,17 +42,14 @@ export default function listLoader(
     const schema = isRow ? rowSchemas[entityName] : schemas[entityName];
 
     if (!schema) {
-      throwError(500, "Internal Server Error");
+      throwError(500, "Internal schema error");
     }
 
     const apiSchema = z.tuple([z.array(schema), z.number()]);
     const result = apiSchema.safeParse(data);
 
     if (!result.success) {
-      // Log validation errors for debugging in development
-      if (import.meta.env.DEV) {
-        console.error("API validation error:", result.error);
-      }
+      // Log validation errors for debugging in
       throwError(
         500,
         "Sorry, we received unexpected data from the server. Please try again later.",

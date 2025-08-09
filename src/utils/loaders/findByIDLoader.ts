@@ -10,7 +10,7 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
     const id = Number(params["id"]);
 
     if (!id || isNaN(id)) {
-      throwError(400, "Invalid admin ID");
+      throwError(400, "Invalid ID");
     }
 
     //to be changed
@@ -19,7 +19,7 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
     const schema = schemas[entity];
 
     if (!schema) {
-      throwError(500, "Internal Server Error");
+      throwError(500, "Internal schema error");
     }
 
     const result = schema.safeParse(data);
