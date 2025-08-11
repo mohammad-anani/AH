@@ -9,6 +9,7 @@
     }
   ],
   "compilerOptions": {
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "moduleResolution": "node",
     "paths": {

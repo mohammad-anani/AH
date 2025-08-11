@@ -13,10 +13,14 @@ export default function BackNavigator({
 }: BackNavigatorType) {
   const navigate = useNavigate();
 
+  if (pagesBack <= 0 || !Number.isInteger(pagesBack)) return null;
+
+  function handelClick(e: React.MouseEvent<Element, MouseEvent>) {
+    e.preventDefault();
+    navigate(-pagesBack);
+  }
+
   return cloneElement(children, {
-    onClick: (e) => {
-      e.preventDefault();
-      navigate(-pagesBack);
-    },
+    onClick: handelClick,
   });
 }

@@ -5,6 +5,7 @@ import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { Setter } from "@/utils/models/types/utils/basics";
 import Clickable from "../customComponents/Clickable";
 import { formatTitle } from "@/utils/formatters/formatTitle";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
 type DataProps<T extends EntityKey> = {
   data: typesObject[T];
@@ -27,7 +28,6 @@ const Data = memo(function Data<T extends EntityKey>({
   return (
     <>
       {fieldData.map(([label, value, link, entity, display]) => {
-        console.log(value);
         return (
           <>
             <span>{label}:</span>
@@ -35,7 +35,7 @@ const Data = memo(function Data<T extends EntityKey>({
             <span className="flex space-x-2 whitespace-pre-line">
               {link ? (
                 <>
-                  <span>{display?.(value)}</span>
+                  <span>{display?.(value as rowTypesObject[EntityKey])}</span>
                   <Clickable
                     disabled={isNestedCard}
                     title={isNestedCard ? "Can't open more nested cards" : ""}
