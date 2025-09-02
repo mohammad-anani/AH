@@ -26,8 +26,12 @@ export default async function getList(
   }
 
   try {
+    console.log(url);
     const response = await axios.get(url);
-    const result: [unknown[], number] = [response.data, response.data.length];
+    const result: [unknown[], number] = [
+      response.data.Items,
+      response.data.Count,
+    ];
 
     // Cache the result
     if (useCache) {

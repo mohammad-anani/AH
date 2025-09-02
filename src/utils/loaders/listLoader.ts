@@ -6,7 +6,7 @@ import type {
 import formatLoaderUrl from "../formatters/formatLoaderUrl";
 import getList from "@/api/getList";
 import { z } from "zod";
-import pluralize from "pluralize";
+
 import throwError from "../helpers/throwError";
 import { schemas } from "../models/zod/schemas/schemas.ts";
 import { rowSchemas } from "../models/zod/rowSchemas/rowSchemas.ts";
@@ -14,6 +14,7 @@ import {
   type EntityKey,
   type FetchingEntityKey,
 } from "../models/types/utils/entityKeys.ts";
+import * as pluralize from "pluralize";
 
 export default function listLoader(
   entity: FetchingEntityKey | `${FetchingEntityKey}Row`,
@@ -31,10 +32,11 @@ export default function listLoader(
     const isRow = entity.endsWith("Row");
     const entityName = (isRow ? entity.slice(0, -3) : entity) as EntityKey;
 
+    console.log(pluralize.plural(entityName));
     const data = await getList(
       (pathPrefix?.(params) ?? "") +
         "/" +
-        pluralize(entity) +
+        pluralize.plural(entityName) +
         "?" +
         searchParams?.toString(),
     );
