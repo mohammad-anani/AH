@@ -1,5 +1,4 @@
 import { admingenerateAuditFields } from "../../utils/RoleUtil";
-import { employee } from "./employee";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
@@ -8,6 +7,7 @@ import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import { prefixFields } from "../../utils/formUtils";
 import { person } from "./person";
 import type { RouteConfig } from "../../routeConfig";
+import { employeeAudit } from "./Audit/employeeAudit";
 
 export const admin: RouteConfig<"Admin"> = {
   dataFields: ({
@@ -15,7 +15,7 @@ export const admin: RouteConfig<"Admin"> = {
     CreatedByAdmin,
     CreatedAt,
   }: typesObject["Admin"]) => [
-    ...employee["dataFields"](Employee),
+    ...employeeAudit["dataFields"](Employee),
     CreatedByAdmin
       ? [
           "Created By",
@@ -28,14 +28,13 @@ export const admin: RouteConfig<"Admin"> = {
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
 
-  filterFields: [
-    ...person["filterFields"],
-    ...employee["filterFields"],
-    ...(admingenerateAuditFields("Admin") ?? []),
-  ],
+  filterFields: [...person["filterFields"], ...employeeAudit["filterFields"]],
 
   formConfig: [
-    ...prefixFields<"Admin", "Employee">("Employee", employee["formConfig"]),
+    ...prefixFields<"Admin", "Employee">(
+      "Employee",
+      employeeAudit["formConfig"],
+    ),
   ],
 
   rowTemplate: [["Name"], (item) => [item.Name], [2]],

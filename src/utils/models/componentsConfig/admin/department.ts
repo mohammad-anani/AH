@@ -2,9 +2,14 @@ import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
-import { stringField, phoneField } from "../utils/filterReusableFields";
+import {
+  stringField,
+  phoneField,
+  generateAuditFields,
+} from "../utils/filterReusableFields";
 import type { RouteConfig } from "../routeConfig";
 import type { rowTypesObject } from "../../types/row/rowTypesObject";
+import { admin } from "./human-resources";
 
 export const department: RouteConfig<"Department"> = {
   dataFields: ({ Name, Phone, CreatedByAdmin, CreatedAt }) => [
@@ -21,6 +26,7 @@ export const department: RouteConfig<"Department"> = {
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
   filterFields: [stringField("Name"), phoneField("Phone")],
+  ...generateAuditFields("Admin", admin, "Admin"),
   formConfig: [
     ["Name", "Name", "string", "both"],
     ["Phone", "Phone", "phone", "both"],

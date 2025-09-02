@@ -1,4 +1,3 @@
-import { employee } from "./employee";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
@@ -17,7 +16,6 @@ export const receptionist: RouteConfig<"Receptionist"> = {
     CreatedByAdmin,
     CreatedAt,
   }: typesObject["Receptionist"]) => [
-    ...employee["dataFields"](Employee),
     CreatedByAdmin
       ? [
           "Created By",
@@ -29,17 +27,8 @@ export const receptionist: RouteConfig<"Receptionist"> = {
       : ["Created By", "System"],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
-  filterFields: [
-    ...person["filterFields"],
-    ...employee["filterFields"],
-    ...(admingenerateAuditFields("Receptionist") ?? []),
-  ],
-  formConfig: [
-    ...prefixFields<"Receptionist", "Employee">(
-      "Employee",
-      employee["formConfig"],
-    ),
-  ],
+  filterFields: [...person["filterFields"]],
+  formConfig: [],
   selectorDisplay: ({ Name }) => Name,
   rowTemplate: [["Name"], (item) => [item.Name], [2]],
   subLinks: ({ ID }) => [

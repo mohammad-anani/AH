@@ -14,6 +14,7 @@ import { patient } from "./human-resources";
 import { department } from "./department";
 import { bill } from "./bill";
 import { receptionist } from "./human-resources/receptionist";
+import { DoctorFilterSelectorCallback } from "@/features/doctor/doctorSelectCallback";
 
 export const operation: RouteConfig<"Operation"> = {
   dataFields: (operation: typesObject["Operation"]) => [
@@ -62,6 +63,7 @@ export const operation: RouteConfig<"Operation"> = {
     adminFilterSelectorField("PatientID", "Patient", patient),
     ["Department", "custom", DepartmentFilterSelectCallBack],
     datetimeField("Scheduled Date"),
+    ["Doctors", "custom", DoctorFilterSelectorCallback],
     ["Status", "uniselect", ["Done", "UnDone"]],
     ...(admingenerateAuditFields("Receptionist") ?? []),
   ],

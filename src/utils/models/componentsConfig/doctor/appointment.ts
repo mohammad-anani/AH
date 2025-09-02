@@ -17,7 +17,6 @@ import type { SelectorDisplay } from "../../types/utils/selectorTypes.ts";
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
     Patient,
-
     ScheduledDate,
     Reason,
     Status,

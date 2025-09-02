@@ -1,8 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { admingenerateAuditFields } from "../../utils/RoleUtil";
 import { moneyField, stringField } from "../../utils/filterReusableFields";
 import { prefixFields } from "../../utils/formUtils";
-import { employee } from "./employee";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import { person } from "./person";
 import type { RouteConfig } from "../../routeConfig";
@@ -19,7 +17,6 @@ export const doctor: RouteConfig<"Doctor"> = {
     CreatedAt,
     AppointmentCost,
   }: typesObject["Doctor"]) => [
-    ...employee["dataFields"](Employee),
     ["Specialization", Specialization],
     ["Appointment Cost", formatMoney(AppointmentCost)],
     [
@@ -33,13 +30,10 @@ export const doctor: RouteConfig<"Doctor"> = {
   ],
   filterFields: [
     ...person["filterFields"],
-    ...employee["filterFields"],
     stringField("Specialization"),
     moneyField("AppointmentCost"),
-    ...(admingenerateAuditFields("Admin") ?? []),
   ],
   formConfig: [
-    ...prefixFields<"Doctor", "Employee">("Employee", employee["formConfig"]),
     ["Specialization", "Specialization", "string", "both"],
     ["Appointment Cost", "AppointmentCost", "money", "both"],
   ],
