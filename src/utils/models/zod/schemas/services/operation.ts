@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { positiveNumber, nonEmptyString } from "../../reusableSchemas";
-import { DepartmentRowSchema } from "../../rowSchemas/department";
+import { DepartmentRowSchema } from "../../rowSchemas";
 import { ServiceSchema } from "./service";
 
 export const OperationSchema = z.object({

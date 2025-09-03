@@ -4,8 +4,8 @@ import {
   positiveNumber,
   nonEmptyString,
 } from "../../reusableSchemas";
-import { BillRowSchema } from "../../rowSchemas/bill";
-import { ReceptionistRowSchema } from "../../rowSchemas/human-resources/receptionist";
+import { BillRowSchema } from "../../rowSchemas";
+import { ReceptionistRowSchema } from "../../rowSchemas";
 
 export const methods = ["Insurance", "Cash", "Card"];
 

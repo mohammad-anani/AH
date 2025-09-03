@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { positiveNumber } from "../../reusableSchemas";
-import { DoctorRowSchema } from "../../rowSchemas/human-resources/doctor";
+import { DoctorRowSchema } from "../../rowSchemas";
 import { ServiceSchema } from "./service";
 import { AppointmentRowSchema } from "../../rowSchemas";
 

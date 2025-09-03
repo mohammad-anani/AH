@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { nonEmptyString, datetime } from "../../reusableSchemas";
-import { PatientRowSchema } from "../../rowSchemas/human-resources/patient";
-import { ReceptionistRowSchema } from "../../rowSchemas/human-resources/receptionist";
+import { PatientRowSchema } from "../../rowSchemas";
+import { ReceptionistRowSchema } from "../../rowSchemas";
 import { BillRowSchema } from "../../rowSchemas/bill";
 
 export const ServiceSchema = z.object({

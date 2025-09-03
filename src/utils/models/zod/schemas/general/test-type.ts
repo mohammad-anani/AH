@@ -4,8 +4,8 @@ import {
   nonEmptyString,
   datetime,
 } from "../../reusableSchemas";
-import { DepartmentRowSchema } from "../../rowSchemas/department";
-import { AdminRowSchema } from "../../rowSchemas/human-resources/admin";
+import { DepartmentRowSchema } from "../../rowSchemas";
+import { AdminRowSchema } from "../../rowSchemas";
 
 export const TestTypeSchema = z.object({
   ID: positiveNumber("Test type ID", 1),

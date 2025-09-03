@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { datetime, positiveNumber } from "../../reusableSchemas";
 import { PersonSchema } from "./person";
-import { ReceptionistRowSchema } from "../../rowSchemas/human-resources/receptionist";
+import { ReceptionistRowSchema } from "../../rowSchemas";
 
 export const PatientSchema = z.object({
   ID: positiveNumber("Patient ID", 1),
