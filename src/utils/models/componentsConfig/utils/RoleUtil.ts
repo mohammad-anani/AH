@@ -12,10 +12,9 @@ import { formSelectorField } from "./formUtils.ts";
 import type { typesObject } from "../../types/normal/typesObject.ts";
 import { adminAudit } from "../admin/human-resources/Audit/adminAudit.ts";
 import { receptionistAudit } from "../admin/human-resources/Audit/receptionistAudit.ts";
-import type { emptyObjectsTypes } from "../../types/empty/emptyTypesObject.ts";
+import type { emptyObjectsTypes } from "../../types/add/emptyTypesObject.ts";
 import type z from "zod";
 import type { schemas } from "../../zod/formSchemas/formSchemas.ts";
-import type { formTypesObject } from "../../types/form/formTypesObject.ts";
 
 export const adminFilterSelectorField = <T extends EntityKey>(
   fieldKey: string,
@@ -56,7 +55,7 @@ export const receptionistFormSelectorField = <
   B extends EntityKey,
 >(
   label: string,
-  fieldKey: DotAccess<formTypesObject[T]>,
+  fieldKey: DotAccess<typesObject[T]>,
   entity: B,
   mode: "add" | "update" | "both",
   entityObject: RouteConfig<B>,

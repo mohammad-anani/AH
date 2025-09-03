@@ -4,7 +4,7 @@ import type { ReactElement } from "react";
 
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { emptyObjectsTypes } from "@/utils/models/types/empty/emptyTypesObject";
+import type { emptyObjectsTypes } from "@/utils/models/types/add/emptyTypesObject";
 import { useError } from "../form-inputs";
 import FormError from "./FormError";
 

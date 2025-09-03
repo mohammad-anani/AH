@@ -16,7 +16,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import type z from "zod";
-import { emptyObjects } from "@/utils/models/types/empty/emptyObjects";
+import { emptyObjects } from "@/utils/models/types/add/emptyObjects";
 
 export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
   const data = useOutletContext<typesObject[EntityKey]>();
