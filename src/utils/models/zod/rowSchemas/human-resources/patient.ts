@@ -4,7 +4,7 @@ import { z } from "zod";
 export const PatientRowSchema = PatientSchema.pick({
   ID: true,
 }).extend({
-  Name: nonEmptyString("Name"),
+  FullName: nonEmptyString("Name"),
   Age: z.number(),
   Phone: nonEmptyString("Phone"),
 });

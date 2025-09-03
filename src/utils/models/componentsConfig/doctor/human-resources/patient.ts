@@ -17,7 +17,7 @@ export const patient: RouteConfig<"Patient"> = {
     ["Show Operations", `/doctor/operations?PatientID=${ID}`],
   ],
   filterFields: [...person["filterFields"]],
-  rowTemplate: [["Name", "Age"], (item) => [item.Name, item.Age], [2, 1]],
+  rowTemplate: [["Name", "Age"], (item) => [item.FullName, item.Age], [2, 1]],
   formConfig: [],
-  selectorDisplay: ({ Name }) => Name,
+  selectorDisplay: ({ FullName: Name }) => Name,
 };

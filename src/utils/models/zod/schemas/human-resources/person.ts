@@ -1,49 +1,29 @@
 import { z } from "zod";
-import {
-  nonEmptyString,
-  date,
-  positiveNumber,
-  booleanField,
-} from "../../reusableSchemas";
+import { nonEmptyString, date } from "../../reusableSchemas";
+import { CountrySchema } from "./CountrySchema";
 
 export const PersonSchema = z.object({
-  FirstName: nonEmptyString("First name").min(2, {
-    message: "First name must be at least 2 characters long.",
+  FirstName: nonEmptyString("First name").min(3, {
+    message: "First name must be at least 3 characters long.",
   }),
-  MiddleName: nonEmptyString("Middle name").min(2, {
-    message: "Middle name must be at least 2 characters long.",
+  MiddleName: nonEmptyString("Middle name").min(3, {
+    message: "Middle name must be at least 3 characters long.",
   }),
-  LastName: nonEmptyString("Last name").min(2, {
-    message: "Last name must be at least 2 characters long.",
+  LastName: nonEmptyString("Last name").min(3, {
+    message: "Last name must be at least 3 characters long.",
   }),
-  Gender: booleanField("Gender"),
+  Gender: z.enum(["M", "F"], { error: "Gender should be M or F" }),
   DateOfBirth: date("Date of birth").refine(
     (val) => new Date(val) <= new Date(),
     {
       message: "Date of birth cannot be in the future.",
     },
   ),
-  Country: z
-    .object({
-      ID: positiveNumber("Country ID").refine((v) => v > 0, {
-        message: "Country ID must be a positive number.",
-      }),
-      Name: nonEmptyString("Country name"),
-    })
-    .refine(
-      (val) => val.ID != null && val.Name != null && val.Name.trim() !== "",
-      {
-        message: "Country is required",
-        path: [], // attach error to the object itself
-      },
-    ),
+  Country: CountrySchema,
   Phone: nonEmptyString("Phone").length(8, {
     message: "Phone number must be exactly 8 characters.",
   }),
   Email: nonEmptyString("Email").email({
     message: "Please enter a valid email address.",
-  }),
-  Username: nonEmptyString("Username").min(6, {
-    message: "Username must be at least 6 characters long.",
   }),
 });

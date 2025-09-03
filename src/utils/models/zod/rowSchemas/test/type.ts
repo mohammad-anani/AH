@@ -1,4 +1,4 @@
-import { TestTypeSchema } from "../../schemas/test/type";
+import { TestTypeSchema } from "../../schemas/general/test-type";
 import { nonEmptyString } from "../../reusableSchemas";
 export const TestTypeRowSchema = TestTypeSchema.pick({
   ID: true,

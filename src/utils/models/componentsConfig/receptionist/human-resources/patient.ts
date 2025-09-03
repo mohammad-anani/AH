@@ -20,9 +20,9 @@ export const patient: RouteConfig<"Patient"> = {
     ["Add Insurance", `/receptionist/insurances/add`, { PatientID: ID }],
   ],
   filterFields: [...person["filterFields"]],
-  rowTemplate: [["Name", "Age"], (item) => [item.Name, item.Age], [2, 1]],
+  rowTemplate: [["Name", "Age"], (item) => [item.FullName, item.Age], [2, 1]],
   formConfig: [
     ...prefixFields<"Patient", "Person">("Person", person["formConfig"]),
   ],
-  selectorDisplay: ({ Name }) => Name,
+  selectorDisplay: ({ FullName: Name }) => Name,
 };

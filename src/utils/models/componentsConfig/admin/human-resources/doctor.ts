@@ -15,7 +15,7 @@ export const doctor: RouteConfig<"Doctor"> = {
     Specialization,
     CreatedByAdmin,
     CreatedAt,
-    AppointmentCost,
+    CostPerAppointment: AppointmentCost,
   }: typesObject["Doctor"]) => [
     ["Specialization", Specialization],
     ["Appointment Cost", formatMoney(AppointmentCost)],

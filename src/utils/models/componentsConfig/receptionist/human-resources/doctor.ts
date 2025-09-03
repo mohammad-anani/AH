@@ -10,7 +10,7 @@ export const doctor: RouteConfig<"Doctor"> = {
   dataFields: ({
     Employee,
     Specialization,
-    AppointmentCost,
+    CostPerAppointment: AppointmentCost,
   }: typesObject["Doctor"]) => [
     ...employee["dataFields"](Employee),
     ["Specialization", Specialization],

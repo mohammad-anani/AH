@@ -1,5 +1,5 @@
 import { datetime, positiveNumber } from "../reusableSchemas";
-import { AppointmentSchema } from "../schemas/appointment";
+import { AppointmentSchema } from "../schemas/services/appointment";
 
 export const FormAppointmentSchema = AppointmentSchema.omit({
   ScheduledDate: true,

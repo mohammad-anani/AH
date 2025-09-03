@@ -1,4 +1,4 @@
-import { TestAppointmentSchema } from "../../schemas/test/appointment";
+import { TestAppointmentSchema } from "../../schemas/services/test-appointment";
 import { nonEmptyString, datetime, booleanField } from "../../reusableSchemas";
 export const TestAppointmentRowSchema = TestAppointmentSchema.pick({
   ID: true,

@@ -1,4 +1,4 @@
-import { BillSchema } from "../schemas/bill";
+import { BillSchema } from "../schemas/finance/bill";
 
 export const BillRowSchema = BillSchema.pick({
   ID: true,

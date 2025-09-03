@@ -1,4 +1,4 @@
-import { TestOrderSchema } from "../../schemas/test/order";
+import { TestOrderSchema } from "../../schemas/services/test-order";
 import { nonEmptyString } from "../../reusableSchemas";
 export const TestOrderRowSchema = TestOrderSchema.pick({
   ID: true,

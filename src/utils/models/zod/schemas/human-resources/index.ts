@@ -1,6 +1,7 @@
-export { PersonSchema } from "./person";
-export { EmployeeSchema } from "./employee";
-export { AdminSchema } from "./admin";
-export { ReceptionistSchema } from "./receptionist";
-export { DoctorSchema } from "./doctor";
-export { PatientSchema } from "./patient";
+export * from "./person";
+export * from "./employee";
+export * from "./admin";
+export * from "./receptionist";
+export * from "./doctor";
+export * from "./patient";
+export * from "./CountrySchema";
