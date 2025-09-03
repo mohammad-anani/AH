@@ -1,8 +1,4 @@
-import { admingenerateAuditFields } from "../../utils/RoleUtil";
-import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import { prefixFields } from "../../utils/formUtils";
 import { person } from "./person";
@@ -10,22 +6,8 @@ import type { RouteConfig } from "../../routeConfig";
 import { employeeAudit } from "./Audit/employeeAudit";
 
 export const admin: RouteConfig<"Admin"> = {
-  dataFields: ({
-    Employee,
-    CreatedByAdmin,
-    CreatedAt,
-  }: typesObject["Admin"]) => [
+  dataFields: ({ Employee }: typesObject["Admin"]) => [
     ...employeeAudit["dataFields"](Employee),
-    CreatedByAdmin
-      ? [
-          "Created By",
-          CreatedByAdmin,
-          `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
-          "Admin",
-          admin.selectorDisplay as SelectorDisplay<EntityKey>,
-        ]
-      : ["Created By", "System"],
-    ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
 
   filterFields: [...person["filterFields"], ...employeeAudit["filterFields"]],
@@ -37,9 +19,9 @@ export const admin: RouteConfig<"Admin"> = {
     ),
   ],
 
-  rowTemplate: [["Name"], (item) => [item.Name], [2]],
+  rowTemplate: [["Name"], (item) => [item.FullName], [2]],
 
-  selectorDisplay: ({ Name }) => Name,
+  selectorDisplay: ({ FullName }) => FullName,
   subLinks: ({ ID }) => [
     ["Show Departments", `/admin/departments?AdminID=${ID}`],
     [

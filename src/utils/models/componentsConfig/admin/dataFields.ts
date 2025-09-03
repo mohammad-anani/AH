@@ -17,7 +17,7 @@ import {
   person,
   employee,
   payment,
-} from "./index.ts";
+} from "./general/index.ts";
 
 export const dataFields: { [K in DisplayEntityKey]: DataFields<K> } = {
   Department: department["dataFields"],

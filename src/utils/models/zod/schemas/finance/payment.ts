@@ -1,13 +1,9 @@
 import { z } from "zod";
-import {
-  datetime,
-  positiveNumber,
-  nonEmptyString,
-} from "../../reusableSchemas";
+import { datetime, positiveNumber } from "../../reusableSchemas";
 import { BillRowSchema } from "../../rowSchemas";
 import { ReceptionistRowSchema } from "../../rowSchemas";
 
-export const methods = ["Insurance", "Cash", "Card"];
+export const methods = ["Card", "Cash", "Insurance"] as const;
 
 export const PaymentSchema = z.object({
   ID: positiveNumber("Payment ID", 1),
@@ -16,8 +12,8 @@ export const PaymentSchema = z.object({
 
   Amount: positiveNumber("Amount", 1),
 
-  Method: nonEmptyString("Method").min(3).max(50, {
-    message: "Method must be between 3 and 50 characters.",
+  Method: z.enum(methods, {
+    message: "Payment method must be one of: Card, Cash, Insurance",
   }),
 
   CreatedAt: datetime("Created at"),

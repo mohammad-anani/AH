@@ -1,36 +1,21 @@
-import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
-import { prefixFields } from "../../../utils/formUtils";
 import { person } from "../person";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
-import { adminAudit } from "./adminAudit";
+import { employee } from "../../../receptionist";
 
 export const receptionistAudit: RouteConfig<"Receptionist"> = {
-  dataFields: ({
-    Employee,
-    CreatedByAdmin,
-    CreatedAt,
-  }: typesObject["Receptionist"]) => [
-    CreatedByAdmin
-      ? [
-          "Created By",
-          CreatedByAdmin,
-          `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
-          "Admin",
-          adminAudit,
-        ]
-      : ["Created By", "System"],
-    ["Created At", formatDateIsoToLocal(CreatedAt)],
+  dataFields: ({ Employee }: typesObject["Receptionist"]) => [
+    ...employee["dataFields"](Employee),
   ],
 
   filterFields: [...person["filterFields"]],
 
   formConfig: [],
 
-  selectorDisplay: ({ Name }) => Name,
+  selectorDisplay: ({ FullName }) => FullName,
 
-  rowTemplate: [["Name"], (item) => [item.Name], [2]],
+  rowTemplate: [["Name"], (item) => [item.FullName], [2]],
 
   subLinks: ({ ID }) => [
     ["Show Appointments", `/admin/appointments?ReceptionistID=${ID}`],

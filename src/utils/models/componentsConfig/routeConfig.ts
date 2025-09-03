@@ -1,7 +1,4 @@
-import {
-  type DisplayEntityKey,
-  type EntityKey,
-} from "../types/utils/entityKeys";
+import { type DisplayEntityKey } from "../types/utils/entityKeys";
 import type { FilterKey, FormKey } from "../types/utils/Form&Filter";
 import type {
   DataFields,
@@ -11,7 +8,7 @@ import type {
 
 import type { SelectorDisplay } from "../types/utils/selectorTypes";
 
-export type RouteConfig<T extends EntityKey> = {
+export type RouteConfig<T extends DisplayEntityKey> = {
   dataFields: DataFields<T>;
   filterFields: FilterKey[];
   formConfig: FormKey<T>[];

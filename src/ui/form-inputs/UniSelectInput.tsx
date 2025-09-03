@@ -1,6 +1,6 @@
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 
-interface SelectOption {
+export interface SelectOption {
   value: string | number;
   label: string;
 }

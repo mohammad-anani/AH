@@ -23,7 +23,7 @@ export const doctor: RouteConfig<"Doctor"> = {
     moneyField("AppointmentCost"),
   ],
   formConfig: [],
-  rowTemplate: [["Name"], (item) => [item.Name], [2]],
+  rowTemplate: [["Name"], (item) => [item.FullName], [2]],
   selectorDisplay: ({ Name }) => Name,
   subLinks: () => [],
 };

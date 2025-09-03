@@ -1,36 +1,27 @@
-import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import { prefixFields } from "../../utils/formUtils";
 import { person } from "./person";
-
-import { admingenerateAuditFields } from "../../utils/RoleUtil";
 import type { RouteConfig } from "../../routeConfig";
-import { admin } from "./admin";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+import { employeeAudit } from "./Audit/employeeAudit";
 
 export const receptionist: RouteConfig<"Receptionist"> = {
-  dataFields: ({
-    Employee,
-    CreatedByAdmin,
-    CreatedAt,
-  }: typesObject["Receptionist"]) => [
-    CreatedByAdmin
-      ? [
-          "Created By",
-          CreatedByAdmin,
-          `/admin/human-resources/admins/${CreatedByAdmin.ID}`,
-          "Admin",
-          admin.selectorDisplay as SelectorDisplay<EntityKey>,
-        ]
-      : ["Created By", "System"],
-    ["Created At", formatDateIsoToLocal(CreatedAt)],
+  dataFields: ({ Employee }: typesObject["Receptionist"]) => [
+    ...employeeAudit["dataFields"](Employee),
   ],
-  filterFields: [...person["filterFields"]],
-  formConfig: [],
-  selectorDisplay: ({ Name }) => Name,
-  rowTemplate: [["Name"], (item) => [item.Name], [2]],
+
+  filterFields: [...person["filterFields"], ...employeeAudit["filterFields"]],
+
+  formConfig: [
+    ...prefixFields<"Receptionist", "Employee">(
+      "Employee",
+      employeeAudit["formConfig"],
+    ),
+  ],
+
+  rowTemplate: [["Name"], (item) => [item.FullName], [2]],
+
+  selectorDisplay: ({ FullName }) => FullName,
   subLinks: ({ ID }) => [
     ["Show Appointments", `/admin/appointments?ReceptionistID=${ID}`],
     [

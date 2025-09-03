@@ -65,5 +65,5 @@ export const emptyObjects = Object.fromEntries(
     return [key, createEmptyValue(schema)];
   }),
 ) as {
-  [K in DisplayEntityKey]: EmptyValueType;
+  [K in DisplayEntityKey]: EmptyObjectValue;
 };

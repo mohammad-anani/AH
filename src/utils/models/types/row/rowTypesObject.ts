@@ -8,6 +8,7 @@ import type {
   OperationRow,
   PatientRow,
   PaymentRow,
+  PrescriptionRow,
   ReceptionistRow,
   TestAppointmentRow,
   TestOrderRow,
@@ -26,7 +27,7 @@ export type rowTypesObject = {
   Insurance: InsuranceRow;
   Operation: OperationRow;
   Appointment: AppointmentRow;
-  Prescription: { ID: number };
+  Prescription: PrescriptionRow;
   Bill: BillRow;
   Payment: PaymentRow;
 };

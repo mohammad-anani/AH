@@ -13,11 +13,13 @@ import {
   dateField,
   multiselectField,
   timeField,
-  booleanField,
 } from "../../utils/filterReusableFields";
 import { prefixFields } from "../../utils/formUtils";
 import type { DisplayingConfig } from "../../routeConfig";
-import { department } from "../department";
+import { department } from "../general/department";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+import { admin } from "./admin";
 
 export const weekdays = [
   "Monday",
@@ -41,7 +43,8 @@ export const employee: DisplayingConfig<"Employee"> = {
       WorkingDays,
       ShiftStart,
       ShiftEnd,
-      isActive,
+      CreatedByAdmin,
+      CreatedAt,
     } = employee;
 
     const formattedWorkingDays =
@@ -65,7 +68,16 @@ export const employee: DisplayingConfig<"Employee"> = {
       ["Working Days", formattedWorkingDays],
       ["Shift Start", convert24To12(ShiftStart)],
       ["Shift End", convert24To12(ShiftEnd)],
-      ["Status", isActive ? "Active" : "Inactive"],
+      CreatedByAdmin
+        ? [
+            "Created By",
+            CreatedByAdmin,
+            `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
+            "Admin",
+            admin.selectorDisplay as SelectorDisplay<EntityKey>,
+          ]
+        : ["Created By", "System"],
+      ["Created At", formatDateIsoToLocal(CreatedAt)],
     ];
   },
   filterFields: [
@@ -73,7 +85,6 @@ export const employee: DisplayingConfig<"Employee"> = {
     moneyField("Salary"),
     dateField("HireDate"),
     dateField("LeaveDate"),
-    booleanField("isActive", ["Active", "Not Active", "All"]),
     multiselectField("WorkingDays", [
       "Monday",
       "Tuesday",
@@ -100,6 +111,5 @@ export const employee: DisplayingConfig<"Employee"> = {
     ["Working Days", "WorkingDays", "multiselect", "both", weekdays],
     ["Shift Start", "ShiftStart", "time", "both"],
     ["Shift End", "ShiftEnd", "time", "both"],
-    ["Status", "isActive", "boolean", "update", statusLabels],
   ],
 };

@@ -28,6 +28,13 @@ export default function Controller({
 
   const errorMessages = useError(name);
 
+  // Convert errorMessages to the format expected by FormError
+  const formErrorMessages = Array.isArray(errorMessages)
+    ? errorMessages
+    : typeof errorMessages === "object" && errorMessages
+      ? Object.values(errorMessages).flat()
+      : undefined;
+
   return (
     <span>
       <Controler
@@ -38,7 +45,7 @@ export default function Controller({
           renderField({ field, isSubmitting: formState.isSubmitting })
         }
       />
-      <FormError errorMessages={errorMessages} />
+      <FormError errorMessages={formErrorMessages} />
     </span>
   );
 }

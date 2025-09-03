@@ -5,6 +5,7 @@ import type { Setter } from "./basics";
 import type { Primitive } from "react-hook-form";
 import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 import type { RouteConfig } from "../../componentsConfig/routeConfig";
+import type { SelectOption } from "@/ui/form-inputs/UniSelectInput";
 
 export type DataTypes =
   | "string"
@@ -48,6 +49,7 @@ export type FormKey<T extends DisplayEntityKey> = [
   data?:
     | Array<Primitive>
     | customFormProps
+    | SelectOption[]
     | [string, string]
     | string
     | [EntityKey, RouteConfig<EntityKey>, Role],

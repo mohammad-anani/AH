@@ -1,4 +1,7 @@
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys.ts";
+import type {
+  DisplayEntityKey,
+  EntityKey,
+} from "@/utils/models/types/utils/entityKeys.ts";
 import type { DotAccess } from "@/utils/models/types/utils/Form&Filter";
 
 import type { RouteConfig } from "../routeConfig.ts";
@@ -12,9 +15,6 @@ import { formSelectorField } from "./formUtils.ts";
 import type { typesObject } from "../../types/normal/typesObject.ts";
 import { adminAudit } from "../admin/human-resources/Audit/adminAudit.ts";
 import { receptionistAudit } from "../admin/human-resources/Audit/receptionistAudit.ts";
-import type { emptyObjectsTypes } from "../../types/add/emptyTypesObject.ts";
-import type z from "zod";
-import type { schemas } from "../../zod/formSchemas/formSchemas.ts";
 
 export const adminFilterSelectorField = <T extends EntityKey>(
   fieldKey: string,
@@ -34,7 +34,7 @@ export const admingenerateAuditFields = (creator: Role) => {
 };
 
 export const adminFormSelectorField = <
-  T extends EntityKey,
+  T extends DisplayEntityKey,
   B extends EntityKey,
 >(
   label: string,
