@@ -9,7 +9,7 @@ import {
   type ZodTypeAny,
 } from "zod";
 import type { DisplayEntityKey } from "../utils/entityKeys.ts";
-import { schemas } from "../../zod/addingSchemas/addingSchemas.ts";
+import { schemas } from "../../zod/addSchemas/addSchemas.ts";
 
 interface EmptyObjectValue {
   [key: string]:

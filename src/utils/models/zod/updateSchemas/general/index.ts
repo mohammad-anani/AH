@@ -1,0 +1,1 @@
+export { UpdateDepartmentSchema } from "./department";

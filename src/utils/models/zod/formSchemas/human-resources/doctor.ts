@@ -1,11 +1,10 @@
-import { DoctorSchema } from "../../schemas/human-resources";
-import { positiveNumber } from "../../reusableSchemas";
+import { positiveNumber, nonEmptyString } from "../../reusableSchemas";
 import { FormEmployeeSchema } from "./employee";
 
-export const FormDoctorSchema = DoctorSchema.omit({
-  Employee: true,
-  CreatedByAdmin: true,
-}).extend({
-  Employee: FormEmployeeSchema,
+export const FormDoctorSchema = FormEmployeeSchema.extend({
+  Specialization: nonEmptyString("Specialization").min(3).max(30, {
+    message: "Specialization must be between 3 and 30 characters.",
+  }),
+
   CreatedByAdminID: positiveNumber("Created By Admin ID", 1),
 });

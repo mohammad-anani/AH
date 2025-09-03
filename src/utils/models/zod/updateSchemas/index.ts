@@ -1,4 +1,4 @@
-export * from "./finance";
-export * from "./general";
 export * from "./human-resources";
+export * from "./general";
+export * from "./finance";
 export * from "./services";

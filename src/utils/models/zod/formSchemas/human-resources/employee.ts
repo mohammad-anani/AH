@@ -1,11 +1,18 @@
-import { EmployeeSchema } from "../../schemas/human-resources";
-import { positiveNumber } from "../../reusableSchemas";
+import {
+  positiveNumber,
+  nonEmptyString,
+  datetime,
+} from "../../reusableSchemas";
 import { FormPersonSchema } from "./person";
 
-export const FormEmployeeSchema = EmployeeSchema.omit({
-  Person: true,
-  Department: true,
-}).extend({
-  Person: FormPersonSchema,
+export const FormEmployeeSchema = FormPersonSchema.extend({
+  Salary: positiveNumber("Salary"),
+
   DepartmentID: positiveNumber("Department ID", 1),
+
+  HireDate: datetime("Hire date"),
+
+  Role: nonEmptyString("Role").min(3).max(30, {
+    message: "Role must be between 3 and 30 characters.",
+  }),
 });
