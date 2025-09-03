@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { positiveNumber, time, datetime } from "../../reusableSchemas";
 import { PersonSchema } from "./person";
-import { DepartmentRowSchema } from "../../rowSchemas/department";
+import { DepartmentRowSchema } from "../../rowSchemas";
 import { AdminRowSchema } from "../../rowSchemas/human-resources/admin";
 
-const validDays = [
+export const validDays = [
   "Monday",
   "Tuesday",
   "Wednesday",

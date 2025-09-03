@@ -2,7 +2,7 @@ import add from "@/api/add";
 import update from "@/api/update";
 import { redirect, type ActionFunctionArgs } from "react-router-dom";
 import type { EntityKey } from "../models/types/utils/entityKeys";
-import pluralize from "pluralize";
+import * as pluralize from "pluralize";
 import type { Primitive } from "react-hook-form";
 
 export default function addUpdateAction(
@@ -12,14 +12,20 @@ export default function addUpdateAction(
   return async function ({ request }: ActionFunctionArgs) {
     const data = await request.json();
 
-    // Log data in development for debugging
-    if (import.meta.env.DEV) {
-      // removed console.log
+    let extra: Primitive | undefined;
+
+    const isAdd = request.url.endsWith("/add");
+
+    if (!isAdd) {
+      const id = request.url.split("/")[-2];
+      const success = await update(data, `${pluralize.plural(entity)}/${id}`);
+      extra = success; // pass ID for redirect if update succeeded
+    } else {
+      // Add: no ID yet
+      const newID = await add(data, `${pluralize.plural(entity)}`);
+      extra = newID;
     }
-    // Fix: Use consistent URL pattern for both add and update
-    const newID = data["ID"]
-      ? await update(data, `/${pluralize(entity)}/${data["ID"]}`)
-      : await add(data, `/${pluralize(entity)}`);
-    return redirect(redirection(request, newID));
+
+    return redirect(redirection(request, extra));
   };
 }

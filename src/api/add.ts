@@ -2,11 +2,7 @@ import axios from "./axios";
 import { listCache, createCacheKey } from "./cache";
 
 export default async function add(data: unknown, url: string) {
-  const response = await axios.post(url, data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await axios.post(url, data);
 
   // Invalidate related cache entries after successful add
   const entityType = url.split("/").filter(Boolean).pop() || "unknown";

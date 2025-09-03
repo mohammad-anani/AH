@@ -1,20 +1,29 @@
+import { login } from "@/api/login";
 import { redirect, type ActionFunctionArgs } from "react-router-dom";
 
 //request
 export default async function loginAction({ request }: ActionFunctionArgs) {
   const data = await request.json();
 
-  // Log login attempts in development
-  if (import.meta.env.DEV) {
-    // removed console.log
+  const { email, password } = data;
+
+  if (!(email && password)) {
+    return redirect("/");
   }
 
-  const { Username } = data;
+  const { ID, Token, Role, RefreshToken } = await login(email, password);
+
+  if (!(Token && RefreshToken && ID && Role)) {
+    return redirect("/");
+  }
+
+  localStorage.setItem("token", Token);
+  localStorage.setItem("refresh-token", RefreshToken);
 
   // TODO: Replace with proper authentication logic
-  if (Username === "admin") return redirect("/admin");
-  if (Username === "receptionist") return redirect("/receptionist");
-  if (Username === "doctor") return redirect("/doctor");
+  if (Role === "Admin") return redirect("/admin");
+  if (Role === "Receptionist") return redirect("/receptionist");
+  if (Role === "Doctor") return redirect("/doctor");
 
   // Invalid credentials - redirect back to login
   return redirect("/");

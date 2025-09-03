@@ -33,10 +33,11 @@ export const testOrder: RouteConfig<"TestOrder"> = {
     datetimeField("OrderAt"),
   ],
   formConfig: [],
-  selectorDisplay: ({ PatientName, TestName }) => PatientName + "," + TestName,
+  selectorDisplay: ({ PatientFullName, TestName }) =>
+    PatientFullName + "," + TestName,
   rowTemplate: [
     ["Patient", "Test"],
-    (item) => [item.PatientName, item.TestName],
+    (item) => [item.PatientFullName, item.TestName],
     [2, 2],
   ],
   subLinks: ({ ID }) => [

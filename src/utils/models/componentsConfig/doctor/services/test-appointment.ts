@@ -7,83 +7,56 @@ import {
   datetimeField,
   uniselectField,
   stringField,
-} from "../../utils/filterReusableFields.ts";
-import type { RouteConfig } from "../../routeConfig.ts";
-import {
-  receptionistFilterSelectorField,
-  receptionistFormSelectorField,
-} from "../../utils/RoleUtil.ts";
-import { testOrder } from "./order.ts";
-import { patient } from "../human-resources/patient.ts";
-import { testType } from "./type.ts";
+} from "../../utils/filterReusableFields";
+import type { RouteConfig } from "../../routeConfig";
+import { testOrder } from "./test-order";
+import { testType } from "../general/test-type";
+import { service } from "../../admin/services/service";
 
 export const testAppointment: RouteConfig<"TestAppointment"> = {
   dataFields: ({
     TestOrder,
-    Patient,
-    ScheduledDate,
-    Status,
-    Result,
-    Notes,
-    ResultDate,
+    TestType,
+    Service,
   }: typesObject["TestAppointment"]) => [
-    TestOrder
+    TestOrder?.ID
       ? [
           "Test Order",
           TestOrder,
-          `/receptionist/tests/orders/${TestOrder?.ID}`,
+          `/doctor/services/test-orders/${TestOrder.ID}`,
           "TestOrder",
           testOrder.selectorDisplay as SelectorDisplay<EntityKey>,
         ]
       : ["Test Order", "None"],
     [
-      "Patient",
-      Patient,
-      `/receptionist/human-resources/patients/${Patient?.ID}`,
-      "Patient",
-      patient.selectorDisplay as SelectorDisplay<EntityKey>,
+      "Test Type",
+      TestType,
+      `/doctor/general/test-types/${TestType.ID}`,
+      "TestType",
+      testType.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
-    ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
-    ["Status", Status],
-    ["Result", Result],
-    ["Notes", Notes?.length ? Notes : "N/A"],
-    ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
+
+    ...service["dataFields"](Service),
   ],
   filterFields: [
-    receptionistFilterSelectorField("TestTypeID", "TestType", testType),
-    receptionistFilterSelectorField("TestOrderID", "TestOrder", testOrder),
-    receptionistFilterSelectorField("PatientID", "Patient", patient),
+    stringField("TestName"),
     datetimeField("ScheduledDate"),
-    uniselectField("Status", ["Cancelled", "Accepted"]),
+    uniselectField("Status", ["Completed", "Pending", "Cancelled"]),
     stringField("Result"),
     datetimeField("ResultDate"),
+    stringField("Notes"),
+    ...service["filterFields"],
   ],
-  formConfig: [
-    receptionistFormSelectorField(
-      "Test",
-      "TestID",
-      "TestType",
-      "add",
-      testType,
-    ),
-    receptionistFormSelectorField(
-      "Patient",
-      "PatientID",
-      "Patient",
-      "add",
-      patient,
-    ),
-    ["Scheduled Date", "ScheduledDate", "datetime", "both"],
-    ["Notes", "Notes", "text", "both"],
-  ],
-  selectorDisplay: ({ TestName, PatientName }) => TestName + "," + PatientName,
+  formConfig: [],
+  selectorDisplay: ({ TestName, PatientFullName, Status }) =>
+    TestName + " | " + PatientFullName + " | " + Status,
 
   rowTemplate: [
     ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [
-      item.PatientName,
+      item.PatientFullName,
       item.TestName,
-      formatDateIsoToLocal(item.Date),
+      formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,
     ],

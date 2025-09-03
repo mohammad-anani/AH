@@ -2,7 +2,7 @@ import Delete from "@/api/delete";
 
 import { redirect, type ActionFunctionArgs } from "react-router-dom";
 import type { EntityKey } from "../models/types/utils/entityKeys";
-import pluralize from "pluralize";
+import * as pluralize from "pluralize";
 import type { Primitive } from "react-hook-form";
 
 export default function deleteAction(
@@ -17,7 +17,7 @@ export default function deleteAction(
       throw new Error("No ID provided for deletion");
     }
 
-    await Delete(`/${pluralize(entity)}/${ID}`);
+    await Delete(`${pluralize.plural(entity)}/${ID}`);
 
     return redirect(redirection(request));
   };

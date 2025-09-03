@@ -15,6 +15,4 @@ export const FormInsuranceSchema = z.object({
   CoveragePercentage: positiveNumber("Coverage percentage", 1, 100),
 
   PatientID: positiveNumber("Patient ID", 1),
-
-  CreatedByReceptionistID: positiveNumber("Created By Receptionist ID", 1),
 });

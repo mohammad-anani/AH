@@ -1,62 +1,47 @@
-import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import {
   datetimeField,
-  uniselectField,
   stringField,
-} from "../../utils/filterReusableFields.ts";
-import type { RouteConfig } from "../../routeConfig.ts";
+  uniselectField,
+} from "../../utils/filterReusableFields";
+import type { RouteConfig } from "../../routeConfig";
 import {
   receptionistFilterSelectorField,
   receptionistFormSelectorField,
-} from "../../utils/RoleUtil.ts";
-import { testOrder } from "./order.ts";
-import { patient } from "../human-resources/patient.ts";
-import { testType } from "./type.ts";
-import { bill } from "../bill.ts";
+} from "../../utils/RoleUtil";
+import { testOrder } from "./test-order";
+import { testType } from "../general/test-type";
+import { service } from "../../admin/services/service";
+import { patient } from "../human-resources";
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 export const testAppointment: RouteConfig<"TestAppointment"> = {
   dataFields: ({
     TestOrder,
-    Patient,
-    ScheduledDate,
-    Status,
-    Result,
-    Notes,
-    ResultDate,
-    Bill,
+    TestType,
+    Service,
   }: typesObject["TestAppointment"]) => [
     TestOrder?.ID
       ? [
           "Test Order",
           TestOrder,
-          `/receptionist/tests/orders/${TestOrder.ID}`,
+          `/receptionist/services/test-orders/${TestOrder.ID}`,
           "TestOrder",
           testOrder.selectorDisplay as SelectorDisplay<EntityKey>,
         ]
       : ["Test Order", "None"],
     [
-      "Patient",
-      Patient,
-      `/receptionist/human-resources/patients/${Patient.ID}`,
-      "Patient",
-      patient.selectorDisplay as SelectorDisplay<EntityKey>,
+      "Test Type",
+      TestType,
+      `/receptionist/general/test-types/${TestType.ID}`,
+      "TestType",
+      testType.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
-    ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
-    ["Status", Status],
-    ["Result", Result],
-    ["Notes", Notes?.length ? Notes : "N/A"],
-    [
-      "Bill",
-      Bill,
-      "/receptionist/bills/" + Bill.ID,
-      "Bill",
-      bill.selectorDisplay as SelectorDisplay<EntityKey>,
-    ],
-    ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
+
+    ...service["dataFields"](Service),
   ],
   filterFields: [
     receptionistFilterSelectorField("Test", "TestType", testType),
@@ -70,29 +55,30 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
   formConfig: [
     receptionistFormSelectorField(
       "Test",
-      "TestID",
+      "TestType.ID",
       "TestType",
       "add",
       testType,
     ),
     receptionistFormSelectorField(
       "Patient",
-      "PatientID",
+      "Service.Patient.ID",
       "Patient",
       "add",
       patient,
     ),
-    ["Scheduled Date", "ScheduledDate", "datetime", "both"],
-    ["Notes", "Notes", "text", "both"],
+    ["Scheduled Date", "Service.ScheduledDate", "datetime", "both"],
+    ["Notes", "Service.Notes", "text", "both"],
   ],
-  selectorDisplay: ({ TestName, PatientName }) => TestName + "," + PatientName,
+  selectorDisplay: ({ TestName, PatientFullName }) =>
+    TestName + "," + PatientFullName,
 
   rowTemplate: [
     ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [
-      item.PatientName,
+      item.PatientFullName,
       item.TestName,
-      formatDateIsoToLocal(item.Date),
+      formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,
     ],

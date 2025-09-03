@@ -91,7 +91,7 @@ export function route<T extends EntityKey>(
                   : {},
                 canEdit
                   ? {
-                      path: "edit",
+                      path: "update",
                       element: (
                         <AddUpdateForm
                           formConfig={formConfig}
@@ -100,7 +100,7 @@ export function route<T extends EntityKey>(
                       ),
                       action: addUpdateAction(
                         entity,
-                        (request) => `${request.url.replace("/edit", "")}`,
+                        (request) => `${request.url.replace("/update", "")}`,
                       ),
                     }
                   : {},

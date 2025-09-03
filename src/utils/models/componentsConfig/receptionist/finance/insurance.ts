@@ -1,16 +1,16 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
-import { statusLabels } from "./human-resources/employee";
-import type { RouteConfig } from "../routeConfig";
-import { receptionistFormSelectorField } from "../utils/RoleUtil";
-import { patient } from "./human-resources";
+import { statusLabels } from "../human-resources/employee";
+import type { RouteConfig } from "../../routeConfig";
+import { receptionistFormSelectorField } from "../../utils/RoleUtil";
+import { patient } from "../human-resources";
 
 export const insurance: RouteConfig<"Insurance"> = {
   dataFields: ({
     ProviderName,
     Coverage,
-    isActive,
+    IsActive,
     Patient,
   }: typesObject["Insurance"]) => [
     [
@@ -22,14 +22,14 @@ export const insurance: RouteConfig<"Insurance"> = {
     ],
     ["Provider", ProviderName],
     ["Coverage", Coverage * 100 + "%"],
-    ["Status", isActive ? "Active" : "Inactive"],
+    ["Status", IsActive ? "Active" : "Inactive"],
   ],
   filterFields: [],
   //solve patient id selector here
   formConfig: [
     receptionistFormSelectorField(
       "Patient",
-      "PatientID",
+      "Patient.ID",
       "Patient",
       "add",
       patient,
@@ -37,7 +37,7 @@ export const insurance: RouteConfig<"Insurance"> = {
     ["Provider Name", "ProviderName", "string", "both"],
     ["Coverage", "Coverage", "number", "both"],
     ["Expiration Date", "ExpirationDate", "date", "both"],
-    ["Status", "isActive", "boolean", "update", statusLabels],
+    ["Status", "IsActive", "boolean", "update", statusLabels],
   ],
   selectorDisplay: ({ ID }) => String(ID),
 
@@ -46,7 +46,7 @@ export const insurance: RouteConfig<"Insurance"> = {
     (item) => [
       item.ProviderName,
       item.Coverage * 100 + "%",
-      item.isActive ? "Active" : "Inactive",
+      item.IsActive ? "Active" : "Inactive",
     ],
     [1, 1, 1],
   ],

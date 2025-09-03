@@ -1,9 +1,11 @@
+import throwError from "@/utils/helpers/throwError";
+import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
 import { Outlet } from "react-router-dom";
 
 export default function DoctorProtectedRoute() {
-  // if (true) return <Navigate to="/" />;
+  const decoded = useDecodedJwt();
 
-  // throwError(401, "Unauthorized access", "Only admins can access this page.");
-
+  if (decoded.decoded?.role !== "Doctor")
+    throwError(401, "Only admins can access this page.");
   return <Outlet />;
 }

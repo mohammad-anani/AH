@@ -1,10 +1,17 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { Form, useSubmit, type SubmitTarget } from "react-router-dom";
+import {
+  Form,
+  useSubmit,
+  useNavigate,
+  type SubmitTarget,
+} from "react-router-dom";
+import { useEffect } from "react";
 import Clickable from "@/ui/customComponents/Clickable";
 import Logo from "@/ui/customComponents/Logo";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/utils/models/zod/Login";
+import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
 
 export default function Login() {
   const methods = useForm({ resolver: zodResolver(LoginSchema) });
@@ -13,6 +20,22 @@ export default function Login() {
     formState: { isSubmitting },
   } = methods;
   const submit = useSubmit();
+  const navigate = useNavigate();
+  const { decoded, expired } = useDecodedJwt();
+
+  // Check for valid token and redirect if authenticated
+  useEffect(() => {
+    if (decoded && !expired && decoded.role) {
+      // Redirect based on role
+      if (decoded.role === "Admin") {
+        navigate("/admin");
+      } else if (decoded.role === "Receptionist") {
+        navigate("/receptionist");
+      } else if (decoded.role === "Doctor") {
+        navigate("/doctor");
+      }
+    }
+  }, [decoded, expired, navigate]);
 
   return (
     <main className="mt-20 grid content-center gap-y-4" role="main">

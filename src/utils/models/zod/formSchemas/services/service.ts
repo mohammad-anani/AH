@@ -7,6 +7,4 @@ export const FormServiceSchema = z.object({
   }),
 
   Price: positiveNumber("Price"),
-
-  CreatedByAdminID: positiveNumber("Created By Admin ID", 1),
 });

@@ -1,5 +1,4 @@
 import { PatientSchema } from "../../schemas/human-resources/patient";
-import { positiveNumber } from "../../reusableSchemas";
 import { FormPersonSchema } from "./person";
 
 export const FormPatientSchema = PatientSchema.omit({
@@ -7,5 +6,4 @@ export const FormPatientSchema = PatientSchema.omit({
   CreatedByReceptionist: true,
 }).extend({
   Person: FormPersonSchema,
-  CreatedByReceptionistID: positiveNumber("Created By Receptionist ID", 1),
 });

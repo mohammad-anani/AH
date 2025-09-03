@@ -52,7 +52,7 @@ export const receptionistFilterSelectorField = <T extends EntityKey>(
 
 export const receptionistFormSelectorField = <
   T extends EntityKey,
-  B extends EntityKey,
+  B extends DisplayEntityKey,
 >(
   label: string,
   fieldKey: DotAccess<typesObject[T]>,

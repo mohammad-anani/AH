@@ -3,38 +3,20 @@ import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
-import {
-  datetimeField,
-  stringField,
-  uniselectField,
-} from "../utils/filterReusableFields.ts";
-
-import type { RouteConfig } from "../routeConfig.ts";
+import type { RouteConfig } from "../../routeConfig";
 import {
   receptionistFilterSelectorField,
   receptionistFormSelectorField,
-} from "../utils/RoleUtil.ts";
-import { doctor } from "./human-resources/doctor.ts";
-import { patient } from "./human-resources/patient.ts";
-import { bill } from "./bill.ts";
+} from "../../utils/RoleUtil";
+import { doctor } from "../human-resources/doctor";
+import { service } from "../../admin/services/service";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
-    Patient,
+    Service,
     Doctor,
-    ScheduledDate,
-    Reason,
-    Status,
-    Notes,
-    Bill,
+    PreviousAppointment,
   }: typesObject["Appointment"]) => [
-    [
-      "Patient",
-      Patient,
-      `/receptionist/human-resources/patients/${Patient.ID}`,
-      "Patient",
-      patient.selectorDisplay as SelectorDisplay<EntityKey>,
-    ],
     [
       "Doctor",
       Doctor,
@@ -42,52 +24,38 @@ export const appointment: RouteConfig<"Appointment"> = {
       "Doctor",
       doctor.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
-    ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
-    ["Reason", Reason],
-    ["Status", Status],
-    ["Notes", Notes?.length ? Notes : "N/A"],
     [
-      "Bill",
-      Bill,
-      "/receptionist/bills/" + Bill.ID,
-      "Bill",
-      bill.selectorDisplay as SelectorDisplay<EntityKey>,
+      "Previous Appointment",
+      PreviousAppointment,
+      PreviousAppointment
+        ? `/receptionist/services/appointments/${PreviousAppointment.ID}`
+        : undefined,
+      "Appointment",
+      appointment.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
+
+    ...service["dataFields"](Service),
   ],
   filterFields: [
-    receptionistFilterSelectorField("PatientID", "Patient", patient),
-    receptionistFilterSelectorField("DoctorID", "Doctor", doctor),
-    datetimeField("ScheduledDate"),
-    stringField("Reason"),
-    uniselectField("Status", ["Accepted", "Rejected"]),
-    stringField("Notes"),
+    receptionistFilterSelectorField("Doctor.ID", "Doctor", doctor),
+    ...service["filterFields"],
   ],
   formConfig: [
     receptionistFormSelectorField(
-      "Patient",
-      "PatientID",
-      "Patient",
-      "add",
-      patient,
-    ),
-    receptionistFormSelectorField(
       "Doctor",
-      "DoctorID",
+      "Doctor.ID",
       "Doctor",
       "add",
       doctor,
     ),
-    ["Scheduled Date", "ScheduledDate", "datetime", "add"],
-    ["Reason", "Reason", "string", "both"],
-    ["Notes", "Notes", "text", "both"],
   ],
-  selectorDisplay: ({ DoctorName, PatientName }) =>
-    DoctorName + "," + PatientName,
+  selectorDisplay: ({ DoctorFullName, PatientFullName, Status }) =>
+    DoctorFullName + " | " + PatientFullName + " | " + Status,
   rowTemplate: [
     ["Patient", "Doctor", "Scheduled Date", "Status", "Is Paid"],
     (item) => [
-      item.PatientName,
-      item.DoctorName,
+      item.PatientFullName,
+      item.DoctorFullName,
       formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,

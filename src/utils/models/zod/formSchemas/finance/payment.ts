@@ -11,6 +11,4 @@ export const FormPaymentSchema = z.object({
   }),
 
   BillID: positiveNumber("Bill ID", 1),
-
-  CreatedByReceptionistID: positiveNumber("Created By Receptionist ID", 1),
 });

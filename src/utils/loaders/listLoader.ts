@@ -8,16 +8,12 @@ import getList from "@/api/getList";
 import { z } from "zod";
 
 import throwError from "../helpers/throwError";
-import { schemas } from "../models/zod/schemas/schemas.ts";
 import { rowSchemas } from "../models/zod/rowSchemas/rowSchemas.ts";
-import {
-  type EntityKey,
-  type FetchingEntityKey,
-} from "../models/types/utils/entityKeys.ts";
+import { type FetchingEntityKey } from "../models/types/utils/entityKeys.ts";
 import * as pluralize from "pluralize";
 
 export default function listLoader(
-  entity: FetchingEntityKey | `${FetchingEntityKey}Row`,
+  entity: FetchingEntityKey,
   pathPrefix?: (params: Params) => string,
   requiredParams: string[] | undefined = undefined,
 ): LoaderFunction {
@@ -29,19 +25,16 @@ export default function listLoader(
         if (!searchParams.has(param)) throwError(400, "Bad request");
       });
 
-    const isRow = entity.endsWith("Row");
-    const entityName = (isRow ? entity.slice(0, -3) : entity) as EntityKey;
-
-    console.log(pluralize.plural(entityName));
+    console.log(pluralize.plural(entity));
     const data = await getList(
       (pathPrefix?.(params) ?? "") +
         "/" +
-        pluralize.plural(entityName) +
+        pluralize.plural(entity) +
         "?" +
         searchParams?.toString(),
     );
 
-    const schema = isRow ? rowSchemas[entityName] : schemas[entityName];
+    const schema = rowSchemas[entity];
 
     if (!schema) {
       throwError(500, "Internal schema error");
