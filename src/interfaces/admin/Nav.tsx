@@ -27,7 +27,7 @@ export default function Nav() {
         <Stethoscope /> Appointments
       </NavLink>
 
-      <NavLink to="/">
+      <NavLink to="/logout">
         <LogOut /> Logout
       </NavLink>
     </>

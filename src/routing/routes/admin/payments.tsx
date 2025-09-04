@@ -7,10 +7,11 @@ import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 import type { RouteObject } from "react-router-dom";
 
+//to be a follow up of its service
 const paymentListRoute: RouteObject[] = [
   {
     index: true,
-    loader: listLoader("PaymentRow", undefined, ["BillID"]),
+    loader: listLoader("Payment", undefined, ["BillID"]),
     element: (
       <ListPage
         entity="Payment"

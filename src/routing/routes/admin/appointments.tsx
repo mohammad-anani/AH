@@ -7,7 +7,7 @@ import type { RouteObject } from "react-router-dom";
 const testOrdersRoute: RouteObject[] = [
   {
     path: "test-orders",
-    loader: listLoader("TestOrderRow", ({ id }) => `/appointments/${id}`),
+    loader: listLoader("TestOrder", ({ id }) => `/appointments/${id}`),
     element: (
       <ListPage
         entity="TestOrder"

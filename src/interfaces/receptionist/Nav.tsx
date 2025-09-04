@@ -22,7 +22,7 @@ export default function Nav() {
       <NavLink classes="w-[150px]!" to="tests/appointments">
         <FlaskConical /> Test Appointments
       </NavLink>
-      <NavLink to="/">
+      <NavLink to="/logout">
         <LogOut /> Logout
       </NavLink>
     </>

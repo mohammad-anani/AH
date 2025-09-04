@@ -4,10 +4,16 @@ import listLoader from "@/utils/loaders/listLoader";
 import { operation } from "@/utils/models/componentsConfig/admin";
 import type { RouteObject } from "react-router-dom";
 
+//to change
 const doctorsRoute: RouteObject[] = [
   {
     path: "doctors",
-    loader: listLoader("OperationDoctorRow"),
+    loader: listLoader(
+      "OperationDoctor",
+      undefined,
+      undefined,
+      ({ id }) => "appointments/" + id + "/doctors",
+    ),
     element: (
       <OperationDoctorListPage
         detailsLink={(ID) => "/doctor/human-resources/doctors/" + ID}

@@ -22,20 +22,18 @@ export default function Login() {
   const submit = useSubmit();
   const navigate = useNavigate();
   const { decoded, expired } = useDecodedJwt();
-
   // Check for valid token and redirect if authenticated
-  useEffect(() => {
-    if (decoded && !expired && decoded.role) {
-      // Redirect based on role
-      if (decoded.role === "Admin") {
-        navigate("/admin");
-      } else if (decoded.role === "Receptionist") {
-        navigate("/receptionist");
-      } else if (decoded.role === "Doctor") {
-        navigate("/doctor");
-      }
+
+  if (decoded && !expired && decoded.role) {
+    // Redirect based on role
+    if (decoded.role === "Admin") {
+      navigate("/admin");
+    } else if (decoded.role === "Receptionist") {
+      navigate("/receptionist");
+    } else if (decoded.role === "Doctor") {
+      navigate("/doctor");
     }
-  }, [decoded, expired, navigate]);
+  }
 
   return (
     <main className="mt-20 grid content-center gap-y-4" role="main">
@@ -65,7 +63,7 @@ export default function Login() {
               <label htmlFor="email-input" className="pr-2 text-right">
                 Email:
               </label>
-              <RegisteredInput name="email">
+              <RegisteredInput name="Email">
                 <input
                   id="email-input"
                   type="text"

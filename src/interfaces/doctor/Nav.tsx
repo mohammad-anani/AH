@@ -12,7 +12,7 @@ export default function Nav() {
         <HeartPulse /> Operations
       </NavLink>
 
-      <NavLink to="/">
+      <NavLink to="/logout">
         <LogOut /> Logout
       </NavLink>
     </>

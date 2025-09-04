@@ -28,10 +28,7 @@ export function route<T extends EntityKey>(
   const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
     entityObject;
 
-  const mainPath =
-    (urlPathPrefix ?? "") +
-    (entity.startsWith("Test") ? entity.replace("Test", "") : entity) +
-    "s";
+  const mainPath = urlPathPrefix + "s";
 
   return [
     {
@@ -49,7 +46,7 @@ export function route<T extends EntityKey>(
                   withBack={withBack ?? false}
                 />
               ),
-              loader: listLoader(`${entity}Row`, loaderPathPrefix),
+              loader: listLoader(`${entity}`, loaderPathPrefix),
             }
           : {
               path: "",
@@ -58,7 +55,7 @@ export function route<T extends EntityKey>(
         {
           path: "list",
           Component: InvalidPath,
-          loader: listLoader(`${entity}Row`, loaderPathPrefix),
+          loader: listLoader(`${entity}`, loaderPathPrefix),
         },
         withID
           ? {

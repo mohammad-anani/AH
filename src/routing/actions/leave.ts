@@ -1,7 +1,7 @@
-import update from "@/api/update";
+import patch from "@/api/patch";
 import type { EmployeeEntities } from "@/ui/entityComponents/EmployeeCard";
 
-import pluralize from "pluralize";
+import * as pluralize from "pluralize";
 import { redirect, type ActionFunctionArgs } from "react-router-dom";
 
 export default function leaveAction(entity: EmployeeEntities) {
@@ -11,7 +11,7 @@ export default function leaveAction(entity: EmployeeEntities) {
 
     const parts = path.split("/").filter(Boolean);
 
-    await update({}, `/${pluralize(entity)}/${params?.["id"]}/leave`);
+    await patch({}, `${pluralize.plural(entity)}/${params?.["id"]}/leave`);
 
     return redirect(parts.join("/"));
   };

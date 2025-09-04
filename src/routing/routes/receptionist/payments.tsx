@@ -10,7 +10,7 @@ import type { RouteObject } from "react-router-dom";
 const paymentListRoute: RouteObject[] = [
   {
     index: true,
-    loader: listLoader("PaymentRow", undefined, ["BillID"]),
+    loader: listLoader("Payment", undefined, ["BillID"]),
     element: (
       <ListPage
         entity="Payment"

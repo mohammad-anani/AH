@@ -1,20 +1,23 @@
 import { login } from "@/api/login";
+import throwError from "@/utils/helpers/throwError";
 import { redirect, type ActionFunctionArgs } from "react-router-dom";
 
 //request
 export default async function loginAction({ request }: ActionFunctionArgs) {
   const data = await request.json();
 
-  const { email, password } = data;
+  const { Email, Password } = data;
 
-  if (!(email && password)) {
+  console.log(data);
+
+  if (!(Email && Password)) {
     return redirect("/");
   }
 
-  const { ID, Token, Role, RefreshToken } = await login(email, password);
+  const { ID, Token, Role, RefreshToken } = await login(Email, Password);
 
   if (!(Token && RefreshToken && ID && Role)) {
-    return redirect("/");
+    throwError(500);
   }
 
   localStorage.setItem("token", Token);

@@ -24,6 +24,7 @@ axios.interceptors.request.use(
     // Add Authorization header if token exists
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      config.headers.set("token", token);
     }
 
     // Add refresh token header if refresh token exists
@@ -39,7 +40,31 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log(response);
+    // Check for new JWT token in response headers (refresh token logic)
+    const newToken =
+      response.headers["Token"] ||
+      response.headers["authorization"] ||
+      response.headers["Authorization"];
+
+    // Get current tokens from localStorage
+    const currentToken = localStorage.getItem("token");
+
+    // If new JWT token is provided and different from current, update localStorage
+    if (newToken) {
+      // Remove 'Bearer ' prefix if present
+      const cleanToken = newToken.startsWith("Bearer ")
+        ? newToken.slice(7)
+        : newToken;
+
+      if (cleanToken !== currentToken) {
+        localStorage.setItem("token", cleanToken);
+      }
+    }
+
+    return response;
+  },
   (error) => {
     if (isAxiosError(error)) {
       const status = error.response?.status ?? 0;
@@ -56,16 +81,6 @@ axios.interceptors.response.use(
         );
       }
 
-      // Handle token expiration
-      if (status === 401) {
-        // Clear stored auth data
-        localStorage.removeItem("token");
-        localStorage.removeItem("refresh-token");
-
-        // Redirect to login page
-        window.location.href = "/login";
-        return;
-      }
       if (status === 500) {
         throwError(
           status,

@@ -7,10 +7,7 @@ export default async function reserveAction({
 }: ActionFunctionArgs) {
   const data = await request.json();
 
-  const newID = await add(
-    { ...data, TestOrderID: params?.["id"] },
-    "/TestAppointments",
-  );
+  const newID = await add(data, "/test-orders/" + params["id"] + "/reserve");
 
   return redirect("/receptionist/tests/appointments/" + newID);
 }

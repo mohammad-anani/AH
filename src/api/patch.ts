@@ -1,10 +1,10 @@
 import axios from "./axios";
 import { listCache, entityCache, createCacheKey } from "./cache";
 
-export default async function update(data: unknown, url: string) {
-  const response = await axios.put(url, data);
+export default async function patch(data: unknown, url: string) {
+  const response = await axios.patch(url, data);
 
-  // Invalidate related cache entries after successful update
+  // Invalidate related cache entries after successful patch
   const urlParts = url.split("/").filter(Boolean);
   const entityType = urlParts[urlParts.length - 2] || "unknown";
   const entityId = urlParts[urlParts.length - 1] || "unknown";

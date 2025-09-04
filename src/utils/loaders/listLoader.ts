@@ -16,6 +16,7 @@ export default function listLoader(
   entity: FetchingEntityKey,
   pathPrefix?: (params: Params) => string,
   requiredParams: string[] | undefined = undefined,
+  directUrl?: (params: Params) => string,
 ): LoaderFunction {
   return async function ({ params, request }: LoaderFunctionArgs) {
     const searchParams = formatLoaderUrl(request.url);
@@ -27,11 +28,12 @@ export default function listLoader(
 
     console.log(pluralize.plural(entity));
     const data = await getList(
-      (pathPrefix?.(params) ?? "") +
-        "/" +
-        pluralize.plural(entity) +
-        "?" +
-        searchParams?.toString(),
+      directUrl?.(params) ||
+        (pathPrefix?.(params) ?? "") +
+          "/" +
+          pluralize.plural(entity) +
+          "?" +
+          searchParams?.toString(),
     );
 
     const schema = rowSchemas[entity];

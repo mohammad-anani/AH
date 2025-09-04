@@ -10,7 +10,7 @@ import type { RouteObject } from "react-router-dom";
 const insuranceListRoute: RouteObject[] = [
   {
     index: true,
-    loader: listLoader("InsuranceRow", undefined, ["PatientID"]),
+    loader: listLoader("Insurance", undefined, ["PatientID"]),
     element: (
       <ListPage
         entity="Insurance"

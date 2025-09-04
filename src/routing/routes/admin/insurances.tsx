@@ -7,10 +7,11 @@ import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 import type { RouteObject } from "react-router-dom";
 
+//to change
 const insuranceListRoute: RouteObject[] = [
   {
     index: true,
-    loader: listLoader("InsuranceRow", undefined, ["PatientID"]),
+    loader: listLoader("Insurance", undefined, ["PatientID"]),
     element: (
       <ListPage
         entity="Insurance"
