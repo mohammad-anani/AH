@@ -24,7 +24,11 @@ import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 export default function MakeAppointment() {
   const testOrder = useOutletContext<TestOrder>();
   const methods = useForm({
-    resolver: zodResolver(TestAppointmentSchema.pick({ ScheduledDate: true })),
+    resolver: zodResolver(
+      TestAppointmentSchema.pick({ Service: true }).transform((data) => ({
+        Service: { ScheduledDate: data.Service.ScheduledDate },
+      })),
+    ),
   });
   const submit = useSubmit();
 
@@ -36,11 +40,11 @@ export default function MakeAppointment() {
   }
 
   useEffect(() => {
-    if (testOrder?.TestTypeID) {
-      fetcher.load(fetchingPaths["TestType"] + "/" + testOrder?.TestTypeID);
+    if (testOrder?.TestType?.ID) {
+      fetcher.load(fetchingPaths["TestType"] + "/" + testOrder?.TestType?.ID);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [testOrder?.TestTypeID]);
+  }, [testOrder?.TestType?.ID]);
 
   const {
     handleSubmit,

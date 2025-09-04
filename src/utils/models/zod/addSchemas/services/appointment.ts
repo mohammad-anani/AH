@@ -1,6 +1,10 @@
-import { AddServiceSchema } from "./service";
-import { positiveNumber } from "../../reusableSchemas";
+import { z } from "zod";
+import { AddServiceSchema } from "./service.ts";
 
+// CreateAppointmentDTO - extends CreateServiceDTO with doctor field
 export const AddAppointmentSchema = AddServiceSchema.extend({
-  DoctorID: positiveNumber("Doctor ID", 1),
+  DoctorID: z
+    .number({ message: "Doctor ID must be a positive number" })
+    .min(1, "Doctor ID must be a positive number")
+    .refine((val) => val > 0, "Doctor ID is required"),
 });

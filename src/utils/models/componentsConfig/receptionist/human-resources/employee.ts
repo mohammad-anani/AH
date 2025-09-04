@@ -37,7 +37,6 @@ export const employee: DisplayingConfig<"Employee"> = {
       WorkingDays,
       ShiftStart,
       ShiftEnd,
-      isActive,
     } = employee;
 
     const formattedWorkingDays =
@@ -61,7 +60,6 @@ export const employee: DisplayingConfig<"Employee"> = {
       ["Working Days", formattedWorkingDays],
       ["Shift Start", convert24To12(ShiftStart)],
       ["Shift End", convert24To12(ShiftEnd)],
-      ["Status", isActive ? "Active" : "Inactive"],
     ];
   },
   filterFields: [
@@ -82,5 +80,4 @@ export const employee: DisplayingConfig<"Employee"> = {
     timeField("ShiftStart"),
     timeField("ShiftEnd"),
   ],
-  formConfig: [],
 };

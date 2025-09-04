@@ -12,6 +12,7 @@ import { stringField, numberField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
 import { department } from ".";
 import { admin } from "..";
+import { formatMoney } from "@/utils/formatters/formatMoney";
 
 export const testType: RouteConfig<"TestType"> = {
   dataFields: ({
@@ -29,7 +30,7 @@ export const testType: RouteConfig<"TestType"> = {
       "Department",
       department.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
-    ["Cost", `${Cost} $`],
+    ["Cost", `${formatMoney(Cost)} $`],
     [
       "Created By",
       CreatedByAdmin,
@@ -56,7 +57,7 @@ export const testType: RouteConfig<"TestType"> = {
     ],
     ["Cost", "Cost", "money", "both"],
   ],
-  selectorDisplay: ({ Name }) => Name,
+  selectorDisplay: ({ Name, Cost }) => Name + " | " + formatMoney(Cost),
 
   rowTemplate: [
     ["Name", "Department"],

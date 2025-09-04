@@ -35,7 +35,6 @@ export const testOrder: RouteConfig<"TestOrder"> = {
     adminFilterSelectorField("DoctorID", "Doctor", doctor),
     ...(admingenerateAuditFields("Doctor") ?? []),
   ],
-  formConfig: [],
   selectorDisplay: ({ PatientFullName, TestName }) =>
     PatientFullName + "," + TestName,
 

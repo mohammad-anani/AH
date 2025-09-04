@@ -42,7 +42,6 @@ export const appointment: RouteConfig<"Appointment"> = {
     ...service["filterFields"],
     ...(admingenerateAuditFields("Receptionist") ?? []),
   ],
-  formConfig: [],
   selectorDisplay: ({ DoctorFullName, PatientFullName, Status }) =>
     DoctorFullName + " | " + PatientFullName + " | " + Status,
   rowTemplate: [

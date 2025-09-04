@@ -7,7 +7,6 @@ import { insuranceRoute } from "./receptionist/insurances";
 import { appointmentsRoutes } from "./receptionist/appointments";
 import { operationsRoutes } from "./receptionist/operations";
 import { departmentsRoutes } from "./receptionist/departments";
-import { billRoute } from "./receptionist/bills";
 import { paymentRoute } from "./receptionist/payments";
 import { humanResourcesRoutes } from "./receptionist/human-resources";
 import { testsRoutes } from "./receptionist/tests";
@@ -32,7 +31,6 @@ export const receptionistRoutes = [
           ...testsRoutes,
           ...operationsRoutes,
           ...departmentsRoutes,
-          ...billRoute,
           ...paymentRoute,
         ],
       },

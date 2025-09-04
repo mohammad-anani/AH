@@ -1,10 +1,8 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
-import { statusLabels } from "../human-resources/employee";
 import type { RouteConfig } from "../../routeConfig";
-import { receptionistFormSelectorField } from "../../utils/RoleUtil";
-import { patient } from "../human-resources";
+import { patient } from "..";
 
 export const insurance: RouteConfig<"Insurance"> = {
   dataFields: ({
@@ -16,7 +14,7 @@ export const insurance: RouteConfig<"Insurance"> = {
     [
       "Patient",
       Patient,
-      "/receptionist/human-resources/patients/" + Patient.ID,
+      "/admin/human-resources/patients/" + Patient.ID,
       "Patient",
       patient.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
@@ -24,22 +22,15 @@ export const insurance: RouteConfig<"Insurance"> = {
     ["Coverage", Coverage * 100 + "%"],
     ["Status", IsActive ? "Active" : "Inactive"],
   ],
-  filterFields: [],
-  //solve patient id selector here
   formConfig: [
-    receptionistFormSelectorField(
-      "Patient",
-      "Patient.ID",
-      "Patient",
-      "add",
-      patient,
-    ),
     ["Provider Name", "ProviderName", "string", "both"],
     ["Coverage", "Coverage", "number", "both"],
     ["Expiration Date", "ExpirationDate", "date", "both"],
-    ["Status", "IsActive", "boolean", "update", statusLabels],
   ],
-  selectorDisplay: ({ ID }) => String(ID),
+  selectorDisplay: ({ ProviderName, Coverage, IsActive }) =>
+    ProviderName + " | Coverage:" + Coverage + " | " + IsActive
+      ? "Active"
+      : "Inactive",
 
   rowTemplate: [
     ["Provider", "Coverage", "status"],
@@ -50,5 +41,4 @@ export const insurance: RouteConfig<"Insurance"> = {
     ],
     [1, 1, 1],
   ],
-  subLinks: () => [],
 };

@@ -30,6 +30,5 @@ export const patient: RouteConfig<"Patient"> = {
   ],
   filterFields: [...person["filterFields"]],
   rowTemplate: [["Name", "Age"], (item) => [item.FullName, item.Age], [2, 1]],
-  formConfig: [],
   selectorDisplay: ({ FullName: Name }) => Name,
 };

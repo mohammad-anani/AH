@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// PersonFormDTO - standalone form schema (no inheritance)
+// PersonFormDTO - standalone form schema with all person fields
 export const FormPersonSchema = z.object({
   FirstName: z
     .string()
@@ -53,3 +53,5 @@ export const FormPersonSchema = z.object({
     .regex(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, "Invalid email format")
     .nonempty("Email is required"),
 });
+
+export type FormPersonType = z.infer<typeof FormPersonSchema>;

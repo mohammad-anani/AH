@@ -43,7 +43,6 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ...service["filterFields"],
     ...(admingenerateAuditFields("Receptionist") ?? []),
   ],
-  formConfig: [],
   selectorDisplay: ({ TestName, PatientFullName, Status }) =>
     TestName + " | " + PatientFullName + " | " + Status,
 
@@ -58,5 +57,4 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ],
     [1, 1, 1, 1, 1],
   ],
-  subLinks: () => [],
 };

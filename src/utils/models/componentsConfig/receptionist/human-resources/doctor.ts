@@ -22,8 +22,14 @@ export const doctor: RouteConfig<"Doctor"> = {
     stringField("Specialization"),
     moneyField("AppointmentCost"),
   ],
-  formConfig: [],
-  rowTemplate: [["Name"], (item) => [item.FullName], [2]],
-  selectorDisplay: ({ Name }) => Name,
-  subLinks: () => [],
+  rowTemplate: [
+    ["Name", "Specialization"],
+    (item) => [item.FullName, item.Specialization],
+    [2],
+  ],
+  selectorDisplay: ({ FullName }) => FullName,
+  subLinks: ({ ID }) => [
+    ["Show Appointments", `/receptionist/appointments?DoctorID=${ID}`],
+    ["Show Operations", `/receptionist/operations?DoctorID=${ID}`],
+  ],
 };

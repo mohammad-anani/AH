@@ -62,14 +62,14 @@ export default function Login() {
             >
               <legend className="sr-only">Login Credentials</legend>
 
-              <label htmlFor="username-input" className="pr-2 text-right">
-                Username:
+              <label htmlFor="email-input" className="pr-2 text-right">
+                Email:
               </label>
-              <RegisteredInput name="Username">
+              <RegisteredInput name="email">
                 <input
-                  id="username-input"
+                  id="email-input"
                   type="text"
-                  autoComplete="username"
+                  autoComplete="email"
                   aria-required="true"
                   autoFocus
                 />

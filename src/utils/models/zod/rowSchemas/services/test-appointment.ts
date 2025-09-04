@@ -11,7 +11,7 @@ export const TestAppointmentRowSchema = z.object({
   PatientFullName: nonEmptyString("Patient full name").min(3).max(60, {
     message: "Patient full name must be between 3 and 60 characters.",
   }),
-  TestName: nonEmptyString("Test name").min(3).max(50, {
+  TestTypeName: nonEmptyString("Test name").min(3).max(50, {
     message: "Test name must be between 3 and 50 characters.",
   }),
   IsOrdered: booleanField("Is ordered"),

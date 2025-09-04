@@ -1,30 +1,42 @@
 import { z } from "zod";
-import {
-  positiveNumber,
-  nonEmptyString,
-  datetime,
-  time,
-} from "../../reusableSchemas";
-import { FormPersonSchema } from "./person";
-import { validDays } from "../../schemas";
+import { FormPersonSchema } from "./person.ts";
 
+// EmployeeFormDTO - extends PersonFormDTO with employee-specific fields
 export const FormEmployeeSchema = FormPersonSchema.extend({
-  Salary: positiveNumber("Salary"),
+  DepartmentID: z
+    .number({ message: "Department ID must be a positive number" })
+    .min(1, "Department ID must be a positive number")
+    .refine((val) => val > 0, "Department ID is required"),
 
-  DepartmentID: positiveNumber("Department ID", 1),
+  Salary: z
+    .number({ message: "Salary must be a number" })
+    .min(100, "Salary must be between 100 and 99,999")
+    .max(99999, "Salary must be between 100 and 99,999")
+    .refine((val) => val > 0, "Salary is required"),
 
-  HireDate: datetime("Hire date"),
+  HireDate: z
+    .string()
+    .datetime({ local: true })
+    .refine((val) => val !== "", "Hire date is required"),
 
-  Role: nonEmptyString("Role").min(3).max(30, {
-    message: "Role must be between 3 and 30 characters.",
-  }),
+  WorkingDays: z.string().refine((val) => {
+    // Validate working days string format
+    const days = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+    const workingDays = val.split(",").map((d) => d.trim());
+    return workingDays.every((day) => days.includes(day));
+  }, "Invalid working days format"),
 
-  WorkingDays: z
-    .array(z.enum(validDays, { message: "Invalid day of the week." }))
-    .min(0)
-    .max(7, { message: "You cannot select more than 7 working days." }),
+  ShiftStart: z.string().time("Shift start time is required"),
 
-  ShiftStart: time("Shift start"),
-
-  ShiftEnd: time("Shift end"),
+  ShiftEnd: z.string().time("Shift end time is required"),
 });
+
+export type FormEmployeeType = z.infer<typeof FormEmployeeSchema>;

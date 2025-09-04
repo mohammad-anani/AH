@@ -2,7 +2,6 @@ import AdminProtectedRoute from "@/interfaces/admin/AdminProtectedRoute";
 import Nav from "@/interfaces/admin/Nav";
 
 import { appointmentsRoutes } from "./admin/appointments";
-import { billRoute } from "./admin/bills";
 import { departmentsRoutes } from "./admin/departments";
 import { humanResourcesRoutes } from "./admin/human-resources";
 import { insuranceRoute } from "./admin/insurances";
@@ -32,7 +31,6 @@ export const adminRoutes = [
           ...testsRoutes,
           ...operationsRoutes,
           ...appointmentsRoutes,
-          ...billRoute,
           ...insuranceRoute,
           ...paymentRoute,
         ],

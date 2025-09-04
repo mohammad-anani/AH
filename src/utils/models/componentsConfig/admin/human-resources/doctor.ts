@@ -25,10 +25,11 @@ export const doctor: RouteConfig<"Doctor"> = {
   formConfig: [
     ...prefixFields<"Doctor", "Employee">("Employee", employee["formConfig"]),
     ["Specialization", "Specialization", "string", "both"],
-    ["Appointment Cost", "AppointmentCost", "money", "both"],
+    ["Appointment Cost", "CostPerAppointment", "money", "both"],
   ],
   rowTemplate: [["Name"], (item) => [item.FullName], [2]],
-  selectorDisplay: ({ FullName }) => FullName,
+  selectorDisplay: ({ FullName, Specialization }) =>
+    FullName + " | " + Specialization,
   subLinks: ({ ID }) => [
     ["Show Appointments", `/admin/appointments?DoctorID=${ID}`],
     ["Show Operations", `/admin/operations?DoctorID=${ID}`],

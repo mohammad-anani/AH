@@ -38,7 +38,6 @@ export const operation: RouteConfig<"Operation"> = {
     ["Doctors", "custom", DoctorFilterSelectorCallback],
     ...(admingenerateAuditFields("Receptionist") ?? []),
   ],
-  formConfig: [],
   selectorDisplay: ({ Name, PatientFullName, Status }) =>
     Name + " | Patient:" + PatientFullName + " | " + Status,
 

@@ -6,6 +6,7 @@ import { DepartmentFilterSelectCallBack } from "@/features/department/department
 import { stringField, numberField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
 import { department } from "./department";
+import { formatMoney } from "@/utils/formatters/formatMoney";
 
 export const testType: RouteConfig<"TestType"> = {
   dataFields: ({ Name, Department, Cost }: typesObject["TestType"]) => [
@@ -17,19 +18,18 @@ export const testType: RouteConfig<"TestType"> = {
       "Department",
       department.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
-    ["Cost", `${Cost} $`],
+    ["Cost", formatMoney(Cost)],
   ],
   filterFields: [
     ["Department", "custom", DepartmentFilterSelectCallBack],
     stringField("Name"),
     numberField("Cost"),
   ],
-  formConfig: [],
-  selectorDisplay: ({ Name }) => Name,
+  selectorDisplay: ({ Name, Cost }) => Name + " | " + formatMoney(Cost),
 
   rowTemplate: [
-    ["Name", "Department"],
-    (item) => [item.Name, item.DepartmentName],
+    ["Name", "Department", "Cost"],
+    (item) => [item.Name, item.DepartmentName, formatMoney(item.Cost)],
     [1, 1],
   ],
   subLinks: ({ ID }) => [

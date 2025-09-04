@@ -1,7 +1,4 @@
-import { FormTestTypeSchema } from "../../formSchemas/general/test-type";
+import { FormTestTypeSchema } from "../../formSchemas/general/test-type.ts";
 
-export const AddTestTypeSchema = FormTestTypeSchema.omit({
-  ID: true,
-  CreatedAt: true,
-  CreatedByAdminID: true,
-});
+// CreateTestTypeDTO - extends TestTypeFormDTO (CreatedByAdminID removed as BindNever)
+export const AddTestTypeSchema = FormTestTypeSchema;

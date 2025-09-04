@@ -40,7 +40,6 @@ export const employeeAudit: DisplayingConfig<"Employee"> = {
       WorkingDays,
       ShiftStart,
       ShiftEnd,
-      isActive,
     } = employee;
 
     const formattedWorkingDays =
@@ -98,6 +97,5 @@ export const employeeAudit: DisplayingConfig<"Employee"> = {
     ["Working Days", "WorkingDays", "multiselect", "both", weekdays],
     ["Shift Start", "ShiftStart", "time", "both"],
     ["Shift End", "ShiftEnd", "time", "both"],
-    ["Status", "isActive", "boolean", "update", statusLabels],
   ],
 };

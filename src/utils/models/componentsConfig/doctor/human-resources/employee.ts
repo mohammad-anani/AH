@@ -2,16 +2,8 @@ import { convert24To12 } from "@/utils/formatters/convert24To12";
 import { person } from "./person";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
 
 import type { DisplayingConfig } from "../../routeConfig";
-
-import {
-  dateField,
-  multiselectField,
-  timeField,
-  booleanField,
-} from "../../utils/filterReusableFields";
 
 export const weekdays = [
   "Monday",
@@ -29,14 +21,13 @@ export const employee: DisplayingConfig<"Employee"> = {
   dataFields: (employee: typesObject["Employee"]) => {
     const {
       Person,
-      DepartmentID,
+      Department,
 
       HireDate,
       LeaveDate,
       WorkingDays,
       ShiftStart,
       ShiftEnd,
-      isActive,
     } = employee;
 
     const formattedWorkingDays =
@@ -51,7 +42,7 @@ export const employee: DisplayingConfig<"Employee"> = {
       [
         "Department",
         "View Department",
-        `/doctor/departments/${DepartmentID}`,
+        `/doctor/departments/${Department.ID}`,
         "Department",
       ],
 
@@ -60,25 +51,6 @@ export const employee: DisplayingConfig<"Employee"> = {
       ["Working Days", formattedWorkingDays],
       ["Shift Start", convert24To12(ShiftStart)],
       ["Shift End", convert24To12(ShiftEnd)],
-      ["Status", isActive ? "Active" : "Inactive"],
     ];
   },
-  filterFields: [
-    ["Department", "custom", DepartmentFilterSelectCallBack],
-    dateField("HireDate"),
-    dateField("LeaveDate"),
-    booleanField("isActive", ["Active", "Not Active", "All"]),
-    multiselectField("WorkingDays", [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ]),
-    timeField("ShiftStart"),
-    timeField("ShiftEnd"),
-  ],
-  formConfig: [],
 };

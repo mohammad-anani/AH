@@ -16,7 +16,7 @@ import {
 } from "../../utils/filterReusableFields";
 import { prefixFields } from "../../utils/formUtils";
 import type { DisplayingConfig } from "../../routeConfig";
-import { department } from "../general/department";
+import { department } from "../general/Audit/departmentAudit";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 import { admin } from "./admin";

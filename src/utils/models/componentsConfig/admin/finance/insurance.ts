@@ -35,8 +35,6 @@ export const insurance: RouteConfig<"Insurance"> = {
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
-  filterFields: [],
-  formConfig: [],
   selectorDisplay: ({ ProviderName, Coverage, IsActive }) =>
     ProviderName + " | Coverage:" + Coverage + " | " + IsActive
       ? "Active"
@@ -51,5 +49,4 @@ export const insurance: RouteConfig<"Insurance"> = {
     ],
     [1, 1, 1],
   ],
-  subLinks: () => [],
 };

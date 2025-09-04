@@ -1,7 +1,6 @@
 import type { DataFields as DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { DisplayEntityKey } from "@/utils/models/types/utils/entityKeys.ts";
 import {
-  admin,
   appointment,
   department,
   insurance,
@@ -13,15 +12,14 @@ import {
   testOrder,
   testType,
   prescription,
-  bill,
   person,
   employee,
   payment,
 } from ".";
+import { service } from "../admin/services/service";
 
 export const dataFields: { [K in DisplayEntityKey]: DataFields<K> } = {
   Department: department["dataFields"],
-  Admin: admin["dataFields"],
   Doctor: doctor["dataFields"],
   Patient: patient["dataFields"],
   Insurance: insurance["dataFields"],
@@ -32,7 +30,7 @@ export const dataFields: { [K in DisplayEntityKey]: DataFields<K> } = {
   TestAppointment: testAppointment["dataFields"],
   Operation: operation["dataFields"],
   Prescription: prescription["dataFields"],
-  Bill: bill["dataFields"],
+  Service: service["dataFields"],
   Person: person["dataFields"],
   Employee: employee["dataFields"],
   Payment: payment["dataFields"],

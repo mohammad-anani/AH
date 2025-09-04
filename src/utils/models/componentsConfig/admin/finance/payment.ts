@@ -18,22 +18,7 @@ export const payment: RouteConfig<"Payment"> = {
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
-  filterFields: [],
-  selectorDisplay: () => "",
-  subLinks: () => [],
-  formConfig: [
-    ["Amount", "Amount", "number", "add"],
-    [
-      "Method",
-      "Method",
-      "uniselect",
-      "add",
-      [
-        { label: "Card", value: 1 },
-        { label: "Cash", value: 2 },
-      ],
-    ],
-  ],
+
   rowTemplate: [
     ["Amount", "Method"],
     ({ Amount, Method }) => [formatMoney(Amount), Method],

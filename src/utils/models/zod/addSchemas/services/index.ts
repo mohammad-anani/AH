@@ -6,4 +6,3 @@ export * from "./service";
 export * from "./test-appointment";
 export * from "./testAppointmentFromTestOrder";
 export * from "./test-order";
-export * from "./testType";

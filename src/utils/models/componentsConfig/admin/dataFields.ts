@@ -13,11 +13,10 @@ import {
   testOrder,
   testType,
   prescription,
-  bill,
   person,
   employee,
   payment,
-} from "./general/index.ts";
+} from ".";
 
 export const dataFields: { [K in DisplayEntityKey]: DataFields<K> } = {
   Department: department["dataFields"],
@@ -32,7 +31,6 @@ export const dataFields: { [K in DisplayEntityKey]: DataFields<K> } = {
   TestAppointment: testAppointment["dataFields"],
   Operation: operation["dataFields"],
   Prescription: prescription["dataFields"],
-  Bill: bill["dataFields"],
   Person: person["dataFields"],
   Employee: employee["dataFields"],
   Payment: payment["dataFields"],

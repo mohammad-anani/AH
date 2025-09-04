@@ -1,9 +1,9 @@
-import { employee } from "../employee";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import { prefixFields } from "../../../utils/formUtils";
 import { person } from "../person";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
+import { employeeAudit as employee } from "./employeeAudit";
 
 export const adminAudit: RouteConfig<"Admin"> = {
   dataFields: ({ Employee }: typesObject["Admin"]) => [

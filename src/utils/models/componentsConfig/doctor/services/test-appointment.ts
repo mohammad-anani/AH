@@ -47,20 +47,18 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     stringField("Notes"),
     ...service["filterFields"],
   ],
-  formConfig: [],
-  selectorDisplay: ({ TestName, PatientFullName, Status }) =>
-    TestName + " | " + PatientFullName + " | " + Status,
+  selectorDisplay: ({ TestTypeName, PatientFullName, Status }) =>
+    TestTypeName + " | " + PatientFullName + " | " + Status,
 
   rowTemplate: [
     ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [
       item.PatientFullName,
-      item.TestName,
+      item.TestTypeName,
       formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,
     ],
     [1, 1, 1, 1, 1],
   ],
-  subLinks: () => [],
 };

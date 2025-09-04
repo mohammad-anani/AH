@@ -23,14 +23,12 @@ export const testOrder: RouteConfig<"TestOrder"> = {
       appointment.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
   ],
-  filterFields: [datetimeField("OrderAt")],
   formConfig: [],
-  selectorDisplay: ({ PatientFullName, TestName }) =>
-    PatientFullName + "," + TestName,
+  selectorDisplay: ({ PatientFullName, TestTypeName }) =>
+    PatientFullName + "," + TestTypeName,
   rowTemplate: [
     ["Patient", "Test"],
-    (item) => [item.PatientFullName, item.TestName],
+    (item) => [item.PatientFullName, item.TestTypeName],
     [2, 2],
   ],
-  subLinks: () => [],
 };

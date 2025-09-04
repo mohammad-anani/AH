@@ -30,6 +30,8 @@ type EmptyValueType =
   | EmptyObjectValue;
 
 function createEmptyValue(schema: ZodTypeAny): EmptyValueType {
+  if (schema.isNullable()) return null;
+
   if (schema instanceof ZodString) {
     return "";
   }
@@ -60,8 +62,6 @@ function createEmptyValue(schema: ZodTypeAny): EmptyValueType {
 
 export const emptyObjects = Object.fromEntries(
   Object.entries(schemas).map(([key, schema]) => {
-    // removed console.log
-
     return [key, createEmptyValue(schema)];
   }),
 ) as {

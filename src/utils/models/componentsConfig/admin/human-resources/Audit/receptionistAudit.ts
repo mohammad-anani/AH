@@ -2,11 +2,11 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import { person } from "../person";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
-import { employee } from "../../../receptionist";
+import { employeeAudit } from "./employeeAudit";
 
 export const receptionistAudit: RouteConfig<"Receptionist"> = {
   dataFields: ({ Employee }: typesObject["Receptionist"]) => [
-    ...employee["dataFields"](Employee),
+    ...employeeAudit["dataFields"](Employee),
   ],
 
   filterFields: [...person["filterFields"]],

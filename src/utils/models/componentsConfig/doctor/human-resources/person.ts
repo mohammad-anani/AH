@@ -23,7 +23,6 @@ export const person: DisplayingConfig<"Person"> = {
     ["Country", person.Country.Name],
     ["Phone", formatPhoneNumber(person.Phone)],
     ["Email", person.Email],
-    ["Username", person.Username],
   ],
   filterFields: [
     stringField("FirstName"),
@@ -34,7 +33,5 @@ export const person: DisplayingConfig<"Person"> = {
     phoneField("Phone"),
     emailField("Email"),
     ["CountryName", "custom", CountryFilterSelectCallBack],
-    stringField("Username"),
   ],
-  formConfig: [],
 };

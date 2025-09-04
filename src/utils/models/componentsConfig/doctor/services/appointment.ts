@@ -5,35 +5,28 @@ import {
   datetimeField,
   stringField,
   uniselectField,
-} from "../utils/filterReusableFields.ts";
+} from "../../utils/filterReusableFields.ts";
 
-import type { RouteConfig } from "../routeConfig.ts";
-import { receptionistFilterSelectorField } from "../utils/RoleUtil.ts";
+import type { RouteConfig } from "../../routeConfig.ts";
+import { receptionistFilterSelectorField } from "../../utils/RoleUtil.ts";
 
-import { patient } from "./human-resources/patient.ts";
-import type { EntityKey } from "../../types/utils/entityKeys.ts";
-import type { SelectorDisplay } from "../../types/utils/selectorTypes.ts";
+import { doctor, patient } from "../human-resources";
+import { service } from "./service.ts";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({
-    Patient,
-    ScheduledDate,
-    Reason,
-    Status,
-    Notes,
+    Service,
+    Doctor,
+    PreviousAppointment,
   }: typesObject["Appointment"]) => [
-    [
-      "Patient",
-      Patient,
-      `/receptionist/human-resources/patients/${Patient.ID}`,
-      "Patient",
-      patient.selectorDisplay as SelectorDisplay<EntityKey>,
-    ],
-
-    ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
-    ["Reason", Reason],
-    ["Status", Status],
-    ["Notes", Notes?.length ? Notes : "N/A"],
+    ...(PreviousAppointment
+      ? [
+          "Previous Appointment",
+          appointment.selectorDisplay(PreviousAppointment),
+        ]
+      : []),
+    ["Doctor", doctor.selectorDisplay(Doctor)],
+    ...service["dataFields"](Service),
   ],
   filterFields: [
     receptionistFilterSelectorField("PatientID", "Patient", patient),
@@ -42,13 +35,12 @@ export const appointment: RouteConfig<"Appointment"> = {
     uniselectField("Status", ["Accepted", "Rejected"]),
     stringField("Notes"),
   ],
-  formConfig: [],
-  selectorDisplay: ({ DoctorName, PatientName }) =>
-    DoctorName + "," + PatientName,
+  selectorDisplay: ({ DoctorFullName, PatientFullName }) =>
+    "Doctor:" + DoctorFullName + " | Patient:" + PatientFullName,
   rowTemplate: [
     ["Patient", "Scheduled Date", "Status", "Is Paid"],
     (item) => [
-      item.PatientName,
+      item.PatientFullName,
 
       formatDateIsoToLocal(item.ScheduledDate),
       item.Status,

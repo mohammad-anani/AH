@@ -1,7 +1,8 @@
 import { z } from "zod";
 import { nonEmptyString, datetime } from "../../reusableSchemas";
-import { BillRowSchema, PatientRowSchema } from "../../rowSchemas";
+import { PatientRowSchema } from "../../rowSchemas";
 import { ReceptionistRowSchema } from "../../rowSchemas";
+import { BillSchema } from "../finance";
 
 // Service Status Enum: 1 - In Progress; 2 - Requested; 3 - Scheduled; 4 - Cancelled; 5 - Completed; 6 - Rejected
 export const serviceStatuses = [
@@ -35,7 +36,7 @@ export const ServiceSchema = z.object({
 
   Notes: z.string().nullable(),
 
-  Bill: BillRowSchema,
+  Bill: BillSchema,
 
   CreatedByReceptionist: ReceptionistRowSchema,
 

@@ -5,7 +5,7 @@ import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 import { useLoaderData } from "react-router-dom";
 import { Info } from "lucide-react";
 import type z from "zod";
-import type { OperationDoctorRowSchema } from "@/utils/models/zod/rowSchemas/OperationDoctor";
+import type { OperationDoctorRowSchema } from "@/utils/models/zod/rowSchemas/services/operation-doctor";
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 import List from "@/ui/entityComponents/List";
@@ -25,18 +25,14 @@ export default function OperationDoctorListPage<T extends EntityKey>({
 
   const render = (item: z.infer<typeof OperationDoctorRowSchema>) => {
     return (
-      <li style={gridStyle} key={item?.Doctor?.["ID"]}>
-        <span>{item.Doctor.Name}</span>
+      <li style={gridStyle} key={item?.DoctorID}>
+        <span>{item.DoctorFullName}</span>
         <span>{item.Role as string}</span>
         <Clickable
           className="flex! items-center gap-x-1"
           variant="secondary"
           as={"Link"}
-          to={
-            detailsLink
-              ? detailsLink(item?.Doctor?.["ID"])
-              : `${item?.Doctor?.["ID"]}`
-          }
+          to={detailsLink ? detailsLink(item?.DoctorID) : `${item?.DoctorID}`}
         >
           <Info className="*:text-primary! h-[20px] w-[20px]" />
           Details

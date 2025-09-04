@@ -70,14 +70,14 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ["Scheduled Date", "Service.ScheduledDate", "datetime", "both"],
     ["Notes", "Service.Notes", "text", "both"],
   ],
-  selectorDisplay: ({ TestName, PatientFullName }) =>
-    TestName + "," + PatientFullName,
+  selectorDisplay: ({ TestTypeName, PatientFullName }) =>
+    TestTypeName + " | " + PatientFullName,
 
   rowTemplate: [
     ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [
       item.PatientFullName,
-      item.TestName,
+      item.TestTypeName,
       formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,

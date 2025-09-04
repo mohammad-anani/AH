@@ -26,7 +26,6 @@ export const person: DisplayingConfig<"Person"> = {
     ["Country", person.Country.Name],
     ["Phone", formatPhoneNumber(person.Phone)],
     ["Email", person.Email],
-    ["Username", person.Username],
   ],
   filterFields: [
     stringField("FirstName"),
@@ -48,6 +47,5 @@ export const person: DisplayingConfig<"Person"> = {
     ["Country", "Country.ID", "custom", "both", CountryFormSelectCallBack],
     ["Phone", "Phone", "phone", "both"],
     ["Email", "Email", "email", "both"],
-    ["Username", "Username", "string", "both"],
   ],
 };

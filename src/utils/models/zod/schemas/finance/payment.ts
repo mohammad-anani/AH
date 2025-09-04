@@ -1,14 +1,14 @@
 import { z } from "zod";
 import { datetime, positiveNumber } from "../../reusableSchemas";
-import { BillRowSchema } from "../../rowSchemas";
 import { ReceptionistRowSchema } from "../../rowSchemas";
+import { BillSchema } from "./bill";
 
 export const methods = ["Card", "Cash", "Insurance"] as const;
 
 export const PaymentSchema = z.object({
   ID: positiveNumber("Payment ID", 1),
 
-  Bill: BillRowSchema,
+  Bill: BillSchema,
 
   Amount: positiveNumber("Amount", 1),
 
