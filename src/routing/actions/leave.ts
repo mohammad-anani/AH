@@ -2,7 +2,8 @@ import patch from "@/api/patch";
 import type { EmployeeEntities } from "@/ui/entityComponents/EmployeeCard";
 
 import * as pluralize from "pluralize";
-import { redirect, type ActionFunctionArgs } from "react-router-dom";
+import { replace, type ActionFunctionArgs } from "react-router-dom";
+import { toKebabCase } from "@/utils/formatters/toKebab.ts";
 
 export default function leaveAction(entity: EmployeeEntities) {
   return async function ({ request, params }: ActionFunctionArgs) {
@@ -11,8 +12,11 @@ export default function leaveAction(entity: EmployeeEntities) {
 
     const parts = path.split("/").filter(Boolean);
 
-    await patch({}, `${pluralize.plural(entity)}/${params?.["id"]}/leave`);
+    await patch(
+      {},
+      `${toKebabCase(pluralize.plural(entity))}/${params?.["id"]}/leave`,
+    );
 
-    return redirect(parts.join("/"));
+    return replace("/" + parts.join("/"));
   };
 }

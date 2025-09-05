@@ -17,6 +17,8 @@ export default function CountrySelect({
   const { selectStyles, selectedOption, options, isLoading } =
     useCountries(countryID);
 
+  if (!options) return;
+
   return (
     <Select
       styles={selectStyles}
@@ -41,6 +43,7 @@ function useCountries(countryID: number) {
   }, []);
 
   const countries: Country[] = fetcher.data?.[0] ?? [];
+
   const isLoading = fetcher.state === "loading";
 
   const options = countries.map((country) => ({

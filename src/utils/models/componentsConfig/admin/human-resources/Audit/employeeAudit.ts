@@ -17,6 +17,7 @@ import {
 } from "../../../utils/filterReusableFields";
 import { prefixFields } from "../../../utils/formUtils";
 import type { DisplayingConfig } from "../../../routeConfig";
+import { department } from "../../general/Audit/departmentAudit";
 
 export const weekdays = [
   "Monday",
@@ -40,6 +41,7 @@ export const employeeAudit: DisplayingConfig<"Employee"> = {
       WorkingDays,
       ShiftStart,
       ShiftEnd,
+      Person,
     } = employee;
 
     const formattedWorkingDays =
@@ -47,22 +49,25 @@ export const employeeAudit: DisplayingConfig<"Employee"> = {
         ? "Everyday"
         : WorkingDays.length === 0
           ? "None"
-          : WorkingDays.join(", ");
+          : WorkingDays.map((d) => d.substring(0, 3)).join(", ");
 
     return [
-      [
-        "Department",
-        Department,
-        Department ? `/admin/departments/${Department.ID}` : undefined,
-        "Department",
-      ],
+      ...person["dataFields"](Person),
+      Department && Department.ID !== -1
+        ? [
+            "Department",
+            Department,
+            `/admin/departments/${Department.ID}`,
+            "Department",
+            department.selectorDisplay(Department),
+          ]
+        : ["Department", "N/A"],
       ["Salary", formatMoney(Salary ?? 0)],
       ["Hire Date", formatDateIsoToLocal(HireDate)],
       ["Leave Date", LeaveDate ? formatDateIsoToLocal(LeaveDate) : "N/A"],
       ["Working Days", formattedWorkingDays],
       ["Shift Start", convert24To12(ShiftStart)],
       ["Shift End", convert24To12(ShiftEnd)],
-      ["Status", isActive ? "Active" : "Inactive"],
     ];
   },
   filterFields: [

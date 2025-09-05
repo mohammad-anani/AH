@@ -1,5 +1,5 @@
 import add from "@/api/add";
-import { redirect, type ActionFunctionArgs } from "react-router-dom";
+import { replace, type ActionFunctionArgs } from "react-router-dom";
 
 export default async function reserveAction({
   request,
@@ -12,5 +12,5 @@ export default async function reserveAction({
     "/appointments/" + params["id"] + "/reserve-follow-up",
   );
 
-  return redirect("/receptionist/appointments/" + newID);
+  return replace("/receptionist/appointments/" + newID);
 }

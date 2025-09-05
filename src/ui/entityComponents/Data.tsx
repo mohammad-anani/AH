@@ -25,6 +25,10 @@ const Data = memo(function Data<T extends EntityKey>({
 }: DataProps<T>) {
   // Memoize the fields computation to avoid recalculation on every render
   const fieldData = useMemo(() => fields(data), [fields, data]);
+
+  console.log(fieldData);
+  if (!fieldData) return;
+
   return (
     <>
       {fieldData.map(([label, value, link, entity, display]) => {
@@ -35,7 +39,7 @@ const Data = memo(function Data<T extends EntityKey>({
             <span className="flex space-x-2 whitespace-pre-line">
               {link ? (
                 <>
-                  <span>{display?.(value as rowTypesObject[EntityKey])}</span>
+                  <span>{display}</span>
                   <Clickable
                     disabled={isNestedCard}
                     title={isNestedCard ? "Can't open more nested cards" : ""}

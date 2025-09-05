@@ -44,7 +44,7 @@ export default function useSelector<T extends EntityKey>(
         Object.keys(object).length === 1 &&
         Object.keys(object)[0] === "ID"
       ) {
-        findFetcher.load(`${fetchingPaths[entity]}/?ID=${object["ID"]}`);
+        findFetcher.load(`${fetchingPaths[entity].replace}/${object["ID"]}`);
         if (findFetcher.data)
           setObject?.(findFetcher.data[0][0] as rowTypesObject[T]);
       }
@@ -55,7 +55,8 @@ export default function useSelector<T extends EntityKey>(
   const cardFetcher = useFetcher();
 
   useEffect(() => {
-    if (CardID) cardFetcher.load(`${fetchingPaths[entity]}/${CardID}`);
+    if (CardID)
+      cardFetcher.load(`${fetchingPaths[entity].replace("list", "" + CardID)}`);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [CardID]);

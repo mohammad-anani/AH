@@ -28,7 +28,10 @@ export function route<T extends EntityKey>(
   const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
     entityObject;
 
-  const mainPath = urlPathPrefix + "s";
+  const mainPath =
+    (urlPathPrefix ?? "") +
+    (entity.startsWith("Test") ? entity.replace("Test", "") : entity) +
+    "s";
 
   return [
     {

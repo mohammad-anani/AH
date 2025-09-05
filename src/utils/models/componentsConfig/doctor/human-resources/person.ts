@@ -19,10 +19,10 @@ export const person: DisplayingConfig<"Person"> = {
       `${person.FirstName} ${person.MiddleName} ${person.LastName}`.trim(),
     ],
     ["Gender", person.Gender ? "Female" : "Male"],
-    ["Age", calculateAge(person.DateOfBirth)],
+    ["Age", calculateAge(person.BirthDate)],
     ["Country", person.Country.Name],
     ["Phone", formatPhoneNumber(person.Phone)],
-    ["Email", person.Email],
+    ["Email", person.User.Email],
   ],
   filterFields: [
     stringField("FirstName"),

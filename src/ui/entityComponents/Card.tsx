@@ -19,6 +19,7 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import Data from "./Data";
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import useCard from "./hooks/useCard";
+import { toast } from "@/utils/helpers/toast";
 
 type CardProps<T extends EntityKey> = {
   title: EntityKey;

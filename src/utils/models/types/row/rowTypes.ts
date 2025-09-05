@@ -11,7 +11,6 @@ import type {
   AppointmentRowSchema,
   InsuranceRowSchema,
   OperationRowSchema,
-  BillRowSchema,
   PaymentRowSchema,
   PrescriptionRowSchema,
 } from "../../zod/rowSchemas";

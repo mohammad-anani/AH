@@ -11,6 +11,7 @@ import throwError from "../helpers/throwError";
 import { rowSchemas } from "../models/zod/rowSchemas/rowSchemas.ts";
 import { type FetchingEntityKey } from "../models/types/utils/entityKeys.ts";
 import * as pluralize from "pluralize";
+import { toKebabCase } from "../formatters/toKebab.ts";
 
 export default function listLoader(
   entity: FetchingEntityKey,
@@ -26,12 +27,12 @@ export default function listLoader(
         if (!searchParams.has(param)) throwError(400, "Bad request");
       });
 
-    console.log(pluralize.plural(entity));
+    console.log(toKebabCase(pluralize.plural(entity)));
     const data = await getList(
       directUrl?.(params) ||
         (pathPrefix?.(params) ?? "") +
           "/" +
-          pluralize.plural(entity) +
+          toKebabCase(pluralize.plural(entity)) +
           "?" +
           searchParams?.toString(),
     );

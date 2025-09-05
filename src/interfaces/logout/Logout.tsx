@@ -8,7 +8,7 @@ export default function Logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh-token");
 
-    navigate("/");
+    navigate("/", { replace: true });
   }, [navigate]);
 
   return null;

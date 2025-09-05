@@ -36,7 +36,6 @@ export default async function getList(
     if (useCache) {
       listCache.set(cacheKey, result, cacheTtl);
     }
-
     return result;
   } catch (error) {
     // If cache exists and request fails, return stale data

@@ -16,14 +16,14 @@ export function toast(
         style={{
           background: "var(--color-background)",
           color: "var(--color-foreground)",
-          padding: "12px 16px",
-          borderRadius: "8px",
+          padding: "16px 20px",
+          borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-          minWidth: "240px",
+          minWidth: "320px",
           position: "relative",
           display: "flex",
           alignItems: "flex-start",
-          fontSize: "14px",
+          fontSize: "16px",
         }}
       >
         {/* Colored left bar */}
@@ -38,19 +38,19 @@ export function toast(
         />
 
         {/* Message content */}
-        <div style={{ flex: 1 }}>{message}</div>
+        <div style={{ flex: 1, paddingRight: "16px" }}>{message}</div>
 
         {/* Close button */}
         <button
           onClick={() => hotToast.dismiss(t.id)}
           style={{
             position: "absolute",
-            top: 6,
-            right: 8,
+            top: 8,
+            right: 10,
             background: "transparent",
             border: "none",
             color: closeColor,
-            fontSize: "16px",
+            fontSize: "18px",
             cursor: "pointer",
           }}
           aria-label="Close"
@@ -59,6 +59,6 @@ export function toast(
         </button>
       </div>
     ),
-    { duration, position: "top-center" },
+    { duration, position: "bottom-left" },
   );
 }

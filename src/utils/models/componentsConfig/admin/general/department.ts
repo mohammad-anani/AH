@@ -9,7 +9,7 @@ import {
 } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
 import type { rowTypesObject } from "../../../types/row/rowTypesObject";
-import { admin } from "..";
+
 import { adminAudit } from "../human-resources/Audit/adminAudit";
 
 export const department: RouteConfig<"Department"> = {

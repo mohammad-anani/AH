@@ -1,8 +1,8 @@
 import buildSchemasRecord from "@/utils/helpers/buildSchemaRecord";
-import type { EntityKey } from "../../types/utils/entityKeys.ts";
+import type { FetchingEntityKey } from "../../types/utils/entityKeys.ts";
 import * as schemasNamespace from "./index.ts";
 
-export const schemas = buildSchemasRecord<EntityKey, "", "Schema">(
+export const schemas = buildSchemasRecord<FetchingEntityKey, "", "Schema">(
   schemasNamespace,
   "",
   "Schema",

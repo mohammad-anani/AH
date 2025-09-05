@@ -41,7 +41,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    console.log(response);
     // Check for new JWT token in response headers (refresh token logic)
     const newToken =
       response.headers["Token"] ||

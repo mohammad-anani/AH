@@ -3,7 +3,7 @@ import { listCache, createCacheKey } from "./cache";
 
 export default async function add(data: unknown, url: string) {
   const response = await axios.post(url, data);
-
+  console.log(response);
   // Invalidate related cache entries after successful add
   const entityType = url.split("/").filter(Boolean).pop() || "unknown";
 
@@ -22,6 +22,6 @@ export default async function add(data: unknown, url: string) {
   if (import.meta.env.DEV) {
     // removed console.log
   }
-
-  return response.data?.["ID"];
+  console.log(response.data);
+  return +response.data;
 }

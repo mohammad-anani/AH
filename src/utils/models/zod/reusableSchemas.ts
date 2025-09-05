@@ -36,10 +36,13 @@ export const time = (name: string) =>
   });
 
 // Date (ISO)
+
 export const date = (name: string) =>
-  z.string().date({
-    error: `${name} must be a valid date.`,
-  });
+  z
+    .string()
+    .refine((val) => /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2})?$/.test(val), {
+      message: `${name} must be a valid date.`,
+    });
 
 // Boolean field
 export const booleanField = (name: string) =>

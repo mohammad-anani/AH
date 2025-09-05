@@ -4,6 +4,7 @@ import throwError from "../helpers/throwError";
 import { schemas } from "../models/zod/schemas/schemas.ts";
 import type { EntityKey } from "../models/types/utils/entityKeys.ts";
 import * as pluralize from "pluralize";
+import { toKebabCase } from "../formatters/toKebab.ts";
 
 export default function findByIDLoader(entity: EntityKey): LoaderFunction {
   return async function ({ params }: LoaderFunctionArgs) {
@@ -14,7 +15,9 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
     }
 
     //to be changed
-    const data = await findByID(`${pluralize.plural(entity)}/${id}`);
+    const data = await findByID(
+      `${toKebabCase(pluralize.plural(entity))}/${id}`,
+    );
     const schema = schemas[entity];
     if (!schema) {
       throwError(500, "Internal schema error");

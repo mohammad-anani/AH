@@ -28,7 +28,7 @@ export default async function findByID(
 
   try {
     const response = await axios.get(url);
-    const result = response.data[0] || undefined;
+    const result = response.data || undefined;
 
     // Cache the result
     if (useCache && result) {

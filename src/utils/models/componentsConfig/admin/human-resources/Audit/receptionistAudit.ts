@@ -9,7 +9,7 @@ export const receptionistAudit: RouteConfig<"Receptionist"> = {
     ...employeeAudit["dataFields"](Employee),
   ],
 
-  filterFields: [...person["filterFields"]],
+  filterFields: [...person["filterFields"], ...employeeAudit["filterFields"]],
 
   formConfig: [],
 

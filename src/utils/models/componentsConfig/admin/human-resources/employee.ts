@@ -55,13 +55,15 @@ export const employee: DisplayingConfig<"Employee"> = {
           : WorkingDays.join(", ");
 
     return [
-      [
-        "Department",
-        Department,
-        Department ? `/admin/departments/${Department.ID}` : undefined,
-        "Department",
-        department,
-      ],
+      Department
+        ? [
+            "Department",
+            Department,
+            `/admin/departments/${Department.ID}`,
+            "Department",
+            department.selectorDisplay(Department),
+          ]
+        : ["Department", "N/A"],
       ["Salary", formatMoney(Salary ?? 0)],
       ["Hire Date", formatDateIsoToLocal(HireDate)],
       ["Leave Date", LeaveDate ? formatDateIsoToLocal(LeaveDate) : "N/A"],

@@ -5,6 +5,7 @@ import type { RouteConfig } from "../../routeConfig";
 import { receptionist } from "./receptionist";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+import { generateAuditFields } from "../../utils/filterReusableFields";
 
 export const patient: RouteConfig<"Patient"> = {
   dataFields: ({
@@ -28,7 +29,10 @@ export const patient: RouteConfig<"Patient"> = {
     ["Show Operations", `/admin/operations?PatientID=${ID}`],
     ["Show Insurances", `/admin/insurances?PatientID=${ID}`],
   ],
-  filterFields: [...person["filterFields"]],
+  filterFields: [
+    ...person["filterFields"],
+    ...generateAuditFields("Receptionist", receptionist, "Admin"),
+  ],
   rowTemplate: [["Name", "Age"], (item) => [item.FullName, item.Age], [2, 1]],
   selectorDisplay: ({ FullName: Name }) => Name,
 };

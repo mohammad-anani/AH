@@ -13,7 +13,6 @@ export const fetchingPaths: { [K in FetchingEntityKey]: string } = {
   Insurance: "/admin/insurances",
   Operation: "/admin/operations",
   Prescription: "/admin/prescriptions",
-  Bill: "/admin/bills",
   Payment: "/admin/payments",
   Country: "/countries",
 };
