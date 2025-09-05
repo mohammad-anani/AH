@@ -2,11 +2,21 @@ import { z } from "zod";
 import { FormPersonSchema } from "./person.ts";
 
 // EmployeeFormDTO - extends PersonFormDTO with employee-specific fields
+
+const validDays = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
 export const FormEmployeeSchema = FormPersonSchema.extend({
   DepartmentID: z
-    .number({ message: "Department ID must be a positive number" })
-    .min(1, "Department ID must be a positive number")
-    .refine((val) => val > 0, "Department ID is required"),
+    .number({ message: "Department must be a positive number" })
+    .refine((val) => val > 0, "Department is required"),
 
   Salary: z
     .number({ message: "Salary must be a number" })
@@ -16,27 +26,16 @@ export const FormEmployeeSchema = FormPersonSchema.extend({
 
   HireDate: z
     .string()
-    .datetime({ local: true })
+    .date()
     .refine((val) => val !== "", "Hire date is required"),
 
-  WorkingDays: z.string().refine((val) => {
-    // Validate working days string format
-    const days = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ];
-    const workingDays = val.split(",").map((d) => d.trim());
-    return workingDays.every((day) => days.includes(day));
-  }, "Invalid working days format"),
+  WorkingDays: z
+    .array(z.enum(validDays, { message: "Invalid day of the week." }))
+    .min(1, { message: "At least 1 day required" })
+    .max(7, { message: "You cannot select more than 7 working days." }),
+  ShiftStart: z.iso.time("Shift start time is required"),
 
-  ShiftStart: z.string().time("Shift start time is required"),
-
-  ShiftEnd: z.string().time("Shift end time is required"),
+  ShiftEnd: z.iso.time("Shift end time is required"),
 });
 
 export type FormEmployeeType = z.infer<typeof FormEmployeeSchema>;

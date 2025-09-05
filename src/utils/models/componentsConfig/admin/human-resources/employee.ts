@@ -14,7 +14,6 @@ import {
   multiselectField,
   timeField,
 } from "../../utils/filterReusableFields";
-import { prefixFields } from "../../utils/formUtils";
 import type { DisplayingConfig } from "../../routeConfig";
 import { department } from "../general/Audit/departmentAudit";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
@@ -100,7 +99,7 @@ export const employee: DisplayingConfig<"Employee"> = {
     timeField("ShiftEnd"),
   ],
   formConfig: [
-    ...prefixFields<"Employee", "Person">("Person", person["formConfig"]),
+    ...person["formConfig"],
     [
       "Department",
       "DepartmentID",

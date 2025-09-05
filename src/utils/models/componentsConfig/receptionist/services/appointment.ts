@@ -37,17 +37,12 @@ export const appointment: RouteConfig<"Appointment"> = {
     ...service["dataFields"](Service),
   ],
   filterFields: [
-    receptionistFilterSelectorField("Doctor.ID", "Doctor", doctor),
+    receptionistFilterSelectorField("DoctorID", "Doctor", doctor),
     ...service["filterFields"],
   ],
   formConfig: [
-    receptionistFormSelectorField(
-      "Doctor",
-      "Doctor.ID",
-      "Doctor",
-      "add",
-      doctor,
-    ),
+    ["Name", "Name", "string", "both"],
+    ["Price", "Price", "number", "both"],
   ],
   selectorDisplay: ({ DoctorFullName, PatientFullName, Status }) =>
     DoctorFullName + " | " + PatientFullName + " | " + Status,

@@ -2,7 +2,6 @@ import { person } from "./person";
 
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
-import { prefixFields } from "../../utils/formUtils";
 import type { RouteConfig } from "../../routeConfig";
 
 export const patient: RouteConfig<"Patient"> = {
@@ -21,8 +20,6 @@ export const patient: RouteConfig<"Patient"> = {
   ],
   filterFields: [...person["filterFields"]],
   rowTemplate: [["Name", "Age"], (item) => [item.FullName, item.Age], [2, 1]],
-  formConfig: [
-    ...prefixFields<"Patient", "Person">("Person", person["formConfig"]),
-  ],
+  formConfig: [...person["formConfig"]],
   selectorDisplay: ({ FullName: Name }) => Name,
 };

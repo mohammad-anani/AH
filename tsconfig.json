@@ -14,6 +14,17 @@
     "moduleResolution": "node",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    /* ✅ Strong type-safety options */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* ✅ Prevent build if errors exist */
+    "noEmitOnError": true
   }
 }

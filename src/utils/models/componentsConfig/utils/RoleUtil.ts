@@ -12,9 +12,10 @@ import {
 import { type Role } from "../../types/utils/Form&Filter.ts";
 import { formSelectorField } from "./formUtils.ts";
 
-import type { typesObject } from "../../types/normal/typesObject.ts";
 import { adminAudit } from "../admin/human-resources/Audit/adminAudit.ts";
 import { receptionistAudit } from "../admin/human-resources/Audit/receptionistAudit.ts";
+import type { addTypesObject } from "../../types/add/addTypesObject.ts";
+import type { updateTypesObject } from "../../types/update/updateTypesObject.ts";
 
 export const adminFilterSelectorField = <T extends EntityKey>(
   fieldKey: string,
@@ -38,7 +39,7 @@ export const adminFormSelectorField = <
   B extends EntityKey,
 >(
   label: string,
-  fieldKey: DotAccess<typesObject[T]>,
+  fieldKey: DotAccess<addTypesObject[T] | updateTypesObject[T]>,
   entity: B,
   mode: "add" | "update" | "both",
   entityObject: RouteConfig<B>,
@@ -55,7 +56,7 @@ export const receptionistFormSelectorField = <
   B extends DisplayEntityKey,
 >(
   label: string,
-  fieldKey: DotAccess<typesObject[T]>,
+  fieldKey: DotAccess<addTypesObject[T] | updateTypesObject[T]>,
   entity: B,
   mode: "add" | "update" | "both",
   entityObject: RouteConfig<B>,

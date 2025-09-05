@@ -1,6 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
-import { prefixFields } from "../../utils/formUtils";
 import { person } from "./person";
 import type { RouteConfig } from "../../routeConfig";
 import { employeeAudit } from "./Audit/employeeAudit";
@@ -12,12 +11,7 @@ export const receptionist: RouteConfig<"Receptionist"> = {
 
   filterFields: [...person["filterFields"], ...employeeAudit["filterFields"]],
 
-  formConfig: [
-    ...prefixFields<"Receptionist", "Employee">(
-      "Employee",
-      employeeAudit["formConfig"],
-    ),
-  ],
+  formConfig: [...employeeAudit["formConfig"]],
 
   rowTemplate: [["Name"], (item) => [item.FullName], [2]],
 

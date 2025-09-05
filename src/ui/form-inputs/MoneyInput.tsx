@@ -43,7 +43,7 @@ export default function MoneyInput({ fieldKey, label }: TemporalInputProps) {
         <MoneyInp
           name={field.name}
           initialValue={field.value}
-          onChange={field.onChange}
+          onChange={(val) => field.onChange(+val)}
         />
       )}
     />

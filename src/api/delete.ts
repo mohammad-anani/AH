@@ -1,11 +1,11 @@
 import axios from "./axios";
 
 export default async function Delete(url: string) {
+  console.log(url);
+
   const response = await axios.delete(url);
 
-  if (import.meta.env.DEV) {
-    // removed console.log
-  }
+  console.log(response);
 
   return response.status === 200;
 }

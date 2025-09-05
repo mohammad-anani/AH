@@ -54,21 +54,14 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
   ],
   formConfig: [
     receptionistFormSelectorField(
-      "Test",
-      "TestType.ID",
+      "Test Type",
+      "TestTypeID",
       "TestType",
       "add",
       testType,
     ),
-    receptionistFormSelectorField(
-      "Patient",
-      "Service.Patient.ID",
-      "Patient",
-      "add",
-      patient,
-    ),
-    ["Scheduled Date", "Service.ScheduledDate", "datetime", "both"],
-    ["Notes", "Service.Notes", "text", "both"],
+
+    ...service["formConfig"],
   ],
   selectorDisplay: ({ TestTypeName, PatientFullName }) =>
     TestTypeName + " | " + PatientFullName,

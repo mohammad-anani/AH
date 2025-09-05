@@ -1,6 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { moneyField, stringField } from "../../utils/filterReusableFields";
-import { prefixFields } from "../../utils/formUtils";
 import { person } from "./person";
 import type { RouteConfig } from "../../routeConfig";
 import { formatMoney } from "@/utils/formatters/formatMoney";
@@ -23,7 +22,7 @@ export const doctor: RouteConfig<"Doctor"> = {
     moneyField("Cost Per Appointment"),
   ],
   formConfig: [
-    ...prefixFields<"Doctor", "Employee">("Employee", employee["formConfig"]),
+    ...employee["formConfig"],
     ["Specialization", "Specialization", "string", "both"],
     ["Appointment Cost", "CostPerAppointment", "money", "both"],
   ],

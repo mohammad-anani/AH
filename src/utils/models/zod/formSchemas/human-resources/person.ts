@@ -27,7 +27,7 @@ export const FormPersonSchema = z.object({
 
   BirthDate: z
     .string()
-    .datetime({ local: true })
+    .date()
     .refine((date) => {
       const birthDate = new Date(date);
       const now = new Date();
@@ -37,7 +37,7 @@ export const FormPersonSchema = z.object({
     .refine((val) => val !== "", "Birth date is required"),
 
   CountryID: z
-    .number({ message: "Country ID must be a positive number" })
+    .number({ message: "Country must be a positive number" })
     .min(1, "Country ID must be a positive number")
     .refine((val) => val > 0, "Country ID is required"),
 

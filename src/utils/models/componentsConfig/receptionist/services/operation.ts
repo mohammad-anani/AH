@@ -6,7 +6,6 @@ import { stringField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
 import {
   receptionistFilterSelectorField,
-  receptionistFormSelectorField,
 } from "../../utils/RoleUtil";
 import { department } from "../general/department";
 import { service } from "../../admin/services/service";
@@ -33,19 +32,11 @@ export const operation: RouteConfig<"Operation"> = {
   filterFields: [
     stringField("Name"),
     stringField("Description"),
-    receptionistFilterSelectorField("Department.ID", "Department", department),
+    receptionistFilterSelectorField("DepartmentID", "Department", department),
     ...service["filterFields"],
   ],
   formConfig: [
     ["Name", "Name", "string", "both"],
-    ["Description", "Description", "text", "both"],
-    receptionistFormSelectorField(
-      "Department",
-      "Department.ID",
-      "Department",
-      "add",
-      department,
-    ),
   ],
   selectorDisplay: ({ Name, PatientFullName, Status }) =>
     Name + " | Patient:" + PatientFullName + " | " + Status,

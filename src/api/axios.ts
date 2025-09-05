@@ -3,7 +3,7 @@ import a, { isAxiosError } from "axios";
 
 const axios = a.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/",
-  timeout: 10000,
+  timeout: 60000,
   headers: {
     "Content-Type": "application/json",
   },

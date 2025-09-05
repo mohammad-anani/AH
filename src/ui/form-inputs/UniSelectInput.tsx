@@ -27,6 +27,7 @@ export default function SelectInput({
       <label htmlFor={fieldKey}>{label}</label>
       <RegisteredInput name={fieldKey}>
         <select>
+          <option value={null}>None</option>
           {isSelectOptionArray(data)
             ? data.map((option) => (
                 <option key={option.value} value={option.value}>

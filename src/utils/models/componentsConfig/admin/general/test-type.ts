@@ -30,7 +30,7 @@ export const testType: RouteConfig<"TestType"> = {
       "Department",
       department.selectorDisplay as SelectorDisplay<EntityKey>,
     ],
-    ["Cost", `${formatMoney(Cost)} $`],
+    ["Cost", `${formatMoney(Cost)}`],
     [
       "Created By",
       CreatedByAdmin,
@@ -50,9 +50,9 @@ export const testType: RouteConfig<"TestType"> = {
     ["Name", "Name", "string", "both"],
     [
       "Department",
-      "Department.ID",
+      "Department",
       "custom",
-      "add",
+      "both",
       DepartmentFormSelectCallBack,
     ],
     ["Cost", "Cost", "money", "both"],

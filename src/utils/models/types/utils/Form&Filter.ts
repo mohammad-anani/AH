@@ -6,6 +6,8 @@ import type { Primitive } from "react-hook-form";
 import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 import type { RouteConfig } from "../../componentsConfig/routeConfig";
 import type { SelectOption } from "@/ui/form-inputs/UniSelectInput";
+import type { addTypesObject } from "../add";
+import type { updateTypesObject } from "../update";
 
 export type DataTypes =
   | "string"
@@ -43,7 +45,7 @@ export type customFormProps = [
 
 export type FormKey<T extends DisplayEntityKey> = [
   label: string,
-  fieldKey: DotAccess<typesObject[T]>,
+  fieldKey: DotAccess<addTypesObject[T] | updateTypesObject[T]>,
   type: DataTypes | "custom",
   mode: "add" | "update" | "both",
   data?:
@@ -66,14 +68,18 @@ export type FilterKey = [
     | [EntityKey, RouteConfig<EntityKey>, Role],
 ];
 
-export type DotAccess<T, Prefix extends string = ""> = {
-  [K in keyof T]: T[K] extends object
-    ? T[K] extends Array<Primitive>
-      ? `${Prefix}${Extract<K, string>}` // don't recurse into arrays
-      :
-          | `${Prefix}${Extract<K, string>}`
-          | DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
-    : `${Prefix}${Extract<K, string>}`;
+// export type DotAccess<T, Prefix extends string = ""> = {
+//   [K in keyof T]: T[K] extends object
+//     ? T[K] extends Array<Primitive>
+//       ? `${Prefix}${Extract<K, string>}` // don't recurse into arrays
+//       :
+//           | `${Prefix}${Extract<K, string>}`
+//           | DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
+//     : `${Prefix}${Extract<K, string>}`;
+// }[keyof T];
+
+export type DotAccess<T> = {
+  [K in keyof T]: `${Extract<K, string>}`;
 }[keyof T];
 
 export type Role = "Admin" | "Receptionist" | "Doctor";

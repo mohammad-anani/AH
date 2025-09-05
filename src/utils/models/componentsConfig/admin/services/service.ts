@@ -3,10 +3,7 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
-import {
-  adminFilterSelectorField,
-  adminFormSelectorField,
-} from "../../utils/RoleUtil";
+import { adminFilterSelectorField } from "../../utils/RoleUtil";
 import {
   datetimeField,
   stringField,
@@ -50,12 +47,8 @@ export const service: RouteConfig<"Service"> = {
     ["Result", Result || "N/A"],
     ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
     ["Notes", Notes?.length ? Notes : "N/A"],
-    ...(Bill
-      ? [
-          ["Bill", formatMoney(Bill.Amount)],
-          ["Paid", formatMoney(Bill.AmountPaid)],
-        ]
-      : [["Bill", "N/A"]]),
+    ["Bill", Bill ? formatMoney(Bill.Amount) : "N/A"],
+    ["Paid", Bill ? formatMoney(Bill.AmountPaid) : "N/A"],
     [
       "Created By",
       CreatedByReceptionist,
@@ -82,15 +75,7 @@ export const service: RouteConfig<"Service"> = {
     datetimeField("CreatedAt"),
   ],
   formConfig: [
-    adminFormSelectorField<"Service", "Patient">(
-      "Patient",
-      "Patient.ID",
-      "Patient",
-      "add",
-      patient,
-    ),
-    ["Scheduled Date", "ScheduledDate", "datetime", "both"],
-    ["Reason", "Reason", "text", "both"],
-    ["Notes", "Notes", "text", "both"],
+    ["Name", "Name", "string", "both"],
+    ["Price", "Price", "money", "both"],
   ],
 };
