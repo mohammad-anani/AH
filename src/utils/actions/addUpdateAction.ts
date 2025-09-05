@@ -30,6 +30,10 @@ export default function addUpdateAction(
         toast(`${entity} updated successfully!`, "success");
       } else {
         // Add: no ID yet
+
+        console.log(data);
+        return;
+
         const newID = await add(
           data,
           `${toKebabCase(pluralize.plural(entity))}`,

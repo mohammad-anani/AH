@@ -17,11 +17,7 @@ export const validDays = [
 export const EmployeeSchema = z.object({
   Person: PersonSchema,
 
-  Department: z.preprocess((dep) => {
-    if (dep?.ID === -1) return null;
-
-    return dep;
-  }, DepartmentRowSchema.nullable()),
+  Department: DepartmentRowSchema.nullable(),
 
   Salary: positiveNumber("Salary", 100, 99999),
 

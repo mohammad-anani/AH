@@ -38,4 +38,5 @@ export type addTypesObject = {
   Prescription: AddPrescription;
   Insurance: AddInsurance;
   Payment: AddPayment;
+  Bill: "none";
 };

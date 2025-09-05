@@ -41,8 +41,10 @@ export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
 
   const {
     handleSubmit,
-    formState: { isSubmitting: isSub },
+    formState: { isSubmitting: isSub, errors },
   } = methods;
+
+  console.log(errors);
   const submit = useSubmit();
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;

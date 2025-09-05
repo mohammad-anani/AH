@@ -103,7 +103,7 @@ export const employee: DisplayingConfig<"Employee"> = {
     ...prefixFields<"Employee", "Person">("Person", person["formConfig"]),
     [
       "Department",
-      "Department.ID",
+      "DepartmentID",
       "custom",
       "both",
       DepartmentFormSelectCallBack,

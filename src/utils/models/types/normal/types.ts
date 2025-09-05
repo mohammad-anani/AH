@@ -19,7 +19,6 @@ import type {
 import type { AdminSchema } from "../../zod/schemas/human-resources/admin";
 import type { DoctorSchema } from "../../zod/schemas/human-resources/doctor";
 import type { CountrySchema } from "../../zod/schemas";
-import type { PrescriptionRowSchema } from "../../zod/rowSchemas";
 
 export type Department = z.infer<typeof DepartmentSchema>;
 export type Person = z.infer<typeof PersonSchema>;

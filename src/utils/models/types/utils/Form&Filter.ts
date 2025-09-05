@@ -75,5 +75,6 @@ export type DotAccess<T, Prefix extends string = ""> = {
           | DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
     : `${Prefix}${Extract<K, string>}`;
 }[keyof T];
+
 export type Role = "Admin" | "Receptionist" | "Doctor";
 export type smallRole = "admin" | "receptionist" | "doctor";
