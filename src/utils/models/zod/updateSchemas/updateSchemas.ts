@@ -1,11 +1,9 @@
-import * as humanResources from "./human-resources";
-import * as general from "./general";
-import * as finance from "./finance";
-import * as services from "./services";
+import buildSchemasRecord from "@/utils/helpers/buildSchemaRecord";
+import * as schemasNamespace from ".";
+import type { EntityKey } from "../../types/utils/entityKeys";
 
-export const schemas = {
-  ...humanResources,
-  ...general,
-  ...finance,
-  ...services,
-};
+export const schemas = buildSchemasRecord<EntityKey, "Update", "Schema">(
+  schemasNamespace,
+  "Update",
+  "Schema",
+);

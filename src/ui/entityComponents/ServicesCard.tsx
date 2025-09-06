@@ -47,7 +47,7 @@ export default function ServiceCard<T extends ServicesEntities>({
         <H2>{formatTitle(title)}</H2>
         <div className="flex flex-wrap justify-end space-y-1 gap-x-2">
           {canEdit && (
-            <Clickable as="Link" variant="primary" to="edit">
+            <Clickable as="Link" variant="primary" to="update">
               Edit
             </Clickable>
           )}

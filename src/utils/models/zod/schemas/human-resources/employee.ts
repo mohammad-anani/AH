@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { positiveNumber, time, datetime } from "../../reusableSchemas";
+import { positiveNumber, time, datetime, date } from "../../reusableSchemas";
 import { PersonSchema } from "./person";
 import { DepartmentRowSchema } from "../../rowSchemas";
 import { AdminRowSchema } from "../../rowSchemas/human-resources/admin";
@@ -21,9 +21,9 @@ export const EmployeeSchema = z.object({
 
   Salary: positiveNumber("Salary", 100, 99999),
 
-  HireDate: datetime("Hire date"),
+  HireDate: date("Hire date"),
 
-  LeaveDate: datetime("Leave date").nullable(),
+  LeaveDate: date("Leave date").nullable(),
 
   WorkingDays: z
     .array(z.enum(validDays, { message: "Invalid day of the week." }))

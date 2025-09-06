@@ -17,14 +17,18 @@ export default function Nav() {
       <NavLink to="human-resources">
         <Users /> HR
       </NavLink>
-      <NavLink to="tests">
-        <FlaskConical /> Tests
+      <NavLink to="tests/types">
+        <FlaskConical /> Test Types
       </NavLink>
       <NavLink to="operations">
         <HeartPulse /> Operations
       </NavLink>
       <NavLink to="appointments">
         <Stethoscope /> Appointments
+      </NavLink>
+      <NavLink to="tests/appointments">
+        <Stethoscope />
+        Test Appointments
       </NavLink>
 
       <NavLink to="/logout">

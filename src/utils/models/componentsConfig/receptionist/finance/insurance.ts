@@ -1,6 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+
 import type { RouteConfig } from "../../routeConfig";
 import { patient } from "..";
 
@@ -16,7 +15,7 @@ export const insurance: RouteConfig<"Insurance"> = {
       Patient,
       "/admin/human-resources/patients/" + Patient.ID,
       "Patient",
-      patient.selectorDisplay as SelectorDisplay<EntityKey>,
+      patient.selectorDisplay(Patient),
     ],
     ["Provider", ProviderName],
     ["Coverage", Coverage * 100 + "%"],

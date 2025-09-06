@@ -1,10 +1,12 @@
 import leaveAction from "@/routing/actions/leave";
-import { route } from "@/routing/entityRoute";
+import { Route } from "@/routing/entityRoute";
 import EmployeeCard, {
   type EmployeeEntities,
 } from "@/ui/entityComponents/EmployeeCard";
 import InvalidPath from "@/ui/InvalidPath";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SubLinks } from "@/utils/models/types/utils/routeTypes";
 
 import type { Params, RouteObject } from "react-router-dom";
 
@@ -22,6 +24,7 @@ export function employeeRoute<T extends EmployeeEntities>(
     urlPathPrefix = undefined,
     withCard = false,
     extraRoutes = [],
+    subLinks,
   }: {
     canAdd?: boolean;
     canEdit?: boolean;
@@ -33,13 +36,18 @@ export function employeeRoute<T extends EmployeeEntities>(
     urlPathPrefix?: string;
     withCard?: boolean;
     extraRoutes?: [RouteObject[], "id" | "index"][];
+    subLinks?: SubLinks<EntityKey>;
   } = {},
 ): RouteObject[] {
   const cardRoute: RouteObject[] = [
     {
       index: true,
       element: (
-        <EmployeeCard title={entity} dataFields={entityObject.dataFields} />
+        <EmployeeCard
+          title={entity}
+          dataFields={entityObject.dataFields}
+          subLinks={entityObject.subLinks}
+        />
       ),
     },
   ];
@@ -48,7 +56,7 @@ export function employeeRoute<T extends EmployeeEntities>(
     { path: "leave", Component: InvalidPath, action: leaveAction(entity) },
   ];
 
-  return route(
+  return Route(
     entity,
     canAdd,
     canEdit,

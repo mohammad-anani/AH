@@ -70,7 +70,7 @@ export const employeeAudit: DisplayingConfig<"Employee"> = {
     ];
   },
   filterFields: [
-    ["Department", "custom", DepartmentFilterSelectCallBack],
+    ["DepartmentID", "custom", DepartmentFilterSelectCallBack],
     moneyField("Salary"),
     dateField("HireDate"),
     dateField("LeaveDate"),

@@ -1,6 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+
 import {
   adminFilterSelectorField,
   admingenerateAuditFields,
@@ -19,14 +18,14 @@ export const testOrder: RouteConfig<"TestOrder"> = {
       TestType,
       "/admin/tests/types/" + TestType.ID,
       "TestType",
-      testType.selectorDisplay as SelectorDisplay<EntityKey>,
+      testType.selectorDisplay(TestType),
     ],
     [
       "Appointment",
       Appointment,
       "/admin/appointments/" + Appointment.ID,
       "Appointment",
-      appointment.selectorDisplay as SelectorDisplay<EntityKey>,
+      appointment.selectorDisplay(Appointment),
     ],
   ],
   filterFields: [

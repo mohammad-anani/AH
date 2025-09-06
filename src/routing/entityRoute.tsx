@@ -7,11 +7,11 @@ import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ListPage from "@/ui/entityComponents/ListPage";
 import Card from "@/ui/entityComponents/Card";
 import ViewEdit from "@/ui/entityComponents/ViewEdit";
-import type { Params, RouteObject } from "react-router-dom";
+import { useMatches, type Params, type RouteObject } from "react-router-dom";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 
-export function route<T extends EntityKey>(
+export function Route<T extends EntityKey>(
   entity: T,
   canAdd: boolean = true,
   canEdit: boolean = true,
@@ -30,7 +30,10 @@ export function route<T extends EntityKey>(
 
   const mainPath =
     (urlPathPrefix ?? "") +
-    (entity.startsWith("Test") ? entity.replace("Test", "") : entity) +
+    (entity.startsWith("Test")
+      ? entity.replace("Test", "")
+      : entity
+    ).toLowerCase() +
     "s";
 
   return [
@@ -87,6 +90,7 @@ export function route<T extends EntityKey>(
                       action: deleteAction(entity, (request) =>
                         request.url.replace(/\/[^/]+\/delete$/, ""),
                       ),
+                      Component: InvalidPath,
                     }
                   : {},
                 canEdit

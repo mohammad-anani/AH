@@ -1,4 +1,4 @@
-import { route } from "@/routing/entityRoute";
+import { Route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
 import { payment } from "@/utils/models/componentsConfig/admin";
@@ -25,7 +25,7 @@ const paymentListRoute: RouteObject[] = [
   },
 ];
 
-export const paymentRoute = route(
+export const paymentRoute = Route(
   "Payment",
   true,
   false,

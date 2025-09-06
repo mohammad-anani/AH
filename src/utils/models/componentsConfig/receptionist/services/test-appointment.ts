@@ -1,6 +1,4 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import {
   datetimeField,
@@ -30,7 +28,7 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
           TestOrder,
           `/receptionist/services/test-orders/${TestOrder.ID}`,
           "TestOrder",
-          testOrder.selectorDisplay as SelectorDisplay<EntityKey>,
+          testOrder.selectorDisplay(TestOrder),
         ]
       : ["Test Order", "None"],
     [
@@ -38,7 +36,7 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
       TestType,
       `/receptionist/general/test-types/${TestType.ID}`,
       "TestType",
-      testType.selectorDisplay as SelectorDisplay<EntityKey>,
+      testType.selectorDisplay(TestType),
     ],
 
     ...service["dataFields"](Service),

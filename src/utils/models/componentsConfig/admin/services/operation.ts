@@ -1,6 +1,4 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
 import { admingenerateAuditFields } from "../../utils/RoleUtil";
@@ -24,7 +22,7 @@ export const operation: RouteConfig<"Operation"> = {
       Department,
       `/admin/departments/${Department.ID}`,
       "Department",
-      department.selectorDisplay as SelectorDisplay<EntityKey>,
+      department.selectorDisplay(Department),
     ],
 
     ...service["dataFields"](Service),

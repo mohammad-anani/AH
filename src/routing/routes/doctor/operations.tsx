@@ -1,4 +1,4 @@
-import { route } from "@/routing/entityRoute";
+import { Route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
 import { doctor, operation } from "@/utils/models/componentsConfig/doctor";
@@ -22,7 +22,7 @@ const doctorsRoute: RouteObject[] = [
   },
 ];
 
-export const operationsRoutes = route(
+export const operationsRoutes = Route(
   "Operation",
   false,
   false,

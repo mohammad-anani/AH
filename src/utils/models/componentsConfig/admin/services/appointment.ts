@@ -1,6 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import {
@@ -23,7 +22,7 @@ export const appointment: RouteConfig<"Appointment"> = {
       Doctor,
       `/admin/human-resources/doctors/${Doctor.ID}`,
       "Doctor",
-      doctor.selectorDisplay as SelectorDisplay<EntityKey>,
+      doctor.selectorDisplay(Doctor),
     ],
     [
       "Previous Appointment",
@@ -32,7 +31,7 @@ export const appointment: RouteConfig<"Appointment"> = {
         ? `/admin/services/appointments/${PreviousAppointment.ID}`
         : undefined,
       "Appointment",
-      appointment.selectorDisplay as SelectorDisplay<EntityKey>,
+      appointment.selectorDisplay(Doctor),
     ],
 
     ...service["dataFields"](Service),

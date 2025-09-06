@@ -17,13 +17,13 @@ export const admin: RouteConfig<"Admin"> = {
 
   selectorDisplay: ({ FullName }) => FullName,
   subLinks: ({ ID }) => [
-    ["Show Departments", `/admin/departments?AdminID=${ID}`],
+    ["Show Departments", `/admin/departments?CreatedByAdminID=${ID}`],
     [
       "Show Receptionists",
-      `/admin/human-resources/receptionists?AdminID=${ID}`,
+      `/admin/human-resources/receptionists?CreatedByAdminID=${ID}`,
     ],
-    ["Show Admins", `/admin/human-resources/admins?AdminID=${ID}`],
-    ["Show Test Types", `/admin/tests/types?AdminID=${ID}`],
-    ["Show Doctors", `/admin/human-resources/doctors?AdminID=${ID}`],
+    ["Show Admins", `/admin/human-resources/admins?CreatedByAdminID=${ID}`],
+    ["Show Test Types", `/admin/tests/types?CreatedByAdminID=${ID}`],
+    ["Show Doctors", `/admin/human-resources/doctors?CreatedByAdminID=${ID}`],
   ],
 };

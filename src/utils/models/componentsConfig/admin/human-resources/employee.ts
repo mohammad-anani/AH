@@ -16,8 +16,7 @@ import {
 } from "../../utils/filterReusableFields";
 import type { DisplayingConfig } from "../../routeConfig";
 import { department } from "../general/Audit/departmentAudit";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+
 import { admin } from "./admin";
 
 export const weekdays = [
@@ -42,6 +41,7 @@ export const employee: DisplayingConfig<"Employee"> = {
       WorkingDays,
       ShiftStart,
       ShiftEnd,
+      Person,
       CreatedByAdmin,
       CreatedAt,
     } = employee;
@@ -54,6 +54,7 @@ export const employee: DisplayingConfig<"Employee"> = {
           : WorkingDays.join(", ");
 
     return [
+      ...person["dataFields"](Person),
       Department
         ? [
             "Department",
@@ -75,14 +76,14 @@ export const employee: DisplayingConfig<"Employee"> = {
             CreatedByAdmin,
             `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
             "Admin",
-            admin.selectorDisplay as SelectorDisplay<EntityKey>,
+            admin.selectorDisplay(employee.CreatedByAdmin),
           ]
         : ["Created By", "System"],
       ["Created At", formatDateIsoToLocal(CreatedAt)],
     ];
   },
   filterFields: [
-    ["Department", "custom", DepartmentFilterSelectCallBack],
+    ["DepartmentID", "custom", DepartmentFilterSelectCallBack],
     moneyField("Salary"),
     dateField("HireDate"),
     dateField("LeaveDate"),

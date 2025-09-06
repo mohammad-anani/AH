@@ -1,7 +1,5 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import {
   adminFilterSelectorField,
@@ -32,7 +30,7 @@ export const service: RouteConfig<"Service"> = {
       Patient,
       `/admin/human-resources/patients/${Patient.ID}`,
       "Patient",
-      patient.selectorDisplay as SelectorDisplay<EntityKey>,
+      patient.selectorDisplay(Patient),
     ],
     ["Scheduled Date", formatDateIsoToLocal(ScheduledDate)],
     [

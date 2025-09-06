@@ -19,7 +19,7 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import Data from "./Data";
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import useCard from "./hooks/useCard";
-import { toast } from "@/utils/helpers/toast";
+import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
 
 type CardProps<T extends EntityKey> = {
   title: EntityKey;
@@ -103,7 +103,7 @@ const Card = memo(function Card<T extends EntityKey>({
         {!isModal ? <H2>{displayTitle}</H2> : null}
         <div className="flex gap-x-2">
           {canEdit ? (
-            <Clickable as="Link" variant="primary" to="edit">
+            <Clickable as="Link" variant="primary" to="update">
               Edit
             </Clickable>
           ) : null}
@@ -156,8 +156,7 @@ const Card = memo(function Card<T extends EntityKey>({
               <Clickable
                 onClick={() => {
                   fetcher.submit(null, {
-                    method: "delete",
-                    action: "./delete",
+                    action: "delete",
                   });
                 }}
                 as="button"

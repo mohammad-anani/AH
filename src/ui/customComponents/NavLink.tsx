@@ -13,7 +13,7 @@ export default function NavLink({
   ...props
 }: NavLinkProps) {
   return (
-    <div className={"w-[110px] " + classes}>
+    <div className={"w-[147px] " + classes}>
       <NLink
         to={to}
         {...props}

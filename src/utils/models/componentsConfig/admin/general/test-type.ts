@@ -1,8 +1,7 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+
 import {
   DepartmentFilterSelectCallBack,
   DepartmentFormSelectCallBack,
@@ -28,7 +27,7 @@ export const testType: RouteConfig<"TestType"> = {
       Department,
       `/admin/departments/${Department?.ID}`,
       "Department",
-      department.selectorDisplay as SelectorDisplay<EntityKey>,
+      department.selectorDisplay(Department),
     ],
     ["Cost", `${formatMoney(Cost)}`],
     [
@@ -36,7 +35,7 @@ export const testType: RouteConfig<"TestType"> = {
       CreatedByAdmin,
       `/admin/human-resources/admins/${CreatedByAdmin?.ID}`,
       "Admin",
-      admin.selectorDisplay as SelectorDisplay<EntityKey>,
+      admin.selectorDisplay(CreatedByAdmin),
     ],
     ["Created At", formatDateIsoToLocal(CreatedAt)],
   ],
@@ -50,7 +49,7 @@ export const testType: RouteConfig<"TestType"> = {
     ["Name", "Name", "string", "both"],
     [
       "Department",
-      "Department",
+      "DepartmentID",
       "custom",
       "both",
       DepartmentFormSelectCallBack,
@@ -66,6 +65,5 @@ export const testType: RouteConfig<"TestType"> = {
   ],
   subLinks: ({ ID }) => [
     ["Show Test Appointments", `/admin/tests/appointments?TestTypeID=${ID}`],
-    ["Show Test Orders", `/admin/tests/orders?TestTypeID=${ID}`],
   ],
 };

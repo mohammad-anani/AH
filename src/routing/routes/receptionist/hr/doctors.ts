@@ -1,7 +1,7 @@
-import { route } from "@/routing/entityRoute";
+import { Route } from "@/routing/entityRoute";
 import { doctor } from "@/utils/models/componentsConfig/receptionist";
 
-export const doctorsRoutes = route(
+export const doctorsRoutes = Route(
   "Doctor",
   false,
   false,

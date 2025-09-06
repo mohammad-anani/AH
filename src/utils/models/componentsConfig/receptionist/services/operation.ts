@@ -1,12 +1,8 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import { stringField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
-import {
-  receptionistFilterSelectorField,
-} from "../../utils/RoleUtil";
+import { receptionistFilterSelectorField } from "../../utils/RoleUtil";
 import { department } from "../general/department";
 import { service } from "../../admin/services/service";
 
@@ -24,7 +20,7 @@ export const operation: RouteConfig<"Operation"> = {
       Department,
       `/receptionist/general/departments/${Department.ID}`,
       "Department",
-      department.selectorDisplay as SelectorDisplay<EntityKey>,
+      department.selectorDisplay(Department),
     ],
 
     ...service["dataFields"](Service),
@@ -35,9 +31,7 @@ export const operation: RouteConfig<"Operation"> = {
     receptionistFilterSelectorField("DepartmentID", "Department", department),
     ...service["filterFields"],
   ],
-  formConfig: [
-    ["Name", "Name", "string", "both"],
-  ],
+  formConfig: [["Name", "Name", "string", "both"]],
   selectorDisplay: ({ Name, PatientFullName, Status }) =>
     Name + " | Patient:" + PatientFullName + " | " + Status,
 

@@ -17,6 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
 
 export type EmployeeEntities = "Receptionist" | "Doctor" | "Admin";
 
@@ -38,8 +39,16 @@ export default function EmployeeCard<T extends EmployeeEntities>({
   canDelete = true,
 }: CardProps<T>) {
   const object = useOutletContext<typesObject[T]>();
-  const hasLeft = !!object.Employee.LeaveDate;
   const fetcher = useFetcher();
+  const hasLeft = !!object.Employee.LeaveDate;
+
+  const { decoded } = useDecodedJwt();
+
+  const isNotSameUser =
+    object?.ID !== +(decoded?.sub ?? -1) || decoded?.role !== "Admin";
+
+  canDelete = canDelete && isNotSameUser;
+
   return (
     <>
       <Clickable className="text-sm!" as="Back" variant="secondary">
@@ -50,13 +59,13 @@ export default function EmployeeCard<T extends EmployeeEntities>({
         <H2>{formatTitle(title)}</H2>
         <div className="flex flex-wrap justify-end space-y-1 gap-x-2">
           {canEdit && (
-            <Clickable as="Link" variant="primary" to="edit">
+            <Clickable as="Link" variant="primary" to="update">
               Edit
             </Clickable>
           )}
 
           {/* Leave Dialog */}
-          {canLeave && !hasLeft && (
+          {canLeave && !hasLeft && isNotSameUser && (
             <Dialog>
               <DialogTrigger asChild>
                 <Clickable
@@ -132,7 +141,8 @@ export default function EmployeeCard<T extends EmployeeEntities>({
                     <Clickable
                       onClick={() => {
                         fetcher.submit(null, {
-                          method: "delete",
+                          method: "POST",
+                          action: "./delete",
                         });
                       }}
                       as="button"

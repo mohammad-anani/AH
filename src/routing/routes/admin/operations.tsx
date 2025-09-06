@@ -1,5 +1,5 @@
 import OperationDoctorListPage from "@/features/doctor/OperationDoctorListPage";
-import { route } from "@/routing/entityRoute";
+import { Route } from "@/routing/entityRoute";
 import listLoader from "@/utils/loaders/listLoader";
 import { operation } from "@/utils/models/componentsConfig/admin";
 import type { RouteObject } from "react-router-dom";
@@ -22,7 +22,7 @@ const doctorsRoute: RouteObject[] = [
   },
 ];
 
-export const operationsRoutes = route(
+export const operationsRoutes = Route(
   "Operation",
   false,
   false,

@@ -20,7 +20,8 @@ export default function addUpdateAction(
       const isAdd = request.url.endsWith("/add");
 
       if (!isAdd) {
-        const id = request.url.split("/")[-2];
+        const urlparts = request.url.split("/");
+        const id = urlparts[urlparts.length - 2];
         const success = await update(
           data,
           `${toKebabCase(pluralize.plural(entity))}/${id}`,

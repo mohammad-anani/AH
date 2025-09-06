@@ -1,7 +1,7 @@
-import { route } from "@/routing/entityRoute";
+import { Route } from "@/routing/entityRoute";
 import { department } from "@/utils/models/componentsConfig/admin";
 
-export const departmentsRoutes = route(
+export const departmentsRoutes = Route(
   "Department",
   true,
   true,

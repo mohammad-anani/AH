@@ -1,16 +1,20 @@
 import { Route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
 import listLoader from "@/utils/loaders/listLoader";
-import { insurance } from "@/utils/models/componentsConfig/receptionist";
-
+import { insurance, patient } from "@/utils/models/componentsConfig/admin";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 import type { RouteObject } from "react-router-dom";
 
 const insuranceListRoute: RouteObject[] = [
   {
-    index: true,
-    loader: listLoader("Insurance", undefined, ["PatientID"]),
+    path: "insurances",
+    loader: listLoader(
+      "Insurance",
+      undefined,
+      undefined,
+      ({ id }) => `patients/${id}/insurances`,
+    ),
     element: (
       <ListPage
         entity="Insurance"
@@ -24,15 +28,13 @@ const insuranceListRoute: RouteObject[] = [
   },
 ];
 
-export const insuranceRoute = Route(
-  "Insurance",
-  true,
-  true,
+export const patientsRoutes = Route(
+  "Patient",
   false,
-  insurance,
   false,
+  true,
+  patient,
+  true,
   undefined,
-  [[insuranceListRoute, "index"]],
-  false,
-  true,
+  [[insuranceListRoute, "id"]],
 );

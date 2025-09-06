@@ -1,6 +1,5 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
+
 import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
 
 import { stringField, numberField } from "../../utils/filterReusableFields";
@@ -16,7 +15,7 @@ export const testType: RouteConfig<"TestType"> = {
       Department,
       `/receptionist/departments/${Department.ID}`,
       "Department",
-      department.selectorDisplay as SelectorDisplay<EntityKey>,
+      department.selectorDisplay(Department),
     ],
     ["Cost", formatMoney(Cost)],
   ],

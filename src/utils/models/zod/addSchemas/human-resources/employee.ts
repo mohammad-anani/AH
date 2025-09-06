@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { AddPersonSchema } from "./person.ts";
-import { positiveNumber, datetime } from "../../reusableSchemas";
+import { date, positiveNumber } from "../../reusableSchemas";
 
 // CreateEmployeeDTO - extends EmployeeFormDTO with password field (CreatedByAdminID removed as BindNever)
 export const AddEmployeeSchema = AddPersonSchema.extend({
@@ -14,7 +14,7 @@ export const AddEmployeeSchema = AddPersonSchema.extend({
       message: "Salary must be an integer",
     }),
 
-  HireDate: datetime("Hire date"),
+  HireDate: date("Hire date"),
 
   WorkingDays: z.array(z.string()).default([]),
 

@@ -1,7 +1,5 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { SelectorDisplay } from "@/utils/models/types/utils/selectorTypes";
 
 import {
   adminFilterSelectorField,
@@ -24,7 +22,7 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
           TestOrder,
           `/admin/services/test-orders/${TestOrder.ID}`,
           "TestOrder",
-          testOrder.selectorDisplay as SelectorDisplay<EntityKey>,
+          testOrder.selectorDisplay(TestOrder),
         ]
       : ["Test Order", "None"],
     [
@@ -32,7 +30,7 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
       TestType,
       `/admin/general/test-types/${TestType.ID}`,
       "TestType",
-      testType.selectorDisplay as SelectorDisplay<EntityKey>,
+      testType.selectorDisplay(TestType),
     ],
 
     ...service["dataFields"](Service),

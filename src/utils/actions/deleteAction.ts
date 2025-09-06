@@ -20,6 +20,8 @@ export default function deleteAction(
         throw new Error("No ID provided for deletion");
       }
 
+      console.log(ID);
+  
       await Delete(`${toKebabCase(pluralize.plural(entity))}/${ID}`);
 
       toast(`${entity} deleted successfully!`, "success");

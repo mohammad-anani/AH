@@ -17,12 +17,15 @@ export const receptionist: RouteConfig<"Receptionist"> = {
 
   selectorDisplay: ({ FullName }) => FullName,
   subLinks: ({ ID }) => [
-    ["Show Appointments", `/admin/appointments?ReceptionistID=${ID}`],
+    ["Show Appointments", `/admin/appointments?CreatedByReceptionistID=${ID}`],
     [
       "Show Tests Appointments",
-      `/admin/tests/appointments?ReceptionistID=${ID}`,
+      `/admin/tests/appointments?CreatedByReceptionistID=${ID}`,
     ],
-    ["Show Patients", `/admin/human-resources/patients?ReceptionistID=${ID}`],
-    ["Show Operartions", `/admin/operations?ReceptionistID=${ID}`],
+    [
+      "Show Patients",
+      `/admin/human-resources/patients?CreatedByReceptionistID=${ID}`,
+    ],
+    ["Show Operartions", `/admin/operations?CreatedByReceptionistID=${ID}`],
   ],
 };

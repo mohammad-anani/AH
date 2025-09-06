@@ -1,4 +1,4 @@
-import { route } from "@/routing/entityRoute";
+import { Route } from "@/routing/entityRoute";
 
 import ServiceProcess, {
   type Process,
@@ -132,7 +132,7 @@ export function serviceRoute<T extends ServicesEntities>(
     },
   ];
 
-  return route(
+  return Route(
     entity,
     canAdd,
     canEdit,
