@@ -1,6 +1,10 @@
 import { FormDoctorSchema } from "../../formSchemas/human-resources/doctor";
-import { positiveNumber } from "../../reusableSchemas";
+import { nonEmptyString, positiveNumber } from "../../reusableSchemas";
 
 export const UpdateDoctorSchema = FormDoctorSchema.extend({
-  ID: positiveNumber("Doctor ID", 1),
+  Specialization: nonEmptyString("Specialization").min(5).max(100, {
+    message: "Specialization must be between 5 and 100 characters.",
+  }),
+
+  CostPerAppointment: positiveNumber("Cost per appointment", 1),
 });

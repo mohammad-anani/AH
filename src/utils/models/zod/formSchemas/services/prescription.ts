@@ -1,26 +1,34 @@
 import { z } from "zod";
-import {
-  positiveNumber,
-  nonEmptyString,
-  datetime,
-} from "../../reusableSchemas";
+import { nonEmptyString, datetime } from "../../reusableSchemas";
 
-export const FormPrescriptionSchema = z.object({
-  DrugName: nonEmptyString("Drug name").min(3).max(30, {
-    message: "Drug name must be between 3 and 30 characters.",
-  }),
+export const FormPrescriptionSchema = z
+  .object({
+    Diagnosis: nonEmptyString("Diagnosis").min(10).max(256, {
+      message: "Diagnosis must be between 10 and 256 characters.",
+    }),
 
-  Dosage: nonEmptyString("Dosage").min(3).max(50, {
-    message: "Dosage must be between 3 and 50 characters.",
-  }),
+    Medication: nonEmptyString("Medication").min(5).max(256, {
+      message: "Medication must be between 5 and 256 characters.",
+    }),
 
-  Instructions: nonEmptyString("Instructions").min(3).max(100, {
-    message: "Instructions must be between 3 and 100 characters.",
-  }),
+    Dosage: nonEmptyString("Dosage").min(5).max(256, {
+      message: "Dosage must be between 5 and 256 characters.",
+    }),
 
-  IssueDate: datetime("Issue date"),
+    Frequency: nonEmptyString("Frequency").min(5).max(256, {
+      message: "Frequency must be between 5 and 256 characters.",
+    }),
 
-  DoctorID: positiveNumber("Doctor ID", 1),
+    MedicationStart: datetime("Medication start date"),
 
-  PatientID: positiveNumber("Patient ID", 1),
-});
+    MedicationEnd: datetime("Medication end date"),
+  })
+  .refine(
+    (data) => {
+      return new Date(data.MedicationEnd) > new Date(data.MedicationStart);
+    },
+    {
+      message: "Medication end date must be after medication start date.",
+      path: ["MedicationEnd"],
+    },
+  );

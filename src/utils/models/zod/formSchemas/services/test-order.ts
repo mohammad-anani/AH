@@ -1,10 +1,3 @@
-import { TestOrderSchema } from "../../schemas/services/test-order";
-import { positiveNumber } from "../../reusableSchemas";
+import z from "zod";
 
-export const FormTestOrderSchema = TestOrderSchema.omit({
-  Appointment: true,
-  TestType: true,
-}).extend({
-  AppointmentID: positiveNumber("Appointment ID", 1),
-  TestTypeID: positiveNumber("Test Type ID", 1),
-});
+export const FormTestOrderSchema = z.object();

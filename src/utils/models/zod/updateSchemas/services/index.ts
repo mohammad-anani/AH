@@ -1,9 +1,9 @@
 export { UpdateServiceSchema } from "./service";
 export { UpdateAppointmentSchema } from "./appointment";
-export { UpdateTestAppointmentSchema } from "./testAppointment";
+export { UpdateTestAppointmentSchema } from "./test-appointment";
 export { UpdateOperationSchema } from "./operation";
 export { UpdatePrescriptionSchema } from "./prescription";
-export { UpdateTestTypeSchema } from "./testType";
+export { UpdateTestTypeSchema } from "../general/test-type";
 export { StartServiceSchema } from "./startService";
 export { CancelServiceSchema } from "./cancelService";
 export { CompleteServiceSchema } from "./completeService";

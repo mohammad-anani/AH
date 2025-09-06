@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { positiveNumber, nonEmptyString } from "../../reusableSchemas";
+import { nonEmptyString } from "../../reusableSchemas";
 
 export const FormServiceSchema = z.object({
-  Name: nonEmptyString("Name").min(3).max(30, {
-    message: "Name must be between 3 and 30 characters.",
+  Reason: nonEmptyString("Reason").min(10, {
+    message: "Reason must be at least 10 characters.",
   }),
 
-  Price: positiveNumber("Price"),
+  Notes: z.string().optional(),
 });

@@ -1,9 +1,7 @@
 import { z } from "zod";
-import { positiveNumber, date } from "../../reusableSchemas";
+import { date } from "../../reusableSchemas";
 
 export const RenewInsuranceSchema = z.object({
-  ID: positiveNumber("Insurance ID", 1),
-
   ExpirationDate: date("Expiration date").refine(
     (val) => {
       const expDate = new Date(val);
