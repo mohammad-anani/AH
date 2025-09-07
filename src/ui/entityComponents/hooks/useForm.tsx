@@ -54,7 +54,6 @@ export default function useForm<T extends EntityKey>(
         </>
       );
     }
-
     const InputComponent = inputMap[type as DataTypes] || UnsupportedInput;
 
     return <InputComponent {...commonProps} />;

@@ -43,9 +43,19 @@ export const person: DisplayingConfig<"Person"> = {
     ["Middle Name", "MiddleName", "string", "both"],
     ["Last Name", "LastName", "string", "both"],
     ["Birth Date", "BirthDate", "date", "both"],
-    ["Gender", "Gender", "boolean", "both", ["Male", "Female", "None"]],
+    [
+      "Gender",
+      "Gender",
+      "uniselect",
+      "both",
+      [
+        { value: "M", label: "Male" },
+        { value: "F", label: "Female" },
+      ],
+    ],
     ["Country", "CountryID", "custom", "both", CountryFormSelectCallBack],
     ["Phone", "Phone", "phone", "both"],
     ["Email", "Email", "email", "both"],
+    ["Password", "Password", "password", "add"],
   ],
 };

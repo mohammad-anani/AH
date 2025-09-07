@@ -35,7 +35,7 @@ export default function ServiceCard<T extends ServicesEntities>({
   canReschedule = false,
 }: CardProps<T>) {
   const object = useOutletContext<typesObject[T]>();
-  const status = object.Status;
+  const status = object.Service.Status;
 
   return (
     <>

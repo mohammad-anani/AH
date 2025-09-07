@@ -28,10 +28,41 @@ export default function useAddUpdateForm<T extends EntityKey>(entity: T) {
 
   const isAdd = location.pathname.includes("/add");
 
+  // Dummy data for Patient entity
+  const patientDummyData =
+    entity === "Patient"
+      ? {
+          FirstName: "John",
+          MiddleName: "Michael",
+          LastName: "Doe",
+          Gender: "M",
+          BirthDate: "1990-05-15",
+          CountryID: 1,
+          Phone: "12345678",
+          Email: "john.doe@example.com",
+          Password: "password123",
+        }
+      : undefined;
+
+  // Dummy data for TestAppointment entity
+  const testAppointmentDummyData =
+    entity === "TestAppointment"
+      ? {
+          ScheduledDate: "2025-09-10T10:00",
+          BillAmount: 150,
+          Reason: "Regular blood test appointment for health checkup",
+          Notes: "Patient has no special requirements",
+        }
+      : undefined;
+
+  const dummy = patientDummyData || testAppointmentDummyData;
+
   const schema = isAdd ? addSchemas[entity] : updateSchemas[entity];
-  const defaultValues = isAdd
-    ? { ...emptyObjects[entity], ...navData }
-    : convertToUpdateObject(data);
+  const defaultValues =
+    dummy ||
+    (isAdd
+      ? { ...emptyObjects[entity], ...navData }
+      : convertToUpdateObject(data));
 
   console.log(defaultValues);
 

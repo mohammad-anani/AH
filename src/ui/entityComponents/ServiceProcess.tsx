@@ -2,10 +2,7 @@ import type { ServicesEntities } from "./ServicesCard";
 import Clickable from "../customComponents/Clickable";
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import H2 from "../customComponents/H2";
-import type {
-  customFormProps,
-  DataTypes,
-} from "@/utils/models/types/utils/Form&Filter";
+import type { customFormProps } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { inputMap } from "@/utils/models/inputMap";
 
@@ -18,12 +15,18 @@ import {
   useSubmit,
   type SubmitTarget,
 } from "react-router-dom";
-import { FormProvider, useForm, type Primitive } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import throwError from "@/utils/helpers/throwError";
 import type { FormKey } from "@/routing/serviceRoute";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { schemas } from "@/utils/models/zod/formSchemas/formSchemas";
+import {
+  StartServiceSchema,
+  CancelServiceSchema,
+  CompleteServiceSchema,
+  RescheduleServiceSchema,
+} from "@/utils/models/zod/updateSchemas/services";
+import { convertToUpdateObject } from "@/utils/helpers/flatten";
 
 export type Process = "Start" | "Cancel" | "Complete" | "Reschedule";
 
@@ -38,13 +41,27 @@ export default function ServiceProcess<T extends ServicesEntities>({
 }) {
   const submit = useSubmit();
   const object = useOutletContext() as typesObject[T];
-  const { Status } = object;
+  const { Service } = object;
+  const { Status } = Service;
 
-  const defaultValues = object;
+  // Schema mapping for different service processes
+  const processSchemas = {
+    Start: StartServiceSchema,
+    Cancel: CancelServiceSchema,
+    Complete: CompleteServiceSchema,
+    Reschedule: RescheduleServiceSchema,
+  };
 
+  const schema = processSchemas[process];
+  if (!schema) {
+    throwError(500, `Unknown process type: ${process}`);
+  }
+
+  const defaultValues = convertToUpdateObject(object);
+  console.log(defaultValues);
   const methods = useForm({
     defaultValues: defaultValues,
-    resolver: zodResolver(schemas[entity]),
+    resolver: zodResolver(schema),
   });
 
   const { handleSubmit } = methods;
@@ -81,7 +98,7 @@ export default function ServiceProcess<T extends ServicesEntities>({
           method="POST"
           onSubmit={handleSubmit((data) => {
             submit(data as SubmitTarget, {
-              method: "POST",
+              method: "PATCH",
               encType: "application/json",
             });
           })}
@@ -139,7 +156,9 @@ const renderField = (field: FormKey<EntityKey>) => {
     );
   }
 
-  const InputComponent = inputMap[type as DataTypes] || UnsupportedInput;
+  const InputComponent =
+    inputMap[type as keyof typeof inputMap] || UnsupportedInput;
 
+  // @ts-expect-error - Complex type inference issue with generic input components
   return <InputComponent {...commonProps} />;
 };

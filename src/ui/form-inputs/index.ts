@@ -5,6 +5,7 @@ export { default as PhoneInput } from "./PhoneInput";
 export { default as BooleanInput } from "./BooleanInput";
 export { default as TemporalInput } from "./TemporalInput";
 export { default as EmailInput } from "./EmailInput";
+export { default as PasswordInput } from "./PasswordInput";
 
 // Select components
 export { default as ArrayInput } from "./MultiSelectInput";

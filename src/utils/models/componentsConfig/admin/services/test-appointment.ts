@@ -56,3 +56,5 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     [1, 1, 1, 1, 1],
   ],
 };
+
+//payment sublink

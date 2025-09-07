@@ -46,7 +46,7 @@ export const service: RouteConfig<"Service"> = {
     ["Result Date", ResultDate ? formatDateIsoToLocal(ResultDate) : "N/A"],
     ["Notes", Notes?.length ? Notes : "N/A"],
     ["Bill", Bill ? formatMoney(Bill.Amount) : "N/A"],
-    ["Paid", Bill ? formatMoney(Bill.AmountPaid) : "N/A"],
+    ["Paid", Bill.AmountPaid ? formatMoney(Bill.AmountPaid) : "N/A"],
     [
       "Created By",
       CreatedByReceptionist,
@@ -73,7 +73,9 @@ export const service: RouteConfig<"Service"> = {
     datetimeField("CreatedAt"),
   ],
   formConfig: [
-    ["Name", "Name", "string", "both"],
-    ["Price", "Price", "money", "both"],
+    ["Patient", "PatientID", "selector", "add", ["Patient", patient, "Admin"]],
+    ["Scheduled Date", "ScheduledDate", "datetime", "add"],
+    ["Reason", "Reason", "string", "both"],
+    ["Notes", "Notes", "string", "both"],
   ],
 };

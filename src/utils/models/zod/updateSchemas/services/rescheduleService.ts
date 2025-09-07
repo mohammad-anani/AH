@@ -4,7 +4,7 @@ import { datetime } from "../../reusableSchemas";
 export const RescheduleServiceSchema = z.object({
   Notes: z.string().optional(),
 
-  NewScheduledDate: datetime("New scheduled date").refine(
+  ScheduledDate: datetime("New scheduled date").refine(
     (val) => {
       const schedDate = new Date(val);
       const now = new Date();

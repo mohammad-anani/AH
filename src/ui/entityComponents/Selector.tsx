@@ -63,6 +63,7 @@ export default function Selector<T extends EntityKey>({
     listData,
     searchParamsState,
     title,
+    isLoading,
   } = useSelector(
     entity,
     selectedObjectState,
@@ -70,10 +71,12 @@ export default function Selector<T extends EntityKey>({
     data,
   );
 
+  //added testapp,check /id
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <SelectorTrigger
-        disabled={disabled}
+        disabled={disabled || isLoading}
         selectedObject={selectedObjectState}
         selectedDisplay={entityObject.selectorDisplay}
         entity={entity}

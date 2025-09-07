@@ -19,10 +19,4 @@ export const AddServiceSchema = FormServiceSchema.extend({
       return schedDate > now && schedDate <= oneYearFromNow;
     }, "Scheduled date must be in the future and within one year")
     .refine((val) => val !== "", "Scheduled date is required"),
-
-  BillAmount: z
-    .number({ message: "Bill amount must be a number" })
-    .min(10, "Bill amount must be between 10 and 99,999")
-    .max(99999, "Bill amount must be between 10 and 99,999")
-    .refine((val) => val > 0, "Bill amount is required"),
 });

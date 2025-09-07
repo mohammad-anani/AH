@@ -11,13 +11,13 @@ export default function processService(entity: ServicesEntities) {
   return async function ({ request, params }: ActionFunctionArgs) {
     const url = new URL(request.url);
     const path = url.pathname; // e.g. "/api/service/complete"
-
+    const data = await request.json();
     const parts = path.split("/").filter(Boolean);
     const lastSegment = parts[parts.length - 1];
 
     try {
       await patch(
-        {},
+        data,
         `${toKebabCase(pluralize.plural(entity))}/${params?.["id"]}/${lastSegment}`,
       );
 

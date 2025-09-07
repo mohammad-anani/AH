@@ -6,14 +6,9 @@ export const testAppointmentsRoutes = serviceRoute(
   testAppointment,
 
   [
-    ["Result", "Service.Result", "text", new Set(["Complete"])],
-    ["Notes", "Service.Notes", "text", "All"],
-    [
-      "Schedule Date",
-      "Service.ScheduledDate",
-      "datetime",
-      new Set(["Reschedule"]),
-    ],
+    ["Result", "Result", "text", new Set(["Complete"])],
+    ["Notes", "Notes", "text", "All"],
+    ["Schedule Date", "ScheduledDate", "datetime", new Set(["Reschedule"])],
   ],
   undefined,
   true,

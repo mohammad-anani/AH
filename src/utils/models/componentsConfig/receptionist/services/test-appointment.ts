@@ -73,7 +73,7 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
       item.Status,
       item.IsPaid,
     ],
-    [1, 1, 1, 1, 1],
+    [1, 1, 2, 1, 1],
   ],
-  subLinks: () => [],
+  subLinks: () => [["View Payments", "payments"]],
 };

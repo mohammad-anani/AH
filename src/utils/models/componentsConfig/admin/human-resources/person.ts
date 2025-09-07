@@ -56,5 +56,6 @@ export const person: DisplayingConfig<"Person"> = {
     ["Country", "CountryID", "custom", "both", CountryFormSelectCallBack],
     ["Phone", "Phone", "phone", "both"],
     ["Email", "Email", "email", "both"],
+    ["Password", "Password", "password", "add"],
   ],
 };

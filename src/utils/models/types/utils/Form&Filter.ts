@@ -23,7 +23,8 @@ export type DataTypes =
   | "money"
   | "selector"
   | "email"
-  | "object";
+  | "object"
+  | "password";
 
 export type customFilterProps = [
   (data: {
@@ -45,7 +46,7 @@ export type customFormProps = [
 
 export type FormKey<T extends DisplayEntityKey> = [
   label: string,
-  fieldKey: DotAccess<addTypesObject[T] | updateTypesObject[T]>,
+  fieldKey: DotAccess<addTypesObject[T]> | DotAccess<updateTypesObject[T]>,
   type: DataTypes | "custom",
   mode: "add" | "update" | "both",
   data?:

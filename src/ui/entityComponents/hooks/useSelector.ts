@@ -62,7 +62,10 @@ export default function useSelector<T extends EntityKey>(
   }, [CardID]);
 
   const title = formatTitle(entity);
-
+  const isLoading =
+    findFetcher.state === "loading" ||
+    cardFetcher.state === "loading" ||
+    listFetcher.state === "loading";
   return {
     isOpen,
     setIsOpen,
@@ -75,6 +78,7 @@ export default function useSelector<T extends EntityKey>(
     searchParamsState,
 
     title,
+    isLoading,
   };
 }
 

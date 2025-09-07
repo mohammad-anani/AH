@@ -22,10 +22,12 @@ import type {
   EntityKey,
 } from "@/utils/models/types/utils/entityKeys";
 import type { Primitive } from "react-hook-form";
+import type { addTypesObject } from "@/utils/models/types/add";
+import type { updateTypesObject } from "@/utils/models/types/update";
 
 export type FormKey<T extends DisplayEntityKey> = [
   label: string,
-  fieldKey: DotAccess<typesObject[T]>,
+  fieldKey: DotAccess<addTypesObject[T]> | DotAccess<updateTypesObject[T]>,
   type: DataTypes | "custom",
   mode: Set<Process> | "All",
   data?:

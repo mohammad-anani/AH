@@ -6,7 +6,7 @@ export const fetchingPaths: { [K in FetchingEntityKey]: string } = {
   Doctor: "/admin/human-resources/doctors/list",
   Patient: "/admin/human-resources/patients/list",
   Receptionist: "/admin/human-resources/receptionists/list",
-  TestType: "/admin/tests/types",
+  TestType: "/admin/tests/types/list",
   Appointment: "/admin/appointments",
   TestOrder: "/admin/tests/orders",
   TestAppointment: "/admin/tests/appointments",

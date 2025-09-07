@@ -10,6 +10,7 @@ import {
   BooleanInput,
   TemporalInput,
   TextareaInput,
+  PasswordInput,
 } from "../../ui/form-inputs";
 
 export const inputMap = {
@@ -26,4 +27,6 @@ export const inputMap = {
   datetime: TemporalInput,
   time: TemporalInput,
   text: TextareaInput,
+
+  password: PasswordInput,
 } as const;

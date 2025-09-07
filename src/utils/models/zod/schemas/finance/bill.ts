@@ -6,5 +6,5 @@ export const BillSchema = z.object({
 
   Amount: positiveNumber("Amount", 1),
 
-  AmountPaid: positiveNumber("Amount paid", 0),
+  AmountPaid: positiveNumber("Amount paid", 0).nullable(),
 });
