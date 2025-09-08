@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { nonEmptyString } from "../../reusableSchemas";
+import { nonEmptyString, positiveNumber } from "../../reusableSchemas";
 
 export const CompleteServiceSchema = z.object({
   Notes: z.string().optional(),
@@ -7,4 +7,5 @@ export const CompleteServiceSchema = z.object({
   Result: nonEmptyString("Result").min(3).max(256, {
     message: "Result must be between 3 and 256 characters.",
   }),
+  TestTypeIDs: z.array(positiveNumber("doctor id")).optional().nullable(),
 });

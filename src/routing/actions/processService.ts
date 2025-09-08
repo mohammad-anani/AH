@@ -12,6 +12,7 @@ export default function processService(entity: ServicesEntities) {
     const url = new URL(request.url);
     const path = url.pathname; // e.g. "/api/service/complete"
     const data = await request.json();
+
     const parts = path.split("/").filter(Boolean);
     const lastSegment = parts[parts.length - 1];
 

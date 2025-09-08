@@ -75,5 +75,5 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ],
     [1, 1, 2, 1, 1],
   ],
-  subLinks: () => [["View Payments", "payments"]],
+  subLinks: () => [],
 };

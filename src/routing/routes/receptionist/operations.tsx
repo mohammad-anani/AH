@@ -1,5 +1,10 @@
+import OperationDoctorListPage from "@/features/doctor/OperationDoctorListPage";
 import { Route } from "@/routing/entityRoute";
+import operationUpdateLoader from "@/routing/loaders/operationUpdateLoader";
+import { serviceRoute } from "@/routing/serviceRoute";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
 import ListPage from "@/ui/entityComponents/ListPage";
+import addUpdateAction from "@/utils/actions/addUpdateAction";
 import listLoader from "@/utils/loaders/listLoader";
 import {
   doctor,
@@ -11,27 +16,59 @@ import type { RouteObject } from "react-router-dom";
 const doctorsRoute: RouteObject[] = [
   {
     path: "doctors",
-    loader: listLoader("Doctor", ({ id }) => `/operations/${id}`),
+    loader: listLoader(
+      "OperationDoctor",
+      undefined,
+      undefined,
+      ({ id }) => `/operations/${id}/doctors`,
+    ),
     element: (
-      <ListPage
-        entity="Doctor"
-        canAdd={false}
-        rowTemplate={doctor["rowTemplate"]}
-        withBack={true}
-        canModifyUrl={false}
+      <OperationDoctorListPage
         detailsLink={(ID) => `/receptionist/human-resources/doctors/${ID}`}
       />
     ),
   },
 ];
 
-export const operationsRoutes = Route(
+const updateRoute: RouteObject[] = [
+  {
+    path: "update",
+    loader: operationUpdateLoader,
+    element: (
+      <AddUpdateForm
+        formConfig={operation["formConfig"]}
+        entity={"Operation"}
+      />
+    ),
+    action: addUpdateAction(
+      "Operation",
+      (request) => `${request.url.replace("/update", "")}`,
+    ),
+  },
+];
+
+export const operationsRoutes = serviceRoute(
   "Operation",
+  operation,
+  [
+    ["Notes", "Notes", "text", "All"],
+    ["Scheduled Date", "ScheduledDate", "datetime", new Set(["Reschedule"])],
+  ],
+  [
+    [doctorsRoute, "id"],
+    [updateRoute, "id"],
+  ],
+  true,
+  true,
   true,
   true,
   false,
-  operation,
+  false,
   false,
   undefined,
-  [[doctorsRoute, "id"]],
+  true,
+  true,
+  undefined,
+  true,
+  "Receptionist",
 );

@@ -20,15 +20,12 @@ import TemporalInput from "@/ui/form-inputs/TemporalInput";
 import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
+import { AddTestAppointmentFromTestOrderSchema } from "@/utils/models/zod/addSchemas";
 
 export default function MakeAppointment() {
   const testOrder = useOutletContext<TestOrder>();
   const methods = useForm({
-    resolver: zodResolver(
-      TestAppointmentSchema.pick({ Service: true }).transform((data) => ({
-        Service: { ScheduledDate: data.Service.ScheduledDate },
-      })),
-    ),
+    resolver: zodResolver(AddTestAppointmentFromTestOrderSchema),
   });
   const submit = useSubmit();
 
@@ -41,7 +38,11 @@ export default function MakeAppointment() {
 
   useEffect(() => {
     if (testOrder?.TestType?.ID) {
-      fetcher.load(fetchingPaths["TestType"] + "/" + testOrder?.TestType?.ID);
+      fetcher.load(
+        fetchingPaths["TestType"].replace("/list", "") +
+          "/" +
+          testOrder?.TestType?.ID,
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testOrder?.TestType?.ID]);

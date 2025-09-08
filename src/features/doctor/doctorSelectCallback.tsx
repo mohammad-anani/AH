@@ -33,6 +33,8 @@ export const DoctorFormSelectorCallback: customFormProps = [
       field as [ID: number, Role: string][] | undefined,
       onChange as Setter<{ ID: number; Role: string }[] | undefined>,
     );
+    console.log(selectedDoctors);
+
     return (
       <DoctorSelect
         disabled={isSubmitting}
@@ -51,7 +53,6 @@ export const DoctorFilterSelectorCallback: customFilterProps = [
       field as [id: number, role: string][] | undefined,
       onChange as Setter<{ ID: number; Role: string }[] | undefined>,
     );
-
     return (
       <DoctorSelect
         doctors={selectedDoctors}

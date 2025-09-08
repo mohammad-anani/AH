@@ -44,6 +44,7 @@ export default function listLoader(
     }
 
     const apiSchema = z.tuple([z.array(schema), z.number()]);
+
     const result = apiSchema.safeParse(data);
 
     if (!result.success) {
@@ -53,7 +54,6 @@ export default function listLoader(
         "Sorry, we received unexpected data from the server. Please try again later.",
       );
     }
-
     return data;
   };
 }

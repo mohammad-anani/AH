@@ -16,7 +16,6 @@ import type {
 } from "@/utils/models/types/utils/Form&Filter";
 import type { Params, RouteObject } from "react-router-dom";
 import processService from "./actions/processService";
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type {
   DisplayEntityKey,
   EntityKey,
@@ -24,6 +23,11 @@ import type {
 import type { Primitive } from "react-hook-form";
 import type { addTypesObject } from "@/utils/models/types/add";
 import type { updateTypesObject } from "@/utils/models/types/update";
+import listLoader from "@/utils/loaders/listLoader";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
+import { payment } from "@/utils/models/componentsConfig/receptionist";
+import { AddPaymentSchema } from "@/utils/models/zod/addSchemas";
+import payAction from "./actions/pay";
 
 export type FormKey<T extends DisplayEntityKey> = [
   label: string,
@@ -54,8 +58,10 @@ export function serviceRoute<T extends ServicesEntities>(
   withList: boolean = true,
   withID: boolean = true,
   urlPathPrefix?: string,
-
   canReschedule: boolean = false,
+  Role: Role = "Receptionist",
+  showPaymentTable: boolean = true,
+  canPay: boolean = true,
 ) {
   const Card: RouteObject[] = [
     {
@@ -70,6 +76,8 @@ export function serviceRoute<T extends ServicesEntities>(
           canComplete={canComplete}
           canEdit={canEdit}
           canReschedule={canReschedule}
+          canPay={canPay}
+          showPaymentTable={showPaymentTable}
         />
       ),
     },
@@ -133,6 +141,35 @@ export function serviceRoute<T extends ServicesEntities>(
       ),
     },
   ];
+  const entityPath =
+    entity === "TestAppointment"
+      ? "test-appointments"
+      : entity.toLowerCase() + "s";
+
+  const payments: RouteObject[] = [
+    {
+      path: "payments",
+      loader: listLoader("Payment", ({ id }) => {
+        return `${entityPath}/${id}`;
+      }),
+    },
+  ];
+
+  const pay: RouteObject[] = [
+    {
+      path: "pay",
+      action: payAction(({ id }) => entityPath + `/${id}/pay`),
+      element: (
+        <AddUpdateForm
+          formConfig={payment["formConfig"]}
+          entity={"Payment"}
+          isAdd={true}
+          submitText="Pay"
+          title="Make Payment"
+        />
+      ),
+    },
+  ];
 
   return Route(
     entity,
@@ -148,6 +185,8 @@ export function serviceRoute<T extends ServicesEntities>(
       canCancel ? [Cancel, "id"] : [[], "id"],
       canComplete ? [Complete, "id"] : [[], "id"],
       canReschedule ? [Reschedule, "id"] : [[], "id"],
+      [payments, "id"],
+      [pay, "id"],
       ...(extraRoutes || []),
     ],
     withList,

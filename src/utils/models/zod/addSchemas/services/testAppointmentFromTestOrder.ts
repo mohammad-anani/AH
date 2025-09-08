@@ -1,9 +1,7 @@
 import { z } from "zod";
-import { positiveNumber, datetime } from "../../reusableSchemas";
+import { datetime } from "../../reusableSchemas";
 
 export const AddTestAppointmentFromTestOrderSchema = z.object({
-  TestOrderID: positiveNumber("Test Order ID", 1),
-
   ScheduledDate: datetime("Scheduled date").refine(
     (val) => {
       const schedDate = new Date(val);
@@ -16,8 +14,4 @@ export const AddTestAppointmentFromTestOrderSchema = z.object({
       message: "Scheduled date must be in the future and within one year.",
     },
   ),
-
-  Notes: z.string().optional(),
-
-  CreatedByReceptionistID: positiveNumber("Created By Receptionist ID", 1),
 });

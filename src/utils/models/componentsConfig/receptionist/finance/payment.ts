@@ -8,15 +8,15 @@ export const payment: RouteConfig<"Payment"> = {
   ],
 
   formConfig: [
-    ["Amount", "Amount", "number", "add"],
+    ["Amount", "Amount", "money", "add"],
     [
       "Method",
       "Method",
       "uniselect",
       "add",
       [
-        { label: "Card", value: 1 },
-        { label: "Cash", value: 2 },
+        { label: "Card", value: "Card" },
+        { label: "Cash", value: "Cash" },
       ],
     ],
   ],

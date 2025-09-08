@@ -21,11 +21,12 @@ export default function useListPage<T extends EntityKey>(
   detailsLink?: (ID: number) => string,
 ) {
   const loaderData = useLoaderData();
-
   const [isFilterOpen, setIsFilterOpen] = useFilter(
     searchParamsState?.[0].toString(),
   );
-  const [items, itemsCount] = searchParamsState && data ? data : loaderData;
+
+  // const [items, itemsCount] = searchParamsState && data ? data : loaderData;
+  const [items, itemsCount] = data ?? loaderData;
 
   const [headerFields, dataFields, gridFr] = rowTemplate;
 

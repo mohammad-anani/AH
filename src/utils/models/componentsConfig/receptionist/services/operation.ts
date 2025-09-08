@@ -4,7 +4,10 @@ import { stringField } from "../../utils/filterReusableFields";
 import type { RouteConfig } from "../../routeConfig";
 import { receptionistFilterSelectorField } from "../../utils/RoleUtil";
 import { department } from "../general/department";
-import { service } from "../../admin/services/service";
+
+import { DepartmentFormSelectCallBack } from "@/features/department/departmentSelectCallback";
+import { DoctorFormSelectorCallback } from "@/features/doctor/doctorSelectCallback";
+import { service } from "../../admin";
 
 export const operation: RouteConfig<"Operation"> = {
   dataFields: ({
@@ -31,7 +34,26 @@ export const operation: RouteConfig<"Operation"> = {
     receptionistFilterSelectorField("DepartmentID", "Department", department),
     ...service["filterFields"],
   ],
-  formConfig: [["Name", "Name", "string", "both"]],
+  formConfig: [
+    ["Name", "Name", "string", "both"],
+    ["Description", "Description", "string", "both"],
+    [
+      "Department",
+      "DepartmentID",
+      "custom",
+      "add",
+      DepartmentFormSelectCallBack,
+    ],
+    [
+      "Doctor",
+      "OperationDoctors",
+      "custom",
+      "both",
+      DoctorFormSelectorCallback,
+    ],
+    ["Bill", "Amount", "money", "add"],
+    ...service["formConfig"],
+  ],
   selectorDisplay: ({ Name, PatientFullName, Status }) =>
     Name + " | Patient:" + PatientFullName + " | " + Status,
 

@@ -1,5 +1,7 @@
+import { TestTypeFormSelectorCallback } from "@/features/testOrder/TestTypeSelectCallback";
 import { serviceRoute } from "@/routing/serviceRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
+import { decodeJwt } from "@/utils/helpers/jwt-decoder";
 
 import listLoader from "@/utils/loaders/listLoader";
 import { appointment, testOrder } from "@/utils/models/componentsConfig/doctor";
@@ -22,10 +24,23 @@ const testOrdersRoute: RouteObject[] = [
   },
 ];
 
+const token = localStorage.getItem("token");
+const doctorID = decodeJwt(token ?? "")?.sub;
+
 export const appointmentsRoutes = serviceRoute(
   "Appointment",
   appointment,
-  [["Notes", "Notes", "text", "All"]],
+  [
+    ["Notes", "Notes", "text", "All"],
+    ["Result", "Result", "text", "All"],
+    [
+      "Tests",
+      "TestTypeIDs",
+      "custom",
+      ["Complete"],
+      TestTypeFormSelectorCallback,
+    ],
+  ],
   [[testOrdersRoute, "id"]],
   false,
   false,
@@ -34,9 +49,12 @@ export const appointmentsRoutes = serviceRoute(
   false,
   false,
   true,
-  undefined,
+  () => `doctors/${doctorID}`,
   true,
   true,
   undefined,
+  false,
+  "Doctor",
+  false,
   false,
 );

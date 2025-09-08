@@ -2,7 +2,7 @@ import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 
 import { formatTitle } from "@/utils/formatters/formatTitle";
-import { useOutletContext } from "react-router-dom";
+import { useFetcher, useLocation, useOutletContext } from "react-router-dom";
 
 import Data from "./Data";
 import type {
@@ -10,6 +10,9 @@ import type {
   SubLinks,
 } from "@/utils/models/types/utils/routeTypes";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import { useEffect } from "react";
+import ListPage from "./ListPage";
+import { payment } from "@/utils/models/componentsConfig/receptionist";
 
 export type ServicesEntities = "TestAppointment" | "Appointment" | "Operation";
 
@@ -22,6 +25,8 @@ type CardProps<T extends ServicesEntities> = {
   canComplete?: boolean;
   canEdit?: boolean;
   canReschedule?: boolean;
+  canPay?: boolean;
+  showPaymentTable?: boolean;
 };
 
 export default function ServiceCard<T extends ServicesEntities>({
@@ -33,9 +38,32 @@ export default function ServiceCard<T extends ServicesEntities>({
   canComplete = true,
   canEdit = true,
   canReschedule = false,
+  canPay = true,
+  showPaymentTable = true,
 }: CardProps<T>) {
+  const fetcher = useFetcher();
   const object = useOutletContext<typesObject[T]>();
   const status = object.Service.Status;
+  const { Bill } = object.Service;
+
+  const url = useLocation().pathname;
+  console.log(url);
+  // Calculate if payment is needed
+  const totalPaid =
+    fetcher.data?.[0]?.reduce(
+      (sum: number, payment: { Amount: number }) => sum + (payment.Amount || 0),
+      0,
+    ) || 0;
+  const remainingBalance = Bill.Amount - totalPaid;
+  const needsPayment = remainingBalance > 0;
+
+  useEffect(() => {
+    if (showPaymentTable) {
+      fetcher.load("payments");
+    }
+  }, [object, showPaymentTable]);
+
+  if (!object || (showPaymentTable && !fetcher.data)) return;
 
   return (
     <>
@@ -49,6 +77,16 @@ export default function ServiceCard<T extends ServicesEntities>({
           {canEdit && (
             <Clickable as="Link" variant="primary" to="update">
               Edit
+            </Clickable>
+          )}
+          {needsPayment && canPay && (
+            <Clickable
+              as="Link"
+              variant="primary"
+              to="pay"
+              className="bg-green-600! text-white! hover:bg-green-500! hover:text-white!"
+            >
+              Pay
             </Clickable>
           )}
           {["Scheduled", "Cancelled"].includes(status) && canReschedule && (
@@ -85,7 +123,7 @@ export default function ServiceCard<T extends ServicesEntities>({
       </div>
 
       <div className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 *:text-xl! *:odd:font-bold">
-        <Data<T> data={object} fields={dataFields} />
+        <Data data={object} fields={dataFields} />
       </div>
 
       <div className="mt-10 flex flex-wrap gap-x-3 gap-y-2 *:text-sm">
@@ -101,6 +139,18 @@ export default function ServiceCard<T extends ServicesEntities>({
           </Clickable>
         ))}
       </div>
+      {showPaymentTable ? (
+        <ListPage
+          entity="Payment"
+          canAdd={false}
+          withBack={false}
+          data={fetcher.data}
+          rowTemplate={payment["rowTemplate"]}
+          detailsLink={(ID) =>
+            url.split("/").splice(0, 2).join("/") + "/payments/" + ID
+          }
+        />
+      ) : null}
     </>
   );
 }

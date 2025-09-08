@@ -1,5 +1,6 @@
 import { Route } from "@/routing/entityRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
+import { decodeJwt } from "@/utils/helpers/jwt-decoder";
 import listLoader from "@/utils/loaders/listLoader";
 import { doctor, operation } from "@/utils/models/componentsConfig/doctor";
 
@@ -22,6 +23,9 @@ const doctorsRoute: RouteObject[] = [
   },
 ];
 
+const token = localStorage.getItem("token");
+const doctorID = decodeJwt(token ?? "")?.sub;
+
 export const operationsRoutes = Route(
   "Operation",
   false,
@@ -29,6 +33,6 @@ export const operationsRoutes = Route(
   false,
   operation,
   false,
-  undefined,
+  () => `doctors/${doctorID}`,
   [[doctorsRoute, "id"]],
 );

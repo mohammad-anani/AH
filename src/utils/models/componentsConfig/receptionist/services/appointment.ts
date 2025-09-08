@@ -23,15 +23,17 @@ export const appointment: RouteConfig<"Appointment"> = {
       "Doctor",
       doctor.selectorDisplay(Doctor),
     ],
-    [
-      "Previous Appointment",
-      PreviousAppointment,
-      PreviousAppointment
-        ? `/receptionist/services/appointments/${PreviousAppointment.ID}`
-        : undefined,
-      "Appointment",
-      appointment.selectorDisplay(PreviousAppointment),
-    ],
+    PreviousAppointment
+      ? [
+          "Previous Appointment",
+          PreviousAppointment,
+          PreviousAppointment
+            ? `/receptionist/services/appointments/${PreviousAppointment.ID}`
+            : undefined,
+          "Appointment",
+          appointment.selectorDisplay(PreviousAppointment),
+        ]
+      : ["Previous Appointment", "N/A"],
 
     ...service["dataFields"](Service),
   ],
@@ -40,8 +42,14 @@ export const appointment: RouteConfig<"Appointment"> = {
     ...service["filterFields"],
   ],
   formConfig: [
-    ["Name", "Name", "string", "both"],
-    ["Price", "Price", "number", "both"],
+    receptionistFormSelectorField(
+      "Doctor",
+      "DoctorID",
+      "Doctor",
+      "add",
+      doctor,
+    ),
+    ...service["formConfig"],
   ],
   selectorDisplay: ({ DoctorFullName, PatientFullName, Status }) =>
     DoctorFullName + " | " + PatientFullName + " | " + Status,

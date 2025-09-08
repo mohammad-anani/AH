@@ -16,6 +16,7 @@ import {
 } from "@radix-ui/react-dialog";
 import { useState } from "react";
 import { DialogFooter } from "@/components/ui/dialog";
+import type { z } from "zod";
 
 type FormProps<T extends EntityKey> = {
   entity: T;
@@ -24,6 +25,9 @@ type FormProps<T extends EntityKey> = {
   submittingText?: string;
   headerWidth?: number;
   withHeader?: boolean;
+  schema?: z.ZodTypeAny;
+  title?: string;
+  isAdd?: boolean;
   confirmation?: {
     title: string;
     content: string;
@@ -39,9 +43,18 @@ export default function AddUpdateForm<T extends EntityKey>({
   submittingText = "Submitting...",
   confirmation,
   withHeader = true,
+  schema,
+  title,
+  isAdd: customIsAdd,
 }: FormProps<T>) {
-  const { title, methods, handleSubmit, submit, isAdd, isSubmitting } =
-    useAddUpdateForm(entity);
+  const {
+    title: hookTitle,
+    methods,
+    handleSubmit,
+    submit,
+    isAdd,
+    isSubmitting,
+  } = useAddUpdateForm(entity, schema, title, customIsAdd);
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
@@ -53,7 +66,7 @@ export default function AddUpdateForm<T extends EntityKey>({
             Back
           </Clickable>
 
-          <H2 className="mb-6">{title}</H2>
+          <H2 className="mb-6">{hookTitle}</H2>
         </>
       ) : null}
       <FormProvider {...methods}>
