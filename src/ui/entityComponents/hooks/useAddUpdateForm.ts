@@ -46,30 +46,9 @@ export default function useAddUpdateForm<T extends EntityKey>(
   const schema =
     customSchema || (isAdd ? addSchemas[entity] : updateSchemas[entity]);
 
-  // Dummy data for Doctor entity
-  const dummyDoctor = {
-    FirstName: "John",
-    MiddleName: "Michael",
-    LastName: "Smith",
-    Gender: "M",
-    BirthDate: "1980-05-15",
-    CountryID: 1,
-    Phone: "12345678",
-    Email: "john.smith@hospital.com",
-    Password: "SecurePassword123",
-    DepartmentID: 1,
-    Salary: 5000,
-    HireDate: "2020-01-15",
-    WorkingDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    ShiftStart: "08:00",
-    ShiftEnd: "16:00",
-    Specialization: "Cardiology",
-    CostPerAppointment: 150,
-  };
-
   const defaultValues = isAdd
     ? entity === "Doctor"
-      ? { ...dummyDoctor, ...navData }
+      ? { ...navData }
       : { ...emptyObjects[entity], ...navData }
     : convertToUpdateObject(data);
 
