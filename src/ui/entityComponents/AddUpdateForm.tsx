@@ -1,7 +1,12 @@
 import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
 import { FormProvider } from "react-hook-form";
-import { Form as RouterForm, type SubmitTarget } from "react-router-dom";
+import {
+  Form as RouterForm,
+  type SubmitTarget,
+  useBlocker,
+} from "react-router-dom";
+import { useEffect } from "react";
 
 import type { FormKey } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
@@ -11,11 +16,12 @@ import useAddUpdateForm from "./hooks/useAddUpdateForm";
 import {
   Dialog,
   DialogContent,
-  DialogPortal,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
   DialogTitle,
-} from "@radix-ui/react-dialog";
+} from "@/components/ui/dialog";
 import { useState } from "react";
-import { DialogFooter } from "@/components/ui/dialog";
 import type { z } from "zod";
 
 type FormProps<T extends EntityKey> = {
@@ -57,6 +63,73 @@ export default function AddUpdateForm<T extends EntityKey>({
   } = useAddUpdateForm(entity, schema, title, customIsAdd);
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [isNavigationDialogOpen, setIsNavigationDialogOpen] = useState(false);
+  const [blockedNavigation, setBlockedNavigation] = useState<{
+    proceed: () => void;
+    reset: () => void;
+  } | null>(null);
+
+  // Check if form has unsaved changes
+  const hasUnsavedChanges =
+    methods.formState.isDirty && !methods.formState.isSubmitted;
+
+  // Block navigation when there are unsaved changes
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    const shouldBlock =
+      hasUnsavedChanges &&
+      !isSubmitting &&
+      currentLocation.pathname !== nextLocation.pathname;
+
+    console.log("Blocker check:", {
+      hasUnsavedChanges,
+      isSubmitting,
+      shouldBlock,
+    });
+
+    return shouldBlock;
+  });
+
+  // Handle blocked navigation
+  useEffect(() => {
+    if (blocker.state === "blocked") {
+      setBlockedNavigation({
+        proceed: () => {
+          setIsNavigationDialogOpen(false);
+          blocker.proceed();
+        },
+        reset: () => {
+          setIsNavigationDialogOpen(false);
+          blocker.reset();
+        },
+      });
+      setIsNavigationDialogOpen(true);
+    }
+  }, [blocker]);
+
+  const handleNavigationConfirm = () => {
+    if (blockedNavigation) {
+      blockedNavigation.proceed();
+    }
+  };
+
+  const handleNavigationCancel = () => {
+    if (blockedNavigation) {
+      blockedNavigation.reset();
+    }
+  };
+
+  // Debug logging
+  console.log("Form state:", {
+    isDirty: methods.formState.isDirty,
+    isSubmitted: methods.formState.isSubmitted,
+    hasUnsavedChanges,
+    isSubmitting,
+  });
+
+  // Keep blocker reference to avoid lint warning
+  if (blocker) {
+    // Blocker is active
+  }
 
   return (
     <>
@@ -99,28 +172,60 @@ export default function AddUpdateForm<T extends EntityKey>({
                   : "Save"}
           </Clickable>
         </RouterForm>
+
+        {/* Navigation blocking dialog */}
+        <Dialog
+          open={isNavigationDialogOpen}
+          onOpenChange={setIsNavigationDialogOpen}
+        >
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Unsaved Changes</DialogTitle>
+              <DialogDescription>
+                You have unsaved changes that will be lost if you leave this
+                page. Are you sure you want to continue?
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Clickable
+                as="button"
+                variant="secondary"
+                onClick={handleNavigationCancel}
+              >
+                Stay on Page
+              </Clickable>
+              <Clickable
+                as="button"
+                variant="primary"
+                onClick={handleNavigationConfirm}
+              >
+                Leave Page
+              </Clickable>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Form submission confirmation dialog */}
         {confirmation ? (
           <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
-            <DialogPortal>
-              <DialogContent>
-                <DialogTitle>
-                  <H2>{confirmation.title}</H2>
-                </DialogTitle>
-                <span>{confirmation.content}</span>
-                <DialogFooter>
-                  <Clickable
-                    as="button"
-                    variant="secondary"
-                    onClick={() => setIsConfirmOpen(false)}
-                  >
-                    {confirmation.cancel}
-                  </Clickable>
-                  <Clickable as="button" variant="secondary" type="submit">
-                    {confirmation.confirm}
-                  </Clickable>
-                </DialogFooter>
-              </DialogContent>
-            </DialogPortal>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{confirmation.title}</DialogTitle>
+                <DialogDescription>{confirmation.content}</DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <Clickable
+                  as="button"
+                  variant="secondary"
+                  onClick={() => setIsConfirmOpen(false)}
+                >
+                  {confirmation.cancel}
+                </Clickable>
+                <Clickable as="button" variant="primary" type="submit">
+                  {confirmation.confirm}
+                </Clickable>
+              </DialogFooter>
+            </DialogContent>
           </Dialog>
         ) : null}
       </FormProvider>
