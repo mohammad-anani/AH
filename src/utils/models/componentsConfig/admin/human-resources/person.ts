@@ -1,20 +1,19 @@
 import {
-  CountryFormSelectCallBack,
   CountryFilterSelectCallBack,
+  CountryFormSelectCallBack,
 } from "@/features/Country/CountrySelectCallback";
 import { calculateAge } from "@/utils/formatters/calculateAge";
 import formatPhoneNumber from "@/utils/formatters/formatPhoneNumber";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
+import type { DisplayingConfig } from "../../routeConfig";
 import {
-  stringField,
+  emailField,
   numberField,
   phoneField,
-  emailField,
-  booleanField,
-  uniselectField,
+  stringField,
+  uniselectField
 } from "../../utils/filterReusableFields";
-import type { DisplayingConfig } from "../../routeConfig";
 
 export const person: DisplayingConfig<"Person"> = {
   dataFields: (person: typesObject["Person"]) => [
@@ -56,7 +55,7 @@ export const person: DisplayingConfig<"Person"> = {
     ],
     ["Country", "CountryID", "custom", "both", CountryFormSelectCallBack],
     ["Phone", "Phone", "phone", "both"],
-    ["Email", "Email", "email", "both"],
+    ["Email", "Email", "email", "add"],
     ["Password", "Password", "password", "add"],
   ],
 };

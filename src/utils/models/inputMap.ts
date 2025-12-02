@@ -13,6 +13,7 @@ import {
   PasswordInput,
 } from "../../ui/form-inputs";
 
+//To dynamically assign inputs to fields in forms
 export const inputMap = {
   number: NumberInput,
   string: StringInput,

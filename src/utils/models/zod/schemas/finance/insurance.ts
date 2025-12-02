@@ -1,9 +1,9 @@
 import { date, z } from "zod";
 import {
-  positiveNumber,
-  nonEmptyString,
   booleanField,
   datetime,
+  nonEmptyString,
+  positiveNumber,
 } from "../../reusableSchemas";
 import { PatientRowSchema, ReceptionistRowSchema } from "../../rowSchemas";
 
@@ -12,13 +12,9 @@ export const InsuranceSchema = z.object({
 
   Patient: PatientRowSchema,
 
-  ProviderName: nonEmptyString("Provider name").min(10).max(50, {
-    message: "Provider name must be between 10 and 50 characters.",
-  }),
+  ProviderName: nonEmptyString("Provider name", 10, 50),
 
-  Coverage: z.number().min(0.0).max(1.0, {
-    message: "Coverage must be between 0 and 1.",
-  }),
+  Coverage: positiveNumber("Coverage", 0.0, 1.0),
 
   ExpirationDate: date("Expiration date"),
 

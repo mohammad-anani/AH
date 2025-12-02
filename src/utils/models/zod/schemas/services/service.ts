@@ -1,7 +1,6 @@
 import { z } from "zod";
-import { nonEmptyString, datetime } from "../../reusableSchemas";
-import { PatientRowSchema } from "../../rowSchemas";
-import { ReceptionistRowSchema } from "../../rowSchemas";
+import { datetime, nonEmptyString } from "../../reusableSchemas";
+import { PatientRowSchema, ReceptionistRowSchema } from "../../rowSchemas";
 import { BillSchema } from "../finance";
 
 // Service Status Enum: 1 - In Progress; 2 - Requested; 3 - Scheduled; 4 - Cancelled; 5 - Completed; 6 - Rejected
@@ -21,9 +20,7 @@ export const ServiceSchema = z.object({
 
   ActualStartingDate: datetime("Actual starting date").nullable(),
 
-  Reason: nonEmptyString("Reason").min(10, {
-    message: "Reason must be at least 10 characters.",
-  }),
+  Reason: nonEmptyString("Reason", 10),
 
   Result: z.string().nullable(),
 

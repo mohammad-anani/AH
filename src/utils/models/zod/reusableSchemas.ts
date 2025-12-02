@@ -1,45 +1,30 @@
 import { z } from "zod";
 
-// Required non-empty string
-export const nonEmptyString = (name: string) =>
-  z.string().nonempty({ error: `${name} is required.` });
+export const nonEmptyString = (name: string, minLength: number = 1, maxLength: number = Number.MAX_SAFE_INTEGER) =>
+  z.string().nonempty({ error: `${name} is required.` }).min(minLength, { error: `${name} length must be at most ${minLength}.` }).max(maxLength,
+    { error: `${name} length must be at most ${maxLength}.` }
+  );
 
 export const positiveNumber = (
   name: string,
   min: number = 1,
   max: number = Number.MAX_SAFE_INTEGER,
-  isSelector: boolean = false,
-) => {
-  // Converts string → number before validation
-  const base = z.coerce.number({
+) =>
+  z.number({
     error: `${name} is required.`,
-  });
-
-  if (isSelector) {
-    return base.refine((val) => val !== 0, {
-      message: `${name} is required.`,
-    });
-  }
-
-  return base
-    .min(min, { message: `${name} must be at least ${min}.` })
+  }).min(min, { message: `${name} must be at least ${min}.` })
     .max(max, { message: `${name} must be at most ${max}.` });
-};
 
-// Datetime with or without seconds
 export const datetime = (name: string) =>
   z.string().datetime({
     local: true,
     error: `${name} must be a valid datetime.`,
   });
 
-// Time with or without seconds
 export const time = (name: string) =>
   z.string().time({
     error: `${name} must be a valid time.`,
   });
-
-// Date (ISO)
 
 export const date = (name: string) =>
   z
@@ -48,11 +33,47 @@ export const date = (name: string) =>
       message: `${name} must be a valid date.`,
     });
 
-// Boolean field
+export const datetimeWithinOneYear = (name: string) =>
+  datetime(name)
+    .refine((val) => {
+      const expDate = new Date(val);
+      const now = new Date();
+      const oneYearFromNow = new Date();
+      oneYearFromNow.setFullYear(now.getFullYear() + 1);
+      return expDate > now && expDate <= oneYearFromNow;
+    }, `${name} must be in the future and within one year`);
+
+
+
+export const datetimeInPast = (name: string) =>
+  datetime(name)
+    .refine((val) => {
+      const expDate = new Date(val);
+      const now = new Date();
+      return expDate <= now;
+    }, `${name} must not be in the future.`);
+
+export const dateInPast = (name: string) =>
+  date(name)
+    .refine((val) => {
+      const expDate = new Date(val);
+      const now = new Date();
+      return expDate <= now;
+    }, `${name} must not be in the future.`);
+
+export const dateWithinOneYear = (name: string) =>
+  date(name)
+    .refine((val) => {
+      const expDate = new Date(val);
+      const now = new Date();
+      const oneYearFromNow = new Date();
+      oneYearFromNow.setFullYear(now.getFullYear() + 1);
+      return expDate > now && expDate <= oneYearFromNow;
+    }, `${name} must be in the future and within one year`);
+
 export const booleanField = (name: string) =>
   z.preprocess(
     (val: boolean | "true" | "false" | "") => {
-      // removed console.log
       if (typeof val === "boolean") return val;
       if (typeof val === "string") return val === "" ? null : val === "true";
       return null;
@@ -60,9 +81,7 @@ export const booleanField = (name: string) =>
     z.boolean({ error: `${name} is required.` }),
   );
 
-const statuses = ["Scheduled", "In Progress", "Completed", "Cancelled"];
-
-export const statusField = (name: string) =>
-  z.enum(statuses, {
-    error: `${name} must be one of these : ${statuses.join(",")}`,
-  });
+export const phone = z
+  .string()
+  .regex(/^[0-9]{8}$/, "Phone must be exactly 8 digits")
+  .nonempty("Phone is required");

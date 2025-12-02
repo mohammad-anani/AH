@@ -1,18 +1,15 @@
 import { z } from "zod";
 import {
-  positiveNumber,
-  nonEmptyString,
   datetime,
+  nonEmptyString,
+  positiveNumber,
 } from "../../reusableSchemas";
-import { DepartmentRowSchema } from "../../rowSchemas";
-import { AdminRowSchema } from "../../rowSchemas";
+import { AdminRowSchema, DepartmentRowSchema } from "../../rowSchemas";
 
 export const TestTypeSchema = z.object({
   ID: positiveNumber("Test type ID", 1),
 
-  Name: nonEmptyString("Test type name").min(3).max(50, {
-    message: "Test type name must be between 3 and 50 characters.",
-  }),
+  Name: nonEmptyString("Test type name", 3, 50),
 
   Department: DepartmentRowSchema,
 

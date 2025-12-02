@@ -1,23 +1,15 @@
 import { z } from "zod";
-import { nonEmptyString, datetime } from "../../reusableSchemas";
+import { datetime, nonEmptyString } from "../../reusableSchemas";
 
 export const FormPrescriptionSchema = z
   .object({
-    Diagnosis: nonEmptyString("Diagnosis").min(10).max(256, {
-      message: "Diagnosis must be between 10 and 256 characters.",
-    }),
+    Diagnosis: nonEmptyString("Diagnosis", 10, 256),
 
-    Medication: nonEmptyString("Medication").min(5).max(256, {
-      message: "Medication must be between 5 and 256 characters.",
-    }),
+    Medication: nonEmptyString("Medication", 5, 256),
 
-    Dosage: nonEmptyString("Dosage").min(5).max(256, {
-      message: "Dosage must be between 5 and 256 characters.",
-    }),
+    Dosage: nonEmptyString("Dosage", 5, 256),
 
-    Frequency: nonEmptyString("Frequency").min(5).max(256, {
-      message: "Frequency must be between 5 and 256 characters.",
-    }),
+    Frequency: nonEmptyString("Frequency", 5, 256),
 
     MedicationStart: datetime("Medication start date"),
 

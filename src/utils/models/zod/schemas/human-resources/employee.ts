@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { positiveNumber, time, datetime, date } from "../../reusableSchemas";
-import { PersonSchema } from "./person";
+import { date, datetime, positiveNumber, time } from "../../reusableSchemas";
 import { DepartmentRowSchema } from "../../rowSchemas";
 import { AdminRowSchema } from "../../rowSchemas/human-resources/admin";
+import { PersonSchema } from "./person";
 
 export const validDays = [
   "Monday",
@@ -13,6 +13,12 @@ export const validDays = [
   "Saturday",
   "Sunday",
 ] as const;
+
+
+export const WorkingDaysSchema = z
+  .array(z.enum(validDays, { message: "Invalid day of the week." }))
+  .min(1, { message: "At least 1 day required" })
+  .max(7, { message: "You cannot select more than 7 working days." })
 
 export const EmployeeSchema = z.object({
   Person: PersonSchema,
@@ -25,10 +31,7 @@ export const EmployeeSchema = z.object({
 
   LeaveDate: date("Leave date").nullable(),
 
-  WorkingDays: z
-    .array(z.enum(validDays, { message: "Invalid day of the week." }))
-    .min(0)
-    .max(7, { message: "You cannot select more than 7 working days." }),
+  WorkingDays: WorkingDaysSchema,
 
   ShiftStart: time("Shift start"),
 

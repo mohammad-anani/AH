@@ -1,3 +1,3 @@
 import { UpdateServiceSchema } from "./service";
 
-export const UpdateTestAppointmentSchema = UpdateServiceSchema.extend({});
+export const UpdateTestAppointmentSchema = UpdateServiceSchema;

@@ -1,29 +1,19 @@
-import z from "zod";
 
-import { validDays } from "../../schemas";
+import { dateInPast, positiveNumber, time } from "../../reusableSchemas";
+import { WorkingDaysSchema } from "../../schemas";
 import { UpdatePersonSchema } from "./person";
 
 export const UpdateEmployeeSchema = UpdatePersonSchema.extend({
-  DepartmentID: z
-    .number({ message: "Department must be a positive number" })
-    .refine((val) => val > 0, "Department is required"),
+  DepartmentID: positiveNumber("Department ID", 1)
+  ,
 
-  Salary: z
-    .number({ message: "Salary must be a number" })
-    .min(100, "Salary must be between 100 and 99,999")
-    .max(99999, "Salary must be between 100 and 99,999")
-    .refine((val) => val > 0, "Salary is required"),
+  Salary: positiveNumber("Salary", 100, 99999)
+  ,
 
-  HireDate: z
-    .string()
-    .date()
-    .refine((val) => val !== "", "Hire date is required"),
+  HireDate: dateInPast("Hire Date"),
 
-  WorkingDays: z
-    .array(z.enum(validDays, { message: "Invalid day of the week." }))
-    .min(1, { message: "At least 1 day required" })
-    .max(7, { message: "You cannot select more than 7 working days." }),
-  ShiftStart: z.iso.time("Shift start time is required"),
+  WorkingDays: WorkingDaysSchema,
+  ShiftStart: time("Shift Start"),
 
-  ShiftEnd: z.iso.time("Shift end time is required"),
+  ShiftEnd: time("Shift End"),
 });

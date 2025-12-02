@@ -1,22 +1,16 @@
 import { z } from "zod";
 import {
   booleanField,
+  datetime,
   nonEmptyString,
   positiveNumber,
-  datetime,
 } from "../../reusableSchemas";
 
 export const AppointmentRowSchema = z.object({
   ID: positiveNumber("Appointment ID", 1),
-  PatientFullName: nonEmptyString("Patient full name").min(3).max(60, {
-    message: "Patient full name must be between 3 and 60 characters.",
-  }),
-  DoctorFullName: nonEmptyString("Doctor full name").min(3).max(60, {
-    message: "Doctor full name must be between 3 and 60 characters.",
-  }),
+  PatientFullName: nonEmptyString("Patient full name", 3, 60),
+  DoctorFullName: nonEmptyString("Doctor full name", 3, 60),
   ScheduledDate: datetime("Scheduled date"),
-  Status: nonEmptyString("Status").min(3).max(20, {
-    message: "Status must be between 3 and 20 characters.",
-  }),
+  Status: nonEmptyString("Status", 3, 20),
   IsPaid: booleanField("Is paid"),
 });

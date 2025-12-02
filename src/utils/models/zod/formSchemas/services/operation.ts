@@ -1,17 +1,13 @@
 import { z } from "zod";
-import { positiveNumber, nonEmptyString } from "../../reusableSchemas";
+import { nonEmptyString, positiveNumber } from "../../reusableSchemas";
 import { FormServiceSchema } from "./service";
 
 export const FormOperationSchema = FormServiceSchema.extend({
-  Name: nonEmptyString("Operation name").min(10).max(100, {
-    message: "Operation name must be between 10 and 100 characters.",
-  }),
+  Name: nonEmptyString("Operation name", 10, 100),
 
   DepartmentID: positiveNumber("Department ID", 1),
 
-  Description: nonEmptyString("Description").min(10, {
-    message: "Description must be at least 10 characters.",
-  }),
+  Description: nonEmptyString("Description", 10),
 
   OperationDoctors: z
     .array(

@@ -1,9 +1,7 @@
 import { z } from "zod";
-import { positiveNumber, nonEmptyString } from "../../reusableSchemas";
+import { nonEmptyString, positiveNumber } from "../../reusableSchemas";
 
 export const FormInsuranceSchema = z.object({
-  ProviderName: nonEmptyString("Company name").min(3).max(30, {
-    message: "Company name must be between 3 and 30 characters.",
-  }),
+  ProviderName: nonEmptyString("Company name", 3, 30),
   Coverage: positiveNumber("Coverage percentage", 0.0, 1.0),
 });

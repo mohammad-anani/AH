@@ -1,3 +1,3 @@
 import { FormDepartmentSchema } from "../../formSchemas/general/department";
 
-export const UpdateDepartmentSchema = FormDepartmentSchema.extend({});
+export const UpdateDepartmentSchema = FormDepartmentSchema;

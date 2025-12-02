@@ -1,21 +1,18 @@
 import { z } from "zod";
 import {
-  positiveNumber,
-  nonEmptyString,
   datetime,
+  nonEmptyString,
+  phone,
+  positiveNumber,
 } from "../../reusableSchemas";
 import { AdminRowSchema } from "../../rowSchemas";
 
 export const DepartmentSchema = z.object({
   ID: positiveNumber("Department ID", 1),
 
-  Name: nonEmptyString("Department name").min(5).max(20, {
-    message: "Department name must be between 5 and 20 characters.",
-  }),
+  Name: nonEmptyString("Department name", 5, 20),
 
-  Phone: z.string().regex(/^[0-9]{8}$/, {
-    message: "Phone must be exactly 8 digits.",
-  }),
+  Phone: phone,
 
   CreatedByAdmin: AdminRowSchema,
 

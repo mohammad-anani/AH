@@ -1,14 +1,10 @@
 import { z } from "zod";
-import { positiveNumber, nonEmptyString } from "../../reusableSchemas";
+import { nonEmptyString, positiveNumber } from "../../reusableSchemas";
 
 export const DoctorRowSchema = z.object({
   ID: positiveNumber("Doctor ID", 1),
-  FullName: nonEmptyString("Full name").min(3).max(60, {
-    message: "Full name must be between 3 and 60 characters.",
-  }),
-  Specialization: nonEmptyString("Specialization").min(5).max(100, {
-    message: "Specialization must be between 5 and 100 characters.",
-  }),
+  FullName: nonEmptyString("Full name", 3, 60),
+  Specialization: nonEmptyString("Specialization", 5, 100),
 });
 
 export const CountryRowSchema = z.object({

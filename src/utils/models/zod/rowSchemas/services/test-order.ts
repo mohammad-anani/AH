@@ -1,12 +1,8 @@
 import { z } from "zod";
-import { positiveNumber, nonEmptyString } from "../../reusableSchemas";
+import { nonEmptyString, positiveNumber } from "../../reusableSchemas";
 
 export const TestOrderRowSchema = z.object({
   ID: positiveNumber("Test order ID", 1),
-  PatientFullName: nonEmptyString("Patient full name").min(3).max(60, {
-    message: "Patient full name must be between 3 and 60 characters.",
-  }),
-  TestTypeName: nonEmptyString("Test name").min(3).max(50, {
-    message: "Test name must be between 3 and 50 characters.",
-  }),
+  PatientFullName: nonEmptyString("Patient full name", 3, 60),
+  TestTypeName: nonEmptyString("Test name", 3, 50),
 });

@@ -1,17 +1,9 @@
 import { z } from "zod";
+import { WorkingDaysSchema } from "../../schemas/index.ts";
 import { FormPersonSchema } from "./person.ts";
 
 // EmployeeFormDTO - extends PersonFormDTO with employee-specific fields
 
-const validDays = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
 
 export const FormEmployeeSchema = FormPersonSchema.extend({
   DepartmentID: z
@@ -29,10 +21,7 @@ export const FormEmployeeSchema = FormPersonSchema.extend({
     .date()
     .refine((val) => val !== "", "Hire date is required"),
 
-  WorkingDays: z
-    .array(z.enum(validDays, { message: "Invalid day of the week." }))
-    .min(1, { message: "At least 1 day required" })
-    .max(7, { message: "You cannot select more than 7 working days." }),
+  WorkingDays: WorkingDaysSchema,
   ShiftStart: z.iso.time("Shift start time is required"),
 
   ShiftEnd: z.iso.time("Shift end time is required"),
