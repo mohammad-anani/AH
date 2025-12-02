@@ -42,22 +42,22 @@ export function Route<T extends EntityKey>(
       children: [
         withList
           ? {
-              index: true,
-              element: (
-                <ListPage<T>
-                  entity={entity}
-                  canAdd={canAdd}
-                  rowTemplate={rowTemplate}
-                  filterFields={filterFields}
-                  withBack={withBack ?? false}
-                />
-              ),
-              loader: listLoader(`${entity}`, loaderPathPrefix),
-            }
+            index: true,
+            element: (
+              <ListPage<T>
+                entity={entity}
+                canAdd={canAdd}
+                rowTemplate={rowTemplate}
+                filterFields={filterFields}
+                withBack={withBack ?? false}
+              />
+            ),
+            loader: listLoader(`${entity}`, loaderPathPrefix),
+          }
           : {
-              path: "",
-              Component: InvalidPath,
-            },
+            path: "",
+            Component: InvalidPath,
+          },
         {
           path: "list",
           Component: InvalidPath,
@@ -65,67 +65,67 @@ export function Route<T extends EntityKey>(
         },
         withID
           ? {
-              path: ":id",
-              Component: ViewEdit<T>,
-              loader: findByIDLoader(entity),
-              children: [
-                withCard
-                  ? {
-                      index: true,
-                      element: (
-                        <Card
-                          title={entity}
-                          subLinks={subLinks}
-                          canDelete={canDelete}
-                          canEdit={canEdit}
-                          dataFields={dataFields}
-                          isModal={false}
-                        />
-                      ),
-                    }
-                  : {},
-                canDelete
-                  ? {
-                      path: "delete",
-                      action: deleteAction(entity, (request) =>
-                        request.url.replace(/\/[^/]+\/delete$/, ""),
-                      ),
-                      Component: InvalidPath,
-                    }
-                  : {},
-                canEdit
-                  ? {
-                      path: "update",
-                      element: (
-                        <AddUpdateForm
-                          formConfig={formConfig}
-                          entity={entity}
-                        />
-                      ),
-                      action: addUpdateAction(
-                        entity,
-                        (request) => `${request.url.replace("/update", "")}`,
-                      ),
-                    }
-                  : {},
-                ...(extraRoutes
-                  ?.filter(([, location]) => location === "id")
-                  .flatMap(([routes]) => routes) ?? []),
-              ].filter(Boolean),
-            }
+            path: ":id",
+            Component: ViewEdit<T>,
+            loader: findByIDLoader(entity),
+            children: [
+              withCard
+                ? {
+                  index: true,
+                  element: (
+                    <Card
+                      title={entity}
+                      subLinks={subLinks}
+                      canDelete={canDelete}
+                      canEdit={canEdit}
+                      dataFields={dataFields}
+                      isModal={false}
+                    />
+                  ),
+                }
+                : {},
+              canDelete
+                ? {
+                  path: "delete",
+                  action: deleteAction(entity, (request) =>
+                    request.url.replace(/\/[^/]+\/delete$/, ""),
+                  ),
+                  Component: InvalidPath,
+                }
+                : null,
+              canEdit
+                ? {
+                  path: "update",
+                  element: (
+                    <AddUpdateForm
+                      formConfig={formConfig}
+                      entity={entity}
+                    />
+                  ),
+                  action: addUpdateAction(
+                    entity,
+                    (request) => `${request.url.replace("/update", "")}`,
+                  ),
+                }
+                : {},
+              ...(extraRoutes
+                ?.filter(([, location]) => location === "id")
+                .flatMap(([routes]) => routes) ?? []),
+            ].filter(Boolean),
+          }
           : {},
         canAdd
           ? {
-              path: "add",
-              element: (
-                <AddUpdateForm formConfig={formConfig} entity={entity} />
-              ),
-              action: addUpdateAction(
-                entity,
-                (request, newID) =>
-                  `${request.url.replace("/add", `/${String(newID)}`)}`,
-              ),
-            }
+            path: "add",
+            element: (
+              <AddUpdateForm formConfig={formConfig} entity={entity} />
+            ),
+            action: addUpdateAction(
+              entity,
+              (request, newID) =>
+                `${request.url.replace("/add", `/${String(newID)}`)}`,
+            ),
+          }
           : {},
         ...(extraRoutes
           ?.filter(([, location]) => location === "index")

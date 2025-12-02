@@ -12,19 +12,18 @@ import type {
   AddTestAppointmentSchema,
   AddInsuranceSchema,
   AddOperationSchema,
-  AddPaymentSchema,
   AddAppointmentSchema,
   AddPrescriptionSchema,
 } from "../../zod/addSchemas";
 
 type NullableNumberBoolean<T> = {
   [K in keyof T]: T[K] extends number | boolean
-    ? T[K] | null
-    : T[K] extends Array<infer U>
-      ? Array<NullableNumberBoolean<U>>
-      : T[K] extends object
-        ? NullableNumberBoolean<T[K]>
-        : T[K];
+  ? T[K] | null
+  : T[K] extends Array<infer U>
+  ? Array<NullableNumberBoolean<U>>
+  : T[K] extends object
+  ? NullableNumberBoolean<T[K]>
+  : T[K];
 };
 
 export type EmptyPerson = NullableNumberBoolean<
@@ -67,9 +66,6 @@ export type EmptyOperation = NullableNumberBoolean<
   z.infer<typeof AddOperationSchema>
 >;
 
-export type EmptyPayment = NullableNumberBoolean<
-  z.infer<typeof AddPaymentSchema>
->;
 
 export type EmptyPrescription = NullableNumberBoolean<
   z.infer<typeof AddPrescriptionSchema>

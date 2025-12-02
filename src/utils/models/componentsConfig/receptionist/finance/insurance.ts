@@ -10,20 +10,20 @@ export const insurance: RouteConfig<"Insurance"> = {
     IsActive,
     Patient,
   }: typesObject["Insurance"]) => [
-    [
-      "Patient",
-      Patient,
-      "/admin/human-resources/patients/" + Patient.ID,
-      "Patient",
-      patient.selectorDisplay(Patient),
+      [
+        "Patient",
+        Patient,
+        "/admin/human-resources/patients/" + Patient.ID,
+        "Patient",
+        patient.selectorDisplay(Patient),
+      ],
+      ["Provider", ProviderName],
+      ["Coverage", Coverage * 100 + "%"],
+      ["Status", IsActive ? "Active" : "Inactive"],
     ],
-    ["Provider", ProviderName],
-    ["Coverage", Coverage * 100 + "%"],
-    ["Status", IsActive ? "Active" : "Inactive"],
-  ],
   formConfig: [
     ["Provider Name", "ProviderName", "string", "both"],
-    ["Coverage", "Coverage", "number", "both"],
+    ["Coverage", "Coverage", "uniselect", "both", Array.from({ length: 10 }, (_, i) => ((i + 1) / 10).toString())],
     ["Expiration Date", "ExpirationDate", "date", "both"],
   ],
   selectorDisplay: ({ ProviderName, Coverage, IsActive }) =>

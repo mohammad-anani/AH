@@ -50,23 +50,23 @@ export type FormKey<T extends DisplayEntityKey> = [
   type: DataTypes | "custom",
   mode: "add" | "update" | "both",
   data?:
-    | Array<Primitive>
-    | customFormProps
-    | SelectOption[]
-    | [string, string]
-    | string
-    | [EntityKey, RouteConfig<EntityKey>, Role],
+  | Array<Primitive>
+  | customFormProps
+  | SelectOption[]
+  | [string, string]
+  | string
+  | [EntityKey, RouteConfig<EntityKey>, Role]
 ];
 
 export type FilterKey = [
   name: string,
   type: DataTypes | "custom",
   data?:
-    | Array<Primitive>
-    | customFilterProps
-    | [string, string]
-    | string
-    | [EntityKey, RouteConfig<EntityKey>, Role],
+  | Array<Primitive>
+  | customFilterProps
+  | [string, string]
+  | string
+  | [EntityKey, RouteConfig<EntityKey>, Role],
 ];
 
 // export type DotAccess<T, Prefix extends string = ""> = {

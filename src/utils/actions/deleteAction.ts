@@ -13,6 +13,7 @@ export default function deleteAction(
 ) {
   return async function ({ request, params }: ActionFunctionArgs) {
     try {
+
       const idParam = params["id"]; // route param is lowercase "id"
       const ID = Number(idParam);
 
@@ -21,7 +22,7 @@ export default function deleteAction(
       }
 
       console.log(ID);
-  
+
       await Delete(`${toKebabCase(pluralize.plural(entity))}/${ID}`);
 
       toast(`${entity} deleted successfully!`, "success");

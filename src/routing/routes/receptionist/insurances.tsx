@@ -7,32 +7,16 @@ import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 import type { RouteObject } from "react-router-dom";
 
-const insuranceListRoute: RouteObject[] = [
-  {
-    index: true,
-    loader: listLoader("Insurance", undefined, ["PatientID"]),
-    element: (
-      <ListPage
-        entity="Insurance"
-        canAdd={false}
-        canModifyUrl={false}
-        rowTemplate={insurance["rowTemplate"] as RowTemplate<EntityKey>}
-        filterFields={undefined}
-        withBack={true}
-      />
-    ),
-  },
-];
 
 export const insuranceRoute = Route(
   "Insurance",
-  true,
+  false,
   true,
   false,
   insurance,
   false,
   undefined,
-  [[insuranceListRoute, "index"]],
+  undefined,
   false,
-  true,
+  false,
 );

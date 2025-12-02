@@ -15,7 +15,7 @@ export const patient: RouteConfig<"Patient"> = {
       `/receptionist/tests/appointments?PatientID=${ID}`,
     ],
     ["Show Operations", `/receptionist/operations?PatientID=${ID}`],
-    ["Show Insurances", `/receptionist/insurances?PatientID=${ID}`],
+    ["Show Insurances", "insurances"],
     ["Add Insurance", `/receptionist/insurances/add`, { PatientID: ID }],
   ],
   filterFields: [...person["filterFields"]],
