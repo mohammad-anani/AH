@@ -21,6 +21,7 @@ export const uniselectField = (label: string, values: string[]): FilterKey => [
   "uniselect",
   values,
 ];
+
 export const multiselectField = (
   label: string,
   values: string[],
@@ -38,6 +39,6 @@ export const generateAuditFields = <T extends Role>(
   entityObject: RouteConfig<T>,
   role: Role,
 ): FilterKey[] => [
-  datetimeField("CreatedAt"),
-  filterSelectorField(`${creator}ID`, creator, entityObject, role),
-];
+    datetimeField("CreatedAt"),
+    filterSelectorField(`${creator}ID`, creator, entityObject, role),
+  ];

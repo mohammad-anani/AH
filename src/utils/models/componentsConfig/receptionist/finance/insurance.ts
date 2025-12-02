@@ -1,7 +1,6 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import type { RouteConfig } from "../../routeConfig";
-import { patient } from "..";
 
 export const insurance: RouteConfig<"Insurance"> = {
   dataFields: ({
@@ -10,13 +9,7 @@ export const insurance: RouteConfig<"Insurance"> = {
     IsActive,
     Patient,
   }: typesObject["Insurance"]) => [
-      [
-        "Patient",
-        Patient,
-        "/admin/human-resources/patients/" + Patient.ID,
-        "Patient",
-        patient.selectorDisplay(Patient),
-      ],
+
       ["Provider", ProviderName],
       ["Coverage", Coverage * 100 + "%"],
       ["Status", IsActive ? "Active" : "Inactive"],

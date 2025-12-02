@@ -1,10 +1,10 @@
-import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import findByID from "@/api/findByID";
-import throwError from "../helpers/throwError";
-import { schemas } from "../models/zod/schemas/schemas.ts";
-import type { EntityKey } from "../models/types/utils/entityKeys.ts";
 import * as pluralize from "pluralize";
+import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import { toKebabCase } from "../formatters/toKebab.ts";
+import throwError from "../helpers/throwError";
+import type { EntityKey } from "../models/types/utils/entityKeys.ts";
+import { schemas } from "../models/zod/schemas/schemas.ts";
 
 export default function findByIDLoader(entity: EntityKey): LoaderFunction {
   return async function ({ params }: LoaderFunctionArgs) {
@@ -14,8 +14,6 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
       throwError(400, "Invalid ID");
     }
 
-
-    //to be changed
     const data = await findByID(
       `${toKebabCase(pluralize.plural(entity))}/${id}`,
     );
@@ -29,9 +27,6 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
 
 
     if (!result.success) {
-
-
-
       throwError(
         500,
         "Sorry, we received unexpected data from the server. Please try again later.",

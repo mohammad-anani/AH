@@ -1,15 +1,15 @@
-import findByIDLoader from "@/utils/loaders/findByIDLoader";
-import listLoader from "@/utils/loaders/listLoader";
+import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
+import Card from "@/ui/entityComponents/Card";
+import ListPage from "@/ui/entityComponents/ListPage";
+import ViewEdit from "@/ui/entityComponents/ViewEdit";
 import InvalidPath from "@/ui/InvalidPath";
 import addUpdateAction from "@/utils/actions/addUpdateAction";
 import deleteAction from "@/utils/actions/deleteAction";
-import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
-import ListPage from "@/ui/entityComponents/ListPage";
-import Card from "@/ui/entityComponents/Card";
-import ViewEdit from "@/ui/entityComponents/ViewEdit";
-import { type Params, type RouteObject } from "react-router-dom";
+import findByIDLoader from "@/utils/loaders/findByIDLoader";
+import listLoader from "@/utils/loaders/listLoader";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import { type Params, type RouteObject } from "react-router-dom";
 
 export function Route<T extends EntityKey>(
   entity: T,
@@ -24,6 +24,7 @@ export function Route<T extends EntityKey>(
   withID: boolean = true,
   urlPathPrefix?: string,
   withCard: boolean = true,
+  detailsLink?: (ID: number) => string
 ): RouteObject[] {
   const { rowTemplate, dataFields, filterFields, formConfig, subLinks } =
     entityObject;
@@ -50,6 +51,7 @@ export function Route<T extends EntityKey>(
                 rowTemplate={rowTemplate}
                 filterFields={filterFields}
                 withBack={withBack ?? false}
+                detailsLink={detailsLink}
               />
             ),
             loader: listLoader(`${entity}`, loaderPathPrefix),

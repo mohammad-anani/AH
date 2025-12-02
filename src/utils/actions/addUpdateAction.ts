@@ -1,11 +1,11 @@
 import add from "@/api/add";
 import update from "@/api/update";
-import { replace, type ActionFunctionArgs } from "react-router-dom";
-import type { EntityKey } from "../models/types/utils/entityKeys";
 import * as pluralize from "pluralize";
 import type { Primitive } from "react-hook-form";
+import { replace, type ActionFunctionArgs } from "react-router-dom";
 import { toKebabCase } from "../formatters/toKebab.ts";
 import { toast } from "../helpers/toast.tsx";
+import type { EntityKey } from "../models/types/utils/entityKeys";
 
 export default function addUpdateAction(
   entity: EntityKey,
@@ -15,7 +15,7 @@ export default function addUpdateAction(
     try {
       const data = await request.json();
 
-      let extra: Primitive | undefined;
+      let extra;
 
       const isAdd = request.url.endsWith("/add");
 

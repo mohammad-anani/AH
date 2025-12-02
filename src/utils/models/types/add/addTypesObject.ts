@@ -1,22 +1,21 @@
 import type {
-  AddPerson,
-  AddEmployee,
   AddAdmin,
-  AddReceptionist,
-  AddDoctor,
-  AddPatient,
-  AddDepartment,
-  AddTestType,
-  AddService,
   AddAppointment,
   AddAppointmentFromPrevious,
+  AddDepartment,
+  AddDoctor,
+  AddEmployee,
+  AddInsurance,
+  AddOperation,
+  AddPatient,
+  AddPerson,
+  AddPrescription,
+  AddReceptionist,
+  AddService,
   AddTestAppointment,
   AddTestAppointmentFromTestOrder,
   AddTestOrder,
-  AddOperation,
-  AddPrescription,
-  AddInsurance,
-  AddPayment,
+  AddTestType,
 } from "./addTypes";
 
 export type addTypesObject = {
@@ -37,6 +36,4 @@ export type addTypesObject = {
   Operation: AddOperation;
   Prescription: AddPrescription;
   Insurance: AddInsurance;
-  Payment: AddPayment;
-  Bill: "none";
 };

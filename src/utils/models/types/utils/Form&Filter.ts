@@ -1,13 +1,12 @@
 import type { JSX } from "react";
-import type { typesObject } from "../normal/typesObject";
 import type { Setter } from "./basics";
 
-import type { Primitive } from "react-hook-form";
-import type { DisplayEntityKey, EntityKey } from "./entityKeys";
-import type { RouteConfig } from "../../componentsConfig/routeConfig";
 import type { SelectOption } from "@/ui/form-inputs/UniSelectInput";
+import type { Primitive } from "react-hook-form";
+import type { RouteConfig } from "../../componentsConfig/routeConfig";
 import type { addTypesObject } from "../add";
 import type { updateTypesObject } from "../update";
+import type { DisplayEntityKey, EntityKey } from "./entityKeys";
 
 export type DataTypes =
   | "string"
@@ -25,6 +24,7 @@ export type DataTypes =
   | "email"
   | "object"
   | "password";
+
 
 export type customFilterProps = [
   (data: {
@@ -44,18 +44,19 @@ export type customFormProps = [
   DataTypes,
 ];
 
+//data is additional config for the datatype
 export type FormKey<T extends DisplayEntityKey> = [
   label: string,
   fieldKey: DotAccess<addTypesObject[T]> | DotAccess<updateTypesObject[T]>,
   type: DataTypes | "custom",
   mode: "add" | "update" | "both",
   data?:
-  | Array<Primitive>
+  | Array<Primitive> //uniselect fields,...
   | customFormProps
-  | SelectOption[]
-  | [string, string]
+  | SelectOption[]// mutliselect option array
+  | [string, string]//for boolean combobox
   | string
-  | [EntityKey, RouteConfig<EntityKey>, Role]
+  | [EntityKey, RouteConfig<EntityKey>, Role]//for selector
 ];
 
 export type FilterKey = [
@@ -69,16 +70,8 @@ export type FilterKey = [
   | [EntityKey, RouteConfig<EntityKey>, Role],
 ];
 
-// export type DotAccess<T, Prefix extends string = ""> = {
-//   [K in keyof T]: T[K] extends object
-//     ? T[K] extends Array<Primitive>
-//       ? `${Prefix}${Extract<K, string>}` // don't recurse into arrays
-//       :
-//           | `${Prefix}${Extract<K, string>}`
-//           | DotAccess<T[K], `${Prefix}${Extract<K, string>}.`>
-//     : `${Prefix}${Extract<K, string>}`;
-// }[keyof T];
 
+//get object fields and spread them as a type in string
 export type DotAccess<T> = {
   [K in keyof T]: `${Extract<K, string>}`;
 }[keyof T];

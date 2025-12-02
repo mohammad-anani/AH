@@ -13,5 +13,5 @@ export const insuranceRoute = Route(
   undefined,
   undefined,
   false,
-  false,
+  true, undefined, true
 );

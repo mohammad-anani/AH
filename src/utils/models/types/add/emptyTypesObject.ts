@@ -1,19 +1,18 @@
 import type {
-  EmptyDepartment,
-  EmptyPatient,
-  EmptyEmployee,
-  EmptyReceptionist,
-  EmptyDoctor,
   EmptyAdmin,
-  EmptyTestType,
-  EmptyTestOrder,
-  EmptyTestAppointment,
+  EmptyAppointment,
+  EmptyDepartment,
+  EmptyDoctor,
+  EmptyEmployee,
   EmptyInsurance,
   EmptyOperation,
+  EmptyPatient,
   EmptyPerson,
-  EmptyAppointment,
-  EmptyPayment,
   EmptyPrescription,
+  EmptyReceptionist,
+  EmptyTestAppointment,
+  EmptyTestOrder,
+  EmptyTestType,
 } from "./emptyObjectsTypes";
 
 export type emptyObjectsTypes = {
@@ -31,5 +30,4 @@ export type emptyObjectsTypes = {
   Person: EmptyPerson;
   Appointment: EmptyAppointment;
   Prescription: EmptyPrescription;
-  Payment: EmptyPayment;
 };

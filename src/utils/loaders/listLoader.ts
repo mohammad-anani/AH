@@ -1,17 +1,16 @@
+import getList from "@/api/getList";
 import type {
   LoaderFunction,
   LoaderFunctionArgs,
   Params,
 } from "react-router-dom";
-import formatLoaderUrl from "../formatters/formatLoaderUrl";
-import getList from "@/api/getList";
 import { z } from "zod";
 
-import throwError from "../helpers/throwError";
-import { rowSchemas } from "../models/zod/rowSchemas/rowSchemas.ts";
-import { type FetchingEntityKey } from "../models/types/utils/entityKeys.ts";
 import * as pluralize from "pluralize";
 import { toKebabCase } from "../formatters/toKebab.ts";
+import throwError from "../helpers/throwError";
+import { type FetchingEntityKey } from "../models/types/utils/entityKeys.ts";
+import { rowSchemas } from "../models/zod/rowSchemas/rowSchemas.ts";
 
 export default function listLoader(
   entity: FetchingEntityKey,
@@ -20,7 +19,13 @@ export default function listLoader(
   directUrl?: (params: Params) => string,
 ): LoaderFunction {
   return async function ({ params, request }: LoaderFunctionArgs) {
-    const searchParams = formatLoaderUrl(request.url);
+
+
+    const url = request.url;
+
+    const searchParams = new URLSearchParams(
+      url.substring(url.includes("?") ? url.indexOf("?") : url.length),
+    );
 
     if (requiredParams)
       requiredParams.forEach((param) => {
@@ -30,11 +35,11 @@ export default function listLoader(
     console.log(toKebabCase(pluralize.plural(entity)));
     const data = await getList(
       directUrl?.(params) ||
-        (pathPrefix?.(params) ?? "") +
-          "/" +
-          toKebabCase(pluralize.plural(entity)) +
-          "?" +
-          searchParams?.toString(),
+      (pathPrefix?.(params) ?? "") +
+      "/" +
+      toKebabCase(pluralize.plural(entity)) +
+      "?" +
+      searchParams?.toString(),
     );
 
     const schema = rowSchemas[entity];
@@ -48,7 +53,6 @@ export default function listLoader(
     const result = apiSchema.safeParse(data);
 
     if (!result.success) {
-      // Log validation errors for debugging in
       throwError(
         500,
         "Sorry, we received unexpected data from the server. Please try again later.",

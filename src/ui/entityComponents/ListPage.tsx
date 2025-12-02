@@ -1,24 +1,23 @@
-import List from "./List";
 import Clickable from "../customComponents/Clickable";
+import List from "./List";
 
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type { SearchParamsState, SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
 } from "../../components/ui/dialog";
-import { DialogPortal, DialogTitle } from "@radix-ui/react-dialog";
 import FilterEntities from "../customComponents/FilterEntities";
-import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
-import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
-import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { Setter } from "@/utils/models/types/utils/basics";
-import H2 from "../customComponents/H2";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { Setter } from "@/utils/models/types/utils/basics";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import H2 from "../customComponents/H2";
 
-import useListPage from "./hooks/useListPage";
 import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
+import useListPage from "./hooks/useListPage";
 
 type ListPageProps<T extends EntityKey> = {
   entity: EntityKey;
