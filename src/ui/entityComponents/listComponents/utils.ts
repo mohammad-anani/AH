@@ -9,6 +9,7 @@ export function convertStringToType(type: string, value: string) {
       return Number(value);
     case "string":
     case "phone":
+    case "uniselect":
       return value;
     case "boolean":
       return value !== "" ? value : "all";
@@ -16,7 +17,7 @@ export function convertStringToType(type: string, value: string) {
       if (value) return value.split(",");
       break;
     default:
-      return null;
+      return value;
   }
 }
 

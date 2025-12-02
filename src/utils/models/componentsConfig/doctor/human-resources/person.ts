@@ -9,6 +9,7 @@ import {
   phoneField,
   emailField,
   booleanField,
+  uniselectField,
 } from "../../utils/filterReusableFields";
 import type { DisplayingConfig } from "../../routeConfig";
 
@@ -28,7 +29,7 @@ export const person: DisplayingConfig<"Person"> = {
     stringField("FirstName"),
     stringField("MiddleName"),
     stringField("LastName"),
-    booleanField("Gender", ["Male", "Female", "All"]),
+    uniselectField("Gender", ["Male", "Female"]),
     numberField("Age"),
     phoneField("Phone"),
     emailField("Email"),

@@ -17,7 +17,7 @@ const NumberInput = memo(function NumberInput({
   label,
   min,
   max,
-  step = 1,
+  step = 0.01,
   required = false,
   placeholder,
 }: NumberInputProps) {
@@ -25,6 +25,7 @@ const NumberInput = memo(function NumberInput({
 
   // Memoize the onChange callback to prevent unnecessary re-renders
   const handleChange = useCallback((value: Primitive): Primitive => {
+    console.log(typeof value);
     return typeof value === "string" ? Number(value) : value;
   }, []);
 

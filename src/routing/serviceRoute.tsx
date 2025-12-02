@@ -24,10 +24,9 @@ import type { Primitive } from "react-hook-form";
 import type { addTypesObject } from "@/utils/models/types/add";
 import type { updateTypesObject } from "@/utils/models/types/update";
 import listLoader from "@/utils/loaders/listLoader";
-import AddUpdateForm from "@/ui/entityComponents/AddUpdateForm";
-import { payment } from "@/utils/models/componentsConfig/receptionist";
-import { AddPaymentSchema } from "@/utils/models/zod/addSchemas";
+
 import payAction from "./actions/pay";
+import Pay from "@/features/payment/Pay";
 
 export type FormKey<T extends DisplayEntityKey> = [
   label: string,
@@ -35,11 +34,11 @@ export type FormKey<T extends DisplayEntityKey> = [
   type: DataTypes | "custom",
   mode: Set<Process> | "All",
   data?:
-    | Array<Primitive>
-    | customFormProps
-    | [string, string]
-    | string
-    | [EntityKey, RouteConfig<EntityKey>, Role],
+  | Array<Primitive>
+  | customFormProps
+  | [string, string]
+  | string
+  | [EntityKey, RouteConfig<EntityKey>, Role],
 ];
 
 export function serviceRoute<T extends ServicesEntities>(
@@ -159,15 +158,7 @@ export function serviceRoute<T extends ServicesEntities>(
     {
       path: "pay",
       action: payAction(({ id }) => entityPath + `/${id}/pay`),
-      element: (
-        <AddUpdateForm
-          formConfig={payment["formConfig"]}
-          entity={"Payment"}
-          isAdd={true}
-          submitText="Pay"
-          title="Make Payment"
-        />
-      ),
+      element: <Pay entity={entityPath} />,
     },
   ];
 

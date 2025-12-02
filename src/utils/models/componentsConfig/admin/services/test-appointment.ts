@@ -16,39 +16,38 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     TestType,
     Service,
   }: typesObject["TestAppointment"]) => [
-    TestOrder?.ID
-      ? [
+      TestOrder?.ID
+        ? [
           "Test Order",
           TestOrder,
           `/admin/services/test-orders/${TestOrder.ID}`,
           "TestOrder",
           testOrder.selectorDisplay(TestOrder),
         ]
-      : ["Test Order", "None"],
-    [
-      "Test Type",
-      TestType,
-      `/admin/general/test-types/${TestType.ID}`,
-      "TestType",
-      testType.selectorDisplay(TestType),
-    ],
+        : ["Test Order", "None"],
+      [
+        "Test Type",
+        TestType,
+        `/admin/general/test-types/${TestType.ID}`,
+        "TestType",
+        testType.selectorDisplay(TestType),
+      ],
 
-    ...service["dataFields"](Service),
-  ],
+      ...service["dataFields"](Service),
+    ],
   filterFields: [
     adminFilterSelectorField("TestTypeID", "TestType", testType),
-    adminFilterSelectorField("TestOrderID", "TestOrder", testOrder),
     ...service["filterFields"],
     ...(admingenerateAuditFields("Receptionist") ?? []),
   ],
-  selectorDisplay: ({ TestName, PatientFullName, Status }) =>
-    TestName + " | " + PatientFullName + " | " + Status,
+  selectorDisplay: ({ TestTypeName, PatientFullName, Status }) =>
+    TestTypeName + " | " + PatientFullName + " | " + Status,
 
   rowTemplate: [
     ["Patient", "Test", "Date", "Status", "Is Paid"],
     (item) => [
       item.PatientFullName,
-      item.TestName,
+      item.TestTypeName,
       formatDateIsoToLocal(item.ScheduledDate),
       item.Status,
       item.IsPaid,

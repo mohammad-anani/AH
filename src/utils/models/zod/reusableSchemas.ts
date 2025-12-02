@@ -4,22 +4,26 @@ import { z } from "zod";
 export const nonEmptyString = (name: string) =>
   z.string().nonempty({ error: `${name} is required.` });
 
-// Positive number with min/max
 export const positiveNumber = (
   name: string,
   min: number = 1,
   max: number = Number.MAX_SAFE_INTEGER,
   isSelector: boolean = false,
 ) => {
-  const base = z.number({ error: `${name} is required.` });
+  // Converts string → number before validation
+  const base = z.coerce.number({
+    error: `${name} is required.`,
+  });
+
   if (isSelector) {
     return base.refine((val) => val !== 0, {
       message: `${name} is required.`,
     });
   }
+
   return base
-    .min(min, { error: `${name} must be at least ${min}.` })
-    .max(max, { error: `${name} must be at most ${max}.` });
+    .min(min, { message: `${name} must be at least ${min}.` })
+    .max(max, { message: `${name} must be at most ${max}.` });
 };
 
 // Datetime with or without seconds
