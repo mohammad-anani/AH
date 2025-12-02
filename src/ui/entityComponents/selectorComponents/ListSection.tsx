@@ -34,7 +34,7 @@ export default function ListSection<T extends EntityKey>({
   path,
 }: ListProps<T>) {
   return (
-    <div className="max-h-[380px] space-y-2! space-x-2!">
+    <div className="max-h-[380px] space-y-2! space-x-2! overflow-y-scroll">
       <ListPage<T>
         entity={entity}
         data={data}

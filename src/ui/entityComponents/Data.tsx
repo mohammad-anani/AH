@@ -29,6 +29,8 @@ const Data = memo(function Data<T extends EntityKey>({
   console.log(fieldData);
   if (!fieldData) return;
 
+
+
   return (
     <>
       {fieldData.map(([label, value, link, entity, display]) => {
@@ -46,9 +48,9 @@ const Data = memo(function Data<T extends EntityKey>({
                     as={isModal ? "button" : "Link"}
                     {...(isModal
                       ? {
-                          onClick: () =>
-                            setSubCard?.([entity as EntityKey, link]),
-                        }
+                        onClick: () =>
+                          setSubCard?.([entity as EntityKey, link]),
+                      }
                       : { to: link })}
                     variant="link"
                   >
@@ -59,6 +61,9 @@ const Data = memo(function Data<T extends EntityKey>({
                 String(value)
               )}
             </span>
+            <span></span>
+            <span></span>
+
           </>
         );
       })}

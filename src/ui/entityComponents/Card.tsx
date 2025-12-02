@@ -20,6 +20,7 @@ import Data from "./Data";
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import useCard from "./hooks/useCard";
 import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
+import { useWindowWidth } from "@/utils/hooks/useWindowWidth";
 
 type CardProps<T extends EntityKey> = {
   title: EntityKey;
@@ -65,6 +66,17 @@ const Card = memo(function Card<T extends EntityKey>({
     if (!subObject || !subDataFields) return false;
     return subDataFields(subObject).length > 4;
   }, [subObject, subDataFields]);
+
+
+  const windowWidth = useWindowWidth();
+
+  const columnsMultiplier = windowWidth < 1200 ? 1 : 2;
+
+  const mainGridFr = "auto_1fr"
+
+  const gridFr = Array(columnsMultiplier).fill(mainGridFr).join("_1px_44px_");
+
+  console.log(gridFr);
 
   if (subObject && subDataFields) {
     return (
@@ -117,7 +129,7 @@ const Card = memo(function Card<T extends EntityKey>({
         </div>
       </div>
       <div
-        className={`grid ${headerWidth ? "grid-cols-[" + headerWidth + "px_1fr]" : "grid-cols-[auto_1fr]"} gap-x-2 gap-y-1 *:text-xl! *:odd:font-bold`}
+        className={`grid ${headerWidth ? "grid-cols-[" + headerWidth + "px_1fr]" : `grid-cols-[${gridFr}_1px_1px]`} gap-x-2 gap-y-1 *:text-xl! *:odd:font-bold`}
       >
         <Data
           isNestedCard={isNestedCard}
@@ -156,6 +168,7 @@ const Card = memo(function Card<T extends EntityKey>({
               <Clickable
                 onClick={() => {
                   fetcher.submit(null, {
+                    method: "post",
                     action: "delete",
                   });
                 }}

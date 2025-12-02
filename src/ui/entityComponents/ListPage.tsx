@@ -115,8 +115,8 @@ export default function ListPage<T extends EntityKey>({
         canModifyUrl={canModifyUrl}
         searchParamsState={
           searchParamsState as
-            | [URLSearchParams, (params: URLSearchParams) => void]
-            | undefined
+          | [URLSearchParams, (params: URLSearchParams) => void]
+          | undefined
         }
         setObject={
           selectedObjectState

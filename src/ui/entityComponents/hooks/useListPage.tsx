@@ -9,6 +9,7 @@ import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTyp
 
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
+import { useWindowWidth } from "@/utils/hooks/useWindowWidth";
 
 export default function useListPage<T extends EntityKey>(
   entity: T,
@@ -30,19 +31,53 @@ export default function useListPage<T extends EntityKey>(
 
   const [headerFields, dataFields, gridFr] = rowTemplate;
 
-  const gridTemplate = [...gridFr, ...(searchParamsState ? [1, 2] : [1])]
+  const additionnalFr = searchParamsState ? [1, 1] : [1]
+
+
+  const windowWidth = useWindowWidth();
+
+
+  let sliceEnd = headerFields.length;
+
+  if (!searchParamsState) {
+
+    if (windowWidth < 600)
+      sliceEnd = 2;
+    else if (windowWidth < 800)
+      sliceEnd = 3
+    else if (windowWidth < 1000)
+      sliceEnd = 4
+    else if (windowWidth < 1200)
+      sliceEnd = 5
+
+  }
+  else {
+    sliceEnd = 1;
+  }
+
+  if (sliceEnd > headerFields.length)
+    sliceEnd = headerFields.length
+
+
+
+  const responsiveGridFr = gridFr.slice(0, sliceEnd);
+
+  const totalGridFr = [...responsiveGridFr, ...(additionnalFr)]
+
+
+  const gridTemplate = totalGridFr
     .map((fr) => `${fr}fr`)
     .join(" ");
 
   const gridStyle = {
     display: "grid",
-    gap: "5px",
+    gap: "15px",
     gridTemplateColumns: gridTemplate,
   };
 
   const Header = (
     <li key="Header" style={gridStyle}>
-      {headerFields.map((field) => (
+      {headerFields.slice(0, sliceEnd).map((field) => (
         <span>{field}</span>
       ))}
     </li>
@@ -51,7 +86,7 @@ export default function useListPage<T extends EntityKey>(
   const render = (item: rowTypesObject[T]) => {
     return (
       <li style={gridStyle} key={item?.["ID"]}>
-        {dataFields(item ?? undefined).map((field) => (
+        {dataFields(item ?? undefined).slice(0, sliceEnd).map((field) => (
           <span>{String(field)}</span>
         ))}
         <Clickable
@@ -60,20 +95,20 @@ export default function useListPage<T extends EntityKey>(
           variant="secondary"
           {...(searchParamsState
             ? {
-                onClick: () => {
-                  onDetailsClick?.(item.ID);
-                },
-              }
+              onClick: () => {
+                onDetailsClick?.(item.ID);
+              },
+            }
             : {
-                to: detailsLink ? detailsLink(item?.["ID"]) : `${item?.["ID"]}`,
-              })}
+              to: detailsLink ? detailsLink(item?.["ID"]) : `${item?.["ID"]}`,
+            })}
         >
           <Info className="*:text-primary! h-[20px] w-[20px]" />
           Details
         </Clickable>
 
         {searchParamsState &&
-        item?.["ID"] !== selectedObjectState?.[0]?.["ID"] ? (
+          item?.["ID"] !== selectedObjectState?.[0]?.["ID"] ? (
           <Clickable
             className="flex! items-center gap-x-1"
             as="button"

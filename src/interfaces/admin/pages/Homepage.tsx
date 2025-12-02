@@ -1,13 +1,17 @@
-import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
-
-import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate, } from "react-router-dom";
 
 export default function Homepage() {
-  const state = useState<rowTypesObject["Department"]>();
-  const [department] = state;
+
+  const navigate = useNavigate();
+  useEffect(() => {
+
+    navigate('departments', { replace: true });
+  }, [])
+
   return (
     <>
-      <h1>{department ? department.Name : "No Deparmtent yet"}</h1>
+      <h1>HomePage</h1>
     </>
   );
 }

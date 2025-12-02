@@ -34,6 +34,8 @@ export default function useForm<T extends EntityKey>(
       disabled: state ? Object.keys(state).includes(key) : false,
     };
 
+
+
     if (type === "custom") {
       const [element] = data as customFormProps;
 

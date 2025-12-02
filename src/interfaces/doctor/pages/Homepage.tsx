@@ -1,7 +1,17 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function Homepage() {
+
+  const navigate = useNavigate();
+  useEffect(() => {
+
+    navigate('appointments', { replace: true });
+  }, [])
+
   return (
     <>
-      <h1>DOCTOR HOMEPAGE</h1>
+      <h1>HomePage</h1>
     </>
   );
 }
