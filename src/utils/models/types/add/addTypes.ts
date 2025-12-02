@@ -17,7 +17,6 @@ import type {
   AddOperationSchema,
   AddPrescriptionSchema,
   AddInsuranceSchema,
-  AddPaymentSchema,
 } from "../../zod/addSchemas";
 
 export type AddPerson = z.infer<typeof AddPersonSchema>;
@@ -41,4 +40,4 @@ export type AddTestOrder = z.infer<typeof AddTestOrderSchema>;
 export type AddOperation = z.infer<typeof AddOperationSchema>;
 export type AddPrescription = z.infer<typeof AddPrescriptionSchema>;
 export type AddInsurance = z.infer<typeof AddInsuranceSchema>;
-export type AddPayment = z.infer<typeof AddPaymentSchema>;
+
