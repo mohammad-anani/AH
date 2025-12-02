@@ -14,6 +14,7 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
       throwError(400, "Invalid ID");
     }
 
+
     //to be changed
     const data = await findByID(
       `${toKebabCase(pluralize.plural(entity))}/${id}`,
@@ -25,16 +26,19 @@ export default function findByIDLoader(entity: EntityKey): LoaderFunction {
 
     const result = schema.safeParse(data);
     console.log(result);
+
+
     if (!result.success) {
-      // Log validation errors for debugging in development
-      if (import.meta.env.DEV) {
-        console.error("API validation error:", result.error);
-      }
+
+
+
       throwError(
         500,
         "Sorry, we received unexpected data from the server. Please try again later.",
       );
     }
+
+
 
     return data;
   };

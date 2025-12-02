@@ -3,8 +3,12 @@ import H2 from "@/ui/customComponents/H2";
 import useAddUpdateForm from "@/ui/entityComponents/hooks/useAddUpdateForm";
 import { AddAppointmentFromPreviousSchema } from "@/utils/models/zod/addSchemas/services/appointmentFromPrevious";
 import { FormProvider } from "react-hook-form";
-import { Form as RouterForm, type SubmitTarget } from "react-router-dom";
+import { Form as RouterForm, useNavigate, useOutletContext, type SubmitTarget } from "react-router-dom";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
+import type { Appointment } from "@/utils/models/types/normal/types";
+import throwError from "@/utils/helpers/throwError";
+
+
 
 export default function ReserveFollowUpForm() {
   const { title, methods, handleSubmit, submit, isSubmitting } =
@@ -14,6 +18,15 @@ export default function ReserveFollowUpForm() {
       "Reserve Follow-up Appointment",
       true,
     );
+
+  const appointment = useOutletContext<Appointment>()
+
+
+
+
+  if (appointment.Service.Status !== "Completed" || appointment.PreviousAppointment)
+    throwError(403, "Cannot reserve a follow up for a non-completed or already reserved appointment.")
+
 
   return (
     <>

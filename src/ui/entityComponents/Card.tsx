@@ -52,6 +52,7 @@ const Card = memo(function Card<T extends EntityKey>({
   headerWidth,
   dataFieldsObject,
 }: CardProps<T>) {
+
   const { subEntity, setSubCard, subDataFields, object, subObject, fetcher } =
     useCard<T>(dataFieldsObject, data);
 
@@ -60,6 +61,8 @@ const Card = memo(function Card<T extends EntityKey>({
     () => titleText ?? formatTitle(title),
     [titleText, title],
   );
+
+
 
   // Memoize the overflow check to avoid recalculation
   const shouldOverflow = useMemo(() => {

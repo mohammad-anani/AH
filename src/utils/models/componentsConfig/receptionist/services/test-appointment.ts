@@ -22,25 +22,25 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     TestType,
     Service,
   }: typesObject["TestAppointment"]) => [
-    TestOrder?.ID
-      ? [
+      TestOrder?.ID
+        ? [
           "Test Order",
           TestOrder,
-          `/receptionist/services/test-orders/${TestOrder.ID}`,
+          `/receptionist/test-orders/${TestOrder.ID}`,
           "TestOrder",
           testOrder.selectorDisplay(TestOrder),
         ]
-      : ["Test Order", "None"],
-    [
-      "Test Type",
-      TestType,
-      `/receptionist/general/test-types/${TestType.ID}`,
-      "TestType",
-      testType.selectorDisplay(TestType),
-    ],
+        : ["Test Order", "None"],
+      [
+        "Test Type",
+        TestType,
+        `/receptionist/general/test-types/${TestType.ID}`,
+        "TestType",
+        testType.selectorDisplay(TestType),
+      ],
 
-    ...service["dataFields"](Service),
-  ],
+      ...service["dataFields"](Service),
+    ],
   filterFields: [
     receptionistFilterSelectorField("Test", "TestType", testType),
     receptionistFilterSelectorField("TestOrder", "TestOrder", testOrder),

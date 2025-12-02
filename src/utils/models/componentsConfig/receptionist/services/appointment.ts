@@ -16,27 +16,27 @@ export const appointment: RouteConfig<"Appointment"> = {
     Doctor,
     PreviousAppointment,
   }: typesObject["Appointment"]) => [
-    [
-      "Doctor",
-      Doctor,
-      `/receptionist/human-resources/doctors/${Doctor.ID}`,
-      "Doctor",
-      doctor.selectorDisplay(Doctor),
-    ],
-    PreviousAppointment
-      ? [
+      [
+        "Doctor",
+        Doctor,
+        `/receptionist/human-resources/doctors/${Doctor.ID}`,
+        "Doctor",
+        doctor.selectorDisplay(Doctor),
+      ],
+      PreviousAppointment
+        ? [
           "Previous Appointment",
           PreviousAppointment,
           PreviousAppointment
-            ? `/receptionist/services/appointments/${PreviousAppointment.ID}`
+            ? `/receptionist/appointments/${PreviousAppointment.ID}`
             : undefined,
           "Appointment",
           appointment.selectorDisplay(PreviousAppointment),
         ]
-      : ["Previous Appointment", "N/A"],
+        : ["Previous Appointment", "N/A"],
 
-    ...service["dataFields"](Service),
-  ],
+      ...service["dataFields"](Service),
+    ],
   filterFields: [
     receptionistFilterSelectorField("DoctorID", "Doctor", doctor),
     ...service["filterFields"],
@@ -64,9 +64,9 @@ export const appointment: RouteConfig<"Appointment"> = {
     ],
     [1, 1, 1, 1, 1],
   ],
-  subLinks: ({ Service }) => [
+  subLinks: ({ Service, PreviousAppointment }) => [
     ["Show Test Orders", `test-orders`],
-    ...(Service.Status === "Completed"
+    ...(Service.Status === "Completed" && PreviousAppointment
       ? [["Reserve Follow-up", "reserve-follow-up"] as [string, string]]
       : []),
   ],
