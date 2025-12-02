@@ -31,7 +31,6 @@ axios.interceptors.request.use(
     if (refreshToken) {
       config.headers["refresh-token"] = refreshToken;
     }
-
     return config;
   },
   (error) => {
@@ -41,6 +40,8 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
+    console.log(123);
+    console.log(response);
     // Check for new JWT token in response headers (refresh token logic)
     const newToken =
       response.headers["Token"] ||
@@ -67,11 +68,16 @@ axios.interceptors.response.use(
   (error) => {
     if (isAxiosError(error)) {
       const status = error.response?.status ?? 0;
-
       const message =
         error.response?.data?.message ||
         error.message ||
         "An unknown error occurred";
+
+      if (status === 404 && error.config?.url?.includes("auth/signin")) {
+        console.log("heelo", error.response);
+        return error.response; // return the response as-is
+      }
+
 
       if (!error.response) {
         throwError(

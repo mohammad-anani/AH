@@ -20,7 +20,7 @@ export const adminRoutes = [
     children: [
       {
         element: (
-          <Layout>
+          <Layout count={6}>
             <Nav />
           </Layout>
         ),

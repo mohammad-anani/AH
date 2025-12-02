@@ -1,17 +1,17 @@
 import { FormProvider, useForm } from "react-hook-form";
 import {
   Form,
-  useSubmit,
   useNavigate,
-  type SubmitTarget,
+  replace,
 } from "react-router-dom";
-import { useEffect } from "react";
 import Clickable from "@/ui/customComponents/Clickable";
 import Logo from "@/ui/customComponents/Logo";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/utils/models/zod/Login";
 import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
+import { login } from "@/api/login";
+import { useState } from "react";
 
 export default function Login() {
   const methods = useForm({ resolver: zodResolver(LoginSchema) });
@@ -19,7 +19,7 @@ export default function Login() {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-  const submit = useSubmit();
+
   const navigate = useNavigate();
   const { decoded, expired } = useDecodedJwt();
   // Check for valid token and redirect if authenticated
@@ -35,6 +35,39 @@ export default function Login() {
     }
   }
 
+  const [isFailed, setIsFailed] = useState(false);
+
+  function loginFn() {
+    return async (data: {
+      Email: string;
+      Password: string;
+    }) => {
+
+
+      if (!(data.Email && data.Password)) {
+        return replace("/");
+      }
+
+      const { ID, Token, Role, RefreshToken } = await login(data.Email, data.Password);
+
+      if (!(Token != -1 && RefreshToken && ID && Role)) {
+
+        methods.reset();
+        setIsFailed(true);
+        return;
+      }
+      console.log(Role);
+      localStorage.setItem("token", Token);
+      localStorage.setItem("refresh-token", RefreshToken);
+
+      if (Role === "Admin") return navigate("/admin", { replace: true });
+      if (Role === "Receptionist") return navigate("/receptionist", { replace: true });
+      if (Role === "Doctor") return navigate("/doctor", { replace: true });
+
+    };
+  }
+
+
   return (
     <main className="mt-20 grid content-center gap-y-4" role="main">
       <header className="text-center">
@@ -45,20 +78,13 @@ export default function Login() {
       <section className="flex justify-center" aria-label="Login form">
         <FormProvider {...methods}>
           <Form
-            onSubmit={handleSubmit((data) => {
-              submit(data as SubmitTarget, {
-                method: "POST",
-                encType: "application/json",
-              });
-            })}
+            onSubmit={handleSubmit(loginFn())}
             className="flex flex-col items-center gap-y-4 text-xl"
             aria-label="Login credentials"
           >
-            <fieldset
+            <div
               className="grid grid-cols-[120px_1fr] gap-y-2"
-              disabled={isSubmitting}
             >
-              <legend className="sr-only">Login Credentials</legend>
 
               <label htmlFor="email-input" className="pr-2 text-right">
                 Email:
@@ -84,7 +110,8 @@ export default function Login() {
                   aria-required="true"
                 />
               </RegisteredInput>
-            </fieldset>
+              {isFailed ? <label className="text-[15px] col-span-2  text-destructive! text-center">Invalid Username and/or Password!</label> : null}
+            </div>
 
             <Clickable
               className="w-[120px]"
@@ -101,4 +128,6 @@ export default function Login() {
       </section>
     </main>
   );
+
+
 }

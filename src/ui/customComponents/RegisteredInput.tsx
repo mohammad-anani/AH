@@ -39,11 +39,13 @@ export default function RegisteredInput({
         ...registered,
         onChange: onChange
           ? (e) => {
-              const value = e.target.value;
 
-              onChange?.(value);
-              setValue(name, value, { shouldValidate: true });
-            }
+            const value = e.target.value;
+
+            const newVal = onChange?.(value);
+
+            setValue(name, newVal, { shouldValidate: true });
+          }
           : registered.onChange,
         value,
         name,
