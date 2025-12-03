@@ -32,7 +32,7 @@ export const appointment: RouteConfig<"Appointment"> = {
             ? `/admin/services/appointments/${PreviousAppointment.ID}`
             : undefined,
           "Appointment",
-          appointment.selectorDisplay(Doctor),
+          appointment.selectorDisplay(PreviousAppointment),
         ] : ["Previous Appointment", "N/A"],
 
       ...service["dataFields"](Service),

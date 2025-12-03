@@ -1,13 +1,3 @@
-import H2 from "@/ui/customComponents/H2";
-import Clickable from "@/ui/customComponents/Clickable";
-import { formatTitle } from "@/utils/formatters/formatTitle";
-import { useFetcher, useOutletContext } from "react-router-dom";
-import Data from "./Data";
-import type {
-  DataFields,
-  SubLinks,
-} from "@/utils/models/types/utils/routeTypes";
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import {
   Dialog,
   DialogClose,
@@ -17,7 +7,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Clickable from "@/ui/customComponents/Clickable";
+import H2 from "@/ui/customComponents/H2";
+import { formatTitle } from "@/utils/formatters/formatTitle";
 import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type {
+  DataFields,
+  SubLinks,
+} from "@/utils/models/types/utils/routeTypes";
+import { useFetcher, useOutletContext } from "react-router-dom";
+import Data from "./Data";
 
 export type EmployeeEntities = "Receptionist" | "Doctor" | "Admin";
 
@@ -64,7 +64,6 @@ export default function EmployeeCard<T extends EmployeeEntities>({
             </Clickable>
           )}
 
-          {/* Leave Dialog */}
           {canLeave && !hasLeft && isNotSameUser && (
             <Dialog>
               <DialogTrigger asChild>
@@ -112,7 +111,6 @@ export default function EmployeeCard<T extends EmployeeEntities>({
             </Dialog>
           )}
 
-          {/* Delete Dialog */}
           {canDelete && (
             <Dialog>
               <DialogTrigger asChild>

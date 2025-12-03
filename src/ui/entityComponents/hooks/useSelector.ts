@@ -1,24 +1,26 @@
 import { formatTitle } from "@/utils/formatters/formatTitle";
 
-import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
-import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
-import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import { useState, useEffect } from "react";
-import { useFetcher } from "react-router-dom";
 import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { SearchParamsState, SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import { useEffect, useState } from "react";
+import { useFetcher } from "react-router-dom";
 
 export default function useSelector<T extends EntityKey>(
   entity: T,
   selectedObjectState: SelectedObjectState<T>,
-
   data?: [rowTypesObject[T][], number],
+  outerSearchParamsState?: SearchParamsState
 ) {
   const [object, setObject] = selectedObjectState;
 
-  const searchParamsState: SearchParamsState = useState<URLSearchParams>(
+  const innerSearchParamsState: SearchParamsState = useState<URLSearchParams>(
     new URLSearchParams(),
   );
+
+
+  const searchParamsState = outerSearchParamsState || innerSearchParamsState;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,6 +29,7 @@ export default function useSelector<T extends EntityKey>(
   const [searchParams] = searchParamsState ?? [];
 
   const paramString = searchParams?.toString() ?? "";
+
 
   const listFetcher = useFetcher();
   const findFetcher = useFetcher();

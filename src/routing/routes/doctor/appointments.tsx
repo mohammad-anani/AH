@@ -24,8 +24,7 @@ const testOrdersRoute: RouteObject[] = [
   },
 ];
 
-const token = localStorage.getItem("token");
-const doctorID = decodeJwt(token ?? "")?.sub;
+
 
 export const appointmentsRoutes = serviceRoute(
   "Appointment",
@@ -49,7 +48,15 @@ export const appointmentsRoutes = serviceRoute(
   false,
   false,
   true,
-  () => `doctors/${doctorID}`,
+  () => {
+
+    const token = localStorage.getItem("token");
+    const doctorID = decodeJwt(token ?? "")?.sub;
+
+    console.log(doctorID);
+
+    return `doctors/${doctorID}`
+  },
   true,
   true,
   undefined,

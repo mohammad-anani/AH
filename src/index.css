@@ -61,7 +61,6 @@
   --color-muted: var(--color-muted);
 }
 
-
 * {
   @apply font-lato text-foreground selection:bg-primary-light! selection:text-foreground focus-visible:outline-primary box-border list-none scroll-smooth rounded-md no-underline transition-all duration-125 focus-visible:outline-2 focus-visible:outline-offset-1;
 }
@@ -76,25 +75,10 @@ html {
   @apply overflow-y-auto;
 }
 
-/* #root {
-  @apply ;
-} */
-
 button,
 a {
   @apply inline-block cursor-pointer;
 }
-
-/* .on path:first-child {
-  rotate: -180deg;
-  transform-origin: 7px 12px;
-}
-
-.on path:nth-child(2) {
-  rotate: -180deg;
-  transform-origin: 0px 8px;
-  transform-box: fill-box;
-} */
 
 input,
 select,
@@ -172,23 +156,12 @@ textarea {
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
-/* @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-} */
-
 @layer base {
   :root {
     --background: var(--color-background);
     --foreground: var(--color-foreground);
     --primary: var(--color-primary);
-    --primary-foreground: var(
-      --color-primary-light
-    ); /* Or white, if better contrast */
+    --primary-foreground: var(--color-primary-light);
     --card: var(--color-background-dark);
     --card-foreground: var(--color-foreground);
     --popover: var(--color-background);

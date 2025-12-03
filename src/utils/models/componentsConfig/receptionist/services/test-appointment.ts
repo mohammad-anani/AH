@@ -1,20 +1,20 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
+import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
+import { service } from "../../admin/services/service";
+import type { RouteConfig } from "../../routeConfig";
 import {
   datetimeField,
   stringField,
   uniselectField,
 } from "../../utils/filterReusableFields";
-import type { RouteConfig } from "../../routeConfig";
 import {
   receptionistFilterSelectorField,
   receptionistFormSelectorField,
 } from "../../utils/RoleUtil";
-import { testOrder } from "./test-order";
 import { testType } from "../general/test-type";
-import { service } from "../../admin/services/service";
 import { patient } from "../human-resources";
-import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
+import { testOrder } from "./test-order";
 
 export const testAppointment: RouteConfig<"TestAppointment"> = {
   dataFields: ({
@@ -43,7 +43,6 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
     ],
   filterFields: [
     receptionistFilterSelectorField("Test", "TestType", testType),
-    receptionistFilterSelectorField("TestOrder", "TestOrder", testOrder),
     receptionistFilterSelectorField("Patient", "Patient", patient),
     datetimeField("ScheduledDate"),
     uniselectField("Status", ["Cancelled", "Accepted"]),

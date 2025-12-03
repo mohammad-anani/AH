@@ -1,5 +1,5 @@
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import {
   datetimeField,
@@ -18,16 +18,21 @@ export const appointment: RouteConfig<"Appointment"> = {
     Service,
     Doctor,
     PreviousAppointment,
-  }: typesObject["Appointment"]) => [
-    ...(PreviousAppointment
-      ? [
+  }: typesObject["Appointment"]) =>
+    [
+      PreviousAppointment ?
+        [
           "Previous Appointment",
+          PreviousAppointment,
+          PreviousAppointment
+            ? `/doctor/appointments/${PreviousAppointment.ID}`
+            : undefined,
+          "Appointment",
           appointment.selectorDisplay(PreviousAppointment),
-        ]
-      : []),
-    ["Doctor", doctor.selectorDisplay(Doctor)],
-    ...service["dataFields"](Service),
-  ],
+        ] : ["Previous Appointment", "N/A"],
+      ["Doctor", doctor.selectorDisplay(Doctor)],
+      ...service["dataFields"](Service),
+    ],
   filterFields: [
     receptionistFilterSelectorField("PatientID", "Patient", patient),
     datetimeField("ScheduledDate"),
@@ -36,7 +41,7 @@ export const appointment: RouteConfig<"Appointment"> = {
     stringField("Notes"),
   ],
   selectorDisplay: ({ DoctorFullName, PatientFullName }) =>
-    "Doctor:" + DoctorFullName + " | Patient:" + PatientFullName,
+    "Doc: " + DoctorFullName + " | Pat: " + PatientFullName,
   rowTemplate: [
     ["Patient", "Scheduled Date", "Status", "Is Paid"],
     (item) => [

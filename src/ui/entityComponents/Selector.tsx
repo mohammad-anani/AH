@@ -1,5 +1,5 @@
 
-import { type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import { type SearchParamsState, type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 
 import { type Setter } from "@/utils/models/types/utils/basics";
 import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
@@ -37,6 +37,7 @@ type SelectorProps<T extends EntityKey> = {
   data?: [rowTypesObject[T][], number];
   onEdit?: (object: rowTypesObject[T]) => void;
   onDelete?: (object: rowTypesObject[T]) => void;
+  outerSearchParamsState?: SearchParamsState
 };
 
 export default function Selector<T extends EntityKey>({
@@ -50,6 +51,7 @@ export default function Selector<T extends EntityKey>({
   dataFieldsObject,
   onEdit,
   onDelete,
+  outerSearchParamsState
 }: SelectorProps<T>) {
   const {
     isOpen,
@@ -66,8 +68,8 @@ export default function Selector<T extends EntityKey>({
   } = useSelector(
     entity,
     selectedObjectState,
-
     data,
+    outerSearchParamsState
   );
 
 

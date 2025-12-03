@@ -159,7 +159,6 @@ export default function AddUpdateForm<T extends EntityKey>({
           </Clickable>
         </RouterForm>
 
-        {/* Navigation blocking dialog */}
         <Dialog
           open={isNavigationDialogOpen}
           onOpenChange={setIsNavigationDialogOpen}
@@ -191,7 +190,6 @@ export default function AddUpdateForm<T extends EntityKey>({
           </DialogContent>
         </Dialog>
 
-        {/* Form submission confirmation dialog */}
         {confirmation ? (
           <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
             <DialogContent>

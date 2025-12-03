@@ -32,7 +32,6 @@ export default function TestOrderForm() {
         </button>
       </div>
 
-      {/* Debug info */}
       <div className="mt-4 rounded bg-gray-100 p-4">
         <h3 className="font-semibold">Selected Test Type IDs:</h3>
         <pre>{JSON.stringify(selectedTestTypes, null, 2)}</pre>

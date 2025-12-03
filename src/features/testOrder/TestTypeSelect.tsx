@@ -6,8 +6,9 @@ import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 
 import type { TestTypeRow } from "@/utils/models/types/row/rowTypes";
 import type { Setter } from "@/utils/models/types/utils/basics";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 
 export type TestTypeSelectState = number[];
@@ -22,8 +23,16 @@ export default function TestTypeSelect({
   setTestTypes: Setter<TestTypeSelectState>;
   entityObject?: RouteConfig<"TestType">;
 }) {
+
+  const searchParamsState: SearchParamsState = useState<URLSearchParams>(
+    new URLSearchParams(),
+  );
+
+
+
+
   const { items, availableItems, count, isLoading, onSelect, onDelete } =
-    useTestTypes(testTypes, setTestTypes);
+    useTestTypes(testTypes, setTestTypes, searchParamsState);
 
   if (isLoading) return null;
 
@@ -53,6 +62,7 @@ export default function TestTypeSelect({
                 onDelete={onDelete}
                 data={[availableItems, count]}
                 onEdit={(testType) => onSelect(testType, index)}
+                outerSearchParamsState={searchParamsState}
               />
             </span>
             <hr />
@@ -66,13 +76,15 @@ export default function TestTypeSelect({
 function useTestTypes(
   testTypes: TestTypeSelectState,
   setTestTypes: Setter<TestTypeSelectState>,
+  searchParamsState: SearchParamsState
+
 ) {
   const fetcher = useFetcher();
 
   useEffect(() => {
-    fetcher.load(fetchingPaths["TestType"]);
+    fetcher.load(fetchingPaths["TestType"] + "?" + searchParamsState[0].toString());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchParamsState[0]]);
 
   const isValidData =
     fetcher.data && Array.isArray(fetcher.data) && fetcher.data.length === 2;

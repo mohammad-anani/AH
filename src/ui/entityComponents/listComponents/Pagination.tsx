@@ -24,6 +24,7 @@ export default function Pagination({ itemsCount }: { itemsCount: number }) {
       className="*:hover:bg-background-darker! flex items-center space-x-4 text-xl! *:flex *:h-[30px] *:place-content-center *:items-center *:bg-white **:w-[30px] **:text-center **:align-middle"
       activeClassName="*:text-primary! bg-background-dark! font-bold"
       onPageChange={(event) => {
+
         const pageIndex = event.selected;
         const params = new URLSearchParams(searchParams.toString());
 
@@ -34,6 +35,9 @@ export default function Pagination({ itemsCount }: { itemsCount: number }) {
         }
 
         params.set("page", String(pageIndex + 1));
+
+        console.log(params);
+
         setSearchParams(params);
       }}
     />

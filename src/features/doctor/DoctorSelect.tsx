@@ -6,8 +6,9 @@ import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 
 import type { DoctorRow } from "@/utils/models/types/row/rowTypes";
 import type { Setter } from "@/utils/models/types/utils/basics";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 
 export type DoctorSelectState = {
@@ -25,9 +26,16 @@ export default function DoctorSelect({
   setDoctors: Setter<DoctorSelectState>;
   entityObject: RouteConfig<"Doctor">;
 }) {
+
+  const searchParamsState: SearchParamsState = useState<URLSearchParams>(
+    new URLSearchParams(),
+  );
+
+
   const { items, count, isLoading, onSelect, onDelete, onEdit } = useDoctors(
     doctors,
     setDoctors,
+    searchParamsState
   );
 
   if (isLoading) return null;
@@ -56,6 +64,7 @@ export default function DoctorSelect({
                 onDelete={onDelete}
                 data={[items, count]}
                 onEdit={(doc) => onEdit(doc, index)}
+                outerSearchParamsState={searchParamsState}
               />
               {doctors?.[index]?.Doctor?.ID && (
                 <>
@@ -89,13 +98,14 @@ export default function DoctorSelect({
 function useDoctors(
   doctors: DoctorSelectState,
   setDoctors: Setter<DoctorSelectState>,
+  searchParamsState: SearchParamsState
 ) {
   const fetcher = useFetcher();
 
   useEffect(() => {
-    fetcher.load(fetchingPaths["Doctor"]);
+    fetcher.load(fetchingPaths["Doctor"] + "?" + searchParamsState[0].toString());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchParamsState[0]]);
 
   const isValidData =
     fetcher.data && Array.isArray(fetcher.data) && fetcher.data.length === 2;
@@ -145,6 +155,7 @@ function useDoctors(
     });
   }
 
+  console.log(availableDoctors);
   return {
     items: availableDoctors,
     count,
