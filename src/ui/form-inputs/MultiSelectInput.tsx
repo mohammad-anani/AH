@@ -1,7 +1,7 @@
 import Controller from "@/ui/customComponents/Controller";
+import type { CSSObjectWithLabel } from "react-select";
 import Select from "react-select";
 import { generateLabel } from "../entityComponents/listComponents/utils";
-import type { CSSObjectWithLabel } from "react-select";
 
 interface SelectOption {
   value: string | number;
@@ -18,8 +18,8 @@ const selectStyles = {
   control: (base: CSSObjectWithLabel) => ({
     ...base,
     fontSize: "inherit",
-    minHeight: "auto", // remove fixed height
-    height: "100%", // fill available height
+    minHeight: "auto",
+    height: "100%",
   }),
   valueContainer: (base: CSSObjectWithLabel) => ({
     ...base,
@@ -32,7 +32,7 @@ const selectStyles = {
   }),
   indicatorsContainer: (base: CSSObjectWithLabel) => ({
     ...base,
-    height: "100%", // fill height here too
+    height: "100%",
   }),
   dropdownIndicator: (base: CSSObjectWithLabel) => ({
     ...base,

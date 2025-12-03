@@ -7,20 +7,19 @@ import {
   useSubmit,
 } from "react-router-dom";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { type SubmitTarget } from "react-router-dom";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import { TestAppointmentSchema } from "@/utils/models/zod/schemas";
-import type { TestOrder } from "@/utils/models/types/normal/types";
-import { useEffect } from "react";
 import Card from "@/ui/entityComponents/Card";
-import { testType } from "@/utils/models/componentsConfig/receptionist";
 import TemporalInput from "@/ui/form-inputs/TemporalInput";
-import type { DataFields } from "@/utils/models/types/utils/routeTypes";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
+import { testType } from "@/utils/models/componentsConfig/receptionist";
+import type { TestOrder } from "@/utils/models/types/normal/types";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { DataFields } from "@/utils/models/types/utils/routeTypes";
 import { AddTestAppointmentFromTestOrderSchema } from "@/utils/models/zod/addSchemas";
+import { useEffect } from "react";
 
 export default function MakeAppointment() {
   const testOrder = useOutletContext<TestOrder>();
@@ -31,17 +30,14 @@ export default function MakeAppointment() {
 
   const fetcher = useFetcher();
 
-  // Log test order data in development
-  if (import.meta.env.DEV) {
-    // removed console.log
-  }
+
 
   useEffect(() => {
     if (testOrder?.TestType?.ID) {
       fetcher.load(
         fetchingPaths["TestType"].replace("/list", "") +
-          "/" +
-          testOrder?.TestType?.ID,
+        "/" +
+        testOrder?.TestType?.ID,
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +49,6 @@ export default function MakeAppointment() {
     formState: { isSubmitting },
   } = methods;
 
-  // Loading state while fetching test type data
   if (fetcher.state === "loading") {
     return (
       <div className="flex items-center justify-center py-8">
@@ -62,7 +57,6 @@ export default function MakeAppointment() {
     );
   }
 
-  // Error state if data fetch failed
   if (!fetcher.data && fetcher.state === "idle") {
     return (
       <div className="flex items-center justify-center py-8">
@@ -73,7 +67,6 @@ export default function MakeAppointment() {
     );
   }
 
-  // Don't render if no data yet
   if (!fetcher.data) return null;
   return (
     <>

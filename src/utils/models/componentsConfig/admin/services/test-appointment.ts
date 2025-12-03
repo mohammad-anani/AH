@@ -1,14 +1,14 @@
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
+import type { RouteConfig } from "../../routeConfig";
 import {
   adminFilterSelectorField,
   admingenerateAuditFields,
 } from "../../utils/RoleUtil";
-import type { RouteConfig } from "../../routeConfig";
 import { testType } from "../general/test-type";
-import { testOrder } from "./test-order";
 import { service } from "./service";
+import { testOrder } from "./test-order";
 
 export const testAppointment: RouteConfig<"TestAppointment"> = {
   dataFields: ({
@@ -56,4 +56,3 @@ export const testAppointment: RouteConfig<"TestAppointment"> = {
   ],
 };
 
-//payment sublink

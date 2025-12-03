@@ -4,7 +4,6 @@ import listLoader from "@/utils/loaders/listLoader";
 import { operation } from "@/utils/models/componentsConfig/admin";
 import type { RouteObject } from "react-router-dom";
 
-//to change
 const doctorsRoute: RouteObject[] = [
   {
     path: "doctors",

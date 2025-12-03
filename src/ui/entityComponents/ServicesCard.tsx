@@ -1,18 +1,18 @@
-import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
+import H2 from "@/ui/customComponents/H2";
 
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import { useFetcher, useLocation, useOutletContext } from "react-router-dom";
 
-import Data from "./Data";
+import { payment } from "@/utils/models/componentsConfig/receptionist";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type {
   DataFields,
   SubLinks,
 } from "@/utils/models/types/utils/routeTypes";
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import { useEffect } from "react";
+import Data from "./Data";
 import ListPage from "./ListPage";
-import { payment } from "@/utils/models/componentsConfig/receptionist";
 
 export type ServicesEntities = "TestAppointment" | "Appointment" | "Operation";
 
@@ -47,8 +47,6 @@ export default function ServiceCard<T extends ServicesEntities>({
   const { Bill } = object.Service;
 
   const url = useLocation().pathname;
-  console.log(url);
-  // Calculate if payment is needed
   const totalPaid =
     fetcher.data?.[0]?.reduce(
       (sum: number, payment: { Amount: number }) => sum + (payment.Amount || 0),

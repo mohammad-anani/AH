@@ -1,5 +1,3 @@
-import { useSearchParams } from "react-router-dom";
-import { convertStringToType, isTemporalType } from "../listComponents/utils";
 import type {
   customFilterProps,
   DataTypes,
@@ -7,6 +5,8 @@ import type {
 } from "@/utils/models/types/utils/Form&Filter";
 import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 import type { Primitive } from "react-hook-form";
+import { useSearchParams } from "react-router-dom";
+import { convertStringToType, isTemporalType } from "../listComponents/utils";
 type ReduceObjectType = {
   [key: string]: Primitive | string[];
 };
@@ -28,7 +28,6 @@ export function useFilterDefaultValues(
       const [, customType] = data as customFilterProps;
       const value = params.get(field);
       if (customType === "object") {
-        // If value exists, return { ID: value as number }, else null
         defaults[field] = value ? { ID: Number(value) } : null;
       } else {
         defaults[field] =

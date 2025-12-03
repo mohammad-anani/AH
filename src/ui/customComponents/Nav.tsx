@@ -1,9 +1,7 @@
 import type { ChildrenProps } from "@/utils/models/types/utils/basics";
-import * as React from "react";
 
 export default function Nav({ children, count = 5 }: ChildrenProps & { count: number }) {
 
-  console.log(React.Children.toArray(children).length);
   const shouldWrapHeader = count > 4;
 
 

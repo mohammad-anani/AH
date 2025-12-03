@@ -27,10 +27,9 @@ export default function addUpdateAction(
           `${toKebabCase(pluralize.plural(entity))}/${id}`,
         );
 
-        extra = success; // pass ID for redirect if update succeeded
+        extra = success;
         toast(`${entity} updated successfully!`, "success");
       } else {
-        // Add: no ID yet
 
         const newID = await add(
           data,
@@ -48,7 +47,6 @@ export default function addUpdateAction(
       console.error(`Failed to ${action} ${entity}:`, error);
       toast(`Failed to ${action} ${entity}. Please try again.`, "error");
 
-      // Re-throw to let React Router handle the error boundary
       throw error;
     }
   };

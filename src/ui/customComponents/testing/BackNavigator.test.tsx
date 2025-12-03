@@ -1,11 +1,9 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { describe, expect, it, vi } from "vitest";
 
-// Import the component
 import BackNavigator from "../BackNavigator";
 
-// 1️⃣ Mock react-router-dom's useNavigate
 vi.mock("react-router-dom", async () => {
   const actual = await vi.importActual("react-router-dom");
   return {
@@ -25,7 +23,6 @@ describe("BackNavigator", () => {
         </BackNavigator>
       </MemoryRouter>,
     );
-    console.log(document.body.innerHTML);
 
     expect(screen.getByRole("button", { name: "Go Back" })).toBeInTheDocument();
   });

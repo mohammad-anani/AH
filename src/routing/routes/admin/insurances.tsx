@@ -2,7 +2,6 @@ import { Route } from "@/routing/entityRoute";
 
 import { insurance } from "@/utils/models/componentsConfig/admin";
 
-//to change
 
 export const insuranceRoute = Route(
   "Insurance",
@@ -14,5 +13,5 @@ export const insuranceRoute = Route(
   undefined,
   undefined,
   false,
-  true,
+  true, undefined, true
 );

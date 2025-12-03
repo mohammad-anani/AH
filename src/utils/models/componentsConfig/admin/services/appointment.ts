@@ -17,25 +17,26 @@ export const appointment: RouteConfig<"Appointment"> = {
     Doctor,
     PreviousAppointment,
   }: typesObject["Appointment"]) => [
-    [
-      "Doctor",
-      Doctor,
-      `/admin/human-resources/doctors/${Doctor.ID}`,
-      "Doctor",
-      doctor.selectorDisplay(Doctor),
-    ],
-    [
-      "Previous Appointment",
-      PreviousAppointment,
-      PreviousAppointment
-        ? `/admin/services/appointments/${PreviousAppointment.ID}`
-        : undefined,
-      "Appointment",
-      appointment.selectorDisplay(Doctor),
-    ],
+      [
+        "Doctor",
+        Doctor,
+        `/admin/human-resources/doctors/${Doctor.ID}`,
+        "Doctor",
+        doctor.selectorDisplay(Doctor),
+      ],
+      PreviousAppointment ?
+        [
+          "Previous Appointment",
+          PreviousAppointment,
+          PreviousAppointment
+            ? `/admin/services/appointments/${PreviousAppointment.ID}`
+            : undefined,
+          "Appointment",
+          appointment.selectorDisplay(Doctor),
+        ] : ["Previous Appointment", "N/A"],
 
-    ...service["dataFields"](Service),
-  ],
+      ...service["dataFields"](Service),
+    ],
   filterFields: [
     adminFilterSelectorField("DoctorID", "Doctor", doctor),
     ...service["filterFields"],

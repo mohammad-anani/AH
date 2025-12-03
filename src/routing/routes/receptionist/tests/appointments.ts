@@ -25,4 +25,3 @@ export const testAppointmentsRoutes = serviceRoute(
   true,
 );
 
-//finish actions and processes

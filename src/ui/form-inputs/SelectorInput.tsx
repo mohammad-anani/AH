@@ -3,15 +3,15 @@ import Selector from "../entityComponents/Selector";
 
 import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useEffect, useState } from "react";
-import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
-import type { Role } from "@/utils/models/types/utils/Form&Filter";
 import { dataFields as adminDataFields } from "@/utils/models/componentsConfig/admin/dataFields";
 import { dataFields as doctorDataFields } from "@/utils/models/componentsConfig/doctor/dataFields";
 import { dataFields as receptionistDataFields } from "@/utils/models/componentsConfig/receptionist/dataFields";
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
+import type { Role } from "@/utils/models/types/utils/Form&Filter";
 
 interface SelectorInputProps {
   fieldKey: string;
@@ -65,7 +65,6 @@ function SelectorField<T extends EntityKey>({
 
   useEffect(() => {
     fieldProps.field.onChange(selected?.["ID"]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   const [entity, entityObject, role] = data;

@@ -25,5 +25,3 @@ export const CountryFilterSelectCallBack: customFilterProps = [
   ),
   "number",
 ];
-
-//to debug

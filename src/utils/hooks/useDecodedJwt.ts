@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import { decodeJwt } from "../helpers/jwt-decoder";
 
 export type JwtPayload = {
-  sub: string; // user ID
+  sub: string;
   email?: string;
   role?: string;
-  exp: number; // expiration (seconds since epoch)
-  iat?: number; // issued at (optional)
+  exp: number;
+  iat?: number;
 };
 
 export function useDecodedJwt() {
@@ -25,5 +25,5 @@ export function useDecodedJwt() {
       console.error("Invalid JWT:", error);
       return { token: null, decoded: null, expired: true };
     }
-  }, []); // No dependencies -> only runs on mount
+  }, []);
 }

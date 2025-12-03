@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import TestTypeSelect, { type TestTypeSelectState } from "./TestTypeSelect";
 import { testType } from "@/utils/models/componentsConfig/doctor/general/test-type.ts";
 import type {
   customFilterProps,
   customFormProps,
 } from "@/utils/models/types/utils/Form&Filter";
 import type { Setter } from "@/utils/models/types/utils/basics";
+import { useEffect, useState } from "react";
+import TestTypeSelect, { type TestTypeSelectState } from "./TestTypeSelect";
 
 export function useSelectedTestTypes(
   field: number[] | undefined,
@@ -57,7 +57,6 @@ export const TestTypeFilterSelectorCallback: customFilterProps = [
   "multiselect",
 ];
 
-// Legacy callback for backward compatibility
 export function TestTypeSelectCallback({
   value,
   setValue,

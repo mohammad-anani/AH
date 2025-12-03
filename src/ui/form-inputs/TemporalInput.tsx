@@ -1,6 +1,6 @@
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
-import { useFormContext } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 interface TemporalInputProps {
   fieldKey: string;
@@ -69,4 +69,3 @@ export default function TemporalInput({
   );
 }
 
-//to be one value

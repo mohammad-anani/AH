@@ -1,10 +1,9 @@
-// Selector.tsx
 
 import { type SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 
-import { type DataFields } from "@/utils/models/types/utils/routeTypes";
-import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { type Setter } from "@/utils/models/types/utils/basics";
+import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
+import { type DataFields } from "@/utils/models/types/utils/routeTypes";
 
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 
@@ -16,12 +15,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 import H2 from "../customComponents/H2";
-import SelectorTrigger from "./selectorComponents/SelectorTrigger";
 import useSelector from "./hooks/useSelector";
 import CardSection from "./selectorComponents/CardSection";
 import ListSection from "./selectorComponents/ListSection";
-import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
+import SelectorTrigger from "./selectorComponents/SelectorTrigger";
 
 type SelectorProps<T extends EntityKey> = {
   entity: T;
@@ -71,7 +70,6 @@ export default function Selector<T extends EntityKey>({
     data,
   );
 
-  //added testapp,check /id
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

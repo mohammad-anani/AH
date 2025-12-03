@@ -1,10 +1,10 @@
-import { Controller as Controler, useFormContext } from "react-hook-form";
-import type { ControllerRenderProps } from "react-hook-form";
 import type { ReactElement } from "react";
+import type { ControllerRenderProps } from "react-hook-form";
+import { Controller as Controler, useFormContext } from "react-hook-form";
 
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { emptyObjectsTypes } from "@/utils/models/types/add/emptyTypesObject";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useError } from "../form-inputs";
 import FormError from "./FormError";
 
@@ -28,7 +28,6 @@ export default function Controller({
 
   const errorMessages = useError(name);
 
-  // Convert errorMessages to the format expected by FormError
   const formErrorMessages = Array.isArray(errorMessages)
     ? errorMessages
     : typeof errorMessages === "object" && errorMessages

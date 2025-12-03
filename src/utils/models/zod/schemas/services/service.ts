@@ -3,7 +3,6 @@ import { datetime, nonEmptyString } from "../../reusableSchemas";
 import { PatientRowSchema, ReceptionistRowSchema } from "../../rowSchemas";
 import { BillSchema } from "../finance";
 
-// Service Status Enum: 1 - In Progress; 2 - Requested; 3 - Scheduled; 4 - Cancelled; 5 - Completed; 6 - Rejected
 export const serviceStatuses = [
   "In Progress",
   "Requested",

@@ -1,11 +1,11 @@
 import * as jwtDecode from "jwt-decode";
 
 export type JwtPayload = {
-  sub: string; // user ID
+  sub: string;
   email?: string;
   role?: string;
-  exp: number; // expiration (seconds since epoch)
-  iat?: number; // issued at (optional)
+  exp: number;
+  iat?: number;
 };
 
 export function decodeJwt(token: string): JwtPayload | null {

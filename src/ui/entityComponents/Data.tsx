@@ -1,11 +1,10 @@
-import { memo, useMemo } from "react";
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import type { DataFields } from "@/utils/models/types/utils/routeTypes";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { Setter } from "@/utils/models/types/utils/basics";
-import Clickable from "../customComponents/Clickable";
 import { formatTitle } from "@/utils/formatters/formatTitle";
-import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import type { Setter } from "@/utils/models/types/utils/basics";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { DataFields } from "@/utils/models/types/utils/routeTypes";
+import { memo, useMemo } from "react";
+import Clickable from "../customComponents/Clickable";
 
 type DataProps<T extends EntityKey> = {
   data: typesObject[T];
@@ -23,10 +22,8 @@ const Data = memo(function Data<T extends EntityKey>({
   setSubCard,
   isNestedCard = false,
 }: DataProps<T>) {
-  // Memoize the fields computation to avoid recalculation on every render
   const fieldData = useMemo(() => fields(data), [fields, data]);
 
-  console.log(fieldData);
   if (!fieldData) return;
 
 

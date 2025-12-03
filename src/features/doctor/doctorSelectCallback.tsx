@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
-import DoctorSelect, { type DoctorSelectState } from "./DoctorSelect";
 import { doctor } from "@/utils/models/componentsConfig/receptionist/human-resources/doctor.ts";
 import type {
   customFilterProps,
   customFormProps,
 } from "@/utils/models/types/utils/Form&Filter";
 import type { Setter } from "@/utils/models/types/utils/basics";
-//finish doctor
+import { useEffect, useState } from "react";
+import DoctorSelect, { type DoctorSelectState } from "./DoctorSelect";
 export function useSelectedDoctors(
   field: [ID: number, Role: string][] | undefined,
   onChange: Setter<{ ID: number; Role: string }[] | undefined>,
@@ -20,7 +19,6 @@ export function useSelectedDoctors(
       ID: docItem.Doctor.ID,
       Role: docItem.Role,
     }));
-    // removed console.log
     onChange(formDoctors);
   }, [selectedDoctors, onChange]);
 
@@ -33,7 +31,6 @@ export const DoctorFormSelectorCallback: customFormProps = [
       field as [ID: number, Role: string][] | undefined,
       onChange as Setter<{ ID: number; Role: string }[] | undefined>,
     );
-    console.log(selectedDoctors);
 
     return (
       <DoctorSelect

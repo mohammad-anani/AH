@@ -1,9 +1,9 @@
-import { useSearchParams } from "react-router-dom";
 import type {
   customFilterProps,
   FilterKey,
 } from "@/utils/models/types/utils/Form&Filter";
 import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
+import { useSearchParams } from "react-router-dom";
 import { isTemporalType } from "../listComponents/utils";
 
 export function useFilterNavigation(
@@ -23,7 +23,6 @@ export function useFilterNavigation(
           params.set(field + "To", String(data[field + "To"]));
       } else if (type === "custom") {
         const [, subType] = misc as customFilterProps;
-        // Handle subType as if it were multiselect, uniselect, etc.
         if (subType === "object") {
           params.set(field, data?.[field]?.["ID"]);
         } else if (subType === "multiselect") {
@@ -44,7 +43,6 @@ export function useFilterNavigation(
           if (data[field] && data[field] !== "all")
             params.set(field, String(data[field]));
         } else {
-          // fallback: treat as array if possible
           const ids = data[field] as number[];
           if (ids?.length > 0) params.set(field, ids?.join(","));
           else params.delete(field);

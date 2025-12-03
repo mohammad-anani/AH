@@ -1,15 +1,14 @@
 import Clickable from "@/ui/customComponents/Clickable";
 import { formatTitle } from "@/utils/formatters/formatTitle";
 import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
-import { Info, Check } from "lucide-react";
+import type { SearchParamsState, SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
+import { Check, Info } from "lucide-react";
 import { useLoaderData } from "react-router-dom";
 import useFilter from "./useFilter";
-import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
-import type { SelectedObjectState } from "@/utils/models/types/utils/selectorTypes";
 
+import { useWindowWidth } from "@/utils/hooks/useWindowWidth";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
-import { useWindowWidth } from "@/utils/hooks/useWindowWidth";
 
 export default function useListPage<T extends EntityKey>(
   entity: T,
@@ -26,7 +25,6 @@ export default function useListPage<T extends EntityKey>(
     searchParamsState?.[0].toString(),
   );
 
-  // const [items, itemsCount] = searchParamsState && data ? data : loaderData;
   const [items, itemsCount] = data ?? loaderData;
 
   const [headerFields, dataFields, gridFr] = rowTemplate;

@@ -1,6 +1,6 @@
 import Selector from "@/ui/entityComponents/Selector";
-import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 import { testType } from "@/utils/models/componentsConfig/doctor/general/test-type";
+import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 
 import type { RouteConfig } from "@/utils/models/componentsConfig/routeConfig";
 
@@ -80,12 +80,10 @@ function useTestTypes(
   const items: TestTypeRow[] = isValidData ? fetcher.data[0] : [];
   const count: number = isValidData ? fetcher.data[1] : 0;
 
-  // Exclude already selected test types
   const availableTestTypes = items.filter(
     (testType) => !testTypes?.includes(testType.ID),
   );
 
-  // Handler to select/set test type at a specific index
   function onSelect(testType: TestTypeRow, index: number) {
     if (!testType || typeof testType.ID === "undefined") return;
 
@@ -95,19 +93,16 @@ function useTestTypes(
       const isAlreadySelected = updated.includes(testType.ID);
       if (isAlreadySelected) return prev;
 
-      // Ensure the array is long enough
       while (updated.length <= index) {
-        updated.push(0); // Use 0 as placeholder for unselected
+        updated.push(0);
       }
 
       updated[index] = testType.ID;
 
-      // Remove any trailing zeros/unselected items
       return updated.filter((id, i) => id > 0 || i < index + 1);
     });
   }
 
-  // Handler to delete test type by ID
   function onDelete(testType: TestTypeRow) {
     if (!testType || typeof testType.ID === "undefined") return;
 
@@ -115,8 +110,8 @@ function useTestTypes(
   }
 
   return {
-    items: items, // Full items array for finding selected items
-    availableItems: availableTestTypes, // Filtered items for the selector dropdown
+    items: items,
+    availableItems: availableTestTypes,
     count,
     isLoading: !isValidData,
     onSelect,

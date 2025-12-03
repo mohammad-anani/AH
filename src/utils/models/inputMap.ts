@@ -1,19 +1,18 @@
 import {
+  ArrayInput,
+  BooleanInput,
+  EmailInput,
   MoneyInput,
   NumberInput,
-  StringInput,
+  PasswordInput,
   PhoneInput,
-  ArrayInput,
   SelectInput,
-  EmailInput,
   SelectorInput,
-  BooleanInput,
+  StringInput,
   TemporalInput,
   TextareaInput,
-  PasswordInput,
 } from "../../ui/form-inputs";
 
-//To dynamically assign inputs to fields in forms
 export const inputMap = {
   number: NumberInput,
   string: StringInput,

@@ -4,7 +4,7 @@ export function convert24To12(time24: string): string {
   const minute = parseInt(minuteStr, 10);
 
   const ampm = hour >= 12 ? "PM" : "AM";
-  hour = hour % 12 || 12; // Convert 0 → 12, 13 → 1, etc.
+  hour = hour % 12 || 12;
 
   return `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
 }

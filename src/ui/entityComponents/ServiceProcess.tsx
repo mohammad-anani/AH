@@ -1,32 +1,32 @@
-import type { ServicesEntities } from "./ServicesCard";
-import Clickable from "../customComponents/Clickable";
 import { formatTitle } from "@/utils/formatters/formatTitle";
-import H2 from "../customComponents/H2";
+import { inputMap } from "@/utils/models/inputMap";
 import type { customFormProps } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
-import { inputMap } from "@/utils/models/inputMap";
+import Clickable from "../customComponents/Clickable";
+import H2 from "../customComponents/H2";
+import type { ServicesEntities } from "./ServicesCard";
 
-import { UnsupportedInput } from "../form-inputs";
-import { generateLabel } from "./listComponents/utils";
-import Controller from "../customComponents/Controller";
+import type { FormKey } from "@/routing/serviceRoute";
+import { convertToUpdateObject } from "@/utils/helpers/flatten";
+import throwError from "@/utils/helpers/throwError";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import {
+  CancelServiceSchema,
+  CompleteServiceSchema,
+  RescheduleServiceSchema,
+  StartServiceSchema,
+} from "@/utils/models/zod/updateSchemas/services";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
 import {
   Form,
   useOutletContext,
   useSubmit,
   type SubmitTarget,
 } from "react-router-dom";
-import { FormProvider, useForm } from "react-hook-form";
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import throwError from "@/utils/helpers/throwError";
-import type { FormKey } from "@/routing/serviceRoute";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  StartServiceSchema,
-  CancelServiceSchema,
-  CompleteServiceSchema,
-  RescheduleServiceSchema,
-} from "@/utils/models/zod/updateSchemas/services";
-import { convertToUpdateObject } from "@/utils/helpers/flatten";
+import Controller from "../customComponents/Controller";
+import { UnsupportedInput } from "../form-inputs";
+import { generateLabel } from "./listComponents/utils";
 
 export type Process = "Start" | "Cancel" | "Complete" | "Reschedule";
 
@@ -44,7 +44,6 @@ export default function ServiceProcess<T extends ServicesEntities>({
   const { Service } = object;
   const { Status } = Service;
 
-  // Schema mapping for different service processes
   const processSchemas = {
     Start: StartServiceSchema,
     Cancel: CancelServiceSchema,
@@ -106,7 +105,6 @@ export default function ServiceProcess<T extends ServicesEntities>({
         >
           {(formFields as FormKey<EntityKey>[])
             ?.filter(([, , , mode]) => {
-              // Only render fields where mode is undefined or includes the current process
               return (
                 mode === "All" || !mode || Array.from(mode).includes(process)
               );

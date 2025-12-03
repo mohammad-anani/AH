@@ -25,7 +25,7 @@ export default function MoneyInput({
     const formatted = formatMoney(raw);
     setValue(formatted);
 
-    if (onChange) onChange(raw); // return raw number to RHF or external state
+    if (onChange) onChange(raw);
   }
 
   return (

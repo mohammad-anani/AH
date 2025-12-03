@@ -1,20 +1,20 @@
-import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
+import H2 from "@/ui/customComponents/H2";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   Form as RouterForm,
-  useSubmit,
-  useNavigation,
   useLocation,
+  useNavigation,
+  useSubmit,
 } from "react-router-dom";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import { MoneyInput, SelectInput } from "@/ui/form-inputs";
-import { useEffect, useState } from "react";
-import { type Appointment, type Bill, type Operation, type TestAppointment } from "@/utils/models/types/normal/types";
 import findByID from "@/api/findByID";
+import { MoneyInput, SelectInput } from "@/ui/form-inputs";
 import { formatMoney } from "@/utils/formatters/formatMoney";
+import { type Appointment, type Bill, type Operation, type TestAppointment } from "@/utils/models/types/normal/types";
 import { AddPaymentSchema } from "@/utils/models/zod/addSchemas/finance/payment";
+import { useEffect, useState } from "react";
 
 
 export default function Pay({ entity }: { entity: string }) {
@@ -36,7 +36,6 @@ export default function Pay({ entity }: { entity: string }) {
     async function fetch() {
 
       const data: Operation | TestAppointment | Appointment = await findByID(entity + "/" + serviceID);
-      console.log(data);
 
       setBill(data.Service.Bill);
 

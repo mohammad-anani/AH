@@ -2,7 +2,6 @@ import { z } from "zod";
 import { WorkingDaysSchema } from "../../schemas/index.ts";
 import { FormPersonSchema } from "./person.ts";
 
-// EmployeeFormDTO - extends PersonFormDTO with employee-specific fields
 
 
 export const FormEmployeeSchema = FormPersonSchema.extend({

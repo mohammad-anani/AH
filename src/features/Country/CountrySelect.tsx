@@ -1,9 +1,9 @@
+import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
+import type { Country } from "@/utils/models/types/normal/types";
 import type { Setter } from "@/utils/models/types/utils/basics";
-import Select from "react-select";
 import { useEffect } from "react";
 import { useFetcher } from "react-router-dom";
-import type { Country } from "@/utils/models/types/normal/types";
-import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
+import Select from "react-select";
 
 export default function CountrySelect({
   countryID,
@@ -57,8 +57,8 @@ function useCountries(countryID: number) {
     control: (base: Record<string, unknown>) => ({
       ...base,
       fontSize: "inherit",
-      minHeight: "auto", // remove fixed height
-      height: "100%", // fill available height
+      minHeight: "auto",
+      height: "100%",
     }),
     valueContainer: (base: Record<string, unknown>) => ({
       ...base,
@@ -71,7 +71,7 @@ function useCountries(countryID: number) {
     }),
     indicatorsContainer: (base: Record<string, unknown>) => ({
       ...base,
-      height: "100%", // fill height here too
+      height: "100%",
     }),
     dropdownIndicator: (base: Record<string, unknown>) => ({
       ...base,

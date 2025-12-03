@@ -1,11 +1,11 @@
 import Delete from "@/api/delete";
 
-import { replace, type ActionFunctionArgs } from "react-router-dom";
-import type { EntityKey } from "../models/types/utils/entityKeys";
 import * as pluralize from "pluralize";
 import type { Primitive } from "react-hook-form";
+import { replace, type ActionFunctionArgs } from "react-router-dom";
 import { toKebabCase } from "../formatters/toKebab.ts";
 import { toast } from "../helpers/toast.tsx";
+import type { EntityKey } from "../models/types/utils/entityKeys";
 
 export default function deleteAction(
   entity: EntityKey,
@@ -14,14 +14,13 @@ export default function deleteAction(
   return async function ({ request, params }: ActionFunctionArgs) {
     try {
 
-      const idParam = params["id"]; // route param is lowercase "id"
+      const idParam = params["id"];
       const ID = Number(idParam);
 
       if (!ID) {
         throw new Error("No ID provided for deletion");
       }
 
-      console.log(ID);
 
       await Delete(`${toKebabCase(pluralize.plural(entity))}/${ID}`);
 
@@ -32,7 +31,6 @@ export default function deleteAction(
       console.error(`Failed to delete ${entity}:`, error);
       toast(`Failed to delete ${entity}. Please try again.`, "error");
 
-      // Re-throw to let React Router handle the error boundary
       throw error;
     }
   };

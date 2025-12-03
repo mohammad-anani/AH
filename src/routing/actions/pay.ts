@@ -10,7 +10,6 @@ export default function payAction(url: (params: Params) => string) {
   return async function payAction({ params, request }: ActionFunctionArgs) {
     try {
       const data = await request.json();
-      console.log(12345, data);
       const newID = await add(data, url(params));
 
       toast("Payment processed successfully", "success");

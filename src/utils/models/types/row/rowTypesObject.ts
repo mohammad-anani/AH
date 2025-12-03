@@ -30,4 +30,3 @@ export type rowTypesObject = {
   Payment: PaymentRow;
 };
 
-//to change

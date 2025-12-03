@@ -103,12 +103,10 @@ function useDoctors(
   const items: DoctorRow[] = isValidData ? fetcher.data[0] : [];
   const count: number = isValidData ? fetcher.data[1] : 0;
 
-  // Exclude already selected doctors
   const availableDoctors = items.filter(
     (doc) => !doctors?.some((sdoc) => sdoc?.Doctor?.ID === doc.ID),
   );
 
-  // Handler to select/set doctor at a specific index
   function onSelect(doctor: DoctorRow, index: number) {
     if (!doctor || typeof doctor.ID === "undefined") return;
 
@@ -120,7 +118,6 @@ function useDoctors(
       );
       if (isAlreadySelected) return prev;
 
-      //to see
       while (updated.length <= index)
         updated.push({ Doctor: {} as DoctorRow, Role: "" });
 
@@ -130,14 +127,12 @@ function useDoctors(
     });
   }
 
-  // Handler to delete doctor by ID
   function onDelete(doctor: DoctorRow) {
     if (!doctor || typeof doctor.ID === "undefined") return;
 
     setDoctors((prev) => prev.filter((doc) => doc?.Doctor.ID !== doctor.ID));
   }
 
-  // Handler to edit/update doctor at index
   function onEdit(doctor: DoctorRow, index: number) {
     if (!doctor || typeof doctor.ID === "undefined") return;
 

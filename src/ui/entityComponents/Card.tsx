@@ -1,26 +1,24 @@
-import { memo, useMemo } from "react";
-import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
+import H2 from "@/ui/customComponents/H2";
+import { memo, useMemo } from "react";
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
+  DialogHeader,
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-  DialogHeader,
-  DialogClose,
 } from "@/components/ui/dialog";
 
-import { type DataFields } from "@/utils/models/types/utils/routeTypes";
-import { type SubLinks } from "@/utils/models/types/utils/routeTypes";
-import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
-import type { typesObject } from "@/utils/models/types/normal/typesObject";
-import Data from "./Data";
 import { formatTitle } from "@/utils/formatters/formatTitle";
-import useCard from "./hooks/useCard";
-import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
 import { useWindowWidth } from "@/utils/hooks/useWindowWidth";
+import type { typesObject } from "@/utils/models/types/normal/typesObject";
+import { type EntityKey } from "@/utils/models/types/utils/entityKeys";
+import { type DataFields, type SubLinks } from "@/utils/models/types/utils/routeTypes";
+import Data from "./Data";
+import useCard from "./hooks/useCard";
 
 type CardProps<T extends EntityKey> = {
   title: EntityKey;
@@ -56,7 +54,6 @@ const Card = memo(function Card<T extends EntityKey>({
   const { subEntity, setSubCard, subDataFields, object, subObject, fetcher } =
     useCard<T>(dataFieldsObject, data);
 
-  // Memoize the computed title text to avoid recalculation
   const displayTitle = useMemo(
     () => titleText ?? formatTitle(title),
     [titleText, title],
@@ -64,7 +61,6 @@ const Card = memo(function Card<T extends EntityKey>({
 
 
 
-  // Memoize the overflow check to avoid recalculation
   const shouldOverflow = useMemo(() => {
     if (!subObject || !subDataFields) return false;
     return subDataFields(subObject).length > 4;
@@ -79,7 +75,6 @@ const Card = memo(function Card<T extends EntityKey>({
 
   const gridFr = Array(columnsMultiplier).fill(mainGridFr).join("_1px_44px_");
 
-  console.log(gridFr);
 
   if (subObject && subDataFields) {
     return (

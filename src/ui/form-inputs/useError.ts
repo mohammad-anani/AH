@@ -15,12 +15,10 @@ export default function useError(name: string): ErrorResult {
 
   const errorObj = get(errors, name);
 
-  // If it's a simple error object (same as before)
   if (!errorObj || typeof errorObj !== "object" || "message" in errorObj) {
     return parseErrorObject(errorObj as ErrorObject | undefined);
   }
 
-  // If it's an object or array (e.g., doctors[0], doctors[1]...)
   if (Array.isArray(errorObj)) {
     const parsed = errorObj
       .map(parseErrorObject)
@@ -40,7 +38,6 @@ export default function useError(name: string): ErrorResult {
   return Object.keys(result).length > 0 ? result : undefined;
 }
 
-// 🔧 Reusable error parser (keeps your logic clean and backward compatible)
 function parseErrorObject(
   errorObj: ErrorObject | undefined,
 ): string[] | undefined {

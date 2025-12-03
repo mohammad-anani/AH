@@ -2,13 +2,13 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import formatDateIsoToLocal from "@/utils/formatters/formatDateIsoToLocal";
 
+import { service } from "../../admin/services/service";
 import type { RouteConfig } from "../../routeConfig";
 import {
   receptionistFilterSelectorField,
   receptionistFormSelectorField,
 } from "../../utils/RoleUtil";
 import { doctor } from "../human-resources/doctor";
-import { service } from "../../admin/services/service";
 
 export const appointment: RouteConfig<"Appointment"> = {
   dataFields: ({

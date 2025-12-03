@@ -1,18 +1,17 @@
-import H2 from "@/ui/customComponents/H2";
 import Clickable from "@/ui/customComponents/Clickable";
+import H2 from "@/ui/customComponents/H2";
+import { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 import {
   Form as RouterForm,
   type SubmitTarget,
   useBlocker,
 } from "react-router-dom";
-import { useEffect } from "react";
 
 import type { FormKey } from "@/utils/models/types/utils/Form&Filter";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import Form from "./Form";
 
-import useAddUpdateForm from "./hooks/useAddUpdateForm";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import type { z } from "zod";
+import useAddUpdateForm from "./hooks/useAddUpdateForm";
 
 type FormProps<T extends EntityKey> = {
   entity: T;
@@ -69,11 +69,9 @@ export default function AddUpdateForm<T extends EntityKey>({
     reset: () => void;
   } | null>(null);
 
-  // Check if form has unsaved changes
   const hasUnsavedChanges =
     methods.formState.isDirty && !methods.formState.isSubmitted;
 
-  // Block navigation when there are unsaved changes
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
     const shouldBlock =
       hasUnsavedChanges &&
@@ -89,7 +87,6 @@ export default function AddUpdateForm<T extends EntityKey>({
     return shouldBlock;
   });
 
-  // Handle blocked navigation
   useEffect(() => {
     if (blocker.state === "blocked") {
       setBlockedNavigation({
@@ -118,18 +115,7 @@ export default function AddUpdateForm<T extends EntityKey>({
     }
   };
 
-  // Debug logging
-  console.log("Form state:", {
-    isDirty: methods.formState.isDirty,
-    isSubmitted: methods.formState.isSubmitted,
-    hasUnsavedChanges,
-    isSubmitting,
-  });
 
-  // Keep blocker reference to avoid lint warning
-  if (blocker) {
-    // Blocker is active
-  }
 
   return (
     <>

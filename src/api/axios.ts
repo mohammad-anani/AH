@@ -12,22 +12,19 @@ const axios = a.create({
 // Request interceptor to add JWT token and refresh token to headers
 axios.interceptors.request.use(
   (config) => {
-    // Skip adding tokens for auth endpoints
+
     if (config.url?.includes("auth/")) {
       return config;
     }
 
-    // Get JWT token and refresh token from localStorage
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refresh-token");
 
-    // Add Authorization header if token exists
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
       config.headers.set("token", token);
     }
 
-    // Add refresh token header if refresh token exists
     if (refreshToken) {
       config.headers["refresh-token"] = refreshToken;
     }
@@ -40,20 +37,16 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    console.log(123);
-    console.log(response);
-    // Check for new JWT token in response headers (refresh token logic)
+
     const newToken =
       response.headers["Token"] ||
       response.headers["authorization"] ||
       response.headers["Authorization"];
 
-    // Get current tokens from localStorage
+
     const currentToken = localStorage.getItem("token");
 
-    // If new JWT token is provided and different from current, update localStorage
     if (newToken) {
-      // Remove 'Bearer ' prefix if present
       const cleanToken = newToken.startsWith("Bearer ")
         ? newToken.slice(7)
         : newToken;
@@ -74,8 +67,7 @@ axios.interceptors.response.use(
         "An unknown error occurred";
 
       if (status === 404 && error.config?.url?.includes("auth/signin")) {
-        console.log("heelo", error.response);
-        return error.response; // return the response as-is
+        return error.response;
       }
 
 

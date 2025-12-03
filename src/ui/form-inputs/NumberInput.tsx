@@ -1,6 +1,6 @@
+import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 import { memo, useCallback } from "react";
 import type { Primitive } from "react-hook-form";
-import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 
 interface NumberInputProps {
   fieldKey: string;
@@ -23,9 +23,7 @@ const NumberInput = memo(function NumberInput({
 }: NumberInputProps) {
   const inputId = `input-${fieldKey}`;
 
-  // Memoize the onChange callback to prevent unnecessary re-renders
   const handleChange = useCallback((value: Primitive): Primitive => {
-    console.log(typeof value);
     return typeof value === "string" ? Number(value) : value;
   }, []);
 

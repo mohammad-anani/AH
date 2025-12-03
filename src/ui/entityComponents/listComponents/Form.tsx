@@ -51,16 +51,13 @@ export function Form({ isNestedFilter = false }: { isNestedFilter?: boolean }) {
 
     const InputComponent = inputMap[type as DataTypes] || UnsupportedInput;
 
-    // TypeScript struggles with the union of all component prop types
-    // Using explicit props object to ensure compatibility
     return <InputComponent fieldKey={key} label={label} data={data || type} />;
   };
 
   return (
     <div
-      className={`grid max-h-[300px]! w-[330px] grid-cols-[auto_1fr] gap-x-2 gap-y-3 overflow-x-hidden ${
-        safeFields.length > 10 ? "overflow-y-scroll" : ""
-      } rounded-none! p-2 text-xs! *:w-full!`}
+      className={`grid max-h-[300px]! w-[330px] grid-cols-[auto_1fr] gap-x-2 gap-y-3 overflow-x-hidden ${safeFields.length > 10 ? "overflow-y-scroll" : ""
+        } rounded-none! p-2 text-xs! *:w-full!`}
     >
       {safeFields.map(renderField)}
     </div>

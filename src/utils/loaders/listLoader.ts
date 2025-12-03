@@ -32,7 +32,6 @@ export default function listLoader(
         if (!searchParams.has(param)) throwError(400, "Bad request");
       });
 
-    console.log(toKebabCase(pluralize.plural(entity)));
     const data = await getList(
       directUrl?.(params) ||
       (pathPrefix?.(params) ?? "") +

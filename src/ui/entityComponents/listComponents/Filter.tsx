@@ -1,15 +1,14 @@
 import { FormProvider, useForm } from "react-hook-form";
-// import { useEffect } from "react";
 import useListContext from "./context";
 
-import Order from "./Order";
-import { Form } from "./Form";
-import Sort from "./Sort";
-import SearchButton from "./SearchButton";
 import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
 import type { ChildrenProps, Setter } from "@/utils/models/types/utils/basics";
 import { useFilterDefaultValues } from "../hooks/useFilterDefaultValues";
 import { useFilterNavigation } from "../hooks/useFilterNavigation";
+import { Form } from "./Form";
+import Order from "./Order";
+import SearchButton from "./SearchButton";
+import Sort from "./Sort";
 
 export default function Filter({
   children,

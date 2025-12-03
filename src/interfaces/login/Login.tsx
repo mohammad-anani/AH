@@ -1,17 +1,17 @@
-import { FormProvider, useForm } from "react-hook-form";
-import {
-  Form,
-  useNavigate,
-  replace,
-} from "react-router-dom";
+import { login } from "@/api/login";
 import Clickable from "@/ui/customComponents/Clickable";
 import Logo from "@/ui/customComponents/Logo";
 import RegisteredInput from "@/ui/customComponents/RegisteredInput";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/utils/models/zod/Login";
 import { useDecodedJwt } from "@/utils/hooks/useDecodedJwt";
-import { login } from "@/api/login";
+import { LoginSchema } from "@/utils/models/zod/Login";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  Form,
+  replace,
+  useNavigate,
+} from "react-router-dom";
 
 export default function Login() {
   const methods = useForm({ resolver: zodResolver(LoginSchema) });
@@ -22,10 +22,8 @@ export default function Login() {
 
   const navigate = useNavigate();
   const { decoded, expired } = useDecodedJwt();
-  // Check for valid token and redirect if authenticated
 
   if (decoded && !expired && decoded.role) {
-    // Redirect based on role
     if (decoded.role === "Admin") {
       navigate("/admin");
     } else if (decoded.role === "Receptionist") {
@@ -56,7 +54,6 @@ export default function Login() {
         setIsFailed(true);
         return;
       }
-      console.log(Role);
       localStorage.setItem("token", Token);
       localStorage.setItem("refresh-token", RefreshToken);
 

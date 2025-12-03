@@ -5,7 +5,6 @@ export function toast(
   variant: "success" | "error" = "success",
   duration: number = 3000,
 ) {
-  // Define bar and close colors based on variant
   const barColor =
     variant === "success" ? "var(--color-primary)" : "var(--color-destructive)";
   const closeColor = barColor;
@@ -26,7 +25,6 @@ export function toast(
           fontSize: "16px",
         }}
       >
-        {/* Colored left bar */}
         <div
           style={{
             height: "100%",
@@ -37,10 +35,8 @@ export function toast(
           }}
         />
 
-        {/* Message content */}
         <div style={{ flex: 1, paddingRight: "16px" }}>{message}</div>
 
-        {/* Close button */}
         <button
           onClick={() => hotToast.dismiss(t.id)}
           style={{

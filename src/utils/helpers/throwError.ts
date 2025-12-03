@@ -1,6 +1,5 @@
 import { UNSAFE_ErrorResponseImpl } from "react-router-dom";
 
-// Common HTTP status phrases map
 const statusPhrases: Record<number, string> = {
   400: "Bad Request",
   401: "Unauthorized",
@@ -12,7 +11,6 @@ const statusPhrases: Record<number, string> = {
   500: "Internal Server Error",
   501: "Not Implemented",
   503: "Service Unavailable",
-  // add more as needed
 };
 
 export default function throwError(

@@ -7,18 +7,18 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useForm, type DefaultValues } from "react-hook-form";
-import {
-  useSubmit,
-  useNavigation,
-  useOutletContext,
-  useLocation,
-  useLoaderData,
-} from "react-router-dom";
-import type z from "zod";
+import { convertToUpdateObject } from "@/utils/helpers/flatten.ts";
 import { emptyObjects } from "@/utils/models/types/add/emptyObjects";
 import { schemas as updateSchemas } from "@/utils/models/zod/updateSchemas/updateSchemas";
-import { convertToUpdateObject } from "@/utils/helpers/flatten";
+import { useForm, type DefaultValues } from "react-hook-form";
+import {
+  useLoaderData,
+  useLocation,
+  useNavigation,
+  useOutletContext,
+  useSubmit,
+} from "react-router-dom";
+import type z from "zod";
 
 export default function useAddUpdateForm<T extends EntityKey>(
   entity: T,
@@ -52,14 +52,11 @@ export default function useAddUpdateForm<T extends EntityKey>(
       : { ...emptyObjects[entity], ...navData }
     : convertToUpdateObject(data);
 
-  console.log(defaultValues);
 
   const title =
     customTitle || `${isAdd ? "Add" : "Edit"} ${formatTitle(entity)}`;
 
-  console.log(schema);
 
-  //to check
   const methods = useForm({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(schema as any),
@@ -78,7 +75,6 @@ export default function useAddUpdateForm<T extends EntityKey>(
   const { state } = useNavigation();
   const isSubmitting = state === "submitting" || isSub;
 
-  // removed console.log
 
   if (!schema || !defaultValues)
     throwError(500, "schema or default values didn't load.");

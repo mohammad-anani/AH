@@ -23,6 +23,7 @@ const insuranceListRoute: RouteObject[] = [
         rowTemplate={insurance["rowTemplate"] as RowTemplate<EntityKey>}
         filterFields={undefined}
         withBack={true}
+        detailsLink={(id) => `/admin/insurances/${id}`}
       />
     ),
   },

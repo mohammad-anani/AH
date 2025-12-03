@@ -1,16 +1,12 @@
 import { useState } from "react";
 import TestTypeSelect, { type TestTypeSelectState } from "./TestTypeSelect";
 
-// Example usage component showing how to integrate TestTypeSelect in a form
 export default function TestOrderForm() {
   const [selectedTestTypes, setSelectedTestTypes] =
     useState<TestTypeSelectState>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Selected Test Types:", selectedTestTypes);
-    // Here you would typically send the selectedTestTypes array to your backend
-    // The array contains the IDs of selected test types that the doctor ordered for the patient
   };
 
   return (
