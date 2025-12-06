@@ -1,23 +1,23 @@
-import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
 import type { ChildrenProps, Setter } from "@/utils/models/types/utils/basics";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { FilterKey } from "@/utils/models/types/utils/Form&Filter";
+import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 import { useState } from "react";
+import ClearFilter from "./listComponents/ClearFilter";
 import { ListContext } from "./listComponents/context";
+import Filter from "./listComponents/Filter";
 import Items from "./listComponents/Items";
 import Pagination from "./listComponents/Pagination";
-import ClearFilter from "./listComponents/ClearFilter";
-import Filter from "./listComponents/Filter";
-import type { rowTypesObject } from "@/utils/models/types/row/rowTypesObject";
-import type { SearchParamsState } from "@/utils/models/types/utils/selectorTypes";
 
-type ListProps<T extends rowTypesObject[EntityKey]> = ChildrenProps & {
+type ListProps<T> = ChildrenProps & {
   items: T[];
   canModifyUrl?: boolean;
   searchParamsState?: [URLSearchParams, (params: URLSearchParams) => void];
   setObject?: Setter<rowTypesObject[EntityKey] | undefined>;
 };
 
-export default function List<T extends rowTypesObject[EntityKey]>({
+export default function List<T>({
   children,
   items,
   canModifyUrl = true,

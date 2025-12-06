@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { AddPrescriptionSchema } from "../../addSchemas";
 import { nonEmptyString, positiveNumber } from "../../reusableSchemas";
 
 export const CompleteServiceSchema = z.object({
@@ -6,4 +7,5 @@ export const CompleteServiceSchema = z.object({
 
   Result: nonEmptyString("Result", 10, 256),
   TestTypeIDs: z.array(positiveNumber("Doctor id")).optional().nullable(),
+  Prescriptions: z.array(AddPrescriptionSchema).optional().nullable()
 });

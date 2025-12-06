@@ -53,5 +53,5 @@ export const appointment: RouteConfig<"Appointment"> = {
     ],
     [1, 1, 1, 1],
   ],
-  subLinks: () => [["Show Test Orders", `test-orders`]],
+  subLinks: () => [["Show Test Orders", `test-orders`], ["Show Prescriptions", "prescriptions"]],
 };

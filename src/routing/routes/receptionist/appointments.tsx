@@ -1,13 +1,16 @@
+import ReserveFollowUpForm from "@/routing/ReserveFollowUpForm";
 import { serviceRoute } from "@/routing/serviceRoute";
 import ListPage from "@/ui/entityComponents/ListPage";
-import ReserveFollowUpForm from "@/routing/ReserveFollowUpForm";
 
+import reserveAppointmentFollowUpAction from "@/routing/actions/reserveAppointmentFollowUp";
 import listLoader from "@/utils/loaders/listLoader";
 import {
   appointment,
+  prescription,
   testOrder,
 } from "@/utils/models/componentsConfig/receptionist";
-import reserveAppointmentFollowUpAction from "@/routing/actions/reserveAppointmentFollowUp";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
+import type { RowTemplate } from "@/utils/models/types/utils/routeTypes";
 import type { RouteObject } from "react-router-dom";
 
 const testOrdersRoute: RouteObject[] = [
@@ -32,6 +35,29 @@ const testOrdersRoute: RouteObject[] = [
   },
 ];
 
+const prescriptionsListRoute: RouteObject[] = [
+  {
+    path: "prescriptions",
+    loader: listLoader(
+      "Prescription",
+      undefined,
+      undefined,
+      ({ id }) => `appointments/${id}/prescriptions`,
+    ),
+    element: (
+      <ListPage
+        entity="Prescription"
+        canAdd={false}
+        canModifyUrl={false}
+        rowTemplate={prescription["rowTemplate"] as RowTemplate<EntityKey>}
+        filterFields={undefined}
+        withBack={true}
+        detailsLink={(id) => `/receptionist/prescriptions/${id}`}
+      />
+    ),
+  },
+];
+
 const reserveFollowUpRoute: RouteObject[] = [
   {
     path: "reserve-follow-up",
@@ -50,6 +76,7 @@ export const appointmentsRoutes = serviceRoute(
   [
     [testOrdersRoute, "id"],
     [reserveFollowUpRoute, "id"],
+    [prescriptionsListRoute, "id"]
   ],
   true,
   true,

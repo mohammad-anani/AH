@@ -65,7 +65,8 @@ export const appointment: RouteConfig<"Appointment"> = {
     [1, 1, 1, 1, 1],
   ],
   subLinks: ({ Service, PreviousAppointment }) => [
-    ["Show Test Orders", `test-orders`],
+    ["Show Test Orders", `test-orders`]
+    , ["Show Prescriptions", "prescriptions"],
     ...(Service.Status === "Completed" && PreviousAppointment
       ? [["Reserve Follow-up", "reserve-follow-up"] as [string, string]]
       : []),

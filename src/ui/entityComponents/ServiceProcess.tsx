@@ -21,8 +21,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import {
   Form,
   useOutletContext,
-  useSubmit,
-  type SubmitTarget,
+  useSubmit
 } from "react-router-dom";
 import Controller from "../customComponents/Controller";
 import { UnsupportedInput } from "../form-inputs";
@@ -68,7 +67,7 @@ export default function ServiceProcess<T extends ServicesEntities>({
   if (Status === "Completed")
     throwError(
       403,
-      "Can't " + process + " a completed or cancelled " + formatTitle(entity),
+      "Can't " + process + " a completed " + formatTitle(entity),
     );
   if (Status === "Scheduled" && process === "Complete")
     throwError(403, "Can't complete a scheduled " + formatTitle(entity));
@@ -96,6 +95,11 @@ export default function ServiceProcess<T extends ServicesEntities>({
           replace
           method="POST"
           onSubmit={handleSubmit((data) => {
+
+            console.log(data);
+
+
+
             submit(data as SubmitTarget, {
               method: "PATCH",
               encType: "application/json",

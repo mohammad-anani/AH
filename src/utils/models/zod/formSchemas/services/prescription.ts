@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { datetime, nonEmptyString } from "../../reusableSchemas";
+import { datetimeWithinOneYear, nonEmptyString } from "../../reusableSchemas";
 
 export const FormPrescriptionSchema = z
   .object({
@@ -11,12 +11,13 @@ export const FormPrescriptionSchema = z
 
     Frequency: nonEmptyString("Frequency", 5, 256),
 
-    MedicationStart: datetime("Medication start date"),
+    MedicationStart: datetimeWithinOneYear("Medication start date"),
 
-    MedicationEnd: datetime("Medication end date"),
+    MedicationEnd: datetimeWithinOneYear("Medication end date"),
   })
   .refine(
     (data) => {
+      console.log(data);
       return new Date(data.MedicationEnd) > new Date(data.MedicationStart);
     },
     {

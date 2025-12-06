@@ -1,14 +1,14 @@
+import Controller from "@/ui/customComponents/Controller";
+import UnsupportedInput from "@/ui/form-inputs/UnsupportedInput";
 import { inputMap } from "@/utils/models/inputMap";
+import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import type {
-  FormKey,
   customFormProps,
   DataTypes,
+  FormKey,
 } from "@/utils/models/types/utils/Form&Filter";
-import { generateLabel } from "../listComponents/utils";
-import Controller from "@/ui/customComponents/Controller";
-import type { EntityKey } from "@/utils/models/types/utils/entityKeys";
 import { useLocation } from "react-router-dom";
-import UnsupportedInput from "@/ui/form-inputs/UnsupportedInput";
+import { generateLabel } from "../listComponents/utils";
 
 export default function useForm<T extends EntityKey>(
   fields: FormKey<T>[],

@@ -5,8 +5,9 @@ import Layout from "@/ui/customComponents/Layout";
 import Error from "@/ui/Error";
 import { appointmentsRoutes } from "./doctor/appointments";
 import { humanResourcesRoutes } from "./doctor/human-resources";
-import { testsRoutes } from "./doctor/tests";
 import { operationsRoutes } from "./doctor/operations";
+import { prescriptionRoute } from "./doctor/prescriptions";
+import { testsRoutes } from "./doctor/tests";
 
 export const doctorRoutes = [
   {
@@ -27,6 +28,7 @@ export const doctorRoutes = [
           ...humanResourcesRoutes,
           ...testsRoutes,
           ...operationsRoutes,
+          ...prescriptionRoute
         ],
       },
     ],

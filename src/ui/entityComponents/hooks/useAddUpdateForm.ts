@@ -63,6 +63,7 @@ export default function useAddUpdateForm<T extends EntityKey>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     defaultValues: defaultValues as DefaultValues<any>,
     criteriaMode: "all",
+    mode: "onChange", reValidateMode: "onChange"
   });
 
   const {
