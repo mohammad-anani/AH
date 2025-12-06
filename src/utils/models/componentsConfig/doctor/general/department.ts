@@ -10,11 +10,11 @@ export const department: RouteConfig<"Department"> = {
   subLinks: ({ ID }) => [
     [
       "Show Doctors",
-      `/receptionist/human-resources/doctors?DepartmentID=${ID}`,
+      `/doctor/human-resources/doctors?DepartmentID=${ID}`,
     ],
 
-    ["Show Tests", `/receptionist/tests/types?DepartmentID=${ID}`],
-    ["Show Operations", `/receptionist/operations?DepartmentID=${ID}`],
+    ["Show Tests", `/doctor/tests/types?DepartmentID=${ID}`],
+    ["Show Operations", `/doctor/operations?DepartmentID=${ID}`],
   ],
   selectorDisplay: ({ Name, Phone }) => Name + " | " + Phone,
 };

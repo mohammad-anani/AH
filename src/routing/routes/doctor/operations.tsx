@@ -23,8 +23,6 @@ const doctorsRoute: RouteObject[] = [
   },
 ];
 
-const token = localStorage.getItem("token");
-const doctorID = decodeJwt(token ?? "")?.sub;
 
 export const operationsRoutes = Route(
   "Operation",
@@ -33,6 +31,14 @@ export const operationsRoutes = Route(
   false,
   operation,
   false,
-  () => `doctors/${doctorID}`,
+  () => {
+
+    const token = localStorage.getItem("token");
+    const doctorID = decodeJwt(token ?? "")?.sub;
+
+    console.log(doctorID);
+
+    return `doctors/${doctorID}`
+  },
   [[doctorsRoute, "id"]],
 );

@@ -1,3 +1,4 @@
+import RegisteredInput from "@/ui/customComponents/RegisteredInput";
 import Selector from "@/ui/entityComponents/Selector";
 import { fetchingPaths } from "@/utils/models/componentsConfig/fetchingPaths";
 import { doctor } from "@/utils/models/componentsConfig/receptionist/human-resources/doctor";
@@ -70,19 +71,22 @@ export default function DoctorSelect({
                 <>
                   <label>Role:</label>
                   <span>
-                    <input
-                      type="text"
-                      defaultValue={selected?.Role ?? ""}
-                      onChange={(e) =>
-                        setDoctors((docs) =>
-                          docs?.map((doc, subIndex) =>
-                            index === subIndex
-                              ? { ...doc, Role: e.target.value }
-                              : doc,
-                          ),
-                        )
-                      }
-                    />
+                    <RegisteredInput name={`OperationDoctors.${index}.Role`}>
+
+                      <input
+                        type="text"
+                        defaultValue={selected?.Role ?? ""}
+                        onChange={(e) =>
+                          setDoctors((docs) =>
+                            docs?.map((doc, subIndex) =>
+                              index === subIndex
+                                ? { ...doc, Role: e.target.value }
+                                : doc,
+                            ),
+                          )
+                        }
+                      />
+                    </RegisteredInput>
                   </span>
                 </>
               )}

@@ -9,10 +9,10 @@ export const patient: RouteConfig<"Patient"> = {
     ...person["dataFields"](Person),
   ],
   subLinks: ({ ID }) => [
-    ["Show Appointments", `/receptionist/appointments?PatientID=${ID}`],
+    ["Show Appointments", `/doctor/appointments?PatientID=${ID}`],
     [
       "Show Tests Appointments",
-      `/receptionist/tests/appointments?PatientID=${ID}`,
+      `/doctor/tests/appointments?PatientID=${ID}`,
     ],
     ["Show Operations", `/doctor/operations?PatientID=${ID}`],
   ],

@@ -2,10 +2,10 @@ import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
 
-import { stringField, numberField } from "../../utils/filterReusableFields";
-import type { RouteConfig } from "../../routeConfig";
-import { department } from "./department";
 import { formatMoney } from "@/utils/formatters/formatMoney";
+import type { RouteConfig } from "../../routeConfig";
+import { numberField, stringField } from "../../utils/filterReusableFields";
+import { department } from "./department";
 
 export const testType: RouteConfig<"TestType"> = {
   dataFields: ({ Name, Department, Cost }: typesObject["TestType"]) => [
@@ -13,7 +13,7 @@ export const testType: RouteConfig<"TestType"> = {
     [
       "Department",
       Department,
-      `/receptionist/departments/${Department.ID}`,
+      `/doctor/departments/${Department.ID}`,
       "Department",
       department.selectorDisplay(Department),
     ],

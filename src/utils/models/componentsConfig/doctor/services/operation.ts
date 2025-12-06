@@ -1,11 +1,11 @@
 import type { typesObject } from "@/utils/models/types/normal/typesObject";
 
 import { DepartmentFilterSelectCallBack } from "@/features/department/departmentSelectCallback";
-import { stringField, datetimeField } from "../../utils/filterReusableFields";
-import type { RouteConfig } from "../../routeConfig";
-import { department } from "../general/department";
 import { DoctorFilterSelectorCallback } from "@/features/doctor/doctorSelectCallback";
-import { service } from "../../admin/services/service";
+import type { RouteConfig } from "../../routeConfig";
+import { datetimeField, stringField } from "../../utils/filterReusableFields";
+import { department } from "../general/department";
+import { service } from "./service";
 
 export const operation: RouteConfig<"Operation"> = {
   dataFields: ({
@@ -14,18 +14,15 @@ export const operation: RouteConfig<"Operation"> = {
     Description,
     Department,
   }: typesObject["Operation"]) => [
-    ["Name", Name],
-    ["Description", Description],
-    [
-      "Department",
-      Department,
-      `/doctor/general/departments/${Department.ID}`,
-      "Department",
-      department.selectorDisplay(Department),
-    ],
+      ["Name", Name],
+      ["Description", Description],
+      [
+        "Department",
+        department.selectorDisplay(Department),
+      ],
 
-    ...service["dataFields"](Service),
-  ],
+      ...service["dataFields"](Service),
+    ],
   filterFields: [
     stringField("Name"),
     stringField("Description"),
